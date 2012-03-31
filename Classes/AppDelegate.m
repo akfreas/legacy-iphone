@@ -15,7 +15,7 @@ static NSString *KeyForBirthday = @"birthday";
     
     NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
     
-    if ([defaults dictionaryForKey:KeyForBirthday] == nil) {
+    if ([defaults objectForKey:KeyForBirthday] == nil) {
         FirstTimeLoadScreen *loadScreen = [[FirstTimeLoadScreen alloc] init];
         mainNavController = [[UINavigationController alloc] initWithRootViewController:loadScreen];
     } else {

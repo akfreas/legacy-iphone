@@ -1,0 +1,3 @@
+@interface MainScreen : UIViewController
+
+@end

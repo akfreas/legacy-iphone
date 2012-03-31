@@ -1,22 +1,37 @@
-//
-//  AppDelegate.m
-//  AtYourAge
-//
-//  Created by Alexander Freas on 3/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "AppDelegate.h"
+#import "FirstTimeLoadScreen.h"
 
-@implementation AppDelegate
+static NSString *KeyForBirthday = @"birthday";
+
+@implementation AppDelegate {
+    
+    UINavigationController *mainNavController;
+}
 
 @synthesize window = _window;
+
+
+-(void)configureInitialViewHeirarchy {
+    
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+    
+    if ([defaults dictionaryForKey:KeyForBirthday] == nil) {
+        FirstTimeLoadScreen *loadScreen = [[FirstTimeLoadScreen alloc] init];
+        mainNavController = [[UINavigationController alloc] initWithRootViewController:loadScreen];
+    } else {
+        
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    [self configureInitialViewHeirarchy];
+    self.window.rootViewController = mainNavController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

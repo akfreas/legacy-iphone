@@ -2,9 +2,11 @@
 #import "Event.h"
 
 @implementation AtYourAgeRequest {
-    NSURLRequest *request;
-    Class requestClass;
+    
 }
+
+@synthesize urlRequest;
+@synthesize classToParse;
 
 +(NSURL *)baseUrl {
     
@@ -37,7 +39,7 @@
     self = [super init];
     
     if (self) {
-        request = theRequest;
+        urlRequest = theRequest;
     }
     
     return self;
@@ -47,7 +49,7 @@
     self = [self initWithRequest:theRequest];
     
     if (self) {
-        requestClass = theClass;
+        classToParse = theClass;
     }
     
     return self;

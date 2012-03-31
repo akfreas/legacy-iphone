@@ -1,0 +1,4 @@
+@interface AtYourAgeConnection : NSObject
+
+
+@end

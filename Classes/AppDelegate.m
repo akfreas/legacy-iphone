@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "FirstTimeLoadScreen.h"
+#import "MainScreen.h"
 
 static NSString *KeyForBirthday = @"birthday";
 
@@ -19,7 +20,8 @@ static NSString *KeyForBirthday = @"birthday";
         FirstTimeLoadScreen *loadScreen = [[FirstTimeLoadScreen alloc] init];
         mainNavController = [[UINavigationController alloc] initWithRootViewController:loadScreen];
     } else {
-        
+        MainScreen *mainScreen = [[MainScreen alloc] init];
+        mainNavController = [[UINavigationController alloc] initWithRootViewController:mainScreen];
     }
 }
 

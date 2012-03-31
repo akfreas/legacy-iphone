@@ -1,4 +1,5 @@
 #import "FirstTimeLoadScreen.h"
+#import "MainScreen.h"
 
 
 static NSString *KeyForBirthday = @"birthday";
@@ -7,6 +8,7 @@ static NSString *KeyForBirthday = @"birthday";
 @implementation FirstTimeLoadScreen {
     
     IBOutlet UIDatePicker *birthdayPicker;
+    MainScreen *mainScreen;
 }
 
 
@@ -19,23 +21,27 @@ static NSString *KeyForBirthday = @"birthday";
 
 
 -(IBAction)selectButtonWasTapped {
-    
+    [self setBirthdayAndMoveToNextView];
 }
 
 -(void)setBirthdayAndMoveToNextView {
     
-    NSDate *birthday = birthdayPicker.date;
-    
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-    
-    [defaults setValue:birthday forKey:KeyForBirthday];
-    
+    [self setBirthday];
+    [self moveToNextView];
+}
 
+-(void)setBirthday {
+    
+    NSDate *birthday = birthdayPicker.date;
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+    [defaults setValue:birthday forKey:KeyForBirthday];
 }
 
 -(void)moveToNextView {
     
+    mainScreen = [[MainScreen alloc] init];
     
+    [self.navigationController pushViewController:mainScreen animated:YES];
 }
 
 

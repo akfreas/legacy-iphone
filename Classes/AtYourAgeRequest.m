@@ -10,9 +10,8 @@
 
 +(NSURL *)baseUrl {
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"AtYourAge-Info" ofType:@"plist"];
-    NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSURL *url = [NSURL URLWithString:[plistDict objectForKey:@"ResourceUrl"]];
+    NSString *path = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ResourceUrl"];
+    NSURL *url = [NSURL URLWithString:path];
     return url;
 }
 
@@ -22,13 +21,28 @@
     return url;
 }
 
++(NSURL *)eventsUrlForBirthday:(NSDate *)theDate {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = @"event/";
+    pathString = [pathString stringByAppendingString:[formatter stringFromDate:theDate]];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
 +(AtYourAgeRequest *)requestToGetEventWithBirthday:(NSDate *)birthday {
 
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [AtYourAgeRequest appendToBaseUrl:@"/events"];
+    NSURL *url = [AtYourAgeRequest eventsUrlForBirthday:birthday];
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSLog(@"Request: %@", url);
     
     AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:[Event class]];
     

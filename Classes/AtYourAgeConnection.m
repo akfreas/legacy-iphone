@@ -45,6 +45,7 @@
                                                                                   forKey:NSLocalizedDescriptionKey]];
             self.AYAConnectionCallback(nil, nil, error);
         }
+        resultData = [[NSMutableData alloc] initWithLength:0];
     }
 }
 
@@ -64,10 +65,9 @@
 
             NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:0];
             
-            for (NSDictionary *jsonDict in parseResult) {
-                [resultArray addObject:[[request.classToParse alloc] initWithJsonDictionary:jsonDict]];
-            }
-            result = resultArray;
+    
+            NSLog(@"Result: %@", parseResult);
+            result = [[request.classToParse alloc] initWithJsonDictionary:[parseResult lastObject]];
         }
     }
     

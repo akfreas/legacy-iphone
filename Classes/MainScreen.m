@@ -12,8 +12,10 @@ static NSString *KeyForBirthday = @"birthday";
     IBOutlet UILabel *descriptionLabel;
     
     NSDate *birthday;
-    Event *event;
+
 }
+
+@synthesize event;
 
 -(id)init {
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
@@ -31,20 +33,23 @@ static NSString *KeyForBirthday = @"birthday";
     AtYourAgeRequest *request = [AtYourAgeRequest requestToGetEventWithBirthday:birthday];
     AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     
-    __block Event *theEvent;
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
-        theEvent = result;
+        self.event = result;
         [self refresh];
     }];
-    
-    event = theEvent;
 }
 
 -(void)refresh {
-    
-    
+
+    NSLog(@"Event: %@", event);
     onThisDayLabel.text = [NSString stringWithFormat:@"On this day in %@'s life...", event.name];
     descriptionLabel.text = event.description;
+}
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self getEventForBirthday];
 }
 
 @end

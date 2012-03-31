@@ -23,6 +23,8 @@ static NSString *KeyForBirthday = @"birthday";
         MainScreen *mainScreen = [[MainScreen alloc] init];
         mainNavController = [[UINavigationController alloc] initWithRootViewController:mainScreen];
     }
+    
+    [mainNavController setNavigationBarHidden:YES];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

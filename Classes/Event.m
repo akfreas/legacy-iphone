@@ -2,6 +2,7 @@
 
 static NSString *KeyForName = @"name";
 static NSString *KeyForDescription = @"description";
+static NSString *KeyForFields = @"fields";
 
 @implementation Event
 
@@ -12,8 +13,8 @@ static NSString *KeyForDescription = @"description";
     self = [super init];
     
     if (self) {
-        description = [jsonDict objectForKey:KeyForDescription];
-        name = [jsonDict objectForKey:KeyForName];
+        description = [[jsonDict objectForKey:KeyForFields] objectForKey:KeyForDescription];
+        name = [[jsonDict objectForKey:KeyForFields] objectForKey:KeyForName];
     }
     return self;
 }

@@ -23,7 +23,7 @@
 
 +(NSURL *)eventsUrlForBirthday:(NSDate *)theDate {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM/dd/yyyy"];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
     
     NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = @"event/";

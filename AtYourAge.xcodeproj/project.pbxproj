@@ -353,10 +353,14 @@
 		4EEA6CF715268ED300B96EFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/AtYourAge-Prefix.pch";
 				INFOPLIST_FILE = "Support/AtYourAge-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -364,10 +368,14 @@
 		4EEA6CF815268ED300B96EFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Freas";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexander Freas";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/AtYourAge-Prefix.pch";
 				INFOPLIST_FILE = "Support/AtYourAge-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "57E71664-A45E-421E-B370-C8A098F9AB82";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "57E71664-A45E-421E-B370-C8A098F9AB82";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

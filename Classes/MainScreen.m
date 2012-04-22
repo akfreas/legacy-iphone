@@ -2,8 +2,9 @@
 #import "AtYourAgeRequest.h"
 #import "AtYourAgeConnection.h"
 #import "Event.h"
+#import "Utility_UserInfo.h"
 
-static NSString *KeyForBirthday = @"birthday";
+static NSString *KeyForName = @"name";
 
 @implementation MainScreen {
     
@@ -22,9 +23,11 @@ static NSString *KeyForBirthday = @"birthday";
     
     if (self) {
         NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-        birthday = [defaults objectForKey:KeyForBirthday];
+        NSString *name = [defaults objectForKey:KeyForName];
+        
+        birthday = [Utility_UserInfo getBirthdayForName:name];
     }
-    
+     
     return self;
 }
 

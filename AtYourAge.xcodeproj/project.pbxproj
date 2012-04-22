@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */; };
 		4E82A1C8154296D100D112F9 /* Utility_UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */; };
 		4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE215268ED300B96EFD /* UIKit.framework */; };
 		4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE415268ED300B96EFD /* Foundation.framework */; };
@@ -35,7 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Utility_UserInfo.h; sourceTree = "<group>"; };
+		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
+		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
+		4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_UserInfo.h; sourceTree = "<group>"; };
 		4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility_UserInfo.m; sourceTree = "<group>"; };
 		4EEA6CDE15268ED200B96EFD /* AtYourAge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtYourAge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEA6CE215268ED300B96EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -139,6 +142,8 @@
 				4EEA6D5C1526CAEF00B96EFD /* AtYourAgeRequest.m */,
 				4EEA6D031526902D00B96EFD /* AppDelegate.h */,
 				4EEA6D041526902D00B96EFD /* AppDelegate.m */,
+				4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */,
+				4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */,
 				4EEA6D581526C86300B96EFD /* Event.h */,
 				4EEA6D591526C86300B96EFD /* Event.m */,
 				4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */,
@@ -293,6 +298,7 @@
 				4EEA6D5D1526CAEF00B96EFD /* AtYourAgeRequest.m in Sources */,
 				4EEA6D651526DCB100B96EFD /* MainScreen.m in Sources */,
 				4E82A1C8154296D100D112F9 /* Utility_UserInfo.m in Sources */,
+				4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

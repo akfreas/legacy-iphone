@@ -13,15 +13,27 @@
 
 +(void)setOrUpdateUserBirthday:(NSDate *)birthday name:(NSString *)name {
     
-    NSMutableDictionary *userInfoDict = [NSMutableDictionary dictionaryWithContentsOfURL:[Utility_UserInfo userInfoUrl]];
+    NSMutableDictionary *userInfoDict = [self userInfoDict];
+    
     [userInfoDict setObject:birthday forKey:name];
     
     [Utility_UserInfo saveUserInfoDict:userInfoDict];
 }
 
++(NSDate *)getBirthdayForName:(NSString *)name {
+    
+    NSMutableDictionary *userInfoDict = [self userInfoDict];
+    
+    return [userInfoDict objectForKey:name];
+}
+
++(NSMutableDictionary *)userInfoDict {
+    return [NSMutableDictionary dictionaryWithContentsOfURL:[self userInfoUrl]];
+}
+
 +(void)saveUserInfoDict:(NSMutableDictionary *)userInfoDict {
     
-    NSURL *userInfoUrl = [Utility_UserInfo userInfoUrl];
+    NSURL *userInfoUrl = [self userInfoUrl];
     [userInfoDict writeToURL:userInfoUrl atomically:YES];
 }
 

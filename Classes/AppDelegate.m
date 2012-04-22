@@ -19,12 +19,12 @@ static NSString *KeyForBirthday = @"birthday";
     if ([defaults objectForKey:KeyForBirthday] == nil) {
         FirstTimeLoadScreen *loadScreen = [[FirstTimeLoadScreen alloc] init];
         mainNavController = [[UINavigationController alloc] initWithRootViewController:loadScreen];
+        [mainNavController setNavigationBarHidden:YES];
     } else {
         MainScreen *mainScreen = [[MainScreen alloc] init];
         mainNavController = [[UINavigationController alloc] initWithRootViewController:mainScreen];
+        [mainNavController setNavigationBarHidden:NO];
     }
-    
-    [mainNavController setNavigationBarHidden:YES];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

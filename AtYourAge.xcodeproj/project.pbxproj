@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */; };
+		4E6478C11544673700CE47F1 /* SwitchPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478C01544673700CE47F1 /* SwitchPerson.m */; };
+		4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */; };
 		4E82A1C8154296D100D112F9 /* Utility_UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */; };
 		4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE215268ED300B96EFD /* UIKit.framework */; };
 		4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE415268ED300B96EFD /* Foundation.framework */; };
@@ -38,6 +40,9 @@
 /* Begin PBXFileReference section */
 		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
+		4E6478BF1544673700CE47F1 /* SwitchPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPerson.h; sourceTree = "<group>"; };
+		4E6478C01544673700CE47F1 /* SwitchPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchPerson.m; sourceTree = "<group>"; };
+		4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwitchPerson.xib; path = Resources/SwitchPerson.xib; sourceTree = SOURCE_ROOT; };
 		4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_UserInfo.h; sourceTree = "<group>"; };
 		4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility_UserInfo.m; sourceTree = "<group>"; };
 		4EEA6CDE15268ED200B96EFD /* AtYourAge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtYourAge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +157,8 @@
 				4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */,
 				4EEA6D631526DCB100B96EFD /* MainScreen.h */,
 				4EEA6D641526DCB100B96EFD /* MainScreen.m */,
+				4E6478BF1544673700CE47F1 /* SwitchPerson.h */,
+				4E6478C01544673700CE47F1 /* SwitchPerson.m */,
 				4EEA6D071526902D00B96EFD /* main.m */,
 			);
 			path = Classes;
@@ -161,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				4EEA6D661526DCE100B96EFD /* MainScreen.xib */,
+				4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */,
 				4EEA6D3E1526A80B00B96EFD /* FirstTimeLoadScreen.xib */,
 			);
 			path = Resources;
@@ -268,6 +276,7 @@
 			files = (
 				4EEA6D3F1526A80B00B96EFD /* FirstTimeLoadScreen.xib in Resources */,
 				4EEA6D671526DCE100B96EFD /* MainScreen.xib in Resources */,
+				4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +308,7 @@
 				4EEA6D651526DCB100B96EFD /* MainScreen.m in Sources */,
 				4E82A1C8154296D100D112F9 /* Utility_UserInfo.m in Sources */,
 				4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */,
+				4E6478C11544673700CE47F1 /* SwitchPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

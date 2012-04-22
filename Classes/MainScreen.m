@@ -3,8 +3,10 @@
 #import "AtYourAgeConnection.h"
 #import "Event.h"
 #import "Utility_UserInfo.h"
+#import "SwitchPerson.h"
 
 static NSString *KeyForName = @"name";
+static NSString *KeyForBirthday = @"birthday";
 
 @implementation MainScreen {
     
@@ -13,6 +15,7 @@ static NSString *KeyForName = @"name";
     IBOutlet UILabel *descriptionLabel;
     
     NSDate *birthday;
+    NSString *name;
 
 }
 
@@ -23,9 +26,9 @@ static NSString *KeyForName = @"name";
     
     if (self) {
         NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-        NSString *name = [defaults objectForKey:KeyForName];
-        
-        birthday = [Utility_UserInfo getBirthdayForName:name];
+        name = [defaults objectForKey:KeyForName];
+        birthday = [defaults objectForKey:KeyForBirthday];
+        NSLog(@"Birthday: %@", birthday);
     }
      
     return self;
@@ -49,9 +52,29 @@ static NSString *KeyForName = @"name";
     descriptionLabel.text = event.description;
 }
 
+-(void)switchPerson {
+    
+    SwitchPerson *switchPerson = [[SwitchPerson alloc] init];
+    
+    [self.navigationController pushViewController:switchPerson animated:YES];
+    
+}
+
+-(void)setNavigationElements {
+    
+    self.navigationController.title = name;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(switchPerson)];
+    
+    self.navigationItem.backBarButtonItem = nil;
+}
+
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController setNavigationBarHidden:NO];
+    
+    [self setNavigationElements];
     [self getEventForBirthday];
 }
 

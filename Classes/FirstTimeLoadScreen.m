@@ -5,6 +5,7 @@
 
 
 static NSString *KeyForBirthday = @"birthday";
+static NSString *KeyForName = @"name";
 
 
 @implementation FirstTimeLoadScreen {
@@ -30,6 +31,11 @@ static NSString *KeyForBirthday = @"birthday";
 
 -(void)setInfoAndMoveToNextView {
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:birthdayPicker.date forKey:KeyForBirthday];
+    [defaults setObject:name.text forKey:KeyForName];
+    
     [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
     [self moveToNextView];
 }
@@ -38,6 +44,9 @@ static NSString *KeyForBirthday = @"birthday";
     
     keyboardControls = [[BSKeyboardControls alloc] init];
     keyboardControls.delegate = self;
+    keyboardControls.alpha = 0.0;
+    keyboardControls.frame = CGRectMake(0, 480, 320, 44);
+    
     [self.view addSubview:keyboardControls];
 }
 
@@ -81,15 +90,10 @@ static NSString *KeyForBirthday = @"birthday";
     
     [animationDurationValue getValue:&animationDuration];
     
-    keyboardControls = [[BSKeyboardControls alloc] init];
-    keyboardControls.delegate = self;
-    keyboardControls.frame = textFieldAccessoryFrame;
-    keyboardControls.alpha = 0.0;
 
-    [self.view addSubview:keyboardControls];
     
     [UIView animateWithDuration:animationDuration animations:^{
-        
+        keyboardControls.frame = textFieldAccessoryFrame;
         keyboardControls.alpha = 1.0;
     }];
     
@@ -106,18 +110,18 @@ static NSString *KeyForBirthday = @"birthday";
     [value getValue:&animationDuration];
     
     [UIView animateWithDuration:animationDuration animations:^{
+        keyboardControls.frame = CGRectMake(0, 480, 320, 44);
         keyboardControls.alpha = 0.0;
     }];
 }
 
 -(void)keyboardControlsDonePressed:(BSKeyboardControls *)controls {
-    
     [name resignFirstResponder];
-    NSLog(@"Done was pressed");
 }
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    [self placeKeyboardControls];
     [self registerForKeyboardNotifications];
 }
 

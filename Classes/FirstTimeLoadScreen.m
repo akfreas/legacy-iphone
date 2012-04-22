@@ -31,8 +31,8 @@ static NSString *KeyForName = @"name";
 
 -(void)setInfoAndMoveToNextView {
         
-    [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
     [Utility_UserInfo setCurrentName:name.text];
+    [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
     [self moveToNextView];
 }
 

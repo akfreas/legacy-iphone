@@ -66,6 +66,8 @@ static NSString *KeyForCurrentName = @"CurrentName";
     NSMutableDictionary *rootUserInfoDict = [NSMutableDictionary dictionaryWithContentsOfURL:userInfoUrl];
     
     [rootUserInfoDict setObject:userInfoDict forKey:KeyForRootInfoDict];
+    
+    
     NSLog(@"Url: %@", userInfoUrl);
     [rootUserInfoDict writeToURL:userInfoUrl atomically:YES];
 }

@@ -54,11 +54,19 @@ static NSString *KeyForBirthday = @"birthday";
         descriptionLabel.hidden = NO;
         
         NSLog(@"Event: %@", event.eventDescription);
-        onThisDayLabel.text = [NSString stringWithFormat:@"On this day in %@'s life...", event.name];
+        
+        NSString *genderQualifier;
+        
+        if (event.male) {
+            genderQualifier = @"he";
+        } else {
+            genderQualifier = @"she";
+        }
+        
+        onThisDayLabel.text = [NSString stringWithFormat:@"On this day in %@'s life, %@ %@", event.name, genderQualifier, event.eventDescription];
         
         yourAgeLabel.text = [NSString stringWithFormat:@"You are %@ years, %@ months, and %@ days old.", event.age_years, event.age_months, event.age_days];
         
-        descriptionLabel.text = event.eventDescription;
     }
 }
 

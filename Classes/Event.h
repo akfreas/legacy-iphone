@@ -6,6 +6,8 @@
 @property (strong, nonatomic) NSString *age_months;
 @property (strong, nonatomic) NSString *age_days;
 
+@property (atomic) BOOL male;
+
 -(id)initWithJsonDictionary:(NSDictionary *)theDictionary;
 
 @end

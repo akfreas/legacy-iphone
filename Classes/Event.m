@@ -10,7 +10,7 @@ static NSString *KeyForFields = @"fields";
 @implementation Event
 
 @synthesize name;
-@synthesize description;
+@synthesize eventDescription;
 @synthesize age_years;
 @synthesize age_months;
 @synthesize age_days;
@@ -22,7 +22,7 @@ static NSString *KeyForFields = @"fields";
         
         NSDictionary *dataDict = [jsonDict objectForKey:KeyForFields];
         
-        description = [dataDict objectForKey:KeyForDescription];
+        eventDescription = [dataDict objectForKey:KeyForDescription];
         name = [dataDict objectForKey:KeyForName];
         age_years = [dataDict objectForKey:KeyForAgeYears];
         age_months = [dataDict objectForKey:KeyForAgeMonths];

@@ -45,12 +45,21 @@ static NSString *KeyForBirthday = @"birthday";
 
 -(void)refresh {
 
-    NSLog(@"Event: %@", event);
-    onThisDayLabel.text = [NSString stringWithFormat:@"On this day in %@'s life...", event.name];
-    
-    yourAgeLabel.text = [NSString stringWithFormat:@"You are %@ years, %@ months, and %@ days old.", event.age_years, event.age_months, event.age_days];
-    
-    descriptionLabel.text = event.description;
+    if ([event.eventDescription isEqualToString:@""] || event.eventDescription == nil) {
+        yourAgeLabel.hidden = YES;
+        descriptionLabel.hidden = YES;
+        onThisDayLabel.text = @"It looks like nobody in the course of history did anything at your age.  Take a day off!";
+    } else {
+        yourAgeLabel.hidden = NO;
+        descriptionLabel.hidden = NO;
+        
+        NSLog(@"Event: %@", event.eventDescription);
+        onThisDayLabel.text = [NSString stringWithFormat:@"On this day in %@'s life...", event.name];
+        
+        yourAgeLabel.text = [NSString stringWithFormat:@"You are %@ years, %@ months, and %@ days old.", event.age_years, event.age_months, event.age_days];
+        
+        descriptionLabel.text = event.eventDescription;
+    }
 }
 
 -(void)switchPerson {

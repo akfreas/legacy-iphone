@@ -2,6 +2,8 @@
 
 static NSString *KeyForName = @"name";
 static NSString *KeyForBirthday = @"birthday";
+static NSString *KeyForRootInfoDict = @"Names";
+static NSString *KeyForCurrentName = @"CurrentName";
 
 
 @implementation Utility_UserInfo
@@ -24,7 +26,7 @@ static NSString *KeyForBirthday = @"birthday";
     [Utility_UserInfo saveUserInfoDict:userInfoDict];
 }
 
-+(NSDate *)getBirthdayForName:(NSString *)name {
++(NSDate *)birthdayForName:(NSString *)name {
     
     NSMutableDictionary *userInfoDict = [self userInfoDict];
     
@@ -35,7 +37,7 @@ static NSString *KeyForBirthday = @"birthday";
 
 +(NSArray *)arrayOfUserInfo {
     NSDictionary *userInfoDict = [self userInfoDict];
-    
+
     NSMutableArray *userInfo = [NSMutableArray arrayWithCapacity:1];
     
     for (NSString *name in [userInfoDict allKeys]) {
@@ -48,7 +50,7 @@ static NSString *KeyForBirthday = @"birthday";
 
 +(NSMutableDictionary *)userInfoDict {
     
-    NSMutableDictionary *userInfoDict = [NSMutableDictionary dictionaryWithContentsOfURL:[self userInfoUrl]];
+    NSMutableDictionary *userInfoDict = [[NSMutableDictionary dictionaryWithContentsOfURL:[self userInfoUrl]] objectForKey:KeyForRootInfoDict];
     
     if (userInfoDict == nil) {
         userInfoDict = [NSMutableDictionary dictionaryWithCapacity:1]; 
@@ -60,39 +62,51 @@ static NSString *KeyForBirthday = @"birthday";
 +(void)saveUserInfoDict:(NSMutableDictionary *)userInfoDict {
     
     NSURL *userInfoUrl = [self userInfoUrl];
-    [userInfoDict writeToURL:userInfoUrl atomically:YES];
+    
+    NSMutableDictionary *rootUserInfoDict = [NSMutableDictionary dictionaryWithContentsOfURL:userInfoUrl];
+    
+    [rootUserInfoDict setObject:userInfoDict forKey:KeyForRootInfoDict];
+    NSLog(@"Url: %@", userInfoUrl);
+    [rootUserInfoDict writeToURL:userInfoUrl atomically:YES];
 }
 
 
-+(NSString *)nameFromUserDefaults {
++(NSString *)currentName {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfURL:[self userInfoUrl]];
     
-    return [defaults objectForKey:KeyForName];
+    NSString *currentName = [dict objectForKey:KeyForCurrentName];
+    
+    return currentName;
 }
 
-+(NSDate *)birthdayFromUserDefaults {
++(void)setCurrentName:(NSString *)name {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfURL:[self userInfoUrl]];
     
-    return [defaults objectForKey:KeyForBirthday];
+    if (dict == nil) {
+        dict = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    
+    [dict setObject:name forKey:KeyForCurrentName];
+    
+    [dict writeToURL:[self userInfoUrl] atomically:YES];
 }
 
-+(void)setNameInUserDefaults:(NSString *)name birthday:(NSDate *)birthday {
++(NSDate *)birthdayForCurrentName {
+        
+    NSString *currentName = [self currentName];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:name forKey:KeyForName];
-    [defaults setObject:birthday forKey:KeyForBirthday];
+    return [[self userInfoDict] objectForKey:currentName];
 }
 
-+(NSString *)birthdayStringFromUserDefaults {
++(NSString *)birthdayStringForCurrentName {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     [dateFormatter setDateFormat:@"mm/dd/YYYY"];
     
-    NSDate *birthday = [self birthdayFromUserDefaults];
+    NSDate *birthday = [self birthdayForCurrentName];
     
     return [dateFormatter stringFromDate:birthday];
 }

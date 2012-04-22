@@ -1,12 +1,12 @@
 @interface Utility_UserInfo : NSObject
 
 +(void)setOrUpdateUserBirthday:(NSDate *)birthday name:(NSString *)name;
-+(NSDate *)getBirthdayForName:(NSString *)name;
++(NSDate *)birthdayForName:(NSString *)name;
 +(NSArray *)arrayOfUserInfo;
-+(NSString *)birthdayStringFromUserDefaults;
-+(NSDate *)birthdayFromUserDefaults;
-+(NSString *)nameFromUserDefaults;
-+(void)setNameInUserDefaults:(NSString *)name birthday:(NSDate *)birthday;
++(NSString *)birthdayStringForCurrentName;
++(NSDate *)birthdayForCurrentName;
++(NSString *)currentName;
++(void)setCurrentName:(NSString *)name;
 
 
 @end

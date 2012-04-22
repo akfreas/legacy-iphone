@@ -30,13 +30,9 @@ static NSString *KeyForName = @"name";
 }
 
 -(void)setInfoAndMoveToNextView {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:birthdayPicker.date forKey:KeyForBirthday];
-    [defaults setObject:name.text forKey:KeyForName];
-    
+        
     [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
+    [Utility_UserInfo setCurrentName:name.text];
     [self moveToNextView];
 }
 

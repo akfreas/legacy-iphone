@@ -2,11 +2,6 @@
 #import "AddNewPerson.h"
 #import "Utility_UserInfo.h"
 
-
-static NSString *KeyForName = @"name";
-static NSString *KeyForBirthday = @"birthday";
-
-
 @implementation SwitchPerson {
     
     NSArray *names;
@@ -23,9 +18,6 @@ static NSString *KeyForBirthday = @"birthday";
     self = [super initWithStyle:UITableViewStyleGrouped];
     
     if (self) {
-        names = [Utility_UserInfo arrayOfUserInfo];        
-        name = [Utility_UserInfo nameFromUserDefaults];
-        birthday = [Utility_UserInfo birthdayFromUserDefaults];
         
         formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"MM/dd/YYYY"];
@@ -63,9 +55,11 @@ static NSString *KeyForBirthday = @"birthday";
     cell.textLabel.text = labelForName;
     cell.detailTextLabel.text = labelForBirthday;
     
-    if ([labelForName isEqualToString:[Utility_UserInfo nameFromUserDefaults]]) {
+    if ([labelForName isEqualToString:[Utility_UserInfo currentName]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         pathForSelectedCell = indexPath;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;
@@ -73,8 +67,7 @@ static NSString *KeyForBirthday = @"birthday";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    name = [[names objectAtIndex:indexPath.row] objectForKey:KeyForName];
-    birthday = [[names objectAtIndex:indexPath.row] objectForKey:KeyForBirthday];
+    name = [[[names objectAtIndex:indexPath.row] allKeys] objectAtIndex:0];
     
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:pathForSelectedCell];
     selectedCell.accessoryType = UITableViewCellAccessoryNone;
@@ -86,7 +79,7 @@ static NSString *KeyForBirthday = @"birthday";
 
 -(void)doneWasTapped {
     
-    [Utility_UserInfo setNameInUserDefaults:name birthday:birthday];
+    [Utility_UserInfo setCurrentName:name];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -106,9 +99,12 @@ static NSString *KeyForBirthday = @"birthday";
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
+    
     names = [Utility_UserInfo arrayOfUserInfo];        
+    name = [Utility_UserInfo currentName];
+    birthday = [Utility_UserInfo birthdayForCurrentName];
+
     [self.tableView reloadData];
 }
 

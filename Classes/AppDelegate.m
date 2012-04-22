@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 #import "FirstTimeLoadScreen.h"
 #import "MainScreen.h"
+#import "Utility_UserInfo.h"
 
 static NSString *KeyForBirthday = @"birthday";
 
@@ -13,10 +14,8 @@ static NSString *KeyForBirthday = @"birthday";
 
 
 -(void)configureInitialViewHeirarchy {
-    
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-    
-    if ([defaults objectForKey:KeyForBirthday] == nil) {
+        
+    if ([Utility_UserInfo currentName] == nil) {
         FirstTimeLoadScreen *loadScreen = [[FirstTimeLoadScreen alloc] init];
         mainNavController = [[UINavigationController alloc] initWithRootViewController:loadScreen];
         [mainNavController setNavigationBarHidden:YES];

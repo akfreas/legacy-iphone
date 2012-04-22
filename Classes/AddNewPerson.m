@@ -105,11 +105,9 @@
     
     NSString *alertText;
     
-    NSLog(@"Name: %@", name.text);
-    
     if ([name.text isEqualToString:@""] && [datePicker.date timeIntervalSinceNow] > 0) {
         alertText = @"Please enter a name.";
-    } else if ([name.text isEqualToString:@""] && [datePicker.date timeIntervalSinceNow] > 0) {
+    } else if ([name.text isEqualToString:@""] || [datePicker.date timeIntervalSinceNow] > 0) {
         alertText = @"Please enter a valid date and a name.";
     } else if ([datePicker.date timeIntervalSinceNow] > 0) {
         alertText = @"Please enter a valid date.";

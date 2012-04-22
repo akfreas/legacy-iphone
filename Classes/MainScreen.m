@@ -25,10 +25,8 @@ static NSString *KeyForBirthday = @"birthday";
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     
     if (self) {
-        NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-        name = [defaults objectForKey:KeyForName];
-        birthday = [defaults objectForKey:KeyForBirthday];
-        NSLog(@"Birthday: %@", birthday);
+        name = [Utility_UserInfo currentName];
+        birthday = [Utility_UserInfo birthdayForCurrentName];
     }
      
     return self;
@@ -69,13 +67,21 @@ static NSString *KeyForBirthday = @"birthday";
     self.navigationItem.backBarButtonItem = nil;
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    birthday = [Utility_UserInfo birthdayForCurrentName];
+    name = [Utility_UserInfo currentName];
+    [self getEventForBirthday];
+    self.navigationItem.title = name;
+}
+
 -(void)viewDidLoad {
     [super viewDidLoad];
     
     [self.navigationController setNavigationBarHidden:NO];
     
     [self setNavigationElements];
-    [self getEventForBirthday];
 }
 
 @end

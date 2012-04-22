@@ -62,10 +62,7 @@
         id parseResult = [parser objectWithData:resultData];
         
         if ([parseResult isKindOfClass:[NSArray class]]) {
-
-            NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:0];
             
-    
             NSLog(@"Result: %@", parseResult);
             result = [[request.classToParse alloc] initWithJsonDictionary:[parseResult lastObject]];
         }

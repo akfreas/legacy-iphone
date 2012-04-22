@@ -45,10 +45,10 @@ typedef enum {
 @end
 
 @protocol BSKeyboardControlsDelegate <NSObject>
-@required
 /* Called when the user presses either the "Previous" or the "Next" button */
 - (void)keyboardControlsPreviousNextPressed:(BSKeyboardControls *)controls withDirection:(KeyboardControlsDirection)direction andActiveTextField:(id)textField;
 
+@required
 /* Called when the user pressed the "Done" button */
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)controls;
 @end

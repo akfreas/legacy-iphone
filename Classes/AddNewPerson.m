@@ -1,45 +1,40 @@
-#import "FirstTimeLoadScreen.h"
-#import "MainScreen.h"
+#import "AddNewPerson.h"
 #import "Utility_UserInfo.h"
 #import "BSKeyboardControls.h"
 
-
-static NSString *KeyForBirthday = @"birthday";
-static NSString *KeyForName = @"name";
-
-
-@implementation FirstTimeLoadScreen {
+@implementation AddNewPerson {
     
-    IBOutlet UIDatePicker *birthdayPicker;
+    IBOutlet UIDatePicker *datePicker;
     IBOutlet UITextField *name;
-    MainScreen *mainScreen;
     BSKeyboardControls *keyboardControls;
+
 }
 
-
-
 -(id)init {
-    self = [super initWithNibName:@"FirstTimeLoadScreen" bundle:[NSBundle mainBundle]];
+    self = [super initWithNibName:@"AddNewName" bundle:[NSBundle bundleForClass:[self class]]];
     return self;
 }
 
 
-
--(IBAction)selectButtonWasTapped {
-    [self setInfoAndMoveToNextView];
+-(void)configureNavigationItems {
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWasTapped)];
+    
+    self.navigationItem.title = @"Add Another Person";
 }
 
--(void)setInfoAndMoveToNextView {
+-(void)doneWasTapped {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:birthdayPicker.date forKey:KeyForBirthday];
-    [defaults setObject:name.text forKey:KeyForName];
-    
-    [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
-    [self moveToNextView];
+    if ([name.text isEqualToString:@""] || [datePicker.date timeIntervalSinceNow] > 0) {
+        [self displayValidationAlerts];
+    } else {
+            
+        [Utility_UserInfo setOrUpdateUserBirthday:datePicker.date name:name.text];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
-
 -(void)placeKeyboardControls {
     
     keyboardControls = [[BSKeyboardControls alloc] init];
@@ -49,14 +44,6 @@ static NSString *KeyForName = @"name";
     
     [self.view addSubview:keyboardControls];
 }
-
--(void)moveToNextView {
-    
-    mainScreen = [[MainScreen alloc] init];
-    
-    [self.navigationController pushViewController:mainScreen animated:YES];
-}
-
 -(void)registerForKeyboardNotifications {
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -72,12 +59,12 @@ static NSString *KeyForName = @"name";
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect;    
     keyboardRect = [value CGRectValue];
-
+    
     keyboardRect = [self.view convertRect:keyboardRect toView:nil];
     
     CGFloat keyboardTop = keyboardRect.origin.y;
     
-    CGRect textFieldAccessoryFrame = CGRectMake(0, keyboardTop - 80, 320, 44);
+    CGRect textFieldAccessoryFrame = [self.view convertRect:CGRectMake(0, self.view.frame.size.height - keyboardTop + 5, 320, 44) toView:nil] ;
     
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     
@@ -85,7 +72,7 @@ static NSString *KeyForName = @"name";
     
     [animationDurationValue getValue:&animationDuration];
     
-
+    
     
     [UIView animateWithDuration:animationDuration animations:^{
         keyboardControls.frame = textFieldAccessoryFrame;
@@ -114,13 +101,31 @@ static NSString *KeyForName = @"name";
     [name resignFirstResponder];
 }
 
--(void)viewDidLoad {
-    [super viewDidLoad];
-    [self placeKeyboardControls];
-    [self registerForKeyboardNotifications];
+-(void)displayValidationAlerts {
+    
+    NSString *alertText;
+    
+    NSLog(@"Name: %@", name.text);
+    
+    if ([name.text isEqualToString:@""] && [datePicker.date timeIntervalSinceNow] > 0) {
+        alertText = @"Please enter a name.";
+    } else if ([name.text isEqualToString:@""] && [datePicker.date timeIntervalSinceNow] > 0) {
+        alertText = @"Please enter a valid date and a name.";
+    } else if ([datePicker.date timeIntervalSinceNow] > 0) {
+        alertText = @"Please enter a valid date.";
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:alertText delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
+-(void)viewDidLoad {
+    [super viewDidLoad];
 
-
+    [self registerForKeyboardNotifications];
+    [self placeKeyboardControls];
+    [self configureNavigationItems];
+}
 
 @end

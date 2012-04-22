@@ -1,4 +1,5 @@
 #import "SwitchPerson.h"
+#import "AddNewPerson.h"
 #import "Utility_UserInfo.h"
 
 
@@ -27,7 +28,7 @@ static NSString *KeyForBirthday = @"birthday";
         birthday = [Utility_UserInfo birthdayFromUserDefaults];
         
         formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"mm/dd/YYYY"];
+        [formatter setDateFormat:@"MM/dd/YYYY"];
     }
     return self;
 }
@@ -90,11 +91,25 @@ static NSString *KeyForBirthday = @"birthday";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)addName {
+    
+    AddNewPerson *newPersonController = [[AddNewPerson alloc] init];
+    
+    [self.navigationController pushViewController:newPersonController animated:YES];
+}
+
 -(void)configureNavigationBarItems {
     
-    self.navigationController.title = @"Select Another Name";
+    self.navigationItem.title = @"Select Another Name";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWasTapped)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addName)];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    names = [Utility_UserInfo arrayOfUserInfo];        
+    [self.tableView reloadData];
 }
 
 -(void)viewDidLoad {

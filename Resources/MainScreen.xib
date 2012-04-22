@@ -11,9 +11,10 @@
 			<string key="NS.object.0">1179</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>IBProxyObject</string>
+			<string>IBUISegmentedControl</string>
 			<string>IBUIView</string>
 			<string>IBUILabel</string>
+			<string>IBProxyObject</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -95,7 +96,6 @@
 						<string key="NSFrame">{{43, 311}, {246, 124}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -112,6 +112,43 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="403084509"/>
 						<reference key="IBUIFont" ref="308240301"/>
+					</object>
+					<object class="IBUISegmentedControl" id="362069949">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{20, 99}, {269, 44}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBNumberOfSegments">3</int>
+						<int key="IBSelectedSegmentIndex">0</int>
+						<array key="IBSegmentTitles">
+							<string>First</string>
+							<string>Second</string>
+							<string/>
+						</array>
+						<array class="NSMutableArray" key="IBSegmentWidths">
+							<real value="0.0"/>
+							<real value="0.0"/>
+							<real value="0.0"/>
+						</array>
+						<array class="NSMutableArray" key="IBSegmentEnabledStates">
+							<boolean value="YES"/>
+							<boolean value="YES"/>
+							<boolean value="YES"/>
+						</array>
+						<array class="NSMutableArray" key="IBSegmentContentOffsets">
+							<string>{0, 0}</string>
+							<string>{0, 0}</string>
+							<string>{0, 0}</string>
+						</array>
+						<array class="NSMutableArray" key="IBSegmentImages">
+							<object class="NSNull" id="4"/>
+							<reference ref="4"/>
+							<reference ref="4"/>
+						</array>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 460}</string>
@@ -175,6 +212,7 @@
 							<reference ref="797410509"/>
 							<reference ref="113266599"/>
 							<reference ref="211062686"/>
+							<reference ref="362069949"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -204,6 +242,11 @@
 						<reference key="object" ref="211062686"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">10</int>
+						<reference key="object" ref="362069949"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -212,6 +255,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -220,32 +264,13 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">9</int>
+			<int key="maxID">11</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">MainScreen</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="descriptionLabel">UILabel</string>
-						<string key="onThisDayLabel">UILabel</string>
-						<string key="yourAgeLabel">UILabel</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="descriptionLabel">
-							<string key="name">descriptionLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="onThisDayLabel">
-							<string key="name">onThisDayLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="yourAgeLabel">
-							<string key="name">yourAgeLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MainScreen.h</string>

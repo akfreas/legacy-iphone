@@ -21,7 +21,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelWasTapped)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWasTapped)];
     
-    self.navigationItem.title = @"Add Another Person";
+    self.navigationItem.title = @"Add Person";
 }
 
 -(void)cancelWasTapped {

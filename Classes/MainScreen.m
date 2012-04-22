@@ -94,6 +94,7 @@ static NSString *KeyForBirthday = @"birthday";
     name = [Utility_UserInfo currentName];
     [self getEventForBirthday];
     self.navigationItem.title = name;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 -(void)viewDidLoad {

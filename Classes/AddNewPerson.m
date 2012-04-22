@@ -18,10 +18,14 @@
 
 -(void)configureNavigationItems {
     
-    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelWasTapped)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWasTapped)];
     
     self.navigationItem.title = @"Add Another Person";
+}
+
+-(void)cancelWasTapped {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)doneWasTapped {

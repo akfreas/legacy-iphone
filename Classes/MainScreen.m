@@ -47,6 +47,9 @@ static NSString *KeyForBirthday = @"birthday";
 
     NSLog(@"Event: %@", event);
     onThisDayLabel.text = [NSString stringWithFormat:@"On this day in %@'s life...", event.name];
+    
+    yourAgeLabel.text = [NSString stringWithFormat:@"You are %@ years, %@ months, and %@ days old.", event.age_years, event.age_months, event.age_days];
+    
     descriptionLabel.text = event.description;
 }
 

@@ -4,15 +4,21 @@
 #import "Event.h"
 #import "Utility_UserInfo.h"
 #import "SwitchPerson.h"
+#import "AgeDisplaySegmentedControl.h"
+#import "MainScreenWebView.h"
 
 static NSString *KeyForName = @"name";
 static NSString *KeyForBirthday = @"birthday";
 
 @implementation MainScreen {
     
+    IBOutlet UIView *onThisDayWebViewPlaceholder;
     IBOutlet UILabel *yourAgeLabel;
-    IBOutlet UILabel *onThisDayLabel;
-    IBOutlet UILabel *descriptionLabel;
+    
+    IBOutlet UIView *segmentedControlPlaceholder;
+    
+    AgeDisplaySegmentedControl *ageDisplay;
+    MainScreenWebView *onThisDayWebView;
     
     NSDate *birthday;
     NSString *name;
@@ -38,34 +44,57 @@ static NSString *KeyForBirthday = @"birthday";
     AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
-        self.event = result;
+        
+        if ([result isKindOfClass:[NSArray class]] && [result count] > 0) {
+            self.event = [result objectAtIndex:0];
+        } else {
+            self.event = result;
+        }
+        
         [self refresh];
     }];
 }
 
+-(void)toggleLabelsHidden {
+    
+//    ageDisplay.hidden = !ageDisplay.hidden;
+//    onThisDayTextView.hidden = !onThisDayTextView.hidden;
+}
+
+-(void)configureWebView {
+    
+ }
+
 -(void)refresh {
 
     if ([event.eventDescription isEqualToString:@""] || event.eventDescription == nil) {
-        yourAgeLabel.hidden = YES;
-        descriptionLabel.hidden = YES;
-        onThisDayLabel.text = @"It looks like nobody in the course of history did anything at your age.  Take a day off!";
+        [self toggleLabelsHidden];
+        //[onThisDayTextView loadHTMLString:@"It looks like nobody in the course of history did anything at your age.  Take a day off!" baseURL:nil];
     } else {
-        yourAgeLabel.hidden = NO;
-        descriptionLabel.hidden = NO;
         
-        NSLog(@"Event: %@", event.eventDescription);
+        [self toggleLabelsHidden];
+
+        [self configureWebView];
         
-        NSString *genderQualifier;
-        
-        if (event.male) {
-            genderQualifier = @"he";
+        if (ageDisplay == nil) {
+            ageDisplay = [[AgeDisplaySegmentedControl alloc] initWithYears:[NSString stringWithFormat:@"%@", event.age_years] months:[NSString stringWithFormat:@"%@", event.age_months] days:[NSString stringWithFormat:@"%@", event.age_days]];
+            ageDisplay.frame = segmentedControlPlaceholder.frame;
         } else {
-            genderQualifier = @"she";
+            [ageDisplay updateWithYears:event.age_years months:event.age_months days:event.age_days];
         }
         
-        onThisDayLabel.text = [NSString stringWithFormat:@"On this day in %@'s life, %@ %@", event.name, genderQualifier, event.eventDescription];
+        if (onThisDayWebView == nil) {
+            onThisDayWebView = [[MainScreenWebView alloc] initWithEvent:event];
+            onThisDayWebView.frame = onThisDayWebViewPlaceholder.frame;
+            [self.view addSubview:onThisDayWebView];
+        } else {
+            [onThisDayWebView updateWithEvent:event];
+        }
         
-        yourAgeLabel.text = [NSString stringWithFormat:@"You are %@ years, %@ months, and %@ days old.", event.age_years, event.age_months, event.age_days];
+        NSLog(@"Frame: %@", NSStringFromCGRect(ageDisplay.frame));
+        [self.view addSubview:ageDisplay];
+        
+
         
     }
 }
@@ -99,6 +128,8 @@ static NSString *KeyForBirthday = @"birthday";
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
+
     
     [self.navigationController setNavigationBarHidden:NO];
     

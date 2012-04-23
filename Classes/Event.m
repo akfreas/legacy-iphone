@@ -24,12 +24,13 @@ static NSString *KeyForMale = @"male";
         
         NSDictionary *dataDict = [jsonDict objectForKey:KeyForFields];
         
-        eventDescription = [dataDict objectForKey:KeyForDescription];
-        name = [dataDict objectForKey:KeyForName];
-        age_years = [dataDict objectForKey:KeyForAgeYears];
-        age_months = [dataDict objectForKey:KeyForAgeMonths];
-        age_days = [dataDict objectForKey:KeyForAgeDays];
+        eventDescription = [NSString stringWithFormat:@"%@", [dataDict objectForKey:KeyForDescription]];
+        name = [NSString stringWithFormat:@"%@",[dataDict objectForKey:KeyForName]];
+        age_years = [NSString stringWithFormat:@"%@", [dataDict objectForKey:KeyForAgeYears]];
+        age_months = [NSString stringWithFormat:@"%@", [dataDict objectForKey:KeyForAgeMonths]];
+        age_days = [NSString stringWithFormat:@"%@", [dataDict objectForKey:KeyForAgeDays]];
         male = [[dataDict objectForKey:KeyForMale] boolValue];
+        
         
     }
     return self;

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4E0F3C9015447D4800369BE1 /* AddNewName.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F3C8F15447D4800369BE1 /* AddNewName.xib */; };
 		4E0F3C9315447DBA00369BE1 /* AddNewPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */; };
+		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
+		4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */; };
 		4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */; };
 		4E6478C11544673700CE47F1 /* SwitchPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478C01544673700CE47F1 /* SwitchPerson.m */; };
 		4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */; };
@@ -43,6 +45,10 @@
 		4E0F3C8F15447D4800369BE1 /* AddNewName.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewName.xib; sourceTree = "<group>"; };
 		4E0F3C9115447DBA00369BE1 /* AddNewPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewPerson.h; sourceTree = "<group>"; };
 		4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewPerson.m; sourceTree = "<group>"; };
+		4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeDisplaySegmentedControl.h; sourceTree = "<group>"; };
+		4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeDisplaySegmentedControl.m; sourceTree = "<group>"; };
+		4E0F3C971545080D00369BE1 /* MainScreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenWebView.h; sourceTree = "<group>"; };
+		4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenWebView.m; sourceTree = "<group>"; };
 		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		4E6478BF1544673700CE47F1 /* SwitchPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPerson.h; sourceTree = "<group>"; };
@@ -162,6 +168,10 @@
 				4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */,
 				4EEA6D631526DCB100B96EFD /* MainScreen.h */,
 				4EEA6D641526DCB100B96EFD /* MainScreen.m */,
+				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
+				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
+				4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */,
+				4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */,
 				4E6478BF1544673700CE47F1 /* SwitchPerson.h */,
 				4E6478C01544673700CE47F1 /* SwitchPerson.m */,
 				4E0F3C9115447DBA00369BE1 /* AddNewPerson.h */,
@@ -174,10 +184,10 @@
 		4EEA6D081526902D00B96EFD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4EEA6D661526DCE100B96EFD /* MainScreen.xib */,
-				4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */,
-				4EEA6D3E1526A80B00B96EFD /* FirstTimeLoadScreen.xib */,
 				4E0F3C8F15447D4800369BE1 /* AddNewName.xib */,
+				4EEA6D661526DCE100B96EFD /* MainScreen.xib */,
+				4EEA6D3E1526A80B00B96EFD /* FirstTimeLoadScreen.xib */,
+				4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -319,6 +329,8 @@
 				4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */,
 				4E6478C11544673700CE47F1 /* SwitchPerson.m in Sources */,
 				4E0F3C9315447DBA00369BE1 /* AddNewPerson.m in Sources */,
+				4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */,
+				4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

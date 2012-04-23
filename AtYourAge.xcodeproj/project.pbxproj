@@ -11,6 +11,9 @@
 		4E0F3C9315447DBA00369BE1 /* AddNewPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */; };
 		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
 		4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */; };
+		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
+		4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */; };
+		4E0F3CA715453CB200369BE1 /* Utility_UISettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_UISettings.m */; };
 		4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */; };
 		4E6478C11544673700CE47F1 /* SwitchPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478C01544673700CE47F1 /* SwitchPerson.m */; };
 		4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */; };
@@ -49,6 +52,11 @@
 		4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeDisplaySegmentedControl.m; sourceTree = "<group>"; };
 		4E0F3C971545080D00369BE1 /* MainScreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenWebView.h; sourceTree = "<group>"; };
 		4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenWebView.m; sourceTree = "<group>"; };
+		4E0F3CA0154533E800369BE1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPersonCell.h; sourceTree = "<group>"; };
+		4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchPersonCell.m; sourceTree = "<group>"; };
+		4E0F3CA515453CB200369BE1 /* Utility_UISettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility_UISettings.h; path = ../Utility_UISettings.h; sourceTree = "<group>"; };
+		4E0F3CA615453CB200369BE1 /* Utility_UISettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility_UISettings.m; path = ../Utility_UISettings.m; sourceTree = "<group>"; };
 		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		4E6478BF1544673700CE47F1 /* SwitchPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPerson.h; sourceTree = "<group>"; };
@@ -110,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */,
 				4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */,
 				4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */,
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
@@ -142,6 +151,7 @@
 		4EEA6CE115268ED300B96EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E0F3CA0154533E800369BE1 /* QuartzCore.framework */,
 				4EEA6CE215268ED300B96EFD /* UIKit.framework */,
 				4EEA6CE415268ED300B96EFD /* Foundation.framework */,
 				4EEA6CE615268ED300B96EFD /* CoreGraphics.framework */,
@@ -152,6 +162,10 @@
 		4EEA6D021526902D00B96EFD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4E0F3C9115447DBA00369BE1 /* AddNewPerson.h */,
+				4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */,
+				4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */,
+				4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */,
 				4EEA6D431526A90200B96EFD /* AtYourAgeConnection.h */,
 				4EEA6D441526A90200B96EFD /* AtYourAgeConnection.m */,
 				4EEA6D5B1526CAEF00B96EFD /* AtYourAgeRequest.h */,
@@ -170,12 +184,12 @@
 				4EEA6D641526DCB100B96EFD /* MainScreen.m */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
-				4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */,
-				4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */,
 				4E6478BF1544673700CE47F1 /* SwitchPerson.h */,
 				4E6478C01544673700CE47F1 /* SwitchPerson.m */,
-				4E0F3C9115447DBA00369BE1 /* AddNewPerson.h */,
-				4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */,
+				4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */,
+				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
+				4E0F3CA515453CB200369BE1 /* Utility_UISettings.h */,
+				4E0F3CA615453CB200369BE1 /* Utility_UISettings.m */,
 				4EEA6D071526902D00B96EFD /* main.m */,
 			);
 			path = Classes;
@@ -331,6 +345,8 @@
 				4E0F3C9315447DBA00369BE1 /* AddNewPerson.m in Sources */,
 				4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */,
 				4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */,
+				4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */,
+				4E0F3CA715453CB200369BE1 /* Utility_UISettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

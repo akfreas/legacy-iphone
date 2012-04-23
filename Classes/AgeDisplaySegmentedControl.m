@@ -31,6 +31,10 @@
         [ageCounter insertSegmentWithTitle:days atIndex:2 animated:YES];
     }
     
+    NSDictionary *titleTextAttributes = [NSDictionary dictionaryWithObject:[UIFont fontWithName:@"AmericanTypewriter" size:16] forKey:UITextAttributeFont];
+    
+     
+    [ageCounter setTitleTextAttributes:titleTextAttributes forState:UIControlStateNormal];
     ageCounter.segmentedControlStyle = UISegmentedControlStyleBordered;
     ageCounter.userInteractionEnabled = NO;
     
@@ -52,19 +56,23 @@
 -(void)placeLabels {
     
     UILabel *yearsL = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 86, 15)];
-    UILabel *monthsL = [[UILabel alloc] initWithFrame:CGRectMake(96, 0, 86, 15)];
-    UILabel *daysL = [[UILabel alloc] initWithFrame:CGRectMake(182, 0, 86, 15)];
-    
     yearsL.text = @"Years";
+    
+    
+    UILabel *monthsL = [[UILabel alloc] initWithFrame:CGRectMake(96, 0, 86, 15)];
     monthsL.text = @"Months";
+    
+    
+    UILabel *daysL = [[UILabel alloc] initWithFrame:CGRectMake(182, 0, 86, 15)];
     daysL.text = @"Days";
+    
     
     NSArray *labelArray = [NSArray arrayWithObjects:yearsL, monthsL, daysL, nil];
     
     for (UILabel *label in labelArray) {
         
         label.textAlignment = UITextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:14];
+        label.font = [UIFont fontWithName:@"AmericanTypewriter" size:14];
         [self addSubview:label];
     }
 }

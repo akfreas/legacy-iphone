@@ -1,6 +1,7 @@
 #import "SwitchPerson.h"
 #import "AddNewPerson.h"
 #import "Utility_UserInfo.h"
+#import "SwitchPersonCell.h"
 
 @implementation SwitchPerson {
     
@@ -37,7 +38,7 @@
     
     NSString *identifier = @"cellIdentifier";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    SwitchPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     NSDictionary *userInfo = [names objectAtIndex:indexPath.row];
     
@@ -48,13 +49,11 @@
     
     if (cell == nil) {
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        cell = [[SwitchPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    cell.textLabel.text = labelForName;
-    cell.detailTextLabel.text = labelForBirthday;
-    
+    [cell configureCellWithName:labelForName birthday:labelForBirthday];
     if ([labelForName isEqualToString:[Utility_UserInfo currentName]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         pathForSelectedCell = indexPath;

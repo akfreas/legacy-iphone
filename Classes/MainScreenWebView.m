@@ -65,10 +65,21 @@ typedef enum  {
 -(void)placeHomeButton {
     
     if (homeButton == nil) {
-        homeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 20, 0, 20, 20)];
-        homeButton.backgroundColor = [UIColor redColor];
-        [homeButton setTitle:@"Home" forState:UIControlStateNormal];
+        
+        UILabel *homeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 24)];
+        
+        homeLabel.text = @"Home";
+        homeLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:12];
+        homeLabel.backgroundColor = [UIColor clearColor];
+        homeLabel.textAlignment = UITextAlignmentCenter;
+        
+        homeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 44, 0, 44, 24)];
+        homeButton.backgroundColor = [UIColor grayColor];
+        homeButton.alpha = 0.75;
+
         [homeButton addTarget:self action:@selector(homeButtonWasTapped) forControlEvents:UIControlEventTouchUpInside];
+        [homeButton.layer setCornerRadius:7.0];
+        [homeButton addSubview:homeLabel];
     } 
     [self addSubview:homeButton];
     homeButton.hidden = NO;

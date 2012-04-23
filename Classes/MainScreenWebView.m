@@ -35,6 +35,7 @@ typedef enum  {
 -(void)updateWithEvent:(Event *)theEvent {
     event = theEvent;
     [self loadInitialHtml];
+
 }
 
 -(void)loadInitialHtml {

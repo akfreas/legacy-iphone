@@ -59,6 +59,7 @@
     yearsL.text = @"Years";
     
     
+    
     UILabel *monthsL = [[UILabel alloc] initWithFrame:CGRectMake(96, 0, 86, 15)];
     monthsL.text = @"Months";
     
@@ -72,7 +73,9 @@
     for (UILabel *label in labelArray) {
         
         label.textAlignment = UITextAlignmentCenter;
-        label.font = [UIFont fontWithName:@"AmericanTypewriter" size:14];
+        label.font = [Utility_UISettings applicationFontSmall];
+        label.textColor = [UIColor blackColor];
+        label.backgroundColor = [UIColor clearColor];
         [self addSubview:label];
     }
 }

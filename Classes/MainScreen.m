@@ -16,6 +16,7 @@ static NSString *KeyForBirthday = @"birthday";
     IBOutlet UILabel *yourAgeLabel;
     
     IBOutlet UIView *segmentedControlPlaceholder;
+    IBOutlet UIView *borderView;
     
     AgeDisplaySegmentedControl *ageDisplay;
     MainScreenWebView *onThisDayWebView;
@@ -129,7 +130,7 @@ static NSString *KeyForBirthday = @"birthday";
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-
+    [borderView.layer setCornerRadius:10.0];
     
     [self.navigationController setNavigationBarHidden:NO];
     

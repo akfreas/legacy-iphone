@@ -178,8 +178,6 @@
 				4EEA6D591526C86300B96EFD /* Event.m */,
 				4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */,
 				4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */,
-				4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */,
-				4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */,
 				4EEA6D631526DCB100B96EFD /* MainScreen.h */,
 				4EEA6D641526DCB100B96EFD /* MainScreen.m */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
@@ -190,6 +188,8 @@
 				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
 				4E0F3CA515453CB200369BE1 /* Utility_UISettings.h */,
 				4E0F3CA615453CB200369BE1 /* Utility_UISettings.m */,
+				4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */,
+				4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */,
 				4EEA6D071526902D00B96EFD /* main.m */,
 			);
 			path = Classes;

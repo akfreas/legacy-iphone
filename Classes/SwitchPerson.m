@@ -92,7 +92,7 @@
 
 -(void)configureNavigationBarItems {
     
-    self.navigationItem.title = @"Select Another Name";
+    self.navigationItem.title = @"Select Name";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWasTapped)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addName)];
 }

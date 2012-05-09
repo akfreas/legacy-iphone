@@ -1,8 +1,11 @@
-@interface Utility_UISettings : NSObject
+@interface Utility_AppSettings : NSObject
 
 +(UIFont *)applicationFontWithSize:(CGFloat)fontSize;
 +(UIFont *)applicationFontLarge;
 +(UIFont *)applicationFontMedium;
 +(UIFont *)applicationFontSmall;
+
++(NSDateFormatter *)dateFormatterForDisplay;
++(NSDateFormatter *)dateFormatterForRequest;
 
 @end

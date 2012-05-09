@@ -22,12 +22,22 @@
 }
 
 +(NSURL *)eventsUrlForBirthday:(NSDate *)theDate {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy/MM/dd"];
+    
+    NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
     
     NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = @"event/";
     pathString = [pathString stringByAppendingString:[formatter stringFromDate:theDate]];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
++(NSURL *)urlToPostUser {
+    
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = @"user/";
     
     url = [url URLByAppendingPathComponent:pathString];
     
@@ -47,6 +57,21 @@
     AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:[Event class]];
     
     return request;
+}
+
++(AtYourAgeRequest *)requestToPostMainUserWithFirstName:(NSString *)firstName lastName:(NSString *)lastName birthday:(NSDate *)birthday {
+    
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
+    
+    NSURL *url = [AtYourAgeRequest urlToPostUser];
+    
+    [urlRequest setURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    
+    
+    
 }
 
 -(id)initWithRequest:(NSURLRequest *)theRequest {

@@ -100,9 +100,6 @@ typedef enum  {
     } else {
         [self placeHomeButton];
     }
-    
-    NSLog(@"REquest: %@", request.URL.path);
-    
     return YES;
 }
 

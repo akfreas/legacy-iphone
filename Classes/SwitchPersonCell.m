@@ -14,14 +14,16 @@
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 4, 100, 36)];
     nameLabel.text = name;
     nameLabel.textAlignment = UITextAlignmentLeft;
-    nameLabel.font = [Utility_UISettings applicationFontMedium];
+    nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.font = [Utility_AppSettings applicationFontMedium];
     
     [self addSubview:nameLabel];
     
     UILabel *birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(175, 4, 100, 36)];
     birthdayLabel.text = birthday;
+    birthdayLabel.backgroundColor = [UIColor clearColor];
     birthdayLabel.textAlignment = UITextAlignmentRight;
-    birthdayLabel.font = [Utility_UISettings applicationFontMedium];
+    birthdayLabel.font = [Utility_AppSettings applicationFontMedium];
     
     [self addSubview:birthdayLabel];
 }

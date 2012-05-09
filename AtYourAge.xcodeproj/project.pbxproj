@@ -13,10 +13,13 @@
 		4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */; };
-		4E0F3CA715453CB200369BE1 /* Utility_UISettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_UISettings.m */; };
+		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
+		4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
+		4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */; };
 		4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */; };
 		4E6478C11544673700CE47F1 /* SwitchPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478C01544673700CE47F1 /* SwitchPerson.m */; };
 		4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */; };
+		4E775F2A154635A60021028B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E775F29154635A60021028B /* User.m */; };
 		4E82A1C8154296D100D112F9 /* Utility_UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */; };
 		4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE215268ED300B96EFD /* UIKit.framework */; };
 		4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE415268ED300B96EFD /* Foundation.framework */; };
@@ -55,13 +58,19 @@
 		4E0F3CA0154533E800369BE1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPersonCell.h; sourceTree = "<group>"; };
 		4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchPersonCell.m; sourceTree = "<group>"; };
-		4E0F3CA515453CB200369BE1 /* Utility_UISettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility_UISettings.h; path = ../Utility_UISettings.h; sourceTree = "<group>"; };
-		4E0F3CA615453CB200369BE1 /* Utility_UISettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility_UISettings.m; path = ../Utility_UISettings.m; sourceTree = "<group>"; };
+		4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility_AppSettings.h; path = ../Utility_AppSettings.h; sourceTree = "<group>"; };
+		4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility_AppSettings.m; path = ../Utility_AppSettings.m; sourceTree = "<group>"; };
+		4E640C1515460474009D8DC6 /* SettingsModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsModalView.h; sourceTree = "<group>"; };
+		4E640C1615460474009D8DC6 /* SettingsModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsModalView.m; sourceTree = "<group>"; };
+		4E640C1B15460C5A009D8DC6 /* Utility_Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_Notifications.h; sourceTree = "<group>"; };
+		4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility_Notifications.m; sourceTree = "<group>"; };
 		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		4E6478BF1544673700CE47F1 /* SwitchPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPerson.h; sourceTree = "<group>"; };
 		4E6478C01544673700CE47F1 /* SwitchPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchPerson.m; sourceTree = "<group>"; };
 		4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwitchPerson.xib; path = Resources/SwitchPerson.xib; sourceTree = SOURCE_ROOT; };
+		4E775F28154635A60021028B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		4E775F29154635A60021028B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_UserInfo.h; sourceTree = "<group>"; };
 		4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility_UserInfo.m; sourceTree = "<group>"; };
 		4EEA6CDE15268ED200B96EFD /* AtYourAge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtYourAge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,16 +189,22 @@
 				4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */,
 				4EEA6D631526DCB100B96EFD /* MainScreen.h */,
 				4EEA6D641526DCB100B96EFD /* MainScreen.m */,
+				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
+				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
 				4E6478BF1544673700CE47F1 /* SwitchPerson.h */,
 				4E6478C01544673700CE47F1 /* SwitchPerson.m */,
 				4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */,
 				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
-				4E0F3CA515453CB200369BE1 /* Utility_UISettings.h */,
-				4E0F3CA615453CB200369BE1 /* Utility_UISettings.m */,
+				4E640C1B15460C5A009D8DC6 /* Utility_Notifications.h */,
+				4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */,
+				4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */,
+				4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */,
 				4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */,
 				4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */,
+				4E775F28154635A60021028B /* User.h */,
+				4E775F29154635A60021028B /* User.m */,
 				4EEA6D071526902D00B96EFD /* main.m */,
 			);
 			path = Classes;
@@ -346,7 +361,10 @@
 				4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */,
 				4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */,
 				4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */,
-				4E0F3CA715453CB200369BE1 /* Utility_UISettings.m in Sources */,
+				4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */,
+				4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */,
+				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
+				4E775F2A154635A60021028B /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +389,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (397NMKG2NM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -386,6 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "68261001-48CD-4E35-BFBA-F0DE827DA475";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -396,7 +416,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -405,6 +426,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -428,14 +451,14 @@
 		4EEA6CF815268ED300B96EFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Freas";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexander Freas";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/AtYourAge-Prefix.pch";
 				INFOPLIST_FILE = "Support/AtYourAge-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "57E71664-A45E-421E-B370-C8A098F9AB82";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "57E71664-A45E-421E-B370-C8A098F9AB82";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

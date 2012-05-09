@@ -6,6 +6,7 @@
 #import "SwitchPerson.h"
 #import "AgeDisplaySegmentedControl.h"
 #import "MainScreenWebView.h"
+#import "SettingsModalView.h"
 
 static NSString *KeyForName = @"name";
 static NSString *KeyForBirthday = @"birthday";
@@ -20,6 +21,7 @@ static NSString *KeyForBirthday = @"birthday";
     
     AgeDisplaySegmentedControl *ageDisplay;
     MainScreenWebView *onThisDayWebView;
+    UINavigationController *viewForSettings;
     
     NSDate *birthday;
     NSString *name;
@@ -56,27 +58,17 @@ static NSString *KeyForBirthday = @"birthday";
     }];
 }
 
--(void)toggleLabelsHidden {
-    
-//    ageDisplay.hidden = !ageDisplay.hidden;
-//    onThisDayTextView.hidden = !onThisDayTextView.hidden;
+-(void)toggleLabelsHidden {    
+    ageDisplay.hidden = YES;
 }
-
--(void)configureWebView {
-    
- }
 
 -(void)refresh {
 
     if ([event.eventDescription isEqualToString:@""] || event.eventDescription == nil) {
         [self toggleLabelsHidden];
-        //[onThisDayTextView loadHTMLString:@"It looks like nobody in the course of history did anything at your age.  Take a day off!" baseURL:nil];
+        [onThisDayWebView loadHTMLString:@"It looks like nobody in the course of history did anything at your age.  Take a day off!" baseURL:nil];
     } else {
-        
-        [self toggleLabelsHidden];
-
-        [self configureWebView];
-        
+                
         if (ageDisplay == nil) {
             ageDisplay = [[AgeDisplaySegmentedControl alloc] initWithYears:[NSString stringWithFormat:@"%@", event.age_years] months:[NSString stringWithFormat:@"%@", event.age_months] days:[NSString stringWithFormat:@"%@", event.age_days]];
             ageDisplay.frame = segmentedControlPlaceholder.frame;
@@ -108,23 +100,31 @@ static NSString *KeyForBirthday = @"birthday";
     
 }
 
+-(void)showSettingsModalView {
+    
+    if (viewForSettings == nil) {
+        viewForSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsModalView alloc] init]];
+    }
+    [self presentModalViewController:viewForSettings animated:YES];
+}
+
 -(void)setNavigationElements {
     
     self.navigationController.title = name;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(switchPerson)];
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingsModalView)];
     self.navigationItem.backBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     birthday = [Utility_UserInfo birthdayForCurrentName];
     name = [Utility_UserInfo currentName];
-    [self getEventForBirthday];
+    
     self.navigationItem.title = name;
-    self.navigationItem.hidesBackButton = YES;
+    [self getEventForBirthday];
 }
 
 -(void)viewDidLoad {

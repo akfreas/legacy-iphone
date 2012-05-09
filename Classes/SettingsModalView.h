@@ -1,0 +1,3 @@
+@interface SettingsModalView : UITableViewController
+
+@end

@@ -1,5 +1,6 @@
 #import "AtYourAgeRequest.h"
 #import "Event.h"
+#import "User.h"
 
 @implementation AtYourAgeRequest {
     
@@ -21,13 +22,12 @@
     return url;
 }
 
-+(NSURL *)eventsUrlForBirthday:(NSDate *)theDate {
++(NSURL *)eventsUrlForBirthday:(NSDate *)theDate user:(NSString *)user {
     
     NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
     
     NSURL *url = [AtYourAgeRequest baseUrl];
-    NSString *pathString = @"event/";
-    pathString = [pathString stringByAppendingString:[formatter stringFromDate:theDate]];
+    NSString *pathString = [NSString stringWithFormat:@"%@/event/%@", user, [formatter stringFromDate:theDate]];
     
     url = [url URLByAppendingPathComponent:pathString];
     
@@ -44,10 +44,11 @@
     return url;
 }
 
-+(AtYourAgeRequest *)requestToGetEventWithBirthday:(NSDate *)birthday {
++(AtYourAgeRequest *)requestToGetEventForUser:(User *)user {
 
+    
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [AtYourAgeRequest eventsUrlForBirthday:birthday];
+    NSURL *url = [AtYourAgeRequest eventsUrlForBirthday:user.birthday user:user.facebookId];
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];

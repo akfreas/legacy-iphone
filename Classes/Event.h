@@ -1,10 +1,11 @@
 @interface Event : NSObject
 
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *eventDescription;
-@property (strong, nonatomic) NSString *age_years;
-@property (strong, nonatomic) NSString *age_months;
-@property (strong, nonatomic) NSString *age_days;
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *eventDescription;
+@property (nonatomic) NSString *age_years;
+@property (nonatomic) NSString *age_months;
+@property (nonatomic) NSString *age_days;
+@property (nonatomic) NSString *storyHtml;
 
 @property (atomic) BOOL male;
 

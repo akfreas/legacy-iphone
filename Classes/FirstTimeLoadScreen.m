@@ -10,10 +10,7 @@ static NSString *KeyForName = @"name";
 
 @implementation FirstTimeLoadScreen {
     
-    IBOutlet UIDatePicker *birthdayPicker;
-    IBOutlet UITextField *name;
     MainScreen *mainScreen;
-    BSKeyboardControls *keyboardControls;
 }
 
 
@@ -31,19 +28,9 @@ static NSString *KeyForName = @"name";
 
 -(void)setInfoAndMoveToNextView {
         
-    [Utility_UserInfo setCurrentName:name.text];
-    [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
+//    [Utility_UserInfo setCurrentName:name.text];
+//    [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
     [self moveToNextView];
-}
-
--(void)placeKeyboardControls {
-    
-    keyboardControls = [[BSKeyboardControls alloc] init];
-    keyboardControls.delegate = self;
-    keyboardControls.alpha = 0.0;
-    keyboardControls.frame = CGRectMake(0, 480, 320, 44);
-    
-    [self.view addSubview:keyboardControls];
 }
 
 -(void)moveToNextView {

@@ -1,8 +1,8 @@
-@interface User : NSObject
+@interface User : NSObject <NSCoding>
 
-@property (strong, nonatomic) NSString *token;
-@property (strong, nonatomic) NSDate *birthday;
-@property (strong, nonatomic) NSString *firstName;
-@property (strong, nonatomic) NSString *lastName;
+@property (nonatomic) NSDate *birthday;
+@property (nonatomic) NSString *firstName;
+@property (nonatomic) NSString *lastName;
+@property (nonatomic) NSString *facebookId;
 
 @end

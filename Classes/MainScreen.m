@@ -1,94 +1,37 @@
 #import "MainScreen.h"
-#import "AtYourAgeRequest.h"
-#import "AtYourAgeConnection.h"
-#import "Event.h"
+#import "AgeInfoScreen.h"
+#import "FBLoginViewController.h"
 #import "Utility_UserInfo.h"
-#import "SwitchPerson.h"
-#import "AgeDisplaySegmentedControl.h"
-#import "MainScreenWebView.h"
 #import "SettingsModalView.h"
-
-static NSString *KeyForName = @"name";
-static NSString *KeyForBirthday = @"birthday";
+#import "SwitchPerson.h"
 
 @implementation MainScreen {
-    
-    IBOutlet UIView *onThisDayWebViewPlaceholder;
-    IBOutlet UILabel *yourAgeLabel;
-    
-    IBOutlet UIView *segmentedControlPlaceholder;
-    IBOutlet UIView *borderView;
-    
-    AgeDisplaySegmentedControl *ageDisplay;
-    MainScreenWebView *onThisDayWebView;
     UINavigationController *viewForSettings;
-    
-    NSDate *birthday;
-    NSString *name;
-
 }
 
-@synthesize event;
 
--(id)init {
-    self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
+-(void)placeAgeInfoView {
     
-    if (self) {
-        name = [Utility_UserInfo currentName];
-        birthday = [Utility_UserInfo birthdayForCurrentName];
-    }
-     
-    return self;
+    AgeInfoScreen *infoScreen = [[AgeInfoScreen alloc] init];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self addChildViewController:infoScreen];
+    [self.view addSubview:infoScreen.view];
 }
 
--(void)getEventForBirthday {
-    
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetEventWithBirthday:birthday];
-    AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-    
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
-        
-        if ([result isKindOfClass:[NSArray class]] && [result count] > 0) {
-            self.event = [result objectAtIndex:0];
-        } else {
-            self.event = result;
-        }
-        
-        [self refresh];
-    }];
-}
-
--(void)toggleLabelsHidden {    
-    ageDisplay.hidden = YES;
-}
-
--(void)refresh {
-
-    if ([event.eventDescription isEqualToString:@""] || event.eventDescription == nil) {
-        [self toggleLabelsHidden];
-        [onThisDayWebView loadHTMLString:@"It looks like nobody in the course of history did anything at your age.  Take a day off!" baseURL:nil];
-    } else {
-                
-        if (ageDisplay == nil) {
-            ageDisplay = [[AgeDisplaySegmentedControl alloc] initWithYears:[NSString stringWithFormat:@"%@", event.age_years] months:[NSString stringWithFormat:@"%@", event.age_months] days:[NSString stringWithFormat:@"%@", event.age_days]];
-            ageDisplay.frame = segmentedControlPlaceholder.frame;
-        } else {
-            [ageDisplay updateWithYears:event.age_years months:event.age_months days:event.age_days];
-        }
-        
-        if (onThisDayWebView == nil) {
-            onThisDayWebView = [[MainScreenWebView alloc] initWithEvent:event];
-            onThisDayWebView.frame = onThisDayWebViewPlaceholder.frame;
-            [self.view addSubview:onThisDayWebView];
-        } else {
-            [onThisDayWebView updateWithEvent:event];
-        }
-        
-        NSLog(@"Frame: %@", NSStringFromCGRect(ageDisplay.frame));
-        [self.view addSubview:ageDisplay];
-        
-
-        
+-(void)getUserBirthdayAndPlaceMainScreen {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    [FBSession openActiveSessionWithAllowLoginUI:NO];
+    NSLog(@"FB Session: %@", FBSession.activeSession);
+    if (FBSession.activeSession.isOpen) {
+        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser>user, NSError *error) {
+            NSDate *birthday = [formatter dateFromString:user.birthday];
+            NSLog(@"Birthday parsed %@", birthday);
+            [Utility_UserInfo setCurrentName:user.name];
+            [Utility_UserInfo setOrUpdateUserBirthday:birthday name:user.name];
+            [self placeAgeInfoView];
+            [self setNavigationElements];
+        }];
     }
 }
 
@@ -105,12 +48,12 @@ static NSString *KeyForBirthday = @"birthday";
     if (viewForSettings == nil) {
         viewForSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsModalView alloc] init]];
     }
-    [self presentModalViewController:viewForSettings animated:YES];
+    [self presentViewController:viewForSettings animated:YES completion:NULL];
 }
 
 -(void)setNavigationElements {
     
-    self.navigationController.title = name;
+    self.navigationController.title = [Utility_UserInfo currentName];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(switchPerson)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingsModalView)];
@@ -118,23 +61,28 @@ static NSString *KeyForBirthday = @"birthday";
     self.navigationItem.hidesBackButton = YES;
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    birthday = [Utility_UserInfo birthdayForCurrentName];
-    name = [Utility_UserInfo currentName];
+-(void)loadView {
+    UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    self.navigationItem.title = name;
-    [self getEventForBirthday];
+    self.view = view;
 }
 
--(void)viewDidLoad {
-    [super viewDidLoad];
+
+-(void)viewDidAppear:(BOOL)animated {
     
-    [borderView.layer setCornerRadius:10.0];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-    
-    [self setNavigationElements];
+//    FBSession *session = [[FBSession alloc] init];
+    [FBSession openActiveSessionWithAllowLoginUI:NO];
+    NSLog(@"FB Session state in mainscreen: %@", FBSession.activeSession);
+    if (FBSession.activeSession.state != FBSessionStateOpen) {
+        FBLoginViewController *loadScreen = [[FBLoginViewController alloc] initWithLoggedInCompletion:^{
+            [self getUserBirthdayAndPlaceMainScreen];
+        }];
+        [self presentViewController:loadScreen animated:NO completion:NULL];
+    } else {
+        [self getUserBirthdayAndPlaceMainScreen];
+    }
 }
 
+
+                    
 @end

@@ -1,6 +1,7 @@
+@class User;
 @interface AtYourAgeRequest : NSObject
 
-+(AtYourAgeRequest *)requestToGetEventWithBirthday:(NSDate *)birthday;
++(AtYourAgeRequest *)requestToGetEventForUser:(User *)user;
 
 @property (strong, nonatomic) NSURLRequest *urlRequest;
 @property (strong, nonatomic) Class classToParse;

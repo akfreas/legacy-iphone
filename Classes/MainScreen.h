@@ -1,7 +1,3 @@
-@class Event;
-
-@interface MainScreen : UIViewController 
-
-@property (strong, nonatomic) Event *event;
+@interface MainScreen : UIViewController
 
 @end

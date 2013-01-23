@@ -1,5 +1,3 @@
-#import "BSKeyboardControls.h"
-
-@interface FirstTimeLoadScreen : UIViewController <BSKeyboardControlsDelegate>
+@interface FirstTimeLoadScreen : UIViewController
 
 @end

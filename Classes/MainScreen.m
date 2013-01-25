@@ -16,7 +16,6 @@
 -(void)placeEventHostingView {
     
     EventInfoHostingView *infoScreen = [[EventInfoHostingView alloc] init];
-    [self dismissViewControllerAnimated:YES completion:NULL];
     [self addChildViewController:infoScreen];
     [self.view addSubview:infoScreen.view];
 }

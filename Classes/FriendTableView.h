@@ -1,3 +1,3 @@
-@interface FriendTableView : UITableViewController
+@interface FriendTableView : UITableView
 
 @end

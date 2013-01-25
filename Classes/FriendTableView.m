@@ -1,21 +1,27 @@
 #import "FriendTableView.h"
+#import "FriendTableViewDelegate.h"
 
-@implementation FriendTableView
-
-- (id)initWithStyle:(UITableViewStyle)style {
+@implementation FriendTableView {
     
-    self = [super initWithStyle:UITableViewStylePlain];
-    if (self) {
+    id tableDelegate;
+}
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        tableDelegate = [[FriendTableViewDelegate alloc] init];
+        self.delegate = tableDelegate;
+        self.dataSource = tableDelegate;
     }
     return self;
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+-(NSInteger)numberOfRowsInSection:(NSInteger)section {
+    return 0;
 }
 
 @end

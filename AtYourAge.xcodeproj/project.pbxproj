@@ -29,6 +29,7 @@
 		19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC516B2370A00C81E60 /* 19-gear.png */; };
 		19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC616B2370A00C81E60 /* 19-gear@2x.png */; };
 		19D61CD216B250E100C81E60 /* FriendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CD116B250E100C81E60 /* FriendTableView.m */; };
+		19D61D2916B2763100C81E60 /* FriendTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61D2816B2763000C81E60 /* FriendTableViewDelegate.m */; };
 		4E0F3C9315447DBA00369BE1 /* AddNewPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */; };
 		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
@@ -94,6 +95,8 @@
 		19D61CC616B2370A00C81E60 /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "19-gear@2x.png"; path = "../19-gear@2x.png"; sourceTree = "<group>"; };
 		19D61CD016B250E100C81E60 /* FriendTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableView.h; sourceTree = "<group>"; };
 		19D61CD116B250E100C81E60 /* FriendTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableView.m; sourceTree = "<group>"; };
+		19D61D2716B2763000C81E60 /* FriendTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewDelegate.h; sourceTree = "<group>"; };
+		19D61D2816B2763000C81E60 /* FriendTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewDelegate.m; sourceTree = "<group>"; };
 		4E0F3C9115447DBA00369BE1 /* AddNewPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewPerson.h; sourceTree = "<group>"; };
 		4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewPerson.m; sourceTree = "<group>"; };
 		4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeDisplaySegmentedControl.h; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19D61CD016B250E100C81E60 /* FriendTableView.h */,
 				19D61CD116B250E100C81E60 /* FriendTableView.m */,
+				19D61D2716B2763000C81E60 /* FriendTableViewDelegate.h */,
+				19D61D2816B2763000C81E60 /* FriendTableViewDelegate.m */,
 				4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */,
 				4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */,
 				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
@@ -479,6 +484,7 @@
 				19D61CA516AFC5B900C81E60 /* AgeArticleView.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
 				19D61CD216B250E100C81E60 /* FriendTableView.m in Sources */,
+				19D61D2916B2763100C81E60 /* FriendTableViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

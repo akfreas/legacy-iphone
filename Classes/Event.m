@@ -36,4 +36,8 @@ static NSString *KeyForHtml = @"story_html";
     return self;
 }
 
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@ HTML: %@", eventDescription, storyHtml];
+}
+
 @end

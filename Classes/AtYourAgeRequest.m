@@ -34,6 +34,18 @@
     return url;
 }
 
++(NSURL *)storyUrlForBirthday:(NSDate *)theDate user:(NSString *)user {
+    
+    NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
+    
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = [NSString stringWithFormat:@"%@/story/%@", user, [formatter stringFromDate:theDate]];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
 +(NSURL *)urlToPostUser {
     
     NSURL *url = [AtYourAgeRequest baseUrl];
@@ -56,6 +68,31 @@
     NSLog(@"Request: %@", url);
     
     AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:[Event class]];
+    
+    return request;
+}
+
++(AtYourAgeRequest *)requestToGetStoryForUser:(User *)user {
+    
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
+    NSURL *url = [AtYourAgeRequest storyUrlForBirthday:user.birthday user:user.facebookId];
+
+    NSString *token = FBSession.activeSession.accessToken;
+    
+    NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, token, NSHTTPCookieValue, @"AtYourAge", NSHTTPCookieName, nil];
+    
+    
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+    NSLog(@"Cookie: %@", cookie);
+    NSDictionary *headers = [NSHTTPCookie requestHeaderFieldsWithCookies:[NSArray arrayWithObject:cookie]];
+    [urlRequest setAllHTTPHeaderFields:headers];
+    [urlRequest setURL:url];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSLog(@"Request: %@", url);
+    
+    AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:nil];
     
     return request;
 }

@@ -36,11 +36,12 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIWebView" id="295121813">
+					<object class="IBUIWebView" id="205241581">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{12, 20}, {296, 278}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -53,7 +54,8 @@
 				</array>
 				<string key="NSFrameSize">{320, 318}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="295121813"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="205241581"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MC42NTI3MTg1MzUxIDAuNzM4MDYwODUwMiAwLjkxOTcwMjY0NjcAA</bytes>
@@ -71,9 +73,17 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">storyWebView</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="295121813"/>
+						<reference key="destination" ref="205241581"/>
 					</object>
-					<int key="connectionID">126</int>
+					<int key="connectionID">136</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="205241581"/>
+						<reference key="destination" ref="191373211"/>
+					</object>
+					<int key="connectionID">139</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -88,9 +98,8 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="295121813"/>
-							<object class="IBNSLayoutConstraint" id="43827006">
-								<reference key="firstItem" ref="295121813"/>
+							<object class="IBNSLayoutConstraint" id="971545841">
+								<reference key="firstItem" ref="205241581"/>
 								<int key="firstAttribute">9</int>
 								<int key="relation">0</int>
 								<reference key="secondItem" ref="191373211"/>
@@ -105,11 +114,11 @@
 								<float key="scoringTypeFloat">22</float>
 								<int key="contentType">2</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="557849757">
+							<object class="IBNSLayoutConstraint" id="217628775">
 								<reference key="firstItem" ref="191373211"/>
 								<int key="firstAttribute">4</int>
 								<int key="relation">0</int>
-								<reference key="secondItem" ref="295121813"/>
+								<reference key="secondItem" ref="205241581"/>
 								<int key="secondAttribute">4</int>
 								<float key="multiplier">1</float>
 								<object class="IBNSLayoutSymbolicConstant" key="constant">
@@ -121,8 +130,8 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="655699097">
-								<reference key="firstItem" ref="295121813"/>
+							<object class="IBNSLayoutConstraint" id="1043762215">
+								<reference key="firstItem" ref="205241581"/>
 								<int key="firstAttribute">3</int>
 								<int key="relation">0</int>
 								<reference key="secondItem" ref="191373211"/>
@@ -137,6 +146,7 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
+							<reference ref="205241581"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -153,10 +163,10 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">116</int>
-						<reference key="object" ref="295121813"/>
+						<reference key="object" ref="205241581"/>
 						<array class="NSMutableArray" key="children">
-							<object class="IBNSLayoutConstraint" id="693435113">
-								<reference key="firstItem" ref="295121813"/>
+							<object class="IBNSLayoutConstraint" id="564887019">
+								<reference key="firstItem" ref="205241581"/>
 								<int key="firstAttribute">7</int>
 								<int key="relation">0</int>
 								<nil key="secondItem"/>
@@ -166,7 +176,7 @@
 									<double key="value">296</double>
 								</object>
 								<float key="priority">1000</float>
-								<reference key="containingView" ref="295121813"/>
+								<reference key="containingView" ref="205241581"/>
 								<int key="scoringType">3</int>
 								<float key="scoringTypeFloat">9</float>
 								<int key="contentType">1</int>
@@ -176,22 +186,22 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">118</int>
-						<reference key="object" ref="655699097"/>
+						<reference key="object" ref="1043762215"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">123</int>
-						<reference key="object" ref="557849757"/>
+						<reference key="object" ref="217628775"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">125</int>
-						<reference key="object" ref="693435113"/>
-						<reference key="parent" ref="295121813"/>
+						<reference key="object" ref="564887019"/>
+						<reference key="parent" ref="205241581"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">135</int>
-						<reference key="object" ref="43827006"/>
+						<reference key="object" ref="971545841"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -203,13 +213,13 @@
 				<string key="1.CustomClassName">AgeArticleView</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array class="NSMutableArray" key="1.IBViewMetadataConstraints">
-					<reference ref="655699097"/>
-					<reference ref="557849757"/>
-					<reference ref="43827006"/>
+					<reference ref="1043762215"/>
+					<reference ref="217628775"/>
+					<reference ref="971545841"/>
 				</array>
 				<string key="116.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array class="NSMutableArray" key="116.IBViewMetadataConstraints">
-					<reference ref="693435113"/>
+					<reference ref="564887019"/>
 				</array>
 				<boolean value="NO" key="116.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="118.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -221,9 +231,39 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">135</int>
+			<int key="maxID">139</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AgeArticleView</string>
+					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">storyWebView</string>
+						<string key="NS.object.0">UIWebView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">storyWebView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">storyWebView</string>
+							<string key="candidateClassName">UIWebView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AgeArticleView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

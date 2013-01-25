@@ -25,10 +25,12 @@
 		19D61CA116AFA76800C81E60 /* AgeArticleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CA016AFA76800C81E60 /* AgeArticleView.xib */; };
 		19D61CA516AFC5B900C81E60 /* AgeArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CA416AFC5B900C81E60 /* AgeArticleView.m */; };
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
-		4E0F3C9015447D4800369BE1 /* AddNewName.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F3C8F15447D4800369BE1 /* AddNewName.xib */; };
+		19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */; };
+		19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC516B2370A00C81E60 /* 19-gear.png */; };
+		19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC616B2370A00C81E60 /* 19-gear@2x.png */; };
+		19D61CD216B250E100C81E60 /* FriendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CD116B250E100C81E60 /* FriendTableView.m */; };
 		4E0F3C9315447DBA00369BE1 /* AddNewPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */; };
 		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
-		4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
@@ -60,17 +62,17 @@
 		4EEA6D451526A90200B96EFD /* AtYourAgeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* AtYourAgeConnection.m */; };
 		4EEA6D5A1526C86300B96EFD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D591526C86300B96EFD /* Event.m */; };
 		4EEA6D5D1526CAEF00B96EFD /* AtYourAgeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* AtYourAgeRequest.m */; };
-		4EEA6D651526DCB100B96EFD /* AgeInfoScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D641526DCB100B96EFD /* AgeInfoScreen.m */; };
-		4EEA6D671526DCE100B96EFD /* AgeInfoScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EEA6D661526DCE100B96EFD /* AgeInfoScreen.xib */; };
+		4EEA6D651526DCB100B96EFD /* EventInfoHostingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D641526DCB100B96EFD /* EventInfoHostingView.m */; };
+		4EEA6D671526DCE100B96EFD /* EventInfoHostingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1993915F16AA1FDF00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resources/icon.png; sourceTree = "<group>"; };
-		1993916016AA1FDF00DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Resources/icon@2x.png"; sourceTree = "<group>"; };
-		1993916316AA200A00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		1993916516AA201000DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		19D29F5716A5461000D46B0A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		19D29F5916A5462300D46B0A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1993915F16AA1FDF00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		1993916016AA1FDF00DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		1993916316AA200A00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		1993916516AA201000DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		19D29F5716A5461000D46B0A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		19D29F5916A5462300D46B0A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		19D29F5B16A5481D00D46B0A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		19D29F5D16A5483400D46B0A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
@@ -87,7 +89,11 @@
 		19D61CA416AFC5B900C81E60 /* AgeArticleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AgeArticleView.m; path = Classes/AgeArticleView.m; sourceTree = SOURCE_ROOT; };
 		19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectArchiveAccessor.h; sourceTree = "<group>"; };
 		19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectArchiveAccessor.m; sourceTree = "<group>"; };
-		4E0F3C8F15447D4800369BE1 /* AddNewName.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewName.xib; sourceTree = "<group>"; };
+		19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeaderImg@2x.png"; sourceTree = "<group>"; };
+		19D61CC516B2370A00C81E60 /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "19-gear.png"; path = "../19-gear.png"; sourceTree = "<group>"; };
+		19D61CC616B2370A00C81E60 /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "19-gear@2x.png"; path = "../19-gear@2x.png"; sourceTree = "<group>"; };
+		19D61CD016B250E100C81E60 /* FriendTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableView.h; sourceTree = "<group>"; };
+		19D61CD116B250E100C81E60 /* FriendTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableView.m; sourceTree = "<group>"; };
 		4E0F3C9115447DBA00369BE1 /* AddNewPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewPerson.h; sourceTree = "<group>"; };
 		4E0F3C9215447DBA00369BE1 /* AddNewPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewPerson.m; sourceTree = "<group>"; };
 		4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeDisplaySegmentedControl.h; sourceTree = "<group>"; };
@@ -156,9 +162,9 @@
 		4EEA6D591526C86300B96EFD /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		4EEA6D5B1526CAEF00B96EFD /* AtYourAgeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtYourAgeRequest.h; sourceTree = "<group>"; };
 		4EEA6D5C1526CAEF00B96EFD /* AtYourAgeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtYourAgeRequest.m; sourceTree = "<group>"; };
-		4EEA6D631526DCB100B96EFD /* AgeInfoScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeInfoScreen.h; sourceTree = "<group>"; };
-		4EEA6D641526DCB100B96EFD /* AgeInfoScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeInfoScreen.m; sourceTree = "<group>"; };
-		4EEA6D661526DCE100B96EFD /* AgeInfoScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeInfoScreen.xib; sourceTree = "<group>"; };
+		4EEA6D631526DCB100B96EFD /* EventInfoHostingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoHostingView.h; sourceTree = "<group>"; };
+		4EEA6D641526DCB100B96EFD /* EventInfoHostingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoHostingView.m; sourceTree = "<group>"; };
+		4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoHostingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,16 +214,25 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		4EEA6CD315268ED200B96EFD = {
+		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				19D61CC516B2370A00C81E60 /* 19-gear.png */,
+				19D61CC616B2370A00C81E60 /* 19-gear@2x.png */,
+				19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */,
 				1993916516AA201000DA3CD9 /* icon@2x.png */,
 				1993916316AA200A00DA3CD9 /* icon.png */,
 				1993915F16AA1FDF00DA3CD9 /* icon.png */,
 				1993916016AA1FDF00DA3CD9 /* icon@2x.png */,
-				19D29F7D16A671C800D46B0A /* Accounts.framework */,
 				19D29F5916A5462300D46B0A /* Default@2x.png */,
 				19D29F5716A5461000D46B0A /* Default-568h@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		4EEA6CD315268ED200B96EFD = {
+			isa = PBXGroup;
+			children = (
 				4EEA6D021526902D00B96EFD /* Classes */,
 				4EEA6D081526902D00B96EFD /* Resources */,
 				4EEA6D091526902D00B96EFD /* Support */,
@@ -257,8 +272,6 @@
 				19D61CA416AFC5B900C81E60 /* AgeArticleView.m */,
 				4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */,
 				4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */,
-				4EEA6D631526DCB100B96EFD /* AgeInfoScreen.h */,
-				4EEA6D641526DCB100B96EFD /* AgeInfoScreen.m */,
 				4EEA6D431526A90200B96EFD /* AtYourAgeConnection.h */,
 				4EEA6D441526A90200B96EFD /* AtYourAgeConnection.m */,
 				4EEA6D5B1526CAEF00B96EFD /* AtYourAgeRequest.h */,
@@ -267,8 +280,12 @@
 				4EEA6D041526902D00B96EFD /* AppDelegate.m */,
 				4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */,
 				4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */,
+				4EEA6D631526DCB100B96EFD /* EventInfoHostingView.h */,
+				4EEA6D641526DCB100B96EFD /* EventInfoHostingView.m */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
+				19D61CD016B250E100C81E60 /* FriendTableView.h */,
+				19D61CD116B250E100C81E60 /* FriendTableView.m */,
 				4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */,
 				4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */,
 				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
@@ -289,8 +306,8 @@
 		4EEA6D081526902D00B96EFD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4E0F3C8F15447D4800369BE1 /* AddNewName.xib */,
-				4EEA6D661526DCE100B96EFD /* AgeInfoScreen.xib */,
+				19D61CCF16B23B6400C81E60 /* Images */,
+				4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */,
 				19D61CA016AFA76800C81E60 /* AgeArticleView.xib */,
 				4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */,
 				4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */,
@@ -311,6 +328,7 @@
 		4EEA6D101526906000B96EFD /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				19D29F7D16A671C800D46B0A /* Accounts.framework */,
 				19D29F7B16A6716F00D46B0A /* FacebookSDKResources.bundle */,
 				19D29F7916A6706A00D46B0A /* CFNetwork.framework */,
 				19D29F7716A6706200D46B0A /* SystemConfiguration.framework */,
@@ -405,9 +423,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EEA6D3F1526A80B00B96EFD /* FBLoginView.xib in Resources */,
-				4EEA6D671526DCE100B96EFD /* AgeInfoScreen.xib in Resources */,
+				4EEA6D671526DCE100B96EFD /* EventInfoHostingView.xib in Resources */,
 				4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */,
-				4E0F3C9015447D4800369BE1 /* AddNewName.xib in Resources */,
 				19D29F5816A5461000D46B0A /* Default-568h@2x.png in Resources */,
 				19D29F5A16A5462300D46B0A /* Default@2x.png in Resources */,
 				19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */,
@@ -416,6 +433,9 @@
 				1993916416AA200A00DA3CD9 /* icon.png in Resources */,
 				1993916616AA201000DA3CD9 /* icon@2x.png in Resources */,
 				19D61CA116AFA76800C81E60 /* AgeArticleView.xib in Resources */,
+				19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */,
+				19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */,
+				19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,13 +463,12 @@
 				4EEA6D451526A90200B96EFD /* AtYourAgeConnection.m in Sources */,
 				4EEA6D5A1526C86300B96EFD /* Event.m in Sources */,
 				4EEA6D5D1526CAEF00B96EFD /* AtYourAgeRequest.m in Sources */,
-				4EEA6D651526DCB100B96EFD /* AgeInfoScreen.m in Sources */,
+				4EEA6D651526DCB100B96EFD /* EventInfoHostingView.m in Sources */,
 				4E82A1C8154296D100D112F9 /* Utility_UserInfo.m in Sources */,
 				4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */,
 				4E6478C11544673700CE47F1 /* SwitchPerson.m in Sources */,
 				4E0F3C9315447DBA00369BE1 /* AddNewPerson.m in Sources */,
 				4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */,
-				4E0F3C9F1545200B00369BE1 /* MainScreenWebView.m in Sources */,
 				4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */,
 				4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */,
 				4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */,
@@ -459,6 +478,7 @@
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
 				19D61CA516AFC5B900C81E60 /* AgeArticleView.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
+				19D61CD216B250E100C81E60 /* FriendTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

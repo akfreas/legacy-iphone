@@ -1,18 +1,21 @@
 #import "MainScreen.h"
-#import "AgeInfoScreen.h"
+#import "EventInfoHostingView.h"
 #import "FBLoginViewController.h"
 #import "Utility_UserInfo.h"
 #import "SettingsModalView.h"
 #import "SwitchPerson.h"
+#import "ObjectArchiveAccessor.h"
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
+    
+    ObjectArchiveAccessor *accessor;
 }
 
 
--(void)placeAgeInfoView {
+-(void)placeEventHostingView {
     
-    AgeInfoScreen *infoScreen = [[AgeInfoScreen alloc] init];
+    EventInfoHostingView *infoScreen = [[EventInfoHostingView alloc] init];
     [self dismissViewControllerAnimated:YES completion:NULL];
     [self addChildViewController:infoScreen];
     [self.view addSubview:infoScreen.view];
@@ -22,15 +25,17 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yyyy"];
     [FBSession openActiveSessionWithAllowLoginUI:NO];
-    NSLog(@"FB Session: %@", FBSession.activeSession);
+    accessor = [[ObjectArchiveAccessor alloc] init];
     if (FBSession.activeSession.isOpen) {
         [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser>user, NSError *error) {
             NSDate *birthday = [formatter dateFromString:user.birthday];
             NSLog(@"Birthday parsed %@", birthday);
-            [Utility_UserInfo setCurrentName:user.name];
-            [Utility_UserInfo setOrUpdateUserBirthday:birthday name:user.name];
-            [self placeAgeInfoView];
-            [self setNavigationElements];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                User *primaryUser = [accessor getOrCreateUserWithFacebookGraphUser:user];
+                [accessor setPrimaryUser:primaryUser error:NULL];
+                [accessor save];
+            });
         }];
     }
 }
@@ -54,11 +59,29 @@
 -(void)setNavigationElements {
     
     self.navigationController.title = [Utility_UserInfo currentName];
+//    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(switchPerson)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(switchPerson)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingsModalView)];
+    
+    CGFloat leftPadding = 6;
+    UIImageView *rightButtonImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"19-gear.png"]];
+    UIView *rightButtonHostView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rightButtonImageView.frame), CGRectGetHeight(rightButtonImageView.frame))];
+    UIButton *rightButtonView = [[UIButton alloc] initWithFrame:CGRectMake(leftPadding, 0, CGRectGetWidth(rightButtonImageView.frame), CGRectGetHeight(rightButtonImageView.frame))];
+    [rightButtonView setBackgroundImage:[UIImage imageNamed:@"19-gear.png"] forState:UIControlStateNormal];
+    [rightButtonView setBackgroundImage:[UIImage imageNamed:@"19-gear-gray.png"] forState:UIControlEventTouchUpInside];
+    [rightButtonView addTarget:self action:@selector(showSettingsModalView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [rightButtonHostView addSubview:rightButtonView];
+
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonHostView];
+    self.navigationItem.leftBarButtonItem = rightButton;
+    
     self.navigationItem.backBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"HeaderImg"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:176.0/256.0 green:167.0/256 blue:93.0/256 alpha:1];
+    self.navigationController.navigationBar.opaque = NO;
 }
 
 -(void)loadView {
@@ -68,9 +91,15 @@
 }
 
 
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setNavigationElements];
+    [self placeEventHostingView];
+}
+
 -(void)viewDidAppear:(BOOL)animated {
     
-//    FBSession *session = [[FBSession alloc] init];
     [FBSession openActiveSessionWithAllowLoginUI:NO];
     NSLog(@"FB Session state in mainscreen: %@", FBSession.activeSession);
     if (FBSession.activeSession.state != FBSessionStateOpen) {

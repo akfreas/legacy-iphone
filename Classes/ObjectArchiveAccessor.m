@@ -19,6 +19,8 @@ static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
         NSError *error;
         NSURL *documentDir = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
         archiveUrl = [NSURL URLWithString:archiveStringURL relativeToURL:documentDir];
+        NSLog(@"Archive url: %@", [archiveUrl path]);
+        [self loadOrCreateArchiveDict];
     }
     return self;
 }
@@ -33,11 +35,15 @@ static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
 }
 
 -(void)save {
-    [archiveDict writeToURL:archiveUrl atomically:YES];
+    [NSKeyedArchiver archiveRootObject:archiveDict toFile:[archiveUrl path]];
+    [self loadOrCreateArchiveDict];
+}
+
+-(void)refresh {
+    [self loadOrCreateArchiveDict];
 }
 
 -(User *)primaryUser {
-    [self loadOrCreateArchiveDict];
     
     NSString *primaryUserId = [archiveDict objectForKey:KeyForPrimaryUserId];
     User *primaryUser = [self userWithFacebookId:primaryUserId error:NULL];
@@ -45,21 +51,17 @@ static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
     return primaryUser;
 }
 
--(void)setPrimaryUser:(User *)user error:(NSError *)error {
-    
-    [self loadOrCreateArchiveDict];
-    
+-(void)setPrimaryUser:(User *)user error:(NSError **)error {
+        
     [archiveDict setObject:user.facebookId forKey:KeyForPrimaryUserId];
     
     [self save];
 }
 
 -(NSMutableArray *)allUsers {
-    
-    [self loadOrCreateArchiveDict];
-    
+        
     NSMutableArray *userArray = [archiveDict objectForKey:KeyForUserArray];
-    
+    NSLog(@"User array pointer: %p", userArray);
     if (userArray == nil) {
         userArray = [NSMutableArray array];
         [archiveDict setObject:userArray forKey:KeyForUserArray];
@@ -70,7 +72,17 @@ static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
     return userArray;
 }
 
--(User *)userWithFacebookId:(NSString *)facebookId error:(NSError *)error {
+-(User *)getOrCreateUserWithFacebookGraphUser:(id<FBGraphUser>)facebookUser {
+    
+    User *theUser = [self userWithFacebookId:facebookUser.id error:NULL];
+    
+    if (theUser == nil) {
+        theUser = [self addFacebookUser:facebookUser];
+    }
+    return theUser;
+}
+
+-(User *)userWithFacebookId:(NSString *)facebookId error:(NSError **)error {
     
     NSMutableArray *users = [self allUsers];
     
@@ -99,7 +111,7 @@ static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
     [users addObject:user];
 }
 
--(void)addFacebookUser:(id<FBGraphUser>)fbUser {
+-(User *)addFacebookUser:(id<FBGraphUser>)fbUser {
     
     User *newUser = [[User alloc] init];
     newUser.firstName = fbUser.first_name;
@@ -108,6 +120,8 @@ static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
     newUser.facebookId = fbUser.id;
     
     [self addUser:newUser error:NULL];
+    
+    return newUser;
 }
 
 -(void)removeUser:(User *)user error:(NSError *)error {

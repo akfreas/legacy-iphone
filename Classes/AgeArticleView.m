@@ -9,7 +9,7 @@
     IBOutlet UIWebView *storyWebView;
     
     User *user;
-    Event *event;
+    __block Event  *event;
     NSDate *birthday;
 }
 
@@ -25,6 +25,13 @@
 }
 
 
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    storyWebView.delegate = self;
+
+//    [[NSBundle mainBundle] loadNibNamed:@"AgeArticleView" owner:self options:nil];
+}
+
 -(void)updateWithUser:(User *)theUser {
     user = theUser;
     [self getEventForBirthday];
@@ -32,16 +39,20 @@
 
 -(void)getEventForBirthday {
     
-    [[FBRequest requestForGraphPath:user.facebookId] startWithCompletionHandler:^(FBRequestConnection *fbConnection, id <FBGraphUser> result, NSError *error) {
-        
-        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetEventForUser:user];
-        AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-        
-        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Event *theEvent, NSError *error) {
-            event = theEvent;
-            [storyWebView loadHTMLString:event.storyHtml baseURL:nil];
-        }];
-    }];
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForUser:user];
+    [storyWebView loadRequest:request.urlRequest];
+
+//    self.backgroundColor = [UIColor redColor];
+}
+
+#pragma mark UIWebView Delegate
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    return YES;
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView {
+    NSLog(@"Started");
 }
 
 @end

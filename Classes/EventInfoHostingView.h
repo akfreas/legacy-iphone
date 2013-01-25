@@ -1,6 +1,6 @@
 @class Event;
 
-@interface AgeInfoScreen : UIViewController 
+@interface EventInfoHostingView : UIViewController 
 
 @property (strong, nonatomic) Event *event;
 

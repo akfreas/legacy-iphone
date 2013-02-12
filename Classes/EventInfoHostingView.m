@@ -1,6 +1,6 @@
-#import "EventInfoHostingView.h"
-#import "AtYourAgeRequest.h"
-#import "AtYourAgeConnection.h"
+    #import "EventInfoHostingView.h"
+#import "YardstickRequest.h"
+#import "YardstickConnection.h"
 #import "Event.h"
 #import "ObjectArchiveAccessor.h"
 #import "SwitchPerson.h"
@@ -9,6 +9,8 @@
 #import "SettingsModalView.h"
 #import "FBLoginViewController.h"
 #import "AgeArticleView.h"
+#import "FriendTableViewController.h"
+#import "FriendPickerHandler.h"
 #import "User.h"
 
 static NSString *KeyForName = @"name";
@@ -17,13 +19,16 @@ static NSString *KeyForBirthday = @"birthday";
 @implementation EventInfoHostingView {
     
     IBOutlet UIWebView *articleWebView;
+    IBOutlet FriendTableViewController *friendTableView;
     AgeArticleView *articleView;
+    FriendPickerHandler *friendPickerDelegate;
+    FBFriendPickerViewController *friendPicker;
     
-    AgeDisplaySegmentedControl *ageDisplay;
     User *currentUser;
     ObjectArchiveAccessor *accessor;
     
     UINavigationController *viewForSettings;
+
 }
 
 @synthesize event;
@@ -32,9 +37,8 @@ static NSString *KeyForBirthday = @"birthday";
     self = [super initWithNibName:@"EventInfoHostingView" bundle:[NSBundle mainBundle]];
     
     if (self) {
-        accessor = [[ObjectArchiveAccessor alloc] init];
+        accessor = [ObjectArchiveAccessor sharedInstance];
         currentUser = [accessor primaryUser];
-        NSLog(@"Current user: %@", currentUser);
     }
     
     return self;
@@ -42,14 +46,13 @@ static NSString *KeyForBirthday = @"birthday";
 
 -(void)refresh {
     
-//        [articleView updateWithUser:currentUser];
+//        [articleView updateWithPerson:currentUser];
 }
 
 
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     currentUser = [accessor primaryUser];
     
     self.navigationItem.title = currentUser.firstName;
@@ -61,11 +64,30 @@ static NSString *KeyForBirthday = @"birthday";
     [super viewDidLoad];
     
     if (currentUser) {
-        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForUser:currentUser];
+        YardstickRequest *request = [YardstickRequest requestToGetStoryForPerson:currentUser];
         [articleWebView loadRequest:request.urlRequest];
         articleWebView.backgroundColor = [UIColor clearColor];
     }
     [self.navigationController setNavigationBarHidden:NO];
+    friendTableView.addFriendBlock = ^{
+        friendPickerDelegate = [[FriendPickerHandler alloc] init];
+        friendPicker = [[FBFriendPickerViewController alloc] init];
+        friendPicker.delegate = friendPickerDelegate;
+        friendPicker.session = [FBSession activeSession];
+        friendPicker.userID = currentUser.facebookId;
+        [friendPicker loadData];
+
+        [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
+    };
+}
+
+-(void)dismissFriendPicker {
+    [friendPicker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark FBFriendPicker delegate
+
+-(void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker {
     
 }
 

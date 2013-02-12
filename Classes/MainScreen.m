@@ -4,6 +4,7 @@
 #import "Utility_UserInfo.h"
 #import "SettingsModalView.h"
 #import "SwitchPerson.h"
+#import "YardstickPerson.h"
 #import "ObjectArchiveAccessor.h"
 
 @implementation MainScreen {
@@ -24,16 +25,16 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yyyy"];
     [FBSession openActiveSessionWithAllowLoginUI:NO];
-    accessor = [[ObjectArchiveAccessor alloc] init];
     if (FBSession.activeSession.isOpen) {
         [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser>user, NSError *error) {
             NSDate *birthday = [formatter dateFromString:user.birthday];
-            NSLog(@"Birthday parsed %@", birthday);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                User *primaryUser = [accessor getOrCreateUserWithFacebookGraphUser:user];
-                [accessor setPrimaryUser:primaryUser error:NULL];
+                accessor = [ObjectArchiveAccessor sharedInstance];
+                YardstickPerson *primaryFriend = [accessor getOrCreateUserWithFacebookGraphPerson:user];
+                [accessor setPrimaryPerson:primaryFriend];
                 [accessor save];
+                [self placeEventHostingView];
             });
         }];
     }
@@ -100,9 +101,9 @@
 -(void)viewDidAppear:(BOOL)animated {
     
     [FBSession openActiveSessionWithAllowLoginUI:NO];
-    NSLog(@"FB Session state in mainscreen: %@", FBSession.activeSession);
     if (FBSession.activeSession.state != FBSessionStateOpen) {
         FBLoginViewController *loadScreen = [[FBLoginViewController alloc] initWithLoggedInCompletion:^{
+            [self dismissViewControllerAnimated:YES completion:NULL];
             [self getUserBirthdayAndPlaceMainScreen];
         }];
         [self presentViewController:loadScreen animated:NO completion:NULL];

@@ -1,134 +1,196 @@
-#import "User.h"
+#import "YardstickPerson.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
+
+@interface ObjectArchiveAccessor ()
+
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@end
 
 @implementation ObjectArchiveAccessor {
     
     NSURL *archiveUrl;
-    NSMutableDictionary *archiveDict;
+    NSPersistentStoreCoordinator *storeCoordinator;
 }
 
 static NSString *archiveStringURL = @"atYourAgeArchive.plist";
+static NSString *DbName = @"Yardstick.sqlite";
 static NSString *KeyForUserArray = @"UserArray";
 static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
+static NSString *FriendEntityName = @"Friend";
+
++(ObjectArchiveAccessor *)sharedInstance {
+    static ObjectArchiveAccessor *instance;
+    if (instance == nil) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            instance = [[ObjectArchiveAccessor alloc] init];
+        });
+    }
+    return instance;
+}
+
+
 
 -(id)init {
     self = [super init];
     
     if (self) {
-        NSError *error;
-        NSURL *documentDir = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-        archiveUrl = [NSURL URLWithString:archiveStringURL relativeToURL:documentDir];
+
+
         NSLog(@"Archive url: %@", [archiveUrl path]);
         [self loadOrCreateArchiveDict];
     }
     return self;
 }
 
--(void)loadOrCreateArchiveDict {
-    archiveDict = nil;
-    archiveDict = [NSKeyedUnarchiver unarchiveObjectWithFile:[archiveUrl path]];
+#pragma mark Core Data Utility Functions
+
+-(NSManagedObjectContext *)managedObjectContext {
     
-    if (archiveDict == nil) {
-        archiveDict = [NSMutableDictionary dictionary];
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+    context.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    return context;
+}
+
+-(NSPersistentStoreCoordinator *)storeCoordinator {
+    
+    NSError *error;
+    if (storeCoordinator != nil) {
+        return storeCoordinator;
+    } else {
+        NSURL *dbPath = [NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:DbName]];
+        storeCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
+        [storeCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:dbPath options:nil error:&error];
     }
+    
+    if (error != nil) {
+        return storeCoordinator;
+    } else {
+        return nil;
+    }
+}
+
+-(NSManagedObjectModel *)managedObjectModel {
+    NSManagedObjectModel *mom = [NSManagedObjectModel mergedModelFromBundles:nil];
+    return mom;
+}
+
+- (NSString *)applicationDocumentsDirectory {
+	
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
 }
 
 -(void)save {
-    [NSKeyedArchiver archiveRootObject:archiveDict toFile:[archiveUrl path]];
-    [self loadOrCreateArchiveDict];
+    NSError *error;
+    [self.managedObjectContext save:&error];
 }
 
--(void)refresh {
-    [self loadOrCreateArchiveDict];
-}
 
--(User *)primaryUser {
+-(YardstickPerson *)primaryUser {
     
-    NSString *primaryUserId = [archiveDict objectForKey:KeyForPrimaryUserId];
-    User *primaryUser = [self userWithFacebookId:primaryUserId error:NULL];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:FriendEntityName];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"primaryUser == YES"];
+    NSError *error;
+    YardstickPerson *primaryUser;
+    fetchRequest.predicate = pred;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
+    if ([results count] == 1 && error == NULL) {
+        primaryUser = [results objectAtIndex:0];
+    } else {
+        primaryUser = nil;
+    }
     return primaryUser;
 }
 
--(void)setPrimaryUser:(User *)user error:(NSError **)error {
+#pragma mark Getter Methods
+
+-(NSArray *)allUsers {
         
-    [archiveDict setObject:user.facebookId forKey:KeyForPrimaryUserId];
-    
-    [self save];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:FriendEntityName];
+    NSError *error;
+    NSArray *allUsers;
+    allUsers = [self.managedObjectContext executeFetchRequest:request error:&error];
+    return allUsers;
 }
 
--(NSMutableArray *)allUsers {
-        
-    NSMutableArray *userArray = [archiveDict objectForKey:KeyForUserArray];
-    NSLog(@"User array pointer: %p", userArray);
-    if (userArray == nil) {
-        userArray = [NSMutableArray array];
-        [archiveDict setObject:userArray forKey:KeyForUserArray];
-        NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:archiveDict];
-        [archiveData writeToURL:archiveUrl atomically:YES];
-    }
+-(YardstickPerson *)getOrCreateUserWithFacebookGraphPerson:(id<FBGraphUser>)facebookUser {
     
-    return userArray;
-}
-
--(User *)getOrCreateUserWithFacebookGraphUser:(id<FBGraphUser>)facebookUser {
-    
-    User *theUser = [self userWithFacebookId:facebookUser.id error:NULL];
+    YardstickPerson *theUser = [self userWithFacebookId:facebookUser.id];
     
     if (theUser == nil) {
-        theUser = [self addFacebookUser:facebookUser];
+        theUser = [self addFacebookPerson:facebookUser];
     }
     return theUser;
 }
 
--(User *)userWithFacebookId:(NSString *)facebookId error:(NSError **)error {
+-(YardstickPerson *)userWithFacebookId:(NSString *)facebookId {
     
-    NSMutableArray *users = [self allUsers];
+    NSNumber *facebookIdNum = [NSNumber numberWithInteger:[facebookId integerValue]];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:FriendEntityName];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"facebookId == %@", facebookIdNum];
+    fetchRequest.predicate = pred;
+    NSError *error;
     
-    NSPredicate *pred = [NSPredicate predicateWithBlock:^BOOL(User *evaluatedObject, NSDictionary *bindings) {
-        BOOL retVal = NO;
-        if ([evaluatedObject.facebookId isEqualToString:facebookId]) {
-            retVal = YES;
-        }
-         return retVal;
-     }];
+    NSArray *userArray = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    [users filterUsingPredicate:pred];
-    
-    User *user = nil;
-    
-    if ([users count] == 1) {
-        user = [users objectAtIndex:0];
+    YardstickPerson *fetchedUser;
+    if ([userArray count] == 1) {
+        fetchedUser = [userArray objectAtIndex:0];
+    } else {
+        fetchedUser = nil;
     }
     
-    return user;
 }
 
--(void)addUser:(User *)user error:(NSError *)error {
+
+#pragma mark Setter Methods
+
+-(void)setPrimaryPerson:(YardstickPerson *)user error:(NSError **)error {
     
-    NSMutableArray *users = [self allUsers];
-    [users addObject:user];
+    YardstickPerson *currentPrimaryUser = [self primaryUser];
+    currentPrimaryUser.isPrimary = [NSNumber numberWithBool:NO];
+    user.isPrimary = [NSNumber numberWithBool:YES];
+    [self save];
 }
 
--(User *)addFacebookUser:(id<FBGraphUser>)fbUser {
+-(void)addPerson:(YardstickPerson *)user {
+    [self.managedObjectContext insertObject:user];
+    [self save];
+}
+
+-(YardstickPerson *)addFacebookPerson:(id<FBGraphUser>)fbUser {
     
-    User *newUser = [[User alloc] init];
+    NSEntityDescription *desc = [NSEntityDescription entityForName:FriendEntityName inManagedObjectContext:[self managedObjectContext]];
+    YardstickPerson *newUser = [[YardstickPerson alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
     newUser.firstName = fbUser.first_name;
     newUser.lastName = fbUser.last_name;
     newUser.birthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:fbUser.birthday];
-    newUser.facebookId = fbUser.id;
-    
-    [self addUser:newUser error:NULL];
-    
+    newUser.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];
+    [self save];
     return newUser;
 }
 
--(void)removeUser:(User *)user error:(NSError *)error {
+-(void)addFacebookUsers:(NSArray *)users {
     
-    NSMutableArray *users = [self allUsers];
-    User *userInArray = [self userWithFacebookId:user.facebookId error:NULL];
-    [users removeObject:userInArray];
+    for (id user in users) {
+        if ([user conformsToProtocol:@protocol(FBGraphUser)]) {
+            id<FBGraphUser> fbUser = user;
+            [self getOrCreateUserWithFacebookGraphPerson:fbUser];
+        }
+    }
+}
+
+-(void)removePerson:(YardstickPerson *)user {
+    
+    YardstickPerson *userInArray = [self userWithFacebookId:[user.facebookId stringValue]];
+    [self.managedObjectContext deleteObject:userInArray];
 }
     
 @end

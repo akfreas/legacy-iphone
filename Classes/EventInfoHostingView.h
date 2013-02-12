@@ -1,6 +1,6 @@
 @class Event;
 
-@interface EventInfoHostingView : UIViewController 
+@interface EventInfoHostingView : UIViewController <FBFriendPickerDelegate>
 
 @property (strong, nonatomic) Event *event;
 

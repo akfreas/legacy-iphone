@@ -1,3 +1,0 @@
-@interface FriendTableView : UITableView
-
-@end

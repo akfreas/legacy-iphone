@@ -1,16 +1,18 @@
-@class User;
+@class YardstickPerson;
 @interface ObjectArchiveAccessor : NSObject
 
--(User *)primaryUser;
--(void)setPrimaryUser:(User *)user error:(NSError **)error;
++(ObjectArchiveAccessor *)sharedInstance;
 
--(NSMutableArray *)allUsers;
--(User *)userWithFacebookId:(NSString *)facebookId error:(NSError **)error;
--(User *)addFacebookUser:(id<FBGraphUser>)user;
--(User *)getOrCreateUserWithFacebookGraphUser:(id<FBGraphUser>)facebookUser;
--(void)addUser:(User *)user error:(NSError **)error;
--(void)removeUser:(User *)user error:(NSError **)error;
+-(YardstickPerson *)primaryUser;
+-(void)setPrimaryPerson:(YardstickPerson *)user;
+
+-(YardstickPerson *)userWithFacebookId:(NSString *)facebookId;
+-(YardstickPerson *)addFacebookPerson:(id<FBGraphUser>)user;
+-(void)addFacebookUsers:(NSArray *)users;
+-(YardstickPerson *)getOrCreateUserWithFacebookGraphPerson:(id<FBGraphUser>)facebookUser;
+-(void)addPerson:(YardstickPerson *)user;
+-(void)removePerson:(YardstickPerson *)user;
 -(void)save;
--(void)refresh;
+
 
 @end

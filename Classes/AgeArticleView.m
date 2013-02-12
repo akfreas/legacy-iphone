@@ -1,6 +1,6 @@
 #import "AgeArticleView.h"
-#import "AtYourAgeConnection.h"
-#import "AtYourAgeRequest.h"
+#import "YardstickConnection.h"
+#import "YardstickRequest.h"
 #import "Event.h"
 #import "User.h"
 
@@ -13,7 +13,7 @@
     NSDate *birthday;
 }
 
-- (id)initWithUser:(User *)theUser {
+- (id)initWithPerson:(User *)theUser {
     
     self = [super init];
     if (self) {
@@ -32,14 +32,14 @@
 //    [[NSBundle mainBundle] loadNibNamed:@"AgeArticleView" owner:self options:nil];
 }
 
--(void)updateWithUser:(User *)theUser {
+-(void)updateWithPerson:(User *)theUser {
     user = theUser;
     [self getEventForBirthday];
 }
 
 -(void)getEventForBirthday {
     
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForUser:user];
+    YardstickRequest *request = [YardstickRequest requestToGetStoryForPerson:user];
     [storyWebView loadRequest:request.urlRequest];
 
 //    self.backgroundColor = [UIColor redColor];
@@ -52,7 +52,6 @@
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"Started");
 }
 
 @end

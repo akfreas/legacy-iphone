@@ -1,8 +1,8 @@
-@interface Utility_UserInfo : NSObject
+@interface Utility_PersonInfo : NSObject
 
-+(void)setOrUpdateUserBirthday:(NSDate *)birthday name:(NSString *)name;
++(void)setOrUpdatePersonBirthday:(NSDate *)birthday name:(NSString *)name;
 +(NSDate *)birthdayForName:(NSString *)name;
-+(NSArray *)arrayOfUserInfo;
++(NSArray *)arrayOfPersonInfo;
 +(NSString *)birthdayStringForCurrentName;
 +(NSDate *)birthdayForCurrentName;
 +(NSString *)currentName;

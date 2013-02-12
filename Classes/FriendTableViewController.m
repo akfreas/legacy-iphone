@@ -1,7 +1,7 @@
 #import "FriendTableViewController.h"
 #import "FriendTableViewDelegate.h"
 #import "ObjectArchiveAccessor.h"
-#import "User.h"
+#import "Person.h"
 
 @implementation FriendTableViewController {
     
@@ -43,7 +43,7 @@
         if ([cellId isEqualToString:FriendCellId]) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             cell.textLabel.text = @"Test";
-            User *user = [friends objectAtIndex:indexPath.row];
+            Person *user = [friends objectAtIndex:indexPath.row];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
         }
     }

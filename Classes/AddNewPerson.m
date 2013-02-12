@@ -1,5 +1,5 @@
 #import "AddNewPerson.h"
-#import "Utility_UserInfo.h"
+#import "Utility_PersonInfo.h"
 #import "BSKeyboardControls.h"
 
 @implementation AddNewPerson {
@@ -34,7 +34,7 @@
         [self displayValidationAlerts];
     } else {
             
-        [Utility_UserInfo setOrUpdateUserBirthday:datePicker.date name:name.text];
+        [Utility_PersonInfo setOrUpdatePersonBirthday:datePicker.date name:name.text];
         
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -60,7 +60,7 @@
     
     NSDictionary *userInfo = [notification userInfo];
     
-    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndPersonInfoKey];
     CGRect keyboardRect;    
     keyboardRect = [value CGRectValue];
     
@@ -70,7 +70,7 @@
     
     CGRect textFieldAccessoryFrame = [self.view convertRect:CGRectMake(0, self.view.frame.size.height - keyboardTop + 5, 320, 44) toView:nil] ;
     
-    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationPersonInfoKey];
     
     NSTimeInterval animationDuration;
     
@@ -89,7 +89,7 @@
     
     NSDictionary *userInfo = [notification userInfo];
     
-    NSValue *value = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSValue *value = [userInfo objectForKey:UIKeyboardAnimationDurationPersonInfoKey];
     
     NSTimeInterval animationDuration;
     

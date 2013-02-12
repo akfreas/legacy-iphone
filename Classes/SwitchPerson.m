@@ -1,6 +1,6 @@
 #import "SwitchPerson.h"
 #import "AddNewPerson.h"
-#import "Utility_UserInfo.h"
+#import "Utility_PersonInfo.h"
 #import "SwitchPersonCell.h"
 
 @implementation SwitchPerson {
@@ -54,7 +54,7 @@
     }
     
     [cell configureCellWithName:labelForName birthday:labelForBirthday];
-    if ([labelForName isEqualToString:[Utility_UserInfo currentName]]) {
+    if ([labelForName isEqualToString:[Utility_PersonInfo currentName]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         pathForSelectedCell = indexPath;
     } else {
@@ -78,7 +78,7 @@
 
 -(void)doneWasTapped {
     
-    [Utility_UserInfo setCurrentName:name];
+    [Utility_PersonInfo setCurrentName:name];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -100,9 +100,9 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    names = [Utility_UserInfo arrayOfUserInfo];        
-    name = [Utility_UserInfo currentName];
-    birthday = [Utility_UserInfo birthdayForCurrentName];
+    names = [Utility_PersonInfo arrayOfPersonInfo];        
+    name = [Utility_PersonInfo currentName];
+    birthday = [Utility_PersonInfo birthdayForCurrentName];
 
     [self.tableView reloadData];
 }

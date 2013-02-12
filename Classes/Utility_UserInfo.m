@@ -1,4 +1,4 @@
-#import "Utility_UserInfo.h"
+#import "Utility_PersonInfo.h"
 
 static NSString *KeyForName = @"name";
 static NSString *KeyForBirthday = @"birthday";
@@ -6,24 +6,24 @@ static NSString *KeyForRootInfoDict = @"Names";
 static NSString *KeyForCurrentName = @"CurrentName";
 
 
-@implementation Utility_UserInfo
+@implementation Utility_PersonInfo
 
 
 +(NSURL *)userInfoUrl {
     NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     
-    url = [url URLByAppendingPathComponent:@"UserInfo.plist"];
+    url = [url URLByAppendingPathComponent:@"PersonInfo.plist"];
     
     return url;
 }
 
-+(void)setOrUpdateUserBirthday:(NSDate *)birthday name:(NSString *)name {
++(void)setOrUpdatePersonBirthday:(NSDate *)birthday name:(NSString *)name {
     
     NSMutableDictionary *userInfoDict = [self userInfoDict];
     
     [userInfoDict setObject:birthday forKey:name];
     
-    [Utility_UserInfo saveUserInfoDict:userInfoDict];
+    [Utility_PersonInfo savePersonInfoDict:userInfoDict];
 }
 
 +(NSDate *)birthdayForName:(NSString *)name {
@@ -35,14 +35,14 @@ static NSString *KeyForCurrentName = @"CurrentName";
     return [userInfoDict objectForKey:name];
 }
 
-+(NSArray *)arrayOfUserInfo {
++(NSArray *)arrayOfPersonInfo {
     NSDictionary *userInfoDict = [self userInfoDict];
 
     NSMutableArray *userInfo = [NSMutableArray arrayWithCapacity:1];
     
     for (NSString *name in [userInfoDict allKeys]) {
-        NSDictionary *singleUserInfo = [NSDictionary dictionaryWithObject:[userInfoDict objectForKey:name] forKey:name];
-        [userInfo addObject:singleUserInfo];
+        NSDictionary *singlePersonInfo = [NSDictionary dictionaryWithObject:[userInfoDict objectForKey:name] forKey:name];
+        [userInfo addObject:singlePersonInfo];
     }
     
     return userInfo;
@@ -59,17 +59,17 @@ static NSString *KeyForCurrentName = @"CurrentName";
     return userInfoDict;
 }
 
-+(void)saveUserInfoDict:(NSMutableDictionary *)userInfoDict {
++(void)savePersonInfoDict:(NSMutableDictionary *)userInfoDict {
     
     NSURL *userInfoUrl = [self userInfoUrl];
     
-    NSMutableDictionary *rootUserInfoDict = [NSMutableDictionary dictionaryWithContentsOfURL:userInfoUrl];
+    NSMutableDictionary *rootPersonInfoDict = [NSMutableDictionary dictionaryWithContentsOfURL:userInfoUrl];
     
-    [rootUserInfoDict setObject:userInfoDict forKey:KeyForRootInfoDict];
+    [rootPersonInfoDict setObject:userInfoDict forKey:KeyForRootInfoDict];
     
     
     NSLog(@"Url: %@", userInfoUrl);
-    [rootUserInfoDict writeToURL:userInfoUrl atomically:YES];
+    [rootPersonInfoDict writeToURL:userInfoUrl atomically:YES];
 }
 
 

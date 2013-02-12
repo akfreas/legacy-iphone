@@ -84,7 +84,7 @@
 		19A524A016B75FE400195D9D /* friend-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "friend-icon.png"; path = "../../../../../../Desktop/friend-icon.png"; sourceTree = "<group>"; };
 		19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendsCell.xib; sourceTree = "<group>"; };
 		19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPickerHandler.h; sourceTree = "<group>"; };
-		19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendPickerHandler.m; sourceTree = "<group>"; };
+		19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendPickerHandler.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19D29F5716A5461000D46B0A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		19D29F5916A5462300D46B0A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		19D29F5B16A5481D00D46B0A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		19D61CC516B2370A00C81E60 /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "19-gear.png"; path = "../19-gear.png"; sourceTree = "<group>"; };
 		19D61CC616B2370A00C81E60 /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "19-gear@2x.png"; path = "../19-gear@2x.png"; sourceTree = "<group>"; };
 		19D61CD016B250E100C81E60 /* FriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewController.h; sourceTree = "<group>"; };
-		19D61CD116B250E100C81E60 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewController.m; sourceTree = "<group>"; };
+		19D61CD116B250E100C81E60 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19D61D2716B2763000C81E60 /* FriendTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewDelegate.h; sourceTree = "<group>"; };
 		19D61D2816B2763000C81E60 /* FriendTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewDelegate.m; sourceTree = "<group>"; };
 		4E0F3C9115447DBA00369BE1 /* AddNewPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewPerson.h; sourceTree = "<group>"; };
@@ -128,9 +128,9 @@
 		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		4E6478BF1544673700CE47F1 /* SwitchPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPerson.h; sourceTree = "<group>"; };
-		4E6478C01544673700CE47F1 /* SwitchPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchPerson.m; sourceTree = "<group>"; };
+		4E6478C01544673700CE47F1 /* SwitchPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SwitchPerson.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwitchPerson.xib; path = Resources/SwitchPerson.xib; sourceTree = SOURCE_ROOT; };
-		4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_UserInfo.h; sourceTree = "<group>"; };
+		4E82A1C6154296D100D112F9 /* Utility_UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Utility_UserInfo.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4E82A1C7154296D100D112F9 /* Utility_UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility_UserInfo.m; sourceTree = "<group>"; };
 		4EEA6CDE15268ED200B96EFD /* Yardstick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yardstick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEA6CE215268ED300B96EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };

@@ -1,6 +1,6 @@
 #import "FirstTimeLoadScreen.h"
 #import "MainScreen.h"
-#import "Utility_UserInfo.h"
+#import "Utility_PersonInfo.h"
 #import "BSKeyboardControls.h"
 
 
@@ -28,8 +28,8 @@ static NSString *KeyForName = @"name";
 
 -(void)setInfoAndMoveToNextView {
         
-//    [Utility_UserInfo setCurrentName:name.text];
-//    [Utility_UserInfo setOrUpdateUserBirthday:birthdayPicker.date name:name.text];
+//    [Utility_PersonInfo setCurrentName:name.text];
+//    [Utility_PersonInfo setOrUpdatePersonBirthday:birthdayPicker.date name:name.text];
     [self moveToNextView];
 }
 

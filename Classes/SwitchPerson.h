@@ -1,3 +1,0 @@
-@interface SwitchPerson : UITableViewController
-
-@end

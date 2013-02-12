@@ -5,7 +5,6 @@ static NSString *KeyForDescription = @"description";
 static NSString *KeyForAgeYears = @"age_years";
 static NSString *KeyForAgeMonths = @"age_months";
 static NSString *KeyForAgeDays = @"age_days";
-static NSString *KeyForFields = @"fields";
 static NSString *KeyForMale = @"male";
 static NSString *KeyForHtml = @"story_html";
 

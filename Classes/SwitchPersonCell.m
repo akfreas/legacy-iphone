@@ -13,7 +13,7 @@
     
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 4, 100, 36)];
     nameLabel.text = name;
-    nameLabel.textAlignment = UITextAlignmentLeft;
+    nameLabel.textAlignment = NSTextAlignmentLeft;
     nameLabel.backgroundColor = [UIColor clearColor];
     nameLabel.font = [Utility_AppSettings applicationFontMedium];
     
@@ -22,7 +22,7 @@
     UILabel *birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(175, 4, 100, 36)];
     birthdayLabel.text = birthday;
     birthdayLabel.backgroundColor = [UIColor clearColor];
-    birthdayLabel.textAlignment = UITextAlignmentRight;
+    birthdayLabel.textAlignment = NSTextAlignmentRight;
     birthdayLabel.font = [Utility_AppSettings applicationFontMedium];
     
     [self addSubview:birthdayLabel];

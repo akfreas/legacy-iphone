@@ -1,7 +1,7 @@
-#import "YardstickPerson.h"
+#import "Person.h"
 
 
-@implementation YardstickPerson
+@implementation Person
 
 @dynamic birthday;
 @dynamic facebookId;

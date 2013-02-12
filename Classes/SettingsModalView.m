@@ -36,7 +36,7 @@ static NSString *identifier = @"Cell";
 }
 
 -(void)doneWasTapped {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 -(void)configureNavigationItems {

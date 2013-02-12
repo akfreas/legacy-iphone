@@ -7,5 +7,6 @@
 
 +(NSDateFormatter *)dateFormatterForDisplay;
 +(NSDateFormatter *)dateFormatterForRequest;
++(NSDateFormatter *)dateFormatterForPartialBirthday;
 
 @end

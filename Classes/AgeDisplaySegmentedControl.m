@@ -72,7 +72,7 @@
     
     for (UILabel *label in labelArray) {
         
-        label.textAlignment = UITextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentCenter;
         label.font = [Utility_AppSettings applicationFontSmall];
         label.textColor = [UIColor blackColor];
         label.backgroundColor = [UIColor clearColor];

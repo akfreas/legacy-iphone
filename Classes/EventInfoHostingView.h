@@ -4,4 +4,6 @@
 
 @property (strong, nonatomic) Event *event;
 
+-(void)refreshWithPrimaryPerson;
+
 @end

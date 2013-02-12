@@ -3,8 +3,6 @@
 #import "FBLoginViewController.h"
 
 
-static NSString *KeyForBirthday = @"birthday";
-
 @implementation AppDelegate {
     
     UINavigationController *mainNavController;
@@ -39,7 +37,7 @@ static NSString *KeyForBirthday = @"birthday";
 
 -(void)openSessionWithCompletionBlock:(void(^)(FBSession *, FBSessionState, NSError *))completionBlock {
     
-    NSArray *perms = [NSArray arrayWithObjects:@"user_birthday", nil];
+    NSArray *perms = [NSArray arrayWithObjects:@"user_birthday", @"friends_birthday", nil];
     [FBSession openActiveSessionWithReadPermissions:perms
                                        allowLoginUI:YES
                                   completionHandler:completionBlock];

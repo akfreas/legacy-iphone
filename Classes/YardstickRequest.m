@@ -1,6 +1,6 @@
 #import "YardstickRequest.h"
 #import "Event.h"
-#import "YardstickPerson.h"
+#import "Person.h"
 
 @implementation YardstickRequest {
     
@@ -56,11 +56,11 @@
     return url;
 }
 
-+(YardstickRequest *)requestToGetEventForPerson:(User *)user {
++(YardstickRequest *)requestToGetEventForPerson:(Person *)person {
 
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [YardstickRequest eventsUrlForBirthday:user.birthday Person:user.facebookId];
+    NSURL *url = [YardstickRequest eventsUrlForBirthday:person.birthday Person:[person.facebookId stringValue]];
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -70,14 +70,15 @@
     return request;
 }
 
-+(YardstickRequest *)requestToGetStoryForPerson:(User *)user {
++(YardstickRequest *)requestToGetStoryForPerson:(Person *)person {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [YardstickRequest storyUrlForBirthday:user.birthday Person:user.facebookId];
+    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:[person.facebookId stringValue]];
 
     NSString *token = FBSession.activeSession.accessToken;
     
     NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, token, NSHTTPCookieValue, @"Yardstick", NSHTTPCookieName, nil];
+//    NSLog(@"Cookie properties: %@", cookieProperties);
     
     
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
@@ -101,9 +102,6 @@
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"POST"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-    
-    
     
 }
 

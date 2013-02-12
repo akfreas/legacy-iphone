@@ -2,7 +2,7 @@
 #import "YardstickConnection.h"
 #import "YardstickRequest.h"
 #import "Event.h"
-#import "User.h"
+#import "Person.h"
 
 @implementation AgeArticleView {
     

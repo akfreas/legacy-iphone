@@ -21,8 +21,7 @@
     return (FBModalCompletionHandler)^(FBFriendPickerViewController *sender, BOOL donePressed){
         if (donePressed) {
             accessor = [ObjectArchiveAccessor sharedInstance];
-            NSLog(@"New users: %@", [accessor addFacebookUsers:sender.selection]);
-            [accessor save];
+            [accessor addFacebookUsers:sender.selection];
             [sender dismissViewControllerAnimated:YES completion:^{
             }];
         } else {

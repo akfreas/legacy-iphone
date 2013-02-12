@@ -1,4 +1,4 @@
-#import "YardstickPerson.h"
+#import "Person.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
 
@@ -16,11 +16,8 @@
     NSPersistentStoreCoordinator *storeCoordinator;
 }
 
-static NSString *archiveStringURL = @"atYourAgeArchive.plist";
 static NSString *DbName = @"Yardstick.sqlite";
-static NSString *KeyForUserArray = @"UserArray";
-static NSString *KeyForPrimaryUserId = @"PrimaryUserId";
-static NSString *FriendEntityName = @"Friend";
+static NSString *PersonEntityName = @"Person";
 
 +(ObjectArchiveAccessor *)sharedInstance {
     static ObjectArchiveAccessor *instance;
@@ -40,9 +37,6 @@ static NSString *FriendEntityName = @"Friend";
     
     if (self) {
 
-
-        NSLog(@"Archive url: %@", [archiveUrl path]);
-        [self loadOrCreateArchiveDict];
     }
     return self;
 }
@@ -50,13 +44,15 @@ static NSString *FriendEntityName = @"Friend";
 #pragma mark Core Data Utility Functions
 
 -(NSManagedObjectContext *)managedObjectContext {
-    
-    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
-    context.persistentStoreCoordinator = self.persistentStoreCoordinator;
-    return context;
+
+    if (_managedObjectContext == nil) {
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    }
+    return _managedObjectContext;
 }
 
--(NSPersistentStoreCoordinator *)storeCoordinator {
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     
     NSError *error;
     if (storeCoordinator != nil) {
@@ -67,9 +63,10 @@ static NSString *FriendEntityName = @"Friend";
         [storeCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:dbPath options:nil error:&error];
     }
     
-    if (error != nil) {
+    if (error == nil) {
         return storeCoordinator;
     } else {
+        NSLog(@"Error loading persistent store coordinator: %@", error);
         return nil;
     }
 }
@@ -91,90 +88,107 @@ static NSString *FriendEntityName = @"Friend";
     [self.managedObjectContext save:&error];
 }
 
+#pragma mark Getter Methods
 
--(YardstickPerson *)primaryUser {
+-(Person *)primaryPerson {
     
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:FriendEntityName];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"primaryUser == YES"];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"isPrimary == YES"];
     NSError *error;
-    YardstickPerson *primaryUser;
+    Person *primaryPerson;
     fetchRequest.predicate = pred;
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if ([results count] == 1 && error == NULL) {
-        primaryUser = [results objectAtIndex:0];
+        primaryPerson = [results objectAtIndex:0];
     } else {
-        primaryUser = nil;
+        primaryPerson = nil;
     }
-    return primaryUser;
+    return primaryPerson;
 }
 
-#pragma mark Getter Methods
 
--(NSArray *)allUsers {
+-(NSArray *)allPersons {
         
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:FriendEntityName];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
     NSError *error;
-    NSArray *allUsers;
-    allUsers = [self.managedObjectContext executeFetchRequest:request error:&error];
-    return allUsers;
+    NSArray *allPersons;
+    allPersons = [self.managedObjectContext executeFetchRequest:request error:&error];
+    return allPersons;
 }
 
--(YardstickPerson *)getOrCreateUserWithFacebookGraphPerson:(id<FBGraphUser>)facebookUser {
+-(Person *)getOrCreatePersonWithFacebookGraphUser:(id<FBGraphUser>)facebookUser {
     
-    YardstickPerson *theUser = [self userWithFacebookId:facebookUser.id];
+    Person *theUser = [self personWithFacebookId:facebookUser.id];
     
     if (theUser == nil) {
-        theUser = [self addFacebookPerson:facebookUser];
+        theUser = [self addPersonWithFacebookUser:facebookUser];
     }
     return theUser;
 }
 
--(YardstickPerson *)userWithFacebookId:(NSString *)facebookId {
+-(Person *)personWithFacebookId:(NSString *)facebookId {
     
     NSNumber *facebookIdNum = [NSNumber numberWithInteger:[facebookId integerValue]];
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:FriendEntityName];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"facebookId == %@", facebookIdNum];
     fetchRequest.predicate = pred;
     NSError *error;
     
     NSArray *userArray = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    YardstickPerson *fetchedUser;
+    Person *fetchedPerson;
     if ([userArray count] == 1) {
-        fetchedUser = [userArray objectAtIndex:0];
+        fetchedPerson = [userArray objectAtIndex:0];
     } else {
-        fetchedUser = nil;
+        fetchedPerson = nil;
     }
-    
+    return fetchedPerson;
 }
 
 
 #pragma mark Setter Methods
 
--(void)setPrimaryPerson:(YardstickPerson *)user error:(NSError **)error {
+-(void)setPrimaryPerson:(Person *)user {
     
-    YardstickPerson *currentPrimaryUser = [self primaryUser];
+    Person *currentPrimaryUser = [self primaryPerson];
     currentPrimaryUser.isPrimary = [NSNumber numberWithBool:NO];
     user.isPrimary = [NSNumber numberWithBool:YES];
     [self save];
 }
 
--(void)addPerson:(YardstickPerson *)user {
+-(void)addPerson:(Person *)user {
     [self.managedObjectContext insertObject:user];
     [self save];
 }
 
--(YardstickPerson *)addFacebookPerson:(id<FBGraphUser>)fbUser {
+-(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser {
     
-    NSEntityDescription *desc = [NSEntityDescription entityForName:FriendEntityName inManagedObjectContext:[self managedObjectContext]];
-    YardstickPerson *newUser = [[YardstickPerson alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
-    newUser.firstName = fbUser.first_name;
-    newUser.lastName = fbUser.last_name;
-    newUser.birthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:fbUser.birthday];
-    newUser.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];
+    NSEntityDescription *desc = [NSEntityDescription entityForName:PersonEntityName inManagedObjectContext:[self managedObjectContext]];
+    __block Person *newPerson = [[Person alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
+    Person *primaryPerson = [self primaryPerson];
+    FBRequest *request = [FBRequest requestForGraphPath:[NSString stringWithFormat:@"me/friends/%@?fields=birthday", fbUser.id]];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
+        NSLog(@"Result: %@ error: %@", result[@"data"] , error);
+        NSArray *resultArray = result[@"data"];
+        if ([resultArray count] == 1) {
+            NSString *birthdayString = resultArray[0][@"birthday"];
+            NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
+            if (theBirthday == nil) {
+                theBirthday = [[Utility_AppSettings dateFormatterForPartialBirthday] dateFromString:birthdayString];
+                newPerson.birthday = theBirthday;
+                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForNoBirthdayNotification object:nil userInfo:@{KeyForPersonInBirthdayNotFoundNotification : newPerson}];
+            } else {
+                newPerson.birthday = theBirthday;
+                [self save];
+            }
+        }
+    }];
+    newPerson.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];
+    newPerson.firstName = fbUser.first_name;
+    newPerson.lastName = fbUser.last_name;
     [self save];
-    return newUser;
+    return newPerson;
 }
 
 -(void)addFacebookUsers:(NSArray *)users {
@@ -182,14 +196,14 @@ static NSString *FriendEntityName = @"Friend";
     for (id user in users) {
         if ([user conformsToProtocol:@protocol(FBGraphUser)]) {
             id<FBGraphUser> fbUser = user;
-            [self getOrCreateUserWithFacebookGraphPerson:fbUser];
+            [self getOrCreatePersonWithFacebookGraphUser:fbUser];
         }
     }
 }
 
--(void)removePerson:(YardstickPerson *)user {
+-(void)removePerson:(Person *)user {
     
-    YardstickPerson *userInArray = [self userWithFacebookId:[user.facebookId stringValue]];
+    Person *userInArray = [self personWithFacebookId:[user.facebookId stringValue]];
     [self.managedObjectContext deleteObject:userInArray];
 }
     

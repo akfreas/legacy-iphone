@@ -1,4 +1,4 @@
-@interface YardstickPerson : NSManagedObject
+@interface Person : NSManagedObject
 
 @property (nonatomic, retain) NSDate * birthday;
 @property (nonatomic, retain) NSNumber * facebookId;

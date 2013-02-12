@@ -1,52 +1,87 @@
 #import "MainScreen.h"
 #import "EventInfoHostingView.h"
 #import "FBLoginViewController.h"
-#import "Utility_UserInfo.h"
 #import "SettingsModalView.h"
-#import "SwitchPerson.h"
-#import "YardstickPerson.h"
+#import "Person.h"
 #import "ObjectArchiveAccessor.h"
+#import "AFAlertView.h"
+#import "Utility_AppSettings.h"
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
     
     ObjectArchiveAccessor *accessor;
+    EventInfoHostingView *infoScreen;
 }
 
 
+-(id)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
+    }
+    return self;
+}
+
+-(void)showAlertForNoBirthday:(NSNotification *)notification {
+    
+    NSDictionary *userInfo = [notification userInfo];
+    __block Person *thePerson = userInfo[KeyForPersonInBirthdayNotFoundNotification];
+    accessor = [ObjectArchiveAccessor sharedInstance];
+    AFAlertView *alertView = [[AFAlertView alloc] initWithTitle:@"No Birthday Found"];
+    alertView.prompt = [NSString stringWithFormat:@"%@ doesn't have their full birthday listed.  Please enter the year they were born below.", thePerson.firstName];
+    
+    UITextField *textField = [[UITextField alloc] init];
+    textField.frame = CGRectMake(15, 0, 300, 44);
+    textField.backgroundColor = [UIColor purpleColor];
+    textField.accessibilityLabel = @"BirthdayInput";
+    [alertView insertUIComponent:textField atIndex:2];
+    
+    alertView.leftButtonTitle = @"Done";
+    alertView.leftButtonActionBlock = ^(NSArray *uiComponents) {
+        NSString *birthYear;
+        for (UIView *component in uiComponents) {
+            if ([component.accessibilityLabel isEqualToString:@"BirthdayInput"])  {
+                birthYear = [(UITextField*)component text];
+            }
+        }
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *birthdayComponents = [calendar components:(NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:thePerson.birthday];
+        [birthdayComponents setYear:[birthYear integerValue]];
+        NSDate *newBirthday = [calendar dateFromComponents:birthdayComponents];
+        thePerson.birthday = newBirthday;
+        [accessor save];
+    };
+    [alertView showInView:infoScreen.view];
+}
+
 -(void)placeEventHostingView {
     
-    EventInfoHostingView *infoScreen = [[EventInfoHostingView alloc] init];
+    infoScreen = [[EventInfoHostingView alloc] init];
     [self addChildViewController:infoScreen];
     [self.view addSubview:infoScreen.view];
 }
 
 -(void)getUserBirthdayAndPlaceMainScreen {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM/dd/yyyy"];
+    
     [FBSession openActiveSessionWithAllowLoginUI:NO];
     if (FBSession.activeSession.isOpen) {
         [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser>user, NSError *error) {
-            NSDate *birthday = [formatter dateFromString:user.birthday];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 accessor = [ObjectArchiveAccessor sharedInstance];
-                YardstickPerson *primaryFriend = [accessor getOrCreateUserWithFacebookGraphPerson:user];
+                Person *primaryFriend = [accessor getOrCreatePersonWithFacebookGraphUser:user];
                 [accessor setPrimaryPerson:primaryFriend];
-                [accessor save];
-                [self placeEventHostingView];
+                
+                if (infoScreen == nil) {
+                    [self placeEventHostingView];
+                } else {
+                    [infoScreen refreshWithPrimaryPerson];
+                }
             });
         }];
     }
 }
 
--(void)switchPerson {
-    
-    SwitchPerson *switchPerson = [[SwitchPerson alloc] init];
-    
-    [self.navigationController pushViewController:switchPerson animated:YES];
-    
-}
 
 -(void)showSettingsModalView {
     
@@ -58,10 +93,8 @@
 
 -(void)setNavigationElements {
     
-    self.navigationController.title = [Utility_UserInfo currentName];
-//    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(switchPerson)];
-    
+    Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
+    self.navigationController.title = primaryPerson.firstName;
     
     CGFloat leftPadding = 6;
     UIImageView *rightButtonImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"19-gear.png"]];
@@ -103,8 +136,9 @@
     [FBSession openActiveSessionWithAllowLoginUI:NO];
     if (FBSession.activeSession.state != FBSessionStateOpen) {
         FBLoginViewController *loadScreen = [[FBLoginViewController alloc] initWithLoggedInCompletion:^{
-            [self dismissViewControllerAnimated:YES completion:NULL];
-            [self getUserBirthdayAndPlaceMainScreen];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self getUserBirthdayAndPlaceMainScreen];
+            }];
         }];
         [self presentViewController:loadScreen animated:NO completion:NULL];
     } else {

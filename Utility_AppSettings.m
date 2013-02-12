@@ -37,4 +37,13 @@
     return dateFormatter;
 }
 
+
++(NSDateFormatter *)dateFormatterForPartialBirthday {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd"];
+    
+    return dateFormatter;
+}
+
 @end

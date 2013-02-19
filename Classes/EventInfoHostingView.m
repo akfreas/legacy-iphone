@@ -70,6 +70,9 @@
         friendPickerDelegate = [[FriendPickerHandler alloc] init];
         friendPicker = [[FBFriendPickerViewController alloc] init];
         friendPicker.delegate = friendPickerDelegate;
+        friendPickerDelegate.friendPickerCompletionBlock = ^{
+            [friendTableView reload];
+        };
         friendPicker.session = [FBSession activeSession];
         friendPicker.userID = [currentPerson.facebookId stringValue];
         [friendPicker loadData];

@@ -16,7 +16,7 @@
 
 
 -(id)init {
-    self = [super init];
+    self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
     }
@@ -32,8 +32,10 @@
     alertView.prompt = [NSString stringWithFormat:@"%@ doesn't have their full birthday listed.  Please enter the year they were born below.", thePerson.firstName];
     
     UITextField *textField = [[UITextField alloc] init];
-    textField.frame = CGRectMake(15, 0, 300, 44);
-    textField.backgroundColor = [UIColor purpleColor];
+    textField.frame = CGRectMake(15, 0, 285, 44);
+    textField.backgroundColor = [UIColor grayColor];
+    textField.textAlignment = NSTextAlignmentCenter;
+    textField.font = [Utility_AppSettings applicationFontLarge];
     textField.accessibilityLabel = @"BirthdayInput";
     [alertView insertUIComponent:textField atIndex:2];
     
@@ -58,8 +60,10 @@
 -(void)placeEventHostingView {
     
     infoScreen = [[EventInfoHostingView alloc] init];
+    infoScreen.view.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
     [self addChildViewController:infoScreen];
     [self.view addSubview:infoScreen.view];
+//    [self.navigationController pushViewController:infoScreen animated:NO];
 }
 
 -(void)getUserBirthdayAndPlaceMainScreen {
@@ -117,11 +121,6 @@
     self.navigationController.navigationBar.opaque = NO;
 }
 
--(void)loadView {
-    UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    self.view = view;
-}
 
 
 -(void)viewDidLoad {

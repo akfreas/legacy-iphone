@@ -2,4 +2,6 @@
 
 -(FBModalCompletionHandler)completionHandler;
 
+@property (copy) void(^friendPickerCompletionBlock)();
+
 @end

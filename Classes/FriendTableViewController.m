@@ -1,5 +1,4 @@
 #import "FriendTableViewController.h"
-#import "FriendTableViewDelegate.h"
 #import "ObjectArchiveAccessor.h"
 #import "Person.h"
 

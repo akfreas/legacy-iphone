@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1915B00016C9EB7500D8434B /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915AFFF16C9EB7500D8434B /* Person.m */; };
+		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		1993916116AA1FDF00DA3CD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993915F16AA1FDF00DA3CD9 /* icon.png */; };
 		1993916216AA1FDF00DA3CD9 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916016AA1FDF00DA3CD9 /* icon@2x.png */; };
 		1993916416AA200A00DA3CD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916316AA200A00DA3CD9 /* icon.png */; };
@@ -39,7 +40,6 @@
 		19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC516B2370A00C81E60 /* 19-gear.png */; };
 		19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC616B2370A00C81E60 /* 19-gear@2x.png */; };
 		19D61CD216B250E100C81E60 /* FriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CD116B250E100C81E60 /* FriendTableViewController.m */; };
-		19D61D2916B2763100C81E60 /* FriendTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61D2816B2763000C81E60 /* FriendTableViewDelegate.m */; };
 		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */; };
@@ -76,6 +76,7 @@
 /* Begin PBXFileReference section */
 		1915AFFE16C9EB7500D8434B /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		1915AFFF16C9EB7500D8434B /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		1993915F16AA1FDF00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		1993916016AA1FDF00DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		1993916316AA200A00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
@@ -115,8 +116,6 @@
 		19D61CC616B2370A00C81E60 /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "19-gear@2x.png"; path = "../19-gear@2x.png"; sourceTree = "<group>"; };
 		19D61CD016B250E100C81E60 /* FriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewController.h; sourceTree = "<group>"; };
 		19D61CD116B250E100C81E60 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19D61D2716B2763000C81E60 /* FriendTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewDelegate.h; sourceTree = "<group>"; };
-		19D61D2816B2763000C81E60 /* FriendTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewDelegate.m; sourceTree = "<group>"; };
 		4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeDisplaySegmentedControl.h; sourceTree = "<group>"; };
 		4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeDisplaySegmentedControl.m; sourceTree = "<group>"; };
 		4E0F3C971545080D00369BE1 /* MainScreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenWebView.h; sourceTree = "<group>"; };
@@ -306,14 +305,13 @@
 				19D61CD116B250E100C81E60 /* FriendTableViewController.m */,
 				19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */,
 				19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */,
-				19D61D2716B2763000C81E60 /* FriendTableViewDelegate.h */,
-				19D61D2816B2763000C81E60 /* FriendTableViewDelegate.m */,
 				4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */,
 				4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */,
 				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
 				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
 				19D29F7F16A674C200D46B0A /* MainScreen.h */,
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
+				191866FC16D4373500220A42 /* MainScreen.xib */,
 				19C49EAB16CA345800304AD6 /* Constants.h */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
@@ -465,6 +463,7 @@
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
+				191866FD16D4373500220A42 /* MainScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,7 +503,6 @@
 				19D61CA516AFC5B900C81E60 /* AgeArticleView.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
 				19D61CD216B250E100C81E60 /* FriendTableViewController.m in Sources */,
-				19D61D2916B2763100C81E60 /* FriendTableViewDelegate.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
 				199C0CB016C0C19D00068E73 /* YardstickModel.xcdatamodeld in Sources */,
 				1915B00016C9EB7500D8434B /* Person.m in Sources */,

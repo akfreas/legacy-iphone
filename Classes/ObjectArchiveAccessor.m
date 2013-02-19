@@ -205,6 +205,7 @@ static NSString *PersonEntityName = @"Person";
     
     Person *userInArray = [self personWithFacebookId:[user.facebookId stringValue]];
     [self.managedObjectContext deleteObject:userInArray];
+    [self save];
 }
     
 @end

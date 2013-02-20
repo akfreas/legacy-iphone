@@ -1,22 +1,14 @@
 #import "Event.h"
 
-static NSString *KeyForName = @"name";
-static NSString *KeyForDescription = @"description";
+static NSString *KeyForFigureName = @"figure_name";
+static NSString *KeyForEventDescription = @"figure_event";
 static NSString *KeyForAgeYears = @"age_years";
 static NSString *KeyForAgeMonths = @"age_months";
 static NSString *KeyForAgeDays = @"age_days";
-static NSString *KeyForMale = @"male";
-static NSString *KeyForHtml = @"story_html";
+static NSString *KeyForPronoun = @"figure_pronoun";
+static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
 
 @implementation Event
-
-@synthesize name;
-@synthesize eventDescription;
-@synthesize age_years;
-@synthesize age_months;
-@synthesize age_days;
-@synthesize male;
-@synthesize storyHtml;
 
 -(id)initWithJsonDictionary:(NSDictionary *)jsonDict {
     self = [super init];
@@ -24,19 +16,20 @@ static NSString *KeyForHtml = @"story_html";
     if (self) {
         
         
-        eventDescription = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForDescription]];
-        name = [NSString stringWithFormat:@"%@",[jsonDict objectForKey:KeyForName]];
-        age_years = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeYears]];
-        age_months = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeMonths]];
-        age_days = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeDays]];
-        storyHtml = [jsonDict objectForKey:KeyForHtml];
-        male = [[jsonDict objectForKey:KeyForMale] boolValue];
+        _eventDescription = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForEventDescription]];
+        _figureName = [NSString stringWithFormat:@"%@",[jsonDict objectForKey:KeyForFigureName]];
+        _ageYears = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeYears]];
+        _ageMonths = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeMonths]];
+        _ageDays = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeDays]];
+        _figureProfilePicUrl = [NSURL URLWithString:[jsonDict objectForKey:KeyForFigureProfilePic]];
+        _pronoun = [jsonDict objectForKey:KeyForPronoun];
     }
     return self;
 }
 
--(NSString *)description {
-    return [NSString stringWithFormat:@"%@ HTML: %@", eventDescription, storyHtml];
-}
+//-(NSString *)description {
+//    
+//    return [NSString stringWithFormat:@"%@ (%@d %@m %@y) %@ HTML: %@",name, age_days, age_months, age_years, eventDescription, storyHtml];
+//}
 
 @end

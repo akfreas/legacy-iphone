@@ -14,7 +14,7 @@
     ObjectArchiveAccessor *accessor;
     FriendPickerHandler *friendPickerDelegate;
     FBFriendPickerViewController *friendPicker;
-    EventInfoScrollView *infoScreen;
+    IBOutlet EventInfoScrollView *infoScreen;
 }
 
 
@@ -59,14 +59,14 @@
     };
     [alertView showInView:self.view];
 }
-
--(void)placeEventHostingView {
-    
-    infoScreen = [[EventInfoScrollView alloc] init];
-    infoScreen.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-    [self.view addSubview:infoScreen];
-//    [self.navigationController pushViewController:infoScreen animated:NO];
-}
+//
+//-(void)placeEventHostingView {
+//    
+//    infoScreen = [[EventInfoScrollView alloc] init];
+//    infoScreen.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+//    [self.view addSubview:infoScreen];
+////    [self.navigationController pushViewController:infoScreen animated:NO];
+//}
 
 -(void)getUserBirthdayAndPlaceMainScreen {
     
@@ -75,14 +75,10 @@
         [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser>user, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 accessor = [ObjectArchiveAccessor sharedInstance];
-                Person *primaryFriend = [accessor getOrCreatePersonWithFacebookGraphUser:user];
-                [accessor setPrimaryPerson:primaryFriend];
+                [accessor createAndSetPrimaryUser:user completionBlock:^(Person *thePerson) {
+                    [infoScreen reload];
+                }];
                 
-                if (infoScreen == nil) {
-                    [self placeEventHostingView];
-                } else {
-//                    [infoScreen refreshWithPrimaryPerson];
-                }
             });
         }];
     }
@@ -131,6 +127,7 @@
         friendPicker = [[FBFriendPickerViewController alloc] init];
         friendPicker.delegate = friendPickerDelegate;
         friendPickerDelegate.friendPickerCompletionBlock = ^{
+            [infoScreen reload];
         };
         friendPicker.session = [FBSession activeSession];
         Person *currentPerson = [accessor primaryPerson];
@@ -144,7 +141,7 @@
     [super viewDidLoad];
     
     [self setNavigationElements];
-    [self placeEventHostingView];
+//    [self placeEventHostingView];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

@@ -61,9 +61,7 @@
         
         id parseResult = [parser objectWithData:resultData];
         
-        if ([parseResult isKindOfClass:[NSArray class]]) {
-            result = [[request.classToParse alloc] initWithJsonDictionary:[parseResult lastObject]];
-        }
+        result = [[request.classToParse alloc] initWithJsonDictionary:parseResult];
     }
     
     self.AYAConnectionCallback(request, result, nil);

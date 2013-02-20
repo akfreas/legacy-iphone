@@ -13,8 +13,7 @@
     return (FBModalCompletionHandler)^(FBFriendPickerViewController *sender, BOOL donePressed){
         if (donePressed) {
             accessor = [ObjectArchiveAccessor sharedInstance];
-            [accessor addFacebookUsers:sender.selection];
-            friendPickerCompletionBlock();
+            [accessor addFacebookUsers:sender.selection completionBlock:friendPickerCompletionBlock];
             [sender dismissViewControllerAnimated:YES completion:NULL];
         } else {
             [sender dismissViewControllerAnimated:YES completion:NULL];

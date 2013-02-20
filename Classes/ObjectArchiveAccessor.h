@@ -9,9 +9,11 @@
 -(NSArray *)allPersons;
 
 -(void)setPrimaryPerson:(Person *)user;
--(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)user;
--(void)addFacebookUsers:(NSArray *)users;
--(Person *)getOrCreatePersonWithFacebookGraphUser:(id<FBGraphUser>)facebookUser;
+-(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock;
+-(void)addFacebookUsers:(NSArray *)users completionBlock:(void(^)())completionBlock;
+-(void)getOrCreatePersonWithFacebookGraphUser:(id<FBGraphUser>)facebookUser completionBlock:(void(^)(Person *thePerson))completionBlock;
+-(void)createAndSetPrimaryUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock;
+
 -(void)addPerson:(Person *)person;
 -(void)removePerson:(Person *)person;
 

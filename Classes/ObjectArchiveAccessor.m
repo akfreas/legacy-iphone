@@ -36,7 +36,7 @@ static NSString *PersonEntityName = @"Person";
     self = [super init];
     
     if (self) {
-
+        
     }
     return self;
 }
@@ -44,7 +44,7 @@ static NSString *PersonEntityName = @"Person";
 #pragma mark Core Data Utility Functions
 
 -(NSManagedObjectContext *)managedObjectContext {
-
+    
     if (_managedObjectContext == nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
         _managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
@@ -109,23 +109,29 @@ static NSString *PersonEntityName = @"Person";
 
 
 -(NSArray *)allPersons {
-        
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
+    NSPredicate *fbUsersPred = [NSPredicate predicateWithFormat:@"isFacebookUser == %@", [NSNumber numberWithBool:YES]];
+    request.predicate = fbUsersPred;
     NSError *error;
     NSArray *allPersons;
     allPersons = [self.managedObjectContext executeFetchRequest:request error:&error];
     return allPersons;
 }
 
--(Person *)getOrCreatePersonWithFacebookGraphUser:(id<FBGraphUser>)facebookUser {
+-(void)getOrCreatePersonWithFacebookGraphUser:(id<FBGraphUser>)facebookUser completionBlock:(void(^)(Person *thePerson))completionBlock {
     
-    Person *theUser = [self personWithFacebookId:facebookUser.id];
+    Person *thePerson = [self personWithFacebookId:facebookUser.id];
     
-    if (theUser == nil) {
-        theUser = [self addPersonWithFacebookUser:facebookUser];
+    if (thePerson == nil) {
+        thePerson = [self addPersonWithFacebookUser:facebookUser completionBlock:completionBlock];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(thePerson);
+        });
     }
-    return theUser;
 }
+
 
 -(Person *)personWithFacebookId:(NSString *)facebookId {
     
@@ -162,11 +168,46 @@ static NSString *PersonEntityName = @"Person";
     [self save];
 }
 
--(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser {
+
+-(void)createAndSetPrimaryUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock {
+    
+    if ([self.primaryPerson.facebookId isEqualToNumber:[NSNumber numberWithInteger:[fbUser.id integerValue]]] == NO) {
+        __block Person *personFromFb = [self personWithFacebookId:fbUser.id];
+        if (personFromFb == nil) {
+            
+            NSEntityDescription *desc = [NSEntityDescription entityForName:PersonEntityName inManagedObjectContext:[self managedObjectContext]];
+            personFromFb = [[Person alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
+            FBRequest *request = [FBRequest requestForGraphPath:@"me"];
+            [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
+                NSLog(@"Result: %@ error: %@", result , error);
+                NSString *birthdayString = result[@"birthday"];
+                NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
+                if (theBirthday == nil) {
+                    theBirthday = [[Utility_AppSettings dateFormatterForPartialBirthday] dateFromString:birthdayString];
+                    personFromFb.birthday = theBirthday;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForNoBirthdayNotification object:nil userInfo:@{KeyForPersonInBirthdayNotFoundNotification : personFromFb}];
+                } else {
+                    personFromFb.birthday = theBirthday;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock(personFromFb);
+                });
+                [self save];
+            }];
+            personFromFb.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];
+            personFromFb.firstName = fbUser.first_name;
+            personFromFb.lastName = fbUser.last_name;
+            personFromFb.isFacebookUser = [NSNumber numberWithBool:YES];
+        }
+        [self setPrimaryPerson:personFromFb];
+        [self save];
+    }
+}
+
+-(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock {
     
     NSEntityDescription *desc = [NSEntityDescription entityForName:PersonEntityName inManagedObjectContext:[self managedObjectContext]];
     __block Person *newPerson = [[Person alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
-    Person *primaryPerson = [self primaryPerson];
     FBRequest *request = [FBRequest requestForGraphPath:[NSString stringWithFormat:@"me/friends/%@?fields=birthday", fbUser.id]];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
         NSLog(@"Result: %@ error: %@", result[@"data"] , error);
@@ -174,29 +215,34 @@ static NSString *PersonEntityName = @"Person";
         if ([resultArray count] == 1) {
             NSString *birthdayString = resultArray[0][@"birthday"];
             NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
+            
             if (theBirthday == nil) {
                 theBirthday = [[Utility_AppSettings dateFormatterForPartialBirthday] dateFromString:birthdayString];
                 newPerson.birthday = theBirthday;
                 [[NSNotificationCenter defaultCenter] postNotificationName:KeyForNoBirthdayNotification object:nil userInfo:@{KeyForPersonInBirthdayNotFoundNotification : newPerson}];
             } else {
                 newPerson.birthday = theBirthday;
-                [self save];
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(newPerson);
+            });
+            [self save];
         }
     }];
     newPerson.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];
+    newPerson.isFacebookUser = [NSNumber numberWithBool:YES];
     newPerson.firstName = fbUser.first_name;
     newPerson.lastName = fbUser.last_name;
     [self save];
     return newPerson;
 }
 
--(void)addFacebookUsers:(NSArray *)users {
+-(void)addFacebookUsers:(NSArray *)users completionBlock:(void(^)())completionBlock {
     
     for (id user in users) {
         if ([user conformsToProtocol:@protocol(FBGraphUser)]) {
             id<FBGraphUser> fbUser = user;
-            [self getOrCreatePersonWithFacebookGraphUser:fbUser];
+            [self getOrCreatePersonWithFacebookGraphUser:fbUser completionBlock:completionBlock];
         }
     }
 }
@@ -217,5 +263,5 @@ static NSString *PersonEntityName = @"Person";
     NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     return resultsController;
 }
-    
+
 @end

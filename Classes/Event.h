@@ -1,13 +1,12 @@
 @interface Event : NSObject
 
-@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *figureName;
 @property (nonatomic) NSString *eventDescription;
-@property (nonatomic) NSString *age_years;
-@property (nonatomic) NSString *age_months;
-@property (nonatomic) NSString *age_days;
-@property (nonatomic) NSString *storyHtml;
-
-@property (atomic) BOOL male;
+@property (nonatomic) NSString *ageYears;
+@property (nonatomic) NSString *ageMonths;
+@property (nonatomic) NSString *ageDays;
+@property (nonatomic) NSString *pronoun;
+@property (nonatomic) NSURL *figureProfilePicUrl;
 
 -(id)initWithJsonDictionary:(NSDictionary *)theDictionary;
 

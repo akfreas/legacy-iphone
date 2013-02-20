@@ -17,5 +17,6 @@
 @dynamic isPrimary;
 @dynamic lastName;
 @dynamic thumbnail;
+@dynamic isFacebookUser;
 
 @end

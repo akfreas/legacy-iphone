@@ -4,11 +4,12 @@
         <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="facebookId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFacebookUser" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isPrimary" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Person" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="Person" positionX="0" positionY="0" width="128" height="150"/>
     </elements>
 </model>

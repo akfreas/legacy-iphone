@@ -2,6 +2,7 @@
 #import "Event.h"
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
+#import "Utility_AppSettings.h"
 
 @implementation YardstickRequest {
     
@@ -59,25 +60,30 @@
 
 +(YardstickRequest *)requestToGetEventForPerson:(Person *)person {
 
-    
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [YardstickRequest eventsUrlForBirthday:person.birthday Person:[person.facebookId stringValue]];
-    [urlRequest setURL:url];
-    [urlRequest setHTTPMethod:@"GET"];
-    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-    YardstickRequest *request = [[YardstickRequest alloc] initWithRequest:urlRequest classToParse:[Event class]];
-    
+    YardstickRequest *request = [self baseRequestForPerson:person];
+    NSURL *url = [self eventsUrlForBirthday:person.birthday Person:person.facebookId.stringValue];
+    request.urlRequest.URL = url;
+    request.classToParse = [Event class];
     return request;
 }
 
 +(YardstickRequest *)requestToGetStoryForPerson:(Person *)person {
     
+    YardstickRequest *request = [self baseRequestForPerson:person];
+    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:[person.facebookId stringValue]];
+    request.urlRequest.URL = url;
+    request.classToParse = nil;
+    
+    return request;
+}
+
++(YardstickRequest *)baseRequestForPerson:(Person *)person {
+    
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
     NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:[person.facebookId stringValue]];
     
     Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
-
+    
     NSString *token = FBSession.activeSession.accessToken;
     NSString *activeFbUserId = [primaryPerson.facebookId stringValue];
     
@@ -97,7 +103,7 @@
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        
+    
     YardstickRequest *request = [[YardstickRequest alloc] initWithRequest:urlRequest classToParse:nil];
     
     return request;

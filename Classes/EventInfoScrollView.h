@@ -1,0 +1,3 @@
+@interface EventInfoScrollView : UIScrollView
+
+@end

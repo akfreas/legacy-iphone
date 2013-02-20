@@ -1,3 +1,11 @@
+//
+//  Person.m
+//  Yardstick
+//
+//  Created by Alexander Freas on 2/20/13.
+//
+//
+
 #import "Person.h"
 
 
@@ -6,7 +14,8 @@
 @dynamic birthday;
 @dynamic facebookId;
 @dynamic firstName;
-@dynamic lastName;
 @dynamic isPrimary;
+@dynamic lastName;
+@dynamic thumbnail;
 
 @end

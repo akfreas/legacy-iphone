@@ -1,5 +1,5 @@
 #import "MainScreen.h"
-#import "EventInfoHostingView.h"
+#import "EventInfoScrollView.h"
 #import "FBLoginViewController.h"
 #import "SettingsModalView.h"
 #import "Person.h"
@@ -11,7 +11,7 @@
     UINavigationController *viewForSettings;
     
     ObjectArchiveAccessor *accessor;
-    EventInfoHostingView *infoScreen;
+    EventInfoScrollView *infoScreen;
 }
 
 
@@ -54,15 +54,14 @@
         thePerson.birthday = newBirthday;
         [accessor save];
     };
-    [alertView showInView:infoScreen.view];
+    [alertView showInView:self.view];
 }
 
 -(void)placeEventHostingView {
     
-    infoScreen = [[EventInfoHostingView alloc] init];
-    infoScreen.view.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-    [self addChildViewController:infoScreen];
-    [self.view addSubview:infoScreen.view];
+    infoScreen = [[EventInfoScrollView alloc] init];
+    infoScreen.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+    [self.view addSubview:infoScreen];
 //    [self.navigationController pushViewController:infoScreen animated:NO];
 }
 
@@ -79,7 +78,7 @@
                 if (infoScreen == nil) {
                     [self placeEventHostingView];
                 } else {
-                    [infoScreen refreshWithPrimaryPerson];
+//                    [infoScreen refreshWithPrimaryPerson];
                 }
             });
         }];

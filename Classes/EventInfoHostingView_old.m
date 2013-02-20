@@ -1,4 +1,4 @@
-#import "EventInfoHostingView.h"
+#import "EventInfoHostingView_old.h"
 #import "YardstickRequest.h"
 #import "YardstickConnection.h"
 #import "Event.h"
@@ -12,7 +12,7 @@
 #import "FriendPickerHandler.h"
 #import "Person.h"
 
-@implementation EventInfoHostingView {
+@implementation EventInfoHostingView_old {
     
     IBOutlet UIWebView *articleWebView;
     IBOutlet FriendTableViewController *friendTableView;

@@ -9,6 +9,7 @@
     IBOutlet UIImageView *personThumbnail;
     IBOutlet UILabel *birthdayLabel;
     IBOutlet UILabel *nameLabel;
+    IBOutlet UIView *personView;
 }
 
 
@@ -23,15 +24,15 @@
     return self;
 }
 
--(void)awakeFromNib {
-    [super awakeFromNib];
+-(void)layoutSubviews {
     
     birthdayLabel.text = [[Utility_AppSettings dateFormatterForDisplay] stringFromDate:thePerson.birthday];
     nameLabel.text = [NSString stringWithFormat:@"%@ %@", thePerson.firstName, thePerson.lastName];
     UIImage *thumbnail = [UIImage imageWithData:thePerson.thumbnail];
     personThumbnail = [[UIImageView alloc] initWithImage:thumbnail];
+    
+    [self addSubview:personView];
 }
-
 
 
 

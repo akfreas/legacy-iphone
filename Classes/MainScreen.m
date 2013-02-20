@@ -6,11 +6,14 @@
 #import "ObjectArchiveAccessor.h"
 #import "AFAlertView.h"
 #import "Utility_AppSettings.h"
+#import "FriendPickerHandler.h"
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
     
     ObjectArchiveAccessor *accessor;
+    FriendPickerHandler *friendPickerDelegate;
+    FBFriendPickerViewController *friendPicker;
     EventInfoScrollView *infoScreen;
 }
 
@@ -110,8 +113,11 @@
     [rightButtonHostView addSubview:rightButtonView];
 
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonHostView];
-    self.navigationItem.leftBarButtonItem = rightButton;
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonHostView];
+    self.navigationItem.leftBarButtonItem = leftButton;
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showFriendPicker)];
+    self.navigationItem.rightBarButtonItem =  rightButton;
     
     self.navigationItem.backBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
@@ -120,6 +126,18 @@
     self.navigationController.navigationBar.opaque = NO;
 }
 
+-(void)showFriendPicker {
+        friendPickerDelegate = [[FriendPickerHandler alloc] init];
+        friendPicker = [[FBFriendPickerViewController alloc] init];
+        friendPicker.delegate = friendPickerDelegate;
+        friendPickerDelegate.friendPickerCompletionBlock = ^{
+        };
+        friendPicker.session = [FBSession activeSession];
+        Person *currentPerson = [accessor primaryPerson];
+        friendPicker.userID = [currentPerson.facebookId stringValue];
+        [friendPicker loadData];
+        [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
+}
 
 
 -(void)viewDidLoad {

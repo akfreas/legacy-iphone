@@ -17,4 +17,6 @@
 
 -(void)save;
 
+-(NSFetchedResultsController *)fetchedResultsControllerForPeople;
+
 @end

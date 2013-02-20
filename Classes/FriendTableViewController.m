@@ -5,6 +5,7 @@
 @implementation FriendTableViewController {
     
     ObjectArchiveAccessor *accessor;
+    NSFetchedResultsController *fetchedResultsController;
     NSArray *persons;
 }
 
@@ -20,6 +21,9 @@
     
     if (self) {
         accessor = [ObjectArchiveAccessor sharedInstance];
+        fetchedResultsController = [accessor fetchedResultsControllerForPeople];
+        fetchedResultsController.delegate = self;
+
         persons = [accessor allPersons];
         UINib *nib = [UINib nibWithNibName:@"AddFriendsCell" bundle:[NSBundle mainBundle]];
         [self.tableView registerNib:nib forCellReuseIdentifier:AddFriendsCellId];
@@ -48,7 +52,7 @@
         if ([cellId isEqualToString:FriendCellId]) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             cell.textLabel.text = @"Test";
-            Person *user = [persons objectAtIndex:indexPath.row];
+            Person *user = [fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
         } 
     }
@@ -66,8 +70,12 @@
     if (section == AddFriendTableSection) {
         retVal = 1;
     } else {
-        retVal = [persons count];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:0];
+
+        retVal = [sectionInfo numberOfObjects];
     }
+    NSLog(@"Persons: %@", persons);
+    NSLog(@"Retval: %d", retVal);
     return retVal;
 }
 
@@ -76,8 +84,6 @@
         Person *personToDelete = [persons objectAtIndex:indexPath.row];
         [accessor removePerson:personToDelete];
         persons = [accessor allPersons];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-        [tableView reloadData];
     }
 }
 
@@ -92,6 +98,42 @@
             self.personSelectedBlock(selectedPerson);
         }
     }
+}
+
+#pragma mark UIViewController methods 
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    NSError *error;
+    [fetchedResultsController performFetch:&error];
+    if (error) {
+        NSLog(@"Error fetching %@", error);
+    }
+}
+
+#pragma mark NSFetchedResultsControllerDelegate methods
+
+-(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+-(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:FriendTableSection]] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSLog(@"Object: %@, FetchedChangeType: %d, IndexPath: %@", anObject, type, newIndexPath);
+}
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+    [self.tableView reloadData];
 }
 
 @end

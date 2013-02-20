@@ -207,5 +207,15 @@ static NSString *PersonEntityName = @"Person";
     [self.managedObjectContext deleteObject:userInArray];
     [self save];
 }
+
+-(NSFetchedResultsController *)fetchedResultsControllerForPeople {
+    
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"birthday" ascending:YES];
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDesc];
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    return resultsController;
+}
     
 @end

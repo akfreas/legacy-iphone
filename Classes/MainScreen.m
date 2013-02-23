@@ -7,6 +7,7 @@
 #import "AFAlertView.h"
 #import "Utility_AppSettings.h"
 #import "FriendPickerHandler.h"
+#import "YardstickWebView.h"
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
@@ -32,7 +33,7 @@
     __block Person *thePerson = userInfo[KeyForPersonInBirthdayNotFoundNotification];
     accessor = [ObjectArchiveAccessor sharedInstance];
     AFAlertView *alertView = [[AFAlertView alloc] initWithTitle:@"No Birthday Found"];
-    alertView.prompt = [NSString stringWithFormat:@"%@ doesn't have their full birthday listed.  Please enter the year they were born below.", thePerson.firstName];
+    alertView.prompt = [NSString stringWithFormat:@"%@ doesn't have their full birthday listed.  Please correct the date below.", thePerson.firstName];
     
     UITextField *textField = [[UITextField alloc] init];
     textField.frame = CGRectMake(15, 0, 285, 44);
@@ -40,33 +41,34 @@
     textField.textAlignment = NSTextAlignmentCenter;
     textField.font = [Utility_AppSettings applicationFontLarge];
     textField.accessibilityLabel = @"BirthdayInput";
-    [alertView insertUIComponent:textField atIndex:2];
+    
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *birthdayComponents = [calendar components:(NSMonthCalendarUnit | NSDayCalendarUnit | NSYearCalendarUnit) fromDate:thePerson.birthday];
+    NSDate *newBirthday = [calendar dateFromComponents:birthdayComponents];
+    
+    UIDatePicker *bDayDatePicker = [[UIDatePicker alloc] init];
+    bDayDatePicker.datePickerMode = UIDatePickerModeDate;
+    bDayDatePicker.date = newBirthday;
+    bDayDatePicker.accessibilityLabel = @"BirthdayInput";
+
+    
+    
+    [alertView insertUIComponent:bDayDatePicker atIndex:2];
     
     alertView.leftButtonTitle = @"Done";
     alertView.leftButtonActionBlock = ^(NSArray *uiComponents) {
-        NSString *birthYear;
+        NSDate *birthYear;
         for (UIView *component in uiComponents) {
             if ([component.accessibilityLabel isEqualToString:@"BirthdayInput"])  {
-                birthYear = [(UITextField*)component text];
+                birthYear = [(UIDatePicker*)component date];
             }
         }
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *birthdayComponents = [calendar components:(NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:thePerson.birthday];
-        [birthdayComponents setYear:[birthYear integerValue]];
-        NSDate *newBirthday = [calendar dateFromComponents:birthdayComponents];
-        thePerson.birthday = newBirthday;
+        thePerson.birthday = birthYear;
         [accessor save];
     };
     [alertView showInView:self.view];
 }
-//
-//-(void)placeEventHostingView {
-//    
-//    infoScreen = [[EventInfoScrollView alloc] init];
-//    infoScreen.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-//    [self.view addSubview:infoScreen];
-////    [self.navigationController pushViewController:infoScreen animated:NO];
-//}
 
 -(void)getUserBirthdayAndPlaceMainScreen {
     
@@ -141,6 +143,10 @@
     [super viewDidLoad];
     
     [self setNavigationElements];
+    infoScreen.wikipediaButtonActionBlock = ^(Event *selectedEvent) {
+        YardstickWebView *webView = [[YardstickWebView alloc] initWithEvent:selectedEvent];
+        [self.navigationController pushViewController:webView animated:YES];
+    };
 //    [self placeEventHostingView];
 }
 

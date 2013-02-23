@@ -8,7 +8,8 @@
     
     IBOutlet UIImageView *personThumbnail;
     IBOutlet UILabel *birthdayLabel;
-    IBOutlet UILabel *nameLabel;
+    IBOutlet UILabel *firstNameLabel;
+    IBOutlet UILabel *lastNameLabel;
     IBOutlet UIView *personView;
 }
 
@@ -27,9 +28,11 @@
 -(void)layoutSubviews {
     
     birthdayLabel.text = [[Utility_AppSettings dateFormatterForDisplay] stringFromDate:thePerson.birthday];
-    nameLabel.text = [NSString stringWithFormat:@"%@ %@", thePerson.firstName, thePerson.lastName];
+    firstNameLabel.text = thePerson.firstName;
+    lastNameLabel.text = thePerson.lastName;
+    lastNameLabel.transform = CGAffineTransformMakeRotation(M_PI/-2);
     UIImage *thumbnail = [UIImage imageWithData:thePerson.thumbnail];
-    personThumbnail = [[UIImageView alloc] initWithImage:thumbnail];
+    personThumbnail.image = thumbnail;
     
     [self addSubview:personView];
 }

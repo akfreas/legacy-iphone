@@ -14,6 +14,7 @@
     
     NSURL *archiveUrl;
     NSPersistentStoreCoordinator *storeCoordinator;
+    NSOperationQueue *operationQueue;
 }
 
 static NSString *DbName = @"Yardstick.sqlite";
@@ -36,7 +37,7 @@ static NSString *PersonEntityName = @"Person";
     self = [super init];
     
     if (self) {
-        
+        operationQueue = [[NSOperationQueue alloc] init];
     }
     return self;
 }
@@ -113,6 +114,10 @@ static NSString *PersonEntityName = @"Person";
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
     NSPredicate *fbUsersPred = [NSPredicate predicateWithFormat:@"isFacebookUser == %@", [NSNumber numberWithBool:YES]];
     request.predicate = fbUsersPred;
+    
+    NSSortDescriptor *sortDescriptorForBirthday = [NSSortDescriptor sortDescriptorWithKey:@"birthday" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptorForBirthday];
+    
     NSError *error;
     NSArray *allPersons;
     allPersons = [self.managedObjectContext executeFetchRequest:request error:&error];
@@ -177,10 +182,23 @@ static NSString *PersonEntityName = @"Person";
             
             NSEntityDescription *desc = [NSEntityDescription entityForName:PersonEntityName inManagedObjectContext:[self managedObjectContext]];
             personFromFb = [[Person alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
-            FBRequest *request = [FBRequest requestForGraphPath:@"me"];
+            
+            personFromFb.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];
+            personFromFb.firstName = fbUser.first_name;
+            personFromFb.lastName = fbUser.last_name;
+            personFromFb.isFacebookUser = [NSNumber numberWithBool:YES];
+            [self save];
+            [self setPrimaryPerson:personFromFb];
+            
+            
+            FBRequest *request = [FBRequest requestForGraphPath:@"me?fields=id,first_name,last_name,birthday,picture"];
             [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
                 NSLog(@"Result: %@ error: %@", result , error);
                 NSString *birthdayString = result[@"birthday"];
+                NSString *profilePicUrlString = result[@"picture"][@"data"][@"url"];
+                
+                NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:profilePicUrlString]];
+                
                 NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
                 if (theBirthday == nil) {
                     theBirthday = [[Utility_AppSettings dateFormatterForPartialBirthday] dateFromString:birthdayString];
@@ -189,18 +207,17 @@ static NSString *PersonEntityName = @"Person";
                 } else {
                     personFromFb.birthday = theBirthday;
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completionBlock(personFromFb);
-                });
-                [self save];
+                
+                
+                [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        personFromFb.thumbnail = data;
+                        [self save];
+                        completionBlock(personFromFb);
+                    });
+                }];
             }];
-            personFromFb.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];
-            personFromFb.firstName = fbUser.first_name;
-            personFromFb.lastName = fbUser.last_name;
-            personFromFb.isFacebookUser = [NSNumber numberWithBool:YES];
         }
-        [self setPrimaryPerson:personFromFb];
-        [self save];
     }
 }
 
@@ -208,12 +225,22 @@ static NSString *PersonEntityName = @"Person";
     
     NSEntityDescription *desc = [NSEntityDescription entityForName:PersonEntityName inManagedObjectContext:[self managedObjectContext]];
     __block Person *newPerson = [[Person alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
-    FBRequest *request = [FBRequest requestForGraphPath:[NSString stringWithFormat:@"me/friends/%@?fields=birthday", fbUser.id]];
+    FBRequest *request = [FBRequest requestForGraphPath:[NSString stringWithFormat:@"me/friends/%@?fields=birthday,picture", fbUser.id]];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
         NSLog(@"Result: %@ error: %@", result[@"data"] , error);
         NSArray *resultArray = result[@"data"];
         if ([resultArray count] == 1) {
             NSString *birthdayString = resultArray[0][@"birthday"];
+            NSString *profilePicUrlString = resultArray[0][@"picture"][@"data"][@"url"];
+            
+            NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:profilePicUrlString]];
+            [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                newPerson.thumbnail = data;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self save];
+                });
+            }];
+            
             NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
             
             if (theBirthday == nil) {
@@ -224,9 +251,9 @@ static NSString *PersonEntityName = @"Person";
                 newPerson.birthday = theBirthday;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self save];
                 completionBlock(newPerson);
             });
-            [self save];
         }
     }];
     newPerson.facebookId = [NSNumber numberWithInt: [fbUser.id integerValue]];

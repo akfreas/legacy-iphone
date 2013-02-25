@@ -217,6 +217,8 @@ static NSString *PersonEntityName = @"Person";
                     });
                 }];
             }];
+        } else {
+            completionBlock(personFromFb);
         }
     }
 }
@@ -235,8 +237,8 @@ static NSString *PersonEntityName = @"Person";
             
             NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:profilePicUrlString]];
             [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                newPerson.thumbnail = data;
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    newPerson.thumbnail = data;
                     [self save];
                 });
             }];

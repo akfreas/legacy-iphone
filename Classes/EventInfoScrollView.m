@@ -39,49 +39,53 @@ static CGFloat height = 105;
         Person *thePerson = [people objectAtIndex:i];
         PersonInfoView *infoView = [[PersonInfoView alloc] initWithPerson:thePerson];
         infoView.frame = [self frameAtIndex:i];
+        [self addRootViewToList:infoView atIndex:currentIndex];
+
         
+        __block EventDetailView *detailView = [self addEventDetailViewAdjacentToRootViewAtIndex:currentIndex];
+        
+        currentIndex++;
+        
+        __block EventInfoView *eventInfoView = [[EventInfoView alloc] initWithEvent:nil];
+        [self addRootViewToList:eventInfoView atIndex:currentIndex];
+        currentIndex++;
+        
+
         
         YardstickRequest *request = [YardstickRequest requestToGetEventForPerson:thePerson];
         
         connection = [[YardstickConnection alloc] initWithYardstickRequest:request];
-        __block EventInfoView *eventInfoView = [[EventInfoView alloc] initWithEvent:nil];
-        __block EventDetailView *detailView = [[EventDetailView alloc] initWithFrame:CGRectMake(1, 1, 100, 100)];
-        detailView.wikipediaButtonTappedActionBlock = self.wikipediaButtonActionBlock;
+        
+        NSLog(@"Detail View Frame: %@", CGRectCreateDictionaryRepresentation(detailView.frame));
+        
 
         [connection getWithCompletionBlock:^(YardstickRequest *request, Event *result, NSError *error) {
             NSLog(@"Event Fetch Result: %@", result);
-                eventInfoView.event = result;
-                detailView.event = result;
+            eventInfoView.event = result;
+            detailView.event = result;
         }];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addRootViewToList:infoView atIndex:currentIndex];
-
-            [self addEventDetailViewToList:detailView adjacentToRootViewAtIndex:currentIndex];
-            NSLog(@"Detail View Frame: %@", CGRectCreateDictionaryRepresentation(detailView.frame));
-            currentIndex++;
-            [self addRootViewToList:eventInfoView atIndex:currentIndex];
-            currentIndex++;
-            if (currentIndex * height > self.contentSize.height) {
-                self.contentSize = CGSizeMake(self.contentSize.width, height + currentIndex * height);
-            }
-        });
     }
-    [self layoutSubviews];
     
+    if (currentIndex * height > self.contentSize.height) {
+        self.contentSize = CGSizeMake(self.contentSize.width, height + currentIndex * height);
+    }
+    
+    [self layoutSubviews];
 }
 
--(void)addEventDetailViewToList:(UIView *)theView adjacentToRootViewAtIndex:(NSInteger)index {
+-(EventDetailView *)addEventDetailViewAdjacentToRootViewAtIndex:(NSInteger)index {
     UIView *rootView = [arrayOfPersonInfoViews objectAtIndex:index];
     CGFloat padding = 5;
-    CGFloat width = 100;
-    CGFloat height = 100;
+    CGFloat width = 207;
+    CGFloat height = 215;
     CGRect rectForEventDetailView = CGRectMake(CGRectGetMaxX(rootView.frame) + padding, CGRectGetMinY(rootView.frame), width, height);
-    NSLog(@"Rootview frame: %@", CGRectCreateDictionaryRepresentation(rootView.frame));
-    theView.frame = rectForEventDetailView;
-    theView.autoresizingMask = (UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    [self addSubview:theView];
-    [theView setNeedsLayout];
+    EventDetailView *eventDetailView = [[EventDetailView alloc] initWithFrame:rectForEventDetailView];
+    NSLog(@"Rootview frame: %@", CGRectCreateDictionaryRepresentation(rectForEventDetailView));
+    eventDetailView.frame = rectForEventDetailView;
+//    eventDetailView.autoresizingMask = (UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    [self addSubview:eventDetailView];
+    [eventDetailView setNeedsLayout];
+    return eventDetailView;
 }
 
 -(void)addRootViewToList:(UIView *)theView atIndex:(NSInteger)index {

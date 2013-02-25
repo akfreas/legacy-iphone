@@ -49,7 +49,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ResourceUrl</key>
-	<string>http://ec2-174-129-55-57.compute-1.amazonaws.com/</string>
+	<string>http://localhost:8000</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -24,10 +24,17 @@
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
     }
     return self;
 }
 
+
+-(void)removePerson:(NSNotification *)notification {
+    Person *thePerson = notification.userInfo[@"person"];
+    [accessor removePerson:thePerson];
+    [infoScreen reload];
+}
 
 -(void)popToWikipedia:(NSNotification *)notification{
     

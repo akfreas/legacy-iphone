@@ -8,29 +8,15 @@
 
     IBOutlet UIView *eventDescriptionHostingView;
     IBOutlet UITextView *eventDescriptionTextView;
-    
-    IBOutlet UIButton *buttonPlaceHolder;
-    IBOutlet UIButton *wikipediaButton;
 }
 
--(id)initWithFrame:(CGRect)frame  {
-    self = [super initWithFrame:frame];
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"EventDetailView" owner:self options:nil];
         [self addSubview:eventDescriptionHostingView];
-//        wikipediaButton.frame = buttonPlaceHolder.frame;
-//        [self addSubview:wikipediaButton];
-//        [buttonPlaceHolder removeFromSuperview];
-//        wikipediaButton.userInteractionEnabled = YES;
     }
     return self;
-}
-
-
--(IBAction)wikipediaButtonAction:(id)sender {
-    
-    NSDictionary *userInfo = @{@"event": _event};
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForWikipediaButtonTappedNotification object:self userInfo:userInfo];
 }
 
 -(void)layoutSubviews {

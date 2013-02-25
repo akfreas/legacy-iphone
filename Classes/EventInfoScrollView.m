@@ -1,11 +1,10 @@
 #import "EventInfoScrollView.h"
 #import "ObjectArchiveAccessor.h"
-#import "PersonInfoView.h"
 #import "Person.h"
 #import "YardstickRequest.h"
 #import "YardstickConnection.h"
-#import "EventInfoView.h"
 #import "EventDetailView.h"
+#import "PersonRow.h"
 
 @implementation EventInfoScrollView {
     ObjectArchiveAccessor *accessor;
@@ -14,7 +13,7 @@
     YardstickConnection *connection;
 }
 
-static CGFloat height = 105;
+static CGFloat height = 280;
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -37,73 +36,28 @@ static CGFloat height = 105;
         
         
         Person *thePerson = [people objectAtIndex:i];
-        PersonInfoView *infoView = [[PersonInfoView alloc] initWithPerson:thePerson];
-        infoView.frame = [self frameAtIndex:i];
-        [self addRootViewToList:infoView atIndex:currentIndex];
-
         
-        __block EventDetailView *detailView = [self addEventDetailViewAdjacentToRootViewAtIndex:currentIndex];
-        
-        currentIndex++;
-        
-        __block EventInfoView *eventInfoView = [[EventInfoView alloc] initWithEvent:nil];
-        [self addRootViewToList:eventInfoView atIndex:currentIndex];
-        currentIndex++;
-        
-
+        __block PersonRow *row = [[PersonRow alloc] initWithFrame:CGRectMake(20, (height + 10) * i, 320, height)];
+        [arrayOfPersonInfoViews addObject:row];
+        [self addSubview:row];
+        row.person = thePerson;
+        [row setNeedsLayout];
         
         YardstickRequest *request = [YardstickRequest requestToGetEventForPerson:thePerson];
         
         connection = [[YardstickConnection alloc] initWithYardstickRequest:request];
         
-        NSLog(@"Detail View Frame: %@", CGRectCreateDictionaryRepresentation(detailView.frame));
-        
-
         [connection getWithCompletionBlock:^(YardstickRequest *request, Event *result, NSError *error) {
             NSLog(@"Event Fetch Result: %@", result);
-            eventInfoView.event = result;
-            detailView.event = result;
+            row.event = result;
         }];
+        
+        
+        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));
     }
     
-    if (currentIndex * height > self.contentSize.height) {
-        self.contentSize = CGSizeMake(self.contentSize.width, height + currentIndex * height);
-    }
     
     [self layoutSubviews];
-}
-
--(EventDetailView *)addEventDetailViewAdjacentToRootViewAtIndex:(NSInteger)index {
-    UIView *rootView = [arrayOfPersonInfoViews objectAtIndex:index];
-    CGFloat padding = 5;
-    CGFloat width = 207;
-    CGFloat height = 215;
-    CGRect rectForEventDetailView = CGRectMake(CGRectGetMaxX(rootView.frame) + padding, CGRectGetMinY(rootView.frame), width, height);
-    EventDetailView *eventDetailView = [[EventDetailView alloc] initWithFrame:rectForEventDetailView];
-    NSLog(@"Rootview frame: %@", CGRectCreateDictionaryRepresentation(rectForEventDetailView));
-    eventDetailView.frame = rectForEventDetailView;
-//    eventDetailView.autoresizingMask = (UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    [self addSubview:eventDetailView];
-    [eventDetailView setNeedsLayout];
-    return eventDetailView;
-}
-
--(void)addRootViewToList:(UIView *)theView atIndex:(NSInteger)index {
-    
-    theView.frame = [self frameAtIndex:index];
-    [self addSubview:theView];
-    NSLog(@"Adding view class: %@ at index %d", [theView class], index);
-        for (int i=index; i<[arrayOfPersonInfoViews count]; i++) {
-        
-            theView.frame = [self frameAtIndex:i-1];
-            UIView *replacedView = [arrayOfPersonInfoViews objectAtIndex:i];
-//            [UIView animateWithDuration:1.5 animations:^{
-                theView.frame = [self frameAtIndex:i];
-                replacedView.frame = [self frameAtIndex:i+1];
-//            }];
-//        }
-    }
-    [arrayOfPersonInfoViews insertObject:theView atIndex:index];
 }
 
 -(CGRect)frameAtIndex:(NSInteger)index {

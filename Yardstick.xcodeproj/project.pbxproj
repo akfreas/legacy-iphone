@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		190AEB9816D868C90079D2F1 /* Buttons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 190AEB9716D868C90079D2F1 /* Buttons.xib */; };
 		190AEB9D16D86E4E0079D2F1 /* YardstickWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 190AEB9C16D86E4E0079D2F1 /* YardstickWebView.xib */; };
 		190AEBA016D86EDD0079D2F1 /* YardstickWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 190AEB9F16D86EDD0079D2F1 /* YardstickWebView.m */; };
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		19348DCA16D4EAD200126BC7 /* EventInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* EventInfoView.m */; };
 		19632B9116DAFA1800E0EA75 /* bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9016DAFA1800E0EA75 /* bracket.png */; };
+		19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9216DB028400E0EA75 /* PersonRow.xib */; };
+		19632B9616DB036900E0EA75 /* PersonRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* PersonRow.m */; };
+		19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */; };
+		19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */; };
+		19632B9E16DB3C4E00E0EA75 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9C16DB3C4E00E0EA75 /* 218-trash2.png */; };
+		19632B9F16DB3C4E00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9D16DB3C4E00E0EA75 /* 218-trash2@2x.png */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
 		199354FA16D4A28100D73389 /* EventInfoHostingView_old.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F916D4A28100D73389 /* EventInfoHostingView_old.m */; };
@@ -87,7 +92,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		190AEB9716D868C90079D2F1 /* Buttons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Buttons.xib; sourceTree = "<group>"; };
 		190AEB9C16D86E4E0079D2F1 /* YardstickWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YardstickWebView.xib; sourceTree = "<group>"; };
 		190AEB9E16D86EDD0079D2F1 /* YardstickWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YardstickWebView.h; sourceTree = "<group>"; };
 		190AEB9F16D86EDD0079D2F1 /* YardstickWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YardstickWebView.m; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 		1915AFFF16C9EB7500D8434B /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		19632B9016DAFA1800E0EA75 /* bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bracket.png; sourceTree = "<group>"; };
+		19632B9216DB028400E0EA75 /* PersonRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonRow.xib; sourceTree = "<group>"; };
+		19632B9416DB036900E0EA75 /* PersonRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRow.h; sourceTree = "<group>"; };
+		19632B9516DB036900E0EA75 /* PersonRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonRow.m; sourceTree = "<group>"; };
+		19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeIndicatorView.xib; sourceTree = "<group>"; };
+		19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeIndicatorView.h; sourceTree = "<group>"; };
+		19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeIndicatorView.m; sourceTree = "<group>"; };
+		19632B9C16DB3C4E00E0EA75 /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
+		19632B9D16DB3C4E00E0EA75 /* 218-trash2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2@2x.png"; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354F216D4A19B00D73389 /* PersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoView.h; path = Classes/PersonInfoView.h; sourceTree = SOURCE_ROOT; };
 		199354F316D4A19B00D73389 /* PersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoView.m; path = Classes/PersonInfoView.m; sourceTree = SOURCE_ROOT; };
@@ -260,6 +272,8 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				19632B9C16DB3C4E00E0EA75 /* 218-trash2.png */,
+				19632B9D16DB3C4E00E0EA75 /* 218-trash2@2x.png */,
 				19632B9016DAFA1800E0EA75 /* bracket.png */,
 				19DFB9F616D585F50019E2B2 /* fb_blank_profile_square.png */,
 				19A524A016B75FE400195D9D /* friend-icon.png */,
@@ -319,6 +333,8 @@
 				19D61CB916B06D2600C81E60 /* Utilities */,
 				19D61CA316AFC5B900C81E60 /* AgeArticleView.h */,
 				19D61CA416AFC5B900C81E60 /* AgeArticleView.m */,
+				19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */,
+				19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */,
 				4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */,
 				4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */,
 				4EEA6D031526902D00B96EFD /* AppDelegate.h */,
@@ -350,6 +366,8 @@
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
 				199354F216D4A19B00D73389 /* PersonInfoView.h */,
 				199354F316D4A19B00D73389 /* PersonInfoView.m */,
+				19632B9416DB036900E0EA75 /* PersonRow.h */,
+				19632B9516DB036900E0EA75 /* PersonRow.m */,
 				4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */,
 				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
 				4EEA6D431526A90200B96EFD /* YardstickConnection.h */,
@@ -370,13 +388,14 @@
 				19D61CCF16B23B6400C81E60 /* Images */,
 				19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */,
 				19D61CA016AFA76800C81E60 /* AgeArticleView.xib */,
+				19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */,
 				4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */,
 				1993550816D4E89900D73389 /* EventInfoView.xib */,
 				19DFB9FB16D5E6E60019E2B2 /* EventDetailView.xib */,
-				190AEB9716D868C90079D2F1 /* Buttons.xib */,
 				4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */,
 				191866FC16D4373500220A42 /* MainScreen.xib */,
 				199354F016D4A05E00D73389 /* PersonInfoView.xib */,
+				19632B9216DB028400E0EA75 /* PersonRow.xib */,
 				4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */,
 				190AEB9C16D86E4E0079D2F1 /* YardstickWebView.xib */,
 			);
@@ -516,9 +535,12 @@
 				1993550B16D4E8CB00D73389 /* EventInfoView.m in Resources */,
 				19DFB9F716D585F50019E2B2 /* fb_blank_profile_square.png in Resources */,
 				19DFB9FC16D5E6E60019E2B2 /* EventDetailView.xib in Resources */,
-				190AEB9816D868C90079D2F1 /* Buttons.xib in Resources */,
 				190AEB9D16D86E4E0079D2F1 /* YardstickWebView.xib in Resources */,
 				19632B9116DAFA1800E0EA75 /* bracket.png in Resources */,
+				19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */,
+				19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */,
+				19632B9E16DB3C4E00E0EA75 /* 218-trash2.png in Resources */,
+				19632B9F16DB3C4E00E0EA75 /* 218-trash2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +589,8 @@
 				199354FD16D4A29700D73389 /* EventInfoScrollView.m in Sources */,
 				19DFB9FA16D5E6810019E2B2 /* EventDetailView.m in Sources */,
 				190AEBA016D86EDD0079D2F1 /* YardstickWebView.m in Sources */,
+				19632B9616DB036900E0EA75 /* PersonRow.m in Sources */,
+				19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

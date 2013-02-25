@@ -4,7 +4,6 @@
 
 @implementation PersonInfoView {
     
-    Person *thePerson;
     
     IBOutlet UIImageView *personThumbnail;
     IBOutlet UILabel *birthdayLabel;
@@ -14,12 +13,12 @@
 }
 
 
--(id)initWithPerson:(Person *)aPerson {
-    self = [super init];
+-(id)initWithCoder:(NSCoder *)aDecoder {
     
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        thePerson = aPerson;
         [[NSBundle mainBundle] loadNibNamed:@"PersonInfoView" owner:self options:nil];
+        [self addSubview:personView];
     }
     
     return self;
@@ -27,17 +26,17 @@
 
 -(void)layoutSubviews {
     
-    birthdayLabel.text = [[Utility_AppSettings dateFormatterForDisplay] stringFromDate:thePerson.birthday];
-    firstNameLabel.text = thePerson.firstName;
-    lastNameLabel.text = thePerson.lastName;
-    lastNameLabel.transform = CGAffineTransformMakeRotation(M_PI/-2);
-    UIImage *thumbnail = [UIImage imageWithData:thePerson.thumbnail];
+    birthdayLabel.text = [[Utility_AppSettings dateFormatterForDisplay] stringFromDate:_person.birthday];
+//    firstNameLabel.text =  [NSString stringWithFormat:@"%@ %@", _person.firstName, _person.lastName];
+    firstNameLabel.text = _person.firstName;
+//    lastNameLabel.transform = CGAffineTransformMakeRotation(M_PI/-2);
+    UIImage *thumbnail = [UIImage imageWithData:_person.thumbnail];
     personThumbnail.image = thumbnail;
-    
-    [self addSubview:personView];
 }
 
-
-
+-(void)setPerson:(Person *)person {
+    _person = person;
+    [self layoutSubviews];
+}
 
 @end

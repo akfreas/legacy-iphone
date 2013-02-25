@@ -1,6 +1,6 @@
 @class Person;
 @interface PersonInfoView : UIView
 
--(id)initWithPerson:(Person *)aPerson;
+@property (strong, nonatomic) Person *person;
 
 @end

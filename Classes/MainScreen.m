@@ -23,8 +23,17 @@
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
     }
     return self;
+}
+
+
+-(void)popToWikipedia:(NSNotification *)notification{
+    
+    Event *selectedEvent = notification.userInfo[@"event"];
+    YardstickWebView *webView = [[YardstickWebView alloc] initWithEvent:selectedEvent];
+    [self.navigationController pushViewController:webView animated:YES];
 }
 
 -(void)showAlertForNoBirthday:(NSNotification *)notification {
@@ -143,11 +152,6 @@
     [super viewDidLoad];
     
     [self setNavigationElements];
-    infoScreen.wikipediaButtonActionBlock = ^(Event *selectedEvent) {
-        YardstickWebView *webView = [[YardstickWebView alloc] initWithEvent:selectedEvent];
-        [self.navigationController pushViewController:webView animated:YES];
-    };
-//    [self placeEventHostingView];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

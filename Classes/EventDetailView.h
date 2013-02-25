@@ -3,6 +3,5 @@
 
 
 @property (nonatomic) Event *event;
-@property (copy) void(^wikipediaButtonTappedActionBlock)(Event *selectedEvent);
 @end
 

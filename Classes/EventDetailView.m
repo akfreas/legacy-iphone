@@ -19,16 +19,18 @@
         [[NSBundle mainBundle] loadNibNamed:@"EventDetailView" owner:self options:nil];
         [self addSubview:eventDescriptionHostingView];
 //        wikipediaButton.frame = buttonPlaceHolder.frame;
-        [self addSubview:wikipediaButton];
-        [buttonPlaceHolder removeFromSuperview];
-        wikipediaButton.userInteractionEnabled = YES;
+//        [self addSubview:wikipediaButton];
+//        [buttonPlaceHolder removeFromSuperview];
+//        wikipediaButton.userInteractionEnabled = YES;
     }
     return self;
 }
 
 
 -(IBAction)wikipediaButtonAction:(id)sender {
-//    self.wikipediaButtonTappedActionBlock(_event);
+    
+    NSDictionary *userInfo = @{@"event": _event};
+    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForWikipediaButtonTappedNotification object:self userInfo:userInfo];
 }
 
 -(void)layoutSubviews {

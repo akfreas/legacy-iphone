@@ -12,6 +12,7 @@
 		190AEBA016D86EDD0079D2F1 /* YardstickWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 190AEB9F16D86EDD0079D2F1 /* YardstickWebView.m */; };
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		19348DCA16D4EAD200126BC7 /* EventInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* EventInfoView.m */; };
+		19632B9116DAFA1800E0EA75 /* bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9016DAFA1800E0EA75 /* bracket.png */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
 		199354FA16D4A28100D73389 /* EventInfoHostingView_old.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F916D4A28100D73389 /* EventInfoHostingView_old.m */; };
@@ -93,6 +94,7 @@
 		1915AFFE16C9EB7500D8434B /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		1915AFFF16C9EB7500D8434B /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
+		19632B9016DAFA1800E0EA75 /* bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bracket.png; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354F216D4A19B00D73389 /* PersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoView.h; path = Classes/PersonInfoView.h; sourceTree = SOURCE_ROOT; };
 		199354F316D4A19B00D73389 /* PersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoView.m; path = Classes/PersonInfoView.m; sourceTree = SOURCE_ROOT; };
@@ -258,6 +260,7 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				19632B9016DAFA1800E0EA75 /* bracket.png */,
 				19DFB9F616D585F50019E2B2 /* fb_blank_profile_square.png */,
 				19A524A016B75FE400195D9D /* friend-icon.png */,
 				19D61CC516B2370A00C81E60 /* 19-gear.png */,
@@ -515,6 +518,7 @@
 				19DFB9FC16D5E6E60019E2B2 /* EventDetailView.xib in Resources */,
 				190AEB9816D868C90079D2F1 /* Buttons.xib in Resources */,
 				190AEB9D16D86E4E0079D2F1 /* YardstickWebView.xib in Resources */,
+				19632B9116DAFA1800E0EA75 /* bracket.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

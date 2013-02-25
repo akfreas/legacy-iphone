@@ -58,10 +58,15 @@
     textField.font = [Utility_AppSettings applicationFontLarge];
     textField.accessibilityLabel = @"BirthdayInput";
     
+    NSDate *newBirthday;
     
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *birthdayComponents = [calendar components:(NSMonthCalendarUnit | NSDayCalendarUnit | NSYearCalendarUnit) fromDate:thePerson.birthday];
-    NSDate *newBirthday = [calendar dateFromComponents:birthdayComponents];
+    if (thePerson.birthday != nil) {
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *birthdayComponents = [calendar components:(NSMonthCalendarUnit | NSDayCalendarUnit | NSYearCalendarUnit) fromDate:thePerson.birthday];
+        newBirthday = [calendar dateFromComponents:birthdayComponents];
+    } else {
+        newBirthday = [NSDate date];
+    }
     
     UIDatePicker *bDayDatePicker = [[UIDatePicker alloc] init];
     bDayDatePicker.datePickerMode = UIDatePickerModeDate;
@@ -74,14 +79,21 @@
     
     alertView.leftButtonTitle = @"Done";
     alertView.leftButtonActionBlock = ^(NSArray *uiComponents) {
-        NSDate *birthYear;
+        NSDate *birthday;
         for (UIView *component in uiComponents) {
             if ([component.accessibilityLabel isEqualToString:@"BirthdayInput"])  {
-                birthYear = [(UIDatePicker*)component date];
+                birthday = [(UIDatePicker*)component date];
             }
         }
-        thePerson.birthday = birthYear;
+        NSLog(@"Chosen date: %@", birthday);
+        thePerson.birthday = birthday;
         [accessor save];
+        [infoScreen reload];
+    };
+    alertView.rightButtonTitle = @"Cancel";
+    alertView.rightButtonActionBlock = ^(NSArray *uiComponents){
+        [accessor removePerson:thePerson];
+        [infoScreen reload];
     };
     [alertView showInView:self.view];
 }
@@ -96,7 +108,6 @@
                 [accessor createAndSetPrimaryUser:user completionBlock:^(Person *thePerson) {
                     [infoScreen reload];
                 }];
-                
             });
         }];
     }
@@ -149,7 +160,7 @@
         };
         friendPicker.session = [FBSession activeSession];
         Person *currentPerson = [accessor primaryPerson];
-        friendPicker.userID = [currentPerson.facebookId stringValue];
+        friendPicker.userID = currentPerson.facebookId;
         [friendPicker loadData];
         [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
 }
@@ -157,12 +168,6 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setNavigationElements];
-}
-
--(void)viewDidAppear:(BOOL)animated {
-    
     [FBSession openActiveSessionWithAllowLoginUI:NO];
     if (FBSession.activeSession.state != FBSessionStateOpen) {
         FBLoginViewController *loadScreen = [[FBLoginViewController alloc] initWithLoggedInCompletion:^{
@@ -174,8 +179,8 @@
     } else {
         [self getUserBirthdayAndPlaceMainScreen];
     }
+    [self setNavigationElements];
 }
-
 
                     
 @end

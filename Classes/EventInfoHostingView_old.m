@@ -74,7 +74,7 @@
             [friendTableView reload];
         };
         friendPicker.session = [FBSession activeSession];
-        friendPicker.userID = [currentPerson.facebookId stringValue];
+        friendPicker.userID = currentPerson.facebookId;
         [friendPicker loadData];
         [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
     };

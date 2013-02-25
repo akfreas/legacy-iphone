@@ -61,7 +61,7 @@
 +(YardstickRequest *)requestToGetEventForPerson:(Person *)person {
 
     YardstickRequest *request = [self baseRequestForPerson:person];
-    NSURL *url = [self eventsUrlForBirthday:person.birthday Person:person.facebookId.stringValue];
+    NSURL *url = [self eventsUrlForBirthday:person.birthday Person:person.facebookId];
     request.urlRequest.URL = url;
     request.classToParse = [Event class];
     return request;
@@ -70,7 +70,7 @@
 +(YardstickRequest *)requestToGetStoryForPerson:(Person *)person {
     
     YardstickRequest *request = [self baseRequestForPerson:person];
-    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:[person.facebookId stringValue]];
+    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     request.urlRequest.URL = url;
     request.classToParse = nil;
     
@@ -80,12 +80,12 @@
 +(YardstickRequest *)baseRequestForPerson:(Person *)person {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:[person.facebookId stringValue]];
+    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     
     Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
     
     NSString *token = FBSession.activeSession.accessToken;
-    NSString *activeFbUserId = [primaryPerson.facebookId stringValue];
+    NSString *activeFbUserId = primaryPerson.facebookId;
     
     NSDictionary *cookieDict = [NSDictionary dictionaryWithObjectsAndKeys:token, @"token", activeFbUserId, @"activeUserId", nil];
     NSData *cookieInfo = [NSJSONSerialization dataWithJSONObject:cookieDict options:NSJSONReadingMutableLeaves error:NULL];

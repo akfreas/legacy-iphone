@@ -7,6 +7,7 @@
 -(Person *)primaryPerson;
 -(Person *)personWithFacebookId:(NSString *)facebookId;
 -(NSArray *)allPersons;
+-(NSArray *)addedPeople;
 
 -(void)setPrimaryPerson:(Person *)user;
 -(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock;

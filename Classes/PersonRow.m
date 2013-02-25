@@ -3,6 +3,7 @@
 #import "PersonInfoView.h"
 #import "EventDetailView.h"
 #import "AgeIndicatorView.h"
+#import "Person.h"
 
 @implementation PersonRow {
     
@@ -22,6 +23,8 @@
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"PersonRow" owner:self options:nil];
         [self addSubview:view];
+        self.backgroundColor = [UIColor colorWithWhite:1 alpha:.4];
+        
     }
     return self;
 }
@@ -44,13 +47,14 @@
     eventInfo.event = event;
     eventDetail.event = event;
     ageIndicator.event = event;
-    [self layoutSubviews];
 }
 
 -(void)setPerson:(Person *)person {
     _person = person;
     personInfo.person = person;
-    [self layoutSubviews];
+    if ([_person.isPrimary isEqualToNumber: [NSNumber numberWithBool:NO]]) {
+        trashcanButton.hidden = NO;
+    }
 }
 
 @end

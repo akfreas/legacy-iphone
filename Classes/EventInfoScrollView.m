@@ -13,7 +13,7 @@
     YardstickConnection *connection;
 }
 
-static CGFloat height = 280;
+static CGFloat height = 240;
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -22,7 +22,7 @@ static CGFloat height = 280;
         self.contentSize = CGSizeMake(320, 600);
         accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfPersonInfoViews = [[NSMutableArray alloc] init];
-        [self addInfoViews];
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood.png"]];
     }
     return self;
 }
@@ -30,7 +30,9 @@ static CGFloat height = 280;
 
 -(void)addInfoViews {
     
-    NSArray *people = [accessor allPersons];
+    NSArray *addedPeople = [accessor addedPeople];
+    NSMutableArray *people = [NSMutableArray arrayWithObject:[accessor primaryPerson]];
+    [people addObjectsFromArray:addedPeople];
     __block int currentIndex = 0;
     for (int i=0; i<[people count]; i++) {
         
@@ -55,8 +57,6 @@ static CGFloat height = 280;
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));
     }
-    
-    
     [self layoutSubviews];
 }
 

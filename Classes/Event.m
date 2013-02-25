@@ -27,9 +27,9 @@ static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
     return self;
 }
 
-//-(NSString *)description {
-//    
-//    return [NSString stringWithFormat:@"%@ (%@d %@m %@y) %@ HTML: %@",name, age_days, age_months, age_years, eventDescription, storyHtml];
-//}
+-(NSString *)description {
+    
+    return [NSString stringWithFormat:@"%@ (%@d %@m %@y) %@", _eventDescription, _ageDays, _ageMonths, _ageYears, _eventDescription];
+}
 
 @end

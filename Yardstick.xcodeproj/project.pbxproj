@@ -16,8 +16,10 @@
 		19632B9616DB036900E0EA75 /* PersonRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* PersonRow.m */; };
 		19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */; };
 		19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */; };
-		19632B9E16DB3C4E00E0EA75 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9C16DB3C4E00E0EA75 /* 218-trash2.png */; };
-		19632B9F16DB3C4E00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9D16DB3C4E00E0EA75 /* 218-trash2@2x.png */; };
+		19632BA116DB427E00E0EA75 /* wood.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA016DB427E00E0EA75 /* wood.jpg */; };
+		19632BA316DB437500E0EA75 /* wood.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA216DB437500E0EA75 /* wood.png */; };
+		19632BA616DB453C00E0EA75 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA416DB453C00E0EA75 /* 218-trash2.png */; };
+		19632BA716DB453C00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
 		199354FA16D4A28100D73389 /* EventInfoHostingView_old.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F916D4A28100D73389 /* EventInfoHostingView_old.m */; };
@@ -49,7 +51,6 @@
 		19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F7B16A6716F00D46B0A /* FacebookSDKResources.bundle */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
-		19D61CA116AFA76800C81E60 /* AgeArticleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CA016AFA76800C81E60 /* AgeArticleView.xib */; };
 		19D61CA516AFC5B900C81E60 /* AgeArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CA416AFC5B900C81E60 /* AgeArticleView.m */; };
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */; };
@@ -105,8 +106,10 @@
 		19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeIndicatorView.xib; sourceTree = "<group>"; };
 		19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeIndicatorView.h; sourceTree = "<group>"; };
 		19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeIndicatorView.m; sourceTree = "<group>"; };
-		19632B9C16DB3C4E00E0EA75 /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
-		19632B9D16DB3C4E00E0EA75 /* 218-trash2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2@2x.png"; sourceTree = "<group>"; };
+		19632BA016DB427E00E0EA75 /* wood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpg; sourceTree = "<group>"; };
+		19632BA216DB437500E0EA75 /* wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood.png; sourceTree = "<group>"; };
+		19632BA416DB453C00E0EA75 /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
+		19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2@2x.png"; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354F216D4A19B00D73389 /* PersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoView.h; path = Classes/PersonInfoView.h; sourceTree = SOURCE_ROOT; };
 		199354F316D4A19B00D73389 /* PersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoView.m; path = Classes/PersonInfoView.m; sourceTree = SOURCE_ROOT; };
@@ -146,7 +149,6 @@
 		19D29F7D16A671C800D46B0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		19D29F7F16A674C200D46B0A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreen.h; sourceTree = "<group>"; };
 		19D29F8016A674C200D46B0A /* MainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19D61CA016AFA76800C81E60 /* AgeArticleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeArticleView.xib; sourceTree = "<group>"; };
 		19D61CA316AFC5B900C81E60 /* AgeArticleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AgeArticleView.h; path = Classes/AgeArticleView.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19D61CA416AFC5B900C81E60 /* AgeArticleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AgeArticleView.m; path = Classes/AgeArticleView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ObjectArchiveAccessor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -272,8 +274,10 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				19632B9C16DB3C4E00E0EA75 /* 218-trash2.png */,
-				19632B9D16DB3C4E00E0EA75 /* 218-trash2@2x.png */,
+				19632BA216DB437500E0EA75 /* wood.png */,
+				19632BA016DB427E00E0EA75 /* wood.jpg */,
+				19632BA416DB453C00E0EA75 /* 218-trash2.png */,
+				19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */,
 				19632B9016DAFA1800E0EA75 /* bracket.png */,
 				19DFB9F616D585F50019E2B2 /* fb_blank_profile_square.png */,
 				19A524A016B75FE400195D9D /* friend-icon.png */,
@@ -387,7 +391,6 @@
 				199C0CAE16C0C19D00068E73 /* YardstickModel.xcdatamodeld */,
 				19D61CCF16B23B6400C81E60 /* Images */,
 				19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */,
-				19D61CA016AFA76800C81E60 /* AgeArticleView.xib */,
 				19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */,
 				4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */,
 				1993550816D4E89900D73389 /* EventInfoView.xib */,
@@ -520,7 +523,6 @@
 				1993916216AA1FDF00DA3CD9 /* icon@2x.png in Resources */,
 				1993916416AA200A00DA3CD9 /* icon.png in Resources */,
 				1993916616AA201000DA3CD9 /* icon@2x.png in Resources */,
-				19D61CA116AFA76800C81E60 /* AgeArticleView.xib in Resources */,
 				19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */,
 				19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */,
 				19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */,
@@ -539,8 +541,10 @@
 				19632B9116DAFA1800E0EA75 /* bracket.png in Resources */,
 				19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */,
 				19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */,
-				19632B9E16DB3C4E00E0EA75 /* 218-trash2.png in Resources */,
-				19632B9F16DB3C4E00E0EA75 /* 218-trash2@2x.png in Resources */,
+				19632BA116DB427E00E0EA75 /* wood.jpg in Resources */,
+				19632BA316DB437500E0EA75 /* wood.png in Resources */,
+				19632BA616DB453C00E0EA75 /* 218-trash2.png in Resources */,
+				19632BA716DB453C00E0EA75 /* 218-trash2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

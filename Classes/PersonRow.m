@@ -11,11 +11,10 @@
     IBOutlet UIButton *wikipediaButton;
     IBOutlet UIButton *trashcanButton;
     
+    IBOutlet UIView *mainInfoHostingView;
     IBOutlet PersonInfoView *personInfo;
     IBOutlet EventInfoView *eventInfo;
-    IBOutlet EventDetailView *eventDetail;
-    IBOutlet AgeIndicatorView *ageIndicator;
-    
+    IBOutlet EventDetailView *eventDetail;    
 }
 
 -(id)initWithFrame:(CGRect)frame {
@@ -23,7 +22,7 @@
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"PersonRow" owner:self options:nil];
         [self addSubview:view];
-        self.backgroundColor = [UIColor colorWithWhite:1 alpha:.4];
+        mainInfoHostingView.backgroundColor = [UIColor colorWithWhite:1 alpha:.4];
         
     }
     return self;
@@ -46,7 +45,7 @@
     _event = event;
     eventInfo.event = event;
     eventDetail.event = event;
-    ageIndicator.event = event;
+    _ageIndicator.event = event;
 }
 
 -(void)setPerson:(Person *)person {

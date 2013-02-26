@@ -3,7 +3,6 @@
 
 @implementation AgeIndicatorView {
     
-    IBOutlet UIView *view;
     IBOutlet UILabel *yearLabel;
     IBOutlet UILabel *monthLabel;
     IBOutlet UILabel *dayLabel;
@@ -14,7 +13,7 @@
     
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"AgeIndicatorView" owner:self options:nil];
-        [self addSubview:view];
+        [self addSubview:_view];
     }
     return self;
 }

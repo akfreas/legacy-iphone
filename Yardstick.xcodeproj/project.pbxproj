@@ -20,6 +20,7 @@
 		19632BA316DB437500E0EA75 /* wood.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA216DB437500E0EA75 /* wood.png */; };
 		19632BA616DB453C00E0EA75 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA416DB453C00E0EA75 /* 218-trash2.png */; };
 		19632BA716DB453C00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */; };
+		19632BAA16DC5A9200E0EA75 /* ScrollViewStickLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
 		199354FA16D4A28100D73389 /* EventInfoHostingView_old.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F916D4A28100D73389 /* EventInfoHostingView_old.m */; };
@@ -110,6 +111,8 @@
 		19632BA216DB437500E0EA75 /* wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood.png; sourceTree = "<group>"; };
 		19632BA416DB453C00E0EA75 /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
 		19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2@2x.png"; sourceTree = "<group>"; };
+		19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewStickLines.h; sourceTree = "<group>"; };
+		19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewStickLines.m; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354F216D4A19B00D73389 /* PersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoView.h; path = Classes/PersonInfoView.h; sourceTree = SOURCE_ROOT; };
 		199354F316D4A19B00D73389 /* PersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoView.m; path = Classes/PersonInfoView.m; sourceTree = SOURCE_ROOT; };
@@ -374,6 +377,8 @@
 				19632B9516DB036900E0EA75 /* PersonRow.m */,
 				4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */,
 				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
+				19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */,
+				19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */,
 				4EEA6D431526A90200B96EFD /* YardstickConnection.h */,
 				4EEA6D441526A90200B96EFD /* YardstickConnection.m */,
 				4EEA6D5B1526CAEF00B96EFD /* YardstickRequest.h */,
@@ -595,6 +600,7 @@
 				190AEBA016D86EDD0079D2F1 /* YardstickWebView.m in Sources */,
 				19632B9616DB036900E0EA75 /* PersonRow.m in Sources */,
 				19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */,
+				19632BAA16DC5A9200E0EA75 /* ScrollViewStickLines.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

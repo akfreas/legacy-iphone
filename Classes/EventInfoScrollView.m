@@ -60,6 +60,7 @@ static CGFloat height = 220;
         
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));
+        stickLines.frame = CGRectMake(stickLines.frame.origin.x, stickLines.frame.origin.y, stickLines.frame.size.width, self.contentSize.height);
     }
     [self layoutSubviews];
     stickLines.personRowArray = [NSArray arrayWithArray:arrayOfPersonInfoViews];

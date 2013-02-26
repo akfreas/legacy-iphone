@@ -43,11 +43,15 @@
             CGPoint lastMajorTick = originPoint;
             for (UILabel *label in sortedArrayOfLabels) {
                 CGPoint labelCenter = [self convertPoint:CGPointMake(CGRectGetMinX(label.frame), CGRectGetMidY(label.frame)) fromView:indicatorView.view];
-                CGPoint labelOffset = CGPointMake(originX, labelCenter.y);
+                
+                CGFloat formattedYValue = labelCenter.y - ((int)labelCenter.y % 6);
+                CGPoint formattedLabelCenter = CGPointMake(labelCenter.x, formattedYValue);
+                CGPoint labelOffset = CGPointMake(originX, formattedYValue);
+                
                 [aPath addLineToPoint:labelOffset];
-                [aPath addLineToPoint:labelCenter];
+                [aPath addLineToPoint:formattedLabelCenter];
                 [aPath addLineToPoint:labelOffset];
-                [self addMinorTickMarksOnPath:aPath fromPoint:lastMajorTick toPoint:labelOffset];
+                [self addMinorTickMarksFromPoint:lastMajorTick toPoint:labelOffset];
                 lastMajorTick = labelOffset;
                 NSLog(@"Label text: %@", label.text);
             }
@@ -57,19 +61,26 @@
     }
 }
 
--(void)addMinorTickMarksOnPath:(UIBezierPath *)path fromPoint:(CGPoint)originPoint toPoint:(CGPoint)destPoint {
-    CGFloat spacing = 5.0;
+-(void)addMinorTickMarksFromPoint:(CGPoint)originPoint toPoint:(CGPoint)destPoint {
+    CGFloat spacing = 6.0;
     CGFloat lineHeight = 7.0;
-    for (int increment=originPoint.y; increment<destPoint.y +1; increment+=(int)spacing) {
-        CGPoint newPointY = CGPointMake(originPoint.x + lineHeight, increment);
+    for (int increment=originPoint.y; increment<=destPoint.y; increment+=(int)spacing) {
+        
+        CGPoint newPointX = CGPointMake(originPoint.x + lineHeight, increment);
         CGPoint newPointReturn = CGPointMake(originPoint.x, increment);
-        path.lineWidth = 1.0;
-        [path addLineToPoint:newPointReturn];
-        [path addLineToPoint:newPointY];
-        [path addLineToPoint:newPointReturn];
-        path.lineWidth = 2.0;
+        
+        CGContextRef c = UIGraphicsGetCurrentContext();
+        CGContextSaveGState(c);
+        CGFloat black[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+        CGContextSetStrokeColor(c, black);
+        CGContextBeginPath(c);
+        CGContextSetLineWidth(c, 1.0);
+        CGContextMoveToPoint(c, newPointReturn.x, newPointReturn.y);
+        CGContextAddLineToPoint(c, newPointX.x, newPointX.y);
+        CGContextStrokePath(c);
+        CGContextRestoreGState(c);
     }
-    [path stroke];
+    
 }
 
 -(void)setPersonRowArray:(NSArray *)personRowArray {

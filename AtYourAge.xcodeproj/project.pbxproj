@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		19348DCA16D4EAD200126BC7 /* EventInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* EventInfoView.m */; };
+		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		195B600116DEB7D3006215E9 /* EventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B5FFE16DEB7D3006215E9 /* EventDetailView.m */; };
 		195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */; };
 		19632B9116DAFA1800E0EA75 /* bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9016DAFA1800E0EA75 /* bracket.png */; };
@@ -550,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194E327216DEBCE4007A55D7 /* Constants.h in Sources */,
 				19348DCA16D4EAD200126BC7 /* EventInfoView.m in Sources */,
 				1993550716D4DDD000D73389 /* Person.m in Sources */,
 				4EEA6D0C1526902D00B96EFD /* AppDelegate.m in Sources */,

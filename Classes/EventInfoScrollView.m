@@ -37,7 +37,6 @@ static CGFloat height = 220;
     NSArray *addedPeople = [accessor addedPeople];
     NSMutableArray *people = [NSMutableArray arrayWithObject:[accessor primaryPerson]];
     [people addObjectsFromArray:addedPeople];
-    __block int currentIndex = 0;
     for (int i=0; i<[people count]; i++) {
         
         

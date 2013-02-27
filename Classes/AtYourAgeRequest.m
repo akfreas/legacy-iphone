@@ -92,7 +92,7 @@
     NSString *activeFbUserId = primaryPerson.facebookId;
     
     NSDictionary *cookieDict = [NSDictionary dictionaryWithObjectsAndKeys:token, @"token", activeFbUserId, @"activeUserId", nil];
-    NSData *cookieInfo = [NSJSONSerialization dataWithJSONObject:cookieDict options:NSJSONReadingMutableLeaves error:NULL];
+    NSData *cookieInfo = [NSJSONSerialization dataWithJSONObject:cookieDict options:NSJSONWritingPrettyPrinted error:NULL];
     NSMutableString *cookieInfoString = [[NSMutableString alloc] initWithData:cookieInfo encoding:NSUTF8StringEncoding];
     [cookieInfoString replaceOccurrencesOfString:@"\"" withString:@"'" options:NSLiteralSearch range:NSMakeRange(0, [cookieInfoString length])];
     
@@ -113,19 +113,7 @@
     return request;
 }
 
-+(AtYourAgeRequest *)requestToPostMainUserWithFirstName:(NSString *)firstName lastName:(NSString *)lastName birthday:(NSDate *)birthday {
-    
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    
-    NSURL *url = [AtYourAgeRequest urlToPostUser];
-    
-    [urlRequest setURL:url];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-}
-
--(id)initWithRequest:(NSURLRequest *)theRequest {
+-(id)initWithRequest:(NSMutableURLRequest *)theRequest {
     self = [super init];
     
     if (self) {
@@ -135,7 +123,7 @@
     return self;
 }
 
--(id)initWithRequest:(NSURLRequest *)theRequest classToParse:(Class)theClass {
+-(id)initWithRequest:(NSMutableURLRequest *)theRequest classToParse:(Class)theClass {
     self = [self initWithRequest:theRequest];
     
     if (self) {

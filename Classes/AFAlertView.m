@@ -76,7 +76,7 @@
         [leftButton setBackgroundImage:[[UIImage imageNamed:@"button.png"] resizableImageWithCapInsets:insets]
                               forState:UIControlStateNormal];
         
-        [leftButton setBackgroundImage:[[UIImage imageNamed:@"button-pressed.png"] resizableImageWithCapInsets:insets] forState:UIControlEventTouchUpInside];
+        [leftButton setBackgroundImage:[[UIImage imageNamed:@"button-pressed.png"] resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
         leftButton.titleLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:17];
     }
 }
@@ -102,7 +102,7 @@
     
     if (self.prompt != nil) {
         CGSize constraint = CGSizeMake(promptLabel.frame.size.width, self.frame.size.height);
-        CGSize promptSize = [self.prompt sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        CGSize promptSize = [self.prompt sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
         
         promptLabel.numberOfLines = ceilf(promptSize.height / 18);
         promptLabel.frame = CGRectMake(promptLabel.frame.origin.x, promptLabel.frame.origin.y, promptSize.width, promptSize.height + PADDING);

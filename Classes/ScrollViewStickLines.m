@@ -20,7 +20,6 @@
 {
     
     if (_personRowArray != nil) {
-        CGContextRef c = UIGraphicsGetCurrentContext();
 
         UIBezierPath *aPath = [UIBezierPath bezierPath];
         aPath.lineCapStyle = kCGLineCapRound;

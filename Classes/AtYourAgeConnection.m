@@ -1,11 +1,9 @@
 #import "AtYourAgeConnection.h"
 #import "Event.h"
-#import "SBJsonParser.h"
 
 @implementation AtYourAgeConnection {
     
     AtYourAgeRequest *request;
-    SBJsonParser *parser;
     NSMutableData *resultData;
     id result;
 }
@@ -25,7 +23,6 @@
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request.urlRequest delegate:self startImmediately:NO];
     self.AYAConnectionCallback = _block;
-    parser = [[SBJsonParser alloc] init];
     
     [connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     [connection start];
@@ -59,7 +56,7 @@
     
     if (request.classToParse != nil && request.classToParse != NULL) {
         
-        id parseResult = [parser objectWithData:resultData];
+        id parseResult = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingMutableLeaves error:NULL];
         
         result = [[request.classToParse alloc] initWithJsonDictionary:parseResult];
     }

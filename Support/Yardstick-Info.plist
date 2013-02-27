@@ -49,6 +49,8 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ResourceUrl</key>
+	<string>http://yardstick.sashimiblade.com</string>
+	<key>DebugResourceUrl</key>
 	<string>http://localhost:8000</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

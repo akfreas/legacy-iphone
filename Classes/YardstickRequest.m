@@ -13,7 +13,11 @@
 
 +(NSURL *)baseUrl {
     
+#ifdef DEBUG
+    NSString *path = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"DebugResourceUrl"];
+#else
     NSString *path = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ResourceUrl"];
+#endif
     NSURL *url = [NSURL URLWithString:path];
     return url;
 }

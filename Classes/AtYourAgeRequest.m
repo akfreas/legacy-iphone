@@ -1,10 +1,10 @@
-#import "YardstickRequest.h"
+#import "AtYourAgeRequest.h"
 #import "Event.h"
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
 
-@implementation YardstickRequest {
+@implementation AtYourAgeRequest {
     
 }
 
@@ -24,7 +24,7 @@
 
 +(NSURL *)appendToBaseUrl:(NSString *)theUrl {
     
-    NSURL *url = [[YardstickRequest baseUrl] URLByAppendingPathComponent:theUrl];
+    NSURL *url = [[AtYourAgeRequest baseUrl] URLByAppendingPathComponent:theUrl];
     return url;
 }
 
@@ -32,7 +32,7 @@
     
     NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
     
-    NSURL *url = [YardstickRequest baseUrl];
+    NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"%@/event/%@", user, [formatter stringFromDate:theDate]];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -44,7 +44,7 @@
     
     NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
     
-    NSURL *url = [YardstickRequest baseUrl];
+    NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"%@/story/%@", user, [formatter stringFromDate:theDate]];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -54,7 +54,7 @@
 
 +(NSURL *)urlToPostUser {
     
-    NSURL *url = [YardstickRequest baseUrl];
+    NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = @"user/";
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -62,29 +62,29 @@
     return url;
 }
 
-+(YardstickRequest *)requestToGetEventForPerson:(Person *)person {
++(AtYourAgeRequest *)requestToGetEventForPerson:(Person *)person {
 
-    YardstickRequest *request = [self baseRequestForPerson:person];
+    AtYourAgeRequest *request = [self baseRequestForPerson:person];
     NSURL *url = [self eventsUrlForBirthday:person.birthday Person:person.facebookId];
     request.urlRequest.URL = url;
     request.classToParse = [Event class];
     return request;
 }
 
-+(YardstickRequest *)requestToGetStoryForPerson:(Person *)person {
++(AtYourAgeRequest *)requestToGetStoryForPerson:(Person *)person {
     
-    YardstickRequest *request = [self baseRequestForPerson:person];
-    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
+    AtYourAgeRequest *request = [self baseRequestForPerson:person];
+    NSURL *url = [AtYourAgeRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     request.urlRequest.URL = url;
     request.classToParse = nil;
     
     return request;
 }
 
-+(YardstickRequest *)baseRequestForPerson:(Person *)person {
++(AtYourAgeRequest *)baseRequestForPerson:(Person *)person {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [YardstickRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
+    NSURL *url = [AtYourAgeRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     
     Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
     
@@ -96,7 +96,7 @@
     NSMutableString *cookieInfoString = [[NSMutableString alloc] initWithData:cookieInfo encoding:NSUTF8StringEncoding];
     [cookieInfoString replaceOccurrencesOfString:@"\"" withString:@"'" options:NSLiteralSearch range:NSMakeRange(0, [cookieInfoString length])];
     
-    NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, cookieInfoString, NSHTTPCookieValue, @"Yardstick", NSHTTPCookieName, nil];
+    NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, cookieInfoString, NSHTTPCookieValue, @"AtYourAge", NSHTTPCookieName, nil];
     NSLog(@"Cookie properties: %@", cookieProperties);
     
     
@@ -108,16 +108,16 @@
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
-    YardstickRequest *request = [[YardstickRequest alloc] initWithRequest:urlRequest classToParse:nil];
+    AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:nil];
     
     return request;
 }
 
-+(YardstickRequest *)requestToPostMainUserWithFirstName:(NSString *)firstName lastName:(NSString *)lastName birthday:(NSDate *)birthday {
++(AtYourAgeRequest *)requestToPostMainUserWithFirstName:(NSString *)firstName lastName:(NSString *)lastName birthday:(NSDate *)birthday {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
     
-    NSURL *url = [YardstickRequest urlToPostUser];
+    NSURL *url = [AtYourAgeRequest urlToPostUser];
     
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"POST"];

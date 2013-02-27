@@ -1,8 +1,8 @@
 #import "EventInfoScrollView.h"
 #import "ObjectArchiveAccessor.h"
 #import "Person.h"
-#import "YardstickRequest.h"
-#import "YardstickConnection.h"
+#import "AtYourAgeRequest.h"
+#import "AtYourAgeConnection.h"
 #import "EventDetailView.h"
 #import "PersonRow.h"
 #import "ScrollViewStickLines.h"
@@ -11,7 +11,7 @@
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfPersonInfoViews;
     NSFetchedResultsController *fetchedResultsController;
-    YardstickConnection *connection;
+    AtYourAgeConnection *connection;
     ScrollViewStickLines *stickLines;
 }
 
@@ -49,11 +49,11 @@ static CGFloat height = 220;
         row.person = thePerson;
         [row setNeedsLayout];
         
-        YardstickRequest *request = [YardstickRequest requestToGetEventForPerson:thePerson];
+        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetEventForPerson:thePerson];
         
-        connection = [[YardstickConnection alloc] initWithYardstickRequest:request];
+        connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
         
-        [connection getWithCompletionBlock:^(YardstickRequest *request, Event *result, NSError *error) {
+        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Event *result, NSError *error) {
             NSLog(@"Event Fetch Result: %@", result);
             row.event = result;
         }];

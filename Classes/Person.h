@@ -1,6 +1,6 @@
 //
 //  Person.h
-//  Yardstick
+//  AtYourAge
 //
 //  Created by Alexander Freas on 2/20/13.
 //

@@ -7,7 +7,8 @@
 #import "AFAlertView.h"
 #import "Utility_AppSettings.h"
 #import "FriendPickerHandler.h"
-#import "YardstickWebView.h"
+#import "Event.h"
+#import "AtYourAgeWebView.h"
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
@@ -39,7 +40,7 @@
 -(void)popToWikipedia:(NSNotification *)notification{
     
     Event *selectedEvent = notification.userInfo[@"event"];
-    YardstickWebView *webView = [[YardstickWebView alloc] initWithEvent:selectedEvent];
+    AtYourAgeWebView *webView = [[AtYourAgeWebView alloc] initWithEvent:selectedEvent];
     [self.navigationController pushViewController:webView animated:YES];
 }
 

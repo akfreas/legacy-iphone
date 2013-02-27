@@ -1,10 +1,10 @@
 #import "EventDetailView.h"
 #import "Event.h"
-#import "YardstickWebView.h"
+#import "AtYourAgeWebView.h"
 
 @implementation EventDetailView {
     
-    YardstickWebView *webViewForEvent;
+    AtYourAgeWebView *webViewForEvent;
 
     IBOutlet UIView *eventDescriptionHostingView;
     IBOutlet UITextView *eventDescriptionTextView;

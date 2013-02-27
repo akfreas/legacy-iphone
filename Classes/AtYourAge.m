@@ -1,8 +1,8 @@
-#import "YardstickRequest.h"
+#import "AtYourAgeRequest.h"
 #import "Event.h"
 #import "User.h"
 
-@implementation YardstickRequest {
+@implementation AtYourAgeRequest {
     
 }
 
@@ -18,7 +18,7 @@
 
 +(NSURL *)appendToBaseUrl:(NSString *)theUrl {
     
-    NSURL *url = [[YardstickRequest baseUrl] URLByAppendingPathComponent:theUrl];
+    NSURL *url = [[AtYourAgeRequest baseUrl] URLByAppendingPathComponent:theUrl];
     return url;
 }
 
@@ -26,7 +26,7 @@
     
     NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
     
-    NSURL *url = [YardstickRequest baseUrl];
+    NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"%@/event/%@", user, [formatter stringFromDate:theDate]];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -38,7 +38,7 @@
     
     NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
     
-    NSURL *url = [YardstickRequest baseUrl];
+    NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"%@/story/%@", user, [formatter stringFromDate:theDate]];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -48,7 +48,7 @@
 
 +(NSURL *)urlToPostUser {
     
-    NSURL *url = [YardstickRequest baseUrl];
+    NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = @"user/";
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -56,30 +56,30 @@
     return url;
 }
 
-+(YardstickRequest *)requestToGetEventForUser:(User *)user {
++(AtYourAgeRequest *)requestToGetEventForUser:(User *)user {
 
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [YardstickRequest eventsUrlForBirthday:user.birthday user:user.facebookId];
+    NSURL *url = [AtYourAgeRequest eventsUrlForBirthday:user.birthday user:user.facebookId];
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     NSLog(@"Request: %@", url);
     
-    YardstickRequest *request = [[YardstickRequest alloc] initWithRequest:urlRequest classToParse:[Event class]];
+    AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:[Event class]];
     
     return request;
 }
 
-+(YardstickRequest *)requestToGetStoryForUser:(User *)user {
++(AtYourAgeRequest *)requestToGetStoryForUser:(User *)user {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
-    NSURL *url = [YardstickRequest storyUrlForBirthday:user.birthday user:user.facebookId];
+    NSURL *url = [AtYourAgeRequest storyUrlForBirthday:user.birthday user:user.facebookId];
 
     NSString *token = FBSession.activeSession.accessToken;
     
-    NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, token, NSHTTPCookieValue, @"Yardstick", NSHTTPCookieName, nil];
+    NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, token, NSHTTPCookieValue, @"AtYourAge", NSHTTPCookieName, nil];
     
     
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
@@ -92,16 +92,16 @@
     
     NSLog(@"Request: %@", url);
     
-    YardstickRequest *request = [[YardstickRequest alloc] initWithRequest:urlRequest classToParse:nil];
+    AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:nil];
     
     return request;
 }
 
-+(YardstickRequest *)requestToPostMainUserWithFirstName:(NSString *)firstName lastName:(NSString *)lastName birthday:(NSDate *)birthday {
++(AtYourAgeRequest *)requestToPostMainUserWithFirstName:(NSString *)firstName lastName:(NSString *)lastName birthday:(NSDate *)birthday {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
     
-    NSURL *url = [YardstickRequest urlToPostUser];
+    NSURL *url = [AtYourAgeRequest urlToPostUser];
     
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"POST"];

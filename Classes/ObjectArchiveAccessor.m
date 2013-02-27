@@ -17,7 +17,7 @@
     NSOperationQueue *operationQueue;
 }
 
-static NSString *DbName = @"Yardstick.sqlite";
+static NSString *DbName = @"AtYourAge.sqlite";
 static NSString *PersonEntityName = @"Person";
 
 +(ObjectArchiveAccessor *)sharedInstance {

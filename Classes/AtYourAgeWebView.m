@@ -1,7 +1,7 @@
 #import "Event.h"
-#import "YardstickWebView.h"
+#import "AtYourAgeWebView.h"
 
-@implementation YardstickWebView {
+@implementation AtYourAgeWebView {
     
     Event *event;
     
@@ -11,7 +11,7 @@
 
 -(id)initWithEvent:(Event *)theEvent {
     
-    self = [super initWithNibName:@"YardstickWebView" bundle:[NSBundle mainBundle]];
+    self = [super initWithNibName:@"AtYourAgeWebView" bundle:[NSBundle mainBundle]];
     if (self) {
         event = theEvent;
     }

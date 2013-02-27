@@ -1,6 +1,8 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <CoreData/CoreData.h>
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "Constants.h"
 #import "Utility_AppSettings.h"

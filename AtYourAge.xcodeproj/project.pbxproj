@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		190AEB9D16D86E4E0079D2F1 /* YardstickWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 190AEB9C16D86E4E0079D2F1 /* YardstickWebView.xib */; };
-		190AEBA016D86EDD0079D2F1 /* YardstickWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 190AEB9F16D86EDD0079D2F1 /* YardstickWebView.m */; };
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		19348DCA16D4EAD200126BC7 /* EventInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* EventInfoView.m */; };
+		195B600116DEB7D3006215E9 /* EventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B5FFE16DEB7D3006215E9 /* EventDetailView.m */; };
+		195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */; };
 		19632B9116DAFA1800E0EA75 /* bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9016DAFA1800E0EA75 /* bracket.png */; };
 		19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9216DB028400E0EA75 /* PersonRow.xib */; };
 		19632B9616DB036900E0EA75 /* PersonRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* PersonRow.m */; };
@@ -23,7 +23,6 @@
 		19632BAA16DC5A9200E0EA75 /* ScrollViewStickLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
-		199354FA16D4A28100D73389 /* EventInfoHostingView_old.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F916D4A28100D73389 /* EventInfoHostingView_old.m */; };
 		199354FD16D4A29700D73389 /* EventInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* EventInfoScrollView.m */; };
 		1993550716D4DDD000D73389 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915AFFF16C9EB7500D8434B /* Person.m */; };
 		1993550916D4E89900D73389 /* EventInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* EventInfoView.xib */; };
@@ -32,8 +31,8 @@
 		1993916216AA1FDF00DA3CD9 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916016AA1FDF00DA3CD9 /* icon@2x.png */; };
 		1993916416AA200A00DA3CD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916316AA200A00DA3CD9 /* icon.png */; };
 		1993916616AA201000DA3CD9 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916516AA201000DA3CD9 /* icon@2x.png */; };
+		1997B72A16DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1997B72816DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld */; };
 		199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199C0CAB16C0C0D900068E73 /* CoreData.framework */; };
-		199C0CB016C0C19D00068E73 /* YardstickModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 199C0CAE16C0C19D00068E73 /* YardstickModel.xcdatamodeld */; };
 		19A524A116B75FE400195D9D /* friend-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A524A016B75FE400195D9D /* friend-icon.png */; };
 		19A524A416B7B6ED00195D9D /* AddFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */; };
 		19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
@@ -53,14 +52,12 @@
 		19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F7B16A6716F00D46B0A /* FacebookSDKResources.bundle */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
-		19D61CA516AFC5B900C81E60 /* AgeArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CA416AFC5B900C81E60 /* AgeArticleView.m */; };
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */; };
 		19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC516B2370A00C81E60 /* 19-gear.png */; };
 		19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC616B2370A00C81E60 /* 19-gear@2x.png */; };
 		19D61CD216B250E100C81E60 /* FriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CD116B250E100C81E60 /* FriendTableViewController.m */; };
 		19DFB9F716D585F50019E2B2 /* fb_blank_profile_square.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DFB9F616D585F50019E2B2 /* fb_blank_profile_square.png */; };
-		19DFB9FA16D5E6810019E2B2 /* EventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DFB9F916D5E6810019E2B2 /* EventDetailView.m */; };
 		19DFB9FC16D5E6E60019E2B2 /* EventDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19DFB9FB16D5E6E60019E2B2 /* EventDetailView.xib */; };
 		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
@@ -88,19 +85,20 @@
 		4EEA6D351526906000B96EFD /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D281526906000B96EFD /* SBJsonUTF8Stream.m */; };
 		4EEA6D361526906000B96EFD /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D2A1526906000B96EFD /* SBJsonWriter.m */; };
 		4EEA6D3F1526A80B00B96EFD /* FBLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */; };
-		4EEA6D451526A90200B96EFD /* YardstickConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* YardstickConnection.m */; };
+		4EEA6D451526A90200B96EFD /* AtYourAgeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* AtYourAgeConnection.m */; };
 		4EEA6D5A1526C86300B96EFD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D591526C86300B96EFD /* Event.m */; };
-		4EEA6D5D1526CAEF00B96EFD /* YardstickRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* YardstickRequest.m */; };
+		4EEA6D5D1526CAEF00B96EFD /* AtYourAgeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* AtYourAgeRequest.m */; };
 		4EEA6D671526DCE100B96EFD /* EventInfoHostingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		190AEB9C16D86E4E0079D2F1 /* YardstickWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YardstickWebView.xib; sourceTree = "<group>"; };
-		190AEB9E16D86EDD0079D2F1 /* YardstickWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YardstickWebView.h; sourceTree = "<group>"; };
-		190AEB9F16D86EDD0079D2F1 /* YardstickWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YardstickWebView.m; sourceTree = "<group>"; };
 		1915AFFE16C9EB7500D8434B /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		1915AFFF16C9EB7500D8434B /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
+		195B5FFD16DEB7D3006215E9 /* EventDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailView.h; sourceTree = "<group>"; };
+		195B5FFE16DEB7D3006215E9 /* EventDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailView.m; sourceTree = "<group>"; };
+		195B5FFF16DEB7D3006215E9 /* AtYourAgeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtYourAgeWebView.h; sourceTree = "<group>"; };
+		195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtYourAgeWebView.m; sourceTree = "<group>"; };
 		19632B9016DAFA1800E0EA75 /* bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bracket.png; sourceTree = "<group>"; };
 		19632B9216DB028400E0EA75 /* PersonRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonRow.xib; sourceTree = "<group>"; };
 		19632B9416DB036900E0EA75 /* PersonRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRow.h; sourceTree = "<group>"; };
@@ -117,8 +115,6 @@
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354F216D4A19B00D73389 /* PersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoView.h; path = Classes/PersonInfoView.h; sourceTree = SOURCE_ROOT; };
 		199354F316D4A19B00D73389 /* PersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoView.m; path = Classes/PersonInfoView.m; sourceTree = SOURCE_ROOT; };
-		199354F816D4A28100D73389 /* EventInfoHostingView_old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoHostingView_old.h; sourceTree = "<group>"; };
-		199354F916D4A28100D73389 /* EventInfoHostingView_old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoHostingView_old.m; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* EventInfoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoScrollView.h; sourceTree = "<group>"; };
 		199354FC16D4A29700D73389 /* EventInfoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoScrollView.m; sourceTree = "<group>"; };
 		1993550816D4E89900D73389 /* EventInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoView.xib; sourceTree = "<group>"; };
@@ -128,8 +124,8 @@
 		1993916016AA1FDF00DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		1993916316AA200A00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		1993916516AA201000DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		1997B72916DEBA31009692F5 /* AtYourAgeModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AtYourAgeModel.xcdatamodel; sourceTree = "<group>"; };
 		199C0CAB16C0C0D900068E73 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		199C0CAF16C0C19D00068E73 /* YardstickModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YardstickModel.xcdatamodel; sourceTree = "<group>"; };
 		19A524A016B75FE400195D9D /* friend-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "friend-icon.png"; path = "../../../../../../Desktop/friend-icon.png"; sourceTree = "<group>"; };
 		19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendsCell.xib; sourceTree = "<group>"; };
 		19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPickerHandler.h; sourceTree = "<group>"; };
@@ -154,8 +150,6 @@
 		19D29F7D16A671C800D46B0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		19D29F7F16A674C200D46B0A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreen.h; sourceTree = "<group>"; };
 		19D29F8016A674C200D46B0A /* MainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19D61CA316AFC5B900C81E60 /* AgeArticleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AgeArticleView.h; path = Classes/AgeArticleView.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		19D61CA416AFC5B900C81E60 /* AgeArticleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AgeArticleView.m; path = Classes/AgeArticleView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ObjectArchiveAccessor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ObjectArchiveAccessor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeaderImg@2x.png"; sourceTree = "<group>"; };
@@ -164,8 +158,6 @@
 		19D61CD016B250E100C81E60 /* FriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewController.h; sourceTree = "<group>"; };
 		19D61CD116B250E100C81E60 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19DFB9F616D585F50019E2B2 /* fb_blank_profile_square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb_blank_profile_square.png; sourceTree = "<group>"; };
-		19DFB9F816D5E6810019E2B2 /* EventDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailView.h; sourceTree = "<group>"; };
-		19DFB9F916D5E6810019E2B2 /* EventDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailView.m; sourceTree = "<group>"; };
 		19DFB9FB16D5E6E60019E2B2 /* EventDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDetailView.xib; sourceTree = "<group>"; };
 		4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeDisplaySegmentedControl.h; sourceTree = "<group>"; };
 		4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeDisplaySegmentedControl.m; sourceTree = "<group>"; };
@@ -183,7 +175,7 @@
 		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwitchPerson.xib; path = Resources/SwitchPerson.xib; sourceTree = SOURCE_ROOT; };
-		4EEA6CDE15268ED200B96EFD /* Yardstick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yardstick.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EEA6CDE15268ED200B96EFD /* AtYourAge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtYourAge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEA6CE215268ED300B96EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4EEA6CE415268ED300B96EFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EEA6CE615268ED300B96EFD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -191,8 +183,8 @@
 		4EEA6D041526902D00B96EFD /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4EEA6D061526902D00B96EFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4EEA6D071526902D00B96EFD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4EEA6D0A1526902D00B96EFD /* Yardstick-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Yardstick-Info.plist"; sourceTree = "<group>"; };
-		4EEA6D0B1526902D00B96EFD /* Yardstick-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Yardstick-Prefix.pch"; sourceTree = "<group>"; };
+		4EEA6D0A1526902D00B96EFD /* AtYourAge-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AtYourAge-Info.plist"; sourceTree = "<group>"; };
+		4EEA6D0B1526902D00B96EFD /* AtYourAge-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AtYourAge-Prefix.pch"; sourceTree = "<group>"; };
 		4EEA6D121526906000B96EFD /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		4EEA6D131526906000B96EFD /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		4EEA6D141526906000B96EFD /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -221,12 +213,12 @@
 		4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTimeLoadScreen.h; sourceTree = "<group>"; };
 		4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FirstTimeLoadScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FBLoginView.xib; path = Resources/FBLoginView.xib; sourceTree = SOURCE_ROOT; };
-		4EEA6D431526A90200B96EFD /* YardstickConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YardstickConnection.h; sourceTree = "<group>"; };
-		4EEA6D441526A90200B96EFD /* YardstickConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YardstickConnection.m; sourceTree = "<group>"; };
+		4EEA6D431526A90200B96EFD /* AtYourAgeConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtYourAgeConnection.h; sourceTree = "<group>"; };
+		4EEA6D441526A90200B96EFD /* AtYourAgeConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtYourAgeConnection.m; sourceTree = "<group>"; };
 		4EEA6D581526C86300B96EFD /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		4EEA6D591526C86300B96EFD /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
-		4EEA6D5B1526CAEF00B96EFD /* YardstickRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = YardstickRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4EEA6D5C1526CAEF00B96EFD /* YardstickRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = YardstickRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4EEA6D5B1526CAEF00B96EFD /* AtYourAgeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AtYourAgeRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4EEA6D5C1526CAEF00B96EFD /* AtYourAgeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AtYourAgeRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoHostingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,7 +307,7 @@
 		4EEA6CDF15268ED200B96EFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4EEA6CDE15268ED200B96EFD /* Yardstick.app */,
+				4EEA6CDE15268ED200B96EFD /* AtYourAge.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -341,8 +333,6 @@
 				19C49EAD16CA3ABB00304AD6 /* button.png */,
 				19D61CBA16B06D3500C81E60 /* Models */,
 				19D61CB916B06D2600C81E60 /* Utilities */,
-				19D61CA316AFC5B900C81E60 /* AgeArticleView.h */,
-				19D61CA416AFC5B900C81E60 /* AgeArticleView.m */,
 				19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */,
 				19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */,
 				4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */,
@@ -352,14 +342,10 @@
 				4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */,
 				4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */,
 				19C49EAB16CA345800304AD6 /* Constants.h */,
-				199354F816D4A28100D73389 /* EventInfoHostingView_old.h */,
-				199354F916D4A28100D73389 /* EventInfoHostingView_old.m */,
 				199354FB16D4A29700D73389 /* EventInfoScrollView.h */,
 				199354FC16D4A29700D73389 /* EventInfoScrollView.m */,
 				1993550C16D4E8F600D73389 /* EventInfoView.h */,
 				1993550A16D4E8CB00D73389 /* EventInfoView.m */,
-				19DFB9F816D5E6810019E2B2 /* EventDetailView.h */,
-				19DFB9F916D5E6810019E2B2 /* EventDetailView.m */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19D61CD016B250E100C81E60 /* FriendTableViewController.h */,
@@ -382,12 +368,14 @@
 				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
 				19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */,
 				19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */,
-				4EEA6D431526A90200B96EFD /* YardstickConnection.h */,
-				4EEA6D441526A90200B96EFD /* YardstickConnection.m */,
-				4EEA6D5B1526CAEF00B96EFD /* YardstickRequest.h */,
-				4EEA6D5C1526CAEF00B96EFD /* YardstickRequest.m */,
-				190AEB9E16D86EDD0079D2F1 /* YardstickWebView.h */,
-				190AEB9F16D86EDD0079D2F1 /* YardstickWebView.m */,
+				4EEA6D431526A90200B96EFD /* AtYourAgeConnection.h */,
+				4EEA6D441526A90200B96EFD /* AtYourAgeConnection.m */,
+				4EEA6D5B1526CAEF00B96EFD /* AtYourAgeRequest.h */,
+				4EEA6D5C1526CAEF00B96EFD /* AtYourAgeRequest.m */,
+				195B5FFD16DEB7D3006215E9 /* EventDetailView.h */,
+				195B5FFE16DEB7D3006215E9 /* EventDetailView.m */,
+				195B5FFF16DEB7D3006215E9 /* AtYourAgeWebView.h */,
+				195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */,
 				4EEA6D071526902D00B96EFD /* main.m */,
 			);
 			path = Classes;
@@ -396,7 +384,7 @@
 		4EEA6D081526902D00B96EFD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				199C0CAE16C0C19D00068E73 /* YardstickModel.xcdatamodeld */,
+				1997B72816DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld */,
 				19D61CCF16B23B6400C81E60 /* Images */,
 				19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */,
 				19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */,
@@ -408,7 +396,6 @@
 				199354F016D4A05E00D73389 /* PersonInfoView.xib */,
 				19632B9216DB028400E0EA75 /* PersonRow.xib */,
 				4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */,
-				190AEB9C16D86E4E0079D2F1 /* YardstickWebView.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -417,8 +404,8 @@
 			isa = PBXGroup;
 			children = (
 				4EEA6D051526902D00B96EFD /* InfoPlist.strings */,
-				4EEA6D0A1526902D00B96EFD /* Yardstick-Info.plist */,
-				4EEA6D0B1526902D00B96EFD /* Yardstick-Prefix.pch */,
+				4EEA6D0A1526902D00B96EFD /* AtYourAge-Info.plist */,
+				4EEA6D0B1526902D00B96EFD /* AtYourAge-Prefix.pch */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -474,9 +461,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4EEA6CDD15268ED200B96EFD /* Yardstick */ = {
+		4EEA6CDD15268ED200B96EFD /* AtYourAge */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "Yardstick" */;
+			buildConfigurationList = 4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "AtYourAge" */;
 			buildPhases = (
 				4EEA6CDA15268ED200B96EFD /* Sources */,
 				4EEA6CDB15268ED200B96EFD /* Frameworks */,
@@ -486,9 +473,9 @@
 			);
 			dependencies = (
 			);
-			name = Yardstick;
-			productName = Yardstick;
-			productReference = 4EEA6CDE15268ED200B96EFD /* Yardstick.app */;
+			name = AtYourAge;
+			productName = AtYourAge;
+			productReference = 4EEA6CDE15268ED200B96EFD /* AtYourAge.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -499,7 +486,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "Yardstick" */;
+			buildConfigurationList = 4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "AtYourAge" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -511,7 +498,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4EEA6CDD15268ED200B96EFD /* Yardstick */,
+				4EEA6CDD15268ED200B96EFD /* AtYourAge */,
 			);
 		};
 /* End PBXProject section */
@@ -545,7 +532,6 @@
 				1993550B16D4E8CB00D73389 /* EventInfoView.m in Resources */,
 				19DFB9F716D585F50019E2B2 /* fb_blank_profile_square.png in Resources */,
 				19DFB9FC16D5E6E60019E2B2 /* EventDetailView.xib in Resources */,
-				190AEB9D16D86E4E0079D2F1 /* YardstickWebView.xib in Resources */,
 				19632B9116DAFA1800E0EA75 /* bracket.png in Resources */,
 				19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */,
 				19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */,
@@ -580,9 +566,9 @@
 				4EEA6D341526906000B96EFD /* SBJsonTokeniser.m in Sources */,
 				4EEA6D351526906000B96EFD /* SBJsonUTF8Stream.m in Sources */,
 				4EEA6D361526906000B96EFD /* SBJsonWriter.m in Sources */,
-				4EEA6D451526A90200B96EFD /* YardstickConnection.m in Sources */,
+				4EEA6D451526A90200B96EFD /* AtYourAgeConnection.m in Sources */,
 				4EEA6D5A1526C86300B96EFD /* Event.m in Sources */,
-				4EEA6D5D1526CAEF00B96EFD /* YardstickRequest.m in Sources */,
+				4EEA6D5D1526CAEF00B96EFD /* AtYourAgeRequest.m in Sources */,
 				4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */,
 				4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */,
 				4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */,
@@ -591,20 +577,18 @@
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
 				19D29F6E16A66B8100D46B0A /* FBLoginViewController.m in Sources */,
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
-				19D61CA516AFC5B900C81E60 /* AgeArticleView.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
 				19D61CD216B250E100C81E60 /* FriendTableViewController.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
-				199C0CB016C0C19D00068E73 /* YardstickModel.xcdatamodeld in Sources */,
 				19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */,
 				199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */,
-				199354FA16D4A28100D73389 /* EventInfoHostingView_old.m in Sources */,
 				199354FD16D4A29700D73389 /* EventInfoScrollView.m in Sources */,
-				19DFB9FA16D5E6810019E2B2 /* EventDetailView.m in Sources */,
-				190AEBA016D86EDD0079D2F1 /* YardstickWebView.m in Sources */,
 				19632B9616DB036900E0EA75 /* PersonRow.m in Sources */,
 				19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */,
 				19632BAA16DC5A9200E0EA75 /* ScrollViewStickLines.m in Sources */,
+				195B600116DEB7D3006215E9 /* EventDetailView.m in Sources */,
+				195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */,
+				1997B72A16DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,8 +675,8 @@
 					"\"$(SRCROOT)/Dependencies\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Support/Yardstick-Prefix.pch";
-				INFOPLIST_FILE = "Support/Yardstick-Info.plist";
+				GCC_PREFIX_HEADER = "Support/AtYourAge-Prefix.pch";
+				INFOPLIST_FILE = "Support/AtYourAge-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = "-lsqlite3.0";
@@ -713,8 +697,8 @@
 					"\"$(SRCROOT)/Dependencies\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Support/Yardstick-Prefix.pch";
-				INFOPLIST_FILE = "Support/Yardstick-Info.plist";
+				GCC_PREFIX_HEADER = "Support/AtYourAge-Prefix.pch";
+				INFOPLIST_FILE = "Support/AtYourAge-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -727,7 +711,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "Yardstick" */ = {
+		4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "AtYourAge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EEA6CF415268ED300B96EFD /* Debug */,
@@ -736,7 +720,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "Yardstick" */ = {
+		4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "AtYourAge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EEA6CF715268ED300B96EFD /* Debug */,
@@ -748,13 +732,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		199C0CAE16C0C19D00068E73 /* YardstickModel.xcdatamodeld */ = {
+		1997B72816DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				199C0CAF16C0C19D00068E73 /* YardstickModel.xcdatamodel */,
+				1997B72916DEBA31009692F5 /* AtYourAgeModel.xcdatamodel */,
 			);
-			currentVersion = 199C0CAF16C0C19D00068E73 /* YardstickModel.xcdatamodel */;
-			path = YardstickModel.xcdatamodeld;
+			currentVersion = 1997B72916DEBA31009692F5 /* AtYourAgeModel.xcdatamodel */;
+			path = AtYourAgeModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

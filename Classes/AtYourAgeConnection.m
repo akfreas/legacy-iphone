@@ -1,10 +1,10 @@
-#import "YardstickConnection.h"
+#import "AtYourAgeConnection.h"
 #import "Event.h"
 #import "SBJsonParser.h"
 
-@implementation YardstickConnection {
+@implementation AtYourAgeConnection {
     
-    YardstickRequest *request;
+    AtYourAgeRequest *request;
     SBJsonParser *parser;
     NSMutableData *resultData;
     id result;
@@ -12,7 +12,7 @@
 
 @synthesize AYAConnectionCallback = _AYAConnectionCallback;
 
--(id)initWithYardstickRequest:(YardstickRequest *)theRequest  {
+-(id)initWithAtYourAgeRequest:(AtYourAgeRequest *)theRequest  {
     self = [super init];
     
     if (self) {
@@ -21,7 +21,7 @@
     return self;
 }
 
--(void)getWithCompletionBlock:(void(^)(YardstickRequest *request, id result, NSError *error))_block {
+-(void)getWithCompletionBlock:(void(^)(AtYourAgeRequest *request, id result, NSError *error))_block {
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request.urlRequest delegate:self startImmediately:NO];
     self.AYAConnectionCallback = _block;

@@ -92,7 +92,7 @@
     NSString *activeFbUserId = primaryPerson.facebookId;
     
     NSDictionary *cookieDict = [NSDictionary dictionaryWithObjectsAndKeys:token, @"token", activeFbUserId, @"activeUserId", nil];
-    NSData *cookieInfo = [NSJSONSerialization dataWithJSONObject:cookieDict options:NSJSONWritingPrettyPrinted error:NULL];
+    NSData *cookieInfo = [NSJSONSerialization dataWithJSONObject:cookieDict options:0 error:NULL];
     NSMutableString *cookieInfoString = [[NSMutableString alloc] initWithData:cookieInfo encoding:NSUTF8StringEncoding];
     [cookieInfoString replaceOccurrencesOfString:@"\"" withString:@"'" options:NSLiteralSearch range:NSMakeRange(0, [cookieInfoString length])];
     

@@ -110,9 +110,7 @@
     } else {
         promptLabel.hidden = YES;
     }
-    
 }
-
 
 -(void)configureAlertDialog {
     

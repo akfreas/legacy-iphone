@@ -2,7 +2,7 @@
 @class Event;
 @class AgeIndicatorView;
 
-@interface PersonRow : UIView
+@interface PersonRow : UIView 
 
 @property (strong, nonatomic) Event *event;
 @property (strong, nonatomic) Person *person;

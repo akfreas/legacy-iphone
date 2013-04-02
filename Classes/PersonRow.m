@@ -79,7 +79,7 @@
 //    CGRect currentBounds = self.bounds;
 //    CGPoint topCenter = CGPointMake(CGRectGetMaxX(currentBounds), CGRectGetMidY(currentBounds));
 //    CGPoint midCenter = CGPointMake(CGRectGetMinX(currentBounds), CGRectGetMidY(currentBounds));
-//    CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
+//    CGCo~~ntextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
 
 //    CGGradientRelease(glossGradient);
 //    CGColorSpaceRelease(rgbColorspace);
@@ -93,6 +93,10 @@
 
 -(IBAction)trashcanButtonAction:(id)sender {
     
+    [self postWikiNotif];
+}
+
+-(void)postWikiNotif {
     NSDictionary *userInfo = @{@"person" : _person};
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRemovePersonButtonTappedNotification object:self userInfo:userInfo];
 

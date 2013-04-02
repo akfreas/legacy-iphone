@@ -211,9 +211,6 @@ static NSString *PersonEntityName = @"Person";
             [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
                 NSLog(@"Result: %@ error: %@", result , error);
                 NSString *birthdayString = result[@"birthday"];
-                NSString *profilePicUrlString = result[@"picture"][@"data"][@"url"];
-                
-                NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:profilePicUrlString]];
                 
                 NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
                 if (theBirthday == nil) {
@@ -225,11 +222,15 @@ static NSString *PersonEntityName = @"Person";
                 }
                 
                 
+                
+                NSString *urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=140", personFromFb.facebookId];
+                
+                NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
                 [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         personFromFb.thumbnail = data;
-                        [self save];
                         completionBlock(personFromFb);
+                        [self save];
                     });
                 }];
             }];
@@ -268,8 +269,11 @@ static NSString *PersonEntityName = @"Person";
             } else {
                 newPerson.birthday = theBirthday;
             }
-            NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:profilePicUrlString]];
-            [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            
+            NSString *urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=140", fbUser.id];
+            
+            NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+       [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     newPerson.thumbnail = data;
                     completionBlock(newPerson);

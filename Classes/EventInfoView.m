@@ -44,7 +44,7 @@
     } else {
         
         if (imageForThumb == nil) {
-            personThumbnail.image = [UIImage imageNamed:@"fb_blank_profile_square.png"];
+            personThumbnail.image = [UIImage imageNamed:@"question.png"];
         } else {
             personThumbnail.image = imageForThumb;
         }
@@ -77,6 +77,8 @@
         [self layoutSubviews];
     }
 }
+
+
 
 
 @end

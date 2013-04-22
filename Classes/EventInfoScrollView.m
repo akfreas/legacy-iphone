@@ -3,7 +3,7 @@
 #import "Person.h"
 #import "AtYourAgeRequest.h"
 #import "AtYourAgeConnection.h"
-#import "EventDetailView.h"
+#import "EventDescriptionView.h"
 #import "PersonRow.h"
 #import "ScrollViewStickLines.h"
 
@@ -15,7 +15,7 @@
     ScrollViewStickLines *stickLines;
 }
 
-static CGFloat height = 220;
+static CGFloat height = 230;
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];

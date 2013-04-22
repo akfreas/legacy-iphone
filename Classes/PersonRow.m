@@ -1,7 +1,7 @@
 #import "PersonRow.h"
-#import "EventInfoView.h"
+#import "FigureInfoView.h"
 #import "PersonInfoView.h"
-#import "EventDetailView.h"
+#import "EventDescriptionView.h"
 #import "AgeIndicatorView.h"
 #import "Person.h"
 
@@ -15,8 +15,8 @@
     
     IBOutlet UIView *mainInfoHostingView;
     IBOutlet PersonInfoView *personInfo;
-    IBOutlet EventInfoView *eventInfo;
-    IBOutlet EventDetailView *eventDetail;    
+    IBOutlet FigureInfoView *eventInfo;
+    IBOutlet EventDescriptionView *eventDetail;    
 }
 
 
@@ -29,6 +29,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"PersonRow" owner:self options:nil];
+        
+        
 //        NSMutableArray *colors = [NSMutableArray array];
 //        [colors addObject:[UIColor colorWithWhite:1.0 alpha:1.0]];
 //        [colors addObject:[UIColor clearColor]];
@@ -40,28 +42,34 @@
 //        
 //        
         // Set the colors for the gradient layer.
-        static NSMutableArray *colors = nil;
-        if (colors == nil) {
-            colors = [[NSMutableArray alloc] initWithCapacity:3];
-            UIColor *color = nil;
-            [colors addObject:(id)[UIColor clearColor].CGColor];
-            color = [UIColor colorWithWhite:1.0 alpha:0.5];
-            [colors addObject:(id)[color CGColor]];
-        }
-        
-        CAGradientLayer *gradient = (CAGradientLayer *)mainInfoHostingView.layer;
-        [gradient setColors:colors];
-        [gradient setLocations:[NSArray arrayWithObjects:[NSNumber numberWithFloat:0.00], [NSNumber numberWithFloat:0.1], nil]];
-        gradient.startPoint = CGPointMake(0, 0);
-        gradient.endPoint =CGPointMake(1, 0);
-
-//        [mainInfoHostingView.layer addSublayer:gradient];
-//        [(CAGradientLayer *)view.layer addSublayer:; setColors:colors];
+//        static NSMutableArray *colors = nil;
+//        if (colors == nil) {
+//            colors = [[NSMutableArray alloc] initWithCapacity:3];
+//            UIColor *color = nil;
+//                        
+//            [colors addObject:(id)[UIColor colorWithWhite:1.0 alpha:0].CGColor];
+//            color = [UIColor colorWithWhite:1.0 alpha:1];
+//            [colors addObject:(id)color];
+//        }
+//        
+//        CAGradientLayer *gradient = (CAGradientLayer *)mainInfoHostingView.layer;
+//        [gradient setColors:colors];
+//        [gradient setLocations:[NSArray arrayWithObjects:[NSNumber numberWithFloat:0.00], [NSNumber numberWithFloat:0.1], nil]];
+//        gradient.startPoint = CGPointMake(0, 0);
+//        gradient.endPoint = CGPointMake(1, 0);
         
         [self addSubview:view];
     }
     return self;
 }
+
+-(void)awakeFromNib {
+    
+    for (UIView *theView in self.subviews) {
+//        theView.backgroundColor = [UIColor clearColor];
+    }
+}
+
 //- (void)drawRect:(CGRect)rect
 //{
 //    CGContextRef currentContext = UIGraphicsGetCurrentContext();

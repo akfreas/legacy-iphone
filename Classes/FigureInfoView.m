@@ -1,8 +1,9 @@
-#import "EventInfoVIew.h"
+#import "FigureInfoView.h"
 #import "Utility_AppSettings.h"
 #import "Event.h"
+#import "ImageWidget.h"
 
-@implementation EventInfoView {
+@implementation FigureInfoView {
         
     IBOutlet UIImageView *personThumbnail;
     IBOutlet UILabel *birthdayLabel;
@@ -13,6 +14,8 @@
     UIImage *imageForThumb;
     UIActivityIndicatorView *indicatorView;
     NSOperationQueue *operationQueue;
+    
+    ImageWidget *widget;
 }
 
 
@@ -21,7 +24,7 @@
     
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
-        [[NSBundle mainBundle] loadNibNamed:@"EventInfoView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"FigureInfoView" owner:self options:nil];
 //        imageForThumb = [UIImage imageNamed:@"icon.png"];
         indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     }
@@ -50,8 +53,15 @@
         }
         
         [indicatorView removeFromSuperview];
+        widget = [[ImageWidget alloc] initWithSmallImage:imageForThumb largeImage:imageForThumb];
+//        widget.angle = 135;
+        
+        [self addSubview:widget];
     }
-    [self addSubview:eventView];
+    
+    
+//    [self addSubview:eventView];
+
 }
 
 -(void)getThumbnailImage {
@@ -59,12 +69,17 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.event.figureProfilePicUrl];
     NSLog(@"Profile pic url: %@", self.event.figureProfilePicUrl);
     [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
-        NSLog(@"Respsonse: %@", (NSHTTPURLResponse *)resp);
-        imageForThumb = [UIImage imageWithData:data];
+        NSLog(@"Response: %@", (NSHTTPURLResponse *)resp);
+        imageForThumb = [UIImage imageWithData:data ];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self layoutSubviews];
         });
     }];
+}
+
+-(void)animate {
+    
+        widget.angle = widget.angle +  10;
 }
 
 -(void)setEvent:(Event *)event {

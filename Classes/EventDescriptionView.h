@@ -1,5 +1,5 @@
 @class Event;
-@interface EventDetailView : UIView
+@interface EventDescriptionView : UIView
 
 
 @property (nonatomic) Event *event;

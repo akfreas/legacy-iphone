@@ -1,8 +1,8 @@
-#import "EventDetailView.h"
+#import "EventDescriptionView.h"
 #import "Event.h"
 #import "AtYourAgeWebView.h"
 
-@implementation EventDetailView {
+@implementation EventDescriptionView {
     
     AtYourAgeWebView *webViewForEvent;
 
@@ -13,7 +13,7 @@
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"EventDetailView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"EventDescriptionView" owner:self options:nil];
         [self addSubview:eventDescriptionHostingView];
     }
     return self;

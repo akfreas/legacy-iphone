@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
-		19348DCA16D4EAD200126BC7 /* FigureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* FigureInfoView.m */; };
+		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		194E327416DF4150007A55D7 /* AtYourAgeWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* AtYourAgeWebView.xib */; };
 		195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */; };
@@ -29,8 +29,8 @@
 		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
 		199354FD16D4A29700D73389 /* EventInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* EventInfoScrollView.m */; };
 		1993550716D4DDD000D73389 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915AFFF16C9EB7500D8434B /* Person.m */; };
-		1993550916D4E89900D73389 /* FigureInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* FigureInfoView.xib */; };
-		1993550B16D4E8CB00D73389 /* FigureInfoView.m in Resources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* FigureInfoView.m */; };
+		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
+		1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		1993916116AA1FDF00DA3CD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993915F16AA1FDF00DA3CD9 /* icon.png */; };
 		1993916216AA1FDF00DA3CD9 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916016AA1FDF00DA3CD9 /* icon@2x.png */; };
 		1993916416AA200A00DA3CD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916316AA200A00DA3CD9 /* icon.png */; };
@@ -38,7 +38,6 @@
 		1997B72A16DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1997B72816DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld */; };
 		199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199C0CAB16C0C0D900068E73 /* CoreData.framework */; };
 		19A524A116B75FE400195D9D /* friend-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A524A016B75FE400195D9D /* friend-icon.png */; };
-		19A524A416B7B6ED00195D9D /* AddFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */; };
 		19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
 		19A9979B16DD6B22006840CD /* brushedmetal.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A9979A16DD6B22006840CD /* brushedmetal.png */; };
 		19AF0EE5171BC908008DCA6A /* decoration-name.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AF0EE4171BC908008DCA6A /* decoration-name.png */; };
@@ -72,7 +71,6 @@
 		4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
 		4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */; };
 		4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */; };
-		4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */; };
 		4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE215268ED300B96EFD /* UIKit.framework */; };
 		4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE415268ED300B96EFD /* Foundation.framework */; };
 		4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE615268ED300B96EFD /* CoreGraphics.framework */; };
@@ -115,9 +113,9 @@
 		199354F316D4A19B00D73389 /* PersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoView.m; path = Classes/PersonInfoView.m; sourceTree = SOURCE_ROOT; };
 		199354FB16D4A29700D73389 /* EventInfoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoScrollView.h; sourceTree = "<group>"; };
 		199354FC16D4A29700D73389 /* EventInfoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoScrollView.m; sourceTree = "<group>"; };
-		1993550816D4E89900D73389 /* FigureInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FigureInfoView.xib; sourceTree = "<group>"; };
-		1993550A16D4E8CB00D73389 /* FigureInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureInfoView.m; sourceTree = "<group>"; };
-		1993550C16D4E8F600D73389 /* FigureInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FigureInfoView.h; sourceTree = "<group>"; };
+		1993550816D4E89900D73389 /* ImageWidgetContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageWidgetContainer.xib; sourceTree = "<group>"; };
+		1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidgetContainer.m; sourceTree = "<group>"; };
+		1993550C16D4E8F600D73389 /* ImageWidgetContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageWidgetContainer.h; sourceTree = "<group>"; };
 		1993915F16AA1FDF00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		1993916016AA1FDF00DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		1993916316AA200A00DA3CD9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 		1997B72916DEBA31009692F5 /* AtYourAgeModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AtYourAgeModel.xcdatamodel; sourceTree = "<group>"; };
 		199C0CAB16C0C0D900068E73 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		19A524A016B75FE400195D9D /* friend-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "friend-icon.png"; path = "../../../../../../Desktop/friend-icon.png"; sourceTree = "<group>"; };
-		19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendsCell.xib; sourceTree = "<group>"; };
 		19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPickerHandler.h; sourceTree = "<group>"; };
 		19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendPickerHandler.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19A9979A16DD6B22006840CD /* brushedmetal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brushedmetal.png; sourceTree = "<group>"; };
@@ -175,7 +172,6 @@
 		4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility_Notifications.m; sourceTree = "<group>"; };
 		4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
-		4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwitchPerson.xib; path = Resources/SwitchPerson.xib; sourceTree = SOURCE_ROOT; };
 		4EEA6CDE15268ED200B96EFD /* AtYourAge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtYourAge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEA6CE215268ED300B96EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4EEA6CE415268ED300B96EFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -322,8 +318,8 @@
 				19C49EAB16CA345800304AD6 /* Constants.h */,
 				199354FB16D4A29700D73389 /* EventInfoScrollView.h */,
 				199354FC16D4A29700D73389 /* EventInfoScrollView.m */,
-				1993550C16D4E8F600D73389 /* FigureInfoView.h */,
-				1993550A16D4E8CB00D73389 /* FigureInfoView.m */,
+				1993550C16D4E8F600D73389 /* ImageWidgetContainer.h */,
+				1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19D61CD016B250E100C81E60 /* FriendTableViewController.h */,
@@ -334,8 +330,6 @@
 				4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */,
 				192E6E411724B1AA008C9153 /* ImageWidget.h */,
 				192E6E421724B1AA008C9153 /* ImageWidget.m */,
-				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
-				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
 				19D29F7F16A674C200D46B0A /* MainScreen.h */,
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
@@ -344,6 +338,8 @@
 				199354F316D4A19B00D73389 /* PersonInfoView.m */,
 				19632B9416DB036900E0EA75 /* PersonRow.h */,
 				19632B9516DB036900E0EA75 /* PersonRow.m */,
+				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
+				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
 				4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */,
 				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
 				19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */,
@@ -369,16 +365,14 @@
 				194E327316DF4150007A55D7 /* AtYourAgeWebView.xib */,
 				1997B72816DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld */,
 				19D61CCF16B23B6400C81E60 /* Images */,
-				19A524A316B7B6ED00195D9D /* AddFriendsCell.xib */,
 				19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */,
 				4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */,
-				1993550816D4E89900D73389 /* FigureInfoView.xib */,
+				1993550816D4E89900D73389 /* ImageWidgetContainer.xib */,
 				19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */,
 				4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */,
 				191866FC16D4373500220A42 /* MainScreen.xib */,
 				199354F016D4A05E00D73389 /* PersonInfoView.xib */,
 				19632B9216DB028400E0EA75 /* PersonRow.xib */,
-				4E6478C2154467DA00CE47F1 /* SwitchPerson.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -460,7 +454,6 @@
 			files = (
 				4EEA6D3F1526A80B00B96EFD /* FBLoginView.xib in Resources */,
 				4EEA6D671526DCE100B96EFD /* EventInfoHostingView.xib in Resources */,
-				4E6478C3154467DA00CE47F1 /* SwitchPerson.xib in Resources */,
 				19D29F5816A5461000D46B0A /* Default-568h@2x.png in Resources */,
 				19D29F5A16A5462300D46B0A /* Default@2x.png in Resources */,
 				19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */,
@@ -472,14 +465,13 @@
 				19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */,
 				19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */,
 				19A524A116B75FE400195D9D /* friend-icon.png in Resources */,
-				19A524A416B7B6ED00195D9D /* AddFriendsCell.xib in Resources */,
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
 				191866FD16D4373500220A42 /* MainScreen.xib in Resources */,
 				199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */,
-				1993550916D4E89900D73389 /* FigureInfoView.xib in Resources */,
-				1993550B16D4E8CB00D73389 /* FigureInfoView.m in Resources */,
+				1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */,
+				1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */,
 				19DFB9FC16D5E6E60019E2B2 /* EventDescriptionView.xib in Resources */,
 				19632B9116DAFA1800E0EA75 /* bracket.png in Resources */,
 				19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */,
@@ -504,7 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194E327216DEBCE4007A55D7 /* Constants.h in Sources */,
-				19348DCA16D4EAD200126BC7 /* FigureInfoView.m in Sources */,
+				19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */,
 				1993550716D4DDD000D73389 /* Person.m in Sources */,
 				4EEA6D0C1526902D00B96EFD /* AppDelegate.m in Sources */,
 				4EEA6D0E1526902D00B96EFD /* main.m in Sources */,

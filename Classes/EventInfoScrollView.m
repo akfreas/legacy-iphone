@@ -15,7 +15,7 @@
     ScrollViewStickLines *stickLines;
 }
 
-static CGFloat height = 230;
+static CGFloat height = 140;
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];

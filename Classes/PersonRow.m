@@ -1,9 +1,9 @@
 #import "PersonRow.h"
-#import "FigureInfoView.h"
+#import "ImageWidgetContainer.h"
 #import "PersonInfoView.h"
-#import "EventDescriptionView.h"
 #import "AgeIndicatorView.h"
 #import "Person.h"
+#import "Event.h"
 
 
 
@@ -14,9 +14,10 @@
     IBOutlet UIButton *trashcanButton;
     
     IBOutlet UIView *mainInfoHostingView;
+    IBOutlet UITextView *eventDescriptionText;
+    IBOutlet UILabel *figureNameLabel;
     IBOutlet PersonInfoView *personInfo;
-    IBOutlet FigureInfoView *eventInfo;
-    IBOutlet EventDescriptionView *eventDetail;    
+    IBOutlet ImageWidgetContainer *widgetContainer;
 }
 
 
@@ -112,14 +113,16 @@
 
 -(void)setEvent:(Event *)event {
     _event = event;
-    eventInfo.event = event;
-    eventDetail.event = event;
+    figureNameLabel.text = event.figureName;
+    widgetContainer.event = event;
+    eventDescriptionText.text = event.eventDescription;
     _ageIndicator.event = event;
 }
 
 -(void)setPerson:(Person *)person {
     _person = person;
-    personInfo.person = person;
+//    personInfo.person = person;
+    widgetContainer.person = person;
     if ([_person.isPrimary isEqualToNumber: [NSNumber numberWithBool:NO]]) {
         trashcanButton.hidden = NO;
     }

@@ -1,9 +1,10 @@
-#import "FigureInfoView.h"
+#import "ImageWidgetContainer.h"
 #import "Utility_AppSettings.h"
 #import "Event.h"
 #import "ImageWidget.h"
+#import "Person.h"
 
-@implementation FigureInfoView {
+@implementation ImageWidgetContainer {
         
     IBOutlet UIImageView *personThumbnail;
     IBOutlet UILabel *birthdayLabel;
@@ -24,9 +25,11 @@
     
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
-        [[NSBundle mainBundle] loadNibNamed:@"FigureInfoView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
 //        imageForThumb = [UIImage imageNamed:@"icon.png"];
         indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        widget = [[ImageWidget alloc] init];
+
     }
     
     return self;
@@ -34,13 +37,9 @@
 
 -(void)layoutSubviews {
     
-    if (self.event.figureName != nil) {
-
-    firstNameLabel.text = self.event.figureName;
     
-    lastNameLabel.transform = CGAffineTransformMakeRotation(M_PI/-2);
-    }
-//    personThumbnail.backgroundColor = [UIColor redColor];
+    [self addSubview:widget];
+    
     if (self.event == nil) {
         [personThumbnail addSubview:indicatorView];
         [indicatorView startAnimating];
@@ -52,11 +51,8 @@
             personThumbnail.image = imageForThumb;
         }
         
+        widget.largeImage = personThumbnail.image;
         [indicatorView removeFromSuperview];
-        widget = [[ImageWidget alloc] initWithSmallImage:imageForThumb largeImage:imageForThumb];
-//        widget.angle = 135;
-        
-        [self addSubview:widget];
     }
     
     
@@ -77,11 +73,6 @@
     }];
 }
 
--(void)animate {
-    
-        widget.angle = widget.angle +  10;
-}
-
 -(void)setEvent:(Event *)event {
     _event = event;
     if (_event == nil) {
@@ -91,6 +82,15 @@
         [self getThumbnailImage];
         [self layoutSubviews];
     }
+}
+
+-(void)setPerson:(Person *)person {
+    
+    UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
+    
+    widget.smallImage = thumbnail;
+    [self layoutSubviews];
+    
 }
 
 

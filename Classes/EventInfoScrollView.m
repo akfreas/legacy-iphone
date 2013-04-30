@@ -5,14 +5,12 @@
 #import "AtYourAgeConnection.h"
 #import "EventDescriptionView.h"
 #import "PersonRow.h"
-#import "ScrollViewStickLines.h"
 
 @implementation EventInfoScrollView {
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfPersonInfoViews;
     NSFetchedResultsController *fetchedResultsController;
     AtYourAgeConnection *connection;
-    ScrollViewStickLines *stickLines;
 }
 
 static CGFloat height = 140;
@@ -25,8 +23,6 @@ static CGFloat height = 140;
         accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfPersonInfoViews = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood.png"]];
-        stickLines = [[ScrollViewStickLines alloc] initWithFrame:CGRectMake(0, 0, 300, self.contentSize.height)];
-        [self addSubview:stickLines];
     }
     return self;
 }
@@ -42,7 +38,7 @@ static CGFloat height = 140;
         
         Person *thePerson = [people objectAtIndex:i];
         
-        __block PersonRow *row = [[PersonRow alloc] initWithFrame:CGRectMake(20, (height + 10) * i, 320, height)];
+        __block PersonRow *row = [[PersonRow alloc] initWithFrame:CGRectMake(5, (height + 10) * i, 310, height)];
         [arrayOfPersonInfoViews addObject:row];
         [self addSubview:row];
         row.person = thePerson;
@@ -59,10 +55,8 @@ static CGFloat height = 140;
         
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));
-        stickLines.frame = CGRectMake(stickLines.frame.origin.x, stickLines.frame.origin.y, stickLines.frame.size.width, self.contentSize.height);
     }
     [self layoutSubviews];
-    stickLines.personRowArray = [NSArray arrayWithArray:arrayOfPersonInfoViews];
 }
 
 -(CGRect)frameAtIndex:(NSInteger)index {

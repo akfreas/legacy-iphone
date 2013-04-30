@@ -1,7 +1,6 @@
 #import "PersonRow.h"
 #import "ImageWidgetContainer.h"
 #import "PersonInfoView.h"
-#import "AgeIndicatorView.h"
 #import "Person.h"
 #import "Event.h"
 
@@ -16,6 +15,7 @@
     IBOutlet UIView *mainInfoHostingView;
     IBOutlet UITextView *eventDescriptionText;
     IBOutlet UILabel *figureNameLabel;
+    IBOutlet UILabel *ageLabel;
     IBOutlet PersonInfoView *personInfo;
     IBOutlet ImageWidgetContainer *widgetContainer;
 }
@@ -31,68 +31,11 @@
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"PersonRow" owner:self options:nil];
         
-        
-//        NSMutableArray *colors = [NSMutableArray array];
-//        [colors addObject:[UIColor colorWithWhite:1.0 alpha:1.0]];
-//        [colors addObject:[UIColor clearColor]];
-//        CAGradientLayer *gradient = [[CAGradientLayer alloc] initWithLayer:mainInfoHostingView.layer];
-//        [gradient setColors:colors];
-//        
-//        [gradient setLocations:[NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:0.48], [NSNumber numberWithFloat:1.0], nil]];
-//        
-//        
-//        
-        // Set the colors for the gradient layer.
-//        static NSMutableArray *colors = nil;
-//        if (colors == nil) {
-//            colors = [[NSMutableArray alloc] initWithCapacity:3];
-//            UIColor *color = nil;
-//                        
-//            [colors addObject:(id)[UIColor colorWithWhite:1.0 alpha:0].CGColor];
-//            color = [UIColor colorWithWhite:1.0 alpha:1];
-//            [colors addObject:(id)color];
-//        }
-//        
-//        CAGradientLayer *gradient = (CAGradientLayer *)mainInfoHostingView.layer;
-//        [gradient setColors:colors];
-//        [gradient setLocations:[NSArray arrayWithObjects:[NSNumber numberWithFloat:0.00], [NSNumber numberWithFloat:0.1], nil]];
-//        gradient.startPoint = CGPointMake(0, 0);
-//        gradient.endPoint = CGPointMake(1, 0);
-        
         [self addSubview:view];
     }
     return self;
 }
 
--(void)awakeFromNib {
-    
-    for (UIView *theView in self.subviews) {
-//        theView.backgroundColor = [UIColor clearColor];
-    }
-}
-
-//- (void)drawRect:(CGRect)rect
-//{
-//    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-//    
-//    CGGradientRef glossGradient;
-//    CGColorSpaceRef rgbColorspace;
-//    size_t num_locations = 2;
-//    CGFloat locations[2] = { 0.0, 1.0 };
-//    CGFloat components[8] = { 0.0, 0.0, 0.0, 0.35,  // Start color
-//        1.0, 1.0, 1.0, 0.06 }; // End color
-//    
-//    rgbColorspace = CGColorSpaceCreateDeviceRGB();
-//    glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components, locations, num_locations);
-//
-//    CGRect currentBounds = self.bounds;
-//    CGPoint topCenter = CGPointMake(CGRectGetMaxX(currentBounds), CGRectGetMidY(currentBounds));
-//    CGPoint midCenter = CGPointMake(CGRectGetMinX(currentBounds), CGRectGetMidY(currentBounds));
-//    CGCo~~ntextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
-
-//    CGGradientRelease(glossGradient);
-//    CGColorSpaceRelease(rgbColorspace);
-//}
 
 -(IBAction)wikipediaButtonAction:(id)sender {
     
@@ -116,7 +59,9 @@
     figureNameLabel.text = event.figureName;
     widgetContainer.event = event;
     eventDescriptionText.text = event.eventDescription;
-    _ageIndicator.event = event;
+    ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
+    ageLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:.6];
+    ageLabel.layer.cornerRadius = 10;
 }
 
 -(void)setPerson:(Person *)person {

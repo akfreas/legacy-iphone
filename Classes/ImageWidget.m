@@ -18,8 +18,9 @@
     
     self = [super initWithFrame:CGRectMake(0, 0, 100, 100)];
     if (self) {
-        _angle = 135;
-        _smallImageRadius = 50;
+        _angle = 100;
+        _smallImageRadius = 20;
+        _smallImageOffset = 5;
         self.backgroundColor = [UIColor clearColor];
     }
     return self;
@@ -45,6 +46,11 @@
     [self setNeedsDisplay];
 }
 
+-(void)setSmallImageOffset:(CGFloat)smallImageOffset {
+    _smallImageOffset = smallImageOffset;
+    [self setNeedsDisplay];
+}
+
 
 
 -(void)drawRect:(CGRect)rect {
@@ -64,8 +70,6 @@
     } else {
         imgRect = CGRectMake(0, viewSize.height - imageHeight, imageWidth, imageHeight);
     }
-    
-//    imgRect = CGRectMake(radius - (MIN(imageHeight, imageWidth) / 2), viewSize.height - MIN(_largeImage.size.width, _largeImage.size.height) * scale, imageWidth, imageHeight);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
 //    CGContextFillRect(context, rect);
@@ -87,14 +91,22 @@
     
     CGContextSaveGState(context);
     CGSize smImgSize = _smallImage.size;
-    scale = MIN(_smallImageRadius / smImgSize.width, _smallImageRadius / smImgSize.height);
+    scale = MAX((_smallImageRadius * 2) / smImgSize.width, (_smallImageRadius * 2) / smImgSize.height);
     
     
-    CGPoint arcCenter = CGPointMake((imgRect.size.width / 2) - largeArcRadius * cos(_angle * M_PI/180), imgRect.size.height / 2 -  largeArcRadius * sin(_angle * M_PI / 180));
+    CGPoint arcCenter = CGPointMake(viewSize.width  - largeArcRadius - (largeArcRadius - _smallImageOffset) * cos(_angle * M_PI/180), viewSize.height - largeArcRadius -  (largeArcRadius - _smallImageOffset) * sin(_angle * M_PI / 180));
     CGFloat smImgWidth = _smallImage.size.width * scale;
     CGFloat smImgHeight = _smallImage.size.height * scale;
-    CGRect smImgRect = CGRectMake(arcCenter.x - smImgWidth / 2, arcCenter.y - smImgHeight / 2, smImgWidth, smImgHeight);
-    CGContextAddArc(context, arcCenter.x, arcCenter.y, (MIN(smImgSize.height, smImgSize.width) * scale) / 2, 0, 2*M_PI, 1);
+    
+    CGRect smImgRect;
+    
+    if (imageWidth > imageHeight) {
+        smImgRect = CGRectMake(arcCenter.x -  smImgWidth /2, arcCenter.y - smImgHeight / 2, smImgWidth, smImgHeight);
+    } else {
+        smImgRect = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
+    }
+    
+    CGContextAddArc(context, arcCenter.x, arcCenter.y, _smallImageRadius, 0, 2*M_PI, 1);
     CGContextClip(context);
     CGContextDrawImage(context, smImgRect, _smallImage.CGImage);
     CGContextRestoreGState(context);

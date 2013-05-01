@@ -52,10 +52,20 @@
     
     CGSize imgSize = _largeImage.size;
     CGSize viewSize = rect.size;
+    CGFloat radius = 40.0;
+    CGFloat scale = MAX((radius * 2) / imgSize.width, (radius * 2) / imgSize.height);
+    CGFloat imageWidth = _largeImage.size.width * scale;
+    CGFloat imageHeight = _largeImage.size.height * scale;
+    
     CGRect imgRect;
     
-    CGFloat scale = MIN(viewSize.width / imgSize.width, viewSize.height / imgSize.height);
-    imgRect = CGRectMake(0, 0, _largeImage.size.width * scale, _largeImage.size.height * scale);
+    if (imageWidth > imageHeight) {
+        imgRect = CGRectMake(radius - imageWidth / 2, viewSize.height - imageHeight, imageWidth, imageHeight);
+    } else {
+        imgRect = CGRectMake(0, viewSize.height - imageHeight, imageWidth, imageHeight);
+    }
+    
+//    imgRect = CGRectMake(radius - (MIN(imageHeight, imageWidth) / 2), viewSize.height - MIN(_largeImage.size.width, _largeImage.size.height) * scale, imageWidth, imageHeight);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
 //    CGContextFillRect(context, rect);
@@ -63,8 +73,8 @@
 	CGContextTranslateCTM(context, 0.0, height);
 	CGContextScaleCTM(context, 1.0, -1.0);
     CGContextSaveGState(context);
-    CGFloat largeArcRadius = imgRect.size.width / 2;
-    CGContextAddArc(context, imgRect.size.width / 2, imgRect.size.height / 2, largeArcRadius, 0, 2*M_PI, 1);
+    CGFloat largeArcRadius = radius;
+    CGContextAddArc(context, largeArcRadius, viewSize.height - largeArcRadius, largeArcRadius, 0, 2*M_PI, 1);
     CGContextClosePath(context);
     
     CGContextEOClip(context);

@@ -101,24 +101,36 @@
     [CATransaction setValue:[NSNumber numberWithDouble:0.2] forKey:kCATransactionAnimationDuration];
 
     CGAffineTransform scaleTransform = CGAffineTransformMakeScale(2, 2);
+    CGAffineTransform circleTransform = CGAffineTransformMakeScale(2, 2);
+    CGRect circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
+    
     if (expanded) {
         scaleTransform = CGAffineTransformMakeScale(.5, .5);
-        
-        
-        CGRect largeImageFrame = CGRectApplyAffineTransform(largeImageLayer.frame, scaleTransform);
-        
-        
-        CGFloat lgFrameXDiff = largeImageLayer.frame.origin.x - largeImageFrame.origin.x;
-        CGFloat lgFrameYDiff = largeImageLayer.frame.origin.y - largeImageFrame.origin.y;
-        
-        largeImageLayer.frame = largeImageFrame;
-
+        circleTransform = CGAffineTransformMakeScale(0, 0);
         largeImageLayer.mask.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(1, 1));
-        smallImageLayer.frame = CGRectMake(smallImageLayer.frame.origin.x + lgFrameXDiff, smallImageLayer.frame.origin.y, smallImageLayer.frame.size.width, smallImageLayer.frame.size.height);
     } else {
-        largeImageLayer.frame = CGRectApplyAffineTransform(largeImageLayer.frame, scaleTransform);
         largeImageLayer.mask.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(2, 2));
     }
+    
+    
+    circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
+    
+    CGRect largeImageFrame = CGRectApplyAffineTransform(circleFrame, circleTransform);
+
+    
+    CGFloat lgFrameWidthDiff = (largeImageFrame.size.width - circleFrame.size.width);
+    CGFloat lgFrameHeightDiff = (largeImageFrame.size.height - circleFrame.size.height);
+    
+    if (expanded) {
+        lgFrameHeightDiff = lgFrameHeightDiff * 1;
+    }
+    
+    if (expanded) {
+        lgFrameWidthDiff = lgFrameWidthDiff * 1;
+    }
+    
+    largeImageLayer.frame = CGRectApplyAffineTransform(largeImageLayer.frame, scaleTransform);
+    smallImageLayer.frame = CGRectMake(smallImageLayer.frame.origin.x + lgFrameWidthDiff, smallImageLayer.frame.origin.y + lgFrameHeightDiff, smallImageLayer.frame.size.width, smallImageLayer.frame.size.height);
     [CATransaction commit];
     expanded = !expanded;
 }

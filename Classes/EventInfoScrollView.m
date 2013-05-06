@@ -22,7 +22,7 @@ static CGFloat height = 140;
         self.contentSize = CGSizeMake(320, 600);
         accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfPersonRows = [[NSMutableArray alloc] init];
-        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood.png"]];
+        self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personRowHeightChanged:) name:KeyForPersonRowHeightChanged object:nil];
     }
     return self;

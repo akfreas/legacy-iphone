@@ -133,7 +133,6 @@ typedef struct DualFrame DualFrame;
         eventDescriptionText.frame = descriptionFrame.expanded;
     }];
     
-    
 }
 
 -(void)collapse {

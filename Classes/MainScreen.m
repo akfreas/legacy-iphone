@@ -150,7 +150,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"HeaderImg"] forBarMetrics:UIBarMetricsDefault];
 //    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
 //    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:176.0/256.0 green:167.0/256 blue:93.0/256 alpha:1];
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"brushedmetal.png"]]];
+//    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"brushedmetal.png"]]];
 //    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.opaque = NO;
 }

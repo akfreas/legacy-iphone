@@ -9,8 +9,8 @@
     
     CALayer *largeImageLayer;
     CALayer *smallImageLayer;
-    CALayer *largeImageClipLayer;
-    CALayer *smallImageClipLayer;
+    CAShapeLayer *largeImageBorderLayer;
+    CAShapeLayer *smallImageBorderLayer;
     
     CAShapeLayer *largeImageMask;
     CAShapeLayer *smallImageMask;
@@ -112,9 +112,9 @@
     if (_expanded) {
         scaleTransform = CGAffineTransformMakeScale(.5, .5);
         circleTransform = CGAffineTransformMakeScale(0, 0);
-        largeImageLayer.mask.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(1, 1));
+        largeImageLayer.mask.transform = largeImageBorderLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(1, 1));
     } else {
-        largeImageLayer.mask.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(2, 2));
+        largeImageLayer.mask.transform = largeImageBorderLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(2, 2));
     }
     
     
@@ -125,14 +125,6 @@
     
     CGFloat lgFrameWidthDiff = (largeImageFrame.size.width - circleFrame.size.width);
     CGFloat lgFrameHeightDiff = (largeImageFrame.size.height - circleFrame.size.height);
-    
-    if (_expanded) {
-        lgFrameHeightDiff = lgFrameHeightDiff * 1;
-    }
-    
-    if (_expanded) {
-        lgFrameWidthDiff = lgFrameWidthDiff * 1;
-    }
     
     largeImageLayer.frame = CGRectApplyAffineTransform(largeImageLayer.frame, scaleTransform);
     smallImageLayer.frame = CGRectMake(smallImageLayer.frame.origin.x + lgFrameWidthDiff, smallImageLayer.frame.origin.y + lgFrameHeightDiff, smallImageLayer.frame.size.width, smallImageLayer.frame.size.height);
@@ -177,8 +169,15 @@
     largeImageMask = [[CAShapeLayer alloc] init];
     largeImageMask.path =  circlePath;
     
+    largeImageBorderLayer = [[CAShapeLayer alloc] init];
+    largeImageBorderLayer.path = circlePath;
+    largeImageBorderLayer.lineWidth = 3.0;
+    largeImageBorderLayer.strokeColor = [UIColor whiteColor].CGColor;
+    largeImageBorderLayer.fillColor = [UIColor clearColor].CGColor;
+    
     largeImageLayer.mask  = largeImageMask;
     largeImageLayer.zPosition = 2.0;
+    [largeImageLayer addSublayer:largeImageBorderLayer];
     [self.layer addSublayer:largeImageLayer];
     
 }
@@ -208,11 +207,21 @@
     smallImageMask = [[CAShapeLayer alloc] init];
     smallImageMask.path = smallCirclePath;
     
+    smallImageBorderLayer = [[CAShapeLayer alloc] init];
+    smallImageBorderLayer.path = smallCirclePath;
+    smallImageBorderLayer.lineWidth = 3.0;
+    smallImageBorderLayer.opacity = 1;
+    smallImageBorderLayer.fillColor = [UIColor clearColor].CGColor;
+    smallImageBorderLayer.strokeColor = [UIColor whiteColor].CGColor;
+
+    
     smallImageLayer = [[CALayer alloc] init];
     smallImageLayer.contents = (__bridge id)(_smallImage.CGImage);
     smallImageLayer.frame = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
     smallImageLayer.mask = smallImageMask;
     smallImageLayer.zPosition = 3.0;
+    smallImageBorderLayer.zPosition = 4.0;
+    [smallImageLayer addSublayer:smallImageBorderLayer];
     [self.layer addSublayer:smallImageLayer];
     
 }

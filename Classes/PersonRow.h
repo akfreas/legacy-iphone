@@ -9,4 +9,6 @@
 
 @property (strong, nonatomic) IBOutlet AgeIndicatorView *ageIndicator;
 
+-(void)expandRow;
+
 @end

@@ -54,10 +54,14 @@ static CGFloat height = 140;
         }];
         
         
+        UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(expandRow)];
+        [row addGestureRecognizer:touchUp];
+
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));
     }
     [self layoutSubviews];
 }
+
 
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat padding = 5;

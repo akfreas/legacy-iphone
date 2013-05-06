@@ -17,7 +17,6 @@
     
     CGMutablePathRef circlePath;
     
-    BOOL expanded;
 }
 
 
@@ -40,7 +39,7 @@
         _smallImageRadius = 20;
         _largeImageRadius = 40;
         _smallImageOffset = 5;
-        expanded = NO;
+        _expanded = NO;
         
         
         circlePath = CGPathCreateMutable();
@@ -52,7 +51,7 @@
 //        [self.layer addSublayer:smallImageLayer];
         
         self.backgroundColor = [UIColor clearColor];
-        [self addGestureRecognizers];
+//        [self addGestureRecognizers];
     }
     return self;
 }
@@ -61,8 +60,6 @@
 #pragma mark setup
 
 -(void)addGestureRecognizers {
-    UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleExpand)];
-    [self addGestureRecognizer:touchUp];
 }
 
 
@@ -90,7 +87,15 @@
 
 -(void)setSmallImageOffset:(CGFloat)smallImageOffset {
     _smallImageOffset = smallImageOffset;
-//    [self setNeedsDisplay];
+    [self setNeedsDisplay];
+}
+
+-(void)setExpanded:(BOOL)expanded {
+    if (_expanded != expanded) {
+    _expanded = !expanded;
+        [self toggleExpand];
+        _expanded = expanded;
+    }
 }
 
 -(void)toggleExpand {
@@ -104,7 +109,7 @@
     CGAffineTransform circleTransform = CGAffineTransformMakeScale(2, 2);
     CGRect circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
     
-    if (expanded) {
+    if (_expanded) {
         scaleTransform = CGAffineTransformMakeScale(.5, .5);
         circleTransform = CGAffineTransformMakeScale(0, 0);
         largeImageLayer.mask.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(1, 1));
@@ -121,29 +126,19 @@
     CGFloat lgFrameWidthDiff = (largeImageFrame.size.width - circleFrame.size.width);
     CGFloat lgFrameHeightDiff = (largeImageFrame.size.height - circleFrame.size.height);
     
-    if (expanded) {
+    if (_expanded) {
         lgFrameHeightDiff = lgFrameHeightDiff * 1;
     }
     
-    if (expanded) {
+    if (_expanded) {
         lgFrameWidthDiff = lgFrameWidthDiff * 1;
     }
     
     largeImageLayer.frame = CGRectApplyAffineTransform(largeImageLayer.frame, scaleTransform);
     smallImageLayer.frame = CGRectMake(smallImageLayer.frame.origin.x + lgFrameWidthDiff, smallImageLayer.frame.origin.y + lgFrameHeightDiff, smallImageLayer.frame.size.width, smallImageLayer.frame.size.height);
     [CATransaction commit];
-    expanded = !expanded;
 }
 
-
--(void)collapseWidget {
-    
-    
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:1];
-    
-//    largeImageLayer.frame
-}
 -(void)drawRect:(CGRect)rect {
     
     if (_largeImage != nil && largeImageLayer == nil) {

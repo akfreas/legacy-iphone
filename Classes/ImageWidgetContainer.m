@@ -26,7 +26,6 @@
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
-//        imageForThumb = [UIImage imageNamed:@"icon.png"];
         indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         widget = [[ImageWidget alloc] init];
         [self addSubview:widget];
@@ -88,7 +87,13 @@
     
 }
 
+-(void)expandWidget {
+    widget.expanded = !widget.expanded;
+}
 
+-(void)collapseWidget {
+    widget.expanded = NO;
+}
 
 
 @end

@@ -5,5 +5,8 @@
 @property (nonatomic) Event *event;
 @property (nonatomic) Person *person;
 
+-(void)expandWidget;
+-(void)collapseWidget;
+
 
 @end

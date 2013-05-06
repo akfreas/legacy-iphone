@@ -29,7 +29,7 @@
 //        imageForThumb = [UIImage imageNamed:@"icon.png"];
         indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         widget = [[ImageWidget alloc] init];
-
+        [self addSubview:widget];
     }
     
     return self;
@@ -38,26 +38,20 @@
 -(void)layoutSubviews {
     
     
-    [self addSubview:widget];
     
     if (self.event == nil) {
-        [personThumbnail addSubview:indicatorView];
-        [indicatorView startAnimating];
+//        [personThumbnail addSubview:indicatorView];
+//        [indicatorView startAnimating];
     } else {
         
         if (imageForThumb == nil) {
             personThumbnail.image = [UIImage imageNamed:@"question.png"];
         } else {
             personThumbnail.image = imageForThumb;
+            widget.largeImage = personThumbnail.image;
+            [widget setNeedsDisplay];
         }
-        
-        widget.largeImage = personThumbnail.image;
-        [indicatorView removeFromSuperview];
     }
-    
-    
-//    [self addSubview:eventView];
-
 }
 
 -(void)getThumbnailImage {
@@ -66,9 +60,10 @@
     NSLog(@"Profile pic url: %@", self.event.figureProfilePicUrl);
     [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
         NSLog(@"Response: %@", (NSHTTPURLResponse *)resp);
-        imageForThumb = [UIImage imageWithData:data ];
+        imageForThumb = [UIImage imageWithData:data];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self layoutSubviews];
+            [self setNeedsLayout];
+
         });
     }];
 }
@@ -80,7 +75,7 @@
     } else {
         [indicatorView stopAnimating];
         [self getThumbnailImage];
-        [self layoutSubviews];
+        [self setNeedsLayout];
     }
 }
 
@@ -89,7 +84,7 @@
     UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
     
     widget.smallImage = thumbnail;
-    [self layoutSubviews];
+    [self setNeedsLayout];
     
 }
 

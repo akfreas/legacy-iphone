@@ -15,7 +15,7 @@ typedef struct DualFrame DualFrame;
 
 @implementation PersonRow {
     
-    IBOutlet UIView *view;
+//    IBOutlet UIView *view;
     IBOutlet UIButton *wikipediaButton;
     IBOutlet UIButton *trashcanButton;
     
@@ -56,10 +56,10 @@ typedef struct DualFrame DualFrame;
         widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(widgetContainer.frame) / 2 - 20, widgetContainer.frame.origin.y, CGRectGetWidth(widgetContainer.frame), CGRectGetHeight(widgetContainer.frame));
         ageLabelFrame.collapsed = ageLabel.frame;
         ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
-        viewFrame.collapsed = view.frame;
-        viewFrame.expanded = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, view.frame.size.height + 100);;
+        viewFrame.collapsed = _view.frame;
+        viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 100);;
         
-        [self addSubview:view];
+        [self addSubview:self.view];
     }
     return self;
 }
@@ -104,15 +104,20 @@ typedef struct DualFrame DualFrame;
 
 -(void)expandRow {
     
+    
+    NSNumber *heightDifference;
+    
+
     if (expanded == NO) {
 
 //        [UIView beginAnimations:nil context:NULL];
+        
         [UIView animateWithDuration:.2 animations:^{
             
             [CATransaction begin];
             [CATransaction setAnimationDuration:0];
             [widgetContainer expandWidget];
-            view.layer.frame = viewFrame.expanded;
+            self.view.layer.frame = viewFrame.expanded;
 //            widgetContainer.backgroundColor = [UIColor greenColor];
             eventDescriptionText.layer.frame = descriptionFrame.expanded;
 //            view.layer.backgroundColor = [UIColor redColor].CGColor;
@@ -123,8 +128,8 @@ typedef struct DualFrame DualFrame;
             expanded = YES;
             eventDescriptionText.frame = descriptionFrame.expanded;
         }];
-//        [UIView commitAnimations];
-
+        heightDifference = [NSNumber numberWithFloat:viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
+        
     } else {
 
         [UIView animateWithDuration:.2 animations:^{
@@ -132,7 +137,7 @@ typedef struct DualFrame DualFrame;
             [CATransaction begin];
             [CATransaction setAnimationDuration:.2];
             [widgetContainer collapseWidget];
-            view.layer.frame = viewFrame.collapsed;
+            self.view.layer.frame = viewFrame.collapsed;
             eventDescriptionText.layer.frame = descriptionFrame.collapsed;
             ageLabel.frame = ageLabelFrame.collapsed;
             widgetContainer.frame = widgetContainerFrame.collapsed;
@@ -140,7 +145,12 @@ typedef struct DualFrame DualFrame;
             [CATransaction commit];
             eventDescriptionText.frame = descriptionFrame.collapsed;
         }];
+        heightDifference = [NSNumber numberWithFloat:viewFrame.collapsed.size.height - viewFrame.expanded.size.height];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
+                                                        object:self
+                                                      userInfo:@{@"delta": heightDifference}];
 }
 
 @end

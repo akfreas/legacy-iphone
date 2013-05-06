@@ -8,7 +8,7 @@
 
 @implementation EventInfoScrollView {
     ObjectArchiveAccessor *accessor;
-    NSMutableArray *arrayOfPersonInfoViews;
+    NSMutableArray *arrayOfPersonRows;
     NSFetchedResultsController *fetchedResultsController;
     AtYourAgeConnection *connection;
 }
@@ -21,8 +21,9 @@ static CGFloat height = 140;
     if (self) {
         self.contentSize = CGSizeMake(320, 600);
         accessor = [ObjectArchiveAccessor sharedInstance];
-        arrayOfPersonInfoViews = [[NSMutableArray alloc] init];
+        arrayOfPersonRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood.png"]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personRowHeightChanged:) name:KeyForPersonRowHeightChanged object:nil];
     }
     return self;
 }
@@ -39,7 +40,7 @@ static CGFloat height = 140;
         Person *thePerson = [people objectAtIndex:i];
         
         __block PersonRow *row = [[PersonRow alloc] initWithFrame:CGRectMake(5, (height + 10) * i, 310, height)];
-        [arrayOfPersonInfoViews addObject:row];
+        [arrayOfPersonRows addObject:row];
         [self addSubview:row];
         row.person = thePerson;
         [row setNeedsLayout];
@@ -56,12 +57,25 @@ static CGFloat height = 140;
         
         UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(expandRow)];
         [row addGestureRecognizer:touchUp];
-
+        
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));
     }
     [self layoutSubviews];
 }
 
+-(void)personRowHeightChanged:(NSNotification *)notification {
+    PersonRow *rowToResize = notification.object;
+    CGRect newFrame;
+    CGFloat heightOffset = [notification.userInfo[@"delta"] floatValue];
+    self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + newFrame.size.height - height);
+    NSInteger firstIndex = [arrayOfPersonRows indexOfObject:rowToResize];
+
+    for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
+        PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
+        rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
+    }
+    
+}
 
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat padding = 5;
@@ -71,10 +85,10 @@ static CGFloat height = 140;
 }
 
 -(void)removeInfoViews {
-    for (UIView *infoView in arrayOfPersonInfoViews) {
+    for (UIView *infoView in arrayOfPersonRows) {
         [infoView removeFromSuperview];
     }
-    [arrayOfPersonInfoViews removeAllObjects];
+    [arrayOfPersonRows removeAllObjects];
 }
 
 -(void)reload {

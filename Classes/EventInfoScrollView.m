@@ -65,15 +65,16 @@ static CGFloat height = 140;
 
 -(void)personRowHeightChanged:(NSNotification *)notification {
     PersonRow *rowToResize = notification.object;
-    CGRect newFrame;
     CGFloat heightOffset = [notification.userInfo[@"delta"] floatValue];
-    self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + newFrame.size.height - height);
+    self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + heightOffset);
     NSInteger firstIndex = [arrayOfPersonRows indexOfObject:rowToResize];
-
-    for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
-        PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
-        rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
-    }
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
+            PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
+            rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
+        }
+    }];
     
 }
 

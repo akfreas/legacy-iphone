@@ -55,7 +55,7 @@ static CGFloat height = 140;
         }];
         
         
-        UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(expandRow)];
+        UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(toggleExpand)];
         [row addGestureRecognizer:touchUp];
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));

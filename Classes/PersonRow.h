@@ -9,7 +9,10 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 
 @property (strong, nonatomic) IBOutlet AgeIndicatorView *ageIndicator;
+@property (nonatomic) BOOL expanded;
 
--(void)expandRow;
+-(void)expand;
+-(void)collapse;
+-(void)toggleExpand;
 
 @end

@@ -15,7 +15,7 @@ typedef struct DualFrame DualFrame;
 
 @implementation PersonRow {
     
-//    IBOutlet UIView *view;
+    //    IBOutlet UIView *view;
     IBOutlet UIButton *wikipediaButton;
     IBOutlet UIButton *trashcanButton;
     
@@ -26,9 +26,7 @@ typedef struct DualFrame DualFrame;
     IBOutlet PersonInfoView *personInfo;
     IBOutlet ImageWidgetContainer *widgetContainer;
     
-    
-    BOOL expanded;
-    
+
     
     DualFrame descriptionFrame;
     DualFrame widgetContainerFrame;
@@ -47,7 +45,7 @@ typedef struct DualFrame DualFrame;
     self = [super initWithFrame:frame];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"PersonRow" owner:self options:nil];
-        expanded = NO;
+        _expanded = NO;
         
         
         descriptionFrame.collapsed = eventDescriptionText.frame;
@@ -79,7 +77,7 @@ typedef struct DualFrame DualFrame;
 -(void)postWikiNotif {
     NSDictionary *userInfo = @{@"person" : _person};
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRemovePersonButtonTappedNotification object:self userInfo:userInfo];
-
+    
 }
 
 -(void)setEvent:(Event *)event {
@@ -94,63 +92,65 @@ typedef struct DualFrame DualFrame;
 
 -(void)setPerson:(Person *)person {
     _person = person;
-//    personInfo.person = person;
+    //    personInfo.person = person;
     widgetContainer.person = person;
     if ([_person.isPrimary isEqualToNumber: [NSNumber numberWithBool:NO]]) {
         trashcanButton.hidden = NO;
     }
 }
 
-
--(void)expandRow {
-    
+-(void)toggleExpand {
     
     NSNumber *heightDifference;
     
-
-    if (expanded == NO) {
-
-//        [UIView beginAnimations:nil context:NULL];
-        
-        [UIView animateWithDuration:.2 animations:^{
-            
-            [CATransaction begin];
-            [CATransaction setAnimationDuration:0];
-            [widgetContainer expandWidget];
-            self.view.layer.frame = viewFrame.expanded;
-//            widgetContainer.backgroundColor = [UIColor greenColor];
-            eventDescriptionText.layer.frame = descriptionFrame.expanded;
-//            view.layer.backgroundColor = [UIColor redColor].CGColor;
-//            eventDescriptionText.layer.backgroundColor = [UIColor orangeColor].CGColor;
-            widgetContainer.layer.frame = widgetContainerFrame.expanded;
-            ageLabel.frame = ageLabelFrame.expanded;
-            [CATransaction commit];
-            expanded = YES;
-            eventDescriptionText.frame = descriptionFrame.expanded;
-        }];
+    if (_expanded == NO) {
+        [self expand];
         heightDifference = [NSNumber numberWithFloat:viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
-        
     } else {
-
-        [UIView animateWithDuration:.2 animations:^{
-            
-            [CATransaction begin];
-            [CATransaction setAnimationDuration:.2];
-            [widgetContainer collapseWidget];
-            self.view.layer.frame = viewFrame.collapsed;
-            eventDescriptionText.layer.frame = descriptionFrame.collapsed;
-            ageLabel.frame = ageLabelFrame.collapsed;
-            widgetContainer.frame = widgetContainerFrame.collapsed;
-            expanded = NO;
-            [CATransaction commit];
-            eventDescriptionText.frame = descriptionFrame.collapsed;
-        }];
+        [self collapse];
         heightDifference = [NSNumber numberWithFloat:viewFrame.collapsed.size.height - viewFrame.expanded.size.height];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
                                                         object:self
                                                       userInfo:@{@"delta": heightDifference}];
+
 }
 
+-(void)expand {
+    
+    [UIView animateWithDuration:.2 animations:^{
+        
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:0];
+        [widgetContainer expandWidget];
+        self.view.layer.frame = viewFrame.expanded;
+        eventDescriptionText.layer.frame = descriptionFrame.expanded;
+        widgetContainer.layer.frame = widgetContainerFrame.expanded;
+        ageLabel.frame = ageLabelFrame.expanded;
+        [CATransaction commit];
+        _expanded = YES;
+        eventDescriptionText.frame = descriptionFrame.expanded;
+    }];
+    
+    
+}
+
+-(void)collapse {
+    
+    
+    [UIView animateWithDuration:.2 animations:^{
+        
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:.2];
+        [widgetContainer collapseWidget];
+        self.view.layer.frame = viewFrame.collapsed;
+        eventDescriptionText.layer.frame = descriptionFrame.collapsed;
+        ageLabel.frame = ageLabelFrame.collapsed;
+        widgetContainer.frame = widgetContainerFrame.collapsed;
+        _expanded = NO;
+        [CATransaction commit];
+        eventDescriptionText.frame = descriptionFrame.collapsed;
+    }];
+}
 @end

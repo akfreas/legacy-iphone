@@ -9,6 +9,8 @@
 #import "FriendPickerHandler.h"
 #import "Event.h"
 #import "AtYourAgeWebView.h"
+#import "AtYourAgeConnection.h"
+#import "AtYourAgeRequest.h"
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
@@ -17,6 +19,7 @@
     FriendPickerHandler *friendPickerDelegate;
     FBFriendPickerViewController *friendPicker;
     IBOutlet EventInfoScrollView *infoScreen;
+    AtYourAgeConnection *connection;
 }
 
 
@@ -89,6 +92,14 @@
         NSLog(@"Chosen date: %@", birthday);
         thePerson.birthday = birthday;
         [accessor save];
+        
+        AtYourAgeRequest *updateBirthdayRequest = [AtYourAgeRequest requestToUpdateBirthday:birthday forPerson:thePerson];
+        connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:updateBirthdayRequest];
+        
+        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
+            NSLog(@"result: %@", result);
+        }];
+                
         [infoScreen reload];
     };
     alertView.rightButtonTitle = @"Cancel";

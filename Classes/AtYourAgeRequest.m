@@ -39,6 +39,16 @@
     return url;
 }
 
++(NSURL *)urlToUpdateBirthdayForPerson:(NSString *)user {
+    
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = [NSString stringWithFormat:@"user/%@/update_birthday", user];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
 +(NSURL *)urlToPostUser {
     
     NSURL *url = [AtYourAgeRequest baseUrl];
@@ -57,6 +67,21 @@
     request.urlRequest.URL = url;
     request.classToParse = [Event class];
     
+    return request;
+}
+
++(AtYourAgeRequest *)requestToUpdateBirthday:(NSDate *)birthday forPerson:(Person *)person {
+    
+    AtYourAgeRequest *request = [self baseRequestForPerson:person];
+    
+    NSURL *url = [AtYourAgeRequest urlToUpdateBirthdayForPerson:person.facebookId];
+    NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
+    NSDictionary *postDict = [NSDictionary dictionaryWithObject:[formatter stringFromDate:birthday] forKey:@"birthday"];
+    
+    request.urlRequest.URL = url;
+    request.urlRequest.HTTPMethod = @"POST";
+    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:postDict options:NSJSONWritingPrettyPrinted error:NULL];
+
     return request;
 }
 

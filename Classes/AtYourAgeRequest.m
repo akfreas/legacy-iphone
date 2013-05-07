@@ -28,24 +28,11 @@
     return url;
 }
 
-+(NSURL *)eventsUrlForBirthday:(NSDate *)theDate Person:(NSString *)user {
-    
-    NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
-    
-    NSURL *url = [AtYourAgeRequest baseUrl];
-    NSString *pathString = [NSString stringWithFormat:@"%@/event/%@", user, [formatter stringFromDate:theDate]];
-    
-    url = [url URLByAppendingPathComponent:pathString];
-    
-    return url;
-}
 
 +(NSURL *)storyUrlForBirthday:(NSDate *)theDate Person:(NSString *)user {
-    
-    NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
-    
+        
     NSURL *url = [AtYourAgeRequest baseUrl];
-    NSString *pathString = [NSString stringWithFormat:@"%@/story/%@", user, [formatter stringFromDate:theDate]];
+    NSString *pathString = [NSString stringWithFormat:@"user/%@/story", user];
     
     url = [url URLByAppendingPathComponent:pathString];
     
@@ -62,21 +49,13 @@
     return url;
 }
 
-+(AtYourAgeRequest *)requestToGetEventForPerson:(Person *)person {
-
-    AtYourAgeRequest *request = [self baseRequestForPerson:person];
-    NSURL *url = [self eventsUrlForBirthday:person.birthday Person:person.facebookId];
-    request.urlRequest.URL = url;
-    request.classToParse = [Event class];
-    return request;
-}
 
 +(AtYourAgeRequest *)requestToGetStoryForPerson:(Person *)person {
     
     AtYourAgeRequest *request = [self baseRequestForPerson:person];
     NSURL *url = [AtYourAgeRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     request.urlRequest.URL = url;
-    request.classToParse = nil;
+    request.classToParse = [Event class];
     
     return request;
 }

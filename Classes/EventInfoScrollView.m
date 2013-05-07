@@ -45,7 +45,7 @@ static CGFloat height = 140;
         row.person = thePerson;
         [row setNeedsLayout];
         
-        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetEventForPerson:thePerson];
+        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForPerson:thePerson];
         
         connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
         

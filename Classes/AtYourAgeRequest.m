@@ -49,6 +49,15 @@
     return url;
 }
 
++(NSURL *)urlToGetRelatedEventsForEvent:(NSString *)eventId {
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = [NSString stringWithFormat:@"event/%@/related", eventId];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
 +(NSURL *)urlToPostUser {
     
     NSURL *url = [AtYourAgeRequest baseUrl];
@@ -82,6 +91,17 @@
     request.urlRequest.HTTPMethod = @"POST";
     request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:postDict options:NSJSONWritingPrettyPrinted error:NULL];
 
+    return request;
+}
+
++(AtYourAgeRequest *)requestToGetRelatedEventsForEvent:(NSString *)event requester:(Person *)person {
+    
+    AtYourAgeRequest *request = [self baseRequestForPerson:person];
+    
+    NSURL *url = [AtYourAgeRequest urlToGetRelatedEventsForEvent:event];
+    
+    request.urlRequest.URL = url;
+    
     return request;
 }
 

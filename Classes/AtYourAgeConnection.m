@@ -53,12 +53,12 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
     result = nil;
-    
+    id parseResult = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingMutableLeaves error:NULL];
     if (request.classToParse != nil && request.classToParse != NULL) {
         
-        id parseResult = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingMutableLeaves error:NULL];
-        
         result = [[request.classToParse alloc] initWithJsonDictionary:parseResult];
+    } else {
+        result = parseResult;
     }
     
     self.AYAConnectionCallback(request, result, nil);

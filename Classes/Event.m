@@ -7,6 +7,7 @@ static NSString *KeyForAgeMonths = @"age_months";
 static NSString *KeyForAgeDays = @"age_days";
 static NSString *KeyForPronoun = @"figure_pronoun";
 static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
+static NSString *KeyForEventId = @"event_id";
 
 @implementation Event
 
@@ -15,7 +16,7 @@ static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
     
     if (self) {
         
-        
+        _eventId = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForEventId]];
         _eventDescription = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForEventDescription]];
         _figureName = [NSString stringWithFormat:@"%@",[jsonDict objectForKey:KeyForFigureName]];
         _ageYears = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeYears]];
@@ -29,7 +30,7 @@ static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
 
 -(NSString *)description {
     
-    return [NSString stringWithFormat:@"%@ (%@d %@m %@y) %@", _eventDescription, _ageDays, _ageMonths, _ageYears, _eventDescription];
+    return [NSString stringWithFormat:@"%@ %@ (%@d %@m %@y) %@", _eventId, _eventDescription, _ageDays, _ageMonths, _ageYears, _eventDescription];
 }
 
 @end

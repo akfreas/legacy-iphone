@@ -3,6 +3,8 @@
 #import "PersonInfoView.h"
 #import "Person.h"
 #import "Event.h"
+#import "AtYourAgeConnection.h"
+#import "AtYourAgeRequest.h"
 
 
 struct DualFrame {
@@ -25,7 +27,8 @@ typedef struct DualFrame DualFrame;
     IBOutlet UILabel *ageLabel;
     IBOutlet PersonInfoView *personInfo;
     IBOutlet ImageWidgetContainer *widgetContainer;
-    
+
+    AtYourAgeConnection *connection;
 
     
     DualFrame descriptionFrame;
@@ -131,6 +134,14 @@ typedef struct DualFrame DualFrame;
         [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
+        
+        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:_event.eventId requester:_person];
+        
+        connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+        
+        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
+            NSLog(@"Result: %@", result);
+        }];
     }];
     
 }

@@ -1,0 +1,3 @@
+[submodule "Dependencies/moriarty"]
+	path = Dependencies/moriarty
+	url = https://github.com/tylerneylon/moriarty.git

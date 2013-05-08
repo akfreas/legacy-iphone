@@ -3,6 +3,7 @@
 #import "PersonInfoView.h"
 #import "Person.h"
 #import "Event.h"
+#import "RelatedEvent.h"
 #import "AtYourAgeConnection.h"
 #import "AtYourAgeRequest.h"
 
@@ -30,12 +31,13 @@ typedef struct DualFrame DualFrame;
 
     AtYourAgeConnection *connection;
 
-    
     DualFrame descriptionFrame;
     DualFrame widgetContainerFrame;
     DualFrame ageLabelFrame;
     DualFrame viewFrame;
     
+    NSNumber *rowHeightDelta;
+    NSMutableArray *arrayOfRelatedEventLabels;
 }
 
 
@@ -58,9 +60,12 @@ typedef struct DualFrame DualFrame;
         ageLabelFrame.collapsed = ageLabel.frame;
         ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
         viewFrame.collapsed = _view.frame;
-        viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 100);;
-        
+        viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 100);
+        arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordHeightDelta:) name:KeyForPersonRowHeightChanged object:nil];
+        
     }
     return self;
 }
@@ -102,6 +107,17 @@ typedef struct DualFrame DualFrame;
     }
 }
 
+-(void)recordHeightDelta:(NSNotification *)notification {
+    
+    CGFloat theDelta = [[notification.userInfo objectForKey:@"delta"] floatValue];
+    
+    if (theDelta > 0) {
+        rowHeightDelta = [NSNumber numberWithFloat:[rowHeightDelta floatValue] + theDelta];
+    } else {
+        rowHeightDelta = [NSNumber numberWithFloat:0];
+    }
+}
+
 -(void)toggleExpand {
     
     NSNumber *heightDifference;
@@ -111,13 +127,49 @@ typedef struct DualFrame DualFrame;
         heightDifference = [NSNumber numberWithFloat:viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
     } else {
         [self collapse];
-        heightDifference = [NSNumber numberWithFloat:viewFrame.collapsed.size.height - viewFrame.expanded.size.height];
+        heightDifference = [NSNumber numberWithFloat: -1 * [rowHeightDelta floatValue]];
+        rowHeightDelta = [NSNumber numberWithFloat:0];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
                                                         object:self
                                                       userInfo:@{@"delta": heightDifference}];
 
+}
+
+-(void)getRelatedEventsAndExpand {
+    
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:_event.eventId requester:_person];
+    CGFloat labelHeight = 50;
+    CGFloat labelWidth = 300;
+    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    
+    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSDictionary *eventDict, NSError *error) {
+        
+        NSArray *eventResult = [eventDict objectForKey:@"events"];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for (int i=0; i < eventResult.count; i++) {
+                
+                RelatedEvent *relatedEvent = [[RelatedEvent alloc] initWithJsonDictionary:[eventResult objectAtIndex:i]];
+                UILabel *eventLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height + labelHeight * i, labelWidth, labelHeight)];
+                eventLabel.text = relatedEvent.eventDescription;
+                [self.view addSubview:eventLabel];
+                [arrayOfRelatedEventLabels addObject:eventLabel];
+            }
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                
+                CGFloat heightIncrease = labelHeight * [eventResult count];
+                self.view.layer.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.x, self.view.layer.frame.size.width, self.view.layer.frame.size.height + heightIncrease);
+                NSNumber *heightDelta = [NSNumber numberWithFloat:heightIncrease];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
+                                                                    object:self
+                                                                  userInfo:@{@"delta": heightDelta}];
+            }];
+        });
+    }];
 }
 
 -(void)expand {
@@ -134,14 +186,7 @@ typedef struct DualFrame DualFrame;
         [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
-        
-        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:_event.eventId requester:_person];
-        
-        connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-        
-        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
-            NSLog(@"Result: %@", result);
-        }];
+        [self getRelatedEventsAndExpand];
     }];
     
 }
@@ -161,6 +206,11 @@ typedef struct DualFrame DualFrame;
         _expanded = NO;
         [CATransaction commit];
         eventDescriptionText.frame = descriptionFrame.collapsed;
+        
+        for (UILabel *relatedEventLabel in arrayOfRelatedEventLabels) {
+            [relatedEventLabel removeFromSuperview];
+        }
+        
     }];
 }
 @end

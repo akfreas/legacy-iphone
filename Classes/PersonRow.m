@@ -123,21 +123,33 @@ typedef struct DualFrame DualFrame;
     NSNumber *heightDifference;
     
     if (_expanded == NO) {
-        [self expand];
-        heightDifference = [NSNumber numberWithFloat:viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
+        [self expandWithCompletion:[self expandCompletionBlock]];
     } else {
-        [self collapse];
-        heightDifference = [NSNumber numberWithFloat: -1 * [rowHeightDelta floatValue]];
-        rowHeightDelta = [NSNumber numberWithFloat:0];
+        [self collapseWithCompletionBlock:[self collapseCompletionBlock]];
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
-                                                        object:self
-                                                      userInfo:@{@"delta": heightDifference}];
-
 }
 
--(void)getRelatedEventsAndExpand {
+-(void(^)(void))collapseCompletionBlock {
+    return ^{
+        NSNumber *heightDifference = [NSNumber numberWithFloat:viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
+                                                            object:self
+                                                          userInfo:@{@"delta": heightDifference}];
+    };
+}
+
+
+-(void(^)(void))expandCompletionBlock {
+    return ^{
+        NSNumber *heightDifference = [NSNumber numberWithFloat: -1 * [rowHeightDelta floatValue]];
+//        rowHeightDelta = [NSNumber numberWithFloat:0];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
+                                                            object:self
+                                                          userInfo:@{@"delta": heightDifference}];
+    };
+}
+
+-(void)getRelatedEventsAndExpandWithCompletion:(void(^)(void))completionBlock {
     
     AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:_event.eventId requester:_person];
     CGFloat labelHeight = 50;
@@ -149,15 +161,16 @@ typedef struct DualFrame DualFrame;
         NSArray *eventResult = [eventDict objectForKey:@"events"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             for (int i=0; i < eventResult.count; i++) {
                 
                 RelatedEvent *relatedEvent = [[RelatedEvent alloc] initWithJsonDictionary:[eventResult objectAtIndex:i]];
                 UILabel *eventLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height + labelHeight * i, labelWidth, labelHeight)];
+                eventLabel.layer.opacity = 0;
                 eventLabel.text = relatedEvent.eventDescription;
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
-            
             [UIView animateWithDuration:0.2 animations:^{
                 
                 CGFloat heightIncrease = labelHeight * [eventResult count];
@@ -167,15 +180,20 @@ typedef struct DualFrame DualFrame;
                 [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
                                                                     object:self
                                                                   userInfo:@{@"delta": heightDelta}];
+            } completion:^(BOOL finished) {
+                for (UILabel *theLabel in arrayOfRelatedEventLabels) {
+                    theLabel.layer.opacity = 1;
+                }
+                completionBlock();
             }];
         });
     }];
 }
 
--(void)expand {
+-(void)expandWithCompletion:(void(^)(void))completionBlock {
     
     [UIView animateWithDuration:.2 animations:^{
-        
+
         [CATransaction begin];
         [CATransaction setAnimationDuration:0];
         [widgetContainer expandWidget];
@@ -186,12 +204,14 @@ typedef struct DualFrame DualFrame;
         [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
-        [self getRelatedEventsAndExpand];
+
+    } completion:^(BOOL finished) {
+        [self getRelatedEventsAndExpandWithCompletion:completionBlock];
     }];
     
 }
 
--(void)collapse {
+-(void)collapseWithCompletionBlock:(void(^)(void))completionBlock {
     
     
     [UIView animateWithDuration:.2 animations:^{
@@ -211,6 +231,8 @@ typedef struct DualFrame DualFrame;
             [relatedEventLabel removeFromSuperview];
         }
         
+    } completion:^(BOOL finished) {
+        completionBlock();
     }];
 }
 @end

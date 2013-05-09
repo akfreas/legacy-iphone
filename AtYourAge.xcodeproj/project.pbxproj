@@ -690,8 +690,6 @@
 		4EEA6CF715268ED300B96EFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (397NMKG2NM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Freas (397NMKG2NM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies\"",
@@ -703,8 +701,6 @@
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3BA9F5DB-667E-4B70-9186-053BEB1C28A1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E1238F7-062A-40AD-8C6F-64987221F12D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -724,8 +720,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3BA9F5DB-667E-4B70-9186-053BEB1C28A1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3BA9F5DB-667E-4B70-9186-053BEB1C28A1";
+				PROVISIONING_PROFILE = "7F80734C-1760-4292-B499-7E72201ACD91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7F80734C-1760-4292-B499-7E72201ACD91";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

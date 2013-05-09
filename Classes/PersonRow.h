@@ -11,7 +11,7 @@
 @property (strong, nonatomic) IBOutlet AgeIndicatorView *ageIndicator;
 @property (nonatomic) BOOL expanded;
 
--(void)expandWithCompletion:(void(^)(void))completionBlock;
+-(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock;
 -(void)collapse;
 -(void)toggleExpand;
 

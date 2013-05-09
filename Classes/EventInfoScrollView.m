@@ -39,7 +39,7 @@ static CGFloat height = 140;
         
         Person *thePerson = [people objectAtIndex:i];
         
-        __block PersonRow *row = [[PersonRow alloc] initWithFrame:CGRectMake(5, (height + 10) * i, 310, height)];
+        __block PersonRow *row = [[PersonRow alloc] initWithFrame:CGRectMake(0, (height + 15) * i, 320, height)];
         [arrayOfPersonRows addObject:row];
         [self addSubview:row];
         row.person = thePerson;
@@ -58,7 +58,7 @@ static CGFloat height = 140;
         UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(toggleExpand)];
         [row addGestureRecognizer:touchUp];
         
-        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 10));
+        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 15));
     }
     [self layoutSubviews];
 }

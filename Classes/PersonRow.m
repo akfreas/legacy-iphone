@@ -64,7 +64,7 @@ typedef struct DualFrame DualFrame;
         arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordHeightDelta:) name:KeyForPersonRowHeightChanged object:nil];
+//        [[NSNotification Center defaultCenter] addObserver:self selector:@selector(recordHeightDelta:) name:KeyForPersonRowHeightChanged object:nil];
         
     }
     return self;
@@ -131,25 +131,32 @@ typedef struct DualFrame DualFrame;
 
 -(void(^)(void))collapseCompletionBlock {
     return ^{
-        NSNumber *heightDifference = [NSNumber numberWithFloat:viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
-                                                            object:self
-                                                          userInfo:@{@"delta": heightDifference}];
-    };
-}
-
-
--(void(^)(void))expandCompletionBlock {
-    return ^{
+        
         NSNumber *heightDifference = [NSNumber numberWithFloat: -1 * [rowHeightDelta floatValue]];
-//        rowHeightDelta = [NSNumber numberWithFloat:0];
+        NSLog(@"Height delta in collapse completion block: %@", rowHeightDelta);
+
+        rowHeightDelta = [NSNumber numberWithFloat:0];
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
                                                             object:self
                                                           userInfo:@{@"delta": heightDifference}];
     };
 }
 
--(void)getRelatedEventsAndExpandWithCompletion:(void(^)(void))completionBlock {
+
+-(void(^)(NSNumber *))expandCompletionBlock {
+    return ^(NSNumber *delta){
+        
+        rowHeightDelta = [NSNumber numberWithFloat:[rowHeightDelta floatValue] + [delta floatValue]];
+        NSLog(@"Height delta in expand completion block: %@", rowHeightDelta);
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
+                                                            object:self
+                                                          userInfo:@{@"delta": delta}];
+    };
+}
+
+
+-(void)getRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
     
     AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:_event.eventId requester:_person];
     CGFloat labelHeight = 50;
@@ -171,26 +178,27 @@ typedef struct DualFrame DualFrame;
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
+            __block NSNumber *heightDelta;
+
             [UIView animateWithDuration:0.2 animations:^{
                 
                 CGFloat heightIncrease = labelHeight * [eventResult count];
                 self.view.layer.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.x, self.view.layer.frame.size.width, self.view.layer.frame.size.height + heightIncrease);
-                NSNumber *heightDelta = [NSNumber numberWithFloat:heightIncrease];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
-                                                                    object:self
-                                                                  userInfo:@{@"delta": heightDelta}];
+                heightDelta = [NSNumber numberWithFloat:heightIncrease + viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
+
             } completion:^(BOOL finished) {
                 for (UILabel *theLabel in arrayOfRelatedEventLabels) {
                     theLabel.layer.opacity = 1;
                 }
-                completionBlock();
+                if (finished) {
+                    completionBlock(heightDelta);
+                }
             }];
         });
     }];
 }
 
--(void)expandWithCompletion:(void(^)(void))completionBlock {
+-(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
     
     [UIView animateWithDuration:.2 animations:^{
 
@@ -206,7 +214,9 @@ typedef struct DualFrame DualFrame;
         eventDescriptionText.frame = descriptionFrame.expanded;
 
     } completion:^(BOOL finished) {
-        [self getRelatedEventsAndExpandWithCompletion:completionBlock];
+        if (finished) {
+            [self getRelatedEventsAndExpandWithCompletion:completionBlock];
+        }
     }];
     
 }
@@ -232,7 +242,9 @@ typedef struct DualFrame DualFrame;
         }
         
     } completion:^(BOOL finished) {
-        completionBlock();
+        if (finished) {
+            completionBlock();
+        }
     }];
 }
 @end

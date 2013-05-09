@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
+		19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19277234173B555800A9F51D /* RelatedEventLabel.m */; };
+		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
@@ -79,7 +81,6 @@
 		19DFB9FC16D5E6E60019E2B2 /* EventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */; };
 		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
-		4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
 		4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
 		4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */; };
@@ -100,6 +101,9 @@
 		1915AFFE16C9EB7500D8434B /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		1915AFFF16C9EB7500D8434B /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
+		19277233173B555800A9F51D /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
+		19277234173B555800A9F51D /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
+		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
 		192E6E411724B1AA008C9153 /* ImageWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWidget.h; sourceTree = "<group>"; };
 		192E6E421724B1AA008C9153 /* ImageWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidget.m; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* AtYourAgeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtYourAgeWebView.xib; sourceTree = "<group>"; };
@@ -201,8 +205,6 @@
 		4E0F3C971545080D00369BE1 /* MainScreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenWebView.h; sourceTree = "<group>"; };
 		4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenWebView.m; sourceTree = "<group>"; };
 		4E0F3CA0154533E800369BE1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchPersonCell.h; sourceTree = "<group>"; };
-		4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchPersonCell.m; sourceTree = "<group>"; };
 		4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility_AppSettings.h; path = ../Utility_AppSettings.h; sourceTree = "<group>"; };
 		4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility_AppSettings.m; path = ../Utility_AppSettings.m; sourceTree = "<group>"; };
 		4E640C1515460474009D8DC6 /* SettingsModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsModalView.h; sourceTree = "<group>"; };
@@ -412,12 +414,12 @@
 				19632B9516DB036900E0EA75 /* PersonRow.m */,
 				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
 				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
-				4E0F3CA21545395900369BE1 /* SwitchPersonCell.h */,
-				4E0F3CA31545395900369BE1 /* SwitchPersonCell.m */,
 				19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */,
 				19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */,
 				19AF0EE6171BCBEA008DCA6A /* Staple.h */,
 				19AF0EE7171BCBEA008DCA6A /* Staple.m */,
+				19277233173B555800A9F51D /* RelatedEventLabel.h */,
+				19277234173B555800A9F51D /* RelatedEventLabel.m */,
 				4EEA6D431526A90200B96EFD /* AtYourAgeConnection.h */,
 				4EEA6D441526A90200B96EFD /* AtYourAgeConnection.m */,
 				4EEA6D5B1526CAEF00B96EFD /* AtYourAgeRequest.h */,
@@ -445,6 +447,7 @@
 				191866FC16D4373500220A42 /* MainScreen.xib */,
 				199354F016D4A05E00D73389 /* PersonInfoView.xib */,
 				19632B9216DB028400E0EA75 /* PersonRow.xib */,
+				19277236173B560D00A9F51D /* RelatedEventLabel.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				19D616FF1739E47600349377 /* NOTICE in Resources */,
 				19D617021739E47600349377 /* README.md in Resources */,
 				19D617041739E47600349377 /* uncrustify.cfg in Resources */,
+				19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +586,6 @@
 				4EEA6D5D1526CAEF00B96EFD /* AtYourAgeRequest.m in Sources */,
 				4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */,
 				4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */,
-				4E0F3CA41545395900369BE1 /* SwitchPersonCell.m in Sources */,
 				4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */,
 				4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */,
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
@@ -611,6 +614,7 @@
 				19D617011739E47600349377 /* NSString+HMAC.m in Sources */,
 				19D617031739E47600349377 /* UIView+Position.m in Sources */,
 				19D617081739EAB500349377 /* RelatedEvent.m in Sources */,
+				19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

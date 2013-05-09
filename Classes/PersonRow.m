@@ -6,6 +6,7 @@
 #import "RelatedEvent.h"
 #import "AtYourAgeConnection.h"
 #import "AtYourAgeRequest.h"
+#import "RelatedEventLabel.h"
 
 
 struct DualFrame {
@@ -172,27 +173,29 @@ typedef struct DualFrame DualFrame;
             for (int i=0; i < eventResult.count; i++) {
                 
                 RelatedEvent *relatedEvent = [[RelatedEvent alloc] initWithJsonDictionary:[eventResult objectAtIndex:i]];
-                UILabel *eventLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height + labelHeight * i, labelWidth, labelHeight)];
-                eventLabel.layer.opacity = 0;
-                eventLabel.text = relatedEvent.eventDescription;
+                __block RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
+                eventLabel.alpha = 0;
+                eventLabel.frame = CGRectMake(0, self.view.frame.size.height + labelHeight * i, labelWidth, labelHeight);
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
             __block NSNumber *heightDelta;
+            CGFloat heightIncrease = labelHeight * [eventResult count];
+            heightDelta = [NSNumber numberWithFloat:heightIncrease + viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
+            completionBlock(heightDelta);
 
             [UIView animateWithDuration:0.2 animations:^{
                 
-                CGFloat heightIncrease = labelHeight * [eventResult count];
                 self.view.layer.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.x, self.view.layer.frame.size.width, self.view.layer.frame.size.height + heightIncrease);
-                heightDelta = [NSNumber numberWithFloat:heightIncrease + viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
-
+                
+                
             } completion:^(BOOL finished) {
-                for (UILabel *theLabel in arrayOfRelatedEventLabels) {
-                    theLabel.layer.opacity = 1;
-                }
-                if (finished) {
-                    completionBlock(heightDelta);
-                }
+                [UIView animateWithDuration:0.2 animations:^{
+                    
+                    for (UILabel *theLabel in arrayOfRelatedEventLabels) {
+                        theLabel.alpha = 1;
+                    }
+                }];
             }];
         });
     }];
@@ -212,11 +215,8 @@ typedef struct DualFrame DualFrame;
         [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
+        [self getRelatedEventsAndExpandWithCompletion:completionBlock];
 
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self getRelatedEventsAndExpandWithCompletion:completionBlock];
-        }
     }];
     
 }
@@ -240,11 +240,8 @@ typedef struct DualFrame DualFrame;
         for (UILabel *relatedEventLabel in arrayOfRelatedEventLabels) {
             [relatedEventLabel removeFromSuperview];
         }
+        completionBlock();
         
-    } completion:^(BOOL finished) {
-        if (finished) {
-            completionBlock();
-        }
     }];
 }
 @end

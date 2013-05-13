@@ -21,7 +21,7 @@
 
 -(void)layoutSubviews {
     eventDescriptionTextView.text = _event.eventDescription;
-    [super layoutSubviews];
+    [super setNeedsLayout];
 }
 
 -(void)setEvent:(Event *)event {

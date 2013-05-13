@@ -36,7 +36,7 @@
 
 -(void)setPerson:(Person *)person {
     _person = person;
-    [self layoutSubviews];
+    [self setNeedsLayout];
 }
 
 @end

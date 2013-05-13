@@ -83,6 +83,19 @@ typedef struct DualFrame DualFrame;
     [self postWikiNotif];
 }
 
+
+-(void)showActivityMonitor {
+    ageLabel.hidden = YES;
+    figureNameLabel.hidden = YES;
+    widgetContainer.hidden = YES;
+    personInfo.hidden = YES;
+    
+}
+
+-(void)hideActivityMonitor {
+    
+}
+
 -(void)postWikiNotif {
     NSDictionary *userInfo = @{@"person" : _person};
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRemovePersonButtonTappedNotification object:self userInfo:userInfo];

@@ -60,7 +60,8 @@ static CGFloat height = 140;
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 15));
     }
-    [self layoutSubviews];
+    
+    [self setNeedsLayout];
 }
 
 -(void)personRowHeightChanged:(NSNotification *)notification {

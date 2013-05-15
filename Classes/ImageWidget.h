@@ -9,4 +9,6 @@
 @property (nonatomic) UIImage *smallImage;
 @property (nonatomic) UIImage *largeImage;
 @property (nonatomic) BOOL expanded;
+
+-(void)startProgressIndicator;
 @end

@@ -48,7 +48,6 @@
         } else {
             personThumbnail.image = imageForThumb;
             widget.largeImage = personThumbnail.image;
-            [widget setNeedsDisplay];
         }
     }
 }
@@ -57,11 +56,12 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.event.figureProfilePicUrl];
     NSLog(@"Profile pic url: %@", self.event.figureProfilePicUrl);
+    [widget startProgressIndicator];
     [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
         NSLog(@"Response: %@", (NSHTTPURLResponse *)resp);
         imageForThumb = [UIImage imageWithData:data];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self setNeedsLayout];
+            [self layoutSubviews];
 
         });
     }];

@@ -9,6 +9,7 @@
     
     CALayer *largeImageLayer;
     CALayer *smallImageLayer;
+    
     CAShapeLayer *largeImageBorderLayer;
     CAShapeLayer *smallImageBorderLayer;
     
@@ -77,17 +78,19 @@
 
 -(void)setSmallImage:(UIImage *)smallImage {
     _smallImage = smallImage;
-    [self setNeedsDisplay];
+//    [self setNeedsDisplay];
 }
 
 -(void)setLargeImage:(UIImage *)largeImage {
     _largeImage = largeImage;
-    [self setNeedsDisplay];
+    [self drawLargeImage];
+//    [self setNeedsDisplay];
 }
+
 
 -(void)setSmallImageOffset:(CGFloat)smallImageOffset {
     _smallImageOffset = smallImageOffset;
-    [self setNeedsDisplay];
+//    [self setNeedsDisplay];
 }
 
 -(void)setExpanded:(BOOL)expanded {
@@ -133,7 +136,15 @@
 
 -(void)drawRect:(CGRect)rect {
     
-    if (_largeImage != nil && largeImageLayer == nil) {
+    
+    if (largeImageLayer == nil) {
+        [self drawLargeImageLayer];
+    }
+    if (largeImageBorderLayer == nil) {
+        [self drawBackgroundBorderLayer];
+    }
+    
+    if (_largeImage != nil) {
         [self drawLargeImage];
     }
     if (_smallImage != nil && smallImageLayer == nil) {
@@ -141,8 +152,53 @@
     }
 }
 
--(void)drawLargeImage {
+-(void)startProgressIndicator {
+    
+    
+    CGMutablePathRef pieEndPath = CGPathCreateMutable();
+    CGPathAddArc(pieEndPath, 0, _largeImageRadius, _largeImageRadius, _largeImageRadius, 0, M_PI_2, true);
+    
+    CGMutablePathRef piePath = CGPathCreateMutable();
+    CGPathAddArc(piePath, 0, _largeImageRadius, _largeImageRadius, _largeImageRadius, M_PI, M_PI_4, true);
+//    largeImageBorderLayer.progress = 1;
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//    maskLayer.path = piePath;
+//    largeImageBorderLayer.mask = maskLayer;
+    
+//    [CATransaction begin];
+//    [CATransaction setAnimationDuration:10];
 
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"path"];
+    anim.duration = 10.0f;
+    anim.fromValue = (__bridge id)circlePath;
+    anim.toValue  = (__bridge id)pieEndPath;
+    
+
+//    [largeImageBorderLayer addAnimation:anim forKey:@"thePath"];
+
+    
+}
+
+-(void)drawBackgroundBorderLayer {
+    
+//    largeImageBorderLayer = [[DZRoundProgressLayer alloc] init];
+    largeImageBorderLayer = [CAShapeLayer layer];
+    largeImageBorderLayer.path = circlePath;
+    largeImageBorderLayer.lineWidth = 3.0;
+    largeImageBorderLayer.strokeColor = [UIColor whiteColor].CGColor;
+    largeImageBorderLayer.fillColor = [UIColor purpleColor].CGColor;
+    largeImageBorderLayer.backgroundColor = [UIColor redColor].CGColor;
+    [largeImageLayer addSublayer:largeImageBorderLayer];
+}
+
+-(void)drawLargeImageLayer {
+    
+    largeImageLayer = [[CALayer alloc] init];
+    largeImageLayer.frame = CGRectMake(0, 0, _largeImageRadius, _largeImageRadius);    
+    [self.layer addSublayer:largeImageLayer];
+}
+
+-(void)drawLargeImage {
     
     CGSize imgSize = _largeImage.size;
     CGFloat scale = MAX((_largeImageRadius * 2) / imgSize.width, (_largeImageRadius * 2) / imgSize.height);
@@ -156,7 +212,6 @@
     } else {
         imgRect = CGRectMake(0, _largeImageRadius - imageHeight / 2, imageWidth, imageHeight);
     }
-    
     UIImage *resizedLargeImage = [[UIImage alloc] init];
     UIGraphicsBeginImageContextWithOptions(imgRect.size, YES, 2.0);
     [_largeImage drawInRect:imgRect];
@@ -169,17 +224,10 @@
     largeImageMask = [[CAShapeLayer alloc] init];
     largeImageMask.path =  circlePath;
     
-    largeImageBorderLayer = [[CAShapeLayer alloc] init];
-    largeImageBorderLayer.path = circlePath;
-    largeImageBorderLayer.lineWidth = 3.0;
-    largeImageBorderLayer.strokeColor = [UIColor whiteColor].CGColor;
-    largeImageBorderLayer.fillColor = [UIColor clearColor].CGColor;
-    
     largeImageLayer.mask  = largeImageMask;
     largeImageLayer.zPosition = 2.0;
-    [largeImageLayer addSublayer:largeImageBorderLayer];
     [self.layer addSublayer:largeImageLayer];
-    
+
 }
 
 -(void)drawSmallImage {

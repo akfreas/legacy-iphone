@@ -9,5 +9,6 @@
 
 -(id)initWithCenterPoint:(CGPoint)point radius:(CGFloat)radius;
 -(void)animate;
+-(void)stopAnimating;
 
 @end

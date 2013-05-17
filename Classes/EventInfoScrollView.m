@@ -45,16 +45,6 @@ static CGFloat height = 140;
         row.person = thePerson;
         [row setNeedsLayout];
         
-        AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForPerson:thePerson];
-        
-        connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-        
-        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Event *result, NSError *error) {
-            NSLog(@"Event Fetch Result: %@", result);
-            row.event = result;
-        }];
-        
-        
         UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(toggleExpand)];
         [row addGestureRecognizer:touchUp];
         

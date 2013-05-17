@@ -10,6 +10,7 @@
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19277234173B555800A9F51D /* RelatedEventLabel.m */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
+		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
@@ -104,6 +105,8 @@
 		19277233173B555800A9F51D /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		19277234173B555800A9F51D /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
+		192E42B1174668E900192BD5 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
+		192E42B2174668E900192BD5 /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
 		192E6E411724B1AA008C9153 /* ImageWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWidget.h; sourceTree = "<group>"; };
 		192E6E421724B1AA008C9153 /* ImageWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidget.m; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* AtYourAgeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtYourAgeWebView.xib; sourceTree = "<group>"; };
@@ -412,6 +415,8 @@
 				199354F316D4A19B00D73389 /* PersonInfoView.m */,
 				19632B9416DB036900E0EA75 /* PersonRow.h */,
 				19632B9516DB036900E0EA75 /* PersonRow.m */,
+				192E42B1174668E900192BD5 /* ProgressIndicator.h */,
+				192E42B2174668E900192BD5 /* ProgressIndicator.m */,
 				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
 				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
 				19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */,
@@ -615,6 +620,7 @@
 				19D617031739E47600349377 /* UIView+Position.m in Sources */,
 				19D617081739EAB500349377 /* RelatedEvent.m in Sources */,
 				19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */,
+				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

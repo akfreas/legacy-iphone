@@ -4,3 +4,4 @@
 #define KeyForRemovePersonButtonTappedNotification @"RemoveFriendButton"
 
 #define KeyForPersonRowHeightChanged @"PersonRowHeightChanged"
+#define KeyForEventLoadingComplete @"EventLoadingComplete"

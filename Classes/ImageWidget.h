@@ -10,5 +10,8 @@
 @property (nonatomic) UIImage *largeImage;
 @property (nonatomic) BOOL expanded;
 
+
+@property (readonly) CGRect largeImageFrame;
+
 -(void)startProgressIndicator;
 @end

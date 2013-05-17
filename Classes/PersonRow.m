@@ -7,6 +7,8 @@
 #import "AtYourAgeConnection.h"
 #import "AtYourAgeRequest.h"
 #import "RelatedEventLabel.h"
+#import "ProgressIndicator.h"
+#import "ImageWidget.h"
 
 
 struct DualFrame {
@@ -31,6 +33,7 @@ typedef struct DualFrame DualFrame;
     IBOutlet ImageWidgetContainer *widgetContainer;
 
     AtYourAgeConnection *connection;
+    ProgressIndicator *ind;
 
     DualFrame descriptionFrame;
     DualFrame widgetContainerFrame;
@@ -64,8 +67,13 @@ typedef struct DualFrame DualFrame;
         viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 100);
         arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
+        CGPoint widgetPoint = [self.view convertPoint:widgetContainer.widget.largeImageFrame.origin fromView:widgetContainer.widget];
+        widgetPoint = CGPointMake(widgetPoint.x + widgetContainer.widget.largeImageRadius, widgetPoint.y + widgetContainer.widget.largeImageRadius);
+        ind = [[ProgressIndicator alloc] initWithCenterPoint:widgetPoint radius:widgetContainer.widget.largeImageRadius];
         
-//        [[NSNotification Center defaultCenter] addObserver:self selector:@selector(recordHeightDelta:) name:KeyForPersonRowHeightChanged object:nil];
+        [self.layer addSublayer:ind];
+        //        [[NSNotification Center defaultCenter] addObserver:self selector:@selector(recordHeightDelta:) name:KeyForPersonRowHeightChanged object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:nil];
         
     }
     return self;
@@ -103,6 +111,7 @@ typedef struct DualFrame DualFrame;
 }
 
 -(void)setEvent:(Event *)event {
+//    [ind animate];
     _event = event;
     figureNameLabel.text = event.figureName;
     widgetContainer.event = event;
@@ -112,6 +121,10 @@ typedef struct DualFrame DualFrame;
     ageLabel.layer.cornerRadius = 10;
 }
 
+-(void)eventLoadingComplete:(NSNotification *)notif {
+    [ind stopAnimating];
+}
+
 -(void)setPerson:(Person *)person {
     _person = person;
     //    personInfo.person = person;
@@ -119,6 +132,17 @@ typedef struct DualFrame DualFrame;
     if ([_person.isPrimary isEqualToNumber: [NSNumber numberWithBool:NO]]) {
         trashcanButton.hidden = NO;
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ind animate];
+    });
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForPerson:person];
+    
+    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    
+    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Event *result, NSError *error) {
+        NSLog(@"Event Fetch Result: %@", result);
+        self.event = result;
+    }];
 }
 
 -(void)recordHeightDelta:(NSNotification *)notification {
@@ -135,7 +159,6 @@ typedef struct DualFrame DualFrame;
 -(void)toggleExpand {
     
     NSNumber *heightDifference;
-    
     if (_expanded == NO) {
         [self expandWithCompletion:[self expandCompletionBlock]];
     } else {

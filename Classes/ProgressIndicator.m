@@ -25,6 +25,10 @@
     self.endAngle = DEG2RAD(270);
 }
 
+-(void)stopAnimating {
+    self.opacity = 0;
+}
+
 
 -(id)init {
     self = [super init];

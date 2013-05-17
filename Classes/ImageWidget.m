@@ -1,4 +1,7 @@
 #import "ImageWidget.h"
+#import "ProgressIndicator.h"
+
+
 
 @implementation ImageWidget {
     
@@ -15,6 +18,8 @@
     
     CAShapeLayer *largeImageMask;
     CAShapeLayer *smallImageMask;
+    
+    ProgressIndicator *indicator;
     
     CGMutablePathRef circlePath;
     
@@ -42,6 +47,8 @@
         _smallImageOffset = 5;
         _expanded = NO;
         
+        
+
         
         circlePath = CGPathCreateMutable();
         CGPathAddArc(circlePath, 0, _largeImageRadius, _largeImageRadius, _largeImageRadius, 0, 2*M_PI, 1);
@@ -101,6 +108,10 @@
     }
 }
 
+-(CGRect)largeImageFrame {
+    return largeImageLayer.frame;
+}
+
 -(void)toggleExpand {
     
     NSLog(@"Expand!");
@@ -139,54 +150,46 @@
     
     if (largeImageLayer == nil) {
         [self drawLargeImageLayer];
+        
     }
     if (largeImageBorderLayer == nil) {
         [self drawBackgroundBorderLayer];
+        
     }
     
     if (_largeImage != nil) {
         [self drawLargeImage];
+    } else {
+        
+//        
+//        if (indicator == nil) {
+//            indicator = [[ProgressIndicator alloc] initWithCenterPoint:CGPointMake(_largeImageRadius, _largeImageRadius) radius:_largeImageRadius];
+//            [self.layer addSublayer:indicator];
+//        } else {
+//        [indicator animate];
+//        }
     }
     if (_smallImage != nil && smallImageLayer == nil) {
         [self drawSmallImage];
     }
+    
+    
+
 }
 
 -(void)startProgressIndicator {
     
-    
-    CGMutablePathRef pieEndPath = CGPathCreateMutable();
-    CGPathAddArc(pieEndPath, 0, _largeImageRadius, _largeImageRadius, _largeImageRadius, 0, M_PI_2, true);
-    
-    CGMutablePathRef piePath = CGPathCreateMutable();
-    CGPathAddArc(piePath, 0, _largeImageRadius, _largeImageRadius, _largeImageRadius, M_PI, M_PI_4, true);
-//    largeImageBorderLayer.progress = 1;
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-//    maskLayer.path = piePath;
-//    largeImageBorderLayer.mask = maskLayer;
-    
-//    [CATransaction begin];
-//    [CATransaction setAnimationDuration:10];
+//    [indicator animate];
 
-    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"path"];
-    anim.duration = 10.0f;
-    anim.fromValue = (__bridge id)circlePath;
-    anim.toValue  = (__bridge id)pieEndPath;
-    
-
-//    [largeImageBorderLayer addAnimation:anim forKey:@"thePath"];
-
-    
 }
 
 -(void)drawBackgroundBorderLayer {
     
-//    largeImageBorderLayer = [[DZRoundProgressLayer alloc] init];
     largeImageBorderLayer = [CAShapeLayer layer];
     largeImageBorderLayer.path = circlePath;
     largeImageBorderLayer.lineWidth = 3.0;
     largeImageBorderLayer.strokeColor = [UIColor whiteColor].CGColor;
-    largeImageBorderLayer.fillColor = [UIColor purpleColor].CGColor;
+    largeImageBorderLayer.fillColor = [UIColor grayColor].CGColor;
     largeImageBorderLayer.backgroundColor = [UIColor redColor].CGColor;
     [largeImageLayer addSublayer:largeImageBorderLayer];
 }
@@ -199,6 +202,8 @@
 }
 
 -(void)drawLargeImage {
+    
+    
     
     CGSize imgSize = _largeImage.size;
     CGFloat scale = MAX((_largeImageRadius * 2) / imgSize.width, (_largeImageRadius * 2) / imgSize.height);
@@ -227,7 +232,8 @@
     largeImageLayer.mask  = largeImageMask;
     largeImageLayer.zPosition = 2.0;
     [self.layer addSublayer:largeImageLayer];
-
+    
+    
 }
 
 -(void)drawSmallImage {

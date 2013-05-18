@@ -13,5 +13,4 @@
 
 @property (readonly) CGRect largeImageFrame;
 
--(void)startProgressIndicator;
 @end

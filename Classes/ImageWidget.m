@@ -1,5 +1,4 @@
 #import "ImageWidget.h"
-#import "ProgressIndicator.h"
 
 
 
@@ -19,9 +18,9 @@
     CAShapeLayer *largeImageMask;
     CAShapeLayer *smallImageMask;
     
-    ProgressIndicator *indicator;
-    
     CGMutablePathRef circlePath;
+    
+    UIImage *resizedLargeImage;
     
 }
 
@@ -75,29 +74,24 @@
 
 -(void)setAngle:(CGFloat)angle {
     _angle = angle;
-//    [self setNeedsDisplay];
 }
 
 -(void)setSmallImageRadius:(CGFloat)smallImageRadius {
     _smallImageRadius = smallImageRadius;
-//    [self setNeedsDisplay];
 }
 
 -(void)setSmallImage:(UIImage *)smallImage {
     _smallImage = smallImage;
-//    [self setNeedsDisplay];
 }
 
 -(void)setLargeImage:(UIImage *)largeImage {
     _largeImage = largeImage;
-    [self drawLargeImage];
-//    [self setNeedsDisplay];
+    [self setNeedsDisplay];
 }
 
 
 -(void)setSmallImageOffset:(CGFloat)smallImageOffset {
     _smallImageOffset = smallImageOffset;
-//    [self setNeedsDisplay];
 }
 
 -(void)setExpanded:(BOOL)expanded {
@@ -127,7 +121,9 @@
         scaleTransform = CGAffineTransformMakeScale(.5, .5);
         circleTransform = CGAffineTransformMakeScale(0, 0);
         largeImageLayer.mask.transform = largeImageBorderLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(1, 1));
+        smallImageLayer.opacity = 1;
     } else {
+        smallImageLayer.opacity = 0;
         largeImageLayer.mask.transform = largeImageBorderLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(2, 2));
     }
     
@@ -143,43 +139,29 @@
     largeImageLayer.frame = CGRectApplyAffineTransform(largeImageLayer.frame, scaleTransform);
     smallImageLayer.frame = CGRectMake(smallImageLayer.frame.origin.x + lgFrameWidthDiff, smallImageLayer.frame.origin.y + lgFrameHeightDiff, smallImageLayer.frame.size.width, smallImageLayer.frame.size.height);
     [CATransaction commit];
+    [self setNeedsDisplay];
 }
 
 -(void)drawRect:(CGRect)rect {
     
-    
-    if (largeImageLayer == nil) {
-        [self drawLargeImageLayer];
-        
-    }
     if (largeImageBorderLayer == nil) {
         [self drawBackgroundBorderLayer];
         
     }
     
+    if (largeImageLayer == nil) {
+        [self drawLargeImageLayer];
+        
+    }
+    
     if (_largeImage != nil) {
         [self drawLargeImage];
-    } else {
-        
-//        
-//        if (indicator == nil) {
-//            indicator = [[ProgressIndicator alloc] initWithCenterPoint:CGPointMake(_largeImageRadius, _largeImageRadius) radius:_largeImageRadius];
-//            [self.layer addSublayer:indicator];
-//        } else {
-//        [indicator animate];
-//        }
-    }
+    } 
     if (_smallImage != nil && smallImageLayer == nil) {
         [self drawSmallImage];
     }
     
     
-
-}
-
--(void)startProgressIndicator {
-    
-//    [indicator animate];
 
 }
 
@@ -191,18 +173,17 @@
     largeImageBorderLayer.strokeColor = [UIColor whiteColor].CGColor;
     largeImageBorderLayer.fillColor = [UIColor grayColor].CGColor;
     largeImageBorderLayer.backgroundColor = [UIColor redColor].CGColor;
-    [largeImageLayer addSublayer:largeImageBorderLayer];
+    [self.layer addSublayer:largeImageBorderLayer];
 }
 
 -(void)drawLargeImageLayer {
     
     largeImageLayer = [[CALayer alloc] init];
-    largeImageLayer.frame = CGRectMake(0, 0, _largeImageRadius, _largeImageRadius);    
-    [self.layer addSublayer:largeImageLayer];
+    largeImageLayer.frame = CGRectMake(0, 0, _largeImageRadius, _largeImageRadius);
+    [largeImageBorderLayer addSublayer:largeImageLayer];
 }
 
 -(void)drawLargeImage {
-    
     
     
     CGSize imgSize = _largeImage.size;
@@ -217,22 +198,21 @@
     } else {
         imgRect = CGRectMake(0, _largeImageRadius - imageHeight / 2, imageWidth, imageHeight);
     }
-    UIImage *resizedLargeImage = [[UIImage alloc] init];
+    resizedLargeImage = [[UIImage alloc] init];
     UIGraphicsBeginImageContextWithOptions(imgRect.size, YES, 2.0);
     [_largeImage drawInRect:imgRect];
     resizedLargeImage = UIGraphicsGetImageFromCurrentImageContext();
     
-    largeImageLayer = [[CALayer alloc] init];
     largeImageLayer.frame = CGRectMake(0, 0, imgRect.size.width, imgRect.size.height);
     largeImageLayer.contents = (__bridge id)(resizedLargeImage.CGImage);
+    
+//    [self addSubview:[[UIImageView alloc] initWithImage:resizedLargeImage]];
     
     largeImageMask = [[CAShapeLayer alloc] init];
     largeImageMask.path =  circlePath;
     
     largeImageLayer.mask  = largeImageMask;
-    largeImageLayer.zPosition = 2.0;
-    [self.layer addSublayer:largeImageLayer];
-    
+//    largeImageLayer.zPosition = 6.0;
     
 }
 

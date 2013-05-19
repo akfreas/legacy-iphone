@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
+		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
 		19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19277234173B555800A9F51D /* RelatedEventLabel.m */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
 		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
@@ -105,6 +106,8 @@
 		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		191CF6361747341700086D5E /* RightIndicatorLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightIndicatorLines.h; sourceTree = "<group>"; };
 		191CF6371747341700086D5E /* RightIndicatorLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightIndicatorLines.m; sourceTree = "<group>"; };
+		191CF63917488CE700086D5E /* CircleImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleImageLayer.h; sourceTree = "<group>"; };
+		191CF63A17488CE700086D5E /* CircleImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageLayer.m; sourceTree = "<group>"; };
 		19277233173B555800A9F51D /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		19277234173B555800A9F51D /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
@@ -396,6 +399,8 @@
 				4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */,
 				4E6478B915439BC800CE47F1 /* BSKeyboardControls.m */,
 				19C49EAB16CA345800304AD6 /* Constants.h */,
+				191CF63917488CE700086D5E /* CircleImageLayer.h */,
+				191CF63A17488CE700086D5E /* CircleImageLayer.m */,
 				199354FB16D4A29700D73389 /* EventInfoScrollView.h */,
 				199354FC16D4A29700D73389 /* EventInfoScrollView.m */,
 				1993550C16D4E8F600D73389 /* ImageWidgetContainer.h */,
@@ -627,6 +632,7 @@
 				19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */,
 				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,
 				191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */,
+				191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

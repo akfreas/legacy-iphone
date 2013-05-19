@@ -219,7 +219,9 @@ typedef struct DualFrame DualFrame;
                 
                 if (relatedEvent.isSelf == YES) {
                     selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
-                    eventLabel.backgroundColor = [UIColor lightGrayColor];
+//                    eventLabel.backgroundColor = [UIColor lightGrayColor];
+                    eventLabel.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:.2].CGColor;
+                    eventLabel.layer.cornerRadius = 15.0;
                 }
                 
                 [self.view addSubview:eventLabel];
@@ -253,27 +255,15 @@ typedef struct DualFrame DualFrame;
 -(void)addIndicatorLines {
 
     
-//    CGPoint translatedPoint = [self.view convertPoint:widgetContainer.frame.origin fromView:widgetContainer];
-    CGPoint translatedPoint = widgetContainer.frame.origin;
-    
-    CGRect largeImageRect = widgetContainer.widget.largeImageFrame;
+        CGRect largeImageRect = widgetContainer.widget.largeImageFrame;
     
     CGPoint startPoint = CGPointMake(largeImageRect.origin.x + largeImageRect.size.width, largeImageRect.origin.y + largeImageRect.size.height / 2);
     
     startPoint = [self.layer convertPoint:startPoint fromLayer:widgetContainer.widget.largeImageL];
-    
-//    CGPoint startPoint = CGPointMake(translatedPoint.x + widgetContainer.frame.size.width, translatedPoint.y + widgetContainer.frame.size.height / 2);
-    widgetContainer.backgroundColor = [UIColor orangeColor];
-    indLines = [[RightIndicatorLines alloc] initWithStartPoint:startPoint endPoint:CGPointZero];
-    
     CGPoint translatedEndPoint = CGPointMake(selfEventRightmostPoint.x - startPoint.x, selfEventRightmostPoint.y - startPoint.y);
-    
-    indLines.lineEndPoint = translatedEndPoint;
+    indLines = [[RightIndicatorLines alloc] initWithStartPoint:startPoint endPoint:translatedEndPoint];
     
     [self addSubview:indLines];
-//    [self setNeedsDisplay];
-
-    
 }
 
 -(void)removeIndicatorLines {

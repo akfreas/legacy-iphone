@@ -6,15 +6,10 @@
 @implementation ImageWidget {
     
     CALayer *layer;
-    CALayer *smallImageLayer;
-    
-    CAShapeLayer *largeImageBorderLayer;
     CAShapeLayer *smallImageBorderLayer;
     CircleImageLayer *largeCircleImage;
-    CAShapeLayer *largeImageMask;
+    CircleImageLayer *smallCircleImage;
     CAShapeLayer *smallImageMask;
-    
-    CGMutablePathRef circlePath;
     
     UIImage *resizedLargeImage;
     
@@ -41,21 +36,10 @@
         _largeImageRadius = 40;
         _smallImageOffset = 5;
         _expanded = NO;
-        
-        
-
-        
-        circlePath = CGPathCreateMutable();
-        CGPathAddArc(circlePath, 0, _largeImageRadius, _largeImageRadius, _largeImageRadius, 0, 2*M_PI, 1);
-        
-//        largeImageLayer = [[CALayer alloc] init];
-//        smallImageLayer = [[CALayer alloc] init];
-//        [self.layer addSublayer:largeImageLayer];
-//        [self.layer addSublayer:smallImageLayer];
-        
+                        
         self.backgroundColor = [UIColor clearColor];
-//        [self addGestureRecognizers];
     }
+    
     return self;
 }
 
@@ -113,18 +97,21 @@
     [CATransaction begin];
     [CATransaction setValue:[NSNumber numberWithDouble:0.2] forKey:kCATransactionAnimationDuration];
 
-    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(2, 2);
     CGAffineTransform circleTransform = CGAffineTransformMakeScale(2, 2);
     CGRect circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
     
-    if (_expanded) {
-        scaleTransform = CGAffineTransformMakeScale(.5, .5);
+    if (_expanded == YES) {
         circleTransform = CGAffineTransformMakeScale(0, 0);
-        largeCircleImage.transform = largeImageBorderLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(1, 1));
-        smallImageLayer.opacity = 1;
+        
+        CGAffineTransform trans = CGAffineTransformMakeScale(1, 1);
+        
+        largeCircleImage.transform = CATransform3DMakeAffineTransform(trans);
+        smallCircleImage.opacity = 1;
     } else {
-        smallImageLayer.opacity = 0;
-        largeCircleImage.transform = largeImageBorderLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeScale(2, 2));
+        smallCircleImage.opacity = 0;
+        
+        CGAffineTransform trans = CGAffineTransformMakeScale(2, 2);
+        largeCircleImage.transform = CATransform3DMakeAffineTransform(trans);
     }
     
     
@@ -136,8 +123,8 @@
     CGFloat lgFrameWidthDiff = (largeImageFrame.size.width - circleFrame.size.width);
     CGFloat lgFrameHeightDiff = (largeImageFrame.size.height - circleFrame.size.height);
     
-    largeCircleImage.frame = CGRectApplyAffineTransform(largeCircleImage.frame, scaleTransform);
-    smallImageLayer.frame = CGRectMake(smallImageLayer.frame.origin.x + lgFrameWidthDiff, smallImageLayer.frame.origin.y + lgFrameHeightDiff, smallImageLayer.frame.size.width, smallImageLayer.frame.size.height);
+    largeCircleImage.frame = self.frame;
+    smallCircleImage.frame = CGRectMake(smallCircleImage.frame.origin.x + lgFrameWidthDiff, smallCircleImage.frame.origin.y + lgFrameHeightDiff, smallCircleImage.frame.size.width, smallCircleImage.frame.size.height);
     [CATransaction commit];
     [self setNeedsDisplay];
 }
@@ -147,25 +134,29 @@
 
     if (largeCircleImage == nil) {
         largeCircleImage = [[CircleImageLayer alloc] initWithRadius:_largeImageRadius];
+//        largeCircleImage.frame = frame
         [self.layer addSublayer:largeCircleImage];
     }
     
     if (_largeImage != nil) {
         largeCircleImage.image = _largeImage;
     } 
-    if (_smallImage != nil && smallImageLayer == nil) {
+    if (_smallImage != nil && smallCircleImage == nil) {
         [self drawSmallImage];
     }
 }
 
 -(void)drawSmallImage {
     
+    
+    
+    
     CGSize smImgSize = _smallImage.size;
     CGFloat scale = MAX((_smallImageRadius * 2) / smImgSize.width, (_smallImageRadius * 2) / smImgSize.height);
     
     
     CGPoint arcCenter = CGPointMake(_largeImageRadius - (_largeImageRadius - _smallImageOffset) * cos(_angle * M_PI/180), _largeImageRadius +  (_largeImageRadius - _smallImageOffset) * sin(_angle * M_PI / 180));
-    NSLog(@"Arc center: %@", CGPointCreateDictionaryRepresentation(arcCenter));
+    
     CGFloat smImgWidth = _smallImage.size.width * scale;
     CGFloat smImgHeight = _smallImage.size.height * scale;
     
@@ -176,29 +167,12 @@
     } else {
         smImgRect = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
     }
-    
-    CGMutablePathRef smallCirclePath = CGPathCreateMutable();
-    
-    CGPathAddArc(smallCirclePath, 0, _smallImageRadius, _smallImageRadius, _smallImageRadius, 0, 2*M_PI, true);
-    smallImageMask = [[CAShapeLayer alloc] init];
-    smallImageMask.path = smallCirclePath;
-    
-    smallImageBorderLayer = [[CAShapeLayer alloc] init];
-    smallImageBorderLayer.path = smallCirclePath;
-    smallImageBorderLayer.lineWidth = 3.0;
-    smallImageBorderLayer.opacity = 1;
-    smallImageBorderLayer.fillColor = [UIColor clearColor].CGColor;
-    smallImageBorderLayer.strokeColor = [UIColor whiteColor].CGColor;
 
-    
-    smallImageLayer = [[CALayer alloc] init];
-    smallImageLayer.contents = (__bridge id)(_smallImage.CGImage);
-    smallImageLayer.frame = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
-    smallImageLayer.mask = smallImageMask;
-    smallImageLayer.zPosition = 3.0;
-    smallImageBorderLayer.zPosition = 4.0;
-    [smallImageLayer addSublayer:smallImageBorderLayer];
-    [self.layer addSublayer:smallImageLayer];
+
+    smallCircleImage = [[CircleImageLayer alloc] initWithImage:_smallImage radius:_smallImageRadius];
+    smallCircleImage.frame = smImgRect;
+
+    [self.layer addSublayer:smallCircleImage];
     
 }
 

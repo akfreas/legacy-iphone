@@ -1,3 +1,4 @@
+
 @interface ImageWidget : UIView
 
 -(id)initWithSmallImage:(UIImage *)theSmallImage largeImage:(UIImage *)theLargeImage;

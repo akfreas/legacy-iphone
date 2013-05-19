@@ -199,7 +199,7 @@ typedef struct DualFrame DualFrame;
 -(void)getRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
     
     AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:_event.eventId requester:_person];
-    CGFloat labelHeight = 50;
+    CGFloat labelHeight = 54;
     CGFloat labelWidth = 300;
     connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     
@@ -255,14 +255,12 @@ typedef struct DualFrame DualFrame;
 -(void)addIndicatorLines {
 
     
-        CGRect largeImageRect = widgetContainer.widget.largeImageFrame;
+    CGRect largeImageRect = widgetContainer.frame   ;
     
     CGPoint startPoint = CGPointMake(largeImageRect.origin.x + largeImageRect.size.width, largeImageRect.origin.y + largeImageRect.size.height / 2);
-    
-    startPoint = [self.layer convertPoint:startPoint fromLayer:widgetContainer.widget.largeImageL];
     CGPoint translatedEndPoint = CGPointMake(selfEventRightmostPoint.x - startPoint.x, selfEventRightmostPoint.y - startPoint.y);
     indLines = [[RightIndicatorLines alloc] initWithStartPoint:startPoint endPoint:translatedEndPoint];
-    
+    indLines.person = self.person;
     [self addSubview:indLines];
 }
 

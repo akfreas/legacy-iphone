@@ -19,4 +19,9 @@
 @dynamic thumbnail;
 @dynamic isFacebookUser;
 
+
+-(NSString *)fullName {
+    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+}
+
 @end

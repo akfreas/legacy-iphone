@@ -20,4 +20,6 @@
 @property (nonatomic, retain) NSData * thumbnail;
 @property (nonatomic, retain) NSNumber * isFacebookUser;
 
+@property (nonatomic, retain) NSString *fullName;
+
 @end

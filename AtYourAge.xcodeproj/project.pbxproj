@@ -28,7 +28,6 @@
 		19632BA316DB437500E0EA75 /* wood.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA216DB437500E0EA75 /* wood.png */; };
 		19632BA616DB453C00E0EA75 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA416DB453C00E0EA75 /* 218-trash2.png */; };
 		19632BA716DB453C00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */; };
-		19632BAA16DC5A9200E0EA75 /* ScrollViewStickLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */; };
 		197308D41707B57C00FCADD3 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = 197308D31707B57C00FCADD3 /* question.png */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
@@ -403,8 +402,6 @@
 				191CF63A17488CE700086D5E /* CircleImageLayer.m */,
 				199354FB16D4A29700D73389 /* EventInfoScrollView.h */,
 				199354FC16D4A29700D73389 /* EventInfoScrollView.m */,
-				1993550C16D4E8F600D73389 /* ImageWidgetContainer.h */,
-				1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19D61CD016B250E100C81E60 /* FriendTableViewController.h */,
@@ -413,6 +410,8 @@
 				19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */,
 				4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */,
 				4EEA6D3C1526A7CD00B96EFD /* FirstTimeLoadScreen.m */,
+				1993550C16D4E8F600D73389 /* ImageWidgetContainer.h */,
+				1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */,
 				192E6E411724B1AA008C9153 /* ImageWidget.h */,
 				192E6E421724B1AA008C9153 /* ImageWidget.m */,
 				19D29F7F16A674C200D46B0A /* MainScreen.h */,
@@ -423,10 +422,10 @@
 				199354F316D4A19B00D73389 /* PersonInfoView.m */,
 				19632B9416DB036900E0EA75 /* PersonRow.h */,
 				19632B9516DB036900E0EA75 /* PersonRow.m */,
-				191CF6361747341700086D5E /* RightIndicatorLines.h */,
-				191CF6371747341700086D5E /* RightIndicatorLines.m */,
 				192E42B1174668E900192BD5 /* ProgressIndicator.h */,
 				192E42B2174668E900192BD5 /* ProgressIndicator.m */,
+				191CF6361747341700086D5E /* RightIndicatorLines.h */,
+				191CF6371747341700086D5E /* RightIndicatorLines.m */,
 				4E640C1515460474009D8DC6 /* SettingsModalView.h */,
 				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
 				19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */,
@@ -614,7 +613,6 @@
 				199354FD16D4A29700D73389 /* EventInfoScrollView.m in Sources */,
 				19632B9616DB036900E0EA75 /* PersonRow.m in Sources */,
 				19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */,
-				19632BAA16DC5A9200E0EA75 /* ScrollViewStickLines.m in Sources */,
 				195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */,
 				195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld in Sources */,

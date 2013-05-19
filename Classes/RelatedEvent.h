@@ -6,6 +6,7 @@
 @property (nonatomic) NSString *ageMonths;
 @property (nonatomic) NSString *ageYears;
 @property (nonatomic) NSString *eventDescription;
+@property (assign) BOOL isSelf;
 
 -(id)initWithJsonDictionary:(NSDictionary *)jsonDict;
 @end

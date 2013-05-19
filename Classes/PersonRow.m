@@ -9,6 +9,7 @@
 #import "RelatedEventLabel.h"
 #import "ProgressIndicator.h"
 #import "ImageWidget.h"
+#import "RightIndicatorLines.h"
 
 
 struct DualFrame {
@@ -34,6 +35,7 @@ typedef struct DualFrame DualFrame;
 
     AtYourAgeConnection *connection;
     ProgressIndicator *ind;
+    RightIndicatorLines *indLines;
 
     DualFrame descriptionFrame;
     DualFrame widgetContainerFrame;
@@ -42,11 +44,12 @@ typedef struct DualFrame DualFrame;
     
     NSNumber *rowHeightDelta;
     NSMutableArray *arrayOfRelatedEventLabels;
+    
+    CGPoint selfEventRightmostPoint;
 }
 
 
 + (Class)layerClass {
-    
     return [CAGradientLayer class];
 }
 
@@ -60,11 +63,11 @@ typedef struct DualFrame DualFrame;
         descriptionFrame.collapsed = eventDescriptionText.frame;
         descriptionFrame.expanded = CGRectMake(10, 185, 300, 60);
         widgetContainerFrame.collapsed = widgetContainer.frame;
-        widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(widgetContainer.frame) / 2 - 20, widgetContainer.frame.origin.y, CGRectGetWidth(widgetContainer.frame), CGRectGetHeight(widgetContainer.frame));
+        widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(widgetContainer.frame) / 2 - 20, widgetContainer.frame.origin.y, CGRectGetWidth(widgetContainer.frame) + 50, CGRectGetHeight(widgetContainer.frame) + 50);
         ageLabelFrame.collapsed = ageLabel.frame;
         ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
         viewFrame.collapsed = _view.frame;
-        viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 100);
+        viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 60);
         arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
         CGPoint widgetPoint = [self.view convertPoint:widgetContainer.widget.largeImageFrame.origin fromView:widgetContainer.widget];
@@ -157,8 +160,7 @@ typedef struct DualFrame DualFrame;
 }
 
 -(void)toggleExpand {
-    
-    NSNumber *heightDifference;
+
     if (_expanded == NO) {
         [self expandWithCompletion:[self expandCompletionBlock]];
     } else {
@@ -189,6 +191,7 @@ typedef struct DualFrame DualFrame;
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
                                                             object:self
                                                           userInfo:@{@"delta": delta}];
+
     };
 }
 
@@ -203,15 +206,22 @@ typedef struct DualFrame DualFrame;
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSDictionary *eventDict, NSError *error) {
         
         NSArray *eventResult = [eventDict objectForKey:@"events"];
-        
+        NSLog(@"Events: %@", eventResult);
         dispatch_async(dispatch_get_main_queue(), ^{
             
             for (int i=0; i < eventResult.count; i++) {
                 
                 RelatedEvent *relatedEvent = [[RelatedEvent alloc] initWithJsonDictionary:[eventResult objectAtIndex:i]];
+                
                 __block RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
                 eventLabel.alpha = 0;
                 eventLabel.frame = CGRectMake(0, self.view.frame.size.height + labelHeight * i, labelWidth, labelHeight);
+                
+                if (relatedEvent.isSelf == YES) {
+                    selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
+                    eventLabel.backgroundColor = [UIColor lightGrayColor];
+                }
+                
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
@@ -231,10 +241,43 @@ typedef struct DualFrame DualFrame;
                     for (UILabel *theLabel in arrayOfRelatedEventLabels) {
                         theLabel.alpha = 1;
                     }
+                    [self addIndicatorLines];
+
                 }];
             }];
         });
     }];
+}
+
+
+-(void)addIndicatorLines {
+
+    
+//    CGPoint translatedPoint = [self.view convertPoint:widgetContainer.frame.origin fromView:widgetContainer];
+    CGPoint translatedPoint = widgetContainer.frame.origin;
+    
+    CGRect largeImageRect = widgetContainer.widget.largeImageFrame;
+    
+    CGPoint startPoint = CGPointMake(largeImageRect.origin.x + largeImageRect.size.width, largeImageRect.origin.y + largeImageRect.size.height / 2);
+    
+    startPoint = [self.layer convertPoint:startPoint fromLayer:widgetContainer.widget.largeImageL];
+    
+//    CGPoint startPoint = CGPointMake(translatedPoint.x + widgetContainer.frame.size.width, translatedPoint.y + widgetContainer.frame.size.height / 2);
+    widgetContainer.backgroundColor = [UIColor orangeColor];
+    indLines = [[RightIndicatorLines alloc] initWithStartPoint:startPoint endPoint:CGPointZero];
+    
+    CGPoint translatedEndPoint = CGPointMake(selfEventRightmostPoint.x - startPoint.x, selfEventRightmostPoint.y - startPoint.y);
+    
+    indLines.lineEndPoint = translatedEndPoint;
+    
+    [self addSubview:indLines];
+//    [self setNeedsDisplay];
+
+    
+}
+
+-(void)removeIndicatorLines {
+    [indLines removeFromSuperview];
 }
 
 -(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
@@ -267,6 +310,7 @@ typedef struct DualFrame DualFrame;
         
         [CATransaction begin];
         [CATransaction setAnimationDuration:.2];
+        [self removeIndicatorLines];
         [widgetContainer collapseWidget];
         self.view.layer.frame = viewFrame.collapsed;
         eventDescriptionText.layer.frame = descriptionFrame.collapsed;

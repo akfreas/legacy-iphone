@@ -106,6 +106,10 @@
     return largeImageLayer.frame;
 }
 
+-(CALayer *)largeImageL {
+    return largeImageLayer;
+}
+
 -(void)toggleExpand {
     
     NSLog(@"Expand!");

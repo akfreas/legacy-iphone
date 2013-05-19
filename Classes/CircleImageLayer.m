@@ -13,7 +13,7 @@
     
     if (self == [super init]) {
         radius = theRadius;
-        
+        self.frame = CGRectMake(0, 0, theRadius, theRadius);
         circlePath = CGPathCreateMutable();
         CGPathAddArc(circlePath, 0, radius, radius, radius, 0, 2*M_PI, 1);
         

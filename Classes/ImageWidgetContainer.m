@@ -27,6 +27,7 @@
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
         indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _widget = [[ImageWidget alloc] init];
+//        self.backgroundColor = [UIColor greenColor];
         [self addSubview:_widget];
     }
     

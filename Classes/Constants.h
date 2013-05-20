@@ -5,3 +5,4 @@
 
 #define KeyForPersonRowHeightChanged @"PersonRowHeightChanged"
 #define KeyForEventLoadingComplete @"EventLoadingComplete"
+#define KeyForPersonRowContentChanged @"PersonRowContentChanged"

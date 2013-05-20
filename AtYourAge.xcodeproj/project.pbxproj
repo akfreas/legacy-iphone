@@ -10,6 +10,7 @@
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
+		191CF63E1749635D00086D5E /* PersonRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* PersonRow.m */; };
 		19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19277234173B555800A9F51D /* RelatedEventLabel.m */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
 		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
@@ -20,8 +21,8 @@
 		195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */; };
 		195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */; };
 		19632B9116DAFA1800E0EA75 /* bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9016DAFA1800E0EA75 /* bracket.png */; };
-		19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9216DB028400E0EA75 /* PersonRow.xib */; };
-		19632B9616DB036900E0EA75 /* PersonRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* PersonRow.m */; };
+		19632B9316DB028400E0EA75 /* MainFigureInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */; };
+		19632B9616DB036900E0EA75 /* MainFigureInfoPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */; };
 		19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */; };
 		19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */; };
 		19632BA116DB427E00E0EA75 /* wood.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA016DB427E00E0EA75 /* wood.jpg */; };
@@ -30,7 +31,6 @@
 		19632BA716DB453C00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */; };
 		197308D41707B57C00FCADD3 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = 197308D31707B57C00FCADD3 /* question.png */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
-		199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354F316D4A19B00D73389 /* PersonInfoView.m */; };
 		199354FD16D4A29700D73389 /* EventInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* EventInfoScrollView.m */; };
 		1993550716D4DDD000D73389 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 1915AFFF16C9EB7500D8434B /* Person.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
@@ -107,6 +107,8 @@
 		191CF6371747341700086D5E /* RightIndicatorLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightIndicatorLines.m; sourceTree = "<group>"; };
 		191CF63917488CE700086D5E /* CircleImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleImageLayer.h; sourceTree = "<group>"; };
 		191CF63A17488CE700086D5E /* CircleImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageLayer.m; sourceTree = "<group>"; };
+		191CF63C1749635C00086D5E /* PersonRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRow.h; sourceTree = "<group>"; };
+		191CF63D1749635D00086D5E /* PersonRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonRow.m; sourceTree = "<group>"; };
 		19277233173B555800A9F51D /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		19277234173B555800A9F51D /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
@@ -120,9 +122,9 @@
 		195B5FFF16DEB7D3006215E9 /* AtYourAgeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtYourAgeWebView.h; sourceTree = "<group>"; };
 		195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtYourAgeWebView.m; sourceTree = "<group>"; };
 		19632B9016DAFA1800E0EA75 /* bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bracket.png; sourceTree = "<group>"; };
-		19632B9216DB028400E0EA75 /* PersonRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonRow.xib; sourceTree = "<group>"; };
-		19632B9416DB036900E0EA75 /* PersonRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRow.h; sourceTree = "<group>"; };
-		19632B9516DB036900E0EA75 /* PersonRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonRow.m; sourceTree = "<group>"; };
+		19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainFigureInfoPage.xib; sourceTree = "<group>"; };
+		19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFigureInfoPage.h; sourceTree = "<group>"; };
+		19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFigureInfoPage.m; sourceTree = "<group>"; };
 		19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeIndicatorView.xib; sourceTree = "<group>"; };
 		19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeIndicatorView.h; sourceTree = "<group>"; };
 		19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeIndicatorView.m; sourceTree = "<group>"; };
@@ -134,8 +136,6 @@
 		19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewStickLines.m; sourceTree = "<group>"; };
 		197308D31707B57C00FCADD3 /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = question.png; path = images/question.png; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
-		199354F216D4A19B00D73389 /* PersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonInfoView.h; path = Classes/PersonInfoView.h; sourceTree = SOURCE_ROOT; };
-		199354F316D4A19B00D73389 /* PersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonInfoView.m; path = Classes/PersonInfoView.m; sourceTree = SOURCE_ROOT; };
 		199354FB16D4A29700D73389 /* EventInfoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoScrollView.h; sourceTree = "<group>"; };
 		199354FC16D4A29700D73389 /* EventInfoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoScrollView.m; sourceTree = "<group>"; };
 		1993550816D4E89900D73389 /* ImageWidgetContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageWidgetContainer.xib; sourceTree = "<group>"; };
@@ -418,10 +418,10 @@
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
-				199354F216D4A19B00D73389 /* PersonInfoView.h */,
-				199354F316D4A19B00D73389 /* PersonInfoView.m */,
-				19632B9416DB036900E0EA75 /* PersonRow.h */,
-				19632B9516DB036900E0EA75 /* PersonRow.m */,
+				191CF63C1749635C00086D5E /* PersonRow.h */,
+				191CF63D1749635D00086D5E /* PersonRow.m */,
+				19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */,
+				19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */,
 				192E42B1174668E900192BD5 /* ProgressIndicator.h */,
 				192E42B2174668E900192BD5 /* ProgressIndicator.m */,
 				191CF6361747341700086D5E /* RightIndicatorLines.h */,
@@ -460,7 +460,7 @@
 				4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */,
 				191866FC16D4373500220A42 /* MainScreen.xib */,
 				199354F016D4A05E00D73389 /* PersonInfoView.xib */,
-				19632B9216DB028400E0EA75 /* PersonRow.xib */,
+				19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */,
 				19277236173B560D00A9F51D /* RelatedEventLabel.xib */,
 			);
 			path = Resources;
@@ -564,7 +564,7 @@
 				1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */,
 				19DFB9FC16D5E6E60019E2B2 /* EventDescriptionView.xib in Resources */,
 				19632B9116DAFA1800E0EA75 /* bracket.png in Resources */,
-				19632B9316DB028400E0EA75 /* PersonRow.xib in Resources */,
+				19632B9316DB028400E0EA75 /* MainFigureInfoPage.xib in Resources */,
 				19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */,
 				19632BA116DB427E00E0EA75 /* wood.jpg in Resources */,
 				19632BA316DB437500E0EA75 /* wood.png in Resources */,
@@ -609,9 +609,8 @@
 				19D61CD216B250E100C81E60 /* FriendTableViewController.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
 				19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */,
-				199354F416D4A19B00D73389 /* PersonInfoView.m in Sources */,
 				199354FD16D4A29700D73389 /* EventInfoScrollView.m in Sources */,
-				19632B9616DB036900E0EA75 /* PersonRow.m in Sources */,
+				19632B9616DB036900E0EA75 /* MainFigureInfoPage.m in Sources */,
 				19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */,
 				195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */,
 				195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */,
@@ -631,6 +630,7 @@
 				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,
 				191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */,
 				191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */,
+				191CF63E1749635D00086D5E /* PersonRow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

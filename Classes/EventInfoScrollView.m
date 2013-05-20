@@ -6,6 +6,7 @@
 #import "EventDescriptionView.h"
 #import "PersonRow.h"
 
+
 @implementation EventInfoScrollView {
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfPersonRows;
@@ -23,7 +24,7 @@ static CGFloat height = 140;
         accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfPersonRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personRowHeightChanged:) name:KeyForPersonRowHeightChanged object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personRowHeightChanged:) name:KeyForPersonRowContentChanged object:nil];
     }
     return self;
 }
@@ -45,7 +46,7 @@ static CGFloat height = 140;
         row.person = thePerson;
         [row setNeedsLayout];
         
-        UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(toggleExpand)];
+        UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(tapped)];
         [row addGestureRecognizer:touchUp];
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 15));

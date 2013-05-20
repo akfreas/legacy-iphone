@@ -53,7 +53,14 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
     result = nil;
-    id parseResult = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingMutableLeaves error:NULL];
+    NSError *error;
+    NSString *str = [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding];
+    id parseResult = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingMutableLeaves error:&error];
+    if (error) {
+        NSLog(@"Error: %@, str: %@", error, str);
+    }
+    
+    NSLog(@"Parse result: %@", parseResult);
     if (request.classToParse != nil && request.classToParse != NULL) {
         
         result = [[request.classToParse alloc] initWithJsonDictionary:parseResult];

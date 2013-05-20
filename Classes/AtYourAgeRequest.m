@@ -140,12 +140,12 @@
     [cookieInfoString replaceOccurrencesOfString:@"\"" withString:@"'" options:NSLiteralSearch range:NSMakeRange(0, [cookieInfoString length])];
     
     NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, cookieInfoString, NSHTTPCookieValue, @"AtYourAge", NSHTTPCookieName, nil];
-    NSLog(@"Cookie properties: %@", cookieProperties);
+//    NSLog(@"Cookie properties: %@", cookieProperties);
     
     
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
     NSDictionary *headers = [NSHTTPCookie requestHeaderFieldsWithCookies:[NSArray arrayWithObject:cookie]];
-    NSLog(@"URL: %@", url);
+//    NSLog(@"URL: %@", url);
     [urlRequest setAllHTTPHeaderFields:headers];
     [urlRequest setURL:url];
     [urlRequest setHTTPMethod:@"GET"];

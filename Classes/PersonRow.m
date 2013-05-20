@@ -10,7 +10,7 @@
 @implementation PersonRow {
     
     MainFigureInfoPage *infoPage;
-    DescriptionPage *description;
+    DescriptionPage *descriptionPage;
     AtYourAgeConnection *connection;
     Event *event;
     Figure *figure;
@@ -49,8 +49,6 @@
             infoPage.event = event;
         }
     }];
-    
-    [self fetchFigureAndAddDescriptionPage];
     [self addSubview:infoPage];
 }
 
@@ -64,8 +62,9 @@
     connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Figure *result, NSError *error) {
-        figure = result;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
+            figure = result;
             [self addDescriptionPage];
         });
     }];
@@ -74,9 +73,9 @@
 
 -(void)addDescriptionPage {
     
-    DescriptionPage *descriptionPage = [[DescriptionPage alloc] initWithFigure:figure];
+    descriptionPage = [[DescriptionPage alloc] initWithFigure:figure];
     
-    descriptionPage.frame = CGRectMake(infoPage.frame.size.width, 0, 320, 200);
+    descriptionPage.frame = CGRectMake(infoPage.frame.size.width, 0, 320, infoPage.frame.size.height);
     
     [self addSubview:descriptionPage];
     
@@ -88,6 +87,8 @@
     
     [UIView animateWithDuration:0 animations:^{
         self.frame = CGRectMake(f.origin.x, f.origin.y, f.size.width, f.size.height + delta);
+        descriptionPage.frame = CGRectMake(infoPage.frame.size.width, 0, 320, infoPage.frame.size.height + delta);
+
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:notif.userInfo];
     }];
     

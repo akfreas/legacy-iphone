@@ -4,7 +4,8 @@
 
 @interface MainFigureInfoPage : UIView 
 
-@property (strong, nonatomic) Person *person;
+@property (nonatomic) Person *person;
+@property (nonatomic) Event *event;
 @property (strong, nonatomic) IBOutlet UIView *view;
 
 @property (nonatomic) BOOL expanded;

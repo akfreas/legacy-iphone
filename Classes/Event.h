@@ -8,6 +8,7 @@
 @property (nonatomic) NSString *pronoun;
 @property (nonatomic) NSURL *figureProfilePicUrl;
 @property (nonatomic) NSString *eventId;
+@property (nonatomic) NSString *figureId;
 
 -(id)initWithJsonDictionary:(NSDictionary *)theDictionary;
 

@@ -1,6 +1,8 @@
-@class Person;
+@class Figure;
 @interface DescriptionPage : UIView
 
-- (id)initWithPerson:(Person *)thePerson;
+- (id)initWithFigure:(Figure *)theFigure;
+
+@property (strong, nonatomic) IBOutlet UIView *view;
 
 @end

@@ -1,10 +1,19 @@
 #import "PersonRow.h"
 #import "MainFigureInfoPage.h"
+#import "DescriptionPage.h"
+#import "AtYourAgeRequest.h"
+#import "AtYourAgeConnection.h"
+#import "ObjectArchiveAccessor.h"
+#import "Figure.h"
+#import "Event.h"
 
 @implementation PersonRow {
     
     MainFigureInfoPage *infoPage;
-    
+    DescriptionPage *description;
+    AtYourAgeConnection *connection;
+    Event *event;
+    Figure *figure;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -12,8 +21,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
+        infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, 320, 140)];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentsChangedSize:) name:KeyForPersonRowHeightChanged object:infoPage];
+        
+        UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+        [self addGestureRecognizer:touchUp];
+        self.contentSize = CGSizeMake(UIApplication.sharedApplication.keyWindow.frame.size.width * 2, infoPage.frame.size.height);
     }
     return self;
 }
@@ -22,7 +35,51 @@
 -(void)setPerson:(Person *)person {
     _person = person;
     infoPage.person = person;
+    
+    
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForPerson:person];
+    
+    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    
+    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Event *result, NSError *error) {
+        NSLog(@"Event Fetch Result: %@", result);
+        event = result;
+        if (event != nil) {
+            [self fetchFigureAndAddDescriptionPage];
+            infoPage.event = event;
+        }
+    }];
+    
+    [self fetchFigureAndAddDescriptionPage];
     [self addSubview:infoPage];
+}
+
+
+-(void)fetchFigureAndAddDescriptionPage {
+    
+    
+    Person *requester = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetFigureWithId:event.figureId requester:requester];
+    
+    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    
+    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Figure *result, NSError *error) {
+        figure = result;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addDescriptionPage];
+        });
+    }];
+    
+}
+
+-(void)addDescriptionPage {
+    
+    DescriptionPage *descriptionPage = [[DescriptionPage alloc] initWithFigure:figure];
+    
+    descriptionPage.frame = CGRectMake(infoPage.frame.size.width, 0, 320, 200);
+    
+    [self addSubview:descriptionPage];
+    
 }
 
 -(void)contentsChangedSize:(NSNotification *)notif {

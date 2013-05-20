@@ -57,7 +57,7 @@
     if (request.classToParse != nil && request.classToParse != NULL) {
         
         result = [[request.classToParse alloc] initWithJsonDictionary:parseResult];
-    } else {
+    } else { //TODO this should parse up collections of objects
         result = parseResult;
     }
     

@@ -38,8 +38,6 @@ typedef struct DualFrame DualFrame;
     DualFrame ageLabelFrame;
     DualFrame viewFrame;
     
-    Event *pageEvent;
-    
     NSNumber *rowHeightDelta;
     NSMutableArray *arrayOfRelatedEventLabels;
     
@@ -61,7 +59,7 @@ typedef struct DualFrame DualFrame;
         descriptionFrame.collapsed = eventDescriptionText.frame;
         descriptionFrame.expanded = CGRectMake(10, 185, 300, 60);
         widgetContainerFrame.collapsed = widgetContainer.frame;
-        widgetContainerFrame.expanded = CGRectMake(self.frame.size.width - CGRectGetWidth(widgetContainer.frame) / 2 - 40, widgetContainer.frame.origin.y, CGRectGetWidth(widgetContainer.frame) + 50, CGRectGetHeight(widgetContainer.frame) + 50);
+        widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(widgetContainer.frame), widgetContainer.frame.origin.y, CGRectGetWidth(widgetContainer.frame) + 50, CGRectGetHeight(widgetContainer.frame) + 50);
         ageLabelFrame.collapsed = ageLabel.frame;
         ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
         viewFrame.collapsed = _view.frame;
@@ -83,7 +81,7 @@ typedef struct DualFrame DualFrame;
 
 -(IBAction)wikipediaButtonAction:(id)sender {
     
-    NSDictionary *userInfo = @{@"event": pageEvent};
+    NSDictionary *userInfo = @{@"event": self.event};
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForWikipediaButtonTappedNotification object:self userInfo:userInfo];
 }
 
@@ -112,7 +110,7 @@ typedef struct DualFrame DualFrame;
 
 -(void)setEvent:(Event *)event {
 //    [ind animate];
-    pageEvent = event;
+    _event = event;
     figureNameLabel.text = event.figureName;
     widgetContainer.event = event;
     eventDescriptionText.text = event.eventDescription;
@@ -135,14 +133,6 @@ typedef struct DualFrame DualFrame;
     dispatch_async(dispatch_get_main_queue(), ^{
         [ind animate];
     });
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForPerson:person];
-    
-    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-    
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Event *result, NSError *error) {
-        NSLog(@"Event Fetch Result: %@", result);
-        self.event = result;
-    }];
 }
 
 -(void)recordHeightDelta:(NSNotification *)notification {
@@ -195,7 +185,7 @@ typedef struct DualFrame DualFrame;
 
 -(void)getRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
     
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:pageEvent.eventId requester:_person];
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:self.event.eventId requester:_person];
     CGFloat labelHeight = 54;
     CGFloat labelWidth = 300;
     connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];

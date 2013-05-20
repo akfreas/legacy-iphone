@@ -44,10 +44,7 @@ static CGFloat height = 140;
         [arrayOfPersonRows addObject:row];
         [self addSubview:row];
         row.person = thePerson;
-        [row setNeedsLayout];
         
-        UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:row action:@selector(tapped)];
-        [row addGestureRecognizer:touchUp];
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 15));
     }

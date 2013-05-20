@@ -8,6 +8,7 @@ static NSString *KeyForAgeDays = @"age_days";
 static NSString *KeyForPronoun = @"figure_pronoun";
 static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
 static NSString *KeyForEventId = @"event_id";
+static NSString *KeyForFigureId = @"figure_id";
 
 @implementation Event
 
@@ -16,14 +17,15 @@ static NSString *KeyForEventId = @"event_id";
     
     if (self) {
         
-        _eventId = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForEventId]];
-        _eventDescription = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForEventDescription]];
-        _figureName = [NSString stringWithFormat:@"%@",[jsonDict objectForKey:KeyForFigureName]];
-        _ageYears = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeYears]];
-        _ageMonths = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeMonths]];
-        _ageDays = [NSString stringWithFormat:@"%@", [jsonDict objectForKey:KeyForAgeDays]];
-        _figureProfilePicUrl = [NSURL URLWithString:[jsonDict objectForKey:KeyForFigureProfilePic]];
-        _pronoun = [jsonDict objectForKey:KeyForPronoun];
+        _eventId = jsonDict[KeyForEventId];
+        _eventDescription = jsonDict[KeyForEventDescription];
+        _figureName = jsonDict[KeyForFigureName];
+        _ageYears = jsonDict[KeyForAgeYears];
+        _ageMonths = jsonDict[KeyForAgeMonths];
+        _ageDays = jsonDict[KeyForAgeDays];
+        _figureProfilePicUrl = [NSURL URLWithString:jsonDict[KeyForFigureProfilePic]];
+        _figureId = jsonDict[KeyForFigureId];
+        _pronoun = jsonDict[KeyForPronoun];
     }
     return self;
 }

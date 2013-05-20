@@ -1,29 +1,29 @@
 #import "DescriptionPage.h"
-#import "Person.h"
+#import "Figure.h"
 
 @implementation DescriptionPage {
     
-    Person *person;
+    Figure *figure;
     
     IBOutlet UITextView *descriptionText;
 }
 
-- (id)initWithPerson:(Person *)thePerson;
-{
+- (id)initWithFigure:(Figure *)theFigure {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 200)];
     if (self) {
+        figure = theFigure;
         [[NSBundle mainBundle] loadNibNamed:@"DescriptionPage" owner:self options:nil];
-        // Initialization code
+        self.backgroundColor = [UIColor redColor];
+        [self addSubview:self.view];
+        descriptionText.text = figure.description;
     }
     return self;
 }
 
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+
 }
 
 

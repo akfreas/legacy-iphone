@@ -1,6 +1,7 @@
 #import "AtYourAgeRequest.h"
 #import "Event.h"
 #import "Person.h"
+#import "Figure.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
 
@@ -68,6 +69,24 @@
     return url;
 }
 
++(NSURL *)urlToGetFigureWithId:(NSString *)theId {
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = [NSString stringWithFormat:@"figure/%@", theId];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
+
++(AtYourAgeRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester {
+    
+    AtYourAgeRequest *request = [self baseRequestForPerson:requester];
+    request.urlRequest.URL = [self urlToGetFigureWithId:theId];
+    request.classToParse = [Figure class];
+    
+    return request;
+}
 
 +(AtYourAgeRequest *)requestToGetStoryForPerson:(Person *)person {
     
@@ -101,7 +120,7 @@
     NSURL *url = [AtYourAgeRequest urlToGetRelatedEventsForEvent:event];
     
     request.urlRequest.URL = url;
-    
+
     return request;
 }
 

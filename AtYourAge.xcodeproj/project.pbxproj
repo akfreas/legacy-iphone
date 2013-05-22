@@ -54,6 +54,7 @@
 		19C7BD841749DD12004C8B0A /* DescriptionPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7BD831749DD12004C8B0A /* DescriptionPage.m */; };
 		19C7BD861749DD68004C8B0A /* DescriptionPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C7BD851749DD68004C8B0A /* DescriptionPage.xib */; };
 		19C7BD891749DFD8004C8B0A /* Figure.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7BD881749DFD8004C8B0A /* Figure.m */; };
+		19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */; };
 		19D29F5816A5461000D46B0A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F5716A5461000D46B0A /* Default-568h@2x.png */; };
 		19D29F5A16A5462300D46B0A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F5916A5462300D46B0A /* Default@2x.png */; };
 		19D29F5C16A5481D00D46B0A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F5B16A5481D00D46B0A /* FacebookSDK.framework */; };
@@ -169,6 +170,8 @@
 		19C7BD851749DD68004C8B0A /* DescriptionPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionPage.xib; sourceTree = "<group>"; };
 		19C7BD871749DFD8004C8B0A /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Figure.h; sourceTree = "<group>"; };
 		19C7BD881749DFD8004C8B0A /* Figure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Figure.m; sourceTree = "<group>"; };
+		19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGRectUtils.m; sourceTree = "<group>"; };
+		19C7BD8D174BF494004C8B0A /* CGRectUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGRectUtils.h; sourceTree = "<group>"; };
 		19D29F5716A5461000D46B0A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		19D29F5916A5462300D46B0A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		19D29F5B16A5481D00D46B0A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -273,6 +276,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19C7BD8A174BC7AA004C8B0A /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				19C7BD821749DD12004C8B0A /* DescriptionPage.h */,
+				19C7BD831749DD12004C8B0A /* DescriptionPage.m */,
+				19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */,
+				19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */,
+			);
+			name = Pages;
+			sourceTree = "<group>";
+		};
 		19D616DD1739E47600349377 /* moriarty */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +321,8 @@
 		19D61CB916B06D2600C81E60 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */,
+				19C7BD8D174BF494004C8B0A /* CGRectUtils.h */,
 				4E640C1B15460C5A009D8DC6 /* Utility_Notifications.h */,
 				4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */,
 				4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */,
@@ -410,8 +426,7 @@
 				19C49EAB16CA345800304AD6 /* Constants.h */,
 				191CF63917488CE700086D5E /* CircleImageLayer.h */,
 				191CF63A17488CE700086D5E /* CircleImageLayer.m */,
-				19C7BD821749DD12004C8B0A /* DescriptionPage.h */,
-				19C7BD831749DD12004C8B0A /* DescriptionPage.m */,
+				19C7BD8A174BC7AA004C8B0A /* Pages */,
 				199354FB16D4A29700D73389 /* EventInfoScrollView.h */,
 				199354FC16D4A29700D73389 /* EventInfoScrollView.m */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
@@ -432,8 +447,6 @@
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
 				191CF63C1749635C00086D5E /* PersonRow.h */,
 				191CF63D1749635D00086D5E /* PersonRow.m */,
-				19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */,
-				19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */,
 				192E42B1174668E900192BD5 /* ProgressIndicator.h */,
 				192E42B2174668E900192BD5 /* ProgressIndicator.m */,
 				191CF6361747341700086D5E /* RightIndicatorLines.h */,
@@ -647,6 +660,7 @@
 				191CF63E1749635D00086D5E /* PersonRow.m in Sources */,
 				19C7BD841749DD12004C8B0A /* DescriptionPage.m in Sources */,
 				19C7BD891749DFD8004C8B0A /* Figure.m in Sources */,
+				19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +740,8 @@
 		4EEA6CF715268ED300B96EFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (397NMKG2NM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Freas (397NMKG2NM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies\"",
@@ -737,6 +753,8 @@
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7F80734C-1760-4292-B499-7E72201ACD91";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7F80734C-1760-4292-B499-7E72201ACD91";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

@@ -27,7 +27,6 @@ typedef struct DualFrame DualFrame;
     IBOutlet UITextView *eventDescriptionText;
     IBOutlet UILabel *figureNameLabel;
     IBOutlet UILabel *ageLabel;
-    IBOutlet ImageWidgetContainer *widgetContainer;
 
     AtYourAgeConnection *connection;
     ProgressIndicator *ind;
@@ -40,6 +39,8 @@ typedef struct DualFrame DualFrame;
     
     NSNumber *rowHeightDelta;
     NSMutableArray *arrayOfRelatedEventLabels;
+    
+    void(^publicExpandCompletion)(BOOL expanded);
     
     CGPoint selfEventRightmostPoint;
 }
@@ -58,21 +59,21 @@ typedef struct DualFrame DualFrame;
         
         descriptionFrame.collapsed = eventDescriptionText.frame;
         descriptionFrame.expanded = CGRectMake(10, 185, 300, 60);
-        widgetContainerFrame.collapsed = widgetContainer.frame;
-        widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(widgetContainer.frame), widgetContainer.frame.origin.y, CGRectGetWidth(widgetContainer.frame) + 50, CGRectGetHeight(widgetContainer.frame) + 50);
+        widgetContainerFrame.collapsed = self.widgetContainer.frame;
+        widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(self.widgetContainer.frame), self.widgetContainer.frame.origin.y, CGRectGetWidth(self.widgetContainer.frame) + 50, CGRectGetHeight(self.widgetContainer.frame) + 50);
         ageLabelFrame.collapsed = ageLabel.frame;
         ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
         viewFrame.collapsed = _view.frame;
         viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 60);
         arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
-        CGPoint widgetPoint = [self.view convertPoint:widgetContainer.widget.largeImageFrame.origin fromView:widgetContainer.widget];
-        widgetPoint = CGPointMake(widgetPoint.x + widgetContainer.widget.largeImageRadius, widgetPoint.y + widgetContainer.widget.largeImageRadius);
-        ind = [[ProgressIndicator alloc] initWithCenterPoint:widgetPoint radius:widgetContainer.widget.largeImageRadius];
+        CGPoint widgetPoint = [self.view convertPoint:self.widgetContainer.widget.largeImageFrame.origin fromView:self.widgetContainer.widget];
+        widgetPoint = CGPointMake(widgetPoint.x + self.widgetContainer.widget.largeImageRadius, widgetPoint.y + self.widgetContainer.widget.largeImageRadius);
+        ind = [[ProgressIndicator alloc] initWithCenterPoint:widgetPoint radius:self.widgetContainer.widget.largeImageRadius];
+  
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:self.widgetContainer];
         [self.layer addSublayer:ind];
-        //        [[NSNotification Center defaultCenter] addObserver:self selector:@selector(recordHeightDelta:) name:KeyForPersonRowHeightChanged object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:nil];
         
     }
     return self;
@@ -94,7 +95,7 @@ typedef struct DualFrame DualFrame;
 -(void)showActivityMonitor {
     ageLabel.hidden = YES;
     figureNameLabel.hidden = YES;
-    widgetContainer.hidden = YES;
+    self.widgetContainer.hidden = YES;
     
 }
 
@@ -112,7 +113,7 @@ typedef struct DualFrame DualFrame;
 //    [ind animate];
     _event = event;
     figureNameLabel.text = event.figureName;
-    widgetContainer.event = event;
+    self.widgetContainer.event = event;
     eventDescriptionText.text = event.eventDescription;
     ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
     ageLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:.6];
@@ -121,12 +122,13 @@ typedef struct DualFrame DualFrame;
 
 -(void)eventLoadingComplete:(NSNotification *)notif {
     [ind stopAnimating];
+    [ind removeFromSuperlayer];
 }
 
 -(void)setPerson:(Person *)person {
     _person = person;
     //    personInfo.person = person;
-    widgetContainer.person = person;
+    self.widgetContainer.person = person;
     if ([_person.isPrimary isEqualToNumber: [NSNumber numberWithBool:NO]]) {
         trashcanButton.hidden = NO;
     }
@@ -146,8 +148,9 @@ typedef struct DualFrame DualFrame;
     }
 }
 
--(void)toggleExpand {
+-(void)toggleExpandWithCompletion:(void(^)(BOOL expanded))completion {
 
+    publicExpandCompletion = completion;
     if (_expanded == NO) {
         [self expandWithCompletion:[self expandCompletionBlock]];
     } else {
@@ -165,6 +168,7 @@ typedef struct DualFrame DualFrame;
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
                                                             object:self
                                                           userInfo:@{@"delta": heightDifference}];
+        publicExpandCompletion(NO);
     };
 }
 
@@ -178,7 +182,7 @@ typedef struct DualFrame DualFrame;
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
                                                             object:self
                                                           userInfo:@{@"delta": delta}];
-
+        publicExpandCompletion(YES);
     };
 }
 
@@ -242,7 +246,7 @@ typedef struct DualFrame DualFrame;
 -(void)addIndicatorLines {
 
     
-    CGRect largeImageRect = widgetContainer.frame   ;
+    CGRect largeImageRect = self.widgetContainer.frame   ;
     
     CGPoint startPoint = CGPointMake(largeImageRect.origin.x + largeImageRect.size.width, largeImageRect.origin.y + largeImageRect.size.height / 2);
     CGPoint translatedEndPoint = CGPointMake(selfEventRightmostPoint.x - startPoint.x, selfEventRightmostPoint.y - startPoint.y);
@@ -261,11 +265,11 @@ typedef struct DualFrame DualFrame;
 
         [CATransaction begin];
         [CATransaction setAnimationDuration:0];
-        [widgetContainer expandWidget];
+        [self.widgetContainer expandWidget];
         self.view.layer.frame = viewFrame.expanded;
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
-        widgetContainer.layer.frame = widgetContainerFrame.expanded;
+        self.widgetContainer.layer.frame = widgetContainerFrame.expanded;
         ageLabel.frame = ageLabelFrame.expanded;
         ageLabel.layer.opacity = 0;
         
@@ -286,13 +290,13 @@ typedef struct DualFrame DualFrame;
         [CATransaction begin];
         [CATransaction setAnimationDuration:.2];
         [self removeIndicatorLines];
-        [widgetContainer collapseWidget];
+        [self.widgetContainer collapseWidget];
         self.view.layer.frame = viewFrame.collapsed;
         eventDescriptionText.layer.frame = descriptionFrame.collapsed;
         eventDescriptionText.layer.opacity = 1;
         ageLabel.frame = ageLabelFrame.collapsed;
         ageLabel.layer.opacity = 1;
-        widgetContainer.frame = widgetContainerFrame.collapsed;
+        self.widgetContainer.frame = widgetContainerFrame.collapsed;
         _expanded = NO;
         [CATransaction commit];
         eventDescriptionText.frame = descriptionFrame.collapsed;

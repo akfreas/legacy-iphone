@@ -1,5 +1,5 @@
 @class Person;
-@interface PersonRow : UIScrollView
+@interface PersonRow : UIView <UIScrollViewDelegate>
 
 @property (nonatomic) Person *person;
 -(void)tapped;

@@ -6,6 +6,7 @@
 
 @dynamic startAngle, endAngle;
 
+static CGFloat numRotations = 5;
 
 -(id)initWithCenterPoint:(CGPoint)point radius:(CGFloat)radius {
     if (self = [self init]) {
@@ -22,7 +23,7 @@
 
 -(void)animate {
     self.startAngle = DEG2RAD(270);
-    self.endAngle = DEG2RAD(270);
+    self.endAngle = DEG2RAD(270) * numRotations;
 }
 
 -(void)stopAnimating {
@@ -62,7 +63,7 @@
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:key];
     anim.fromValue = [[self presentationLayer] valueForKey:key];
     anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    anim.duration = 4.0;
+    anim.duration = 4.0 * numRotations;
     return anim;
 }
 

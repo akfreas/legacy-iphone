@@ -9,13 +9,14 @@
 }
 
 - (id)initWithFigure:(Figure *)theFigure {
-    self = [super initWithFrame:CGRectMake(0, 0, 320, 200)];
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         figure = theFigure;
         [[NSBundle mainBundle] loadNibNamed:@"DescriptionPage" owner:self options:nil];
         self.backgroundColor = [UIColor redColor];
         [self addSubview:self.view];
         descriptionText.text = figure.description;
+        descriptionText.editable = NO;
     }
     return self;
 }

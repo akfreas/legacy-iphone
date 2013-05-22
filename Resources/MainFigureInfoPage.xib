@@ -37,47 +37,14 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUILabel" id="609768784">
-						<reference key="NSNextResponder" ref="589461115"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{40, 4}, {230, 28}}</string>
-						<reference key="NSSuperview" ref="589461115"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Sir Charles Wimbledon</string>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
-							<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
-						</object>
-						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">0</int>
-						<float key="IBUIMinimumFontSize">8</float>
-						<bool key="IBUIAdjustsLetterSpacingToFitWidth">YES</bool>
-						<int key="IBUITextAlignment">1</int>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<string key="name">Cochin-Bold</string>
-							<string key="family">Cochin</string>
-							<int key="traits">2</int>
-							<double key="pointSize">18</double>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Cochin-Bold</string>
-							<double key="NSSize">18</double>
-							<int key="NSfFlags">16</int>
-						</object>
-					</object>
 					<object class="IBUIView" id="307835401">
 						<reference key="NSNextResponder" ref="589461115"/>
 						<int key="NSvFlags">292</int>
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrame">{{20, 33}, {120, 100}}</string>
 						<reference key="NSSuperview" ref="589461115"/>
-						<reference key="NSNextKeyView" ref="609768784"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="228446864">
 							<int key="NSColorSpace">3</int>
@@ -91,6 +58,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{61, 38}, {215, 21}}</string>
 						<reference key="NSSuperview" ref="589461115"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="761690703"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -120,6 +88,7 @@
 						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{111, 60}, {209, 66}}</string>
 						<reference key="NSSuperview" ref="589461115"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="859983184"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="228446864"/>
@@ -153,6 +122,7 @@
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{278, 40}, {25, 25}}</string>
 						<reference key="NSSuperview" ref="589461115"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="228446864"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -188,6 +158,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 146}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="307835401"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -257,14 +228,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">figureNameLabel</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="609768784"/>
-					</object>
-					<int key="connectionID">70</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">trashcanButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="859983184"/>
@@ -322,7 +285,6 @@
 						<reference key="object" ref="589461115"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="418740898"/>
-							<reference ref="609768784"/>
 							<reference ref="761690703"/>
 							<reference ref="859983184"/>
 							<reference ref="307835401"/>
@@ -342,11 +304,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
 						<reference key="object" ref="307835401"/>
-						<reference key="parent" ref="589461115"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">68</int>
-						<reference key="object" ref="609768784"/>
 						<reference key="parent" ref="589461115"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -371,7 +328,6 @@
 				<string key="50.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="68.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="71.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -381,7 +337,108 @@
 			<nil key="sourceID"/>
 			<int key="maxID">74</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ImageWidgetContainer</string>
+					<string key="superclassName">UIView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="birthdayLabel">UILabel</string>
+						<string key="eventView">UIView</string>
+						<string key="firstNameLabel">UILabel</string>
+						<string key="lastNameLabel">UILabel</string>
+						<string key="personThumbnail">UIImageView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="birthdayLabel">
+							<string key="name">birthdayLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="eventView">
+							<string key="name">eventView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="firstNameLabel">
+							<string key="name">firstNameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lastNameLabel">
+							<string key="name">lastNameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personThumbnail">
+							<string key="name">personThumbnail</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ImageWidgetContainer.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MainFigureInfoPage</string>
+					<string key="superclassName">UIView</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="trashcanButtonAction:">id</string>
+						<string key="wikipediaButtonAction:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="trashcanButtonAction:">
+							<string key="name">trashcanButtonAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="wikipediaButtonAction:">
+							<string key="name">wikipediaButtonAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="ageLabel">UILabel</string>
+						<string key="eventDescriptionText">UITextView</string>
+						<string key="figureNameLabel">UILabel</string>
+						<string key="trashcanButton">UIButton</string>
+						<string key="view">UIView</string>
+						<string key="widgetContainer">ImageWidgetContainer</string>
+						<string key="wikipediaButton">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="ageLabel">
+							<string key="name">ageLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="eventDescriptionText">
+							<string key="name">eventDescriptionText</string>
+							<string key="candidateClassName">UITextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="figureNameLabel">
+							<string key="name">figureNameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="trashcanButton">
+							<string key="name">trashcanButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="view">
+							<string key="name">view</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="widgetContainer">
+							<string key="name">widgetContainer</string>
+							<string key="candidateClassName">ImageWidgetContainer</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="wikipediaButton">
+							<string key="name">wikipediaButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MainFigureInfoPage.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

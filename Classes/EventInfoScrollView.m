@@ -59,23 +59,23 @@ static CGFloat height = 140;
     NSInteger firstIndex = [arrayOfPersonRows indexOfObject:rowToResize];
     
     self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + heightOffset);
-    [UIView animateWithDuration:0.2 animations:^{
-        
-        
-        if (heightOffset > 0) {
-            self.scrollEnabled = NO;
-            PersonRow *openRow = [arrayOfPersonRows objectAtIndex:firstIndex];
-            self.contentOffset = openRow.frame.origin;
-        } else {
-            self.scrollEnabled = YES;
-        }
-        
-        for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
-            PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
-            rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
-        }
-    }];
+
+    for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
+        PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
+        rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
+    }
     
+    if (heightOffset > 0) {
+        self.scrollEnabled = NO;
+        PersonRow *openRow = [arrayOfPersonRows objectAtIndex:firstIndex];
+        [self setContentOffset:openRow.frame.origin animated:YES];
+    } else {
+        self.scrollEnabled = YES;
+        if (firstIndex > 0 && firstIndex != [arrayOfPersonRows count] - 1) {
+            PersonRow *rowAbove = [arrayOfPersonRows objectAtIndex:firstIndex - 1];
+            [self setContentOffset:CGPointMake(0, CGRectGetMidY(rowAbove.frame)) animated:YES];
+        }
+    }
 }
 
 -(CGRect)frameAtIndex:(NSInteger)index {

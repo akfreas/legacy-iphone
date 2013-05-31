@@ -3,7 +3,7 @@
 @class AgeIndicatorView;
 @class ImageWidgetContainer;
 
-@interface MainFigureInfoPage : UIView 
+@interface MainFigureInfoPage : UIScrollView
 
 @property (nonatomic) Person *person;
 @property (nonatomic) Event *event;

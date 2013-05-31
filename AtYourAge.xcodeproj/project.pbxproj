@@ -66,18 +66,6 @@
 		19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F7B16A6716F00D46B0A /* FacebookSDKResources.bundle */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
-		19D616F81739E47600349377 /* BNAppStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616E01739E47600349377 /* BNAppStats.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D616F91739E47600349377 /* BNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616E21739E47600349377 /* BNColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D616FA1739E47600349377 /* BNPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616E41739E47600349377 /* BNPieChart.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D616FB1739E47600349377 /* CArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616E61739E47600349377 /* CArray.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D616FC1739E47600349377 /* CodeTimestamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616E81739E47600349377 /* CodeTimestamps.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D616FD1739E47600349377 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 19D616E91739E47600349377 /* LICENSE */; };
-		19D616FF1739E47600349377 /* NOTICE in Resources */ = {isa = PBXBuildFile; fileRef = 19D616EC1739E47600349377 /* NOTICE */; };
-		19D617001739E47600349377 /* NSObject+Be.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616EE1739E47600349377 /* NSObject+Be.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D617011739E47600349377 /* NSString+HMAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616F01739E47600349377 /* NSString+HMAC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D617021739E47600349377 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 19D616F11739E47600349377 /* README.md */; };
-		19D617031739E47600349377 /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D616F31739E47600349377 /* UIView+Position.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		19D617041739E47600349377 /* uncrustify.cfg in Resources */ = {isa = PBXBuildFile; fileRef = 19D616F41739E47600349377 /* uncrustify.cfg */; };
 		19D617081739EAB500349377 /* RelatedEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D617071739EAB500349377 /* RelatedEvent.m */; };
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */; };
@@ -85,7 +73,6 @@
 		19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC616B2370A00C81E60 /* 19-gear@2x.png */; };
 		19D61CD216B250E100C81E60 /* FriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CD116B250E100C81E60 /* FriendTableViewController.m */; };
 		19DFB9FC16D5E6E60019E2B2 /* EventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */; };
-		4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
 		4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
@@ -219,8 +206,6 @@
 		19D61CD016B250E100C81E60 /* FriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewController.h; sourceTree = "<group>"; };
 		19D61CD116B250E100C81E60 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionView.xib; sourceTree = "<group>"; };
-		4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeDisplaySegmentedControl.h; sourceTree = "<group>"; };
-		4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeDisplaySegmentedControl.m; sourceTree = "<group>"; };
 		4E0F3C971545080D00369BE1 /* MainScreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenWebView.h; sourceTree = "<group>"; };
 		4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenWebView.m; sourceTree = "<group>"; };
 		4E0F3CA0154533E800369BE1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -417,8 +402,6 @@
 				19D61CB916B06D2600C81E60 /* Utilities */,
 				19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */,
 				19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */,
-				4E0F3C941544CA8D00369BE1 /* AgeDisplaySegmentedControl.h */,
-				4E0F3C951544CA8D00369BE1 /* AgeDisplaySegmentedControl.m */,
 				4EEA6D031526902D00B96EFD /* AppDelegate.h */,
 				4EEA6D041526902D00B96EFD /* AppDelegate.m */,
 				4E6478B815439BC800CE47F1 /* BSKeyboardControls.h */,
@@ -601,10 +584,6 @@
 				197308D41707B57C00FCADD3 /* question.png in Resources */,
 				19C6F811171BBA1D00DDD6D9 /* oldpaper-bg@2x.png in Resources */,
 				19AF0EE5171BC908008DCA6A /* decoration-name.png in Resources */,
-				19D616FD1739E47600349377 /* LICENSE in Resources */,
-				19D616FF1739E47600349377 /* NOTICE in Resources */,
-				19D617021739E47600349377 /* README.md in Resources */,
-				19D617041739E47600349377 /* uncrustify.cfg in Resources */,
 				19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */,
 				19C7BD861749DD68004C8B0A /* DescriptionPage.xib in Resources */,
 			);
@@ -626,7 +605,6 @@
 				4EEA6D5A1526C86300B96EFD /* Event.m in Sources */,
 				4EEA6D5D1526CAEF00B96EFD /* AtYourAgeRequest.m in Sources */,
 				4E6478BA15439BC800CE47F1 /* BSKeyboardControls.m in Sources */,
-				4E0F3C961544CA8D00369BE1 /* AgeDisplaySegmentedControl.m in Sources */,
 				4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */,
 				4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */,
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
@@ -644,14 +622,6 @@
 				1997B72A16DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld in Sources */,
 				19AF0EE8171BCBEA008DCA6A /* Staple.m in Sources */,
 				192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */,
-				19D616F81739E47600349377 /* BNAppStats.m in Sources */,
-				19D616F91739E47600349377 /* BNColor.m in Sources */,
-				19D616FA1739E47600349377 /* BNPieChart.m in Sources */,
-				19D616FB1739E47600349377 /* CArray.m in Sources */,
-				19D616FC1739E47600349377 /* CodeTimestamps.m in Sources */,
-				19D617001739E47600349377 /* NSObject+Be.m in Sources */,
-				19D617011739E47600349377 /* NSString+HMAC.m in Sources */,
-				19D617031739E47600349377 /* UIView+Position.m in Sources */,
 				19D617081739EAB500349377 /* RelatedEvent.m in Sources */,
 				19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */,
 				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,

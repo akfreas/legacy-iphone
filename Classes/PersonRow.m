@@ -19,6 +19,7 @@
     UILabel *figureNameLabel;
     UIPageControl *pageControl;
     UIScrollView *scroller;
+    CGPoint lastPoint;
 }
 
 CGFloat pageSpace = 0;
@@ -154,21 +155,29 @@ CGFloat pageWidth = 320;
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (decelerate == NO) {
+    if (decelerate == YES) {
         [self paginateScrollView:scrollView];
     }
+}
+
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    [self paginateScrollView:scrollView];
 }
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
     
     CGFloat pagePercent = 0.5;
 
-    int page = (((int)scrollView.contentOffset.x) / ((int)pageWidth * pagePercent ));
-    pageControl.currentPage = page;
-    CGPoint pagePoint = CGPointMake(page * pageWidth + page *pageSpace, 0);
-    if (pagePoint.x < scrollView.contentSize.width) {
-        [scrollView setContentOffset:pagePoint animated:YES];
+    if (scrollView.contentOffset.x > lastPoint.x) {
+        pageControl.currentPage++;
+    } else {
+        pageControl.currentPage--;
     }
+    
+    lastPoint = CGPointMake(pageControl.currentPage * pageWidth + pageControl.currentPage * pageSpace, 0);
+//    if (lastPoint.x < scrollView.contentSize.width) {
+        [scrollView setContentOffset:lastPoint animated:YES];
+//    }
 }
 
 @end

@@ -75,6 +75,8 @@ typedef struct DualFrame DualFrame;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:self.widgetContainer];
         [self.layer addSublayer:ind];
         
+        self.scrollEnabled = NO;
+        
     }
     return self;
 }
@@ -225,7 +227,9 @@ typedef struct DualFrame DualFrame;
 
             [UIView animateWithDuration:0.2 animations:^{
                 
-                self.view.layer.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.x, self.view.layer.frame.size.width, self.view.layer.frame.size.height + heightIncrease);
+                self.view.layer.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.y, self.view.layer.frame.size.width, self.view.layer.frame.size.height + heightIncrease);
+                self.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.y, self.view.layer.frame.size.width, MIN(self.view.layer.frame.size.height + heightIncrease, 416));
+                self.contentSize = self.view.frame.size;
                 
                 
             } completion:^(BOOL finished) {
@@ -266,18 +270,18 @@ typedef struct DualFrame DualFrame;
         [CATransaction begin];
         [CATransaction setAnimationDuration:0];
         [self.widgetContainer expandWidget];
-        self.view.layer.frame = viewFrame.expanded;
+        self.view.frame = self.frame = viewFrame.expanded;
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
         self.widgetContainer.layer.frame = widgetContainerFrame.expanded;
         ageLabel.frame = ageLabelFrame.expanded;
         ageLabel.layer.opacity = 0;
-        
+
         [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
         [self getRelatedEventsAndExpandWithCompletion:completionBlock];
-
+        self.scrollEnabled = YES;
     }];
     
 }
@@ -304,6 +308,8 @@ typedef struct DualFrame DualFrame;
         for (UILabel *relatedEventLabel in arrayOfRelatedEventLabels) {
             [relatedEventLabel removeFromSuperview];
         }
+        self.scrollEnabled = NO;
+        
         completionBlock();
         
     }];

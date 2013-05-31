@@ -55,9 +55,20 @@ static CGFloat height = 140;
 -(void)personRowHeightChanged:(NSNotification *)notification {
     PersonRow *rowToResize = notification.object;
     CGFloat heightOffset = [notification.userInfo[@"delta"] floatValue];
-    self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + heightOffset);
+    
     NSInteger firstIndex = [arrayOfPersonRows indexOfObject:rowToResize];
+    
+    self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + heightOffset);
     [UIView animateWithDuration:0.2 animations:^{
+        
+        
+        if (heightOffset > 0) {
+            self.scrollEnabled = NO;
+            PersonRow *openRow = [arrayOfPersonRows objectAtIndex:firstIndex];
+            self.contentOffset = openRow.frame.origin;
+        } else {
+            self.scrollEnabled = YES;
+        }
         
         for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
             PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];

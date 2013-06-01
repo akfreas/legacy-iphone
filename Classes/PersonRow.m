@@ -19,7 +19,7 @@
     UILabel *figureNameLabel;
     UIPageControl *pageControl;
     UIScrollView *scroller;
-    UIButton *moreLessButton;
+    UIButton *moreCloseButton;
     CGPoint lastPoint;
 }
 
@@ -46,13 +46,13 @@ CGFloat pageWidth = 320;
 
 -(void)addMoreLessButton {
     
-    moreLessButton = [[UIButton alloc] initWithFrame:CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, 100, 20)];
-    moreLessButton.backgroundColor = [UIColor grayColor];
-    moreLessButton.layer.cornerRadius = 7.0;
-    [moreLessButton addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
-    moreLessButton.userInteractionEnabled = NO;
-    [moreLessButton setTitle:@"More" forState:UIControlStateNormal];
-    [self addSubview:moreLessButton];
+    moreCloseButton = [[UIButton alloc] initWithFrame:CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, MoreCloseButtonWidth, MoreCloseButtonHeight)];
+    moreCloseButton.backgroundColor = [UIColor grayColor];
+    moreCloseButton.layer.cornerRadius = MoreCloseButtonCornerRadius;
+    [moreCloseButton addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
+    moreCloseButton.userInteractionEnabled = NO;
+    [moreCloseButton setTitle:@"More" forState:UIControlStateNormal];
+    [self addSubview:moreCloseButton];
     
 }
 
@@ -80,10 +80,8 @@ CGFloat pageWidth = 320;
 
 -(void)addPageControl {
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(260, 20, 40, 20)];
-    //        pageControl.pageIndicatorTintColor = [UIColor orangeColor];
-    //        pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
-    pageControl.layer.cornerRadius = 10.0;
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(PageControlXPosition, PageControlYPosition, PageControlWidth, PageControlHeight)];
+    pageControl.layer.cornerRadius = PageControlCornerRadius;
     pageControl.alpha = 0;
     pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
     pageControl.numberOfPages = 2;
@@ -121,7 +119,7 @@ CGFloat pageWidth = 320;
 }
 
 -(void)eventLoadingComplete:(NSNotification *)notif {
-    moreLessButton.userInteractionEnabled = YES;
+    moreCloseButton.userInteractionEnabled = YES;
 }
 
 -(void)fetchFigureAndAddDescriptionPage {
@@ -175,11 +173,11 @@ CGFloat pageWidth = 320;
             newHeight = self.frame.size.height + delta;// + CGRectGetHeight(moreLessButton.frame));
             newDelta = delta;
         }
-        [moreLessButton setTitle:@"Close" forState:UIControlStateNormal];
+        [moreCloseButton setTitle:@"Close" forState:UIControlStateNormal];
     } else {
         newHeight = PageRowInitialHeight;
         newDelta = PageRowInitialHeight - self.frame.size.height;// - CGRectGetHeight(moreLessButton.frame);
-        [moreLessButton setTitle:@"More" forState:UIControlStateNormal];
+        [moreCloseButton setTitle:@"More" forState:UIControlStateNormal];
     }
 //    newHeight = self.frame.size.height + delta;
 //    newDelta += 20;
@@ -188,7 +186,7 @@ CGFloat pageWidth = 320;
         self.backgroundColor = [UIColor orangeColor];
         scroller.frame = CGRectMakeFrameWithSizeFromFrame(self.frame);
         descriptionPage.frame = CGRectMake(infoPage.frame.size.width + pageSpace, 0, 320, newHeight);
-        moreLessButton.frame = CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, CGRectGetWidth(moreLessButton.frame), CGRectGetHeight(moreLessButton.frame));
+        moreCloseButton.frame = CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, CGRectGetWidth(moreCloseButton.frame), CGRectGetHeight(moreCloseButton.frame));
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:@{@"delta": [NSNumber numberWithFloat:newDelta]}];
     } completion:^(BOOL finished) {
             
@@ -223,8 +221,6 @@ CGFloat pageWidth = 320;
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
     
-    CGFloat pagePercent = 0.5;
-
     if (scrollView.contentOffset.x > lastPoint.x) {
         pageControl.currentPage++;
     } else {

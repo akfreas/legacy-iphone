@@ -227,7 +227,7 @@ typedef struct DualFrame DualFrame;
             }
             CGFloat contentSizeIncrease = labelHeight * [eventResult count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
             CGFloat frameDelta;
-            CGFloat availableHeight = [UIApplication sharedApplication].keyWindow.frame.size.height ;//- 20 - 44;
+            CGFloat availableHeight = [UIApplication sharedApplication].keyWindow.frame.size.height - MoreCloseButtonHeight;
             if (contentSizeIncrease + self.view.layer.frame.size.height > availableHeight) {
                 frameDelta = availableHeight - self.view.layer.frame.size.height;
             } else {

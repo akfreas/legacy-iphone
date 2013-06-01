@@ -14,13 +14,12 @@
     AtYourAgeConnection *connection;
 }
 
-static CGFloat height = 140;
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
     if (self) {
-        self.contentSize = CGSizeMake(320, 600);
+        self.contentSize = CGSizeMake(320, Utility_AppSettings.frameForKeyWindow.size.height);
         accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfPersonRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
@@ -40,13 +39,13 @@ static CGFloat height = 140;
         
         Person *thePerson = [people objectAtIndex:i];
         
-        __block PersonRow *row = [[PersonRow alloc] initWithOrigin:CGPointMake(0, (PersonRow.height + 15) * i)];
+        __block PersonRow *row = [[PersonRow alloc] initWithOrigin:CGPointMake(0, (PageRowInitialHeight + EventInfoScrollViewPadding) * i)];
         [arrayOfPersonRows addObject:row];
         [self addSubview:row];
         row.person = thePerson;
         
         
-        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (PersonRow.height + 15));
+        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (PageRowInitialHeight + EventInfoScrollViewPadding));
     }
     
     [self setNeedsLayout];
@@ -81,9 +80,9 @@ static CGFloat height = 140;
 
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat padding = 5;
-    CGFloat width = 105;
+    CGFloat width = Utility_AppSettings.frameForKeyWindow.size.height;
 
-    return CGRectMake(0, (height + padding)  * index, width, height);
+    return CGRectMake(0, (PageRowInitialHeight + EventInfoScrollViewPadding)  * index, width, PageRowInitialHeight);
 }
 
 -(void)removeInfoViews {

@@ -8,5 +8,6 @@
 +(NSDateFormatter *)dateFormatterForDisplay;
 +(NSDateFormatter *)dateFormatterForRequest;
 +(NSDateFormatter *)dateFormatterForPartialBirthday;
++(CGRect)frameForKeyWindow;
 
 @end

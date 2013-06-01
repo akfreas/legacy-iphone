@@ -25,11 +25,10 @@
 
 CGFloat pageSpace = 0;
 CGFloat pageWidth = 320;
-CGFloat initialPageHeight = 140;
 
 - (id)initWithOrigin:(CGPoint)origin
 {
-    CGRect frame = CGRectMake(origin.x, origin.y, 320, initialPageHeight);
+    CGRect frame = CGRectMake(origin.x, origin.y, 320, PageRowInitialHeight);
     self = [super initWithFrame:frame];
     if (self) {
 
@@ -42,10 +41,6 @@ CGFloat initialPageHeight = 140;
         scroller.backgroundColor =[UIColor purpleColor]; 
     }
     return self;
-}
-
-+(CGFloat)height {
-    return initialPageHeight;
 }
 
 
@@ -62,7 +57,7 @@ CGFloat initialPageHeight = 140;
 }
 
 -(void)initInfoPage {
-    infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, pageWidth, 140)];
+    infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, pageWidth, PageRowInitialHeight)];
 }
 
 -(void)registerForNotifications {
@@ -182,8 +177,8 @@ CGFloat initialPageHeight = 140;
         }
         [moreLessButton setTitle:@"Close" forState:UIControlStateNormal];
     } else {
-        newHeight = initialPageHeight;
-        newDelta = initialPageHeight - self.frame.size.height;// - CGRectGetHeight(moreLessButton.frame);
+        newHeight = PageRowInitialHeight;
+        newDelta = PageRowInitialHeight - self.frame.size.height;// - CGRectGetHeight(moreLessButton.frame);
         [moreLessButton setTitle:@"More" forState:UIControlStateNormal];
     }
 //    newHeight = self.frame.size.height + delta;

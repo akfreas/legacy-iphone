@@ -65,7 +65,8 @@ typedef struct DualFrame DualFrame;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:self.widgetContainer];
         [self.layer addSublayer:ind];
-        self.contentSize = CGSizeMakeFromRect(viewFrame.collapsed);
+//        self.contentSize = CGSizeMakeFromRect(viewFrame.collapsed);
+        [self setContentFrames:viewFrame.collapsed];
         self.scrollEnabled = NO;
         
     }
@@ -236,12 +237,12 @@ typedef struct DualFrame DualFrame;
             CGRect newContentRect = CGRectAddHeightToRect(self.view.frame, contentSizeIncrease);
             [UIView animateWithDuration:0.2 animations:^{
                 
-                [self setContentFrames:newContentRect];
                 self.frame = CGRectAddHeightToRect(self.view.layer.frame, frameDelta);
+                [self setContentFrames:newContentRect];
 
-                __block NSNumber *frameDeltaNumber;
-                frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
-                completionBlock(frameDeltaNumber);
+            __block NSNumber *frameDeltaNumber;
+            frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
+            completionBlock(frameDeltaNumber);
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.2 animations:^{
@@ -275,7 +276,7 @@ typedef struct DualFrame DualFrame;
 }
 
 -(void)setContentFrames:(CGRect)rect {
-    self.view.frame = self.frame = rect;
+    self.view.frame = rect;
     self.contentSize = CGSizeMakeFromRect(rect);
 }
 

@@ -46,4 +46,8 @@
     return dateFormatter;
 }
 
++(CGRect)frameForKeyWindow {
+    return [UIApplication sharedApplication].keyWindow.frame;
+}
+
 @end

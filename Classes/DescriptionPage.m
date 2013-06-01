@@ -13,7 +13,6 @@
     if (self) {
         figure = theFigure;
         [[NSBundle mainBundle] loadNibNamed:@"DescriptionPage" owner:self options:nil];
-        self.backgroundColor = [UIColor redColor];
         [self addSubview:self.view];
         descriptionText.text = figure.description;
         descriptionText.editable = NO;

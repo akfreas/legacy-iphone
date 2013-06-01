@@ -55,31 +55,35 @@ typedef struct DualFrame DualFrame;
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"MainFigureInfoPage" owner:self options:nil];
         _expanded = NO;
-        
-        
-        descriptionFrame.collapsed = eventDescriptionText.frame;
-        descriptionFrame.expanded = CGRectMake(10, 185, 300, 60);
-        widgetContainerFrame.collapsed = self.widgetContainer.frame;
-        widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(self.widgetContainer.frame), self.widgetContainer.frame.origin.y, CGRectGetWidth(self.widgetContainer.frame) + 50, CGRectGetHeight(self.widgetContainer.frame) + 50);
-        ageLabelFrame.collapsed = ageLabel.frame;
-        ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
-        viewFrame.collapsed = _view.frame;
-        viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 60);
+        [self setUpFrames];
+
         arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
         CGPoint widgetPoint = [self.view convertPoint:self.widgetContainer.widget.largeImageFrame.origin fromView:self.widgetContainer.widget];
         widgetPoint = CGPointMake(widgetPoint.x + self.widgetContainer.widget.largeImageRadius, widgetPoint.y + self.widgetContainer.widget.largeImageRadius);
         ind = [[ProgressIndicator alloc] initWithCenterPoint:widgetPoint radius:self.widgetContainer.widget.largeImageRadius];
-  
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:self.widgetContainer];
         [self.layer addSublayer:ind];
-        
+        self.contentSize = CGSizeMakeFromRect(viewFrame.collapsed);
         self.scrollEnabled = NO;
         
     }
     return self;
 }
+
+-(void)setUpFrames {
+    
+    descriptionFrame.collapsed = eventDescriptionText.frame;
+    descriptionFrame.expanded = CGRectMake(10, 185, 300, 60);
+    widgetContainerFrame.collapsed = self.widgetContainer.frame;
+    widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(self.widgetContainer.frame), self.widgetContainer.frame.origin.y, CGRectGetWidth(self.widgetContainer.frame) + 50, CGRectGetHeight(self.widgetContainer.frame) + 50);
+    ageLabelFrame.collapsed = ageLabel.frame;
+    ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
+    viewFrame.collapsed = _view.frame;
+    viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 60);
+}
+
 
 
 -(IBAction)wikipediaButtonAction:(id)sender {
@@ -220,17 +224,24 @@ typedef struct DualFrame DualFrame;
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
-            __block NSNumber *heightDelta;
-            CGFloat heightIncrease = labelHeight * [eventResult count];
-            heightDelta = [NSNumber numberWithFloat:heightIncrease + viewFrame.expanded.size.height - viewFrame.collapsed.size.height];
-            completionBlock(heightDelta);
+            CGFloat contentSizeIncrease = labelHeight * [eventResult count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
+            CGFloat frameDelta;
+            CGFloat availableHeight = [UIApplication sharedApplication].keyWindow.frame.size.height ;//- 20 - 44;
+            if (contentSizeIncrease + self.view.layer.frame.size.height > availableHeight) {
+                frameDelta = availableHeight - self.view.layer.frame.size.height;
+            } else {
+                frameDelta = contentSizeIncrease;
+            }
 
+            CGRect newContentRect = CGRectAddHeightToRect(self.view.frame, contentSizeIncrease);
             [UIView animateWithDuration:0.2 animations:^{
                 
-                self.view.layer.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.y, self.view.layer.frame.size.width, self.view.layer.frame.size.height + heightIncrease);
-                self.frame = CGRectMake(self.view.layer.frame.origin.x, self.view.layer.frame.origin.y, self.view.layer.frame.size.width, MIN(self.view.layer.frame.size.height + heightIncrease, 416));
-                self.contentSize = self.view.frame.size;
-                
+                [self setContentFrames:newContentRect];
+                self.frame = CGRectAddHeightToRect(self.view.layer.frame, frameDelta);
+
+                __block NSNumber *frameDeltaNumber;
+                frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
+                completionBlock(frameDeltaNumber);
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.2 animations:^{
@@ -263,6 +274,11 @@ typedef struct DualFrame DualFrame;
     [indLines removeFromSuperview];
 }
 
+-(void)setContentFrames:(CGRect)rect {
+    self.view.frame = self.frame = rect;
+    self.contentSize = CGSizeMakeFromRect(rect);
+}
+
 -(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
     
     [UIView animateWithDuration:.2 animations:^{
@@ -270,13 +286,12 @@ typedef struct DualFrame DualFrame;
         [CATransaction begin];
         [CATransaction setAnimationDuration:0];
         [self.widgetContainer expandWidget];
-        self.view.frame = self.frame = viewFrame.expanded;
+        [self setContentFrames:viewFrame.expanded];
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
         self.widgetContainer.layer.frame = widgetContainerFrame.expanded;
         ageLabel.frame = ageLabelFrame.expanded;
         ageLabel.layer.opacity = 0;
-
         [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
@@ -295,7 +310,7 @@ typedef struct DualFrame DualFrame;
         [CATransaction setAnimationDuration:.2];
         [self removeIndicatorLines];
         [self.widgetContainer collapseWidget];
-        self.view.layer.frame = viewFrame.collapsed;
+        [self setContentFrames:viewFrame.collapsed];
         eventDescriptionText.layer.frame = descriptionFrame.collapsed;
         eventDescriptionText.layer.opacity = 1;
         ageLabel.frame = ageLabelFrame.collapsed;

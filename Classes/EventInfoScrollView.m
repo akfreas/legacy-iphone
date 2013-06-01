@@ -40,13 +40,13 @@ static CGFloat height = 140;
         
         Person *thePerson = [people objectAtIndex:i];
         
-        __block PersonRow *row = [[PersonRow alloc] initWithFrame:CGRectMake(0, (height + 15) * i, 320, height)];
+        __block PersonRow *row = [[PersonRow alloc] initWithOrigin:CGPointMake(0, (PersonRow.height + 15) * i)];
         [arrayOfPersonRows addObject:row];
         [self addSubview:row];
         row.person = thePerson;
         
         
-        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (height + 15));
+        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (PersonRow.height + 15));
     }
     
     [self setNeedsLayout];
@@ -60,22 +60,23 @@ static CGFloat height = 140;
     
     self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + heightOffset);
 
-    for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
-        PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
-        rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
-    }
-    
-    if (heightOffset > 0) {
-        self.scrollEnabled = NO;
-        PersonRow *openRow = [arrayOfPersonRows objectAtIndex:firstIndex];
-        [self setContentOffset:openRow.frame.origin animated:YES];
-    } else {
-        self.scrollEnabled = YES;
-        if (firstIndex > 0 && firstIndex != [arrayOfPersonRows count] - 1) {
-            PersonRow *rowAbove = [arrayOfPersonRows objectAtIndex:firstIndex - 1];
-            [self setContentOffset:CGPointMake(0, CGRectGetMidY(rowAbove.frame)) animated:YES];
+        for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
+            PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
+            rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
         }
-    }
+        
+        if (heightOffset > 0) {
+            self.scrollEnabled = NO;
+            PersonRow *openRow = [arrayOfPersonRows objectAtIndex:firstIndex];
+            [self setContentOffset:openRow.frame.origin animated:YES];
+        } else {
+            self.scrollEnabled = YES;
+            if (firstIndex > 0 && firstIndex != [arrayOfPersonRows count] - 1) {
+                PersonRow *rowAbove = [arrayOfPersonRows objectAtIndex:firstIndex - 1];
+                [self setContentOffset:CGPointMake(0, CGRectGetMidY(rowAbove.frame)) animated:YES];
+            }
+        }
+    
 }
 
 -(CGRect)frameAtIndex:(NSInteger)index {

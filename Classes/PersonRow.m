@@ -19,40 +19,84 @@
     UILabel *figureNameLabel;
     UIPageControl *pageControl;
     UIScrollView *scroller;
+    UIButton *moreLessButton;
     CGPoint lastPoint;
 }
 
 CGFloat pageSpace = 0;
 CGFloat pageWidth = 320;
+CGFloat initialPageHeight = 140;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithOrigin:(CGPoint)origin
 {
+    CGRect frame = CGRectMake(origin.x, origin.y, 320, initialPageHeight);
     self = [super initWithFrame:frame];
     if (self) {
 
-        
-        infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, 320, 140)];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentsChangedSize:) name:KeyForPersonRowHeightChanged object:infoPage];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:infoPage.widgetContainer];
-        
-        scroller = [[UIScrollView alloc] initWithFrame:CGRectMakeFrameWithSizeFromFrame(frame)];
-        scroller.scrollEnabled = NO;
-        scroller.contentSize = CGSizeMake(pageWidth * 2 + pageSpace, infoPage.frame.size.height);
-        scroller.delegate = self;
-        pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(260, 20, 40, 20)];
-//        pageControl.pageIndicatorTintColor = [UIColor orangeColor];
-//        pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
-        pageControl.layer.cornerRadius = 10.0;
-        pageControl.alpha = 0;
-        pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
-        pageControl.numberOfPages = 2;
-        [self addSubview:scroller];
-        [self addSubview:pageControl];
-    
+        [self initInfoPage];
+        [self registerForNotifications];
+        [self addScrollViewWithFrame:frame];
+        [self addPageControl];
+        [self addMoreLessButton];
+        self.backgroundColor = [UIColor orangeColor];
+        scroller.backgroundColor =[UIColor purpleColor]; 
     }
     return self;
 }
+
++(CGFloat)height {
+    return initialPageHeight;
+}
+
+
+-(void)addMoreLessButton {
+    
+    moreLessButton = [[UIButton alloc] initWithFrame:CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, 100, 20)];
+    moreLessButton.backgroundColor = [UIColor grayColor];
+    moreLessButton.layer.cornerRadius = 7.0;
+    [moreLessButton addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
+    moreLessButton.userInteractionEnabled = NO;
+    [moreLessButton setTitle:@"More" forState:UIControlStateNormal];
+    [self addSubview:moreLessButton];
+    
+}
+
+-(void)initInfoPage {
+    infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, pageWidth, 140)];
+}
+
+-(void)registerForNotifications {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentsChangedSize:) name:KeyForPersonRowHeightChanged object:infoPage];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:infoPage.widgetContainer];
+    
+}
+
+
+-(void)addScrollViewWithFrame:(CGRect)frame {
+    scroller = [[UIScrollView alloc] initWithFrame:CGRectMakeFrameWithSizeFromFrame(frame)];
+    scroller.scrollEnabled = NO;
+    scroller.contentSize = CGSizeMake(pageWidth * 2 + pageSpace, infoPage.frame.size.height);
+    scroller.delegate = self;
+    [self addSubview:scroller];
+
+}
+
+-(void)addPageControl {
+    
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(260, 20, 40, 20)];
+    //        pageControl.pageIndicatorTintColor = [UIColor orangeColor];
+    //        pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
+    pageControl.layer.cornerRadius = 10.0;
+    pageControl.alpha = 0;
+    pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
+    pageControl.numberOfPages = 2;
+    pageControl.userInteractionEnabled = NO;
+    [self addSubview:pageControl];
+
+}
+
 
 -(void)setPerson:(Person *)person {
     _person = person;
@@ -82,9 +126,7 @@ CGFloat pageWidth = 320;
 }
 
 -(void)eventLoadingComplete:(NSNotification *)notif {
-    
-    UITapGestureRecognizer *touchUp = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
-    [infoPage addGestureRecognizer:touchUp];
+    moreLessButton.userInteractionEnabled = YES;
 }
 
 -(void)fetchFigureAndAddDescriptionPage {
@@ -128,13 +170,33 @@ CGFloat pageWidth = 320;
 -(void)contentsChangedSize:(NSNotification *)notif {
     CGRect f = self.frame;
     CGFloat delta = [[notif.userInfo objectForKey:@"delta"] floatValue];
-    
-    [UIView animateWithDuration:0 animations:^{
-        self.frame =  CGRectMake(f.origin.x, f.origin.y, f.size.width, f.size.height + delta);
+    CGFloat newDelta;
+    CGFloat newHeight;
+    if (delta > 0) {
+        if (delta + self.frame.size.height > [UIApplication sharedApplication].keyWindow.frame.size.height) {
+            newHeight = [UIApplication sharedApplication].keyWindow.frame.size.height - 44 - 20;
+            newDelta = newHeight - self.frame.size.height;
+        } else {
+            newHeight = self.frame.size.height + delta;// + CGRectGetHeight(moreLessButton.frame));
+            newDelta = delta;
+        }
+        [moreLessButton setTitle:@"Close" forState:UIControlStateNormal];
+    } else {
+        newHeight = initialPageHeight;
+        newDelta = initialPageHeight - self.frame.size.height;// - CGRectGetHeight(moreLessButton.frame);
+        [moreLessButton setTitle:@"More" forState:UIControlStateNormal];
+    }
+//    newHeight = self.frame.size.height + delta;
+//    newDelta += 20;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.frame =  CGRectMake(f.origin.x, f.origin.y, f.size.width, newHeight);
+        self.backgroundColor = [UIColor orangeColor];
         scroller.frame = CGRectMakeFrameWithSizeFromFrame(self.frame);
-        descriptionPage.frame = CGRectMake(infoPage.frame.size.width + pageSpace, 0, 320, infoPage.frame.size.height + delta);
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:notif.userInfo];
+        descriptionPage.frame = CGRectMake(infoPage.frame.size.width + pageSpace, 0, 320, newHeight);
+        moreLessButton.frame = CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, CGRectGetWidth(moreLessButton.frame), CGRectGetHeight(moreLessButton.frame));
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:@{@"delta": [NSNumber numberWithFloat:newDelta]}];
+    } completion:^(BOOL finished) {
+            
     }];
     
 }

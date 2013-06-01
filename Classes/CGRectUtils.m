@@ -14,3 +14,35 @@ CGRect CGRectMakeFrameWithSizeFromFrame(CGRect rect) {
 CGPoint CGPointGetCenterFromRect(CGRect rect) {
     return CGPointMake(rect.size.width / 2, rect.size.height /2);
 }
+
+CGRect CGRectMakeFrameWithOriginInBottomOfFrame(CGRect hostFrame, CGFloat width, CGFloat height) {
+    CGFloat lowerY = CGRectGetHeight(hostFrame) - height;
+    CGFloat lowerX = CGRectGetWidth(hostFrame) / 2 - width / 2;
+    CGRect newFrame = CGRectMake(lowerX, lowerY, width, height);
+    return newFrame;
+}
+
+
+CGRect CGRectMakeFrameWithOriginOnBottomOfFrame(CGRect hostFrame, CGFloat width, CGFloat height) {
+    CGFloat lowerY = CGRectGetHeight(hostFrame);
+    CGFloat lowerX = CGRectGetWidth(hostFrame) / 2 - width / 2;
+    CGRect newFrame = CGRectMake(lowerX, lowerY, width, height);
+    return newFrame;
+}
+
+CGRect CGRectAddHeightToRect(CGRect rect, CGFloat delta) {
+    
+    CGRect newRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height + delta);
+    
+    return newRect;
+}
+
+CGSize CGSizeAddHeightToSize(CGSize size, CGFloat delta) {
+    CGSize newSize = CGSizeMake(size.width, size.height + delta);
+    return newSize;
+}
+
+CGSize CGSizeMakeFromRect(CGRect rect) {
+    CGSize newSize =  CGSizeMake(rect.size.width, rect.size.height);
+    return newSize;
+}

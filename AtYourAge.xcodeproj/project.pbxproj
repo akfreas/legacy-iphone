@@ -45,7 +45,6 @@
 		19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
 		19A9979B16DD6B22006840CD /* brushedmetal.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A9979A16DD6B22006840CD /* brushedmetal.png */; };
 		19AF0EE5171BC908008DCA6A /* decoration-name.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AF0EE4171BC908008DCA6A /* decoration-name.png */; };
-		19AF0EE8171BCBEA008DCA6A /* Staple.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AF0EE7171BCBEA008DCA6A /* Staple.m */; };
 		19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EA716CA2BA400304AD6 /* AFAlertView.m */; };
 		19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C49EA816CA2BA400304AD6 /* AFAlertView.xib */; };
 		19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C49EAC16CA3ABB00304AD6 /* button-pressed.png */; };
@@ -143,8 +142,6 @@
 		19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendPickerHandler.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19A9979A16DD6B22006840CD /* brushedmetal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brushedmetal.png; sourceTree = "<group>"; };
 		19AF0EE4171BC908008DCA6A /* decoration-name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "decoration-name.png"; sourceTree = "<group>"; };
-		19AF0EE6171BCBEA008DCA6A /* Staple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Staple.h; sourceTree = "<group>"; };
-		19AF0EE7171BCBEA008DCA6A /* Staple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Staple.m; sourceTree = "<group>"; };
 		19C49EA616CA2BA400304AD6 /* AFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAlertView.h; sourceTree = "<group>"; };
 		19C49EA716CA2BA400304AD6 /* AFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAlertView.m; sourceTree = "<group>"; };
 		19C49EA816CA2BA400304AD6 /* AFAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AFAlertView.xib; sourceTree = "<group>"; };
@@ -438,8 +435,6 @@
 				4E640C1615460474009D8DC6 /* SettingsModalView.m */,
 				19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */,
 				19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */,
-				19AF0EE6171BCBEA008DCA6A /* Staple.h */,
-				19AF0EE7171BCBEA008DCA6A /* Staple.m */,
 				19277233173B555800A9F51D /* RelatedEventLabel.h */,
 				19277234173B555800A9F51D /* RelatedEventLabel.m */,
 				4EEA6D431526A90200B96EFD /* AtYourAgeConnection.h */,
@@ -620,7 +615,6 @@
 				195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */,
 				195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld in Sources */,
-				19AF0EE8171BCBEA008DCA6A /* Staple.m in Sources */,
 				192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */,
 				19D617081739EAB500349377 /* RelatedEvent.m in Sources */,
 				19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */,

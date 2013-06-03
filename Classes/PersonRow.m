@@ -23,7 +23,7 @@
     CGPoint lastPoint;
 }
 
-CGFloat pageSpace = 0;
+
 CGFloat pageWidth = 320;
 
 - (id)initWithOrigin:(CGPoint)origin
@@ -37,8 +37,7 @@ CGFloat pageWidth = 320;
         [self addScrollViewWithFrame:frame];
         [self addPageControl];
         [self addMoreLessButton];
-        self.backgroundColor = [UIColor orangeColor];
-        scroller.backgroundColor =[UIColor purpleColor]; 
+        scroller.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
@@ -72,7 +71,7 @@ CGFloat pageWidth = 320;
 -(void)addScrollViewWithFrame:(CGRect)frame {
     scroller = [[UIScrollView alloc] initWithFrame:CGRectMakeFrameWithSizeFromFrame(frame)];
     scroller.scrollEnabled = NO;
-    scroller.contentSize = CGSizeMake(pageWidth * 2 + pageSpace, infoPage.frame.size.height);
+    scroller.contentSize = CGSizeMake(pageWidth * 2 + SpaceBetweenPersonRowPages, infoPage.frame.size.height);
     scroller.delegate = self;
     [self addSubview:scroller];
 
@@ -156,7 +155,7 @@ CGFloat pageWidth = 320;
     [descriptionPage setNeedsLayout];
     
     [scroller addSubview:descriptionPage];
-    descriptionPage.frame = CGRectMake(pageWidth + pageSpace, 0, 20, infoPage.frame.size.height);
+    descriptionPage.frame = CGRectMake(pageWidth + SpaceBetweenPersonRowPages, 0, 20, infoPage.frame.size.height);
     
 }
 
@@ -168,28 +167,24 @@ CGFloat pageWidth = 320;
     if (delta > 0) {
         if (delta + self.frame.size.height > [UIApplication sharedApplication].keyWindow.frame.size.height) {
             newHeight = [UIApplication sharedApplication].keyWindow.frame.size.height - 44 - 20;
-            newDelta = newHeight - self.frame.size.height;
+            newDelta = newHeight - self.frame.size.height + MoreCloseButtonHeight;
         } else {
-            newHeight = self.frame.size.height + delta;// + CGRectGetHeight(moreLessButton.frame));
-            newDelta = delta;
+            newHeight = self.frame.size.height + delta + MoreCloseButtonHeight;// + CGRectGetHeight(moreLessButton.frame));
+            newDelta = delta + MoreCloseButtonHeight;
         }
         [moreCloseButton setTitle:@"Close" forState:UIControlStateNormal];
     } else {
         newHeight = PageRowInitialHeight;
-        newDelta = PageRowInitialHeight - self.frame.size.height;// - CGRectGetHeight(moreLessButton.frame);
+        newDelta = PageRowInitialHeight - self.frame.size.height;
         [moreCloseButton setTitle:@"More" forState:UIControlStateNormal];
     }
-//    newHeight = self.frame.size.height + delta;
-//    newDelta += 20;
+    
     [UIView animateWithDuration:0.2 animations:^{
         self.frame =  CGRectMake(f.origin.x, f.origin.y, f.size.width, newHeight);
-        self.backgroundColor = [UIColor orangeColor];
         scroller.frame = CGRectMakeFrameWithSizeFromFrame(self.frame);
-        descriptionPage.frame = CGRectMake(infoPage.frame.size.width + pageSpace, 0, 320, newHeight);
+        descriptionPage.frame = CGRectMake(infoPage.frame.size.width + SpaceBetweenPersonRowPages, 0, 320, newHeight);
         moreCloseButton.frame = CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, CGRectGetWidth(moreCloseButton.frame), CGRectGetHeight(moreCloseButton.frame));
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:@{@"delta": [NSNumber numberWithFloat:newDelta]}];
-    } completion:^(BOOL finished) {
-            
     }];
     
 }
@@ -227,7 +222,7 @@ CGFloat pageWidth = 320;
         pageControl.currentPage--;
     }
     
-    lastPoint = CGPointMake(pageControl.currentPage * pageWidth + pageControl.currentPage * pageSpace, 0);
+    lastPoint = CGPointMake(pageControl.currentPage * pageWidth + pageControl.currentPage * SpaceBetweenPersonRowPages, 0);
 //    if (lastPoint.x < scrollView.contentSize.width) {
         [scrollView setContentOffset:lastPoint animated:YES];
 //    }

@@ -9,6 +9,7 @@
 #import "ProgressIndicator.h"
 #import "ImageWidget.h"
 #import "RightIndicatorLines.h"
+#import "Utility_AppSettings.h"
 
 
 struct DualFrame {
@@ -54,8 +55,8 @@ typedef struct DualFrame DualFrame;
     self = [super initWithFrame:frame];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"MainFigureInfoPage" owner:self options:nil];
-        _expanded = NO;
         [self setUpFrames];
+        _expanded = NO;
 
         arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
@@ -76,13 +77,13 @@ typedef struct DualFrame DualFrame;
 -(void)setUpFrames {
     
     descriptionFrame.collapsed = eventDescriptionText.frame;
-    descriptionFrame.expanded = CGRectMake(10, 185, 300, 60);
+    descriptionFrame.expanded = CGRectMake(EventDescriptionX, EventDescriptionY, EventDescriptionWidth, EventDescriptionHeight);
     widgetContainerFrame.collapsed = self.widgetContainer.frame;
     widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(self.widgetContainer.frame), self.widgetContainer.frame.origin.y, CGRectGetWidth(self.widgetContainer.frame) + 50, CGRectGetHeight(self.widgetContainer.frame) + 50);
     ageLabelFrame.collapsed = ageLabel.frame;
     ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
     viewFrame.collapsed = _view.frame;
-    viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + 60);
+    viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + EventDescriptionHeight);
 }
 
 
@@ -197,8 +198,6 @@ typedef struct DualFrame DualFrame;
 -(void)getRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
     
     AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:self.event.eventId requester:_person];
-    CGFloat labelHeight = 54;
-    CGFloat labelWidth = 300;
     connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSDictionary *eventDict, NSError *error) {
@@ -213,7 +212,7 @@ typedef struct DualFrame DualFrame;
                 
                 __block RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
                 eventLabel.alpha = 0;
-                eventLabel.frame = CGRectMake(0, self.view.frame.size.height + labelHeight * i, labelWidth, labelHeight);
+                eventLabel.frame = CGRectMake(0, self.view.frame.size.height + RelatedEventsLabelHeight * i, RelatedEventsLabelWidth, RelatedEventsLabelHeight);
                 
                 if (relatedEvent.isSelf == YES) {
                     selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
@@ -225,11 +224,12 @@ typedef struct DualFrame DualFrame;
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
-            CGFloat contentSizeIncrease = labelHeight * [eventResult count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
+            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
             CGFloat frameDelta;
-            CGFloat availableHeight = [UIApplication sharedApplication].keyWindow.frame.size.height - MoreCloseButtonHeight;
-            if (contentSizeIncrease + self.view.layer.frame.size.height > availableHeight) {
-                frameDelta = availableHeight - self.view.layer.frame.size.height;
+            CGRect keyWindowFrame = Utility_AppSettings.frameForKeyWindow;
+            CGFloat availableHeight = keyWindowFrame.size.height - MoreCloseButtonHeight - 20 - 44;
+            if (contentSizeIncrease + self.frame.size.height > availableHeight) {
+                frameDelta = availableHeight - self.frame.size.height;
             } else {
                 frameDelta = contentSizeIncrease;
             }
@@ -237,7 +237,7 @@ typedef struct DualFrame DualFrame;
             CGRect newContentRect = CGRectAddHeightToRect(self.view.frame, contentSizeIncrease);
             [UIView animateWithDuration:0.2 animations:^{
                 
-                self.frame = CGRectAddHeightToRect(self.view.layer.frame, frameDelta);
+                self.frame = CGRectAddHeightToRect(self.frame, frameDelta);
                 [self setContentFrames:newContentRect];
 
             __block NSNumber *frameDeltaNumber;
@@ -312,6 +312,7 @@ typedef struct DualFrame DualFrame;
         [self removeIndicatorLines];
         [self.widgetContainer collapseWidget];
         [self setContentFrames:viewFrame.collapsed];
+        self.frame = viewFrame.collapsed;
         eventDescriptionText.layer.frame = descriptionFrame.collapsed;
         eventDescriptionText.layer.opacity = 1;
         ageLabel.frame = ageLabelFrame.collapsed;

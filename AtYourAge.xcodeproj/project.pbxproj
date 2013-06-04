@@ -65,6 +65,7 @@
 		19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F7B16A6716F00D46B0A /* FacebookSDKResources.bundle */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
+		19D5DFAF175D820D007DEEB2 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D5DFAE175D820D007DEEB2 /* Reveal.framework */; };
 		19D617081739EAB500349377 /* RelatedEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D617071739EAB500349377 /* RelatedEvent.m */; };
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */; };
@@ -169,6 +170,7 @@
 		19D29F7D16A671C800D46B0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		19D29F7F16A674C200D46B0A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreen.h; sourceTree = "<group>"; };
 		19D29F8016A674C200D46B0A /* MainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		19D5DFAE175D820D007DEEB2 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		19D616DF1739E47600349377 /* BNAppStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNAppStats.h; sourceTree = "<group>"; };
 		19D616E01739E47600349377 /* BNAppStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNAppStats.m; sourceTree = "<group>"; };
 		19D616E11739E47600349377 /* BNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNColor.h; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D5DFAF175D820D007DEEB2 /* Reveal.framework in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
 				19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */,
 				19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */,
@@ -359,6 +362,7 @@
 		4EEA6CD315268ED200B96EFD = {
 			isa = PBXGroup;
 			children = (
+				19D5DFAE175D820D007DEEB2 /* Reveal.framework */,
 				4EEA6D021526902D00B96EFD /* Classes */,
 				4EEA6D081526902D00B96EFD /* Resources */,
 				4EEA6D091526902D00B96EFD /* Support */,
@@ -709,13 +713,18 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies\"",
+					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/AtYourAge-Prefix.pch";
 				INFOPLIST_FILE = "Support/AtYourAge-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DDEBUG=1";
-				OTHER_LDFLAGS = "-lsqlite3.0";
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7F80734C-1760-4292-B499-7E72201ACD91";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7F80734C-1760-4292-B499-7E72201ACD91";
@@ -731,12 +740,17 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies\"",
+					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/AtYourAge-Prefix.pch";
 				INFOPLIST_FILE = "Support/AtYourAge-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = "-lsqlite3.0";
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7F80734C-1760-4292-B499-7E72201ACD91";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7F80734C-1760-4292-B499-7E72201ACD91";

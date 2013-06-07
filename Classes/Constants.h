@@ -32,3 +32,9 @@
 #define EventDescriptionY 185
 #define EventDescriptionHeight 60
 #define EventDescriptionWidth 300
+
+#define LargeImageWidgetExpandedRadius 40
+
+#define ImageWidgetInitialHeight 90
+#define ImageWidgetInitialWidth 90
+#define ImageWidgetExpandTransformFactor 2

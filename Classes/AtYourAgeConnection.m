@@ -60,7 +60,7 @@
         NSLog(@"Error: %@, str: %@", error, str);
     }
     
-    NSLog(@"Parse result: %@", parseResult);
+//    NSLog(@"Parse result: %@", parseResult);
     if (request.classToParse != nil && request.classToParse != NULL) {
         
         result = [[request.classToParse alloc] initWithJsonDictionary:parseResult];

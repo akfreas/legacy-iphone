@@ -78,6 +78,7 @@
     }
 }
 
+
 -(void)setPerson:(Person *)person {
     
     UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
@@ -88,7 +89,7 @@
 }
 
 -(void)expandWidget {
-    _widget.expanded = !_widget.expanded;
+    _widget.expanded = YES;
 }
 
 -(void)collapseWidget {

@@ -79,11 +79,14 @@ typedef struct DualFrame DualFrame;
     descriptionFrame.collapsed = eventDescriptionText.frame;
     descriptionFrame.expanded = CGRectMake(EventDescriptionX, EventDescriptionY, EventDescriptionWidth, EventDescriptionHeight);
     widgetContainerFrame.collapsed = self.widgetContainer.frame;
-    widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(self.widgetContainer.frame), self.widgetContainer.frame.origin.y, CGRectGetWidth(self.widgetContainer.frame) + 50, CGRectGetHeight(self.widgetContainer.frame) + 50);
+    widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(self.widgetContainer.frame), self.widgetContainer.frame.origin.y, CGRectGetWidth(self.widgetContainer.frame) + (CGRectGetWidth(self.widgetContainer.frame) - ImageWidgetExpandTransformFactor * ImageWidgetInitialWidth), CGRectGetHeight(self.widgetContainer.frame) + ImageWidgetExpandTransformFactor * ImageWidgetInitialHeight - CGRectGetHeight(self.widgetContainer.frame));
     ageLabelFrame.collapsed = ageLabel.frame;
     ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
     viewFrame.collapsed = _view.frame;
-    viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + EventDescriptionHeight);
+    
+    CGRect widgetFrameTranslated = [self convertRect:widgetContainerFrame.expanded fromView:self];
+    
+    viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + widgetContainerFrame.expanded.size.height - widgetContainerFrame.expanded.origin.y - widgetContainerFrame.collapsed.size.height);//ImageWidgetInitialHeight * ImageWidgetExpandTransformFactor);
 }
 
 
@@ -216,7 +219,6 @@ typedef struct DualFrame DualFrame;
                 
                 if (relatedEvent.isSelf == YES) {
                     selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
-//                    eventLabel.backgroundColor = [UIColor lightGrayColor];
                     eventLabel.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:.2].CGColor;
                     eventLabel.layer.cornerRadius = 15.0;
                 }
@@ -224,7 +226,7 @@ typedef struct DualFrame DualFrame;
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
-            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
+            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + widgetContainerFrame.expanded.size.height - widgetContainerFrame.expanded.origin.y - widgetContainerFrame.collapsed.size.height;
             CGFloat frameDelta;
             CGRect keyWindowFrame = Utility_AppSettings.frameForKeyWindow;
             CGFloat availableHeight = keyWindowFrame.size.height - MoreCloseButtonHeight - 20 - 44;
@@ -233,11 +235,11 @@ typedef struct DualFrame DualFrame;
             } else {
                 frameDelta = contentSizeIncrease;
             }
-
+            
             CGRect newContentRect = CGRectAddHeightToRect(self.view.frame, contentSizeIncrease);
             [UIView animateWithDuration:0.2 animations:^{
                 
-                self.frame = CGRectAddHeightToRect(self.frame, frameDelta);
+                self.frame = CGRectAddHeightToRect(viewFrame.expanded, frameDelta);
                 [self setContentFrames:newContentRect];
 
             __block NSNumber *frameDeltaNumber;
@@ -262,8 +264,7 @@ typedef struct DualFrame DualFrame;
 -(void)addIndicatorLines {
 
     
-    CGRect largeImageRect = self.widgetContainer.frame   ;
-    
+    CGRect largeImageRect = self.widgetContainer.frame;
     CGPoint startPoint = CGPointMake(largeImageRect.origin.x + largeImageRect.size.width, largeImageRect.origin.y + largeImageRect.size.height / 2);
     CGPoint translatedEndPoint = CGPointMake(selfEventRightmostPoint.x - startPoint.x, selfEventRightmostPoint.y - startPoint.y);
     indLines = [[RightIndicatorLines alloc] initWithStartPoint:startPoint endPoint:translatedEndPoint];
@@ -288,6 +289,7 @@ typedef struct DualFrame DualFrame;
         [CATransaction setAnimationDuration:0];
         [self.widgetContainer expandWidget];
         [self setContentFrames:viewFrame.expanded];
+        self.frame = viewFrame.expanded;
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
         self.widgetContainer.layer.frame = widgetContainerFrame.expanded;

@@ -11,12 +11,22 @@
 #import "RightIndicatorLines.h"
 #import "Utility_AppSettings.h"
 
-
-struct DualFrame {
+typedef struct DualFrame {
     CGRect expanded;
     CGRect collapsed;
-};
+    CGFloat (* heightDelta)();
+} DualFrame;
 
+CGFloat heightDelta(DualFrame *mine) {
+    CGFloat d = mine->expanded.size.height - mine->collapsed.size.height;
+    return d;
+}
+
+DualFrame * initFrame() {
+    DualFrame *df = (DualFrame*)malloc(sizeof(DualFrame));
+    df->heightDelta = &heightDelta;
+    return df;
+}
 typedef struct DualFrame DualFrame;
 
 
@@ -78,10 +88,13 @@ typedef struct DualFrame DualFrame;
     
     descriptionFrame.collapsed = eventDescriptionText.frame;
     descriptionFrame.expanded = CGRectMake(EventDescriptionX, EventDescriptionY, EventDescriptionWidth, EventDescriptionHeight);
+    
     widgetContainerFrame.collapsed = self.widgetContainer.frame;
     widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - ImageWidgetExpandTransformFactor / 2 * ImageWidgetInitialWidth + ImageLayerDefaultStrokeWidth * 2, widgetContainerFrame.collapsed.origin.y, CGRectGetWidth(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialWidth - CGRectGetWidth(widgetContainerFrame.collapsed) + ImageLayerDefaultStrokeWidth * 2, CGRectGetHeight(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialHeight - CGRectGetHeight(widgetContainerFrame.collapsed) + ImageLayerDefaultStrokeWidth * 2);
+    
     ageLabelFrame.collapsed = ageLabel.frame;
     ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
+    
     viewFrame.collapsed = _view.frame;
     viewFrame.expanded = CGRectMake(viewFrame.collapsed.origin.x, viewFrame.collapsed.origin.y, viewFrame.collapsed.size.width, viewFrame.collapsed.size.height + widgetContainerFrame.expanded.size.height - widgetContainerFrame.collapsed.size.height + RelatedEventsLabelTopMargin);//ImageWidgetInitialHeight * ImageWidgetExpandTransformFactor);
 }
@@ -223,22 +236,22 @@ typedef struct DualFrame DualFrame;
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
-            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + widgetContainerFrame.expanded.size.height - widgetContainerFrame.collapsed.size.height;
+            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
             CGFloat frameDelta;
             CGRect keyWindowFrame = Utility_AppSettings.frameForKeyWindow;
             CGFloat availableHeight = keyWindowFrame.size.height - MoreCloseButtonHeight - 20 - 44;
             if (contentSizeIncrease + viewFrame.expanded.size.height > availableHeight) {
-                frameDelta = availableHeight - viewFrame.expanded.size.height;
+                frameDelta = availableHeight - viewFrame.collapsed.size.height;
             } else {
                 frameDelta = contentSizeIncrease;
             }
             
             CGRect newContentRect = CGRectAddHeightToRect(self.view.frame, contentSizeIncrease);
+            CGRect newFrameRect = CGRectAddHeightToRect(viewFrame.collapsed, frameDelta);
             [UIView animateWithDuration:0.2 animations:^{
                 
-                self.frame = CGRectAddHeightToRect(viewFrame.expanded, frameDelta);
+                self.frame =  newFrameRect ;
                 [self setContentFrames:newContentRect];
-
             __block NSNumber *frameDeltaNumber;
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
             completionBlock(frameDeltaNumber);
@@ -285,8 +298,6 @@ typedef struct DualFrame DualFrame;
         [CATransaction begin];
         [CATransaction setAnimationDuration:0];
         [self.widgetContainer expandWidget];
-        [self setContentFrames:viewFrame.expanded];
-        self.frame = viewFrame.expanded;
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
         self.widgetContainer.frame = widgetContainerFrame.expanded;

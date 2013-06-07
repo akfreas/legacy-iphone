@@ -11,3 +11,4 @@ inline CGSize CGSizeAddHeightToSize(CGSize size, CGFloat delta);
 inline CGRect CGRectAddHeightToRect(CGRect rect, CGFloat delta);
 inline CGRect CGRectMakeFrameWithOriginOnBottomOfFrame(CGRect hostFrame, CGFloat width, CGFloat height);
 inline CGSize CGSizeMakeFromRect(CGRect rect);
+inline void CGRectSetOrigin(CGRect rect, CGPoint origin);

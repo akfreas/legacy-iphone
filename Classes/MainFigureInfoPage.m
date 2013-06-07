@@ -250,15 +250,13 @@ typedef struct DualFrame DualFrame;
             CGRect newFrameRect = CGRectAddHeightToRect(viewFrame.collapsed, frameDelta);
             [self setContentFrames:newContentRect];
 
-            [UIView animateWithDuration:0.2 animations:^{
-                
-                self.frame =  newFrameRect;
+            self.frame =  newFrameRect;
+            self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+                        
             __block NSNumber *frameDeltaNumber;
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
             completionBlock(frameDeltaNumber);
-                
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.2 animations:^{
+            [UIView animateWithDuration:0.2 animations:^{
                     
                     for (UILabel *theLabel in arrayOfRelatedEventLabels) {
                         theLabel.alpha = 1;
@@ -266,7 +264,6 @@ typedef struct DualFrame DualFrame;
 
                     [self addIndicatorLines];
 
-                }];
             }];
         });
     }];
@@ -292,7 +289,9 @@ typedef struct DualFrame DualFrame;
     self.view.frame = rect;
     self.contentSize = CGSizeMakeFromRect(rect);
 }
-
+-(void)setContentOrigin:(CGPoint)point {
+    CGRectSetOrigin(self.view.frame, point);
+}
 -(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
     
     [UIView animateWithDuration:.2 animations:^{

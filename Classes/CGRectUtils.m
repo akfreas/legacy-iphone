@@ -46,3 +46,7 @@ CGSize CGSizeMakeFromRect(CGRect rect) {
     CGSize newSize =  CGSizeMake(rect.size.width, rect.size.height);
     return newSize;
 }
+
+void CGRectSetOrigin(CGRect rect, CGPoint origin) {
+    rect = CGRectMake(origin.x, origin.y, rect.size.width, rect.size.height);
+}

@@ -2,23 +2,19 @@
 
 @implementation CircleImageLayer {
     
-    CALayer *imageHostingLayer;
-    CAShapeLayer *mask;
-    CAShapeLayer *borderLayer;
+
     CGFloat _radius;
     CGMutablePathRef circlePath;
 }
 
 @dynamic radius;
 
-CGFloat strokeWidth = 2;
-
 
 -(id)initWithRadius:(CGFloat)theRadius {
     
     if (self == [self init]) {
         _radius = theRadius;
-        self.frame = CGRectMake(0, 0, theRadius * 2 + strokeWidth, theRadius * 2 + strokeWidth);
+        self.frame = CGRectMake(0, 0, theRadius * 2 + ImageLayerDefaultStrokeWidth, theRadius * 2 + ImageLayerDefaultStrokeWidth);
         
 //        [self drawBackgroundBorderLayer];
 //        [self drawImageHostingLayer];
@@ -138,8 +134,8 @@ CGFloat strokeWidth = 2;
         CGContextSetFillColorWithColor(ctx, [UIColor grayColor].CGColor);
         drawingMode = kCGPathFillStroke;
     }
-    CGContextAddArc(ctx, center.x, center.y, _radius - strokeWidth /2, 0, M_PI * 2, 1);
-    CGContextSetLineWidth(ctx, strokeWidth);
+    CGContextAddArc(ctx, center.x, center.y, _radius - ImageLayerDefaultStrokeWidth / 2, 0, M_PI * 2, 1);
+    CGContextSetLineWidth(ctx, ImageLayerDefaultStrokeWidth);
     CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
     CGContextDrawPath(ctx, drawingMode);
 }

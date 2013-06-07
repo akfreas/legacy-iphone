@@ -248,10 +248,11 @@ typedef struct DualFrame DualFrame;
             
             CGRect newContentRect = CGRectAddHeightToRect(self.view.frame, contentSizeIncrease);
             CGRect newFrameRect = CGRectAddHeightToRect(viewFrame.collapsed, frameDelta);
+            [self setContentFrames:newContentRect];
+
             [UIView animateWithDuration:0.2 animations:^{
                 
-                self.frame =  newFrameRect ;
-                [self setContentFrames:newContentRect];
+                self.frame =  newFrameRect;
             __block NSNumber *frameDeltaNumber;
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
             completionBlock(frameDeltaNumber);
@@ -262,6 +263,7 @@ typedef struct DualFrame DualFrame;
                     for (UILabel *theLabel in arrayOfRelatedEventLabels) {
                         theLabel.alpha = 1;
                     }
+
                     [self addIndicatorLines];
 
                 }];

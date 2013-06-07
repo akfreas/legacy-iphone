@@ -9,7 +9,7 @@
 
 -(id)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     
-    if (self = [self initWithFrame:CGRectMake(startPoint.x, startPoint.y, 200, 400)]) {
+    if (self = [self initWithFrame:CGRectMake(startPoint.x, startPoint.y, RightIndicatorLinesFrameWidth, RightIndicatorLinesFrameHeight)]) {
         _lineStartPoint = startPoint;
         _lineEndPoint = endPoint;
 //        self.backgroundColor = [UIColor greenColor];

@@ -63,7 +63,8 @@
     CircleImageLayer *imageLayer = [[CircleImageLayer alloc] initWithImage:thumb radius:20];
     
     CGFloat imageLayerSize = 20;
-    imageLayer.frame = CGRectMake(points[1].x - imageLayerSize, points[1].y - imageLayerSize, imageLayerSize, imageLayerSize);
+    
+    imageLayer.frame = CGRectMake(points[1].x - imageLayer.bounds.size.height / 2, points[1].y - imageLayer.bounds.size.width / 2, imageLayer.bounds.size.width, imageLayer.bounds.size.height);
     [self.layer addSublayer:imageLayer];
              
     CATextLayer *textLayer = [[CATextLayer alloc] init];

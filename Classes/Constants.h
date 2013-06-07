@@ -19,6 +19,9 @@
 #define PageControlHeight 20
 #define PageControlCornerRadius 12.0
 
+#define RelatedEventsLabelTopMargin 10
+#define ImageLayerDefaultStrokeWidth 2
+
 #define RelatedEventsLabelHeight 54
 #define RelatedEventsLabelWidth 300
 
@@ -38,3 +41,6 @@
 #define ImageWidgetInitialHeight 90
 #define ImageWidgetInitialWidth 90
 #define ImageWidgetExpandTransformFactor 2
+
+#define RightIndicatorLinesFrameWidth 200
+#define RightIndicatorLinesFrameHeight 400

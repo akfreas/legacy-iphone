@@ -29,14 +29,14 @@
 
 -(id)init {
     
-    self = [super initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self = [super initWithFrame:CGRectMake(0, 0, ImageWidgetInitialWidth, ImageWidgetInitialHeight)];
     if (self) {
         _angle = 130;
         _smallImageRadius = 20;
         _largeImageRadius = 40;
         _smallImageOffset = 5;
         _expanded = NO;
-                        
+        
         self.backgroundColor = [UIColor clearColor];
     }
     
@@ -100,21 +100,25 @@
     CGAffineTransform circleTransform = CGAffineTransformMakeScale(2, 2);
     CGRect circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
     
+    CGAffineTransform trans;
     if (_expanded == YES) {
         circleTransform = CGAffineTransformMakeScale(0, 0);
         
-        CGAffineTransform trans = CGAffineTransformMakeScale(1, 1);
+        trans = CGAffineTransformMakeScale(1, 1);
         
         largeCircleImage.transform = CATransform3DMakeAffineTransform(trans);
+        trans = CGAffineTransformMakeScale(.5, .5); /// HAX NONONO
         smallCircleImage.opacity = 1;
+        largeCircleImage.anchorPoint = CGPointMake(.5, .5);
     } else {
+        largeCircleImage.anchorPoint = CGPointMake(0, .3);
         smallCircleImage.opacity = 0;
         
-        CGAffineTransform trans = CGAffineTransformMakeScale(2, 2);
+        trans = CGAffineTransformMakeScale(2, 2);
         largeCircleImage.transform = CATransform3DMakeAffineTransform(trans);
     }
     
-    
+    self.frame = CGRectApplyAffineTransform(self.frame, trans);
     circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
     
     CGRect largeImageFrame = CGRectApplyAffineTransform(circleFrame, circleTransform);
@@ -123,7 +127,6 @@
     CGFloat lgFrameWidthDiff = (largeImageFrame.size.width - circleFrame.size.width);
     CGFloat lgFrameHeightDiff = (largeImageFrame.size.height - circleFrame.size.height);
     
-    largeCircleImage.frame = self.frame;
     smallCircleImage.frame = CGRectMake(smallCircleImage.frame.origin.x + lgFrameWidthDiff, smallCircleImage.frame.origin.y + lgFrameHeightDiff, smallCircleImage.frame.size.width, smallCircleImage.frame.size.height);
     [CATransaction commit];
     [self setNeedsDisplay];

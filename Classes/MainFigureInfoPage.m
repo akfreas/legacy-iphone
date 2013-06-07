@@ -79,14 +79,11 @@ typedef struct DualFrame DualFrame;
     descriptionFrame.collapsed = eventDescriptionText.frame;
     descriptionFrame.expanded = CGRectMake(EventDescriptionX, EventDescriptionY, EventDescriptionWidth, EventDescriptionHeight);
     widgetContainerFrame.collapsed = self.widgetContainer.frame;
-    widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - ImageWidgetExpandTransformFactor / 2 * ImageWidgetInitialWidth, widgetContainerFrame.collapsed.origin.y, CGRectGetWidth(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialWidth - CGRectGetWidth(widgetContainerFrame.collapsed), CGRectGetHeight(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialHeight - CGRectGetHeight(widgetContainerFrame.collapsed));
+    widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - ImageWidgetExpandTransformFactor / 2 * ImageWidgetInitialWidth + ImageLayerDefaultStrokeWidth * 2, widgetContainerFrame.collapsed.origin.y, CGRectGetWidth(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialWidth - CGRectGetWidth(widgetContainerFrame.collapsed) + ImageLayerDefaultStrokeWidth * 2, CGRectGetHeight(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialHeight - CGRectGetHeight(widgetContainerFrame.collapsed) + ImageLayerDefaultStrokeWidth * 2);
     ageLabelFrame.collapsed = ageLabel.frame;
     ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
     viewFrame.collapsed = _view.frame;
-    
-    CGRect widgetFrameTranslated = [self convertRect:widgetContainerFrame.expanded fromView:self];
-    
-    viewFrame.expanded = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + widgetContainerFrame.expanded.size.height - widgetContainerFrame.expanded.origin.y - widgetContainerFrame.collapsed.size.height);//ImageWidgetInitialHeight * ImageWidgetExpandTransformFactor);
+    viewFrame.expanded = CGRectMake(viewFrame.collapsed.origin.x, viewFrame.collapsed.origin.y, viewFrame.collapsed.size.width, viewFrame.collapsed.size.height + widgetContainerFrame.expanded.size.height - widgetContainerFrame.collapsed.size.height + RelatedEventsLabelTopMargin);//ImageWidgetInitialHeight * ImageWidgetExpandTransformFactor);
 }
 
 
@@ -215,7 +212,7 @@ typedef struct DualFrame DualFrame;
                 
                 __block RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
                 eventLabel.alpha = 0;
-                eventLabel.frame = CGRectMake(0, self.view.frame.size.height + RelatedEventsLabelTopMargin + RelatedEventsLabelHeight * i, RelatedEventsLabelWidth, RelatedEventsLabelHeight);
+                eventLabel.frame = CGRectMake(0, viewFrame.expanded.size.height + RelatedEventsLabelHeight * i, RelatedEventsLabelWidth, RelatedEventsLabelHeight);
                 
                 if (relatedEvent.isSelf == YES) {
                     selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
@@ -226,12 +223,12 @@ typedef struct DualFrame DualFrame;
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
-            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + widgetContainerFrame.expanded.size.height - widgetContainerFrame.expanded.origin.y - widgetContainerFrame.collapsed.size.height;
+            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + widgetContainerFrame.expanded.size.height - widgetContainerFrame.collapsed.size.height;
             CGFloat frameDelta;
             CGRect keyWindowFrame = Utility_AppSettings.frameForKeyWindow;
             CGFloat availableHeight = keyWindowFrame.size.height - MoreCloseButtonHeight - 20 - 44;
-            if (contentSizeIncrease + self.frame.size.height > availableHeight) {
-                frameDelta = availableHeight - self.frame.size.height;
+            if (contentSizeIncrease + viewFrame.expanded.size.height > availableHeight) {
+                frameDelta = availableHeight - viewFrame.expanded.size.height;
             } else {
                 frameDelta = contentSizeIncrease;
             }

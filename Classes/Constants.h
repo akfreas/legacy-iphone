@@ -19,7 +19,7 @@
 #define PageControlHeight 20
 #define PageControlCornerRadius 12.0
 
-#define RelatedEventsLabelTopMargin 10
+#define RelatedEventsLabelTopMargin 0
 #define ImageLayerDefaultStrokeWidth 2
 
 #define RelatedEventsLabelHeight 54

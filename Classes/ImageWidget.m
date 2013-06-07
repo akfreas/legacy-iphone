@@ -33,7 +33,7 @@
     if (self) {
         _angle = 130;
         _smallImageRadius = 20;
-        _largeImageRadius = 40;
+        _largeImageRadius = ImageWidgetInitialWidth / 2 - ImageLayerDefaultStrokeWidth / 2;
         _smallImageOffset = 5;
         _expanded = NO;
         
@@ -86,10 +86,6 @@
     return largeCircleImage.frame;
 }
 
--(CALayer *)largeImageL {
-    return largeCircleImage;
-}
-
 -(void)toggleExpand {
     
     NSLog(@"Expand!");
@@ -111,7 +107,7 @@
         smallCircleImage.opacity = 1;
         largeCircleImage.anchorPoint = CGPointMake(.5, .5);
     } else {
-        largeCircleImage.anchorPoint = CGPointMake(0, .3);
+        largeCircleImage.anchorPoint = CGPointMake(.25, .25);
         smallCircleImage.opacity = 0;
         
         trans = CGAffineTransformMakeScale(2, 2);
@@ -150,9 +146,6 @@
 }
 
 -(void)drawSmallImage {
-    
-    
-    
     
     CGSize smImgSize = _smallImage.size;
     CGFloat scale = MAX((_smallImageRadius * 2) / smImgSize.width, (_smallImageRadius * 2) / smImgSize.height);

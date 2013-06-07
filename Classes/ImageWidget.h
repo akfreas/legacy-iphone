@@ -10,7 +10,6 @@
 @property (nonatomic) UIImage *smallImage;
 @property (nonatomic) UIImage *largeImage;
 @property (nonatomic) BOOL expanded;
-@property (readonly) CALayer *largeImageL;
 
 
 @property (readonly) CGRect largeImageFrame;

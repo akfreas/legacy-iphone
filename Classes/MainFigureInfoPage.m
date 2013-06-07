@@ -79,7 +79,7 @@ typedef struct DualFrame DualFrame;
     descriptionFrame.collapsed = eventDescriptionText.frame;
     descriptionFrame.expanded = CGRectMake(EventDescriptionX, EventDescriptionY, EventDescriptionWidth, EventDescriptionHeight);
     widgetContainerFrame.collapsed = self.widgetContainer.frame;
-    widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(self.widgetContainer.frame), self.widgetContainer.frame.origin.y, CGRectGetWidth(self.widgetContainer.frame) + (CGRectGetWidth(self.widgetContainer.frame) - ImageWidgetExpandTransformFactor * ImageWidgetInitialWidth), CGRectGetHeight(self.widgetContainer.frame) + ImageWidgetExpandTransformFactor * ImageWidgetInitialHeight - CGRectGetHeight(self.widgetContainer.frame));
+    widgetContainerFrame.expanded = CGRectMake(self.frame.size.width / 2 - ImageWidgetExpandTransformFactor / 2 * ImageWidgetInitialWidth, widgetContainerFrame.collapsed.origin.y, CGRectGetWidth(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialWidth - CGRectGetWidth(widgetContainerFrame.collapsed), CGRectGetHeight(widgetContainerFrame.collapsed) + ImageWidgetExpandTransformFactor * ImageWidgetInitialHeight - CGRectGetHeight(widgetContainerFrame.collapsed));
     ageLabelFrame.collapsed = ageLabel.frame;
     ageLabelFrame.expanded = CGRectMake(self.frame.size.width / 2 - CGRectGetWidth(ageLabel.frame) / 2, ageLabel.frame.origin.y, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
     viewFrame.collapsed = _view.frame;
@@ -215,7 +215,7 @@ typedef struct DualFrame DualFrame;
                 
                 __block RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
                 eventLabel.alpha = 0;
-                eventLabel.frame = CGRectMake(0, self.view.frame.size.height + RelatedEventsLabelHeight * i, RelatedEventsLabelWidth, RelatedEventsLabelHeight);
+                eventLabel.frame = CGRectMake(0, self.view.frame.size.height + RelatedEventsLabelTopMargin + RelatedEventsLabelHeight * i, RelatedEventsLabelWidth, RelatedEventsLabelHeight);
                 
                 if (relatedEvent.isSelf == YES) {
                     selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
@@ -292,7 +292,7 @@ typedef struct DualFrame DualFrame;
         self.frame = viewFrame.expanded;
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
-        self.widgetContainer.layer.frame = widgetContainerFrame.expanded;
+        self.widgetContainer.frame = widgetContainerFrame.expanded;
         ageLabel.frame = ageLabelFrame.expanded;
         ageLabel.layer.opacity = 0;
         [CATransaction commit];

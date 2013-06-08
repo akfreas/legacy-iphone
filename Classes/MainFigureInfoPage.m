@@ -101,11 +101,7 @@ DualFrame * initFrame() {
 
 
 
--(IBAction)wikipediaButtonAction:(id)sender {
-    
-    NSDictionary *userInfo = @{@"event": self.event};
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForWikipediaButtonTappedNotification object:self userInfo:userInfo];
-}
+
 
 -(IBAction)trashcanButtonAction:(id)sender {
     
@@ -125,8 +121,6 @@ DualFrame * initFrame() {
 }
 
 -(void)postWikiNotif {
-    NSDictionary *userInfo = @{@"person" : _person};
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRemovePersonButtonTappedNotification object:self userInfo:userInfo];
     
 }
 
@@ -284,9 +278,7 @@ DualFrame * initFrame() {
     self.view.frame = rect;
     self.contentSize = CGSizeMakeFromRect(rect);
 }
--(void)setContentOrigin:(CGPoint)point {
-    CGRectSetOrigin(self.view.frame, point);
-}
+
 -(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
     
     [UIView animateWithDuration:.2 animations:^{

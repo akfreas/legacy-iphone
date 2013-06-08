@@ -14,3 +14,4 @@ inline CGRect CGRectMakeFrameWithOriginOnBottomOfFrame(CGRect hostFrame, CGFloat
 inline CGSize CGSizeMakeFromRect(CGRect rect);
 inline CGRect CGRectSetHeightForRect(CGFloat height, CGRect rect);
 inline CGRect CGRectSetOriginOnRect(CGRect rect, CGFloat originX, CGFloat originY);
+inline CGRect CGRectMakeFrameForDeadCenterInRect(CGRect rect, CGSize frameSize);

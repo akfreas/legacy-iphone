@@ -62,6 +62,7 @@ CGRect CGRectSetOriginOnRect(CGRect rect, CGFloat originX, CGFloat originY) {
     return newRect;
 }
 
-void CGRectSetOrigin(CGRect rect, CGPoint origin) {
-    rect = CGRectMake(origin.x, origin.y, rect.size.width, rect.size.height);
+CGRect CGRectMakeFrameForDeadCenterInRect(CGRect rect, CGSize frameSize) {
+    CGRect newRect = CGRectMake(rect.size.width / 2 - frameSize.width / 2, rect.size.height / 2 - frameSize.height / 2, frameSize.width, frameSize.height);
+    return newRect;
 }

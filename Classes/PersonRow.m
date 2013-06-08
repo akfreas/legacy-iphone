@@ -73,7 +73,7 @@ CGFloat pageWidth = 320;
 
 -(void)addScrollViewWithFrame:(CGRect)frame {
     scroller = [[UIScrollView alloc] initWithFrame:CGRectMakeFrameWithSizeFromFrame(frame)];
-    scroller.scrollEnabled = YES;
+    scroller.scrollEnabled = NO;
     scroller.contentSize = CGSizeZero;
     scroller.delegate = self;
     scroller.showsHorizontalScrollIndicator = NO;
@@ -97,6 +97,8 @@ CGFloat pageWidth = 320;
 
 -(void)setPerson:(Person *)person {
     _person = person;
+
+    tabPage.person = _person;
     infoPage.person = person;
     
     
@@ -116,7 +118,7 @@ CGFloat pageWidth = 320;
         if (event != nil) {
             [self fetchFigureAndAddDescriptionPage];
             infoPage.event = event;
-            
+            tabPage.event = event;
         }
     }];
 }
@@ -265,7 +267,7 @@ CGFloat pageWidth = 320;
     } else {
         
         [infoPage collapseWithCompletion:^(BOOL expanded) {
-//            scroller.scrollEnabled = expanded;
+            scroller.scrollEnabled = expanded;
             [UIView animateWithDuration:.2 animations:^{
                 pageControl.alpha = (int)expanded;
             }];

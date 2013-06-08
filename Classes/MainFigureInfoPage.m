@@ -50,6 +50,7 @@ typedef struct DualFrame DualFrame;
     
     NSNumber *rowHeightDelta;
     NSMutableArray *arrayOfRelatedEventLabels;
+    NSDictionary *eventDict;
     
     void(^publicExpandCompletion)(BOOL expanded);
     
@@ -169,14 +170,15 @@ typedef struct DualFrame DualFrame;
     }
 }
 
--(void)toggleExpandWithCompletion:(void(^)(BOOL expanded))completion {
-
+-(void)expandWithRelatedEvents:(NSDictionary *)events completion:(void(^)(BOOL expanded))completion {
     publicExpandCompletion = completion;
-    if (_expanded == NO) {
-        [self expandWithCompletion:[self expandCompletionBlock]];
-    } else {
-        [self collapseWithCompletionBlock:[self collapseCompletionBlock]];
-    }
+    eventDict = events;
+    [self expandWithCompletion:[self expandCompletionBlock]];
+}
+
+-(void)collapseWithCompletion:(void(^)(BOOL expanded))completion {
+    publicExpandCompletion = completion;
+    [self collapseWithCompletionBlock:[self collapseCompletionBlock]];
 }
 
 -(void(^)(void))collapseCompletionBlock {
@@ -210,11 +212,6 @@ typedef struct DualFrame DualFrame;
 
 -(void)getRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
     
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:self.event.eventId requester:_person];
-    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-    
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSDictionary *eventDict, NSError *error) {
-        
         NSArray *eventResult = [eventDict objectForKey:@"events"];
         NSLog(@"Events: %@", eventResult);
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -266,7 +263,6 @@ typedef struct DualFrame DualFrame;
 
             }];
         });
-    }];
 }
 
 

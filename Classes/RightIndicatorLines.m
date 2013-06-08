@@ -9,9 +9,9 @@
 
 -(id)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     
-    if (self = [self initWithFrame:CGRectMake(startPoint.x, startPoint.y, RightIndicatorLinesFrameWidth, RightIndicatorLinesFrameHeight)]) {
-        _lineStartPoint = startPoint;
-        _lineEndPoint = endPoint;
+    if (self = [self initWithFrame:CGRectMake(startPoint.x - RightIndicatorLinesFrameWidth / 2, startPoint.y, RightIndicatorLinesFrameWidth, RightIndicatorLinesFrameHeight)]) {
+        _lineStartPoint = CGPointMake(RightIndicatorLinesFrameWidth /2, 0);// startPoint;// CGPointMake(startPoint.x + RightIndicatorLinesFrameWidth/2, startPoint.y);
+        _lineEndPoint = CGPointMake(endPoint.x + RightIndicatorLinesFrameWidth/2, endPoint.y);
 //        self.backgroundColor = [UIColor greenColor];
     }
     return self;
@@ -47,6 +47,26 @@
     }
 }
 
+
+-(void)drawLines {
+    
+    path = [UIBezierPath bezierPath];
+    
+    path.lineWidth = 1.0;
+    path.lineJoinStyle = kCGLineJoinRound;
+    
+    CGFloat dash[2] = {3.0, 5.0};
+    
+    [path setLineDash:dash count:2 phase:0];
+    [[UIColor colorWithRed:0 green:0 blue:1 alpha:.35] setStroke];
+    
+    [path moveToPoint:_lineStartPoint];
+    [path addLineToPoint:_lineStartPoint];
+    [path addLineToPoint:CGPointMake(_lineEndPoint.x, 20)];
+    [path addLineToPoint:_lineEndPoint];
+    
+    [path stroke];
+}
 -(void)drawPersonInfo {
         
     const int numPoints = 3;
@@ -88,24 +108,5 @@
     
 }
 
--(void)drawLines {
-    
-    path = [UIBezierPath bezierPath];
-    
-    path.lineWidth = 1.0;
-    path.lineJoinStyle = kCGLineJoinRound;
-    
-    CGFloat dash[2] = {3.0, 5.0};
-    
-    [path setLineDash:dash count:2 phase:0];
-    [[UIColor colorWithRed:0 green:0 blue:1 alpha:.35] setStroke];
-    
-    [path moveToPoint:CGPointMake(0, 0)];
-    [path addLineToPoint:CGPointMake(0, 0)];
-    [path addLineToPoint:CGPointMake(_lineEndPoint.x, 20)];
-    [path addLineToPoint:_lineEndPoint];
-
-    [path stroke];
-}
 
 @end

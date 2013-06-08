@@ -13,8 +13,8 @@
 @property (nonatomic) BOOL expanded;
 
 -(void)collapse;
--(void)toggleExpandWithCompletion:(void(^)(BOOL expanded))completion;
-
+-(void)collapseWithCompletion:(void(^)(BOOL expanded))completion;
+-(void)expandWithRelatedEvents:(NSDictionary *)events completion:(void(^)(BOOL expanded))completion;
 @end
 
 

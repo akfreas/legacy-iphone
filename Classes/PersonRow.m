@@ -20,6 +20,7 @@
     UIPageControl *pageControl;
     UIScrollView *scroller;
     UIButton *moreCloseButton;
+    UIActivityIndicatorView *indicator;
     CGPoint lastPoint;
 }
 
@@ -190,12 +191,36 @@ CGFloat pageWidth = 320;
 }
 
 -(void)tapped {
-    [infoPage toggleExpandWithCompletion:^(BOOL expanded) {
-        scroller.scrollEnabled = expanded;
-        [UIView animateWithDuration:.2 animations:^{
-            pageControl.alpha = (int)expanded;
+    
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:event.eventId requester:_person];
+    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    if (infoPage.expanded == NO) {
+        
+        
+        indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        indicator.frame = CGRectMake(0, 0, MoreCloseButtonHeight, MoreCloseButtonHeight);
+        [indicator startAnimating];
+        [moreCloseButton addSubview:indicator];
+        
+        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSDictionary *eventDict, NSError *error) {
+            [indicator stopAnimating];
+            [indicator removeFromSuperview];
+            [infoPage expandWithRelatedEvents:eventDict completion:^(BOOL expanded) {
+                scroller.scrollEnabled = YES;
+                [UIView animateWithDuration:.2 animations:^{
+                    pageControl.alpha = 1;
+                }];
+            }];
         }];
-    }];
+    } else {
+        
+        [infoPage collapseWithCompletion:^(BOOL expanded) {
+            scroller.scrollEnabled = expanded;
+            [UIView animateWithDuration:.2 animations:^{
+                pageControl.alpha = (int)expanded;
+            }];
+        }];
+    }
 }
 
 #pragma mark UIScrollViewDelegate

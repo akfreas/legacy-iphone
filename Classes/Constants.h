@@ -17,10 +17,10 @@
 #define EventInfoScrollViewPadding 5
 
 #define PageControlYPosition 20
-#define PageControlXPosition 260
+#define PageControlXPosition 240
 #define PageControlWidthPerPage 20
 #define PageControlHeight 20
-#define PageControlCornerRadius 12.0
+#define PageControlCornerRadius 10.0
 
 #define RelatedEventsLabelTopMargin 0
 #define ImageLayerDefaultStrokeWidth 2

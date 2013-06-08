@@ -76,6 +76,7 @@ CGFloat pageWidth = 320;
     scroller.scrollEnabled = YES;
     scroller.contentSize = CGSizeZero;
     scroller.delegate = self;
+    scroller.showsHorizontalScrollIndicator = NO;
     [self addSubview:scroller];
 
 }

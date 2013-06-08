@@ -8,7 +8,10 @@
 #define KeyForPersonRowContentChanged @"PersonRowContentChanged"
 
 
-#define PageRowInitialHeight 140
+#define PersonRowPageInitialHeight 140
+#define PersonRowPageWidth 320
+
+
 #define SpaceBetweenPersonRowPages 10
 
 #define EventInfoScrollViewPadding 5
@@ -44,3 +47,7 @@
 
 #define RightIndicatorLinesFrameWidth 100
 #define RightIndicatorLinesFrameHeight 400
+
+#define LeftActionTabPageWidth 60
+#define LeftActionTabPageButtonWidth 60
+#define LeftActionTabPageButtonHeight 60

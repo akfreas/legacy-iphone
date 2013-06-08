@@ -1,5 +1,7 @@
+#import "PersonRowPageProtocol.h"
+
 @class Figure;
-@interface DescriptionPage : UIView
+@interface DescriptionPage : UIView <PersonRowPageProtocol>
 
 - (id)initWithFigure:(Figure *)theFigure;
 

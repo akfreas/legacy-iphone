@@ -27,7 +27,6 @@ DualFrame * initFrame() {
     df->heightDelta = &heightDelta;
     return df;
 }
-typedef struct DualFrame DualFrame;
 
 
 @implementation MainFigureInfoPage {
@@ -338,4 +337,12 @@ typedef struct DualFrame DualFrame;
         
     }];
 }
+
+#pragma mark PersonRowPageProtocol Functions
+
+-(CGFloat)rightPageMargin {
+    return SpaceBetweenPersonRowPages;
+}
+
+
 @end

@@ -39,13 +39,13 @@
         
         Person *thePerson = [people objectAtIndex:i];
         
-        __block PersonRow *row = [[PersonRow alloc] initWithOrigin:CGPointMake(0, (PageRowInitialHeight + EventInfoScrollViewPadding) * i)];
+        __block PersonRow *row = [[PersonRow alloc] initWithOrigin:CGPointMake(0, (PersonRowPageInitialHeight + EventInfoScrollViewPadding) * i)];
         [arrayOfPersonRows addObject:row];
         [self addSubview:row];
         row.person = thePerson;
         
         
-        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (PageRowInitialHeight + EventInfoScrollViewPadding));
+        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (PersonRowPageInitialHeight + EventInfoScrollViewPadding));
     }
     
     [self setNeedsLayout];
@@ -82,7 +82,7 @@
     CGFloat padding = 5;
     CGFloat width = Utility_AppSettings.frameForKeyWindow.size.height;
 
-    return CGRectMake(0, (PageRowInitialHeight + EventInfoScrollViewPadding)  * index, width, PageRowInitialHeight);
+    return CGRectMake(0, (PersonRowPageInitialHeight + EventInfoScrollViewPadding)  * index, width, PersonRowPageInitialHeight);
 }
 
 -(void)removeInfoViews {

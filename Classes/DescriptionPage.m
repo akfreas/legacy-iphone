@@ -20,11 +20,8 @@
     return self;
 }
 
-
-- (void)drawRect:(CGRect)rect
-{
-
+-(CGFloat)rightPageMargin {
+    return SpaceBetweenPersonRowPages;
 }
-
 
 @end

@@ -39,9 +39,9 @@ CGFloat pageWidth = 320;
     if (self) {
 
         [self addScrollViewWithFrame:frame];
-        [self addPageControl];
         [self addMoreLessButton];
         [self setupPages];
+        [self addPageControl];
         [self registerForNotifications];
         scroller.backgroundColor = [UIColor blackColor];
     }
@@ -82,11 +82,12 @@ CGFloat pageWidth = 320;
 
 -(void)addPageControl {
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(PageControlXPosition, PageControlYPosition, PageControlWidth, PageControlHeight)];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(PageControlXPosition, PageControlYPosition, PageControlWidthPerPage * [pageArray count], PageControlHeight)];
     pageControl.layer.cornerRadius = PageControlCornerRadius;
     pageControl.alpha = 0;
+    pageControl.currentPage = 1;
     pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
-    pageControl.numberOfPages = 2;
+    pageControl.numberOfPages = [pageArray count];
     pageControl.userInteractionEnabled = NO;
     [self addSubview:pageControl];
 
@@ -155,12 +156,19 @@ CGFloat pageWidth = 320;
 -(void)setupPages {
     pageArray = [NSMutableArray arrayWithObjects:[self leftActionTabPage], [self figureInfoPage], [self descriptionPage], nil];
     
+    [self setPageFrames];
+    
+    for (UIView <PersonRowPageProtocol> *page in pageArray) {
+        [scroller addSubview:page];
+    }
+}
+
+-(void)setPageFrames {
     
     CGFloat currentXOffset = 0;
     for (int i=0; i < [pageArray count]; i++) {
         UIView <PersonRowPageProtocol> *page = pageArray[i];
         page.frame = CGRectSetOriginOnRect(page.frame, currentXOffset, 0);
-        [scroller addSubview:page];
         CGFloat widthDelta = CGRectGetWidth(page.frame) + page.rightPageMargin;
         scroller.contentSize = CGSizeAddWidthToSize(scroller.contentSize, widthDelta);
         if (i == 0) {
@@ -194,7 +202,7 @@ CGFloat pageWidth = 320;
 }
 
 -(void)contentsChangedSize:(NSNotification *)notif {
-    CGRect f = self.frame;
+
     CGFloat delta = [[notif.userInfo objectForKey:@"delta"] floatValue];
     CGFloat newDelta;
     CGFloat newHeight;
@@ -213,11 +221,17 @@ CGFloat pageWidth = 320;
         [moreCloseButton setTitle:@"More" forState:UIControlStateNormal];
     }
     
+    
+    [self setPageFrames];
     [UIView animateWithDuration:0.2 animations:^{
-        self.frame =  CGRectMake(f.origin.x, f.origin.y, f.size.width, newHeight);
-        tabPage.height = newHeight;
+        self.frame =  CGRectSetHeightForRect(newHeight, self.frame);
+        
+        for (UIView <PersonRowPageProtocol> *page in pageArray) {
+            page.frame = CGRectSetHeightForRect(newHeight, page.frame);
+            NSLog(@"xxx Page: %@", page);
+        }
         scroller.frame = CGRectMakeFrameWithSizeFromFrame(self.frame);
-        descriptionPage.frame = CGRectMake(infoPage.frame.size.width + SpaceBetweenPersonRowPages, 0, 320, newHeight);
+        
         moreCloseButton.frame = CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, CGRectGetWidth(moreCloseButton.frame), CGRectGetHeight(moreCloseButton.frame));
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:@{@"delta": [NSNumber numberWithFloat:newDelta]}];
     }];
@@ -243,13 +257,14 @@ CGFloat pageWidth = 320;
                 scroller.scrollEnabled = YES;
                 [UIView animateWithDuration:.2 animations:^{
                     pageControl.alpha = 1;
+                    pageControl.currentPage = [pageArray indexOfObject:infoPage];
                 }];
             }];
         }];
     } else {
         
         [infoPage collapseWithCompletion:^(BOOL expanded) {
-            scroller.scrollEnabled = expanded;
+//            scroller.scrollEnabled = expanded;
             [UIView animateWithDuration:.2 animations:^{
                 pageControl.alpha = (int)expanded;
             }];
@@ -274,14 +289,14 @@ CGFloat pageWidth = 320;
 }
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
-    return;
+    
     if (scrollView.contentOffset.x > lastPoint.x) {
         pageControl.currentPage++;
     } else {
         pageControl.currentPage--;
     }
-    
-    lastPoint = CGPointMake(pageControl.currentPage * pageWidth + pageControl.currentPage * SpaceBetweenPersonRowPages, 0);
+    UIView <PersonRowPageProtocol> *page = pageArray[pageControl.currentPage];
+    lastPoint = CGPointMake(page.frame.origin.x, 0);
         [scrollView setContentOffset:lastPoint animated:YES];
 }
 

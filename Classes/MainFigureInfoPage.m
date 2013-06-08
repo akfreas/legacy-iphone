@@ -209,7 +209,7 @@ DualFrame * initFrame() {
 }
 
 
--(void)getRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
+-(void)putRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
     
         NSArray *eventResult = [eventDict objectForKey:@"events"];
         NSLog(@"Events: %@", eventResult);
@@ -219,7 +219,7 @@ DualFrame * initFrame() {
                 
                 RelatedEvent *relatedEvent = [[RelatedEvent alloc] initWithJsonDictionary:[eventResult objectAtIndex:i]];
                 
-                __block RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
+                    RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
                 eventLabel.alpha = 0;
                 eventLabel.frame = CGRectMake(0, viewFrame.expanded.size.height + RelatedEventsLabelHeight * i, RelatedEventsLabelWidth, RelatedEventsLabelHeight);
                 
@@ -248,7 +248,7 @@ DualFrame * initFrame() {
 
             self.frame =  newFrameRect;
             self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-                        
+            
             __block NSNumber *frameDeltaNumber;
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
             completionBlock(frameDeltaNumber);
@@ -302,7 +302,7 @@ DualFrame * initFrame() {
         [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
-        [self getRelatedEventsAndExpandWithCompletion:completionBlock];
+        [self putRelatedEventsAndExpandWithCompletion:completionBlock];
         self.scrollEnabled = YES;
     }];
     

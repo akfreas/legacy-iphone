@@ -18,7 +18,7 @@
 
 #define PageControlYPosition 20
 #define PageControlXPosition 260
-#define PageControlWidth 40
+#define PageControlWidthPerPage 20
 #define PageControlHeight 20
 #define PageControlCornerRadius 12.0
 
@@ -48,6 +48,6 @@
 #define RightIndicatorLinesFrameWidth 100
 #define RightIndicatorLinesFrameHeight 400
 
-#define LeftActionTabPageWidth 60
-#define LeftActionTabPageButtonWidth 60
-#define LeftActionTabPageButtonHeight 60
+#define LeftActionTabPageWidth 30
+#define LeftActionTabPageButtonWidth 30
+#define LeftActionTabPageButtonHeight 30

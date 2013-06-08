@@ -37,14 +37,29 @@ CGRect CGRectAddHeightToRect(CGRect rect, CGFloat delta) {
     return newRect;
 }
 
+CGRect CGRectSetHeightForRect(CGFloat height, CGRect rect) {
+    CGRect newRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, height);
+    return newRect;
+}
+
 CGSize CGSizeAddHeightToSize(CGSize size, CGFloat delta) {
     CGSize newSize = CGSizeMake(size.width, size.height + delta);
+    return newSize;
+}
+
+CGSize CGSizeAddWidthToSize(CGSize size, CGFloat delta) {
+    CGSize newSize = CGSizeMake(size.width + delta, size.height);
     return newSize;
 }
 
 CGSize CGSizeMakeFromRect(CGRect rect) {
     CGSize newSize =  CGSizeMake(rect.size.width, rect.size.height);
     return newSize;
+}
+
+CGRect CGRectSetOriginOnRect(CGRect rect, CGFloat originX, CGFloat originY) {
+    CGRect newRect = CGRectMake(originX, originY, rect.size.width, rect.size.height);
+    return newRect;
 }
 
 void CGRectSetOrigin(CGRect rect, CGPoint origin) {

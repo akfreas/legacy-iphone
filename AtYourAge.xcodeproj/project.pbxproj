@@ -73,6 +73,7 @@
 		19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC616B2370A00C81E60 /* 19-gear@2x.png */; };
 		19D61CD216B250E100C81E60 /* FriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CD116B250E100C81E60 /* FriendTableViewController.m */; };
 		19DFB9FC16D5E6E60019E2B2 /* EventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */; };
+		19FAD7821762F1D1006FA829 /* LeftActionTabPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FAD7811762F1D1006FA829 /* LeftActionTabPage.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
 		4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
@@ -205,6 +206,9 @@
 		19D61CD016B250E100C81E60 /* FriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewController.h; sourceTree = "<group>"; };
 		19D61CD116B250E100C81E60 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDescriptionView.xib; sourceTree = "<group>"; };
+		19FAD7801762F1D1006FA829 /* LeftActionTabPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftActionTabPage.h; sourceTree = "<group>"; };
+		19FAD7811762F1D1006FA829 /* LeftActionTabPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftActionTabPage.m; sourceTree = "<group>"; };
+		19FAD7831763005E006FA829 /* PersonRowPageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRowPageProtocol.h; sourceTree = "<group>"; };
 		4E0F3C971545080D00369BE1 /* MainScreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenWebView.h; sourceTree = "<group>"; };
 		4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenWebView.m; sourceTree = "<group>"; };
 		4E0F3CA0154533E800369BE1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -264,10 +268,13 @@
 		19C7BD8A174BC7AA004C8B0A /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				19FAD7831763005E006FA829 /* PersonRowPageProtocol.h */,
 				19C7BD821749DD12004C8B0A /* DescriptionPage.h */,
 				19C7BD831749DD12004C8B0A /* DescriptionPage.m */,
 				19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */,
 				19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */,
+				19FAD7801762F1D1006FA829 /* LeftActionTabPage.h */,
+				19FAD7811762F1D1006FA829 /* LeftActionTabPage.m */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -629,6 +636,7 @@
 				19C7BD841749DD12004C8B0A /* DescriptionPage.m in Sources */,
 				19C7BD891749DFD8004C8B0A /* Figure.m in Sources */,
 				19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */,
+				19FAD7821762F1D1006FA829 /* LeftActionTabPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -279,6 +279,8 @@
 				19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */,
 				19FAD7801762F1D1006FA829 /* LeftActionTabPage.h */,
 				19FAD7811762F1D1006FA829 /* LeftActionTabPage.m */,
+				195B5FFF16DEB7D3006215E9 /* AtYourAgeWebView.h */,
+				195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -460,8 +462,6 @@
 				4EEA6D5C1526CAEF00B96EFD /* AtYourAgeRequest.m */,
 				195B5FFD16DEB7D3006215E9 /* EventDescriptionView.h */,
 				195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */,
-				195B5FFF16DEB7D3006215E9 /* AtYourAgeWebView.h */,
-				195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */,
 				4EEA6D071526902D00B96EFD /* main.m */,
 			);
 			path = Classes;

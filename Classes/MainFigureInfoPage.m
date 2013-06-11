@@ -230,24 +230,19 @@ DualFrame * initFrame() {
             CGFloat frameDelta;
             CGRect keyWindowFrame = Utility_AppSettings.frameForKeyWindow;
             CGFloat availableHeight = keyWindowFrame.size.height - MoreCloseButtonHeight - 20 - 44;
-            if (contentSizeIncrease + viewFrame.expanded.size.height > availableHeight) {
-                frameDelta = availableHeight - viewFrame.collapsed.size.height;
-            } else {
-                frameDelta = contentSizeIncrease;
-            }
+            frameDelta = availableHeight - viewFrame.collapsed.size.height;
             
-            CGRect newContentRect = CGRectAddHeightToRect(self.view.frame, contentSizeIncrease);
+            CGRect newContentRect = CGRectMake(0, 0, viewFrame.collapsed.size.width, viewFrame.collapsed.size.height + contentSizeIncrease);
             CGRect newFrameRect = CGRectAddHeightToRect(viewFrame.collapsed, frameDelta);
-            [self setContentFrames:newContentRect];
+            newFrameRect = CGRectMakeFrameWithSizeFromFrame(newFrameRect);
 
             self.frame =  newFrameRect;
-            self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-            
             __block NSNumber *frameDeltaNumber;
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
             completionBlock(frameDeltaNumber);
             [UIView animateWithDuration:0.2 animations:^{
-                    
+                
+                [self setContentFrames:newContentRect];
                     for (UILabel *theLabel in arrayOfRelatedEventLabels) {
                         theLabel.alpha = 1;
                     }

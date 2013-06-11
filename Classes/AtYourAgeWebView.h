@@ -1,7 +1,11 @@
+#import "PersonRowPageProtocol.h"
+
 @class Event;
 
-@interface AtYourAgeWebView : UIViewController <UIWebViewDelegate>
+@interface AtYourAgeWebView : UIView <UIWebViewDelegate, PersonRowPageProtocol>
 
--(id)initWithEvent:(Event *)theEvent;
+@property (nonatomic) Event *event;
+
+-(void)loadRequest;
 
 @end

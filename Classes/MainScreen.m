@@ -40,13 +40,6 @@
     [infoScreen reload];
 }
 
--(void)popToWikipedia:(NSNotification *)notification{
-    
-    Event *selectedEvent = notification.userInfo[@"event"];
-    AtYourAgeWebView *webView = [[AtYourAgeWebView alloc] initWithEvent:selectedEvent];
-    [self.navigationController pushViewController:webView animated:YES];
-}
-
 -(void)showAlertForNoBirthday:(NSNotification *)notification {
     
     NSDictionary *userInfo = [notification userInfo];

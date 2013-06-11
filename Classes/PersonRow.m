@@ -8,12 +8,13 @@
 #import "Figure.h"
 #import "Event.h"
 #import "PersonRowPageProtocol.h"
+#import "AtYourAgeWebView.h"
 
 
 @implementation PersonRow {
     
     MainFigureInfoPage *infoPage;
-    DescriptionPage *descriptionPage;
+    AtYourAgeWebView *webView;
     LeftActionTabPage *tabPage;
     
     AtYourAgeConnection *connection;
@@ -119,6 +120,7 @@ CGFloat pageWidth = 320;
             [self fetchFigureAndAddDescriptionPage];
             infoPage.event = event;
             tabPage.event = event;
+            webView.event = event;
         }
     }];
 }
@@ -157,7 +159,7 @@ CGFloat pageWidth = 320;
 #pragma mark Page Management
 
 -(void)setupPages {
-    pageArray = [NSMutableArray arrayWithObjects:[self leftActionTabPage], [self figureInfoPage], [self descriptionPage], nil];
+    pageArray = [NSMutableArray arrayWithObjects:[self leftActionTabPage], [self figureInfoPage], [self webView], nil];
     
     [self setPageFrames];
     
@@ -193,15 +195,12 @@ CGFloat pageWidth = 320;
     return infoPage;
 }
 
--(DescriptionPage *)descriptionPage {
+-(AtYourAgeWebView *)webView {
     
-    descriptionPage = [[DescriptionPage alloc] initWithFigure:figure];
-    
-    [descriptionPage setNeedsLayout];
-    CGRect descriptionPageFrame = CGRectMake(0, 0, pageWidth, self.frame.size.height);
-    CGRect offsetFrame = CGRectOffset(descriptionPageFrame, infoPage.frame.origin.x + infoPage.frame.size.width, 0);
-    descriptionPage.frame = offsetFrame;
-    return descriptionPage;
+    CGRect webViewFrame = CGRectMake(0, 0, pageWidth, self.frame.size.height);
+    CGRect offsetFrame = CGRectOffset(webViewFrame, infoPage.frame.origin.x  + infoPage.frame.size.width, 0);
+    webView = [[AtYourAgeWebView alloc] initWithFrame:offsetFrame];
+    return webView;
 }
 
 -(void)contentsChangedSize:(NSNotification *)notif {
@@ -298,9 +297,13 @@ CGFloat pageWidth = 320;
     } else {
         pageControl.currentPage--;
     }
+    
     UIView <PersonRowPageProtocol> *page = pageArray[pageControl.currentPage];
     lastPoint = CGPointMake(page.frame.origin.x, 0);
         [scrollView setContentOffset:lastPoint animated:YES];
+    if ([page isKindOfClass:[AtYourAgeWebView class]]) {
+        [(AtYourAgeWebView *)page loadRequest];
+    }
 }
 
 @end

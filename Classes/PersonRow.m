@@ -27,6 +27,7 @@
     UIButton *moreCloseButton;
     UIActivityIndicatorView *indicator;
     NSMutableArray *pageArray;
+    UIView *nameContainerView;
     CGPoint lastPoint;
 }
 
@@ -42,7 +43,6 @@ CGFloat pageWidth = 320;
         [self addScrollViewWithFrame:frame];
         [self addMoreLessButton];
         [self setupPages];
-        [self addPageControl];
         [self registerForNotifications];
         scroller.backgroundColor = [UIColor blackColor];
     }
@@ -91,9 +91,29 @@ CGFloat pageWidth = 320;
     pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
     pageControl.numberOfPages = [pageArray count];
     pageControl.userInteractionEnabled = NO;
-    [self addSubview:pageControl];
+    [nameContainerView addSubview:pageControl];
 
 }
+
+-(void)addFigureNameLabel {
+    
+    CGSize labelSize = CGSizeMake(200, nameContainerView.frame.size.height);
+    figureNameLabel = [[UILabel alloc] initWithFrame:CGRectMakeFrameForCenter(nameContainerView, labelSize, 0)];
+    figureNameLabel.backgroundColor = [UIColor clearColor];
+    figureNameLabel.textAlignment = NSTextAlignmentCenter;
+    figureNameLabel.text = event.figureName;
+    [nameContainerView addSubview:figureNameLabel];
+}
+
+-(void)addNameContainerView {
+    nameContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, PersonRowNameContainerViewHeight)];
+    nameContainerView.backgroundColor = [UIColor clearColor];
+    [self addSubview:nameContainerView];
+    
+    [self addPageControl];
+    [self addFigureNameLabel];
+}
+
 
 
 -(void)setPerson:(Person *)person {
@@ -112,7 +132,7 @@ CGFloat pageWidth = 320;
         event = result;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self addFigureNameLabel];
+            [self addNameContainerView];
             
         });
         
@@ -146,14 +166,6 @@ CGFloat pageWidth = 320;
     
 }
 
--(void)addFigureNameLabel {
-    
-    CGSize labelSize = CGSizeMake(200, 50);
-    figureNameLabel = [[UILabel alloc] initWithFrame:CGRectMakeFrameForCenter(self, labelSize, 0)];
-    figureNameLabel.backgroundColor = [UIColor clearColor];
-    figureNameLabel.text = event.figureName;
-    [self addSubview:figureNameLabel];
-}
 
 
 #pragma mark Page Management
@@ -230,11 +242,11 @@ CGFloat pageWidth = 320;
         
         for (UIView <PersonRowPageProtocol> *page in pageArray) {
             page.frame = CGRectSetHeightForRect(newHeight, page.frame);
-            NSLog(@"xxx Page: %@", page);
         }
         scroller.frame = CGRectMakeFrameWithSizeFromFrame(self.frame);
         
         moreCloseButton.frame = CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, CGRectGetWidth(moreCloseButton.frame), CGRectGetHeight(moreCloseButton.frame));
+        tabPage.height = newHeight;
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:@{@"delta": [NSNumber numberWithFloat:newDelta]}];
     }];
     

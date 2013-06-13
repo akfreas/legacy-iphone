@@ -33,6 +33,11 @@
     }
 }
 
+-(void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    webView.frame = CGRectMakeFrameWithSizeFromFrame(frame);
+}
+
 -(CGFloat)rightPageMargin {
     return 10;
 }

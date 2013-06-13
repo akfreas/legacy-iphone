@@ -16,7 +16,7 @@
 
 #define EventInfoScrollViewPadding 5
 
-#define PageControlYPosition 20
+#define PageControlYPosition 10
 #define PageControlXPosition 240
 #define PageControlWidthPerPage 20
 #define PageControlHeight 20
@@ -51,3 +51,5 @@
 #define LeftActionTabPageWidth 30
 #define LeftActionTabPageButtonWidth 30
 #define LeftActionTabPageButtonHeight 30
+
+#define PersonRowNameContainerViewHeight 40

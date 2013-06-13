@@ -41,8 +41,9 @@ NSInteger numberOfButtons = 2;
 
 -(CGRect)rectForButtonAtIndex:(NSInteger)index {
     
-    CGFloat buttonOriginY = self.frame.size.height - LeftActionTabPageButtonHeight * (numberOfButtons - 1) * (index - 1) + LeftActionTabPageButtonHeight;
-    CGRect buttonFrame = CGRectMake(0, buttonOriginY, LeftActionTabPageButtonWidth, LeftActionTabPageButtonHeight);
+    CGFloat buttonOriginY = (LeftActionTabPageButtonHeight + 10) * (numberOfButtons - 1) * (index - 1);
+    CGFloat buttonOriginAbsY = self.frame.size.height / 2 + buttonOriginY;
+    CGRect buttonFrame = CGRectMake(0, buttonOriginAbsY, LeftActionTabPageButtonWidth, LeftActionTabPageButtonHeight);
     
     return buttonFrame;
 }
@@ -81,10 +82,10 @@ NSInteger numberOfButtons = 2;
 -(void)layoutSubviews {
     
     [super layoutSubviews];
-    CGFloat buttonOriginY = self.frame.size.height / (numberOfButtons + 1) - LeftActionTabPageButtonHeight / 2;
-    CGRect buttonFrame = CGRectMake(0, buttonOriginY, LeftActionTabPageButtonWidth, LeftActionTabPageButtonHeight);
-    
-    deleteButton.frame = buttonFrame;
+    for (int i=0; i < [buttonArray count]; i++) {
+        UIButton *button = [buttonArray objectAtIndex:i];
+        button.frame = [self rectForButtonAtIndex:i];
+    }
 }
 
 #pragma mark PersonRowPageProtocol Functions

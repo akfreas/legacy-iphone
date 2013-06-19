@@ -4,12 +4,12 @@
 #import "AtYourAgeRequest.h"
 #import "AtYourAgeConnection.h"
 #import "EventDescriptionView.h"
-#import "PersonRow.h"
+#import "FigureRow.h"
 
 
 @implementation EventInfoScrollView {
     ObjectArchiveAccessor *accessor;
-    NSMutableArray *arrayOfPersonRows;
+    NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
     AtYourAgeConnection *connection;
 }
@@ -21,9 +21,9 @@
     if (self) {
         self.contentSize = CGSizeMake(320, Utility_AppSettings.frameForKeyWindow.size.height);
         accessor = [ObjectArchiveAccessor sharedInstance];
-        arrayOfPersonRows = [[NSMutableArray alloc] init];
+        arrayOfFigureRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personRowHeightChanged:) name:KeyForPersonRowContentChanged object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(figureRowHeightChanged:) name:KeyForFigureRowContentChanged object:nil];
     }
     return self;
 }
@@ -39,39 +39,39 @@
         
         Person *thePerson = [people objectAtIndex:i];
         
-        __block PersonRow *row = [[PersonRow alloc] initWithOrigin:CGPointMake(0, (PersonRowPageInitialHeight + EventInfoScrollViewPadding) * i)];
-        [arrayOfPersonRows addObject:row];
+        __block FigureRow *row = [[FigureRow alloc] initWithOrigin:CGPointMake(0, (FigureRowPageInitialHeight + EventInfoScrollViewPadding) * i)];
+        [arrayOfFigureRows addObject:row];
         [self addSubview:row];
         row.person = thePerson;
         
         
-        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (PersonRowPageInitialHeight + EventInfoScrollViewPadding));
+        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (FigureRowPageInitialHeight + EventInfoScrollViewPadding));
     }
     
     [self setNeedsLayout];
 }
 
--(void)personRowHeightChanged:(NSNotification *)notification {
-    PersonRow *rowToResize = notification.object;
+-(void)figureRowHeightChanged:(NSNotification *)notification {
+    FigureRow *rowToResize = notification.object;
     CGFloat heightOffset = [notification.userInfo[@"delta"] floatValue];
     
-    NSInteger firstIndex = [arrayOfPersonRows indexOfObject:rowToResize];
+    NSInteger firstIndex = [arrayOfFigureRows indexOfObject:rowToResize];
     
     self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + heightOffset);
 
-        for (int i=firstIndex + 1; i<[arrayOfPersonRows count]; i++) {
-            PersonRow *rowToOffset = [arrayOfPersonRows objectAtIndex:i];
+        for (int i=firstIndex + 1; i<[arrayOfFigureRows count]; i++) {
+            FigureRow *rowToOffset = [arrayOfFigureRows objectAtIndex:i];
             rowToOffset.frame = CGRectMake(rowToOffset.frame.origin.x, rowToOffset.frame.origin.y + heightOffset,  rowToOffset.frame.size.width, rowToOffset.frame.size.height);
         }
         
         if (heightOffset > 0) {
             self.scrollEnabled = NO;
-            PersonRow *openRow = [arrayOfPersonRows objectAtIndex:firstIndex];
+            FigureRow *openRow = [arrayOfFigureRows objectAtIndex:firstIndex];
             [self setContentOffset:openRow.frame.origin animated:YES];
         } else {
             self.scrollEnabled = YES;
-            if (firstIndex > 0 && firstIndex != [arrayOfPersonRows count] - 1) {
-                PersonRow *rowAbove = [arrayOfPersonRows objectAtIndex:firstIndex - 1];
+            if (firstIndex > 0 && firstIndex != [arrayOfFigureRows count] - 1) {
+                FigureRow *rowAbove = [arrayOfFigureRows objectAtIndex:firstIndex - 1];
                 [self setContentOffset:CGPointMake(0, CGRectGetMidY(rowAbove.frame)) animated:YES];
             }
         }
@@ -82,14 +82,14 @@
     CGFloat padding = 5;
     CGFloat width = Utility_AppSettings.frameForKeyWindow.size.height;
 
-    return CGRectMake(0, (PersonRowPageInitialHeight + EventInfoScrollViewPadding)  * index, width, PersonRowPageInitialHeight);
+    return CGRectMake(0, (FigureRowPageInitialHeight + EventInfoScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
 }
 
 -(void)removeInfoViews {
-    for (UIView *infoView in arrayOfPersonRows) {
+    for (UIView *infoView in arrayOfFigureRows) {
         [infoView removeFromSuperview];
     }
-    [arrayOfPersonRows removeAllObjects];
+    [arrayOfFigureRows removeAllObjects];
 }
 
 -(void)reload {

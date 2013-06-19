@@ -1,5 +1,5 @@
 #import "ScrollViewStickLines.h"
-#import "PersonRow.h"
+#import "FigureRow.h"
 #import "AgeIndicatorView.h"
 
 @implementation ScrollViewStickLines
@@ -19,7 +19,7 @@
 - (void)drawRect:(CGRect)rect
 {
     
-    if (_personRowArray != nil) {
+    if (_figureRowArray != nil) {
 
         UIBezierPath *aPath = [UIBezierPath bezierPath];
         aPath.lineCapStyle = kCGLineCapRound;
@@ -28,7 +28,7 @@
         CGFloat originX = 5.0;
         CGPoint originPoint = CGPointMake(originX, 0.0);
         [aPath moveToPoint:originPoint];
-        for (PersonRow *row in _personRowArray) {
+        for (FigureRow *row in _figureRowArray) {
             AgeIndicatorView *indicatorView = row.ageIndicator;
 //            [aPath addLineToPoint:[self convertPoint:indicatorView.center fromView:indicatorView]];
             NSArray *arrayOfLabels = [indicatorView.view.subviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"tag > 0"]];
@@ -82,8 +82,8 @@
     
 }
 
--(void)setPersonRowArray:(NSArray *)personRowArray {
-    _personRowArray = personRowArray;
+-(void)setFigureRowArray:(NSArray *)figureRowArray {
+    _figureRowArray = figureRowArray;
     [self setNeedsDisplay];
 }
 

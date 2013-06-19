@@ -1,11 +1,11 @@
-#import "PersonRowPageProtocol.h"
+#import "FigureRowPageProtocol.h"
 
 @class Person;
 @class Event;
 @class AgeIndicatorView;
 @class ImageWidgetContainer;
 
-@interface MainFigureInfoPage : UIScrollView <PersonRowPageProtocol>
+@interface MainFigureInfoPage : UIScrollView <FigureRowPageProtocol>
 
 @property (nonatomic) Person *person;
 @property (nonatomic) Event *event;

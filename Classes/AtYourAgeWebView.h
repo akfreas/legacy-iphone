@@ -1,8 +1,8 @@
-#import "PersonRowPageProtocol.h"
+#import "FigureRowPageProtocol.h"
 
 @class Event;
 
-@interface AtYourAgeWebView : UIView <UIWebViewDelegate, PersonRowPageProtocol>
+@interface AtYourAgeWebView : UIView <UIWebViewDelegate, FigureRowPageProtocol>
 
 @property (nonatomic) Event *event;
 

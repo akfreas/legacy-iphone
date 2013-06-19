@@ -1,9 +1,9 @@
-#import "PersonRowPageProtocol.h"
+#import "FigureRowPageProtocol.h"
 
 @class Person;
 @class Event;
 
-@interface LeftActionTabPage : UIView <PersonRowPageProtocol>
+@interface LeftActionTabPage : UIView <FigureRowPageProtocol>
 
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic) Person *person;

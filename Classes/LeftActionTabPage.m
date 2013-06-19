@@ -88,7 +88,7 @@ NSInteger numberOfButtons = 2;
     }
 }
 
-#pragma mark PersonRowPageProtocol Functions
+#pragma mark FigureRowPageProtocol Functions
 
 -(CGFloat)rightPageMargin {
     return 0;

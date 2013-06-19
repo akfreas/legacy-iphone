@@ -1,4 +1,4 @@
-@protocol PersonRowPageProtocol <NSObject>
+@protocol FigureRowPageProtocol <NSObject>
 
 -(CGFloat)rightPageMargin;
 

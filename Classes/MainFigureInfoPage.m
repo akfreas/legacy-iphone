@@ -181,7 +181,7 @@ DualFrame * initFrame() {
         NSLog(@"Height delta in collapse completion block: %@", rowHeightDelta);
 
         rowHeightDelta = [NSNumber numberWithFloat:0];
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
                                                             object:self
                                                           userInfo:@{@"delta": heightDifference}];
         publicExpandCompletion(NO);
@@ -195,7 +195,7 @@ DualFrame * initFrame() {
         rowHeightDelta = [NSNumber numberWithFloat:[rowHeightDelta floatValue] + [delta floatValue]];
         NSLog(@"Height delta in expand completion block: %@", rowHeightDelta);
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowHeightChanged
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
                                                             object:self
                                                           userInfo:@{@"delta": delta}];
         publicExpandCompletion(YES);
@@ -325,10 +325,10 @@ DualFrame * initFrame() {
     }];
 }
 
-#pragma mark PersonRowPageProtocol Functions
+#pragma mark FigureRowPageProtocol Functions
 
 -(CGFloat)rightPageMargin {
-    return SpaceBetweenPersonRowPages;
+    return SpaceBetweenFigureRowPages;
 }
 
 

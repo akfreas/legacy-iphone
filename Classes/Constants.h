@@ -3,16 +3,16 @@
 #define KeyForWikipediaButtonTappedNotification @"WikipediaButtonTapped"
 #define KeyForRemovePersonButtonTappedNotification @"RemoveFriendButton"
 
-#define KeyForPersonRowHeightChanged @"PersonRowHeightChanged"
+#define KeyForFigureRowHeightChanged @"FigureRowHeightChanged"
 #define KeyForEventLoadingComplete @"EventLoadingComplete"
-#define KeyForPersonRowContentChanged @"PersonRowContentChanged"
+#define KeyForFigureRowContentChanged @"FigureRowContentChanged"
 
 
-#define PersonRowPageInitialHeight 140
-#define PersonRowPageWidth 320
+#define FigureRowPageInitialHeight 140
+#define FigureRowPageWidth 320
 
 
-#define SpaceBetweenPersonRowPages 10
+#define SpaceBetweenFigureRowPages 10
 
 #define EventInfoScrollViewPadding 5
 
@@ -52,4 +52,4 @@
 #define LeftActionTabPageButtonWidth 30
 #define LeftActionTabPageButtonHeight 30
 
-#define PersonRowNameContainerViewHeight 40
+#define FigureRowNameContainerViewHeight 40

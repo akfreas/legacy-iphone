@@ -21,7 +21,7 @@
 }
 
 -(CGFloat)rightPageMargin {
-    return SpaceBetweenPersonRowPages;
+    return SpaceBetweenFigureRowPages;
 }
 
 @end

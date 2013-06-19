@@ -109,10 +109,6 @@
     
     if (_image != nil) {
         
-
-        
-        
-        
         CGSize imgSize = _image.size;
         CGFloat scale = MAX((_radius * 2) / imgSize.width, (_radius * 2) / imgSize.height);
         CGFloat imageWidth = _image.size.width * scale;

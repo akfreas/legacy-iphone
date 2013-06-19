@@ -1,4 +1,4 @@
-#import "PersonRow.h"
+#import "FigureRow.h"
 #import "MainFigureInfoPage.h"
 #import "LeftActionTabPage.h"
 #import "DescriptionPage.h"
@@ -7,11 +7,11 @@
 #import "ObjectArchiveAccessor.h"
 #import "Figure.h"
 #import "Event.h"
-#import "PersonRowPageProtocol.h"
+#import "FigureRowPageProtocol.h"
 #import "AtYourAgeWebView.h"
 
 
-@implementation PersonRow {
+@implementation FigureRow {
     
     MainFigureInfoPage *infoPage;
     AtYourAgeWebView *webView;
@@ -36,7 +36,7 @@ CGFloat pageWidth = 320;
 
 - (id)initWithOrigin:(CGPoint)origin
 {
-    CGRect frame = CGRectMake(origin.x, origin.y, PersonRowPageWidth, PersonRowPageInitialHeight);
+    CGRect frame = CGRectMake(origin.x, origin.y, FigureRowPageWidth, FigureRowPageInitialHeight);
     self = [super initWithFrame:frame];
     if (self) {
 
@@ -65,7 +65,7 @@ CGFloat pageWidth = 320;
 
 -(void)registerForNotifications {
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentsChangedSize:) name:KeyForPersonRowHeightChanged object:infoPage];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentsChangedSize:) name:KeyForFigureRowHeightChanged object:infoPage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:infoPage.widgetContainer];
     
@@ -106,7 +106,7 @@ CGFloat pageWidth = 320;
 }
 
 -(void)addNameContainerView {
-    nameContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, PersonRowNameContainerViewHeight)];
+    nameContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, FigureRowNameContainerViewHeight)];
     nameContainerView.backgroundColor = [UIColor clearColor];
     [self addSubview:nameContainerView];
     
@@ -175,7 +175,7 @@ CGFloat pageWidth = 320;
     
     [self setPageFrames];
     
-    for (UIView <PersonRowPageProtocol> *page in pageArray) {
+    for (UIView <FigureRowPageProtocol> *page in pageArray) {
         [scroller addSubview:page];
     }
 }
@@ -184,7 +184,7 @@ CGFloat pageWidth = 320;
     
     CGFloat currentXOffset = 0;
     for (int i=0; i < [pageArray count]; i++) {
-        UIView <PersonRowPageProtocol> *page = pageArray[i];
+        UIView <FigureRowPageProtocol> *page = pageArray[i];
         page.frame = CGRectSetOriginOnRect(page.frame, currentXOffset, 0);
         CGFloat widthDelta = CGRectGetWidth(page.frame) + page.rightPageMargin;
         scroller.contentSize = CGSizeAddWidthToSize(scroller.contentSize, widthDelta);
@@ -203,7 +203,7 @@ CGFloat pageWidth = 320;
 }
 
 -(MainFigureInfoPage *)figureInfoPage {
-    infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, PersonRowPageWidth, PersonRowPageInitialHeight)];
+    infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, FigureRowPageWidth, FigureRowPageInitialHeight)];
     return infoPage;
 }
 
@@ -230,8 +230,8 @@ CGFloat pageWidth = 320;
         }
         [moreCloseButton setTitle:@"Close" forState:UIControlStateNormal];
     } else {
-        newHeight = PersonRowPageInitialHeight;
-        newDelta = PersonRowPageInitialHeight - self.frame.size.height;
+        newHeight = FigureRowPageInitialHeight;
+        newDelta = FigureRowPageInitialHeight - self.frame.size.height;
         [moreCloseButton setTitle:@"More" forState:UIControlStateNormal];
     }
     
@@ -240,14 +240,14 @@ CGFloat pageWidth = 320;
     [UIView animateWithDuration:0.2 animations:^{
         self.frame =  CGRectSetHeightForRect(newHeight, self.frame);
         
-        for (UIView <PersonRowPageProtocol> *page in pageArray) {
+        for (UIView <FigureRowPageProtocol> *page in pageArray) {
             page.frame = CGRectSetHeightForRect(newHeight, page.frame);
         }
         scroller.frame = CGRectMakeFrameWithSizeFromFrame(self.frame);
         
         moreCloseButton.frame = CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, CGRectGetWidth(moreCloseButton.frame), CGRectGetHeight(moreCloseButton.frame));
         tabPage.height = newHeight;
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonRowContentChanged object:self userInfo:@{@"delta": [NSNumber numberWithFloat:newDelta]}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowContentChanged object:self userInfo:@{@"delta": [NSNumber numberWithFloat:newDelta]}];
     }];
     
 }
@@ -310,7 +310,7 @@ CGFloat pageWidth = 320;
         pageControl.currentPage--;
     }
     
-    UIView <PersonRowPageProtocol> *page = pageArray[pageControl.currentPage];
+    UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage];
     lastPoint = CGPointMake(page.frame.origin.x, 0);
         [scrollView setContentOffset:lastPoint animated:YES];
     if ([page isKindOfClass:[AtYourAgeWebView class]]) {

@@ -41,14 +41,20 @@ CGFloat pageWidth = 320;
     if (self) {
 
         [self addScrollViewWithFrame:frame];
-        [self addMoreLessButton];
+//        [self addMoreLessButton];
         [self setupPages];
         [self registerForNotifications];
+        [self addTapGestureRecognizer];
         scroller.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
 
+
+-(void)addTapGestureRecognizer {
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
+    [self addGestureRecognizer:gesture];
+}
 
 -(void)addMoreLessButton {
     
@@ -68,6 +74,14 @@ CGFloat pageWidth = 320;
         actionOverlay = [[FigureRowActionOverlay alloc] initWithEvent:self.event];
     }
     [actionOverlay showInView:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForOverlayViewShown object:self];
+}
+
+-(void)removeActionOverlay:(NSNotification *)notif {
+    
+    if (notif.object != self) {
+        [actionOverlay hide];
+    }
 }
 
 -(void)registerForNotifications {
@@ -75,6 +89,8 @@ CGFloat pageWidth = 320;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentsChangedSize:) name:KeyForFigureRowHeightChanged object:infoPage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:infoPage.widgetContainer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeActionOverlay:) name:KeyForOverlayViewShown object:nil];
     
 }
 

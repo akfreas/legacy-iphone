@@ -2,6 +2,7 @@
 #define KeyForPersonInBirthdayNotFoundNotification @"thePerson"
 #define KeyForWikipediaButtonTappedNotification @"WikipediaButtonTapped"
 #define KeyForRemovePersonButtonTappedNotification @"RemoveFriendButton"
+#define KeyForOverlayViewShown @"OverlayViewShown"
 
 #define KeyForFigureRowHeightChanged @"FigureRowHeightChanged"
 #define KeyForEventLoadingComplete @"EventLoadingComplete"

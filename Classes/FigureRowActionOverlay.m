@@ -13,9 +13,25 @@
     
     if (self) {
         event = theEvent;
+        self.animationDuration = 0.2;
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+        self.alpha = 0;
+        [self addTapGestureRecognizer];
     }
     return self;
+}
+
+-(void)addTapGestureRecognizer {
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hide)];
+    [self addGestureRecognizer:gesture];
+}
+
+-(void)hide {
+    [UIView animateWithDuration:_animationDuration animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 -(void)showInView:(UIView *)superView {
@@ -23,7 +39,8 @@
     self.frame = CGRectMakeFrameWithSizeFromFrame(superView.frame);
     [self prepareCircles];
     [superView addSubview:self];
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:_animationDuration animations:^{
+        self.alpha = 1;
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:.5];
     }];
 }

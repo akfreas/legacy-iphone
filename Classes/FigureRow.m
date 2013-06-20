@@ -9,6 +9,7 @@
 #import "Event.h"
 #import "FigureRowPageProtocol.h"
 #import "AtYourAgeWebView.h"
+#import "FigureRowActionOverlay.h"
 
 
 @implementation FigureRow {
@@ -16,6 +17,7 @@
     MainFigureInfoPage *infoPage;
     AtYourAgeWebView *webView;
     LeftActionTabPage *tabPage;
+    FigureRowActionOverlay *actionOverlay;
     
     AtYourAgeConnection *connection;
     
@@ -53,13 +55,20 @@ CGFloat pageWidth = 320;
     moreCloseButton = [[UIButton alloc] initWithFrame:CGRectMakeFrameWithOriginInBottomOfFrame(self.frame, MoreCloseButtonWidth, MoreCloseButtonHeight)];
     moreCloseButton.backgroundColor = [UIColor grayColor];
     moreCloseButton.layer.cornerRadius = MoreCloseButtonCornerRadius;
-    [moreCloseButton addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
+    [moreCloseButton addTarget:self action:@selector(addActionOverlay) forControlEvents:UIControlEventTouchUpInside];
     moreCloseButton.userInteractionEnabled = NO;
     [moreCloseButton setTitle:@"More" forState:UIControlStateNormal];
     [self addSubview:moreCloseButton];
     
 }
 
+
+-(void)addActionOverlay {
+    if (actionOverlay == nil) {
+        actionOverlay = [[FigureRowActionOverlay alloc] initWithEvent:self.event];
+    }
+    [actionOverlay showInView:self];
+}
 
 -(void)registerForNotifications {
     

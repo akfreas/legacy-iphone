@@ -132,7 +132,7 @@
     }
     CGContextAddArc(ctx, center.x, center.y, _radius - ImageLayerDefaultStrokeWidth / 2, 0, M_PI * 2, 1);
     CGContextSetLineWidth(ctx, ImageLayerDefaultStrokeWidth);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
+    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0 alpha:.8].CGColor);
     CGContextDrawPath(ctx, drawingMode);
 }
 

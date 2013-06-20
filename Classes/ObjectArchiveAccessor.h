@@ -8,8 +8,10 @@
 -(Person *)personWithFacebookId:(NSString *)facebookId;
 -(NSArray *)allPersons;
 -(NSArray *)addedPeople;
+-(NSArray *)getStoredEvents;
 
 -(void)setPrimaryPerson:(Person *)user;
+-(void)addEventAndFigureWithJson:(NSDictionary *)json;
 -(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock;
 -(void)addFacebookUsers:(NSArray *)users completionBlock:(void(^)())completionBlock;
 -(void)getOrCreatePersonWithFacebookGraphUser:(id<FBGraphUser>)facebookUser completionBlock:(void(^)(Person *thePerson))completionBlock;
@@ -17,7 +19,7 @@
 
 -(void)addPerson:(Person *)person;
 -(void)removePerson:(Person *)person;
-
+-(void)clearEventsAndFiguresAndSave;
 -(void)save;
 
 -(NSFetchedResultsController *)fetchedResultsControllerForPeople;

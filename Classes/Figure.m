@@ -1,26 +1,36 @@
+//
+//  Figure.m
+//  AtYourAge
+//
+//  Created by Alexander Freas on 6/20/13.
+//
+//
+
 #import "Figure.h"
+#import "Event.h"
+
 
 @implementation Figure
 
+@dynamic imageURL;
+@dynamic name;
+@dynamic id;
+@dynamic events;
+
 static NSString *KeyForName = @"name";
 static NSString *KeyForImageUrl = @"image_url";
-static NSString *KeyForDateOfBirth = @"date_of_birth";
-static NSString *KeyForDateOfDeath = @"date_of_death";
-static NSString *KeyForDescription = @"description";
 
 
 -(id)initWithJsonDictionary:(NSDictionary *)dict {
     
     if (self == [super init]) {
         
-        _name = dict[KeyForName];
-        _imageUrl = [NSURL URLWithString:dict[KeyForImageUrl]];
-        _dateOfBirth = dict[KeyForDateOfBirth];
-        _dateOfDeath = dict[KeyForDateOfDeath];
-        _description = dict[KeyForDescription];
+        self.name = dict[KeyForName];
+        self.imageURL = [NSURL URLWithString:dict[KeyForImageUrl]];
     }
     
     return self;
 }
+
 
 @end

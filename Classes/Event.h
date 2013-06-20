@@ -1,15 +1,24 @@
-@interface Event : NSObject
+//
+//  Event.h
+//  AtYourAge
+//
+//  Created by Alexander Freas on 6/19/13.
+//
+//
 
-@property (nonatomic) NSString *figureName;
-@property (nonatomic) NSString *eventDescription;
-@property (nonatomic) NSString *ageYears;
-@property (nonatomic) NSString *ageMonths;
-@property (nonatomic) NSString *ageDays;
-@property (nonatomic) NSString *pronoun;
-@property (nonatomic) NSURL *figureProfilePicUrl;
-@property (nonatomic) NSString *eventId;
-@property (nonatomic) NSString *figureId;
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
--(id)initWithJsonDictionary:(NSDictionary *)theDictionary;
+@class Figure, Person;
+
+@interface Event : NSManagedObject
+
+@property (nonatomic, retain) NSString * eventDescription;
+@property (nonatomic, retain) NSNumber * ageYears;
+@property (nonatomic, retain) NSNumber * ageMonths;
+@property (nonatomic, retain) NSNumber * ageDays;
+@property (nonatomic, retain) NSNumber * eventId;
+@property (nonatomic, retain) Figure *figure;
+@property (nonatomic, retain) Person *person;
 
 @end

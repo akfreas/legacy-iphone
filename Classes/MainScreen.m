@@ -11,6 +11,7 @@
 #import "AtYourAgeWebView.h"
 #import "AtYourAgeConnection.h"
 #import "AtYourAgeRequest.h"
+#import "DataSyncUtility.h"
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
@@ -20,6 +21,8 @@
     FBFriendPickerViewController *friendPicker;
     IBOutlet EventInfoScrollView *infoScreen;
     AtYourAgeConnection *connection;
+    
+    DataSyncUtility *dataSync;
 }
 
 
@@ -29,6 +32,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
+        dataSync = [[DataSyncUtility alloc] init];
     }
     return self;
 }
@@ -176,17 +180,9 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    [FBSession openActiveSessionWithAllowLoginUI:NO];
-    if (FBSession.activeSession.state != FBSessionStateOpen) {
-        FBLoginViewController *loadScreen = [[FBLoginViewController alloc] initWithLoggedInCompletion:^{
-            [self dismissViewControllerAnimated:YES completion:^{
-                [self getUserBirthdayAndPlaceMainScreen];
-            }];
-        }];
-        [self presentViewController:loadScreen animated:NO completion:NULL];
-    } else {
-        [self getUserBirthdayAndPlaceMainScreen];
-    }
+    [dataSync sync:^{
+        [infoScreen reload];
+    }];
     [self setNavigationElements];
 }
 

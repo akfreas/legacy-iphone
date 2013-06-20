@@ -1,4 +1,25 @@
+//
+//  Event.m
+//  AtYourAge
+//
+//  Created by Alexander Freas on 6/19/13.
+//
+//
+
 #import "Event.h"
+#import "Figure.h"
+#import "Person.h"
+
+
+@implementation Event
+
+@dynamic eventDescription;
+@dynamic ageYears;
+@dynamic ageMonths;
+@dynamic ageDays;
+@dynamic eventId;
+@dynamic figure;
+@dynamic person;
 
 static NSString *KeyForFigureName = @"figure_name";
 static NSString *KeyForEventDescription = @"figure_event";
@@ -10,29 +31,24 @@ static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
 static NSString *KeyForEventId = @"event_id";
 static NSString *KeyForFigureId = @"figure_id";
 
-@implementation Event
-
 -(id)initWithJsonDictionary:(NSDictionary *)jsonDict {
     self = [super init];
     
     if (self) {
         
-        _eventId = jsonDict[KeyForEventId];
-        _eventDescription = jsonDict[KeyForEventDescription];
-        _figureName = jsonDict[KeyForFigureName];
-        _ageYears = jsonDict[KeyForAgeYears];
-        _ageMonths = jsonDict[KeyForAgeMonths];
-        _ageDays = jsonDict[KeyForAgeDays];
-        _figureProfilePicUrl = [NSURL URLWithString:jsonDict[KeyForFigureProfilePic]];
-        _figureId = jsonDict[KeyForFigureId];
-        _pronoun = jsonDict[KeyForPronoun];
+        self.eventId = jsonDict[KeyForEventId];
+        self.eventDescription = jsonDict[KeyForEventDescription];
+        self.ageYears = jsonDict[KeyForAgeYears];
+        self.ageMonths = jsonDict[KeyForAgeMonths];
+        self.ageDays = jsonDict[KeyForAgeDays];
     }
     return self;
 }
 
 -(NSString *)description {
     
-    return [NSString stringWithFormat:@"%@ %@ (%@d %@m %@y) %@", _eventId, _eventDescription, _ageDays, _ageMonths, _ageYears, _eventDescription];
+    return [NSString stringWithFormat:@"%@ %@ (%@d %@m %@y) %@", self.eventId, self.eventDescription, self.ageDays, self.ageMonths, self.ageYears, self.eventDescription];
 }
+
 
 @end

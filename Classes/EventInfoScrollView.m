@@ -31,18 +31,17 @@
 
 -(void)addInfoViews {
     
-    NSArray *addedPeople = [accessor addedPeople];
-    NSMutableArray *people = [NSMutableArray arrayWithObject:[accessor primaryPerson]];
-    [people addObjectsFromArray:addedPeople];
-    for (int i=0; i<[people count]; i++) {
+    NSArray *eventsInStore = [accessor getStoredEvents];
+    
+    for (int i=0; i<[eventsInStore count]; i++) {
         
         
-        Person *thePerson = [people objectAtIndex:i];
+        Event *theEvent = [eventsInStore objectAtIndex:i];
         
         __block FigureRow *row = [[FigureRow alloc] initWithOrigin:CGPointMake(0, (FigureRowPageInitialHeight + EventInfoScrollViewPadding) * i)];
         [arrayOfFigureRows addObject:row];
         [self addSubview:row];
-        row.person = thePerson;
+        row.event = theEvent;
         
         
         self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (FigureRowPageInitialHeight + EventInfoScrollViewPadding));

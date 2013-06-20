@@ -78,6 +78,15 @@
     return url;
 }
 
++(NSURL *)urlToGetRandomEvents {
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = [NSString stringWithFormat:@"sample-events"];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
 
 +(AtYourAgeRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester {
     
@@ -95,6 +104,14 @@
     request.urlRequest.URL = url;
     request.classToParse = [Event class];
     
+    return request;
+}
+
++(AtYourAgeRequest *)requestToGetRandomStories {
+
+    AtYourAgeRequest *request = [AtYourAgeRequest baseRequest];
+    NSURL *url = [AtYourAgeRequest urlToGetRandomEvents];
+    [request.urlRequest setURL:url];
     return request;
 }
 
@@ -124,9 +141,19 @@
     return request;
 }
 
-+(AtYourAgeRequest *)baseRequestForPerson:(Person *)person {
++(AtYourAgeRequest *)baseRequest {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest];
+    return request;
+}
+
++(AtYourAgeRequest *)baseRequestForPerson:(Person *)person {
+
+    AtYourAgeRequest *request = [AtYourAgeRequest baseRequest];
+    NSMutableURLRequest *urlRequest = request.urlRequest;
     NSURL *url = [AtYourAgeRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     
     Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
@@ -148,10 +175,6 @@
 //    NSLog(@"URL: %@", url);
     [urlRequest setAllHTTPHeaderFields:headers];
     [urlRequest setURL:url];
-    [urlRequest setHTTPMethod:@"GET"];
-    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-    AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest classToParse:nil];
     
     return request;
 }

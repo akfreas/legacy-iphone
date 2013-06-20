@@ -1,4 +1,5 @@
 #import "Event.h"
+#import "Figure.h"
 #import "AtYourAgeWebView.h"
 
 @implementation AtYourAgeWebView {
@@ -24,7 +25,7 @@
     
     if (_event != nil && hasLoadedEventInfo == NO) {
     
-        NSString *nameWithUnderscores = [_event.figureName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        NSString *nameWithUnderscores = [_event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];

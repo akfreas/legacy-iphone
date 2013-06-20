@@ -60,14 +60,7 @@
         NSLog(@"Error: %@, str: %@", error, str);
     }
     
-//    NSLog(@"Parse result: %@", parseResult);
-    if (request.classToParse != nil && request.classToParse != NULL) {
-        
-        result = [[request.classToParse alloc] initWithJsonDictionary:parseResult];
-    } else { //TODO this should parse up collections of objects
-        result = parseResult;
-    }
-    
+    result = parseResult;    
     self.AYAConnectionCallback(request, result, nil);
 }
 

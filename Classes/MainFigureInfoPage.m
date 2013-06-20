@@ -2,6 +2,7 @@
 #import "ImageWidgetContainer.h"
 #import "Person.h"
 #import "Event.h"
+#import "Figure.h"
 #import "RelatedEvent.h"
 #import "AtYourAgeConnection.h"
 #import "AtYourAgeRequest.h"
@@ -127,7 +128,7 @@ DualFrame * initFrame() {
 -(void)setEvent:(Event *)event {
 //    [ind animate];
     _event = event;
-    figureNameLabel.text = event.figureName;
+    figureNameLabel.text = event.figure.name;
     self.widgetContainer.event = event;
     eventDescriptionText.text = event.eventDescription;
     ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];

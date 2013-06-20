@@ -18,8 +18,6 @@
     LeftActionTabPage *tabPage;
     
     AtYourAgeConnection *connection;
-    Event *event;
-    Figure *figure;
     
     UILabel *figureNameLabel;
     UIPageControl *pageControl;
@@ -101,7 +99,7 @@ CGFloat pageWidth = 320;
     figureNameLabel = [[UILabel alloc] initWithFrame:CGRectMakeFrameForCenter(nameContainerView, labelSize, 0)];
     figureNameLabel.backgroundColor = [UIColor clearColor];
     figureNameLabel.textAlignment = NSTextAlignmentCenter;
-    figureNameLabel.text = event.figureName;
+    figureNameLabel.text = _event.figure.name;
     [nameContainerView addSubview:figureNameLabel];
 }
 
@@ -115,57 +113,25 @@ CGFloat pageWidth = 320;
 }
 
 
+#pragma mark Accessors
 
--(void)setPerson:(Person *)person {
-    _person = person;
 
-    tabPage.person = _person;
-    infoPage.person = person;
+
+-(void)setEvent:(Event *)event {
     
-    
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetStoryForPerson:person];
-    
-    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-    
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Event *result, NSError *error) {
-        NSLog(@"Event Fetch Result: %@", result);
-        event = result;
+    _event = event;
+    if (event != nil) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addNameContainerView];
-            
-        });
-        
-        if (event != nil) {
-            [self fetchFigureAndAddDescriptionPage];
-            infoPage.event = event;
-            tabPage.event = event;
-            webView.event = event;
-        }
-    }];
+        infoPage.event = event;
+        tabPage.event = event;
+        webView.event = event;
+        [self addNameContainerView];
+    }
 }
 
 -(void)eventLoadingComplete:(NSNotification *)notif {
     moreCloseButton.userInteractionEnabled = YES;
 }
-
--(void)fetchFigureAndAddDescriptionPage {
-    
-    
-    Person *requester = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetFigureWithId:event.figureId requester:requester];
-    
-    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-    
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, Figure *result, NSError *error) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            figure = result;
-        });
-    }];
-    
-}
-
 
 
 #pragma mark Page Management
@@ -254,7 +220,7 @@ CGFloat pageWidth = 320;
 
 -(void)tapped {
     
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:event.eventId requester:_person];
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:[_event.eventId stringValue] requester:nil];
     connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     if (infoPage.expanded == NO) {
         

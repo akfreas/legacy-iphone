@@ -1,6 +1,7 @@
 #import "ImageWidgetContainer.h"
 #import "Utility_AppSettings.h"
 #import "Event.h"
+#import "Figure.h"
 #import "ImageWidget.h"
 #import "Person.h"
 
@@ -54,8 +55,10 @@
 
 -(void)getThumbnailImage {
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.event.figureProfilePicUrl];
-    NSLog(@"Profile pic url: %@", self.event.figureProfilePicUrl);
+    
+    NSURL *imageURL = [NSURL URLWithString:self.event.figure.imageURL];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:imageURL];
+    NSLog(@"Profile pic url: %@", imageURL);
     
     [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
         NSLog(@"Response: %@", (NSHTTPURLResponse *)resp);

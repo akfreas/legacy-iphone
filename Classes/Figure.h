@@ -1,9 +1,29 @@
-@interface Figure : NSObject
+//
+//  Figure.h
+//  AtYourAge
+//
+//  Created by Alexander Freas on 6/20/13.
+//
+//
 
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *description;
-@property (nonatomic) NSURL *imageUrl;
-@property (nonatomic) NSDate *dateOfBirth;
-@property (nonatomic) NSDate *dateOfDeath;
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class Event;
+
+@interface Figure : NSManagedObject
+
+@property (nonatomic, retain) NSString * imageURL;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSSet *events;
+@end
+
+@interface Figure (CoreDataGeneratedAccessors)
+
+- (void)addEventsObject:(Event *)value;
+- (void)removeEventsObject:(Event *)value;
+- (void)addEvents:(NSSet *)values;
+- (void)removeEvents:(NSSet *)values;
 
 @end

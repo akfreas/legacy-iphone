@@ -1,4 +1,6 @@
 #import "Person.h"
+#import "Event.h"
+#import "Figure.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
 
@@ -247,6 +249,87 @@ static NSString *PersonEntityName = @"Person";
     }
 }
 
+-(void)clearEventsAndFiguresAndSave {
+    
+    NSFetchRequest *eventDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+    NSError *error;
+    NSArray *arrayOfEvents = [self.managedObjectContext executeFetchRequest:eventDeleteFetchRequest error:&error];
+    
+    for (Event *event in arrayOfEvents) {
+        [self.managedObjectContext deleteObject:event];
+    }
+    
+    NSFetchRequest *figureDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
+    
+    NSArray *arrayOfFigures = [self.managedObjectContext executeFetchRequest:figureDeleteFetchRequest error:&error];
+    
+    for (Figure *figure in arrayOfFigures) {
+        [self.managedObjectContext deleteObject:figure];
+    }
+    [self save];
+}
+
+-(void)addEventAndFigureWithJson:(NSDictionary *)json {
+    
+    NSEntityDescription *eventEntityDesc = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:[self managedObjectContext]];
+    
+    
+    Event *newEvent = [[Event alloc] initWithEntity:eventEntityDesc insertIntoManagedObjectContext:[self managedObjectContext]];
+    
+    
+    
+    newEvent.eventDescription = json[@"event_description"];
+    newEvent.ageYears = [NSNumber numberWithInt:[json[@"age_years"] intValue]];
+    newEvent.ageMonths = [NSNumber numberWithInt:[json[@"age_months"] intValue]];
+    newEvent.ageDays = [NSNumber numberWithInt:[json[@"age_days"] intValue]];
+    newEvent.eventId = [NSNumber numberWithInt:[json[@"event_id"] intValue]];
+    
+    
+    NSDictionary *figureDict = json[@"figure"];
+    NSNumber *figureId = [NSNumber numberWithInt:[figureDict[@"id"] intValue]];
+    
+    Figure *eventFigure = [self fetchFigureWithId:figureId];
+    
+    if (eventFigure == nil) {
+        
+        NSEntityDescription *figureEntityDesc = [NSEntityDescription entityForName:@"Figure" inManagedObjectContext:[self managedObjectContext]];
+        eventFigure = [[Figure alloc] initWithEntity:figureEntityDesc insertIntoManagedObjectContext:[self managedObjectContext]];
+        
+        eventFigure.name = figureDict[@"name"];
+        eventFigure.imageURL = figureDict[@"image_url"];
+    }
+    
+    newEvent.figure = eventFigure;
+}
+
+-(Figure *)fetchFigureWithId:(NSNumber *)figureId {
+    
+    NSFetchRequest *figureFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
+    
+    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"id == %@", figureId];
+    
+    figureFetchRequest.predicate = fetchPredicate;
+    NSError *error;
+    NSArray *fetchedArray = [self.managedObjectContext executeFetchRequest:figureFetchRequest error:&error];
+    
+    Figure *returnFigure;
+    if (fetchedArray != nil) {
+        returnFigure = [fetchedArray lastObject];
+    } else {
+        returnFigure = nil;
+    }
+    return returnFigure;
+}
+
+-(NSArray *)getStoredEvents {
+ 
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+    NSError *error;
+    NSArray *events = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    return events;
+}
+
 -(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock {
     
     NSEntityDescription *desc = [NSEntityDescription entityForName:PersonEntityName inManagedObjectContext:[self managedObjectContext]];
@@ -257,7 +340,6 @@ static NSString *PersonEntityName = @"Person";
         NSArray *resultArray = result[@"data"];
         if ([resultArray count] == 1) {
             NSString *birthdayString = resultArray[0][@"birthday"];
-            NSString *profilePicUrlString = resultArray[0][@"picture"][@"data"][@"url"];
             
 
             NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];

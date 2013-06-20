@@ -1,10 +1,12 @@
 @class Person;
+@class Event;
 
 
 
 @interface FigureRow : UIView <UIScrollViewDelegate>
 
-@property (nonatomic) Person *person;
+
+@property (nonatomic) Event *event;
 -(void)tapped;
 - (id)initWithOrigin:(CGPoint)origin;
 

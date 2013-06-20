@@ -29,6 +29,7 @@
 -(void)hide {
     [UIView animateWithDuration:_animationDuration animations:^{
         self.alpha = 0;
+        [self setAlphaOnCircleViews:0];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
@@ -41,6 +42,7 @@
     [superView addSubview:self];
     [UIView animateWithDuration:_animationDuration animations:^{
         self.alpha = 1;
+        [self setAlphaOnCircleViews:1];
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:.5];
     }];
 }
@@ -61,6 +63,12 @@
     [infoCircle addGestureRecognizer:tapGesture];
     
     return infoCircle;
+}
+
+-(void)setAlphaOnCircleViews:(CGFloat)alpha {
+    for (CircleImageView *circleView in circleImageViews) {
+        circleView.alpha = alpha;
+    }
 }
 
 -(void)prepareCircles {
@@ -92,6 +100,7 @@
         circleView.frame = CGRectOffset(circleView.frame, centeredXOffset, 0);
         [self addSubview:circleView];
     }
+    [self setAlphaOnCircleViews:0];
     [self setNeedsLayout];
 }
 

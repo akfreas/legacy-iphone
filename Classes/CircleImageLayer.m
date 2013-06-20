@@ -72,9 +72,10 @@
     return [super actionForKey:event];
 }
 
-//-(void)setRadius:(CGFloat)radius {
-//    _radius = radius
-//}
+-(void)setRadius:(CGFloat)radius {
+    _radius = radius;
+    [self setNeedsDisplay];
+}
 
 +(BOOL)needsDisplayForKey:(NSString *)key {
     if ([key isEqualToString:@"transform"]) {

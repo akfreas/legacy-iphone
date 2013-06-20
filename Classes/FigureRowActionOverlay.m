@@ -1,10 +1,10 @@
 #import "FigureRowActionOverlay.h"
-#import "CircleImageLayer.h"
+#import "CircleImageView.h"
 #import "Event.h"
 
 @implementation FigureRowActionOverlay {
     
-    NSArray *circleImageLayers;
+    NSArray *circleImageViews;
     Event *event;
 }
 
@@ -45,39 +45,68 @@
     }];
 }
 
+-(CircleImageView *)fbCircle {
+    CircleImageView *fbCircle = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"FB-f-Logo__blue_100.png"] radius:OverlayViewButtonRadius];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fbAction)];
+    
+    [fbCircle addGestureRecognizer:tapGesture];
+    return fbCircle;
+}
+
+-(CircleImageView *)infoCircle {
+    CircleImageView *infoCircle = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"informationcircle.png"] radius:OverlayViewButtonRadius];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoAction)];
+    
+    [infoCircle addGestureRecognizer:tapGesture];
+    
+    return infoCircle;
+}
+
 -(void)prepareCircles {
     
     
-    CGFloat radius = 20;
-    CircleImageLayer *fbCircle = [[CircleImageLayer alloc] initWithImage:[UIImage imageNamed:@"FB-f-Logo__blue_100.png"] radius:radius];
-    CircleImageLayer *infoCircle = [[CircleImageLayer alloc] initWithImage:[UIImage imageNamed:@"informationcircle.png"] radius:radius];
+    
+    circleImageViews = [NSArray arrayWithObjects:[self fbCircle], [self infoCircle], nil];
 
-    circleImageLayers = [NSArray arrayWithObjects:fbCircle, infoCircle, nil];
-
-    CGPoint startPoint = CGPointMake(0, self.frame.size.height / 2 - radius);
+    CGPoint startPoint = CGPointMake(0, self.frame.size.height / 2 - OverlayViewButtonRadius);
     
     CGFloat originXOffset = 0;
     CGFloat padding = 5;
     
-    for (int i=0; i < [circleImageLayers count]; i++) {
+    for (int i=0; i < [circleImageViews count]; i++) {
         
-        CircleImageLayer *layer = [circleImageLayers objectAtIndex:i];
+        CircleImageView *circleView = [circleImageViews objectAtIndex:i];
         CGFloat xPointForCircle = startPoint.x + originXOffset + padding;
         
         CGPoint layerOrigin = CGPointMake(xPointForCircle, startPoint.y);
-        layer.frame = CGRectSetOriginOnRect(layer.frame, layerOrigin.x, layerOrigin.y);
-        originXOffset += layer.frame.size.width + padding;
+        circleView.frame = CGRectSetOriginOnRect(circleView.frame, layerOrigin.x, layerOrigin.y);
+        originXOffset += circleView.frame.size.width + padding;
 
     }
     
     CGPoint centerOfFrame = CGPointGetCenterFromRect(self.frame);
     CGFloat centeredXOffset = centerOfFrame.x - originXOffset / 2;
     
-    for (CircleImageLayer *layer in circleImageLayers) {
-        layer.frame = CGRectOffset(layer.frame, centeredXOffset, 0);
-        [self.layer addSublayer:layer];
+    for (CircleImageView *circleView in circleImageViews) {
+        circleView.frame = CGRectOffset(circleView.frame, centeredXOffset, 0);
+        [self addSubview:circleView];
     }
     [self setNeedsLayout];
+}
+
+#pragma mark Button Actions
+
+-(void)fbAction {
+    if (self.facebookButtonAction != NULL) {
+        self.facebookButtonAction();
+    }
+}
+
+-(void)infoAction {
+    if (self.infoButtonAction != NULL) {
+        self.infoButtonAction();
+    }
 }
 
 @end

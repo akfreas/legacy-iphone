@@ -14,6 +14,7 @@
 		1909A85C1772D21600256ED0 /* FigureRowActionOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A85B1772D21500256ED0 /* FigureRowActionOverlay.m */; };
 		1909A85E1772D3B300256ED0 /* FB-f-Logo__blue_100.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85D1772D3B300256ED0 /* FB-f-Logo__blue_100.png */; };
 		1909A8601772D44300256ED0 /* informationcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85F1772D44300256ED0 /* informationcircle.png */; };
+		1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8621772E6B000256ED0 /* CircleImageView.m */; };
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
@@ -110,6 +111,8 @@
 		1909A85B1772D21500256ED0 /* FigureRowActionOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowActionOverlay.m; sourceTree = "<group>"; };
 		1909A85D1772D3B300256ED0 /* FB-f-Logo__blue_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_100.png"; sourceTree = "<group>"; };
 		1909A85F1772D44300256ED0 /* informationcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = informationcircle.png; sourceTree = "<group>"; };
+		1909A8611772E6AE00256ED0 /* CircleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleImageView.h; sourceTree = "<group>"; };
+		1909A8621772E6B000256ED0 /* CircleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageView.m; sourceTree = "<group>"; };
 		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		191CF6361747341700086D5E /* RightIndicatorLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightIndicatorLines.h; sourceTree = "<group>"; };
 		191CF6371747341700086D5E /* RightIndicatorLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightIndicatorLines.m; sourceTree = "<group>"; };
@@ -439,6 +442,8 @@
 				19C49EAB16CA345800304AD6 /* Constants.h */,
 				191CF63917488CE700086D5E /* CircleImageLayer.h */,
 				191CF63A17488CE700086D5E /* CircleImageLayer.m */,
+				1909A8611772E6AE00256ED0 /* CircleImageView.h */,
+				1909A8621772E6B000256ED0 /* CircleImageView.m */,
 				19C7BD8A174BC7AA004C8B0A /* Pages */,
 				199354FB16D4A29700D73389 /* EventInfoScrollView.h */,
 				199354FC16D4A29700D73389 /* EventInfoScrollView.m */,
@@ -665,6 +670,7 @@
 				1909A8531772BCCD00256ED0 /* DataSyncUtility.m in Sources */,
 				1909A8561772C48300256ED0 /* Figure.m in Sources */,
 				1909A85C1772D21600256ED0 /* FigureRowActionOverlay.m in Sources */,
+				1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

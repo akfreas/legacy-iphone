@@ -54,3 +54,5 @@
 #define LeftActionTabPageButtonHeight 30
 
 #define FigureRowNameContainerViewHeight 40
+
+#define OverlayViewButtonRadius 20

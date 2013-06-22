@@ -114,7 +114,6 @@
         CGFloat scale = MAX((_radius * 2) / imgSize.width, (_radius * 2) / imgSize.height);
         CGFloat imageWidth = _image.size.width * scale;
         CGFloat imageHeight = _image.size.height * scale;
-        NSLog(@"Radius: %f", _radius);
         CGRect imgRect;
         
         if (imageWidth > imageHeight) {

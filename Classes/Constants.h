@@ -7,15 +7,17 @@
 #define KeyForFigureRowHeightChanged @"FigureRowHeightChanged"
 #define KeyForEventLoadingComplete @"EventLoadingComplete"
 #define KeyForFigureRowContentChanged @"FigureRowContentChanged"
+#define KeyForFacebookButtonTapped @"FacebookButtonTapped"
+#define KeyForInfoOverlayButtonTapped @"OverlayInfoButtonTapped"
 
 
 #define FigureRowPageInitialHeight 140
 #define FigureRowPageWidth 320
 
 
-#define SpaceBetweenFigureRowPages 10
+#define SpaceBetweenFigureRowPages 1
 
-#define EventInfoScrollViewPadding 5
+#define EventInfoScrollViewPadding 1
 
 #define PageControlYPosition 10
 #define PageControlXPosition 240

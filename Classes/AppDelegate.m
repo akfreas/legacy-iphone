@@ -14,6 +14,7 @@
 -(void)configureInitialViewHeirarchy {
     
     MainScreen *mainScreen = [[MainScreen alloc] init];
+    
     mainNavController = [[UINavigationController alloc] initWithRootViewController:mainScreen];
     [mainNavController setNavigationBarHidden:NO];
 }
@@ -25,7 +26,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [FBProfilePictureView class];
     [self configureInitialViewHeirarchy];
-    self.window.rootViewController = mainNavController;
+    MainScreen *mainScreen = [[MainScreen alloc] init];
+
+    self.window.rootViewController = mainScreen;
     
     [self.window makeKeyAndVisible];
     return YES;

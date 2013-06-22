@@ -74,6 +74,10 @@ CGFloat pageWidth = 320;
         actionOverlay = [[FigureRowActionOverlay alloc] initWithEvent:self.event];
     }
     [actionOverlay showInView:self];
+    NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:@{@"event": _event}];
+    actionOverlay.infoButtonAction = ^{
+        [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
+    };
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForOverlayViewShown object:self];
 }
 
@@ -162,7 +166,7 @@ CGFloat pageWidth = 320;
 #pragma mark Page Management
 
 -(void)setupPages {
-    pageArray = [NSMutableArray arrayWithObjects:[self leftActionTabPage], [self figureInfoPage], [self webView], nil];
+    pageArray = [NSMutableArray arrayWithObjects:[self figureInfoPage], nil];
     
     [self setPageFrames];
     
@@ -174,14 +178,12 @@ CGFloat pageWidth = 320;
 -(void)setPageFrames {
     
     CGFloat currentXOffset = 0;
+    
     for (int i=0; i < [pageArray count]; i++) {
         UIView <FigureRowPageProtocol> *page = pageArray[i];
         page.frame = CGRectSetOriginOnRect(page.frame, currentXOffset, 0);
         CGFloat widthDelta = CGRectGetWidth(page.frame) + page.rightPageMargin;
         scroller.contentSize = CGSizeAddWidthToSize(scroller.contentSize, widthDelta);
-        if (i == 0) {
-            scroller.contentOffset = CGPointMake(CGRectGetWidth(page.frame), 0);
-        }
         currentXOffset += widthDelta;
     }
 }

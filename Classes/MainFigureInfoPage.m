@@ -78,7 +78,7 @@ DualFrame * initFrame() {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:self.widgetContainer];
         [self.layer addSublayer:ind];
 //        self.contentSize = CGSizeMakeFromRect(viewFrame.collapsed);
-        [self setContentFrames:viewFrame.collapsed];
+//        [self setContentFrames:viewFrame.collapsed];
         self.scrollEnabled = NO;
         
     }
@@ -182,9 +182,9 @@ DualFrame * initFrame() {
         NSLog(@"Height delta in collapse completion block: %@", rowHeightDelta);
 
         rowHeightDelta = [NSNumber numberWithFloat:0];
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
-                                                            object:self
-                                                          userInfo:@{@"delta": heightDifference}];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
+//                                                            object:self
+//                                                          userInfo:@{@"delta": heightDifference}];
         publicExpandCompletion(NO);
     };
 }
@@ -196,9 +196,9 @@ DualFrame * initFrame() {
         rowHeightDelta = [NSNumber numberWithFloat:[rowHeightDelta floatValue] + [delta floatValue]];
         NSLog(@"Height delta in expand completion block: %@", rowHeightDelta);
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
-                                                            object:self
-                                                          userInfo:@{@"delta": delta}];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
+//                                                            object:self
+//                                                          userInfo:@{@"delta": delta}];
         publicExpandCompletion(YES);
     };
 }
@@ -236,21 +236,19 @@ DualFrame * initFrame() {
             CGRect newContentRect = CGRectMake(0, 0, viewFrame.collapsed.size.width, viewFrame.collapsed.size.height + contentSizeIncrease);
             CGRect newFrameRect = CGRectAddHeightToRect(viewFrame.collapsed, frameDelta);
             newFrameRect = CGRectMakeFrameWithSizeFromFrame(newFrameRect);
-
+            newFrameRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, newFrameRect.size.width, newFrameRect.size.height);
             self.frame =  newFrameRect;
             __block NSNumber *frameDeltaNumber;
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
             completionBlock(frameDeltaNumber);
-            [UIView animateWithDuration:0.2 animations:^{
                 
-                [self setContentFrames:newContentRect];
+                [self setContentFrames:self.bounds];
                     for (UILabel *theLabel in arrayOfRelatedEventLabels) {
                         theLabel.alpha = 1;
                     }
 
                     [self addIndicatorLines];
 
-            }];
         });
 }
 
@@ -275,12 +273,13 @@ DualFrame * initFrame() {
     self.contentSize = CGSizeMakeFromRect(rect);
 }
 
+-(void)setFrame:(CGRect)frame {
+    [self setContentFrames:frame];
+    [super setFrame:frame];
+}
+
 -(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
     
-    [UIView animateWithDuration:.2 animations:^{
-
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:0];
         [self.widgetContainer expandWidget];
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
@@ -292,17 +291,11 @@ DualFrame * initFrame() {
         eventDescriptionText.frame = descriptionFrame.expanded;
         [self putRelatedEventsAndExpandWithCompletion:completionBlock];
         self.scrollEnabled = YES;
-    }];
-    
 }
 
 -(void)collapseWithCompletionBlock:(void(^)(void))completionBlock {
     
     
-    [UIView animateWithDuration:.2 animations:^{
-        
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:.2];
         [self removeIndicatorLines];
         [self.widgetContainer collapseWidget];
         [self setContentFrames:viewFrame.collapsed];
@@ -322,8 +315,6 @@ DualFrame * initFrame() {
         self.scrollEnabled = NO;
         
         completionBlock();
-        
-    }];
 }
 
 #pragma mark FigureRowPageProtocol Functions

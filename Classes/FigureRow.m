@@ -53,6 +53,9 @@ CGFloat pageWidth = 320;
 
 -(void)addTapGestureRecognizer {
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeOnRow)];
+    swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self addGestureRecognizer:swipeGesture];
     [self addGestureRecognizer:gesture];
 }
 
@@ -79,6 +82,13 @@ CGFloat pageWidth = 320;
         [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
     };
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForOverlayViewShown object:self];
+}
+
+-(void)swipeOnRow {
+    
+    NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:@{@"event": _event}];
+    [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
+
 }
 
 -(void)removeActionOverlay:(NSNotification *)notif {

@@ -269,7 +269,7 @@ DualFrame * initFrame() {
 }
 
 -(void)setContentFrames:(CGRect)rect {
-    self.view.frame = rect;
+    self.view.frame = CGRectMakeFrameWithSizeFromFrame(rect);
     self.contentSize = CGSizeMakeFromRect(rect);
 }
 

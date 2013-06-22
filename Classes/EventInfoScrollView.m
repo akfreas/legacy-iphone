@@ -67,7 +67,7 @@
 
             [self addSubview:webView];
             self.contentSize = CGSizeAddWidthToSize(self.contentSize, infoPage.frame.size.width + webView.frame.size.width);
-            self.contentSize = CGRectSetWidthForRect(self.contentSize.width, self.bounds).size;
+//            self.contentSize = CGRectSetWidthForRect(self.contentSize.width, self.bounds).size;
 
 
         }];
@@ -94,7 +94,7 @@
         row.event = theEvent;
         
         
-        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (FigureRowPageInitialHeight + EventInfoScrollViewPadding));
+        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (FigureRowPageInitialHeight));
     }
     
     [self setNeedsLayout];

@@ -8,6 +8,7 @@
 #import "MainFigureInfoPage.h"
 #import "Event.h"
 #import "AtYourAgeWebView.h"
+#import "FigureRowScrollPage.h"
 
 @interface EventInfoScrollView () <UIScrollViewDelegate>
 
@@ -40,6 +41,12 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
     }
     return self;
+}
+
+-(void)addFigurePage {
+    FigureRowScrollPage *figurePage = [[FigureRowScrollPage alloc] initWithFrame:self.bounds];
+    [self addSubview:figurePage];
+    [figurePage reload];
 }
 
 -(void)addEventInfoPageAndScroll:(NSNotification *)notif {
@@ -79,26 +86,7 @@
 }
 
 
--(void)addInfoViews {
-    
-    NSArray *eventsInStore = [accessor getStoredEvents];
-    
-    for (int i=0; i<[eventsInStore count]; i++) {
-        
-        
-        Event *theEvent = [eventsInStore objectAtIndex:i];
-        
-        __block FigureRow *row = [[FigureRow alloc] initWithOrigin:CGPointMake(0, (FigureRowPageInitialHeight + EventInfoScrollViewPadding) * i)];
-        [arrayOfFigureRows addObject:row];
-        [self addSubview:row];
-        row.event = theEvent;
-        
-        
-        self.contentSize = CGSizeMake(self.contentSize.width, (i + 1) * (FigureRowPageInitialHeight));
-    }
-    
-    [self setNeedsLayout];
-}
+
 
 -(void)addPageControl {
     
@@ -131,7 +119,7 @@
 
 -(void)reload {
     [self removeInfoViews];
-    [self addInfoViews];
+    [self addFigurePage];
 }
 
 #pragma mark UIScrollViewDelegate

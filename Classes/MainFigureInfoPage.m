@@ -242,7 +242,7 @@ DualFrame * initFrame() {
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
             completionBlock(frameDeltaNumber);
                 
-                [self setContentFrames:self.bounds];
+                [self setContentFrames:newContentRect];
                     for (UILabel *theLabel in arrayOfRelatedEventLabels) {
                         theLabel.alpha = 1;
                     }
@@ -269,12 +269,12 @@ DualFrame * initFrame() {
 }
 
 -(void)setContentFrames:(CGRect)rect {
-    self.view.frame = CGRectMakeFrameWithSizeFromFrame(rect);
+    self.view.frame = rect;
     self.contentSize = CGSizeMakeFromRect(rect);
 }
 
 -(void)setFrame:(CGRect)frame {
-    [self setContentFrames:frame];
+//    [self setContentFrames:frame];
     [super setFrame:frame];
 }
 

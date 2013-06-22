@@ -15,6 +15,7 @@
 		1909A85E1772D3B300256ED0 /* FB-f-Logo__blue_100.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85D1772D3B300256ED0 /* FB-f-Logo__blue_100.png */; };
 		1909A8601772D44300256ED0 /* informationcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85F1772D44300256ED0 /* informationcircle.png */; };
 		1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8621772E6B000256ED0 /* CircleImageView.m */; };
+		1909A8691776192100256ED0 /* FigureRowScrollPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8681776192100256ED0 /* FigureRowScrollPage.m */; };
 		191866FD16D4373500220A42 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191866FC16D4373500220A42 /* MainScreen.xib */; };
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
@@ -113,6 +114,8 @@
 		1909A85F1772D44300256ED0 /* informationcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = informationcircle.png; sourceTree = "<group>"; };
 		1909A8611772E6AE00256ED0 /* CircleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleImageView.h; sourceTree = "<group>"; };
 		1909A8621772E6B000256ED0 /* CircleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageView.m; sourceTree = "<group>"; };
+		1909A8671776192100256ED0 /* FigureRowScrollPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowScrollPage.h; sourceTree = "<group>"; };
+		1909A8681776192100256ED0 /* FigureRowScrollPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowScrollPage.m; sourceTree = "<group>"; };
 		191866FC16D4373500220A42 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		191CF6361747341700086D5E /* RightIndicatorLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightIndicatorLines.h; sourceTree = "<group>"; };
 		191CF6371747341700086D5E /* RightIndicatorLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightIndicatorLines.m; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 				19FAD7811762F1D1006FA829 /* LeftActionTabPage.m */,
 				195B5FFF16DEB7D3006215E9 /* AtYourAgeWebView.h */,
 				195B600016DEB7D3006215E9 /* AtYourAgeWebView.m */,
+				1909A8671776192100256ED0 /* FigureRowScrollPage.h */,
+				1909A8681776192100256ED0 /* FigureRowScrollPage.m */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -671,6 +676,7 @@
 				1909A8561772C48300256ED0 /* Figure.m in Sources */,
 				1909A85C1772D21600256ED0 /* FigureRowActionOverlay.m in Sources */,
 				1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */,
+				1909A8691776192100256ED0 /* FigureRowScrollPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -121,7 +121,7 @@
         } else {
             imgRect = CGRectMake(0, _radius - imageHeight / 2, imageWidth, imageHeight);
         }
-        
+        imgRect = CGRectMakeFrameForDeadCenterInRect(self.bounds, CGSizeMake(imageWidth, imageHeight));
         CGContextDrawImage(ctx, imgRect, _image.CGImage);
         CGContextRestoreGState(ctx);
         drawingMode = kCGPathStroke;

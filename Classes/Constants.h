@@ -9,6 +9,7 @@
 #define KeyForFigureRowContentChanged @"FigureRowContentChanged"
 #define KeyForFacebookButtonTapped @"FacebookButtonTapped"
 #define KeyForInfoOverlayButtonTapped @"OverlayInfoButtonTapped"
+#define KeyForAddFriendButtonTapped @"AddFriendButtonTapped"
 
 
 #define FigureRowPageInitialHeight 140

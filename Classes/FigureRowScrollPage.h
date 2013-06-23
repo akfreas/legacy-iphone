@@ -1,4 +1,4 @@
-@interface FigureRowScrollPage : UIScrollView
+@interface FigureRowScrollPage : UIView
 
 -(void)reload;
 

@@ -37,7 +37,6 @@
         pageArray = [NSMutableArray array];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(figureRowHeightChanged:) name:KeyForFigureRowContentChanged object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
     }
     return self;

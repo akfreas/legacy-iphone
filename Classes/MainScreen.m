@@ -32,6 +32,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
         dataSync = [[DataSyncUtility alloc] init];
     }
     return self;
@@ -129,38 +130,6 @@
         viewForSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsModalView alloc] init]];
     }
     [self presentViewController:viewForSettings animated:YES completion:NULL];
-}
-
--(void)setNavigationElements {
-    
-    Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
-    self.navigationController.title = primaryPerson.firstName;
-    
-    CGFloat leftPadding = 6;
-    UIImageView *rightButtonImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"19-gear.png"]];
-    UIView *rightButtonHostView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rightButtonImageView.frame), CGRectGetHeight(rightButtonImageView.frame))];
-    UIButton *rightButtonView = [[UIButton alloc] initWithFrame:CGRectMake(leftPadding, 0, CGRectGetWidth(rightButtonImageView.frame), CGRectGetHeight(rightButtonImageView.frame))];
-    [rightButtonView setBackgroundImage:[UIImage imageNamed:@"19-gear.png"] forState:UIControlStateNormal];
-    [rightButtonView setBackgroundImage:[UIImage imageNamed:@"19-gear-gray.png"] forState:UIControlStateSelected];
-    [rightButtonView addTarget:self action:@selector(showSettingsModalView) forControlEvents:UIControlEventTouchUpInside];
-    
-    [rightButtonHostView addSubview:rightButtonView];
-
-    
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonHostView];
-    self.navigationItem.leftBarButtonItem = leftButton;
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showFriendPicker)];
-    self.navigationItem.rightBarButtonItem =  rightButton;
-    
-    self.navigationItem.backBarButtonItem = nil;
-    self.navigationItem.hidesBackButton = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"HeaderImg"] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-//    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:176.0/256.0 green:167.0/256 blue:93.0/256 alpha:1];
-//    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"brushedmetal.png"]]];
-//    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.opaque = NO;
 }
 
 -(void)showFriendPicker {

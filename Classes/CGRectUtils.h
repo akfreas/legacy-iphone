@@ -17,3 +17,4 @@ inline CGRect CGRectSetWidthForRect(CGFloat width, CGRect rect);
 inline CGRect CGRectSetOriginOnRect(CGRect rect, CGFloat originX, CGFloat originY);
 inline CGRect CGRectMakeFrameForDeadCenterInRect(CGRect rect, CGSize frameSize);
 inline CGRect CGRectSetSizeOnFrame(CGRect rect, CGSize size);
+inline CGSize CGSizeAddSizeToSize(CGSize size, CGSize delta);

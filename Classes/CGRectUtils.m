@@ -57,6 +57,11 @@ CGSize CGSizeAddWidthToSize(CGSize size, CGFloat delta) {
     return newSize;
 }
 
+CGSize CGSizeAddSizeToSize(CGSize size, CGSize delta) {
+    CGSize newSize = CGSizeMake(size.width + delta.width, size.height + delta.height);
+    return newSize;
+}
+
 CGSize CGSizeMakeFromRect(CGRect rect) {
     CGSize newSize =  CGSizeMake(rect.size.width, rect.size.height);
     return newSize;

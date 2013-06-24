@@ -50,6 +50,14 @@
     return url;
 }
 
++(NSURL *)urlToPostUsers {
+    
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = [NSString stringWithFormat:@"users/add"];
+    url = [url URLByAppendingPathComponent:pathString];
+    return url;
+}
+
 +(NSURL *)urlToGetRelatedEventsForEvent:(NSString *)eventId {
     NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"event/%@/related", eventId];
@@ -88,6 +96,15 @@
 }
 
 
++(NSURL *)urlToGetEvents {
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSString *pathString = [NSString stringWithFormat:@"events"];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
 +(AtYourAgeRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester {
     
     AtYourAgeRequest *request = [self baseRequestForPerson:requester];
@@ -112,6 +129,25 @@
     AtYourAgeRequest *request = [AtYourAgeRequest baseRequest];
     NSURL *url = [AtYourAgeRequest urlToGetRandomEvents];
     [request.urlRequest setURL:url];
+    return request;
+}
+
++(AtYourAgeRequest *)requestToGetStoriesForPerson:(Person *)person {
+    
+    AtYourAgeRequest *request = [AtYourAgeRequest baseRequestForPerson:person];
+    NSURL *url = [AtYourAgeRequest urlToGetEvents];
+    request.urlRequest.URL = url;
+    
+    return request;
+}
+
++(AtYourAgeRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person {
+    
+    AtYourAgeRequest *request = [self baseRequestForPerson:person];
+    request.urlRequest.URL = [self urlToPostUsers];
+    request.urlRequest.HTTPMethod = @"POST";
+    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:users options:NSJSONWritingPrettyPrinted error:NULL];
+    
     return request;
 }
 

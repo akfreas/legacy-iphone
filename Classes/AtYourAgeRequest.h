@@ -6,6 +6,7 @@
 +(AtYourAgeRequest *)requestToGetRelatedEventsForEvent:(NSString *)event requester:(Person *)person;
 +(AtYourAgeRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester;
 +(AtYourAgeRequest *)requestToGetRandomStories;
++(AtYourAgeRequest *)requestToGetStoriesForPerson:(Person *)person;
 
 @property (strong, nonatomic) NSMutableURLRequest *urlRequest;
 @property (strong, nonatomic) Class classToParse;

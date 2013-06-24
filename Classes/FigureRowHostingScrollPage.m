@@ -1,4 +1,4 @@
-#import "EventInfoScrollView.h"
+#import "LeftRightHostingScrollView.h"
 #import "ObjectArchiveAccessor.h"
 #import "Person.h"
 #import "AtYourAgeRequest.h"
@@ -7,17 +7,18 @@
 #import "FigureRow.h"
 #import "MainFigureInfoPage.h"
 #import "Event.h"
+#import "EventPersonRelation.h"
 #import "AtYourAgeWebView.h"
 #import "BottomFacebookSignInRowView.h"
 #import "TopActionView.h"
 
-#import "FigureRowScrollPage.h"
+#import "FigureRowHostingScrollPage.h"
 
-@interface FigureRowScrollPage () <UIScrollViewDelegate>
+@interface FigureRowHostingScrollPage () <UIScrollViewDelegate>
 
 @end
 
-@implementation FigureRowScrollPage {
+@implementation FigureRowHostingScrollPage {
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
@@ -64,32 +65,6 @@
     }];
 }
 
-
--(void)addInfoViews {
-    
-    NSArray *eventsInStore = [accessor getStoredEvents];
-    
-    for (int i=0; i<[eventsInStore count]; i++) {
-        
-        
-        Event *theEvent = [eventsInStore objectAtIndex:i];
-        
-        __block FigureRow *row = [[FigureRow alloc] initWithOrigin:[self frameAtIndex:i].origin];
-        [arrayOfFigureRows addObject:row];
-        [scroller addSubview:row];
-        row.event = theEvent;
-        
-        
-        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, FigureRowPageInitialHeight);
-    }
-//    
-    if ([[FBSession activeSession] state] != FBSessionStateCreatedTokenLoaded) {
-                [self addFacebookButton];
-        }
-    
-    [self setNeedsLayout];
-}
-
 -(void)addFacebookButton {
     
     BottomFacebookSignInRowView *signInActionRow = [[BottomFacebookSignInRowView alloc] init];
@@ -97,7 +72,6 @@
     signInActionRow.frame = CGRectSetOriginOnRect(signInActionRow.frame, pointForActionRow.x, pointForActionRow.y);
     
     [scroller addSubview:signInActionRow];
-    [arrayOfFigureRows addObject:signInActionRow];
     scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, signInActionRow.frame.size.height);
 }
 
@@ -105,6 +79,12 @@
     CGFloat width = self.bounds.size.width;
     
     return CGRectMake(0, (FigureRowPageInitialHeight + EventInfoScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
+}
+
+-(NSInteger)indexAtPoint:(CGPoint)point {
+    
+    NSInteger index = point.x / (FigureRowPageInitialHeight + EventInfoScrollViewPadding);
+    return index;
 }
 
 -(void)removeInfoViews {
@@ -115,8 +95,35 @@
 }
 
 -(void)reload {
-    [self removeInfoViews];
-    [self addInfoViews];
+    
+    NSArray *eventArray = [accessor getStoredEventRelations];
+    scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
+    for (int i=0; i < [eventArray count]; i++) {
+        FigureRow *row;
+        EventPersonRelation *relation = [eventArray objectAtIndex:i];
+        if (i < [arrayOfFigureRows count] && [arrayOfFigureRows count] > 0) {
+            row = [arrayOfFigureRows objectAtIndex:i];
+        } else {
+            row  = [[FigureRow alloc] initWithOrigin:[self frameAtIndex:i].origin];
+            row.event = relation.event;
+            row.person = relation.person;
+            [arrayOfFigureRows addObject:row];
+            [scroller addSubview:row];
+        }
+        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, row.frame.size.height);
+    }
+    
+    if ([[FBSession activeSession] state] != FBSessionStateCreatedTokenLoaded) {
+        [self addFacebookButton];
+    }
+    
+    if ([eventArray count] < [arrayOfFigureRows count]) {
+        [arrayOfFigureRows removeObjectsInRange:NSMakeRange([eventArray count], [arrayOfFigureRows count] - 1)];
+    }
+    
+    
+    
+    [self layoutSubviews];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

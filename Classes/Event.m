@@ -19,7 +19,6 @@
 @dynamic ageDays;
 @dynamic eventId;
 @dynamic figure;
-@dynamic person;
 
 static NSString *KeyForFigureName = @"figure_name";
 static NSString *KeyForEventDescription = @"figure_event";

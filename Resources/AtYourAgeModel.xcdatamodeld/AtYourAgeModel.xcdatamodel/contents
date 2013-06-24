@@ -7,7 +7,10 @@
         <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="figure" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Figure" inverseName="events" inverseEntity="Figure" syncable="YES"/>
-        <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="events" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="EventPersonRelation" representedClassName="EventPersonRelation" syncable="YES">
+        <relationship name="event" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Event" syncable="YES"/>
+        <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Person" syncable="YES"/>
     </entity>
     <entity name="Figure" representedClassName="Figure" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -23,11 +26,12 @@
         <attribute name="isPrimary" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="person" inverseEntity="Event" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="160" positionY="192" width="128" height="148"/>
+        <element name="Event" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Figure" positionX="367" positionY="9" width="128" height="105"/>
         <element name="Person" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="EventPersonRelation" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

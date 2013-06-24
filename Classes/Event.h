@@ -19,6 +19,5 @@
 @property (nonatomic, retain) NSNumber * ageDays;
 @property (nonatomic, retain) NSNumber * eventId;
 @property (nonatomic, retain) Figure *figure;
-@property (nonatomic, retain) Person *person;
 
 @end

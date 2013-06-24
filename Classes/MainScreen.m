@@ -1,5 +1,5 @@
 #import "MainScreen.h"
-#import "EventInfoScrollView.h"
+#import "LeftRightHostingScrollView.h"
 #import "FBLoginViewController.h"
 #import "SettingsModalView.h"
 #import "Person.h"
@@ -19,7 +19,7 @@
     ObjectArchiveAccessor *accessor;
     FriendPickerHandler *friendPickerDelegate;
     FBFriendPickerViewController *friendPicker;
-    IBOutlet EventInfoScrollView *infoScreen;
+    IBOutlet LeftRightHostingScrollView *infoScreen;
     AtYourAgeConnection *connection;
     
     DataSyncUtility *dataSync;
@@ -152,7 +152,6 @@
     [dataSync sync:^{
         [infoScreen reload];
     }];
-    [self setNavigationElements];
 }
 
                     

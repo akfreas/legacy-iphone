@@ -7,15 +7,8 @@
 
 
 @property (nonatomic) Event *event;
--(void)tapped;
+@property (nonatomic) Person *person;
 - (id)initWithOrigin:(CGPoint)origin;
 
-@end
-
-
-
-@protocol FigureRowDelegate <NSObject>
-
--(void)figureRowWillExpand:(FigureRow *)figureRow;
 
 @end

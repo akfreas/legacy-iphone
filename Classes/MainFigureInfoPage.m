@@ -77,12 +77,14 @@ DualFrame * initFrame() {
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:self.widgetContainer];
         [self.layer addSublayer:ind];
-//        self.contentSize = CGSizeMakeFromRect(viewFrame.collapsed);
-//        [self setContentFrames:viewFrame.collapsed];
         self.scrollEnabled = NO;
         
     }
     return self;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)setUpFrames {
@@ -148,9 +150,6 @@ DualFrame * initFrame() {
     if ([_person.isPrimary isEqualToNumber: [NSNumber numberWithBool:NO]]) {
         trashcanButton.hidden = NO;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [ind animate];
-    });
 }
 
 -(void)recordHeightDelta:(NSNotification *)notification {

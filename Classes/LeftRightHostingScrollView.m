@@ -1,4 +1,4 @@
-#import "EventInfoScrollView.h"
+#import "LeftRightHostingScrollView.h"
 #import "ObjectArchiveAccessor.h"
 #import "Person.h"
 #import "AtYourAgeRequest.h"
@@ -8,19 +8,20 @@
 #import "MainFigureInfoPage.h"
 #import "Event.h"
 #import "AtYourAgeWebView.h"
-#import "FigureRowScrollPage.h"
+#import "FigureRowHostingScrollPage.h"
 
-@interface EventInfoScrollView () <UIScrollViewDelegate>
+@interface LeftRightHostingScrollView () <UIScrollViewDelegate>
 
 @end
 
-@implementation EventInfoScrollView {
+@implementation LeftRightHostingScrollView {
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
     
     UIPageControl *pageControl;
     NSMutableArray *pageArray;
+    FigureRowHostingScrollPage *figurePage;
     CGPoint lastPoint;
     AtYourAgeConnection *connection;
 }
@@ -30,20 +31,24 @@
     self = [super initWithCoder:aDecoder];
     
     if (self) {
-//        self.contentSize = CGSizeMake(320, Utility_AppSettings.frameForKeyWindow.size.height);
+        
         self.delegate = self;
+        self.showsHorizontalScrollIndicator = NO;
+        self.showsVerticalScrollIndicator = NO;
         lastPoint = CGPointZero;
         accessor = [ObjectArchiveAccessor sharedInstance];
         pageArray = [NSMutableArray array];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
+        [self addFigurePage];
+
     }
     return self;
 }
 
 -(void)addFigurePage {
-    FigureRowScrollPage *figurePage = [[FigureRowScrollPage alloc] initWithFrame:self.bounds];
+    figurePage = [[FigureRowHostingScrollPage alloc] initWithFrame:self.bounds];
     [self addSubview:figurePage];
     [figurePage reload];
 }
@@ -54,12 +59,19 @@
     CGRect infoFrame = CGRectMake(320 + SpaceBetweenFigureRowPages, self.contentOffset.y, 320, 400);
     NSDictionary *userInfo = notif.userInfo;
     Event *theEvent = userInfo[@"event"];
-    
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:nil];
+    Person *thePerson = userInfo[@"person"];
+    AtYourAgeRequest *request;
+    if ([accessor primaryPerson]) {
+        request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:[accessor primaryPerson]];
+    } else {
+        request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:nil];
+        
+    }
     connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     [self addPageControl];
     MainFigureInfoPage *infoPage = [[MainFigureInfoPage alloc] initWithFrame:infoFrame];
     infoPage.event = theEvent;
+    infoPage.person = thePerson;
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSDictionary *eventDict, NSError *error) {
         [pageArray addObject:infoPage];
         [infoPage expandWithRelatedEvents:eventDict completion:^(BOOL expanded) {
@@ -117,8 +129,10 @@
 }
 
 -(void)reload {
-    [self removeInfoViews];
-    [self addFigurePage];
+    if (figurePage == nil) {
+        [self addFigurePage];
+    }
+    [figurePage reload];
 }
 
 #pragma mark UIScrollViewDelegate

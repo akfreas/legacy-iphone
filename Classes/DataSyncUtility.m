@@ -25,8 +25,10 @@
     
     
     [accessor clearEventsAndFiguresAndSave];
-    
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToGetRandomStories];
+    AtYourAgeRequest *request;
+    Person *primaryPerson = [accessor primaryPerson];
+
+    request = [AtYourAgeRequest requestToGetStoriesForPerson:primaryPerson];
     
     AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     

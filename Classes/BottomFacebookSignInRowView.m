@@ -1,12 +1,5 @@
-//
-//  BottomFacebookSignInRowView.m
-//  AtYourAge
-//
-//  Created by Alexander Freas on 6/23/13.
-//
-//
-
 #import "BottomFacebookSignInRowView.h"
+#import "ObjectArchiveAccessor.h"
 
 @implementation BottomFacebookSignInRowView {
     
@@ -54,17 +47,28 @@
         if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
             [FBSession openActiveSessionWithAllowLoginUI:NO];
         } else {
-            FBSession *session = [[FBSession alloc] initWithPermissions:@[@"user_birthday", @"friends_birthday"]];
-            [FBSession setActiveSession:session];
-            [session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-               
-                
-                if (status == FBSessionStateOpen) {
-                    [self hide];
-                }
-            }];
+            [self startFBLoginProcess];
         }
     }
+}
+
+-(void)startFBLoginProcess {
+    
+    FBSession *session = [[FBSession alloc] initWithPermissions:@[@"user_birthday", @"friends_birthday"]];
+    [FBSession setActiveSession:session];
+    [session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        if (status == FBSessionStateOpen) {
+            [self getAndSavePrimaryUser];
+        }
+    }];
+}
+
+-(void)getAndSavePrimaryUser {
+    [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
+        [[ObjectArchiveAccessor sharedInstance] createAndSetPrimaryUser:result completionBlock:^(Person *thePerson) {
+            [self hide];
+        }];
+    }];
 }
 
 @end

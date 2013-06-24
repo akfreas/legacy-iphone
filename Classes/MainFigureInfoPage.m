@@ -128,7 +128,7 @@ DualFrame * initFrame() {
 }
 
 -(void)setEvent:(Event *)event {
-//    [ind animate];
+    [ind animate];
     _event = event;
     figureNameLabel.text = event.figure.name;
     self.widgetContainer.event = event;

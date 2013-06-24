@@ -143,10 +143,17 @@
 
 +(AtYourAgeRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person {
     
+    
+    NSMutableArray *arrayOfUserIds = [NSMutableArray array];
+    
+    for (Person *person in users) {
+        [arrayOfUserIds addObject:person.facebookId];
+    }
+    
     AtYourAgeRequest *request = [self baseRequestForPerson:person];
     request.urlRequest.URL = [self urlToPostUsers];
     request.urlRequest.HTTPMethod = @"POST";
-    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:users options:NSJSONWritingPrettyPrinted error:NULL];
+    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:arrayOfUserIds options:NSJSONWritingPrettyPrinted error:NULL];
     
     return request;
 }

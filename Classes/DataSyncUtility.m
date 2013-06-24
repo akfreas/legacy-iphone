@@ -4,11 +4,23 @@
 #import "ObjectArchiveAccessor.h"
 #import "Figure.h"
 #import "Event.h"
+#import "Person.h"
 
 @implementation DataSyncUtility {
     
     NSOperationQueue *queue;
     ObjectArchiveAccessor *accessor;
+}
+
++(DataSyncUtility *)sharedInstance {
+    static dispatch_once_t onceToken;
+    static DataSyncUtility *instance;
+    if (instance == nil) {
+        dispatch_once(&onceToken, ^{
+            instance = [[DataSyncUtility alloc] init];
+        });
+    }
+    return instance;
 }
 
 -(id)init {
@@ -38,6 +50,19 @@
         
     }];
     
+}
+
+-(void)syncFacebookFriends:(void(^)())completion {
+    
+    NSArray *persons = [accessor addedPeople];
+    Person *primaryPerson = [accessor primaryPerson];
+    AtYourAgeRequest *request = [AtYourAgeRequest requestToSaveFacebookUsers:persons forPerson:primaryPerson];
+    
+    AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
+        NSLog(@"Person sync result: %@", result);
+        completion();
+    }];
 }
 
 -(void)parseArrayOfEvents:(NSArray *)events {

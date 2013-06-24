@@ -33,7 +33,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
-        dataSync = [[DataSyncUtility alloc] init];
+        dataSync = [DataSyncUtility sharedInstance];
     }
     return self;
 }
@@ -137,7 +137,9 @@
         friendPicker = [[FBFriendPickerViewController alloc] init];
         friendPicker.delegate = friendPickerDelegate;
         friendPickerDelegate.friendPickerCompletionBlock = ^{
-            [infoScreen reload];
+            [[DataSyncUtility sharedInstance] syncFacebookFriends:^{
+                [self reloadScreen];
+            }];
         };
         friendPicker.session = [FBSession activeSession];
         Person *currentPerson = [accessor primaryPerson];
@@ -146,6 +148,11 @@
         [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
 }
 
+-(void)reloadScreen {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [infoScreen reload];
+    });
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];

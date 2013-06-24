@@ -7,6 +7,7 @@
 +(AtYourAgeRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester;
 +(AtYourAgeRequest *)requestToGetRandomStories;
 +(AtYourAgeRequest *)requestToGetStoriesForPerson:(Person *)person;
++(AtYourAgeRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person;
 
 @property (strong, nonatomic) NSMutableURLRequest *urlRequest;
 @property (strong, nonatomic) Class classToParse;

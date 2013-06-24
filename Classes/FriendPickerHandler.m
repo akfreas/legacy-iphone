@@ -1,5 +1,6 @@
 #import "FriendPickerHandler.h"
 #import "ObjectArchiveAccessor.h"
+#import "DataSyncUtility.h"
 
 @implementation FriendPickerHandler {
     

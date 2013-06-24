@@ -207,7 +207,8 @@ static NSString *PersonEntityName = @"Person";
             personFromFb.lastName = fbUser.last_name;
             personFromFb.isFacebookUser = [NSNumber numberWithBool:YES];
             [self setPrimaryPerson:personFromFb];            
-            
+
+            NSLog(@"Active session: %@", [FBSession activeSession]);
             FBRequest *request = [FBRequest requestForGraphPath:@"me?fields=id,first_name,last_name,birthday,picture"];
             [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
                 NSLog(@"Result: %@ error: %@", result , error);
@@ -378,6 +379,9 @@ static NSString *PersonEntityName = @"Person";
 -(NSArray *)getStoredEventRelations {
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
+    NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
+    NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
+    request.sortDescriptors = @[meSorter, friendSorter];
     NSError *error;
     NSArray *events = [self.managedObjectContext executeFetchRequest:request error:&error];
     

@@ -1,5 +1,6 @@
 #import "Person.h"
 #import "Event.h"
+#import "EventPersonRelation.h"
 #import "Figure.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
@@ -205,9 +206,7 @@ static NSString *PersonEntityName = @"Person";
             personFromFb.firstName = fbUser.first_name;
             personFromFb.lastName = fbUser.last_name;
             personFromFb.isFacebookUser = [NSNumber numberWithBool:YES];
-            [self save];
-            [self setPrimaryPerson:personFromFb];
-            
+            [self setPrimaryPerson:personFromFb];            
             
             FBRequest *request = [FBRequest requestForGraphPath:@"me?fields=id,first_name,last_name,birthday,picture"];
             [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
@@ -266,6 +265,15 @@ static NSString *PersonEntityName = @"Person";
     for (Figure *figure in arrayOfFigures) {
         [self.managedObjectContext deleteObject:figure];
     }
+    
+    NSFetchRequest *relationDeleteFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"EventPersonRelation"];
+    
+    NSArray *arrayOfRelations = [self.managedObjectContext executeFetchRequest:relationDeleteFetchRequest error:&error];
+    
+    for (EventPersonRelation *relation in arrayOfRelations) {
+        [self.managedObjectContext deleteObject:relation];
+    }
+    
     [self save];
 }
 
@@ -300,6 +308,43 @@ static NSString *PersonEntityName = @"Person";
     }
     
     newEvent.figure = eventFigure;
+    
+    NSDictionary *personDict = json[@"person"];
+    __block Person *assocPerson = [self personWithFacebookId:personDict[@"facebook_id"]];
+    
+    if (assocPerson == nil && personDict != nil) {
+        NSEntityDescription *personEntityDesc = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+        assocPerson = [[Person alloc] initWithEntity:personEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
+        assocPerson.facebookId = personDict[@"facebook_id"];
+        assocPerson.firstName = personDict[@"first_name"];
+        assocPerson.lastName = personDict[@"last_name"];
+        assocPerson.birthday = [[Utility_AppSettings dateFormatterForRequest] dateFromString:personDict[@"birthday"]];
+        assocPerson.isFacebookUser = [NSNumber numberWithBool:YES];
+        [self save];
+        
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:personDict[@"profile_pic"]]];
+        
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *imageData, NSError *error) {
+            
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if (httpResponse.statusCode == 200) {
+                assocPerson.thumbnail = imageData;
+                [self save];
+            }
+        }];
+    }
+    
+    
+    NSEntityDescription *relationEntityDesc = [NSEntityDescription entityForName:@"EventPersonRelation"  inManagedObjectContext:self.managedObjectContext];
+    EventPersonRelation *relation = [[EventPersonRelation alloc] initWithEntity:relationEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
+    
+    relation.event = newEvent;
+    relation.person = assocPerson;
+    
+    
+    
 }
 
 -(Figure *)fetchFigureWithId:(NSNumber *)figureId {
@@ -324,6 +369,15 @@ static NSString *PersonEntityName = @"Person";
 -(NSArray *)getStoredEvents {
  
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+    NSError *error;
+    NSArray *events = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    return events;
+}
+
+-(NSArray *)getStoredEventRelations {
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
     NSError *error;
     NSArray *events = [self.managedObjectContext executeFetchRequest:request error:&error];
     

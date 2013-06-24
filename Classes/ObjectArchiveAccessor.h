@@ -9,6 +9,7 @@
 -(NSArray *)allPersons;
 -(NSArray *)addedPeople;
 -(NSArray *)getStoredEvents;
+-(NSArray *)getStoredEventRelations;
 
 -(void)setPrimaryPerson:(Person *)user;
 -(void)addEventAndFigureWithJson:(NSDictionary *)json;

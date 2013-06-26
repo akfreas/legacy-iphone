@@ -388,7 +388,8 @@ static NSString *PersonEntityName = @"Person";
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
     NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
     NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
-    request.sortDescriptors = @[meSorter, friendSorter];
+    NSSortDescriptor *bdaySorter = [NSSortDescriptor sortDescriptorWithKey:@"person.birthday" ascending:NO];
+    request.sortDescriptors = @[meSorter, friendSorter, bdaySorter];
     NSError *error;
     NSArray *events = [self.managedObjectContext executeFetchRequest:request error:&error];
     

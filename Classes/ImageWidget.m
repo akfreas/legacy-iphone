@@ -138,8 +138,9 @@
     }
     
     largeCircleImage.image = _largeImage;
-    
-    [self drawSmallImage];
+    if (_smallImage != nil) {
+        [self drawSmallImage];
+    }
 }
 
 -(void)drawSmallImage {

@@ -6,6 +6,7 @@
     
     IBOutlet UIWebView *webView;
     BOOL hasLoadedEventInfo;
+    NSOperationQueue *queue;
 }
 
 
@@ -15,7 +16,7 @@
     if (self) {
         
         [[NSBundle mainBundle] loadNibNamed:@"AtYourAgeWebView" owner:self options:nil];
-
+        queue = [[NSOperationQueue alloc] init];
         [self addSubview:webView];
     }
     return self;
@@ -29,8 +30,12 @@
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-
-        [webView loadRequest:request];
+        [request addValue:@"Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341" forHTTPHeaderField:@"User-Agent"];
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *htmlData, NSError *error) {
+            
+            NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+            [webView loadHTMLString:htmlString baseURL:url];
+        }];
     }
 }
 

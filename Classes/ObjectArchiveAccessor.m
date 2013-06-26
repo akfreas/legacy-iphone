@@ -89,7 +89,9 @@ static NSString *PersonEntityName = @"Person";
 
 -(void)save {
     NSError *error;
-    [self.managedObjectContext save:&error];
+    if([self.managedObjectContext hasChanges]) {
+        [self.managedObjectContext save:&error];
+    }
 }
 
 #pragma mark Getter Methods
@@ -231,8 +233,8 @@ static NSString *PersonEntityName = @"Person";
                 [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         personFromFb.thumbnail = data;
-                        completionBlock(personFromFb);
                         [self save];
+                        completionBlock(personFromFb);
                     });
                 }];
             }];
@@ -416,8 +418,8 @@ static NSString *PersonEntityName = @"Person";
        [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     newPerson.thumbnail = data;
-                    completionBlock(newPerson);
                     [self save];
+                    completionBlock(newPerson);
                 });
             }];
         }
@@ -448,13 +450,14 @@ static NSString *PersonEntityName = @"Person";
     [self save];
 }
 
--(NSFetchedResultsController *)fetchedResultsControllerForPeople {
+-(NSFetchedResultsController *)fetchedResultsControllerForRelations {
     
-    
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
-    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"birthday" ascending:YES];
-    fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDesc];
-    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
+    NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
+    NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
+    fetchRequest.sortDescriptors = @[meSorter, friendSorter];
+
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:@"EventPersonRelationCache"];
     return resultsController;
 }
 

@@ -10,6 +10,7 @@
     
     NSOperationQueue *queue;
     ObjectArchiveAccessor *accessor;
+    void (^completion)();
 }
 
 +(DataSyncUtility *)sharedInstance {
@@ -33,11 +34,12 @@
     return self;
 }
 
--(void)sync:(void (^)())completion {
+-(void)sync:(void (^)())completionBlock {
     
     
     [accessor clearEventsAndFiguresAndSave];
     AtYourAgeRequest *request;
+    completion = completionBlock;
     Person *primaryPerson = [accessor primaryPerson];
 
     request = [AtYourAgeRequest requestToGetStoriesForPerson:primaryPerson];
@@ -45,14 +47,12 @@
     AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSArray *result, NSError *error) {
-        [self parseArrayOfEvents:result];
-        completion();
-        
+        [self parseArrayOfEvents:result];        
     }];
     
 }
 
--(void)syncFacebookFriends:(void(^)())completion {
+-(void)syncFacebookFriends:(void(^)())completionBlock {
     
     NSArray *persons = [accessor addedPeople];
     Person *primaryPerson = [accessor primaryPerson];
@@ -61,7 +61,7 @@
     AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
         NSLog(@"Person sync result: %@", result);
-        completion();
+        completionBlock();
     }];
 }
 
@@ -70,7 +70,11 @@
     for (NSDictionary *eventDict in events) {
         [accessor addEventAndFigureWithJson:eventDict];
     }
+
     [accessor save];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        completion();
+    });
 }
 
 @end

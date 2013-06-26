@@ -23,6 +23,7 @@
 -(void)clearEventsAndFiguresAndSave;
 -(void)save;
 
--(NSFetchedResultsController *)fetchedResultsControllerForPeople;
+
+-(NSFetchedResultsController *)fetchedResultsControllerForRelations;
 
 @end

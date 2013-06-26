@@ -4,6 +4,5 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
 #import <FacebookSDK/FacebookSDK.h>
-
 #import "Utility_AppSettings.h"
 #import "CGRectUtils.h"

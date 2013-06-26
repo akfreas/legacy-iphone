@@ -197,7 +197,6 @@
 
     AtYourAgeRequest *request = [AtYourAgeRequest baseRequest];
     NSMutableURLRequest *urlRequest = request.urlRequest;
-    NSURL *url = [AtYourAgeRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     
     Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
     
@@ -217,7 +216,6 @@
     NSDictionary *headers = [NSHTTPCookie requestHeaderFieldsWithCookies:[NSArray arrayWithObject:cookie]];
 //    NSLog(@"URL: %@", url);
     [urlRequest setAllHTTPHeaderFields:headers];
-    [urlRequest setURL:url];
     
     return request;
 }

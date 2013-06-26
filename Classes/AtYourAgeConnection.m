@@ -1,6 +1,6 @@
-#import "AtYourAgeConnection.h"
 #import "Event.h"
 
+#import "AtYourAgeConnection.h"
 @implementation AtYourAgeConnection {
     
     AtYourAgeRequest *request;
@@ -59,7 +59,7 @@
     if (error) {
         NSLog(@"Error: %@, str: %@", error, str);
     }
-    
+    NSLog(@"parse result: %@", parseResult);
     result = parseResult;    
     self.AYAConnectionCallback(request, result, nil);
 }

@@ -4,13 +4,15 @@
 #import "DescriptionPage.h"
 #import "AtYourAgeRequest.h"
 #import "AtYourAgeConnection.h"
-#import "ObjectArchiveAccessor.h"
 #import "Figure.h"
 #import "Event.h"
 #import "FigureRowPageProtocol.h"
 #import "AtYourAgeWebView.h"
 #import "FigureRowActionOverlay.h"
 
+@interface FigureRow () <UIScrollViewDelegate>
+
+@end
 
 @implementation FigureRow {
     
@@ -25,7 +27,9 @@
     UIPageControl *pageControl;
     NSMutableArray *pageArray;
     UIView *nameContainerView;
+    
     CGPoint lastPoint;
+    BOOL isSwiping;
 }
 
 
@@ -38,6 +42,10 @@ CGFloat pageWidth = 320;
     if (self) {
 
 //        [self addMoreLessButton];
+        self.contentSize = CGSizeAddWidthToSize(self.bounds.size, .5);
+        self.bounces = YES;
+        self.showsHorizontalScrollIndicator = NO;
+        self.delegate = self;
         [self setupPages];
         [self registerForNotifications];
         [self addTapGestureRecognizer];
@@ -46,11 +54,22 @@ CGFloat pageWidth = 320;
 }
 
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (scrollView.tracking == NO && scrollView.contentOffset.x > 10 && isSwiping == NO) {
+        isSwiping = YES;
+
+        [self swipeOnRow];
+    } else if (isSwiping == YES) {
+        scrollView.scrollEnabled = NO;
+        scrollView.bounces = NO;
+    }
+}
 -(void)addTapGestureRecognizer {
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeOnRow)];
-    swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self addGestureRecognizer:swipeGesture];
+//    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeOnRow)];
+//    swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+//    [self addGestureRecognizer:swipeGesture];
     [self addGestureRecognizer:gesture];
 }
 
@@ -78,6 +97,17 @@ CGFloat pageWidth = 320;
     NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
 
+}
+
+-(void)reset {
+    [self performSelector:@selector(resetContentOffset) withObject:self afterDelay:1];
+}
+
+-(void)resetContentOffset {
+    self.contentOffset = CGPointZero;
+    self.scrollEnabled = YES;
+    self.bounces = YES;
+    isSwiping = NO;
 }
 
 -(void)removeActionOverlay:(NSNotification *)notif {

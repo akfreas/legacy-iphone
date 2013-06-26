@@ -27,6 +27,7 @@
         operationQueue = [[NSOperationQueue alloc] init];
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
         indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
         _widget = [[ImageWidget alloc] init];
 //        self.backgroundColor = [UIColor greenColor];
         [self addSubview:_widget];
@@ -34,6 +35,11 @@
     
     return self;
 }
+
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    NSLog(@"thumbnail data: %@ \n %@", change[@"new"], _person.thumbnail);
+//    _widget.smallImage = [UIImage imageWithData:_person.thumbnail];
+//}
 
 -(void)layoutSubviews {
     

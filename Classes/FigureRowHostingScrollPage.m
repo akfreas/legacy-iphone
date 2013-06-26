@@ -14,7 +14,7 @@
 
 #import "FigureRowHostingScrollPage.h"
 
-@interface FigureRowHostingScrollPage () <UIScrollViewDelegate>
+@interface FigureRowHostingScrollPage () <UIScrollViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end
 
@@ -27,6 +27,7 @@
     NSMutableArray *pageArray;
     CGPoint priorPoint;
     AtYourAgeConnection *connection;
+    BottomFacebookSignInRowView *signInActionRow;
     TopActionView *actionViewTop;
 }
 
@@ -41,11 +42,25 @@
         pageArray = [NSMutableArray array];
         scroller = [[UIScrollView alloc] initWithFrame:self.bounds];
         scroller.delegate = self;
+        [self configureFetchController];
         [self addSubview:scroller];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideView:) name:KeyForFigureRowContentChanged object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:KeyForRowDataUpdated object:nil];
+        
+
     }
     return self;
+}
+
+-(void)configureFetchController {
+    
+    fetchedResultsController = [accessor fetchedResultsControllerForRelations];
+    
+    fetchedResultsController.delegate = self;
+    NSError *error;
+    [fetchedResultsController performFetch:&error];
+
 }
 
 -(void)hideView:(NSNotification *)notif {
@@ -67,12 +82,18 @@
 
 -(void)addFacebookButton {
     
-    BottomFacebookSignInRowView *signInActionRow = [[BottomFacebookSignInRowView alloc] init];
+    if (signInActionRow == nil) {
+        signInActionRow = [[BottomFacebookSignInRowView alloc] init];
+        [scroller addSubview:signInActionRow];
+    }
+    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, signInActionRow.frame.size.height);
     CGPoint pointForActionRow = [self frameAtIndex:[arrayOfFigureRows count]].origin;
     signInActionRow.frame = CGRectSetOriginOnRect(signInActionRow.frame, pointForActionRow.x, pointForActionRow.y);
-    
-    [scroller addSubview:signInActionRow];
-    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, signInActionRow.frame.size.height);
+}
+
+-(void)removeFacebookButton {
+    [signInActionRow removeFromSuperview];
+    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, -signInActionRow.frame.size.height);
 }
 
 -(CGRect)frameAtIndex:(NSInteger)index {
@@ -96,34 +117,63 @@
 
 -(void)reload {
     
-    NSArray *eventArray = [accessor getStoredEventRelations];
+    NSError *error;
+    NSLog(@"IS? %d",[fetchedResultsController performFetch:&error]);
+//    NSArray *eventArray = [fetchedResultsController fetchedObjects];
     scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
-    for (int i=0; i < [eventArray count]; i++) {
-        FigureRow *row;
-        EventPersonRelation *relation = [eventArray objectAtIndex:i];
-        if (i < [arrayOfFigureRows count] && [arrayOfFigureRows count] > 0) {
-            row = [arrayOfFigureRows objectAtIndex:i];
-        } else {
-            row  = [[FigureRow alloc] initWithOrigin:[self frameAtIndex:i].origin];
-            row.event = relation.event;
-            row.person = relation.person;
-            [arrayOfFigureRows addObject:row];
-            [scroller addSubview:row];
-        }
+    for (int i=0; i < [[fetchedResultsController fetchedObjects] count]; i++) {
+        
+        FigureRow *row = [self figureRowForIndex:i];
+        [scroller addSubview:row];
         scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, row.frame.size.height);
     }
-    
-    if ([[FBSession activeSession] state] != FBSessionStateCreatedTokenLoaded) {
+
+    [FBSession openActiveSessionWithAllowLoginUI:NO];
+    if ([[FBSession activeSession] state] != FBSessionStateOpen) {
         [self addFacebookButton];
     }
     
-    if ([eventArray count] < [arrayOfFigureRows count]) {
-        [arrayOfFigureRows removeObjectsInRange:NSMakeRange([eventArray count], [arrayOfFigureRows count] - 1)];
-    }
+//    if ([eventArray count] < [arrayOfFigureRows count]) {
+//        [arrayOfFigureRows removeObjectsInRange:NSMakeRange([eventArray count], [arrayOfFigureRows count] - 1)];
+//    }
     
     
     
     [self layoutSubviews];
+}
+
+-(FigureRow *)figureRowForIndex:(NSUInteger)index {
+    
+    FigureRow *row;
+    EventPersonRelation *relation = [fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    [relation addObserver:self forKeyPath:@"person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
+    if (index < [arrayOfFigureRows count] && [arrayOfFigureRows count] > 0) {
+        row = [arrayOfFigureRows objectAtIndex:index];
+    } else {
+        row  = [[FigureRow alloc] initWithOrigin:[self frameAtIndex:index].origin];
+        
+        [arrayOfFigureRows addObject:row];
+    }
+    row.event = relation.event;
+    row.person = relation.person;
+    return row;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"Keypath: %@ change: %@", keyPath, object);
+    
+    NSUInteger index = [[fetchedResultsController fetchedObjects] indexOfObject:object];
+    if (index != NSNotFound) {
+        NSLog(@"Index: %d %@", index, [fetchedResultsController fetchedObjects]);
+        FigureRow *row = [self figureRowForIndex:index];
+        
+        if ([object isKindOfClass:[EventPersonRelation class]]) {
+            EventPersonRelation *changedObject = (EventPersonRelation *)object;
+            NSLog(@"Person thumb: %@", changedObject.person.thumbnail);
+            row.person = changedObject.person;
+            row.event = changedObject.event;
+        }
+    }
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -148,6 +198,19 @@
         }];
     }
     priorPoint = scrollView.contentOffset;
+}
+
+#pragma mark NSFetchedResultsController Delegate 
+
+-(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    FigureRow *row = [self figureRowForIndex:indexPath.row];
+    
+    if ([anObject isKindOfClass:[EventPersonRelation class]]) {
+        EventPersonRelation *changedObject = (EventPersonRelation *)anObject;
+        row.person = changedObject.person;
+        row.event = changedObject.event;
+    }
 }
 
 @end

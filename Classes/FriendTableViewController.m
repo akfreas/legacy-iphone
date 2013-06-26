@@ -21,7 +21,7 @@
     
     if (self) {
         accessor = [ObjectArchiveAccessor sharedInstance];
-        fetchedResultsController = [accessor fetchedResultsControllerForPeople];
+        fetchedResultsController = [accessor fetchedResultsControllerForRelations];
         fetchedResultsController.delegate = self;
 
         persons = [accessor allPersons];

@@ -13,7 +13,7 @@
     
     if (self) {
         event = theEvent;
-        self.animationDuration = 0.2;
+        self.animationDuration = 0.05;
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         self.alpha = 0;
         [self addTapGestureRecognizer];

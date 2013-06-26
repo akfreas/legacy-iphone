@@ -78,9 +78,14 @@
             infoPage.frame = CGRectSetSizeOnFrame(infoFrame, self.bounds.size);
             [self scrollToPage:1];
             
+            if ([notif.object isKindOfClass:[FigureRow class]]) {
+                FigureRow *theRow = (FigureRow *)notif.object;
+                [theRow reset];
+            }
             AtYourAgeWebView *webView = [[AtYourAgeWebView alloc] initWithFrame:CGRectOffset(infoFrame, 320 + SpaceBetweenFigureRowPages, 0)];
             webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
             webView.event = theEvent;
+            [webView loadRequest];
             [pageArray addObject:webView];
 
             [self addSubview:webView];

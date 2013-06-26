@@ -160,7 +160,11 @@
     } else {
         smImgRect = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
     }
-    smallCircleImage = [[CircleImageLayer alloc] initWithImage:_smallImage radius:_smallImageRadius];
+    if (smallCircleImage == nil) {
+        smallCircleImage = [[CircleImageLayer alloc] initWithImage:_smallImage radius:_smallImageRadius];
+    } else {
+        smallCircleImage.image = _smallImage;
+    }
     smallCircleImage.frame = smImgRect;
 
     [self.layer addSublayer:smallCircleImage];

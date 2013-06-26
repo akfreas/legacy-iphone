@@ -50,12 +50,8 @@
 //        [indicatorView startAnimating];
     } else {
         
-        if (imageForThumb == nil) {
-            personThumbnail.image = [UIImage imageNamed:@"question.png"];
-        } else {
             personThumbnail.image = imageForThumb;
             _widget.largeImage = personThumbnail.image;
-        }
     }
 }
 

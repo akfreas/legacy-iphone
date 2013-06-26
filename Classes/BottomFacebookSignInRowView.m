@@ -86,7 +86,6 @@
         [[ObjectArchiveAccessor sharedInstance] createAndSetPrimaryUser:result completionBlock:^(Person *thePerson) {
             [self hide];
             [[DataSyncUtility sharedInstance] sync:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
             }];
         }];
     }];

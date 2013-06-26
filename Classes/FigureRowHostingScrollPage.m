@@ -21,10 +21,10 @@
 @implementation FigureRowHostingScrollPage {
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfFigureRows;
-    NSFetchedResultsController *fetchedResultsController;
     UIScrollView *scroller;
     UIPageControl *pageControl;
     NSMutableArray *pageArray;
+    NSArray *eventArray;
     CGPoint priorPoint;
     AtYourAgeConnection *connection;
     BottomFacebookSignInRowView *signInActionRow;
@@ -42,7 +42,6 @@
         pageArray = [NSMutableArray array];
         scroller = [[UIScrollView alloc] initWithFrame:self.bounds];
         scroller.delegate = self;
-        [self configureFetchController];
         [self addSubview:scroller];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideView:) name:KeyForFigureRowContentChanged object:nil];
@@ -51,16 +50,6 @@
 
     }
     return self;
-}
-
--(void)configureFetchController {
-    
-    fetchedResultsController = [accessor fetchedResultsControllerForRelations];
-    
-    fetchedResultsController.delegate = self;
-    NSError *error;
-    [fetchedResultsController performFetch:&error];
-
 }
 
 -(void)hideView:(NSNotification *)notif {
@@ -117,11 +106,10 @@
 
 -(void)reload {
     
-    NSError *error;
-    NSLog(@"IS? %d",[fetchedResultsController performFetch:&error]);
-//    NSArray *eventArray = [fetchedResultsController fetchedObjects];
+    accessor = [[ObjectArchiveAccessor alloc] init];
+    eventArray = [accessor getStoredEventRelations];
     scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
-    for (int i=0; i < [[fetchedResultsController fetchedObjects] count]; i++) {
+    for (int i=0; i < [eventArray count]; i++) {
         
         FigureRow *row = [self figureRowForIndex:i];
         [scroller addSubview:row];
@@ -145,8 +133,8 @@
 -(FigureRow *)figureRowForIndex:(NSUInteger)index {
     
     FigureRow *row;
-    EventPersonRelation *relation = [fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
-    [relation addObserver:self forKeyPath:@"person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
+    EventPersonRelation *relation = [eventArray objectAtIndex:index];
+//    [relation addObserver:self forKeyPath:@"person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
     if (index < [arrayOfFigureRows count] && [arrayOfFigureRows count] > 0) {
         row = [arrayOfFigureRows objectAtIndex:index];
     } else {
@@ -156,15 +144,16 @@
     }
     row.event = relation.event;
     row.person = relation.person;
+    NSLog(@"%@ thumbnail: %@", relation.person.firstName, relation.person.thumbnail);
     return row;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"Keypath: %@ change: %@", keyPath, object);
+//    NSLog(@"Keypath: %@ change: %@", keyPath, object);
     
-    NSUInteger index = [[fetchedResultsController fetchedObjects] indexOfObject:object];
+    NSUInteger index = [eventArray indexOfObject:object];
     if (index != NSNotFound) {
-        NSLog(@"Index: %d %@", index, [fetchedResultsController fetchedObjects]);
+
         FigureRow *row = [self figureRowForIndex:index];
         
         if ([object isKindOfClass:[EventPersonRelation class]]) {
@@ -198,19 +187,6 @@
         }];
     }
     priorPoint = scrollView.contentOffset;
-}
-
-#pragma mark NSFetchedResultsController Delegate 
-
--(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    
-    FigureRow *row = [self figureRowForIndex:indexPath.row];
-    
-    if ([anObject isKindOfClass:[EventPersonRelation class]]) {
-        EventPersonRelation *changedObject = (EventPersonRelation *)anObject;
-        row.person = changedObject.person;
-        row.event = changedObject.event;
-    }
 }
 
 @end

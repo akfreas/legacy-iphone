@@ -130,16 +130,15 @@
 
 -(void)drawRect:(CGRect)rect {
     
-
+    
     if (largeCircleImage == nil) {
         largeCircleImage = [[CircleImageLayer alloc] initWithRadius:_largeImageRadius];
-//        largeCircleImage.frame = frame
+        largeCircleImage.zPosition = -1;
         [self.layer addSublayer:largeCircleImage];
     }
     
-    if (_largeImage != nil) {
-        largeCircleImage.image = _largeImage;
-    } 
+    largeCircleImage.image = _largeImage;
+    
     if (_smallImage != nil && smallCircleImage == nil) {
         [self drawSmallImage];
     }

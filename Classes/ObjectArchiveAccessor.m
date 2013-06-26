@@ -333,8 +333,13 @@ static NSString *PersonEntityName = @"Person";
             
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (httpResponse.statusCode == 200) {
-                assocPerson.thumbnail = imageData;
-                [self save];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    assocPerson.thumbnail = imageData;
+                    NSLog(@"Assoc person: %@", assocPerson);
+                    NSLog(@"assoc person thumb: %@", assocPerson.thumbnail);
+                    [self save];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
+                });
             }
         }];
     }
@@ -394,6 +399,14 @@ static NSString *PersonEntityName = @"Person";
     
     NSEntityDescription *desc = [NSEntityDescription entityForName:PersonEntityName inManagedObjectContext:[self managedObjectContext]];
     __block Person *newPerson = [[Person alloc] initWithEntity:desc insertIntoManagedObjectContext:self.managedObjectContext];
+    
+    newPerson.facebookId = fbUser.id;
+    newPerson.isFacebookUser = [NSNumber numberWithBool:YES];
+    newPerson.isPrimary = [NSNumber numberWithBool:NO];
+    newPerson.firstName = fbUser.first_name;
+    newPerson.lastName = fbUser.last_name;
+    [self save];
+    
     FBRequest *request = [FBRequest requestForGraphPath:[NSString stringWithFormat:@"me/friends/%@?fields=birthday,picture", fbUser.id]];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
         NSLog(@"Result: %@ error: %@", result[@"data"] , error);
@@ -424,12 +437,6 @@ static NSString *PersonEntityName = @"Person";
             }];
         }
     }];
-    newPerson.facebookId = fbUser.id;
-    newPerson.isFacebookUser = [NSNumber numberWithBool:YES];
-    newPerson.isPrimary = [NSNumber numberWithBool:NO];
-    newPerson.firstName = fbUser.first_name;
-    newPerson.lastName = fbUser.last_name;
-    [self save];
     return newPerson;
 }
 

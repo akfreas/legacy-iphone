@@ -37,7 +37,6 @@
 -(void)sync:(void (^)())completionBlock {
     
     
-    [accessor clearEventsAndFiguresAndSave];
     AtYourAgeRequest *request;
     completion = completionBlock;
     Person *primaryPerson = [accessor primaryPerson];
@@ -47,7 +46,8 @@
     AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSArray *result, NSError *error) {
-        [self parseArrayOfEvents:result];        
+        [accessor clearEventsAndFiguresAndSave];
+        [self parseArrayOfEvents:result];
     }];
     
 }
@@ -61,7 +61,9 @@
     AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
         NSLog(@"Person sync result: %@", result);
-        completionBlock();
+        if (completionBlock != NULL) {
+            completionBlock();
+        }
     }];
 }
 
@@ -73,6 +75,7 @@
 
     [accessor save];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
         completion();
     });
 }

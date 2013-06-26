@@ -137,9 +137,6 @@
         friendPicker = [[FBFriendPickerViewController alloc] init];
         friendPicker.delegate = friendPickerDelegate;
         friendPickerDelegate.friendPickerCompletionBlock = ^{
-            [[DataSyncUtility sharedInstance] syncFacebookFriends:^{
-                [self reloadScreen];
-            }];
         };
         friendPicker.session = [FBSession activeSession];
         Person *currentPerson = [accessor primaryPerson];

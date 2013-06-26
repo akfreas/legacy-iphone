@@ -59,8 +59,8 @@
     if (error) {
         NSLog(@"Error: %@, str: %@", error, str);
     }
-    NSLog(@"parse result: %@", parseResult);
-    result = parseResult;    
+//    NSLog(@"parse result: %@", parseResult);
+    result = parseResult;
     self.AYAConnectionCallback(request, result, nil);
 }
 

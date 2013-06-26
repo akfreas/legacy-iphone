@@ -315,7 +315,7 @@ static NSString *PersonEntityName = @"Person";
     NSDictionary *personDict = json[@"person"];
     __block Person *assocPerson = [self personWithFacebookId:personDict[@"facebook_id"]];
     
-    if (assocPerson == nil && personDict != nil) {
+//    if (assocPerson == nil && personDict != nil) {
         NSEntityDescription *personEntityDesc = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
         assocPerson = [[Person alloc] initWithEntity:personEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
         assocPerson.facebookId = personDict[@"facebook_id"];
@@ -324,8 +324,6 @@ static NSString *PersonEntityName = @"Person";
         assocPerson.birthday = [[Utility_AppSettings dateFormatterForRequest] dateFromString:personDict[@"birthday"]];
         assocPerson.isFacebookUser = [NSNumber numberWithBool:YES];
         [self save];
-        
-        
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:personDict[@"profile_pic"]]];
         
         
@@ -342,7 +340,7 @@ static NSString *PersonEntityName = @"Person";
                 });
             }
         }];
-    }
+//    }
     
     
     NSEntityDescription *relationEntityDesc = [NSEntityDescription entityForName:@"EventPersonRelation"  inManagedObjectContext:self.managedObjectContext];
@@ -443,10 +441,17 @@ static NSString *PersonEntityName = @"Person";
 
 -(void)addFacebookUsers:(NSArray *)users completionBlock:(void(^)())completionBlock {
     
+    __block NSInteger userCount = [users count];
     for (id user in users) {
         if ([user conformsToProtocol:@protocol(FBGraphUser)]) {
             id<FBGraphUser> fbUser = user;
-            [self getOrCreatePersonWithFacebookGraphUser:fbUser completionBlock:completionBlock];
+            [self getOrCreatePersonWithFacebookGraphUser:fbUser completionBlock:^(Person *person){
+                userCount--;
+                
+                if (userCount == 0) {
+                    completionBlock();
+                }
+            }];
         }
     }
 }

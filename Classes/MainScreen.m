@@ -137,6 +137,9 @@
         friendPicker = [[FBFriendPickerViewController alloc] init];
         friendPicker.delegate = friendPickerDelegate;
         friendPickerDelegate.friendPickerCompletionBlock = ^{
+            [dataSync sync:^{
+                
+            }];
         };
         friendPicker.session = [FBSession activeSession];
         Person *currentPerson = [accessor primaryPerson];

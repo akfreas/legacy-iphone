@@ -42,7 +42,7 @@
         [self drawLines];
     }
     
-    if (self.person != nil) {
+    if (self.person.thumbnail != nil) {
         [self drawPersonInfo];
     }
 }

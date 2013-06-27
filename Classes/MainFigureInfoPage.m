@@ -7,7 +7,6 @@
 #import "AtYourAgeConnection.h"
 #import "AtYourAgeRequest.h"
 #import "RelatedEventLabel.h"
-#import "ProgressIndicator.h"
 #import "ImageWidget.h"
 #import "RightIndicatorLines.h"
 #import "Utility_AppSettings.h"
@@ -40,7 +39,6 @@ DualFrame * initFrame() {
     IBOutlet UILabel *ageLabel;
 
     AtYourAgeConnection *connection;
-    ProgressIndicator *ind;
     RightIndicatorLines *indLines;
 
     DualFrame descriptionFrame;
@@ -71,14 +69,9 @@ DualFrame * initFrame() {
 
         arrayOfRelatedEventLabels = [NSMutableArray array];
         [self addSubview:self.view];
-        CGPoint widgetPoint = [self.view convertPoint:self.widgetContainer.widget.largeImageFrame.origin fromView:self.widgetContainer.widget];
-        widgetPoint = CGPointMake(widgetPoint.x + self.widgetContainer.widget.largeImageRadius, widgetPoint.y + self.widgetContainer.widget.largeImageRadius);
-        ind = [[ProgressIndicator alloc] initWithCenterPoint:widgetPoint radius:self.widgetContainer.widget.largeImageRadius];
+//        ind.frame = CGRectMakeFrameForDeadCenterInRect(self.widgetContainer.bounds, CGSizeMake(self.widgetContainer.widget.largeImageRadius, self.widgetContainer.widget.largeImageRadius));
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventLoadingComplete:) name:KeyForEventLoadingComplete object:self.widgetContainer];
-        [self.layer addSublayer:ind];
         self.scrollEnabled = NO;
-        
     }
     return self;
 }
@@ -128,7 +121,6 @@ DualFrame * initFrame() {
 }
 
 -(void)setEvent:(Event *)event {
-    [ind animate];
     _event = event;
     figureNameLabel.text = event.figure.name;
     self.widgetContainer.event = event;
@@ -139,8 +131,8 @@ DualFrame * initFrame() {
 }
 
 -(void)eventLoadingComplete:(NSNotification *)notif {
-    [ind stopAnimating];
-    [ind removeFromSuperlayer];
+//    [ind stopAnimating];
+//    [ind removeFromSuperlayer];
 }
 
 -(void)setPerson:(Person *)person {

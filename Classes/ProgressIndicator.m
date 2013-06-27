@@ -17,6 +17,7 @@ static CGFloat numRotations = 5;
         self.strokeColor = [UIColor clearColor];
         self.fillColor = [UIColor whiteColor];
         self.strokeWidth = 1.25;
+        self.contentsScale = [UIScreen mainScreen].scale;
     }
     return self;
 }
@@ -39,6 +40,7 @@ static CGFloat numRotations = 5;
         self.strokeColor = [UIColor blackColor];
 		self.strokeWidth = 1.0;
 		
+//        [self performSelector:@selector(animate) withObject:self afterDelay:0.0];
 		[self setNeedsDisplay];
     }
     return self;

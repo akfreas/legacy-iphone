@@ -1,5 +1,6 @@
 #import "ImageWidgetContainer.h"
 #import "Utility_AppSettings.h"
+#import "ProgressIndicator.h"
 #import "Event.h"
 #import "Figure.h"
 #import "ImageWidget.h"
@@ -14,7 +15,7 @@
     IBOutlet UIView *eventView;
     
     UIImage *imageForThumb;
-    UIActivityIndicatorView *indicatorView;
+    ProgressIndicator *progressIndicator;
     NSOperationQueue *operationQueue;
     
 }
@@ -26,11 +27,12 @@
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
-        indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 //        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
         _widget = [[ImageWidget alloc] init];
 //        self.backgroundColor = [UIColor greenColor];
         [self addSubview:_widget];
+        progressIndicator = [[ProgressIndicator alloc] initWithCenterPoint:_widget.center radius:_widget.largeImageRadius - ImageLayerDefaultStrokeWidth];
+        [_widget.layer addSublayer:progressIndicator];
     }
     
     return self;
@@ -61,23 +63,25 @@
     NSURL *imageURL = [NSURL URLWithString:self.event.figure.imageURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:imageURL];
     NSLog(@"Profile pic url: %@", imageURL);
-    
+//    [progressIndicator performSelector:@selector(animate) withObject:nil afterDelay:0];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [progressIndicator animate];
+    });
     [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
         NSLog(@"Response: %@", (NSHTTPURLResponse *)resp);
         imageForThumb = [UIImage imageWithData:data];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self layoutSubviews];
-            [[NSNotificationCenter defaultCenter] postNotificationName:KeyForEventLoadingComplete object:self];
+            [progressIndicator stopAnimating];
         });
     }];
 }
 
 -(void)setEvent:(Event *)event {
     _event = event;
+    
     if (_event == nil) {
-        [indicatorView startAnimating];
     } else {
-        [indicatorView stopAnimating];
         [self getThumbnailImage];
         [self setNeedsLayout];
     }

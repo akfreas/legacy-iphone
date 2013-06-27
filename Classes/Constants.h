@@ -5,7 +5,6 @@
 #define KeyForOverlayViewShown @"OverlayViewShown"
 
 #define KeyForFigureRowHeightChanged @"FigureRowHeightChanged"
-#define KeyForEventLoadingComplete @"EventLoadingComplete"
 #define KeyForFigureRowContentChanged @"FigureRowContentChanged"
 #define KeyForRowDataUpdated @"RowsUpdated"
 #define KeyForFacebookButtonTapped @"FacebookButtonTapped"

@@ -18,6 +18,7 @@
         [[NSBundle mainBundle] loadNibNamed:@"AtYourAgeWebView" owner:self options:nil];
         queue = [[NSOperationQueue alloc] init];
         [self addSubview:webView];
+        [[[webView subviews] lastObject] setScrollEnabled:NO];
     }
     return self;
 }
@@ -39,8 +40,13 @@
     }
 }
 
+-(UIScrollView *)scrollView {
+    return webView.scrollView;
+}
+
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
+    
     webView.frame = CGRectMakeFrameWithSizeFromFrame(frame);
 }
 
@@ -59,6 +65,9 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     hasLoadedEventInfo = YES;
+    if (_loadingCompleteBlock != NULL) {
+        _loadingCompleteBlock();
+    }
 }
 
 @end

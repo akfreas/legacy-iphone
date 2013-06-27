@@ -17,6 +17,8 @@
         
         [[NSBundle mainBundle] loadNibNamed:@"AtYourAgeWebView" owner:self options:nil];
         queue = [[NSOperationQueue alloc] init];
+        webView.scrollView.delegate = self;
+        [webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
         [self addSubview:webView];
         [[[webView subviews] lastObject] setScrollEnabled:NO];
     }
@@ -63,8 +65,16 @@
     return YES;
 }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView {
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    UIScrollView *scrollView = (UIScrollView *)object;
+    NSLog(@"new: %@", CGSizeCreateDictionaryRepresentation( scrollView.contentSize));
+    self.frame = CGRectSetSizeOnFrame(self.frame, scrollView.contentSize);
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)theWebView {
     hasLoadedEventInfo = YES;
+    self.frame = CGRectSetSizeOnFrame(self.frame, CGSizeMake(self.bounds.size.width, webView.scrollView.contentSize.height));
     if (_loadingCompleteBlock != NULL) {
         _loadingCompleteBlock();
     }

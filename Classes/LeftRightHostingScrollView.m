@@ -151,6 +151,10 @@
     [self paginateScrollView:scrollView];
 }
 
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self paginateScrollView:scrollView];   
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if (scrollView.contentOffset.x == 0 && [pageArray count] > 0) {
@@ -180,33 +184,51 @@
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
     
+    
+    BOOL hasPaginated = NO;
     if (self.contentOffset.x != lastPoint.x && isPaginating == NO) {
-        if (self.contentOffset.x > lastPoint.x) {
+        if (self.contentOffset.x > lastPoint.x + 20 && self.contentOffset.x + 320 < self.contentSize.width) {
             pageControl.currentPage++;
-        } else {
+            hasPaginated = YES;
+        } else if (self.contentOffset.x < lastPoint.x - 20) {
             pageControl.currentPage--;
+            hasPaginated = YES;
         }
         isPaginating = YES;
         
         if (pageControl.currentPage > 0 && [pageArray count] > 0 && pageControl.currentPage <= [pageArray count]) {
+            
             UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage - 1];
+
+                if ([page isKindOfClass:[AtYourAgeWebView class]]) {
+                    AtYourAgeWebView *webView = (AtYourAgeWebView *)page;
+                    
+                    if (hasPaginated == YES) {
+                        self.contentSize = CGSizeMake(self.contentSize.width, webView.scrollView.contentSize.height);
+                        CGRect webViewFrame = CGRectSetHeightForRect(webView.scrollView.contentSize.height, webView.frame);
+                        webView.frame = webViewFrame;
+                        webView.scrollView.scrollEnabled = NO;
+                        webView.loadingCompleteBlock = ^{
+                            [self setContentOffset:CGPointMake(webViewFrame.origin.x, 0)];
+                        };
+                    }
+                } else {
+                    self.contentSize = CGSizeMake(self.contentSize.width, self.bounds.size.height);
+                }
+            
+            
+            lastPoint = CGPointMake(page.frame.origin.x, 0);
             if ([page isKindOfClass:[AtYourAgeWebView class]]) {
                 AtYourAgeWebView *webView = (AtYourAgeWebView *)page;
-                self.contentSize = CGSizeMake(self.contentSize.width, webView.scrollView.contentSize.height);
-                CGRect webViewFrame = CGRectSetHeightForRect(webView.scrollView.contentSize.height, webView.frame);
-                webView.frame = webViewFrame;
-                webView.scrollView.scrollEnabled = NO;
-                webView.loadingCompleteBlock = ^{
-                    [self setContentOffset:CGPointMake(webViewFrame.origin.x, 0)];
-                };
+                if (webView.scrollView.decelerating== NO && hasPaginated == YES) {
+                    [self scrollToPage:pageControl.currentPage];                    
+                }
             } else {
-                self.contentSize = CGSizeMake(self.contentSize.width, self.bounds.size.height);
+                [self scrollToPage:pageControl.currentPage];
             }
-            lastPoint = CGPointMake(page.frame.origin.x, 0);
-            [self scrollToPage:pageControl.currentPage];
-        } else {
+        } else  {
             [self scrollToPage:0];
-        }
+        } 
         isPaginating = NO;
     }
 }

@@ -2,7 +2,7 @@
 
 @class Event;
 
-@interface AtYourAgeWebView : UIView <UIWebViewDelegate, FigureRowPageProtocol>
+@interface AtYourAgeWebView : UIView <UIWebViewDelegate, UIScrollViewDelegate, FigureRowPageProtocol>
 
 @property (nonatomic) Event *event;
 @property (nonatomic, readonly) UIScrollView *scrollView;

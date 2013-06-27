@@ -794,8 +794,8 @@
 		4EEA6CF715268ED300B96EFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (397NMKG2NM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Freas (397NMKG2NM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (656PBDGZKU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Freas (656PBDGZKU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies\"",
@@ -812,8 +812,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51500465-C10A-4B45-B82F-2865B612D05F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7F80734C-1760-4292-B499-7E72201ACD91";
+				PROVISIONING_PROFILE = "C9D06504-7843-4686-A8A1-96D7BF27C643";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9D06504-7843-4686-A8A1-96D7BF27C643";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

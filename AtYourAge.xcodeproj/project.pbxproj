@@ -26,6 +26,7 @@
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
 		191CF63E1749635D00086D5E /* FigureRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* FigureRow.m */; };
+		191F78D7177BFF5200729F2A /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 191F78D6177BFF5200729F2A /* Reveal.framework */; };
 		19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19277234173B555800A9F51D /* RelatedEventLabel.m */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
 		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
@@ -137,6 +138,7 @@
 		191CF63A17488CE700086D5E /* CircleImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageLayer.m; sourceTree = "<group>"; };
 		191CF63C1749635C00086D5E /* FigureRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRow.h; sourceTree = "<group>"; };
 		191CF63D1749635D00086D5E /* FigureRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRow.m; sourceTree = "<group>"; };
+		191F78D6177BFF5200729F2A /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		19277233173B555800A9F51D /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		19277234173B555800A9F51D /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */,
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
 				19D29F5C16A5481D00D46B0A /* FacebookSDK.framework in Frameworks */,
+				191F78D7177BFF5200729F2A /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +432,7 @@
 		4EEA6CD315268ED200B96EFD = {
 			isa = PBXGroup;
 			children = (
+				191F78D6177BFF5200729F2A /* Reveal.framework */,
 				4EEA6D021526902D00B96EFD /* Classes */,
 				4EEA6D081526902D00B96EFD /* Resources */,
 				4EEA6D091526902D00B96EFD /* Support */,

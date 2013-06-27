@@ -149,9 +149,7 @@
 }
 
 -(void)reloadScreen {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [infoScreen reload];
-    });
+    [infoScreen reload];
 }
 
 -(void)viewDidLoad {

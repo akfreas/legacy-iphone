@@ -37,16 +37,17 @@
     if (self) {
         // Initialization code
         
+        self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         priorPoint = CGPointZero;
         accessor = [ObjectArchiveAccessor sharedInstance];
         pageArray = [NSMutableArray array];
         scroller = [[UIScrollView alloc] initWithFrame:self.bounds];
+        scroller.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         scroller.delegate = self;
         [self addSubview:scroller];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideView:) name:KeyForFigureRowContentChanged object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:KeyForRowDataUpdated object:nil];
-        
 
     }
     return self;

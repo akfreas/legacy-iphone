@@ -18,7 +18,6 @@
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
-    BOOL isPaginating;
     
     UIPageControl *pageControl;
     NSMutableArray *pageArray;
@@ -41,6 +40,7 @@
         pageArray = [NSMutableArray array];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
+        self.contentSize = self.bounds.size;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
         [self addFigurePage];
 
@@ -51,7 +51,6 @@
 -(void)addFigurePage {
     figurePage = [[FigureRowHostingScrollPage alloc] initWithFrame:self.bounds];
     [self addSubview:figurePage];
-    self.contentSize = CGSizeMake(figurePage.bounds.size.width, self.bounds.size.height);
     [figurePage reload];
 }
 
@@ -91,13 +90,7 @@
             [pageArray addObject:webView];
 
             [self addSubview:webView];
-            NSLog(@"Webview: %@", infoPage);
-            NSLog(@"Content size before: %@", CGSizeCreateDictionaryRepresentation(self.contentSize));
-            self.contentSize = CGSizeAddWidthToSize(self.contentSize, infoPage.frame.size.width + webView.frame.size.width  + SpaceBetweenFigureRowPages * [pageArray count]);
-            NSLog(@"Content size: %@", CGSizeCreateDictionaryRepresentation(self.contentSize));
-//            self.contentSize = CGRectSetWidthForRect(self.contentSize.width, self.bounds).size;
-
-
+            self.contentSize = CGSizeAddWidthToSize(self.contentSize, infoPage.frame.size.width + webView.frame.size.width * SpaceBetweenFigureRowPages * [pageArray count]);
         }];
     }];
     
@@ -151,10 +144,6 @@
     [self paginateScrollView:scrollView];
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self paginateScrollView:scrollView];   
-}
-
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if (scrollView.contentOffset.x == 0 && [pageArray count] > 0) {
@@ -170,7 +159,7 @@
         pageArray = newArray;
     }
     
-}   
+}
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (decelerate == YES) {
@@ -184,52 +173,23 @@
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
     
-    
-    BOOL hasPaginated = NO;
-    if (self.contentOffset.x != lastPoint.x && isPaginating == NO) {
-        if (self.contentOffset.x > lastPoint.x + 20 && self.contentOffset.x + 320 < self.contentSize.width) {
+    if (self.contentOffset.x != lastPoint.x) {
+        if (self.contentOffset.x > lastPoint.x) {
             pageControl.currentPage++;
-            hasPaginated = YES;
-        } else if (self.contentOffset.x < lastPoint.x - 20) {
+        } else {
             pageControl.currentPage--;
-            hasPaginated = YES;
         }
-        isPaginating = YES;
         
         if (pageControl.currentPage > 0 && [pageArray count] > 0 && pageControl.currentPage <= [pageArray count]) {
-            
             UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage - 1];
-
-                if ([page isKindOfClass:[AtYourAgeWebView class]]) {
-                    AtYourAgeWebView *webView = (AtYourAgeWebView *)page;
-                    
-                    if (hasPaginated == YES) {
-                        self.contentSize = CGSizeMake(self.contentSize.width, webView.scrollView.contentSize.height);
-                        CGRect webViewFrame = CGRectSetHeightForRect(webView.scrollView.contentSize.height, webView.frame);
-                        webView.frame = webViewFrame;
-                        webView.scrollView.scrollEnabled = NO;
-                        webView.loadingCompleteBlock = ^{
-                            [self setContentOffset:CGPointMake(webViewFrame.origin.x, 0)];
-                        };
-                    }
-                } else {
-                    self.contentSize = CGSizeMake(self.contentSize.width, self.bounds.size.height);
-                }
-            
-            
             lastPoint = CGPointMake(page.frame.origin.x, 0);
             if ([page isKindOfClass:[AtYourAgeWebView class]]) {
-                AtYourAgeWebView *webView = (AtYourAgeWebView *)page;
-                if (webView.scrollView.decelerating== NO && hasPaginated == YES) {
-                    [self scrollToPage:pageControl.currentPage];                    
-                }
-            } else {
-                [self scrollToPage:pageControl.currentPage];
+                [(AtYourAgeWebView *)page loadRequest];
             }
-        } else  {
+            [self scrollToPage:pageControl.currentPage];
+        } else {
             [self scrollToPage:0];
-        } 
-        isPaginating = NO;
+        }
     }
 }
 

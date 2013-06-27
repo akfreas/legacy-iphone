@@ -29,6 +29,7 @@ static CGFloat numRotations = 5;
 
 -(void)stopAnimating {
     self.opacity = 0;
+    [self removeFromSuperlayer];
 }
 
 

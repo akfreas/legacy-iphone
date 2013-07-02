@@ -77,6 +77,17 @@
     return url;
 }
 
++(NSURL *)urlForEventsForFigure:(Figure *)figure {
+    
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    
+    NSString *pathString = [NSString stringWithFormat:@"figure/%@/events", figure.id];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    
+    return url;
+}
+
 +(NSURL *)urlToGetFigureWithId:(NSString *)theId {
     NSURL *url = [AtYourAgeRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"figure/%@", theId];
@@ -103,6 +114,24 @@
     url = [url URLByAppendingPathComponent:pathString];
     
     return url;
+}
+
++(NSURL *)urlToPostDeviceInfo {
+    
+    NSURL *url = [AtYourAgeRequest baseUrl];
+    url = [url URLByAppendingPathComponent:@"device/information"];
+    return url;
+}
+
++(AtYourAgeRequest *)requestToPostDeviceInformation:(NSDictionary *)deviceInfo person:(Person *)person {
+    
+    AtYourAgeRequest *request = [AtYourAgeRequest baseRequestForPerson:person];
+    
+    request.urlRequest.URL = [self urlToPostDeviceInfo];
+    request.urlRequest.HTTPMethod = @"POST";
+    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:deviceInfo options:NSJSONWritingPrettyPrinted error:NULL];
+    
+    return request;
 }
 
 +(AtYourAgeRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester {
@@ -181,6 +210,15 @@
     
     request.urlRequest.URL = url;
 
+    return request;
+}
+
++(AtYourAgeRequest *)requestToGetAllEventsForFigure:(Figure *)figure {
+    
+    AtYourAgeRequest *request = [self baseRequest];
+    
+    request.urlRequest.URL = [self urlForEventsForFigure:figure];
+    
     return request;
 }
 

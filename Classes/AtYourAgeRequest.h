@@ -1,4 +1,5 @@
 @class Person;
+@class Figure;
 @interface AtYourAgeRequest : NSObject
 
 +(AtYourAgeRequest *)requestToGetStoryForPerson:(Person *)person;
@@ -8,7 +9,7 @@
 +(AtYourAgeRequest *)requestToGetRandomStories;
 +(AtYourAgeRequest *)requestToGetStoriesForPerson:(Person *)person;
 +(AtYourAgeRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person;
-
++(AtYourAgeRequest *)requestToGetAllEventsForFigure:(Figure *)figure;
 @property (strong, nonatomic) NSMutableURLRequest *urlRequest;
 @property (strong, nonatomic) Class classToParse;
 

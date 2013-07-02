@@ -62,13 +62,10 @@
     
     NSURL *imageURL = [NSURL URLWithString:self.event.figure.imageURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:imageURL];
-    NSLog(@"Profile pic url: %@", imageURL);
-//    [progressIndicator performSelector:@selector(animate) withObject:nil afterDelay:0];
     dispatch_async(dispatch_get_main_queue(), ^{
         [progressIndicator animate];
     });
     [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
-        NSLog(@"Response: %@", (NSHTTPURLResponse *)resp);
         imageForThumb = [UIImage imageWithData:data];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self layoutSubviews];

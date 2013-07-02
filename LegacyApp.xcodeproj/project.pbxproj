@@ -255,7 +255,7 @@
 		4E640C1615460474009D8DC6 /* SettingsModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsModalView.m; sourceTree = "<group>"; };
 		4E640C1B15460C5A009D8DC6 /* Utility_Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_Notifications.h; sourceTree = "<group>"; };
 		4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility_Notifications.m; sourceTree = "<group>"; };
-		4EEA6CDE15268ED200B96EFD /* AtYourAge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtYourAge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EEA6CDE15268ED200B96EFD /* LegacyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEA6CE215268ED300B96EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4EEA6CE415268ED300B96EFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EEA6CE615268ED300B96EFD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -436,7 +436,7 @@
 		4EEA6CDF15268ED200B96EFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4EEA6CDE15268ED200B96EFD /* AtYourAge.app */,
+				4EEA6CDE15268ED200B96EFD /* LegacyApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -563,9 +563,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4EEA6CDD15268ED200B96EFD /* AtYourAge */ = {
+		4EEA6CDD15268ED200B96EFD /* LegacyApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "AtYourAge" */;
+			buildConfigurationList = 4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "LegacyApp" */;
 			buildPhases = (
 				4EEA6CDA15268ED200B96EFD /* Sources */,
 				4EEA6CDB15268ED200B96EFD /* Frameworks */,
@@ -575,9 +575,9 @@
 			);
 			dependencies = (
 			);
-			name = AtYourAge;
-			productName = AtYourAge;
-			productReference = 4EEA6CDE15268ED200B96EFD /* AtYourAge.app */;
+			name = LegacyApp;
+			productName = LegacyApp;
+			productReference = 4EEA6CDE15268ED200B96EFD /* LegacyApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -588,7 +588,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "AtYourAge" */;
+			buildConfigurationList = 4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "LegacyApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -600,7 +600,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4EEA6CDD15268ED200B96EFD /* AtYourAge */,
+				4EEA6CDD15268ED200B96EFD /* LegacyApp */,
 			);
 		};
 /* End PBXProject section */
@@ -817,8 +817,8 @@
 		4EEA6CF815268ED300B96EFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (397NMKG2NM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Freas (397NMKG2NM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies\"",
@@ -834,8 +834,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51500465-C10A-4B45-B82F-2865B612D05F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "51500465-C10A-4B45-B82F-2865B612D05F";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -843,7 +843,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "AtYourAge" */ = {
+		4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "LegacyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EEA6CF415268ED300B96EFD /* Debug */,
@@ -852,7 +852,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "AtYourAge" */ = {
+		4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "LegacyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EEA6CF715268ED300B96EFD /* Debug */,

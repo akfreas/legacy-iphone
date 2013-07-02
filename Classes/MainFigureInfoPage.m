@@ -3,7 +3,6 @@
 #import "Person.h"
 #import "Event.h"
 #import "Figure.h"
-#import "RelatedEvent.h"
 #import "AtYourAgeConnection.h"
 #import "AtYourAgeRequest.h"
 #import "RelatedEventLabel.h"

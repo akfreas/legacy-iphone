@@ -88,7 +88,6 @@
 		19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F7B16A6716F00D46B0A /* FacebookSDKResources.bundle */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
-		19D617081739EAB500349377 /* RelatedEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D617071739EAB500349377 /* RelatedEvent.m */; };
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */; };
 		19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC516B2370A00C81E60 /* 19-gear.png */; };
@@ -234,8 +233,6 @@
 		19D29F7D16A671C800D46B0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		19D29F7F16A674C200D46B0A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreen.h; sourceTree = "<group>"; };
 		19D29F8016A674C200D46B0A /* MainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19D617061739EAB500349377 /* RelatedEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEvent.h; sourceTree = "<group>"; };
-		19D617071739EAB500349377 /* RelatedEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEvent.m; sourceTree = "<group>"; };
 		19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ObjectArchiveAccessor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ObjectArchiveAccessor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeaderImg@2x.png"; sourceTree = "<group>"; };
@@ -385,8 +382,6 @@
 				1909A84C1771F4B100256ED0 /* Event.m */,
 				1909A84E1772B39400256ED0 /* Person.h */,
 				1909A84F1772B39400256ED0 /* Person.m */,
-				19D617061739EAB500349377 /* RelatedEvent.h */,
-				19D617071739EAB500349377 /* RelatedEvent.m */,
 				1909A8841777888300256ED0 /* EventPersonRelation.h */,
 				1909A8851777888300256ED0 /* EventPersonRelation.m */,
 			);
@@ -689,7 +684,6 @@
 				195B600216DEB7D3006215E9 /* AtYourAgeWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* AtYourAgeModel.xcdatamodeld in Sources */,
 				192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */,
-				19D617081739EAB500349377 /* RelatedEvent.m in Sources */,
 				19277235173B555800A9F51D /* RelatedEventLabel.m in Sources */,
 				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,
 				191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */,

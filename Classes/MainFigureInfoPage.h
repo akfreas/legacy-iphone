@@ -16,7 +16,7 @@
 
 -(void)collapse;
 -(void)collapseWithCompletion:(void(^)(BOOL expanded))completion;
--(void)expandWithRelatedEvents:(NSDictionary *)events completion:(void(^)(BOOL expanded))completion;
+-(void)expandWithRelatedEvents:(NSArray *)events completion:(void(^)(BOOL expanded))completion ;
 @end
 
 

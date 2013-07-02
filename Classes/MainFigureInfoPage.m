@@ -48,7 +48,7 @@ DualFrame * initFrame() {
     
     NSNumber *rowHeightDelta;
     NSMutableArray *arrayOfRelatedEventLabels;
-    NSDictionary *eventDict;
+    NSArray *relatedEventArray;
     
     void(^publicExpandCompletion)(BOOL expanded);
     
@@ -96,29 +96,7 @@ DualFrame * initFrame() {
 }
 
 
-
-
-
--(IBAction)trashcanButtonAction:(id)sender {
     
-    [self postWikiNotif];
-}
-
-
--(void)showActivityMonitor {
-    ageLabel.hidden = YES;
-    figureNameLabel.hidden = YES;
-    self.widgetContainer.hidden = YES;
-    
-}
-
--(void)hideActivityMonitor {
-    
-}
-
--(void)postWikiNotif {
-    
-}
 
 -(void)setEvent:(Event *)event {
     _event = event;
@@ -155,9 +133,9 @@ DualFrame * initFrame() {
     }
 }
 
--(void)expandWithRelatedEvents:(NSDictionary *)events completion:(void(^)(BOOL expanded))completion {
+-(void)expandWithRelatedEvents:(NSArray *)events completion:(void(^)(BOOL expanded))completion {
     publicExpandCompletion = completion;
-    eventDict = events;
+    relatedEventArray = events;
     [self expandWithCompletion:[self expandCompletionBlock]];
 }
 
@@ -169,8 +147,6 @@ DualFrame * initFrame() {
 -(void(^)(void))collapseCompletionBlock {
     return ^{
         
-        NSNumber *heightDifference = [NSNumber numberWithFloat: -1 * [rowHeightDelta floatValue]];
-        NSLog(@"Height delta in collapse completion block: %@", rowHeightDelta);
 
         rowHeightDelta = [NSNumber numberWithFloat:0];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
@@ -185,7 +161,6 @@ DualFrame * initFrame() {
     return ^(NSNumber *delta){
         
         rowHeightDelta = [NSNumber numberWithFloat:[rowHeightDelta floatValue] + [delta floatValue]];
-        NSLog(@"Height delta in expand completion block: %@", rowHeightDelta);
 
 //        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
 //                                                            object:self
@@ -197,28 +172,25 @@ DualFrame * initFrame() {
 
 -(void)putRelatedEventsAndExpandWithCompletion:(void(^)(NSNumber *heightIncrease))completionBlock {
     
-        NSArray *eventResult = [eventDict objectForKey:@"events"];
-        NSLog(@"Events: %@", eventResult);
+        NSLog(@"Events: %@", relatedEventArray);
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            for (int i=0; i < eventResult.count; i++) {
-                
-                RelatedEvent *relatedEvent = [[RelatedEvent alloc] initWithJsonDictionary:[eventResult objectAtIndex:i]];
-                
+            for (int i=0; i < relatedEventArray.count; i++) {
+                Event *relatedEvent = [relatedEventArray objectAtIndex:i];
                     RelatedEventLabel *eventLabel = [[RelatedEventLabel alloc] initWithRelatedEvent:relatedEvent];
                 eventLabel.alpha = 0;
                 eventLabel.frame = CGRectMake(0, viewFrame.expanded.size.height + RelatedEventsLabelHeight * i, RelatedEventsLabelWidth, RelatedEventsLabelHeight);
                 
-                if (relatedEvent.isSelf == YES) {
-                    selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
-                    eventLabel.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:.2].CGColor;
-                    eventLabel.layer.cornerRadius = 15.0;
-                }
+//                if (relatedEvent.isSelf == YES) {
+//                    selfEventRightmostPoint = CGPointMake(CGRectGetMaxX(eventLabel.frame), CGRectGetMaxY(eventLabel.frame) - CGRectGetHeight(eventLabel.frame) / 2);
+//                    eventLabel.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:.2].CGColor;
+//                    eventLabel.layer.cornerRadius = 15.0;
+//                }
                 
                 [self.view addSubview:eventLabel];
                 [arrayOfRelatedEventLabels addObject:eventLabel];
             }
-            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [eventResult count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
+            CGFloat contentSizeIncrease = RelatedEventsLabelHeight * [relatedEventArray count] + viewFrame.expanded.size.height - viewFrame.collapsed.size.height;
             CGFloat frameDelta;
             CGRect keyWindowFrame = Utility_AppSettings.frameForKeyWindow;
             CGFloat availableHeight = keyWindowFrame.size.height - MoreCloseButtonHeight - 20 - 44;
@@ -231,7 +203,6 @@ DualFrame * initFrame() {
             self.frame =  newFrameRect;
             __block NSNumber *frameDeltaNumber;
             frameDeltaNumber = [NSNumber numberWithFloat:frameDelta];
-            completionBlock(frameDeltaNumber);
                 
                 [self setContentFrames:newContentRect];
                     for (UILabel *theLabel in arrayOfRelatedEventLabels) {
@@ -239,6 +210,7 @@ DualFrame * initFrame() {
                     }
 
                     [self addIndicatorLines];
+            completionBlock(frameDeltaNumber);
 
         });
 }
@@ -275,6 +247,8 @@ DualFrame * initFrame() {
 
 -(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
     
+        [CATransaction begin];
+    [CATransaction setAnimationDuration:0.5];
         [self.widgetContainer expandWidget];
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
@@ -301,7 +275,6 @@ DualFrame * initFrame() {
         ageLabel.layer.opacity = 1;
         self.widgetContainer.frame = widgetContainerFrame.collapsed;
         _expanded = NO;
-        [CATransaction commit];
         eventDescriptionText.frame = descriptionFrame.collapsed;
         
         for (UILabel *relatedEventLabel in arrayOfRelatedEventLabels) {

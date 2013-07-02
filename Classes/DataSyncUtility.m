@@ -47,7 +47,7 @@
     
     [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSArray *result, NSError *error) {
         [accessor clearEventsAndFiguresAndSave];
-        [self parseArrayOfEvents:result];
+        [self parseArrayOfEventsForTable:result];
     }];
     
 }
@@ -67,10 +67,10 @@
     }];
 }
 
--(void)parseArrayOfEvents:(NSArray *)events {
+-(void)parseArrayOfEventsForTable:(NSArray *)events {
     
     for (NSDictionary *eventDict in events) {
-        [accessor addEventAndFigureWithJson:eventDict];
+        [accessor addEventAndFigureRelationWithJson:eventDict];
     }
 
     [accessor save];
@@ -78,6 +78,32 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
         completion();
     });
+    [self syncRelatedEvents];
+}
+
+-(void)syncRelatedEvents {
+    
+    NSArray *figures = [accessor allFigures];
+    NSLog(@"figures: %@", figures);
+//    for (Figure *figure in figures) {
+    
+    if ([figures count] > 0) {
+        
+        for (Figure *theFigure in figures) {
+            AtYourAgeRequest *request = [AtYourAgeRequest requestToGetAllEventsForFigure:theFigure];
+            
+            AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+            
+            [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
+                ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];
+                NSLog(@"event result: %@", result);
+                NSArray *resultArray = (NSArray *)result;
+                for (NSDictionary *relatedEvent in resultArray) {
+                    [ourAccessor addEventAndFigureWithJson:relatedEvent];
+                }
+            }];
+        }
+    }
 }
 
 @end

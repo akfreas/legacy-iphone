@@ -1,6 +1,7 @@
-@class RelatedEvent;
+@class Event;
 @interface RelatedEventLabel : UIView
 
--(id)initWithRelatedEvent:(RelatedEvent *)event;
+-(id)initWithRelatedEvent:(Event *)event;
+
 
 @end

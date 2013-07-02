@@ -1,16 +1,16 @@
 #import "RelatedEventLabel.h"
-#import "RelatedEvent.h"
+#import "Event.h"
 
 @implementation RelatedEventLabel {
     
-    RelatedEvent *relatedEvent;
+    Event *relatedEvent;
     
     IBOutlet UITextView *textView;
     IBOutlet UILabel *ageLabel;
     IBOutlet UIView *view;
 }
 
--(id)initWithRelatedEvent:(RelatedEvent *)event {
+-(id)initWithRelatedEvent:(Event *)event {
     
     self = [super init];
     

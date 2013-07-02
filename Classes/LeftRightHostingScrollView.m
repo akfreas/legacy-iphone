@@ -43,6 +43,7 @@
         self.contentSize = self.bounds.size;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
         [self addFigurePage];
+        [self addPageControl];
 
     }
     return self;
@@ -69,15 +70,16 @@
         
     }
     connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-    [self addPageControl];
     MainFigureInfoPage *infoPage = [[MainFigureInfoPage alloc] initWithFrame:infoFrame];
     infoPage.event = theEvent;
     infoPage.person = thePerson;
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSDictionary *eventDict, NSError *error) {
+    NSArray *relatedEvents = [accessor eventsForFigure:theEvent.figure];
         [pageArray addObject:infoPage];
-        [infoPage expandWithRelatedEvents:eventDict completion:^(BOOL expanded) {
+    [self scrollToPage:1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [infoPage expandWithRelatedEvents:relatedEvents completion:^(BOOL expanded) {
             infoPage.frame = CGRectSetSizeOnFrame(infoFrame, self.bounds.size);
-            [self scrollToPage:1];
             
             if ([notif.object isKindOfClass:[FigureRow class]]) {
                 FigureRow *theRow = (FigureRow *)notif.object;
@@ -89,13 +91,12 @@
             [webView loadRequest];
             [pageArray addObject:webView];
 
-            [self addSubview:webView];
+            [self insertSubview:webView belowSubview:pageControl];
             self.contentSize = CGSizeAddWidthToSize(self.contentSize, infoPage.frame.size.width + webView.frame.size.width * SpaceBetweenFigureRowPages * [pageArray count]);
         }];
-    }];
+    });
     
-    
-    [self addSubview:infoPage];
+    [self insertSubview:infoPage belowSubview:pageControl];
     
 }
 
@@ -146,6 +147,14 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    if (scrollView.contentOffset.x > self.bounds.size.width) {
+        pageControl.frame = CGRectMake(scrollView.contentOffset.x + 20, pageControl.frame.origin.y, pageControl.frame.size.width, pageControl.frame.size.height);
+        if (pageControl.alpha != 1) {
+            [UIView animateWithDuration:0.2 animations:^{
+                pageControl.alpha = 1;
+            }];
+        }
+    }
     if (scrollView.contentOffset.x == 0 && [pageArray count] > 0) {
         NSMutableArray *newArray = [NSMutableArray arrayWithArray:pageArray];
         for (int i=0; i < [pageArray count]; i++) {
@@ -154,6 +163,7 @@
             
             [page removeFromSuperview];
             [newArray removeObject:page];
+            page = nil;
         }
         self.contentSize = CGSizeMake(self.bounds.size.width, ([arrayOfFigureRows count] + 1) * (FigureRowPageInitialHeight + EventInfoScrollViewPadding));
         pageArray = newArray;

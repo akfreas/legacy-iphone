@@ -1,8 +1,8 @@
 #import "Event.h"
 #import "Figure.h"
-#import "AtYourAgeWebView.h"
+#import "LegacyWebView.h"
 
-@implementation AtYourAgeWebView {
+@implementation LegacyWebView {
     
     IBOutlet UIWebView *webView;
     BOOL hasLoadedEventInfo;
@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [[NSBundle mainBundle] loadNibNamed:@"AtYourAgeWebView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"LegacyWebView" owner:self options:nil];
         queue = [[NSOperationQueue alloc] init];
         webView.scrollView.delegate = self;
         [self addSubview:webView];

@@ -1,10 +1,10 @@
 #import "EventDescriptionView.h"
 #import "Event.h"
-#import "AtYourAgeWebView.h"
+#import "LegacyWebView.h"
 
 @implementation EventDescriptionView {
     
-    AtYourAgeWebView *webViewForEvent;
+    LegacyWebView *webViewForEvent;
 
     IBOutlet UIView *eventDescriptionHostingView;
     IBOutlet UITextView *eventDescriptionTextView;

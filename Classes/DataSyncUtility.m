@@ -1,6 +1,6 @@
 #import "DataSyncUtility.h"
-#import "AtYourAgeRequest.h"
-#import "AtYourAgeConnection.h"
+#import "LegacyAppRequest.h"
+#import "LegacyAppConnection.h"
 #import "ObjectArchiveAccessor.h"
 #import "Figure.h"
 #import "Event.h"
@@ -37,15 +37,15 @@
 -(void)sync:(void (^)())completionBlock {
     
     
-    AtYourAgeRequest *request;
+    LegacyAppRequest *request;
     completion = completionBlock;
     Person *primaryPerson = [accessor primaryPerson];
 
-    request = [AtYourAgeRequest requestToGetStoriesForPerson:primaryPerson];
+    request = [LegacyAppRequest requestToGetStoriesForPerson:primaryPerson];
     
-    AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, NSArray *result, NSError *error) {
+    [connection getWithCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
         [accessor clearEventsAndFiguresAndSave];
         [self parseArrayOfEventsForTable:result];
     }];
@@ -56,10 +56,10 @@
     
     NSArray *persons = [accessor addedPeople];
     Person *primaryPerson = [accessor primaryPerson];
-    AtYourAgeRequest *request = [AtYourAgeRequest requestToSaveFacebookUsers:persons forPerson:primaryPerson];
+    LegacyAppRequest *request = [LegacyAppRequest requestToSaveFacebookUsers:persons forPerson:primaryPerson];
     
-    AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
-    [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
+    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
+    [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
         NSLog(@"Person sync result: %@", result);
         if (completionBlock != NULL) {
             completionBlock();
@@ -90,11 +90,11 @@
     if ([figures count] > 0) {
         
         for (Figure *theFigure in figures) {
-            AtYourAgeRequest *request = [AtYourAgeRequest requestToGetAllEventsForFigure:theFigure];
+            LegacyAppRequest *request = [LegacyAppRequest requestToGetAllEventsForFigure:theFigure];
             
-            AtYourAgeConnection *connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+            LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
             
-            [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
+            [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
                 ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];
                 NSLog(@"event result: %@", result);
                 NSArray *resultArray = (NSArray *)result;

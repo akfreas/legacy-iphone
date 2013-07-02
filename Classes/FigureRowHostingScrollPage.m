@@ -1,14 +1,14 @@
 #import "LeftRightHostingScrollView.h"
 #import "ObjectArchiveAccessor.h"
 #import "Person.h"
-#import "AtYourAgeRequest.h"
-#import "AtYourAgeConnection.h"
+#import "LegacyAppRequest.h"
+#import "LegacyAppConnection.h"
 #import "EventDescriptionView.h"
 #import "FigureRow.h"
 #import "MainFigureInfoPage.h"
 #import "Event.h"
 #import "EventPersonRelation.h"
-#import "AtYourAgeWebView.h"
+#import "LegacyWebView.h"
 #import "BottomFacebookSignInRowView.h"
 #import "TopActionView.h"
 
@@ -26,7 +26,7 @@
     NSMutableArray *pageArray;
     NSArray *eventArray;
     CGPoint priorPoint;
-    AtYourAgeConnection *connection;
+    LegacyAppConnection *connection;
     BottomFacebookSignInRowView *signInActionRow;
     TopActionView *actionViewTop;
 }

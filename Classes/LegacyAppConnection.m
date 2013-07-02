@@ -1,16 +1,16 @@
 #import "Event.h"
 #import "AFNetworking.h"
-#import "AtYourAgeConnection.h"
-@implementation AtYourAgeConnection {
+#import "LegacyAppConnection.h"
+@implementation LegacyAppConnection {
     
-    AtYourAgeRequest *request;
+    LegacyAppRequest *request;
     NSMutableData *resultData;
     id result;
 }
 
 @synthesize AYAConnectionCallback = _AYAConnectionCallback;
 
--(id)initWithAtYourAgeRequest:(AtYourAgeRequest *)theRequest  {
+-(id)initWithLegacyRequest:(LegacyAppRequest *)theRequest  {
     self = [super init];
     
     if (self) {
@@ -19,7 +19,7 @@
     return self;
 }
 
--(void)getWithCompletionBlock:(void(^)(AtYourAgeRequest *request, id result, NSError *error))_block {
+-(void)getWithCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block {
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request.urlRequest success:^(NSURLRequest *URLRequest, NSHTTPURLResponse *response, id JSON) {
         _block(request, JSON, NULL);

@@ -20,7 +20,7 @@
     NSOperationQueue *operationQueue;
 }
 
-static NSString *DbName = @"AtYourAge.sqlite";
+static NSString *DbName = @"Legacy.sqlite";
 static NSString *PersonEntityName = @"Person";
 
 +(ObjectArchiveAccessor *)sharedInstance {

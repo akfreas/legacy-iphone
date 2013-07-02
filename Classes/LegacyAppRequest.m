@@ -1,11 +1,11 @@
-#import "AtYourAgeRequest.h"
+#import "LegacyAppRequest.h"
 #import "Event.h"
 #import "Person.h"
 #import "Figure.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
 
-@implementation AtYourAgeRequest {
+@implementation LegacyAppRequest {
     
 }
 
@@ -25,14 +25,14 @@
 
 +(NSURL *)appendToBaseUrl:(NSString *)theUrl {
     
-    NSURL *url = [[AtYourAgeRequest baseUrl] URLByAppendingPathComponent:theUrl];
+    NSURL *url = [[LegacyAppRequest baseUrl] URLByAppendingPathComponent:theUrl];
     return url;
 }
 
 
 +(NSURL *)storyUrlForBirthday:(NSDate *)theDate Person:(NSString *)user {
         
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"user/%@/story", user];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -42,7 +42,7 @@
 
 +(NSURL *)urlToUpdateBirthdayForPerson:(NSString *)user {
     
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"user/%@/update_birthday", user];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -52,14 +52,14 @@
 
 +(NSURL *)urlToPostUsers {
     
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"users/add"];
     url = [url URLByAppendingPathComponent:pathString];
     return url;
 }
 
 +(NSURL *)urlToGetRelatedEventsForEvent:(NSString *)eventId {
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"event/%@/related", eventId];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -69,7 +69,7 @@
 
 +(NSURL *)urlToPostUser {
     
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = @"user/";
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -79,7 +79,7 @@
 
 +(NSURL *)urlForEventsForFigure:(Figure *)figure {
     
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     
     NSString *pathString = [NSString stringWithFormat:@"figure/%@/events", figure.id];
     
@@ -89,7 +89,7 @@
 }
 
 +(NSURL *)urlToGetFigureWithId:(NSString *)theId {
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"figure/%@", theId];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -98,7 +98,7 @@
 }
 
 +(NSURL *)urlToGetRandomEvents {
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"sample-events"];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -108,7 +108,7 @@
 
 
 +(NSURL *)urlToGetEvents {
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"events"];
     
     url = [url URLByAppendingPathComponent:pathString];
@@ -118,14 +118,14 @@
 
 +(NSURL *)urlToPostDeviceInfo {
     
-    NSURL *url = [AtYourAgeRequest baseUrl];
+    NSURL *url = [LegacyAppRequest baseUrl];
     url = [url URLByAppendingPathComponent:@"device/information"];
     return url;
 }
 
-+(AtYourAgeRequest *)requestToPostDeviceInformation:(NSDictionary *)deviceInfo person:(Person *)person {
++(LegacyAppRequest *)requestToPostDeviceInformation:(NSDictionary *)deviceInfo person:(Person *)person {
     
-    AtYourAgeRequest *request = [AtYourAgeRequest baseRequestForPerson:person];
+    LegacyAppRequest *request = [LegacyAppRequest baseRequestForPerson:person];
     
     request.urlRequest.URL = [self urlToPostDeviceInfo];
     request.urlRequest.HTTPMethod = @"POST";
@@ -134,43 +134,43 @@
     return request;
 }
 
-+(AtYourAgeRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester {
++(LegacyAppRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester {
     
-    AtYourAgeRequest *request = [self baseRequestForPerson:requester];
+    LegacyAppRequest *request = [self baseRequestForPerson:requester];
     request.urlRequest.URL = [self urlToGetFigureWithId:theId];
     request.classToParse = [Figure class];
     
     return request;
 }
 
-+(AtYourAgeRequest *)requestToGetStoryForPerson:(Person *)person {
++(LegacyAppRequest *)requestToGetStoryForPerson:(Person *)person {
     
-    AtYourAgeRequest *request = [self baseRequestForPerson:person];
-    NSURL *url = [AtYourAgeRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
+    LegacyAppRequest *request = [self baseRequestForPerson:person];
+    NSURL *url = [LegacyAppRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
     request.urlRequest.URL = url;
     request.classToParse = [Event class];
     
     return request;
 }
 
-+(AtYourAgeRequest *)requestToGetRandomStories {
++(LegacyAppRequest *)requestToGetRandomStories {
 
-    AtYourAgeRequest *request = [AtYourAgeRequest baseRequest];
-    NSURL *url = [AtYourAgeRequest urlToGetRandomEvents];
+    LegacyAppRequest *request = [LegacyAppRequest baseRequest];
+    NSURL *url = [LegacyAppRequest urlToGetRandomEvents];
     [request.urlRequest setURL:url];
     return request;
 }
 
-+(AtYourAgeRequest *)requestToGetStoriesForPerson:(Person *)person {
++(LegacyAppRequest *)requestToGetStoriesForPerson:(Person *)person {
     
-    AtYourAgeRequest *request = [AtYourAgeRequest baseRequestForPerson:person];
-    NSURL *url = [AtYourAgeRequest urlToGetEvents];
+    LegacyAppRequest *request = [LegacyAppRequest baseRequestForPerson:person];
+    NSURL *url = [LegacyAppRequest urlToGetEvents];
     request.urlRequest.URL = url;
     
     return request;
 }
 
-+(AtYourAgeRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person {
++(LegacyAppRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person {
     
     
     NSMutableArray *arrayOfUserIds = [NSMutableArray array];
@@ -179,7 +179,7 @@
         [arrayOfUserIds addObject:person.facebookId];
     }
     
-    AtYourAgeRequest *request = [self baseRequestForPerson:person];
+    LegacyAppRequest *request = [self baseRequestForPerson:person];
     request.urlRequest.URL = [self urlToPostUsers];
     request.urlRequest.HTTPMethod = @"POST";
     request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:arrayOfUserIds options:NSJSONWritingPrettyPrinted error:NULL];
@@ -187,11 +187,11 @@
     return request;
 }
 
-+(AtYourAgeRequest *)requestToUpdateBirthday:(NSDate *)birthday forPerson:(Person *)person {
++(LegacyAppRequest *)requestToUpdateBirthday:(NSDate *)birthday forPerson:(Person *)person {
     
-    AtYourAgeRequest *request = [self baseRequestForPerson:person];
+    LegacyAppRequest *request = [self baseRequestForPerson:person];
     
-    NSURL *url = [AtYourAgeRequest urlToUpdateBirthdayForPerson:person.facebookId];
+    NSURL *url = [LegacyAppRequest urlToUpdateBirthdayForPerson:person.facebookId];
     NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
     NSDictionary *postDict = [NSDictionary dictionaryWithObject:[formatter stringFromDate:birthday] forKey:@"birthday"];
     
@@ -202,38 +202,38 @@
     return request;
 }
 
-+(AtYourAgeRequest *)requestToGetRelatedEventsForEvent:(NSString *)event requester:(Person *)person {
++(LegacyAppRequest *)requestToGetRelatedEventsForEvent:(NSString *)event requester:(Person *)person {
     
-    AtYourAgeRequest *request = [self baseRequestForPerson:person];
+    LegacyAppRequest *request = [self baseRequestForPerson:person];
     
-    NSURL *url = [AtYourAgeRequest urlToGetRelatedEventsForEvent:event];
+    NSURL *url = [LegacyAppRequest urlToGetRelatedEventsForEvent:event];
     
     request.urlRequest.URL = url;
 
     return request;
 }
 
-+(AtYourAgeRequest *)requestToGetAllEventsForFigure:(Figure *)figure {
++(LegacyAppRequest *)requestToGetAllEventsForFigure:(Figure *)figure {
     
-    AtYourAgeRequest *request = [self baseRequest];
+    LegacyAppRequest *request = [self baseRequest];
     
     request.urlRequest.URL = [self urlForEventsForFigure:figure];
     
     return request;
 }
 
-+(AtYourAgeRequest *)baseRequest {
++(LegacyAppRequest *)baseRequest {
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    AtYourAgeRequest *request = [[AtYourAgeRequest alloc] initWithRequest:urlRequest];
+    LegacyAppRequest *request = [[LegacyAppRequest alloc] initWithRequest:urlRequest];
     return request;
 }
 
-+(AtYourAgeRequest *)baseRequestForPerson:(Person *)person {
++(LegacyAppRequest *)baseRequestForPerson:(Person *)person {
 
-    AtYourAgeRequest *request = [AtYourAgeRequest baseRequest];
+    LegacyAppRequest *request = [LegacyAppRequest baseRequest];
     NSMutableURLRequest *urlRequest = request.urlRequest;
     
     Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
@@ -246,7 +246,7 @@
     NSMutableString *cookieInfoString = [[NSMutableString alloc] initWithData:cookieInfo encoding:NSUTF8StringEncoding];
     [cookieInfoString replaceOccurrencesOfString:@"\"" withString:@"'" options:NSLiteralSearch range:NSMakeRange(0, [cookieInfoString length])];
     
-    NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, cookieInfoString, NSHTTPCookieValue, @"AtYourAge", NSHTTPCookieName, nil];
+    NSDictionary *cookieProperties = [[NSDictionary alloc] initWithObjectsAndKeys:[[self baseUrl] host], NSHTTPCookieDomain, @"/",  NSHTTPCookiePath, cookieInfoString, NSHTTPCookieValue, @"Legacy", NSHTTPCookieName, nil];
 //    NSLog(@"Cookie properties: %@", cookieProperties);
     
     

@@ -1,13 +1,13 @@
 #import "LeftRightHostingScrollView.h"
 #import "ObjectArchiveAccessor.h"
 #import "Person.h"
-#import "AtYourAgeRequest.h"
-#import "AtYourAgeConnection.h"
+#import "LegacyAppRequest.h"
+#import "LegacyAppConnection.h"
 #import "EventDescriptionView.h"
 #import "FigureRow.h"
 #import "MainFigureInfoPage.h"
 #import "Event.h"
-#import "AtYourAgeWebView.h"
+#import "LegacyWebView.h"
 #import "FigureRowHostingScrollPage.h"
 
 @interface LeftRightHostingScrollView () <UIScrollViewDelegate>
@@ -23,7 +23,7 @@
     NSMutableArray *pageArray;
     FigureRowHostingScrollPage *figurePage;
     CGPoint lastPoint;
-    AtYourAgeConnection *connection;
+    LegacyAppConnection *connection;
 }
 
 
@@ -62,14 +62,14 @@
     NSDictionary *userInfo = notif.userInfo;
     Event *theEvent = userInfo[@"event"];
     Person *thePerson = userInfo[@"person"];
-    AtYourAgeRequest *request;
+    LegacyAppRequest *request;
     if ([accessor primaryPerson]) {
-        request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:[accessor primaryPerson]];
+        request = [LegacyAppRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:[accessor primaryPerson]];
     } else {
-        request = [AtYourAgeRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:nil];
+        request = [LegacyAppRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:nil];
         
     }
-    connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:request];
+    connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     MainFigureInfoPage *infoPage = [[MainFigureInfoPage alloc] initWithFrame:infoFrame];
     infoPage.event = theEvent;
     infoPage.person = thePerson;
@@ -85,7 +85,7 @@
                 FigureRow *theRow = (FigureRow *)notif.object;
                 [theRow reset];
             }
-            AtYourAgeWebView *webView = [[AtYourAgeWebView alloc] initWithFrame:CGRectOffset(infoFrame, 320 + SpaceBetweenFigureRowPages, 0)];
+            LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:CGRectOffset(infoFrame, 320 + SpaceBetweenFigureRowPages, 0)];
             webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
             webView.event = theEvent;
             [webView loadRequest];
@@ -193,8 +193,8 @@
         if (pageControl.currentPage > 0 && [pageArray count] > 0 && pageControl.currentPage <= [pageArray count]) {
             UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage - 1];
             lastPoint = CGPointMake(page.frame.origin.x, 0);
-            if ([page isKindOfClass:[AtYourAgeWebView class]]) {
-                [(AtYourAgeWebView *)page loadRequest];
+            if ([page isKindOfClass:[LegacyWebView class]]) {
+                [(LegacyWebView *)page loadRequest];
             }
             [self scrollToPage:pageControl.currentPage];
         } else {

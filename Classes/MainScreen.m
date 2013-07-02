@@ -8,9 +8,9 @@
 #import "Utility_AppSettings.h"
 #import "FriendPickerHandler.h"
 #import "Event.h"
-#import "AtYourAgeWebView.h"
-#import "AtYourAgeConnection.h"
-#import "AtYourAgeRequest.h"
+#import "LegacyWebView.h"
+#import "LegacyAppConnection.h"
+#import "LegacyAppRequest.h"
 #import "DataSyncUtility.h"
 
 @implementation MainScreen {
@@ -20,7 +20,7 @@
     FriendPickerHandler *friendPickerDelegate;
     FBFriendPickerViewController *friendPicker;
     IBOutlet LeftRightHostingScrollView *infoScreen;
-    AtYourAgeConnection *connection;
+    LegacyAppConnection *connection;
     
     DataSyncUtility *dataSync;
 }
@@ -91,10 +91,10 @@
         thePerson.birthday = birthday;
         [accessor save];
         
-        AtYourAgeRequest *updateBirthdayRequest = [AtYourAgeRequest requestToUpdateBirthday:birthday forPerson:thePerson];
-        connection = [[AtYourAgeConnection alloc] initWithAtYourAgeRequest:updateBirthdayRequest];
+        LegacyAppRequest *updateBirthdayRequest = [LegacyAppRequest requestToUpdateBirthday:birthday forPerson:thePerson];
+        connection = [[LegacyAppConnection alloc] initWithLegacyRequest:updateBirthdayRequest];
         
-        [connection getWithCompletionBlock:^(AtYourAgeRequest *request, id result, NSError *error) {
+        [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
             NSLog(@"result: %@", result);
         }];
                 

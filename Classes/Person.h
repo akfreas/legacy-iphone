@@ -1,6 +1,6 @@
 //
 //  Person.h
-//  AtYourAge
+//  Legacy
 //
 //  Created by Alexander Freas on 6/19/13.
 //

@@ -2,12 +2,12 @@
 #import "MainFigureInfoPage.h"
 #import "LeftActionTabPage.h"
 #import "DescriptionPage.h"
-#import "AtYourAgeRequest.h"
-#import "AtYourAgeConnection.h"
+#import "LegacyAppRequest.h"
+#import "LegacyAppConnection.h"
 #import "Figure.h"
 #import "Event.h"
 #import "FigureRowPageProtocol.h"
-#import "AtYourAgeWebView.h"
+#import "LegacyWebView.h"
 #import "FigureRowActionOverlay.h"
 
 @interface FigureRow () <UIScrollViewDelegate>
@@ -17,11 +17,11 @@
 @implementation FigureRow {
     
     MainFigureInfoPage *infoPage;
-    AtYourAgeWebView *webView;
+    LegacyWebView *webView;
     LeftActionTabPage *tabPage;
     FigureRowActionOverlay *actionOverlay;
     
-    AtYourAgeConnection *connection;
+    LegacyAppConnection *connection;
     
     UILabel *figureNameLabel;
     UIPageControl *pageControl;

@@ -1,6 +1,6 @@
 //
 //  Figure.m
-//  AtYourAge
+//  Legacy
 //
 //  Created by Alexander Freas on 6/20/13.
 //

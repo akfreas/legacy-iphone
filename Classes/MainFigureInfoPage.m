@@ -3,8 +3,8 @@
 #import "Person.h"
 #import "Event.h"
 #import "Figure.h"
-#import "AtYourAgeConnection.h"
-#import "AtYourAgeRequest.h"
+#import "LegacyAppConnection.h"
+#import "LegacyAppRequest.h"
 #import "RelatedEventLabel.h"
 #import "ImageWidget.h"
 #import "RightIndicatorLines.h"
@@ -37,7 +37,7 @@ DualFrame * initFrame() {
     IBOutlet UILabel *figureNameLabel;
     IBOutlet UILabel *ageLabel;
 
-    AtYourAgeConnection *connection;
+    LegacyAppConnection *connection;
     RightIndicatorLines *indLines;
 
     DualFrame descriptionFrame;

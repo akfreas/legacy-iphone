@@ -57,20 +57,20 @@
 }
 
 -(void)startFBLoginProcess {
-    
-    NSDictionary *accessToken = @{
-                                  @"com.facebook.sdk:TokenInformationExpirationDateKey" : [NSDate distantFuture],
-                                  @"com.facebook.sdk:TokenInformationIsFacebookLoginKey" : [NSNumber numberWithInt:1],
-                                  @"com.facebook.sdk:TokenInformationLoginTypeLoginKey" : [NSNumber numberWithInt:3],
-                                  @"com.facebook.sdk:TokenInformationPermissionsKey" :     @[
-                                          @"user_birthday",
-                                          @"friends_birthday"
-                                          ],
-                                  @"com.facebook.sdk:TokenInformationRefreshDateKey" : [NSDate date],
-                                  @"com.facebook.sdk:TokenInformationTokenKey" : @"CAABr4W3cfKwBABZBAVmuUjZCJPmR7ZAfhOmvAOozxmOUzAtHumi8ZBXI26fiHd8iPvTS6uUqZAmxNsaM17Qjfz5kDZBNoEJjlWXZBo4ISguulPuNHPCmTywq1De58Tww1hK1wZANAfTILnikQe8FIa7IBcXLRr4XDNihNha5NytppwZDZD"
-                                  };
-    
-    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"FBAccessTokenInformationKey"];
+//    
+//    NSDictionary *accessToken = @{
+//                                  @"com.facebook.sdk:TokenInformationExpirationDateKey" : [NSDate distantFuture],
+//                                  @"com.facebook.sdk:TokenInformationIsFacebookLoginKey" : [NSNumber numberWithInt:1],
+//                                  @"com.facebook.sdk:TokenInformationLoginTypeLoginKey" : [NSNumber numberWithInt:3],
+//                                  @"com.facebook.sdk:TokenInformationPermissionsKey" :     @[
+//                                          @"user_birthday",
+//                                          @"friends_birthday"
+//                                          ],
+//                                  @"com.facebook.sdk:TokenInformationRefreshDateKey" : [NSDate date],
+//                                  @"com.facebook.sdk:TokenInformationTokenKey" : @"CAABr4W3cfKwBABZBAVmuUjZCJPmR7ZAfhOmvAOozxmOUzAtHumi8ZBXI26fiHd8iPvTS6uUqZAmxNsaM17Qjfz5kDZBNoEJjlWXZBo4ISguulPuNHPCmTywq1De58Tww1hK1wZANAfTILnikQe8FIa7IBcXLRr4XDNihNha5NytppwZDZD"
+//                                  };
+//    
+//    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"FBAccessTokenInformationKey"];
     FBSession *session = [[FBSession alloc] initWithPermissions:@[@"user_birthday", @"friends_birthday"]];
     [FBSession setActiveSession:session];
 

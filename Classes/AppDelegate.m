@@ -1,6 +1,8 @@
 #import "AppDelegate.h"
 #import "MainScreen.h"
 #import "FBLoginViewController.h"
+#import "LegacyAppRequest.h"
+#import "LegacyAppConnection.h"
 
 
 @implementation AppDelegate {
@@ -43,8 +45,24 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSString *token = [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding];
-    NSLog(@"Token: %@", token);
+    
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSLog(@"Token: %@", hexToken);
+    NSDictionary *deviceDict = @{@"device_token": hexToken};
+    LegacyAppRequest *request = [LegacyAppRequest requestToPostDeviceInformation:deviceDict person:nil];
+    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
+    
+    [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+        NSLog(@"APNS result: %@", result);
+    }];
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Could not register for notifications: %@", error);
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

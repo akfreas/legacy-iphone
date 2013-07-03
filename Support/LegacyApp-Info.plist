@@ -37,11 +37,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb118615954980012</string>
+				<string>fb562062263833279</string>
 			</array>
 		</dict>
 	</array>
@@ -50,7 +52,7 @@
 	<key>DebugResourceUrl</key>
 	<string>http://localhost:8000</string>
 	<key>FacebookAppID</key>
-	<string>118615954980012</string>
+	<string>562062263833279</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ResourceUrl</key>

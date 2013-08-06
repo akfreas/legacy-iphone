@@ -145,12 +145,7 @@ DualFrame * initFrame() {
 
 -(void(^)(void))collapseCompletionBlock {
     return ^{
-        
-
         rowHeightDelta = [NSNumber numberWithFloat:0];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowHeightChanged
-//                                                            object:self
-//                                                          userInfo:@{@"delta": heightDifference}];
         publicExpandCompletion(NO);
     };
 }
@@ -246,15 +241,12 @@ DualFrame * initFrame() {
 
 -(void)expandWithCompletion:(void(^)(NSNumber *))completionBlock {
     
-        [CATransaction begin];
-    [CATransaction setAnimationDuration:0.5];
         [self.widgetContainer expandWidget];
         eventDescriptionText.layer.frame = descriptionFrame.expanded;
         eventDescriptionText.layer.opacity = 0;
         self.widgetContainer.frame = widgetContainerFrame.expanded;
         ageLabel.frame = ageLabelFrame.expanded;
         ageLabel.layer.opacity = 0;
-        [CATransaction commit];
         _expanded = YES;
         eventDescriptionText.frame = descriptionFrame.expanded;
         [self putRelatedEventsAndExpandWithCompletion:completionBlock];

@@ -154,7 +154,12 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activity.frame = CGRectInset(self.view.frame, 0, 0);
+    [self.view addSubview:activity];
+    [activity startAnimating];
     [dataSync sync:^{
+        [activity stopAnimating];
         [infoScreen reload];
     }];
 }

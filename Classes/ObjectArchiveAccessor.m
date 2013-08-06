@@ -372,6 +372,37 @@ static NSString *PersonEntityName = @"Person";
     [self save];
 }
 
+-(Person *)personWithJson:(NSDictionary *)json {
+    __block Person *person = [self personWithFacebookId:json[@"facebook_id"]];
+    
+    if (person == nil && json != nil) {
+        NSEntityDescription *personEntityDesc = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+        person = [[Person alloc] initWithEntity:personEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
+        person.facebookId = json[@"facebook_id"];
+        person.firstName = json[@"first_name"];
+        person.lastName = json[@"last_name"];
+        person.birthday = [[Utility_AppSettings dateFormatterForRequest] dateFromString:json[@"birthday"]];
+        person.isFacebookUser = [NSNumber numberWithBool:YES];
+        [self save];
+        
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:json[@"profile_pic"]]];
+    [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *imageData, NSError *error) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                person.thumbnail = imageData;
+                //                NSLog(@"Assoc person: %@", assocPerson);
+                //                NSLog(@"assoc person thumb: %@", assocPerson.thumbnail);
+                [self save];
+                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
+            });
+        }
+    }];
+    return person;
+}
+
 -(void)addEventAndFigureRelationWithJson:(NSDictionary *)json {
     
     
@@ -405,35 +436,10 @@ static NSString *PersonEntityName = @"Person";
     
     
     NSDictionary *personDict = json[@"person"];
-    __block Person *assocPerson = [self personWithFacebookId:personDict[@"facebook_id"]];
-    
-    //    if (assocPerson == nil && personDict != nil) {
-    NSEntityDescription *personEntityDesc = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
-    assocPerson = [[Person alloc] initWithEntity:personEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
-    assocPerson.facebookId = personDict[@"facebook_id"];
-    assocPerson.firstName = personDict[@"first_name"];
-    assocPerson.lastName = personDict[@"last_name"];
-    assocPerson.birthday = [[Utility_AppSettings dateFormatterForRequest] dateFromString:personDict[@"birthday"]];
-    assocPerson.isFacebookUser = [NSNumber numberWithBool:YES];
-    [self save];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:personDict[@"profile_pic"]]];
-    
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *imageData, NSError *error) {
-        
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                assocPerson.thumbnail = imageData;
-//                NSLog(@"Assoc person: %@", assocPerson);
-//                NSLog(@"assoc person thumb: %@", assocPerson.thumbnail);
-                [self save];
-                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
-            });
-        }
-    }];
-    //    }
-    
+    Person *assocPerson;
+    if (personDict != nil) {
+        assocPerson = [self personWithJson:personDict];
+    }
     
     NSEntityDescription *relationEntityDesc = [NSEntityDescription entityForName:@"EventPersonRelation"  inManagedObjectContext:self.managedObjectContext];
     EventPersonRelation *relation = [[EventPersonRelation alloc] initWithEntity:relationEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];

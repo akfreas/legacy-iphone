@@ -42,8 +42,8 @@ CGFloat pageWidth = 320;
     if (self) {
 
 //        [self addMoreLessButton];
-        self.contentSize = CGSizeAddWidthToSize(self.bounds.size, .5);
-        self.bounces = YES;
+        self.contentSize = CGSizeAddWidthToSize(self.bounds.size, 100);
+        self.bounces = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
         [self setupPages];
@@ -57,14 +57,18 @@ CGFloat pageWidth = 320;
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if (scrollView.tracking == NO && scrollView.contentOffset.x > 10 && isSwiping == NO) {
+        
         isSwiping = YES;
-
-        [self swipeOnRow];
     } else if (isSwiping == YES) {
         scrollView.scrollEnabled = NO;
         scrollView.bounces = NO;
     }
 }
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self swipeOnRow];
+}
+
 -(void)addTapGestureRecognizer {
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
 //    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeOnRow)];
@@ -96,6 +100,7 @@ CGFloat pageWidth = 320;
     }
     NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
+    self.bounces = NO;
 
 }
 
@@ -118,9 +123,7 @@ CGFloat pageWidth = 320;
 }
 
 -(void)registerForNotifications {
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentsChangedSize:) name:KeyForFigureRowHeightChanged object:infoPage];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeActionOverlay:) name:KeyForOverlayViewShown object:nil];
     
 }

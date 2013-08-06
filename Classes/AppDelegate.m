@@ -3,7 +3,7 @@
 #import "FBLoginViewController.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
-
+#import "ObjectArchiveAccessor.h"
 
 @implementation AppDelegate {
     
@@ -53,7 +53,8 @@ void uncaughtExceptionHandler(NSException *exception) {
                           ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
     NSLog(@"Token: %@", hexToken);
     NSDictionary *deviceDict = @{@"device_token": hexToken};
-    LegacyAppRequest *request = [LegacyAppRequest requestToPostDeviceInformation:deviceDict person:nil];
+    Person *mainPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
+    LegacyAppRequest *request = [LegacyAppRequest requestToPostDeviceInformation:deviceDict person:mainPerson];
     LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {

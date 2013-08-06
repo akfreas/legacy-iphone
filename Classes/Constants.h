@@ -4,7 +4,6 @@
 #define KeyForRemovePersonButtonTappedNotification @"RemoveFriendButton"
 #define KeyForOverlayViewShown @"OverlayViewShown"
 
-#define KeyForFigureRowHeightChanged @"FigureRowHeightChanged"
 #define KeyForFigureRowContentChanged @"FigureRowContentChanged"
 #define KeyForRowDataUpdated @"RowsUpdated"
 #define KeyForFacebookButtonTapped @"FacebookButtonTapped"
@@ -18,7 +17,7 @@
 
 #define SpaceBetweenFigureRowPages 1
 
-#define EventInfoScrollViewPadding 1
+#define FigureRowScrollViewPadding 1
 
 #define PageControlYPosition 10
 #define PageControlXPosition 240

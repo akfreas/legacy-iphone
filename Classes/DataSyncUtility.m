@@ -46,7 +46,8 @@
     LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
-        [accessor clearEventsAndFiguresAndSave];
+        ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];
+        [ourAccessor clearEventsAndFiguresAndSave];
         [self parseArrayOfEventsForTable:result];
     }];
     

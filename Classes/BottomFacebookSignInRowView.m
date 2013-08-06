@@ -73,8 +73,8 @@
 //    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"FBAccessTokenInformationKey"];
     FBSession *session = [[FBSession alloc] initWithPermissions:@[@"user_birthday", @"friends_birthday"]];
     [FBSession setActiveSession:session];
-
-    [session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+    
+    [session openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
         if (status == FBSessionStateOpen) {
             [self getAndSavePrimaryUser];
         }

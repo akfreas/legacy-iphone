@@ -44,28 +44,35 @@
         scroller = [[UIScrollView alloc] initWithFrame:self.bounds];
         scroller.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         scroller.delegate = self;
+
         [self addSubview:scroller];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideView:) name:KeyForFigureRowContentChanged object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideViewFromNotif:) name:KeyForFigureRowContentChanged object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:KeyForRowDataUpdated object:nil];
 
     }
     return self;
 }
 
--(void)hideView:(NSNotification *)notif {
+-(void)hideViewFromNotif:(NSNotification *)notif {
+    
     
     NSDictionary *userInfo = notif.userInfo;
     UIView *theView = notif.object;
+    
     CGFloat animationDuration = [userInfo[@"animation_duration"] floatValue];
     CGSize sizeChange = [userInfo[@"size_change"] CGSizeValue];
+    [self hideView:theView animationDuration:animationDuration sizeChange:sizeChange];
+}
+
+-(void)hideView:(UIView *)view animationDuration:(CGFloat)animationDuration sizeChange:(CGSize)sizeChange {
     
     [UIView animateWithDuration:animationDuration animations:^{
         scroller.contentSize = CGSizeAddSizeToSize(scroller.contentSize, sizeChange);
-        theView.alpha = 0;
+        view.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished) {
-            [theView removeFromSuperview];
+            [view removeFromSuperview];
         }
     }];
 }
@@ -75,8 +82,8 @@
     if (signInActionRow == nil) {
         signInActionRow = [[BottomFacebookSignInRowView alloc] init];
         [scroller addSubview:signInActionRow];
+        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, signInActionRow.frame.size.height);
     }
-    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, signInActionRow.frame.size.height);
     CGPoint pointForActionRow = [self frameAtIndex:[arrayOfFigureRows count]].origin;
     signInActionRow.frame = CGRectSetOriginOnRect(signInActionRow.frame, pointForActionRow.x, pointForActionRow.y);
 }
@@ -89,12 +96,12 @@
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat width = self.bounds.size.width;
     
-    return CGRectMake(0, (FigureRowPageInitialHeight + EventInfoScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
+    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
 }
 
 -(NSInteger)indexAtPoint:(CGPoint)point {
     
-    NSInteger index = point.x / (FigureRowPageInitialHeight + EventInfoScrollViewPadding);
+    NSInteger index = point.x / (FigureRowPageInitialHeight + FigureRowScrollViewPadding);
     return index;
 }
 
@@ -109,12 +116,18 @@
     
     accessor = [[ObjectArchiveAccessor alloc] init];
     eventArray = [accessor getStoredEventRelations];
-    scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
+    
+    if ([arrayOfFigureRows count] < 1) {
+        scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
+    }
+    
     for (int i=0; i < [eventArray count]; i++) {
         
         FigureRow *row = [self figureRowForIndex:i];
-        [scroller addSubview:row];
-        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, row.frame.size.height);
+        if ([row superview] == nil) {
+            scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, row.frame.size.height + FigureRowScrollViewPadding);
+            [scroller addSubview:row];
+        }
     }
 
     [FBSession openActiveSessionWithAllowLoginUI:NO];
@@ -172,7 +185,7 @@
 
 -(void)addTopActionForScrollAction:(UIScrollView *)scrollView {
     if (actionViewTop == nil) {
-        CGFloat height = 30;
+        CGFloat height = 50;
         actionViewTop = [[TopActionView alloc] initWithFrame:CGRectMake(0, -height, self.bounds.size.width, height)];
         [self addSubview:actionViewTop];
         priorPoint = scrollView.contentOffset;

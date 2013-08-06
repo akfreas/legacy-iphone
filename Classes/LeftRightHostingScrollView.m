@@ -52,7 +52,6 @@
 -(void)addFigurePage {
     figurePage = [[FigureRowHostingScrollPage alloc] initWithFrame:self.bounds];
     [self addSubview:figurePage];
-    [figurePage reload];
 }
 
 -(void)addEventInfoPageAndScroll:(NSNotification *)notif {
@@ -122,7 +121,7 @@
     CGFloat padding = 5;
     CGFloat width = Utility_AppSettings.frameForKeyWindow.size.height;
 
-    return CGRectMake(0, (FigureRowPageInitialHeight + EventInfoScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
+    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
 }
 
 -(void)removeInfoViews {
@@ -165,7 +164,7 @@
             [newArray removeObject:page];
             page = nil;
         }
-        self.contentSize = CGSizeMake(self.bounds.size.width, ([arrayOfFigureRows count] + 1) * (FigureRowPageInitialHeight + EventInfoScrollViewPadding));
+        self.contentSize = CGSizeMake(self.bounds.size.width, ([arrayOfFigureRows count] + 1) * (FigureRowPageInitialHeight + FigureRowScrollViewPadding));
         pageArray = newArray;
     }
     

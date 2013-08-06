@@ -26,7 +26,6 @@
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
 		191CF63E1749635D00086D5E /* FigureRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* FigureRow.m */; };
-		191F78D7177BFF5200729F2A /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 191F78D6177BFF5200729F2A /* Reveal.framework */; };
 		191F78F51782DD6700729F2A /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78E31782DD6700729F2A /* AFHTTPClient.m */; };
 		191F78F61782DD6700729F2A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78E51782DD6700729F2A /* AFHTTPRequestOperation.m */; };
 		191F78F71782DD6700729F2A /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78E71782DD6700729F2A /* AFImageRequestOperation.m */; };
@@ -48,8 +47,6 @@
 		19632B9116DAFA1800E0EA75 /* bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9016DAFA1800E0EA75 /* bracket.png */; };
 		19632B9316DB028400E0EA75 /* MainFigureInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */; };
 		19632B9616DB036900E0EA75 /* MainFigureInfoPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */; };
-		19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */; };
-		19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */; };
 		19632BA116DB427E00E0EA75 /* wood.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA016DB427E00E0EA75 /* wood.jpg */; };
 		19632BA316DB437500E0EA75 /* wood.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA216DB437500E0EA75 /* wood.png */; };
 		19632BA616DB453C00E0EA75 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA416DB453C00E0EA75 /* 218-trash2.png */; };
@@ -147,7 +144,6 @@
 		191CF63A17488CE700086D5E /* CircleImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageLayer.m; sourceTree = "<group>"; };
 		191CF63C1749635C00086D5E /* FigureRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRow.h; sourceTree = "<group>"; };
 		191CF63D1749635D00086D5E /* FigureRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRow.m; sourceTree = "<group>"; };
-		191F78D6177BFF5200729F2A /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		191F78E21782DD6700729F2A /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		191F78E31782DD6700729F2A /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		191F78E41782DD6700729F2A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -183,9 +179,6 @@
 		19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainFigureInfoPage.xib; sourceTree = "<group>"; };
 		19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFigureInfoPage.h; sourceTree = "<group>"; };
 		19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFigureInfoPage.m; sourceTree = "<group>"; };
-		19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeIndicatorView.xib; sourceTree = "<group>"; };
-		19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeIndicatorView.h; sourceTree = "<group>"; };
-		19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeIndicatorView.m; sourceTree = "<group>"; };
 		19632BA016DB427E00E0EA75 /* wood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpg; sourceTree = "<group>"; };
 		19632BA216DB437500E0EA75 /* wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood.png; sourceTree = "<group>"; };
 		19632BA416DB453C00E0EA75 /* 218-trash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2.png"; sourceTree = "<group>"; };
@@ -295,7 +288,6 @@
 				4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */,
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
 				19D29F5C16A5481D00D46B0A /* FacebookSDK.framework in Frameworks */,
-				191F78D7177BFF5200729F2A /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,7 +421,6 @@
 			children = (
 				19C55E4B1783A7900099AE4A /* icon@2x.png */,
 				19C55E491783A7890099AE4A /* icon.png */,
-				191F78D6177BFF5200729F2A /* Reveal.framework */,
 				4EEA6D021526902D00B96EFD /* Classes */,
 				4EEA6D081526902D00B96EFD /* Resources */,
 				4EEA6D091526902D00B96EFD /* Support */,
@@ -468,8 +459,6 @@
 				19C49EAD16CA3ABB00304AD6 /* button.png */,
 				19D61CBA16B06D3500C81E60 /* Models */,
 				19D61CB916B06D2600C81E60 /* Utilities */,
-				19632B9916DB309E00E0EA75 /* AgeIndicatorView.h */,
-				19632B9A16DB309E00E0EA75 /* AgeIndicatorView.m */,
 				4EEA6D031526902D00B96EFD /* AppDelegate.h */,
 				4EEA6D041526902D00B96EFD /* AppDelegate.m */,
 				19C49EAB16CA345800304AD6 /* Constants.h */,
@@ -527,7 +516,6 @@
 				194E327316DF4150007A55D7 /* LegacyWebView.xib */,
 				1997B72816DEBA31009692F5 /* LegacyModel.xcdatamodeld */,
 				19D61CCF16B23B6400C81E60 /* Images */,
-				19632B9716DB2F6F00E0EA75 /* AgeIndicatorView.xib */,
 				4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */,
 				1993550816D4E89900D73389 /* ImageWidgetContainer.xib */,
 				19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */,
@@ -639,7 +627,6 @@
 				19DFB9FC16D5E6E60019E2B2 /* EventDescriptionView.xib in Resources */,
 				19632B9116DAFA1800E0EA75 /* bracket.png in Resources */,
 				19632B9316DB028400E0EA75 /* MainFigureInfoPage.xib in Resources */,
-				19632B9816DB2F6F00E0EA75 /* AgeIndicatorView.xib in Resources */,
 				19632BA116DB427E00E0EA75 /* wood.jpg in Resources */,
 				19632BA316DB437500E0EA75 /* wood.png in Resources */,
 				19632BA616DB453C00E0EA75 /* 218-trash2.png in Resources */,
@@ -687,7 +674,6 @@
 				19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */,
 				199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */,
 				19632B9616DB036900E0EA75 /* MainFigureInfoPage.m in Sources */,
-				19632B9B16DB309F00E0EA75 /* AgeIndicatorView.m in Sources */,
 				195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */,
 				195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */,

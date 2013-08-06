@@ -20,15 +20,11 @@
 @dynamic eventId;
 @dynamic figure;
 
-static NSString *KeyForFigureName = @"figure_name";
 static NSString *KeyForEventDescription = @"figure_event";
 static NSString *KeyForAgeYears = @"age_years";
 static NSString *KeyForAgeMonths = @"age_months";
 static NSString *KeyForAgeDays = @"age_days";
-static NSString *KeyForPronoun = @"figure_pronoun";
-static NSString *KeyForFigureProfilePic = @"figure_profile_pic";
 static NSString *KeyForEventId = @"event_id";
-static NSString *KeyForFigureId = @"figure_id";
 
 -(id)initWithJsonDictionary:(NSDictionary *)jsonDict {
     self = [super init];

@@ -51,6 +51,8 @@
 		19632BA316DB437500E0EA75 /* wood.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA216DB437500E0EA75 /* wood.png */; };
 		19632BA616DB453C00E0EA75 /* 218-trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA416DB453C00E0EA75 /* 218-trash2.png */; };
 		19632BA716DB453C00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */; };
+		197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */; };
+		197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305EA17C5B66A00958D15 /* EventInfoTableView.m */; };
 		197308D41707B57C00FCADD3 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = 197308D31707B57C00FCADD3 /* question.png */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
@@ -62,7 +64,6 @@
 		1993916616AA201000DA3CD9 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993916516AA201000DA3CD9 /* icon@2x.png */; };
 		1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1997B72816DEBA31009692F5 /* LegacyModel.xcdatamodeld */; };
 		199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199C0CAB16C0C0D900068E73 /* CoreData.framework */; };
-		19A524A116B75FE400195D9D /* friend-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A524A016B75FE400195D9D /* friend-icon.png */; };
 		19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
 		19A9979B16DD6B22006840CD /* brushedmetal.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A9979A16DD6B22006840CD /* brushedmetal.png */; };
 		19AF0EE5171BC908008DCA6A /* decoration-name.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AF0EE4171BC908008DCA6A /* decoration-name.png */; };
@@ -185,6 +186,10 @@
 		19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "218-trash2@2x.png"; sourceTree = "<group>"; };
 		19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewStickLines.h; sourceTree = "<group>"; };
 		19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewStickLines.m; sourceTree = "<group>"; };
+		197305E617C5B32D00958D15 /* EventInfoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoHeaderCell.h; sourceTree = "<group>"; };
+		197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoHeaderCell.m; sourceTree = "<group>"; };
+		197305E917C5B66A00958D15 /* EventInfoTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoTableView.h; sourceTree = "<group>"; };
+		197305EA17C5B66A00958D15 /* EventInfoTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoTableView.m; sourceTree = "<group>"; };
 		197308D31707B57C00FCADD3 /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = question.png; path = images/question.png; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
@@ -198,7 +203,6 @@
 		1993916516AA201000DA3CD9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		1997B72916DEBA31009692F5 /* LegacyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LegacyModel.xcdatamodel; sourceTree = "<group>"; };
 		199C0CAB16C0C0D900068E73 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		19A524A016B75FE400195D9D /* friend-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "friend-icon.png"; path = "../../../../../../Desktop/friend-icon.png"; sourceTree = "<group>"; };
 		19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPickerHandler.h; sourceTree = "<group>"; };
 		19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendPickerHandler.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19A9979A16DD6B22006840CD /* brushedmetal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brushedmetal.png; sourceTree = "<group>"; };
@@ -334,6 +338,17 @@
 			name = AFNetworking;
 			sourceTree = "<group>";
 		};
+		197305E517C5B30400958D15 /* Event Info Components */ = {
+			isa = PBXGroup;
+			children = (
+				197305E617C5B32D00958D15 /* EventInfoHeaderCell.h */,
+				197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */,
+				197305E917C5B66A00958D15 /* EventInfoTableView.h */,
+				197305EA17C5B66A00958D15 /* EventInfoTableView.m */,
+			);
+			name = "Event Info Components";
+			sourceTree = "<group>";
+		};
 		19C7BD8A174BC7AA004C8B0A /* Pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,7 +417,6 @@
 				19632BA416DB453C00E0EA75 /* 218-trash2.png */,
 				19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */,
 				19632B9016DAFA1800E0EA75 /* bracket.png */,
-				19A524A016B75FE400195D9D /* friend-icon.png */,
 				19D61CC516B2370A00C81E60 /* 19-gear.png */,
 				19D61CC616B2370A00C81E60 /* 19-gear@2x.png */,
 				19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */,
@@ -485,6 +499,7 @@
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
+				197305E517C5B30400958D15 /* Event Info Components */,
 				1909A86F1776B41700256ED0 /* Row Components */,
 				1909A85A1772D21300256ED0 /* FigureRowActionOverlay.h */,
 				1909A85B1772D21500256ED0 /* FigureRowActionOverlay.m */,
@@ -616,7 +631,6 @@
 				19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */,
 				19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */,
 				19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */,
-				19A524A116B75FE400195D9D /* friend-icon.png in Resources */,
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
@@ -705,6 +719,8 @@
 				191F78FC1782DD6700729F2A /* AFXMLRequestOperation.m in Sources */,
 				191F78FD1782DD6700729F2A /* UIImageView+AFNetworking.m in Sources */,
 				191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */,
+				197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */,
+				197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,8 +827,8 @@
 		4EEA6CF815268ED300B96EFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies\"",

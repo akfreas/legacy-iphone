@@ -5,10 +5,10 @@
 #import "LegacyAppConnection.h"
 #import "EventDescriptionView.h"
 #import "FigureRow.h"
-#import "MainFigureInfoPage.h"
 #import "Event.h"
 #import "LegacyWebView.h"
 #import "FigureRowHostingScrollPage.h"
+#import "EventInfoTableView.h"
 
 @interface LeftRightHostingScrollView () <UIScrollViewDelegate>
 
@@ -61,42 +61,30 @@
     NSDictionary *userInfo = notif.userInfo;
     Event *theEvent = userInfo[@"event"];
     Person *thePerson = userInfo[@"person"];
-    LegacyAppRequest *request;
-    if ([accessor primaryPerson]) {
-        request = [LegacyAppRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:[accessor primaryPerson]];
-    } else {
-        request = [LegacyAppRequest requestToGetRelatedEventsForEvent:[theEvent.eventId stringValue] requester:nil];
-        
-    }
-    connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
-    MainFigureInfoPage *infoPage = [[MainFigureInfoPage alloc] initWithFrame:infoFrame];
-    infoPage.event = theEvent;
-    infoPage.person = thePerson;
+    
+    EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithEvent:theEvent];
+    
+    infoPage.frame = infoFrame;
     NSArray *relatedEvents = [accessor eventsForFigure:theEvent.figure];
-        [pageArray addObject:infoPage];
+    [pageArray addObject:infoPage];
+    [infoPage reloadData];
+    [self addSubview:infoPage];
     [self scrollToPage:1];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [infoPage expandWithRelatedEvents:relatedEvents completion:^(BOOL expanded) {
-            infoPage.frame = CGRectSetSizeOnFrame(infoFrame, self.bounds.size);
-            
-            if ([notif.object isKindOfClass:[FigureRow class]]) {
-                FigureRow *theRow = (FigureRow *)notif.object;
-                [theRow reset];
-            }
-            LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:CGRectOffset(infoFrame, 320 + SpaceBetweenFigureRowPages, 0)];
-            webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
-            webView.event = theEvent;
-            [webView loadRequest];
-            [pageArray addObject:webView];
+    
+    if ([notif.object isKindOfClass:[FigureRow class]]) {
+        FigureRow *theRow = (FigureRow *)notif.object;
+        [theRow reset];
+    }
+    
+    LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:CGRectOffset(infoFrame, 320 + SpaceBetweenFigureRowPages, 0)];
+    webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
+    webView.event = theEvent;
+    [webView loadRequest];
+    [pageArray addObject:webView];
+    [self insertSubview:webView belowSubview:pageControl];
 
-            [self insertSubview:webView belowSubview:pageControl];
-            self.contentSize = CGSizeAddWidthToSize(self.contentSize, infoPage.frame.size.width + webView.frame.size.width * SpaceBetweenFigureRowPages * [pageArray count]);
-        }];
-    });
-    
-    [self insertSubview:infoPage belowSubview:pageControl];
-    
+    self.contentSize = CGSizeAddWidthToSize(self.contentSize, infoPage.frame.size.width + webView.frame.size.width * SpaceBetweenFigureRowPages * [pageArray count]);
+
 }
 
 

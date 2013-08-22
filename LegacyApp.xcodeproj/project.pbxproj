@@ -53,6 +53,8 @@
 		19632BA716DB453C00E0EA75 /* 218-trash2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19632BA516DB453C00E0EA75 /* 218-trash2@2x.png */; };
 		197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */; };
 		197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305EA17C5B66A00958D15 /* EventInfoTableView.m */; };
+		197305EE17C5C41500958D15 /* EventInfoTimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305ED17C5C41500958D15 /* EventInfoTimelineCell.m */; };
+		197305F017C5CA6700958D15 /* EventInfoTimelineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 197305EF17C5CA6700958D15 /* EventInfoTimelineCell.xib */; };
 		197308D41707B57C00FCADD3 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = 197308D31707B57C00FCADD3 /* question.png */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
@@ -190,6 +192,9 @@
 		197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoHeaderCell.m; sourceTree = "<group>"; };
 		197305E917C5B66A00958D15 /* EventInfoTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoTableView.h; sourceTree = "<group>"; };
 		197305EA17C5B66A00958D15 /* EventInfoTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoTableView.m; sourceTree = "<group>"; };
+		197305EC17C5C41500958D15 /* EventInfoTimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoTimelineCell.h; sourceTree = "<group>"; };
+		197305ED17C5C41500958D15 /* EventInfoTimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoTimelineCell.m; sourceTree = "<group>"; };
+		197305EF17C5CA6700958D15 /* EventInfoTimelineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventInfoTimelineCell.xib; path = Resources/EventInfoTimelineCell.xib; sourceTree = SOURCE_ROOT; };
 		197308D31707B57C00FCADD3 /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = question.png; path = images/question.png; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
@@ -345,6 +350,9 @@
 				197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */,
 				197305E917C5B66A00958D15 /* EventInfoTableView.h */,
 				197305EA17C5B66A00958D15 /* EventInfoTableView.m */,
+				197305EC17C5C41500958D15 /* EventInfoTimelineCell.h */,
+				197305ED17C5C41500958D15 /* EventInfoTimelineCell.m */,
+				197305EF17C5CA6700958D15 /* EventInfoTimelineCell.xib */,
 			);
 			name = "Event Info Components";
 			sourceTree = "<group>";
@@ -661,6 +669,7 @@
 				1909A8831777559000256ED0 /* 10-medical@2x.png in Resources */,
 				19C55E4A1783A7890099AE4A /* icon.png in Resources */,
 				19C55E4C1783A7900099AE4A /* icon@2x.png in Resources */,
+				197305F017C5CA6700958D15 /* EventInfoTimelineCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +730,7 @@
 				191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */,
 				197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */,
 				197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */,
+				197305EE17C5C41500958D15 /* EventInfoTimelineCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

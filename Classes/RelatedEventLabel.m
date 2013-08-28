@@ -3,22 +3,21 @@
 
 @implementation RelatedEventLabel {
     
-    Event *relatedEvent;
     
     IBOutlet UITextView *textView;
     IBOutlet UILabel *ageLabel;
     IBOutlet UIView *view;
 }
 
--(id)initWithRelatedEvent:(Event *)event {
+-(id)initWithRelatedEvent:(Event *)anEvent {
     
     self = [super init];
     
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"RelatedEventLabel" owner:self options:nil];
-        relatedEvent = event;
-        ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
-        textView.text = relatedEvent.eventDescription;
+        _event = anEvent;
+        ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", _event.ageYears, _event.ageMonths, _event.ageDays];
+        textView.text = _event.eventDescription;
         [self addSubview:view];
     }
     return self;

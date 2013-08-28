@@ -9,9 +9,9 @@
 #import "LegacyWebView.h"
 #import "FigureRowHostingScrollPage.h"
 #import "EventInfoTableView.h"
+#import "LegacyInfoPage.h"
 
 @interface LeftRightHostingScrollView () <UIScrollViewDelegate>
-
 @end
 
 @implementation LeftRightHostingScrollView {
@@ -26,6 +26,13 @@
     LegacyAppConnection *connection;
 }
 
+#define InfoPageNumber 0
+#define LandingPageNumber InfoPageNumber + 1
+#define TimelinePageNumber LandingPageNumber + 1
+#define WebViewPageNumber TimelinePageNumber + 1
+#define LastPageNumber WebViewPageNumber
+
+
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -37,54 +44,80 @@
         self.showsVerticalScrollIndicator = NO;
         lastPoint = CGPointZero;
         accessor = [ObjectArchiveAccessor sharedInstance];
-        pageArray = [NSMutableArray array];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
-        self.contentSize = self.bounds.size;
+        self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
-        [self addFigurePage];
         [self addPageControl];
-
+        [self addLegacyInfoPage];
+        [self addFigurePage];
+        [self scrollToPage:LandingPageNumber];
     }
     return self;
 }
 
 -(void)addFigurePage {
-    figurePage = [[FigureRowHostingScrollPage alloc] initWithFrame:self.bounds];
-    [self addSubview:figurePage];
+    
+    figurePage = [[FigureRowHostingScrollPage alloc] initWithFrame:[self frameAtIndex:LandingPageNumber]];
+    [self addPage:figurePage];
+}
+
+-(void)addLegacyInfoPage {
+    
+    LegacyInfoPage *infoPage = [[LegacyInfoPage alloc] initWithFrame:[self frameAtIndex:InfoPageNumber]];
+    [self addPage:infoPage];
+}
+
+-(void)addPage:(UIView <FigureRowPageProtocol> *)page {
+    if (pageArray == nil) {
+        pageArray = [NSMutableArray array];
+    }
+    [pageArray addObject:page];
+    page.frame = [self frameAtIndex:[pageArray count] - 1];
+    [self insertSubview:page belowSubview:pageControl];
+    self.contentSize = CGSizeAddWidthToSize(self.contentSize, page.frame.size.width + SpaceBetweenFigureRowPages);
+    
+}
+
+-(void)removePage:(UIView <FigureRowPageProtocol> *)page {
+    
+    [page removeFromSuperview];
+    [pageArray removeObject:page];
+    
+    CGSize newContentSize = CGSizeMake(0, self.bounds.size.height);
+    
+    for (UIView <FigureRowPageProtocol> *thePage in pageArray) {
+        CGSize pageSize = thePage.frame.size;
+        newContentSize = CGSizeAddWidthToSize(newContentSize, pageSize.height + SpaceBetweenFigureRowPages);
+    }
+    NSLog(@"New content size: %@", CGSizeCreateDictionaryRepresentation(newContentSize));
+    self.contentSize = newContentSize;
+    
 }
 
 -(void)addEventInfoPageAndScroll:(NSNotification *)notif {
     
     
-    CGRect infoFrame = CGRectMake(320 + SpaceBetweenFigureRowPages, self.contentOffset.y, 320, 400);
     NSDictionary *userInfo = notif.userInfo;
     Event *theEvent = userInfo[@"event"];
-    Person *thePerson = userInfo[@"person"];
     
     EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithEvent:theEvent];
     
-    infoPage.frame = infoFrame;
-    NSArray *relatedEvents = [accessor eventsForFigure:theEvent.figure];
-    [pageArray addObject:infoPage];
+    infoPage.frame = [self frameAtIndex:TimelinePageNumber];
     [infoPage reloadData];
-    [self addSubview:infoPage];
-    [self scrollToPage:1];
+    [self addPage:infoPage];
+    [self scrollToPage:TimelinePageNumber];
     
     if ([notif.object isKindOfClass:[FigureRow class]]) {
         FigureRow *theRow = (FigureRow *)notif.object;
         [theRow reset];
     }
     
-    LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:CGRectOffset(infoFrame, 320 + SpaceBetweenFigureRowPages, 0)];
+    LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
     webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
     webView.event = theEvent;
     [webView loadRequest];
-    [pageArray addObject:webView];
-    [self insertSubview:webView belowSubview:pageControl];
-
-    self.contentSize = CGSizeAddWidthToSize(self.contentSize, infoPage.frame.size.width + webView.frame.size.width * SpaceBetweenFigureRowPages * [pageArray count]);
-
+    [self addPage:webView];
 }
 
 
@@ -95,9 +128,9 @@
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(PageControlXPosition, PageControlYPosition, PageControlWidthPerPage * 3, PageControlHeight)];
     pageControl.layer.cornerRadius = PageControlCornerRadius;
     pageControl.alpha = 0;
-    pageControl.currentPage = 1;
+    pageControl.currentPage = 0;
     pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
-    pageControl.numberOfPages = 3;
+    pageControl.numberOfPages = LastPageNumber;
     pageControl.userInteractionEnabled = NO;
     [self addSubview:pageControl];
     
@@ -106,10 +139,7 @@
 
 
 -(CGRect)frameAtIndex:(NSInteger)index {
-    CGFloat padding = 5;
-    CGFloat width = Utility_AppSettings.frameForKeyWindow.size.height;
-
-    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
+    return CGRectMake((self.bounds.size.width + SpaceBetweenFigureRowPages) * index , 0, self.bounds.size.width, self.bounds.size.height);
 }
 
 -(void)removeInfoViews {
@@ -142,18 +172,13 @@
             }];
         }
     }
-    if (scrollView.contentOffset.x == 0 && [pageArray count] > 0) {
+    if (scrollView.contentOffset.x == [self frameAtIndex:LandingPageNumber].origin.x && [pageArray count] > 0) {
         NSMutableArray *newArray = [NSMutableArray arrayWithArray:pageArray];
-        for (int i=0; i < [pageArray count]; i++) {
+        for (int i=LandingPageNumber + 1; i < [newArray count]; i++) {
             
-            UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:i];
-            
-            [page removeFromSuperview];
-            [newArray removeObject:page];
-            page = nil;
+            UIView <FigureRowPageProtocol> *page = [newArray objectAtIndex:i];
+            [self removePage:page];
         }
-        self.contentSize = CGSizeMake(self.bounds.size.width, ([arrayOfFigureRows count] + 1) * (FigureRowPageInitialHeight + FigureRowScrollViewPadding));
-        pageArray = newArray;
     }
     
 }
@@ -169,7 +194,7 @@
 }
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
-    
+
     if (self.contentOffset.x != lastPoint.x) {
         if (self.contentOffset.x > lastPoint.x) {
             pageControl.currentPage++;
@@ -177,15 +202,15 @@
             pageControl.currentPage--;
         }
         
-        if (pageControl.currentPage > 0 && [pageArray count] > 0 && pageControl.currentPage <= [pageArray count]) {
-            UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage - 1];
+        if (pageControl.currentPage > 0 && [pageArray count] > 0 && pageControl.currentPage < [pageArray count]) {
+            UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage];
             lastPoint = CGPointMake(page.frame.origin.x, 0);
             if ([page isKindOfClass:[LegacyWebView class]]) {
                 [(LegacyWebView *)page loadRequest];
-            }
+            } 
             [self scrollToPage:pageControl.currentPage];
         } else {
-            [self scrollToPage:0];
+            [self scrollToPage:LandingPageNumber];
         }
     }
 }
@@ -194,16 +219,12 @@
     
     CGFloat xPoint = 0;
 
-    if (page > 0) {
-        UIView <FigureRowPageProtocol> *pageView = pageArray[page - 1];
-        xPoint = pageView.frame.origin.x;
-    } else {
-        xPoint = 0;
-    }
+    UIView <FigureRowPageProtocol> *pageView = pageArray[page];
+    xPoint = pageView.frame.origin.x;
     pageControl.currentPage = page;
     CGPoint pagePoint = CGPointMake(xPoint, self.contentOffset.y);
-    lastPoint = pagePoint;
     [self setContentOffset:pagePoint animated:YES];
+    lastPoint = pagePoint;
 }
 
 @end

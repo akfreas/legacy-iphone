@@ -56,6 +56,7 @@ CGFloat pageWidth = 320;
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    [actionOverlay hide];
     if (scrollView.tracking == NO && scrollView.contentOffset.x > 10 && isSwiping == NO) {
         
         isSwiping = YES;
@@ -66,7 +67,9 @@ CGFloat pageWidth = 320;
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [self swipeOnRow];
+    if (scrollView.contentOffset.x > 0) {
+        [self swipeOnRow];
+    }
 }
 
 -(void)addTapGestureRecognizer {
@@ -101,7 +104,7 @@ CGFloat pageWidth = 320;
     NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
     self.bounces = NO;
-
+    isSwiping = NO;
 }
 
 -(void)reset {
@@ -111,7 +114,7 @@ CGFloat pageWidth = 320;
 -(void)resetContentOffset {
     self.contentOffset = CGPointZero;
     self.scrollEnabled = YES;
-    self.bounces = YES;
+//    self.bounces = YES;
     isSwiping = NO;
 }
 

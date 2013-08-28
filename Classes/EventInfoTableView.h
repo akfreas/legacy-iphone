@@ -1,5 +1,7 @@
+#include "FigureRowPageProtocol.h"
+
 @class Event;
-@interface EventInfoTableView : UITableView
+@interface EventInfoTableView : UITableView <FigureRowPageProtocol>
 
 -(id)initWithEvent:(Event *)anEvent;
 

@@ -25,6 +25,7 @@
     
     if (self) {
         event = anEvent;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor orangeColor];
         self.reuseIdentifier = @"HeaderTableViewCell";
         queue = [[NSOperationQueue alloc] init];

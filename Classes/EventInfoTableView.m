@@ -1,5 +1,6 @@
 #import "EventInfoTableView.h"
 #import "EventInfoHeaderCell.h"
+#import "EventInfoTimelineCell.h"
 #import "Event.h"
 #import "Figure.h"
 #import "Person.h"
@@ -27,6 +28,7 @@
         [self fetchRelatedEvents];
         self.delegate = self;
         self.dataSource = self;
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin);
     }
     return self;
@@ -52,8 +54,20 @@
         }
         cell.frame = CGRectSetHeightForRect(100, cell.frame);
     } else {
+        NSInteger eventIndex = indexPath.row - 1;
+        NSLog(@"Event array: %@", arrayOfEvents);
+        Event *theEvent = [arrayOfEvents objectAtIndex:eventIndex];
         static NSString *ReuseId = @"mainTableViewCells";
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseId];
+        cell = [self dequeueReusableCellWithIdentifier:ReuseId];
+        if (cell == nil) {
+            cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
+        } else {
+        
+            EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)cell;
+            timelineCell.event = theEvent;
+        }
+        cell.frame = CGRectSetHeightForRect(44, cell.frame);
+        cell.backgroundColor = [UIColor orangeColor];
     }
     return cell;
 }
@@ -62,12 +76,12 @@
     if (indexPath.row == 0) {
         return 200;
     } else {
-        return 44;
+        return RelatedEventsLabelHeight;
     }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [arrayOfEvents count] + 1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

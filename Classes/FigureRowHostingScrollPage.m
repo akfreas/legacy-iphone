@@ -31,6 +31,8 @@
     TopActionView *actionViewTop;
 }
 
+
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

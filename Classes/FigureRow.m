@@ -10,7 +10,7 @@
 #import "LegacyWebView.h"
 #import "FigureRowActionOverlay.h"
 
-@interface FigureRow () <UIScrollViewDelegate>
+@interface FigureRow () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end
 
@@ -28,6 +28,7 @@
     NSMutableArray *pageArray;
     UIView *nameContainerView;
     
+    UISwipeGestureRecognizer *swipeGesture;
     CGPoint lastPoint;
     BOOL isSwiping;
 }
@@ -46,6 +47,7 @@ CGFloat pageWidth = 320;
         self.bounces = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
+        self.scrollEnabled = YES;
         [self setupPages];
         [self registerForNotifications];
         [self addTapGestureRecognizer];
@@ -72,11 +74,29 @@ CGFloat pageWidth = 320;
     }
 }
 
+#pragma mark Gesture Recognizer Methods
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    if (gestureRecognizer == swipeGesture || otherGestureRecognizer == swipeGesture) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(void)beginSwiping:(id)test {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollToInfo" object:nil];
+}
+
 -(void)addTapGestureRecognizer {
+
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
-//    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeOnRow)];
-//    swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-//    [self addGestureRecognizer:swipeGesture];
+    swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(beginSwiping:)];
+    swipeGesture.delegate = self;
+    swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    [self addGestureRecognizer:swipeGesture];
     [self addGestureRecognizer:gesture];
 }
 
@@ -114,7 +134,6 @@ CGFloat pageWidth = 320;
 -(void)resetContentOffset {
     self.contentOffset = CGPointZero;
     self.scrollEnabled = YES;
-//    self.bounces = YES;
     isSwiping = NO;
 }
 

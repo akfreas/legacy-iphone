@@ -30,7 +30,7 @@
 #define LandingPageNumber InfoPageNumber + 1
 #define TimelinePageNumber LandingPageNumber + 1
 #define WebViewPageNumber TimelinePageNumber + 1
-#define LastPageNumber WebViewPageNumber
+#define LastPageNumber WebViewPageNumber + 1
 
 
 
@@ -42,18 +42,24 @@
         self.delegate = self;
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
+        self.bounces = NO;
         lastPoint = CGPointZero;
         accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToInfoPage) name:@"ScrollToInfo" object:nil];
         [self addPageControl];
         [self addLegacyInfoPage];
         [self addFigurePage];
         [self scrollToPage:LandingPageNumber];
     }
     return self;
+}
+         
+-(void)scrollToInfoPage {
+    [self scrollToPage:InfoPageNumber];
 }
 
 -(void)addFigurePage {
@@ -78,6 +84,7 @@
     self.contentSize = CGSizeAddWidthToSize(self.contentSize, page.frame.size.width + SpaceBetweenFigureRowPages);
     
 }
+
 
 -(void)removePage:(UIView <FigureRowPageProtocol> *)page {
     
@@ -195,22 +202,20 @@
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
 
-    if (self.contentOffset.x != lastPoint.x) {
+    if (self.contentOffset.x != lastPoint.x && self.contentOffset.x <= self.contentSize.width - [self frameAtIndex:pageControl.currentPage].size.width) {
         if (self.contentOffset.x > lastPoint.x) {
             pageControl.currentPage++;
         } else {
             pageControl.currentPage--;
         }
         
-        if (pageControl.currentPage > 0 && [pageArray count] > 0 && pageControl.currentPage < [pageArray count]) {
+        if (pageControl.currentPage >= 0 && [pageArray count] > 0 && pageControl.currentPage < [pageArray count]) {
             UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage];
             lastPoint = CGPointMake(page.frame.origin.x, 0);
             if ([page isKindOfClass:[LegacyWebView class]]) {
                 [(LegacyWebView *)page loadRequest];
             } 
             [self scrollToPage:pageControl.currentPage];
-        } else {
-            [self scrollToPage:LandingPageNumber];
         }
     }
 }

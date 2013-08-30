@@ -97,7 +97,6 @@
         CGSize pageSize = thePage.frame.size;
         newContentSize = CGSizeAddWidthToSize(newContentSize, pageSize.height + SpaceBetweenFigureRowPages);
     }
-    NSLog(@"New content size: %@", CGSizeCreateDictionaryRepresentation(newContentSize));
     self.contentSize = newContentSize;
     
 }

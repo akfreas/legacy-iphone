@@ -55,7 +55,6 @@
         cell.frame = CGRectSetHeightForRect(100, cell.frame);
     } else {
         NSInteger eventIndex = indexPath.row - 1;
-        NSLog(@"Event array: %@", arrayOfEvents);
         Event *theEvent = [arrayOfEvents objectAtIndex:eventIndex];
         static NSString *ReuseId = @"mainTableViewCells";
         cell = [self dequeueReusableCellWithIdentifier:ReuseId];

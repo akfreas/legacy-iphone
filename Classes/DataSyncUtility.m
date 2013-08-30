@@ -61,7 +61,6 @@
     
     LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-        NSLog(@"Person sync result: %@", result);
         if (completionBlock != NULL) {
             completionBlock();
         }
@@ -85,7 +84,6 @@
 -(void)syncRelatedEvents {
     
     NSArray *figures = [accessor allFigures];
-    NSLog(@"figures: %@", figures);
 //    for (Figure *figure in figures) {
     
     if ([figures count] > 0) {
@@ -97,7 +95,6 @@
             
             [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
                 ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];
-                NSLog(@"event result: %@", result);
                 NSArray *resultArray = (NSArray *)result;
                 for (NSDictionary *relatedEvent in resultArray) {
                     [ourAccessor addEventAndFigureWithJson:relatedEvent];

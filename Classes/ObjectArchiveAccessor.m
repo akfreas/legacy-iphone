@@ -308,7 +308,6 @@ static NSString *PersonEntityName = @"Person";
     Event *newEvent = [[Event alloc] initWithEntity:eventEntityDesc insertIntoManagedObjectContext:[self managedObjectContext]];
     
     
-//    NSLog(@"Json: %@", json);
     newEvent.eventDescription = json[@"event_description"];
     newEvent.ageYears = [NSNumber numberWithInt:[json[@"age_years"] intValue]];
     newEvent.ageMonths = [NSNumber numberWithInt:[json[@"age_months"] intValue]];
@@ -393,8 +392,6 @@ static NSString *PersonEntityName = @"Person";
         if (httpResponse.statusCode == 200) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 person.thumbnail = imageData;
-                //                NSLog(@"Assoc person: %@", assocPerson);
-                //                NSLog(@"assoc person thumb: %@", assocPerson.thumbnail);
                 [self save];
                 [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
             });

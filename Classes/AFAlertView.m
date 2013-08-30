@@ -142,7 +142,6 @@
     CGFloat heightTextView = descriptionSize.height + PADDING;
     
     descriptionTextView.frame = CGRectMake(xTextView, yTextView, widthTextView, heightTextView);
-    NSLog(@"Description view: %f %f", descriptionSize.height, descriptionSize.width);
     
     CGFloat alertViewHeight = PADDING;
     NSArray *sortedSubviews = [alertDialogView.subviews sortedArrayUsingComparator:^NSComparisonResult(UIView *obj1, UIView *obj2) {
@@ -208,7 +207,6 @@
         
         CGFloat alertDialogY = superView.frame.size.height - alertDialogView.frame.size.height;
         alertDialogView.frame = CGRectMake(0, alertDialogY, alertDialogView.frame.size.width, alertDialogView.frame.size.height);
-        NSLog(@"alert dialog frame: %@", CGRectCreateDictionaryRepresentation(alertDialogView.frame));
     }];
 }
 

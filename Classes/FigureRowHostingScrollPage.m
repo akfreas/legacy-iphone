@@ -133,12 +133,10 @@
     }
     row.event = relation.event;
     row.person = relation.person;
-    NSLog(@"%@ thumbnail: %@", relation.person.firstName, relation.person.thumbnail);
     return row;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    NSLog(@"Keypath: %@ change: %@", keyPath, object);
     
     NSUInteger index = [eventArray indexOfObject:object];
     if (index != NSNotFound) {
@@ -147,7 +145,6 @@
         
         if ([object isKindOfClass:[EventPersonRelation class]]) {
             EventPersonRelation *changedObject = (EventPersonRelation *)object;
-            NSLog(@"Person thumb: %@", changedObject.person.thumbnail);
             row.person = changedObject.person;
             row.event = changedObject.event;
         }

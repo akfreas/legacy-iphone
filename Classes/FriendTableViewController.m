@@ -74,8 +74,6 @@
 
         retVal = [sectionInfo numberOfObjects];
     }
-    NSLog(@"Persons: %@", persons);
-    NSLog(@"Retval: %d", retVal);
     return retVal;
 }
 

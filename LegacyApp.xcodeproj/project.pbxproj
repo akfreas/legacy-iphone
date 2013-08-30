@@ -36,6 +36,7 @@
 		191F78FC1782DD6700729F2A /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78F21782DD6700729F2A /* AFXMLRequestOperation.m */; };
 		191F78FD1782DD6700729F2A /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78F41782DD6700729F2A /* UIImageView+AFNetworking.m */; };
 		191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78FF1783990B00729F2A /* RelatedEventLabel.m */; };
+		1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
 		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
@@ -168,6 +169,7 @@
 		191F78F41782DD6700729F2A /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		191F78FE1783990B00729F2A /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		191F78FF1783990B00729F2A /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
+		1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LegacyInfoPage.xib; path = Resources/LegacyInfoPage.xib; sourceTree = SOURCE_ROOT; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
 		192E42B1174668E900192BD5 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
 		192E42B2174668E900192BD5 /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				1909A8681776192100256ED0 /* FigureRowHostingScrollPage.m */,
 				197305F117C5D54500958D15 /* LegacyInfoPage.h */,
 				197305F217C5D54500958D15 /* LegacyInfoPage.m */,
+				1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				19C55E4A1783A7890099AE4A /* icon.png in Resources */,
 				19C55E4C1783A7900099AE4A /* icon@2x.png in Resources */,
 				197305F017C5CA6700958D15 /* EventInfoTimelineCell.xib in Resources */,
+				1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

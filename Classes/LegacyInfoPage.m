@@ -1,23 +1,16 @@
 #import "LegacyInfoPage.h"
 
-@implementation LegacyInfoPage
+@implementation LegacyInfoPage {
+    
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.class) owner:nil options:nil][0];
     if (self) {
-        self.backgroundColor = [UIColor orangeColor];
+        self.frame = frame;
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

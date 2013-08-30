@@ -79,22 +79,6 @@
     }];
 }
 
--(void)addFacebookButton {
-    
-    if (signInActionRow == nil) {
-        signInActionRow = [[BottomFacebookSignInRowView alloc] init];
-        [scroller addSubview:signInActionRow];
-        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, signInActionRow.frame.size.height);
-    }
-    CGPoint pointForActionRow = [self frameAtIndex:[arrayOfFigureRows count]].origin;
-    signInActionRow.frame = CGRectSetOriginOnRect(signInActionRow.frame, pointForActionRow.x, pointForActionRow.y);
-}
-
--(void)removeFacebookButton {
-    [signInActionRow removeFromSuperview];
-    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, -signInActionRow.frame.size.height);
-}
-
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat width = self.bounds.size.width;
     
@@ -132,17 +116,6 @@
         }
     }
 
-    [FBSession openActiveSessionWithAllowLoginUI:NO];
-    if ([[FBSession activeSession] state] != FBSessionStateOpen) {
-        [self addFacebookButton];
-    }
-    
-//    if ([eventArray count] < [arrayOfFigureRows count]) {
-//        [arrayOfFigureRows removeObjectsInRange:NSMakeRange([eventArray count], [arrayOfFigureRows count] - 1)];
-//    }
-    
-    
-    
     [self layoutSubviews];
 }
 

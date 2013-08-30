@@ -5,6 +5,8 @@
 #import "Figure.h"
 #import "ImageWidget.h"
 #import "Person.h"
+#import "ObjectArchiveAccessor.h"
+#import "ImageDownloadUtil.h"
 
 @implementation ImageWidgetContainer {
         
@@ -17,7 +19,7 @@
     UIImage *imageForThumb;
     ProgressIndicator *progressIndicator;
     NSOperationQueue *operationQueue;
-    
+    ObjectArchiveAccessor *accessor;
 }
 
 
@@ -26,6 +28,7 @@
     
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
+        accessor = [[ObjectArchiveAccessor alloc] init];
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
 //        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
         _widget = [[ImageWidget alloc] init];
@@ -38,20 +41,14 @@
     return self;
 }
 
-//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    NSLog(@"thumbnail data: %@ \n %@", change[@"new"], _person.thumbnail);
-//    _widget.smallImage = [UIImage imageWithData:_person.thumbnail];
-//}
 
 -(void)layoutSubviews {
     
     
     
     if (self.event == nil) {
-//        [personThumbnail addSubview:indicatorView];
-//        [indicatorView startAnimating];
-    } else {
         
+    } else {
             personThumbnail.image = imageForThumb;
             _widget.largeImage = personThumbnail.image;
     }
@@ -60,16 +57,14 @@
 -(void)getThumbnailImage {
     
     
-    NSURL *imageURL = [NSURL URLWithString:self.event.figure.imageURL];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:imageURL];
     dispatch_async(dispatch_get_main_queue(), ^{
         [progressIndicator animate];
     });
-    [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
-        imageForThumb = [UIImage imageWithData:data];
+    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:self.event.figure completion:^(UIImage *theImage) {
+        [progressIndicator stopAnimating];
+        imageForThumb = theImage;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self layoutSubviews];
-            [progressIndicator stopAnimating];
+            [self setNeedsLayout];
         });
     }];
 }

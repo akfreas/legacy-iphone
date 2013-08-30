@@ -81,7 +81,7 @@ NSInteger numberOfButtons = 2;
 
 -(void)layoutSubviews {
     
-    [super layoutSubviews];
+    [super setNeedsLayout];
     for (int i=0; i < [buttonArray count]; i++) {
         UIButton *button = [buttonArray objectAtIndex:i];
         button.frame = [self rectForButtonAtIndex:i];

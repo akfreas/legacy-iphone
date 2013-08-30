@@ -14,6 +14,7 @@
     </entity>
     <entity name="Figure" representedClassName="Figure" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="figure" inverseEntity="Event" syncable="YES"/>
@@ -29,9 +30,9 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Figure" positionX="367" positionY="9" width="128" height="105"/>
+        <element name="Event" positionX="198" positionY="243" width="128" height="135"/>
+        <element name="EventPersonRelation" positionX="-0" positionY="288" width="128" height="73"/>
+        <element name="Figure" positionX="367" positionY="9" width="128" height="118"/>
         <element name="Person" positionX="0" positionY="0" width="128" height="165"/>
-        <element name="EventPersonRelation" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

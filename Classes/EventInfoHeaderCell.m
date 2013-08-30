@@ -2,6 +2,7 @@
 #import "CircleImageView.h"
 #import "Event.h"
 #import "Figure.h"
+#import "ImageDownloadUtil.h"
 
 @interface EventInfoHeaderCell ()
 
@@ -41,7 +42,7 @@
 -(void)drawMainCircleImage {
     
     if (mainImageView == nil) {
-        mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:100];
+        mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:80];
         [self addSubview:mainImageView];
 
     } else {
@@ -53,18 +54,11 @@
 
 -(void)fetchFigureProfilePic {
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:event.figure.imageURL]];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        
-        if (error == nil) {
-            mainImage = [UIImage imageWithData:data];
-            
-            if (mainImage != nil) {
-                [self drawMainCircleImage];
-            }
-        }
+    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:event.figure completion:^(UIImage *theImage) {
+        mainImage = theImage;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self drawMainCircleImage];
+        });
     }];
 }
 

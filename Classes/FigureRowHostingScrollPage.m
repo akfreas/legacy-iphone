@@ -116,7 +116,7 @@
         }
     }
 
-    [self layoutSubviews];
+    [self setNeedsLayout];
 }
 
 -(FigureRow *)figureRowForIndex:(NSUInteger)index {

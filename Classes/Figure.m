@@ -1,8 +1,8 @@
 //
 //  Figure.m
-//  Legacy
+//  LegacyApp
 //
-//  Created by Alexander Freas on 6/20/13.
+//  Created by Alexander Freas on 8/29/13.
 //
 //
 
@@ -12,25 +12,15 @@
 
 @implementation Figure
 
+@dynamic id;
 @dynamic imageURL;
 @dynamic name;
-@dynamic id;
+@dynamic imageData;
 @dynamic events;
 
-static NSString *KeyForName = @"name";
-static NSString *KeyForImageUrl = @"image_url";
 
-
--(id)initWithJsonDictionary:(NSDictionary *)dict {
-    
-    if (self == [super init]) {
-        
-        self.name = dict[KeyForName];
-        self.imageURL = [NSURL URLWithString:dict[KeyForImageUrl]];
-    }
-    
-    return self;
+-(UIImage *)image {
+    return [UIImage imageWithData:self.imageData];
 }
-
 
 @end

@@ -1,8 +1,8 @@
 //
 //  Figure.h
-//  Legacy
+//  LegacyApp
 //
-//  Created by Alexander Freas on 6/20/13.
+//  Created by Alexander Freas on 8/29/13.
 //
 //
 
@@ -13,10 +13,13 @@
 
 @interface Figure : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * imageURL;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSSet *events;
+
+@property (nonatomic, readonly) UIImage *image;
 @end
 
 @interface Figure (CoreDataGeneratedAccessors)

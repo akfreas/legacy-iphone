@@ -28,5 +28,6 @@
 
 
 -(NSFetchedResultsController *)fetchedResultsControllerForRelations;
+-(NSManagedObjectContext *)managedObjectContext;
 
 @end

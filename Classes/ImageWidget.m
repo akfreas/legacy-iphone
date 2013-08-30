@@ -87,10 +87,7 @@
 }
 
 -(void)toggleExpand {
-    
-    NSLog(@"Expand!");
-
-    [CATransaction begin];
+        [CATransaction begin];
     [CATransaction setValue:[NSNumber numberWithDouble:0.2] forKey:kCATransactionAnimationDuration];
 
     CGAffineTransform circleTransform = CGAffineTransformMakeScale(2, 2);

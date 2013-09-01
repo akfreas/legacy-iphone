@@ -10,6 +10,9 @@
 #define KeyForInfoOverlayButtonTapped @"OverlayInfoButtonTapped"
 #define KeyForAddFriendButtonTapped @"AddFriendButtonTapped"
 
+#define TableViewCellIdentifierForHeader @"HeaderCellIdentifier"
+#define TableViewCellIdentifierForMainCell @"MainTableViewCell"
+
 
 #define FigureRowPageInitialHeight 140
 #define FigureRowPageWidth 320

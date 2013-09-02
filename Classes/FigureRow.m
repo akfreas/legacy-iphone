@@ -189,7 +189,7 @@ CGFloat pageWidth = 320;
     for (int i=0; i < [pageArray count]; i++) {
         UIView <FigureRowPageProtocol> *page = pageArray[i];
         page.frame = CGRectSetOriginOnRect(page.frame, currentXOffset, 0);
-        CGFloat widthDelta = CGRectGetWidth(page.frame) + page.rightPageMargin;
+        CGFloat widthDelta = CGRectGetWidth(page.frame) + SpaceBetweenFigureRowPages;
         currentXOffset += widthDelta;
     }
 }

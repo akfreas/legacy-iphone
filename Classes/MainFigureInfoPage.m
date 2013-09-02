@@ -276,11 +276,6 @@ DualFrame * initFrame() {
         completionBlock();
 }
 
-#pragma mark FigureRowPageProtocol Functions
-
--(CGFloat)rightPageMargin {
-    return SpaceBetweenFigureRowPages;
-}
 
 
 @end

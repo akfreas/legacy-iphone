@@ -40,7 +40,6 @@ void uncaughtExceptionHandler(NSException *exception) {
     self.window.rootViewController = mainScreen;
     
     [self.window makeKeyAndVisible];
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     return YES;
 }
 

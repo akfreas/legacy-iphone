@@ -69,10 +69,6 @@
     webView.frame = CGRectMakeFrameWithSizeFromFrame(frame);
 }
 
--(CGFloat)rightPageMargin {
-    return 10;
-}
-
 -(void)addWebViewControls {
     if (controls.superview == nil) {
         [self insertSubview:controls aboveSubview:webView];

@@ -7,12 +7,30 @@
     UIBezierPath *path;
 }
 
++(CGRect)rectForStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    
+    CGRect newRect = CGRectZero;
+    
+    CGPoint newOrigin = CGPointZero;
+    CGSize newSize = CGSizeZero;
+    
+    newOrigin.x = MIN(startPoint.x, endPoint.x);
+    newOrigin.y = MIN(startPoint.y, endPoint.y);
+    
+    newSize.width = MAX(startPoint.x, endPoint.x) - newOrigin.x;
+    newSize.height = MAX(startPoint.y, endPoint.y) - newOrigin.y;
+    
+    newRect.origin = newOrigin;
+    newRect.size = newSize;
+    
+    return newRect;
+}
+
 -(id)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     
-    if (self = [self initWithFrame:CGRectMake(startPoint.x - RightIndicatorLinesFrameWidth / 2, startPoint.y, MAX(startPoint.x, endPoint.x) - MIN(endPoint.x, startPoint.x) , MAX(startPoint.y, endPoint.y) - MIN(endPoint.y, startPoint.y))]) {
-        _lineStartPoint = startPoint;
-        _lineEndPoint = endPoint;
-        self.backgroundColor = [UIColor greenColor];
+    if (self = [self initWithFrame:[RightIndicatorLines rectForStartPoint:startPoint endPoint:endPoint]]) {
+        _lineStartPoint = CGPointZero;
+        _lineEndPoint = CGPointMake(self.frame.size.width/1.35, self.frame.size.height);
     }
     return self;
 }
@@ -58,9 +76,10 @@
     CGFloat dash[2] = {3.0, 5.0};
     
     [path setLineDash:dash count:2 phase:0];
-    [[UIColor colorWithRed:0 green:0 blue:1 alpha:.35] setStroke];
+    [[UIColor colorWithRed:0 green:0 blue:0 alpha:.35] setStroke];
     
     [path moveToPoint:_lineStartPoint];
+//    [path moveToPoint:CGPointMake(0, 0)];
     [path addLineToPoint:_lineStartPoint];
     [path addLineToPoint:CGPointMake(_lineEndPoint.x, 20)];
     [path addLineToPoint:_lineEndPoint];

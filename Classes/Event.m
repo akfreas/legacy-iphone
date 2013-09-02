@@ -19,6 +19,7 @@
 @dynamic ageDays;
 @dynamic eventId;
 @dynamic figure;
+@synthesize isKeyEvent;
 
 static NSString *KeyForEventDescription = @"figure_event";
 static NSString *KeyForAgeYears = @"age_years";

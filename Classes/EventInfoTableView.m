@@ -14,17 +14,18 @@
 @implementation EventInfoTableView {
     
     Person *person;
-    Event *event;
+    Event *keyEvent;
     ObjectArchiveAccessor *accessor;
     RightIndicatorLines *indicatorLines;
     
+    NSInteger keyEventIndex;
     NSArray *arrayOfEvents;
 }
 
 -(id)initWithEvent:(Event *)anEvent {
     self = [super init];
     if (self) {
-        event = anEvent;
+        keyEvent = anEvent;
         accessor = [[ObjectArchiveAccessor alloc] init];
         [self fetchRelatedEvents];
         self.delegate = self;
@@ -38,16 +39,33 @@
 
 -(void)fetchRelatedEvents {
     
-    arrayOfEvents = [accessor eventsForFigure:event.figure];
+    arrayOfEvents = [accessor eventsForFigure:keyEvent.figure];
+    
+    for (int i=0; i < [arrayOfEvents count]; i++) {
+        
+        Event *theEvent = arrayOfEvents[i];
+        if ([theEvent.eventId isEqualToNumber:keyEvent.eventId]) {
+            theEvent.isKeyEvent = YES;
+            keyEventIndex = i + 1;
+        }
+    }
 }
 
--(void)addStickLines {
+-(void)addStickLinesForCell:(EventInfoHeaderCell *)cell {
     
-    indicatorLines  = [RightIndicatorLines new];
-    EventInfoHeaderCell *cell = (EventInfoHeaderCell *)[self tableView:self cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    CGPoint translatedPoint = [self convertPoint:cell.pointForLines toView:self];
-    indicatorLines = [[RightIndicatorLines alloc] initWithStartPoint:CGPointMake(100, 100) endPoint:CGPointMake(300, 400)];
-    [self addSubview:indicatorLines];
+    if (indicatorLines == nil) {
+        CGFloat indicatedCellMaxY = cell.frame.size.height + RelatedEventsLabelHeight * keyEventIndex   - RelatedEventsLabelHeight / 2;
+        CGPoint translatedPoint = [self convertPoint:cell.pointForLines toView:self];
+        
+        indicatorLines  = [RightIndicatorLines new];
+        indicatorLines = [[RightIndicatorLines alloc] initWithStartPoint:translatedPoint endPoint:CGPointMake(self.bounds.size.width, indicatedCellMaxY)];
+        [self addSubview:indicatorLines];
+    }
+    
+    indicatorLines.person = person;
+    
+    
+    
 }
 
 #pragma mark TableView Methods
@@ -60,12 +78,12 @@
         
         cell = [self dequeueReusableCellWithIdentifier:HeaderReuseId];
         if (cell == nil) {
-            cell = [[EventInfoHeaderCell alloc] initWithEvent:event];
+            cell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
         }
-//        if (indicatorLines == nil) {
-//            [self addStickLines];
-//        }
-//        cell.frame = CGRectSetHeightForRect(100, cell.frame);
+        //        if (person != nil) {
+        [self addStickLinesForCell:(EventInfoHeaderCell *)cell];
+        //        }
+        //        cell.frame = CGRectSetHeightForRect(100, cell.frame);
     } else {
         NSInteger eventIndex = indexPath.row - 1;
         Event *theEvent = [arrayOfEvents objectAtIndex:eventIndex];
@@ -74,11 +92,11 @@
         if (cell == nil) {
             cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
         } else {
-        
+            
             EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)cell;
             timelineCell.event = theEvent;
         }
-        cell.frame = CGRectSetHeightForRect(44, cell.frame);
+        cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);
         cell.backgroundColor = [UIColor orangeColor];
     }
     return cell;

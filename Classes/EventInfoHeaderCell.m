@@ -28,7 +28,6 @@
     if (self) {
         event = anEvent;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor orangeColor];
         self.reuseIdentifier = TableViewCellIdentifierForHeader;
         figureNameLabel.text = event.figure.name;
         [self fetchFigureProfilePic];
@@ -41,8 +40,7 @@
 
 -(CGPoint)pointForLines {
     
-        CGPoint newPoint = CGPointMake(mainImagePlaceholder.frame.size.width, mainImageView.frame.size.height / 2);
-        CGPoint relevantPoint = [self convertPoint:newPoint fromView:self];
+        CGPoint newPoint = CGPointMake(CGRectGetMaxX(mainImagePlaceholder.frame), mainImagePlaceholder.frame.origin.y + mainImagePlaceholder.frame.size.height / 2);
         
         return newPoint;
 }
@@ -63,7 +61,7 @@
         mainImageView.image = mainImage;
     }
     mainImageView.frame = CGRectMake(mainImagePlaceholder.frame.origin.x, mainImagePlaceholder.frame.origin.y, mainImageView.frame.size.width, mainImageView.frame.size.height);
-    [mainImagePlaceholder removeFromSuperview];
+//    [mainImagePlaceholder removeFromSuperview];
 }
 
 -(void)fetchFigureProfilePic {

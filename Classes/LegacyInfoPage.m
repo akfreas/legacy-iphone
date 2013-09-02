@@ -1,8 +1,10 @@
 #import "LegacyInfoPage.h"
+#import "BottomFacebookSignInRowView.h"
 
 @implementation LegacyInfoPage {
     
     IBOutlet UISwitch *notificationSwitch;
+    IBOutlet BottomFacebookSignInRowView *facebookButton;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -11,6 +13,7 @@
     if (self) {
         self.frame = frame;
         [self checkIfPushEnabledAndFlipSwitch];
+        [self removeFacebookButtonIfAuthorized];
     }
     return self;
 }
@@ -25,6 +28,14 @@
         notificationSwitch.on = YES;
     }
     
+}
+
+-(void)removeFacebookButtonIfAuthorized {
+    if ([FBSession activeSession].state != FBSessionStateCreatedTokenLoaded) {
+        facebookButton.hidden = NO;
+    } else {
+        facebookButton.hidden = YES;
+    }
 }
 
 #pragma mark IBActions

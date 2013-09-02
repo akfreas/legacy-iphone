@@ -7,8 +7,8 @@
     IBOutlet UIView *view;
 }
 
--(id)init {
-    self = [super init];
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
         [self addSubview:view];

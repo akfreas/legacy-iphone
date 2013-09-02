@@ -49,36 +49,13 @@
 
         [self addSubview:scroller];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideViewFromNotif:) name:KeyForFigureRowContentChanged object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:KeyForRowDataUpdated object:nil];
 
     }
     return self;
+
 }
 
-
--(void)hideViewFromNotif:(NSNotification *)notif {
-    
-    
-    NSDictionary *userInfo = notif.userInfo;
-    UIView *theView = notif.object;
-    
-    CGFloat animationDuration = [userInfo[@"animation_duration"] floatValue];
-    CGSize sizeChange = [userInfo[@"size_change"] CGSizeValue];
-    [self hideView:theView animationDuration:animationDuration sizeChange:sizeChange];
-}
-
--(void)hideView:(UIView *)view animationDuration:(CGFloat)animationDuration sizeChange:(CGSize)sizeChange {
-    
-    [UIView animateWithDuration:animationDuration animations:^{
-        scroller.contentSize = CGSizeAddSizeToSize(scroller.contentSize, sizeChange);
-        view.alpha = 0;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [view removeFromSuperview];
-        }
-    }];
-}
 
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat width = self.bounds.size.width;

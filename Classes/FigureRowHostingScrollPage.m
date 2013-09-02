@@ -56,6 +56,7 @@
     return self;
 }
 
+
 -(void)hideViewFromNotif:(NSNotification *)notif {
     
     
@@ -152,7 +153,10 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self addTopActionForScrollAction:scrollView];
+    
+    if ([[FBSession activeSession] state] != FBSessionStateCreated) {
+        [self addTopActionForScrollAction:scrollView];
+    }
 }
 
 -(void)addTopActionForScrollAction:(UIScrollView *)scrollView {
@@ -173,6 +177,16 @@
         }];
     }
     priorPoint = scrollView.contentOffset;
+}
+
+#pragma mark FigureRowPageProtocol Delegate Methods
+
+-(void)becameVisible {
+    
+}
+
+-(void)scrollCompleted {
+    
 }
 
 @end

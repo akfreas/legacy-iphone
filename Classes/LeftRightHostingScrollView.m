@@ -10,9 +10,15 @@
 #import "FigureRowHostingScrollPage.h"
 #import "EventInfoTableView.h"
 #import "LegacyInfoPage.h"
+#import "WebViewControls.h"
 
 @interface LeftRightHostingScrollView () <UIScrollViewDelegate>
 @end
+
+typedef enum ScrollViewDirection {
+    ScrollViewDirectionRight,
+    ScrollViewDirectionLeft,
+} ScrollViewDirection;
 
 @implementation LeftRightHostingScrollView {
     ObjectArchiveAccessor *accessor;
@@ -22,8 +28,13 @@
     UIPageControl *pageControl;
     NSMutableArray *pageArray;
     FigureRowHostingScrollPage *figurePage;
-    CGPoint lastPoint;
+    CGPoint departurePoint;
+    CGPoint destinationPoint;
+    CGPoint lastScrollPoint;
+    BOOL paginationInProgress;
     LegacyAppConnection *connection;
+    WebViewControls *controls;
+    ScrollViewDirection direction;
 }
 
 #define InfoPageNumber 0
@@ -43,9 +54,10 @@
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
         self.bounces = NO;
-        lastPoint = CGPointZero;
+        departurePoint = CGPointZero;
         accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
+        controls = [[WebViewControls alloc] initWithOrigin:CGPointMake(self.contentOffset.x, 0)];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
@@ -95,7 +107,7 @@
     
     for (UIView <FigureRowPageProtocol> *thePage in pageArray) {
         CGSize pageSize = thePage.frame.size;
-        newContentSize = CGSizeAddWidthToSize(newContentSize, pageSize.height + SpaceBetweenFigureRowPages);
+        newContentSize = CGSizeAddWidthToSize(newContentSize, pageSize.width + SpaceBetweenFigureRowPages);
     }
     self.contentSize = newContentSize;
     
@@ -122,7 +134,6 @@
     LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
     webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
     webView.event = theEvent;
-    [webView loadRequest];
     [self addPage:webView];
 }
 
@@ -162,6 +173,50 @@
     [figurePage reload];
 }
 
+-(void)checkIfScrollCompletedAndNotifyPage {
+    
+    if (CGPointEqualToPoint(self.contentOffset, destinationPoint)) {
+        paginationInProgress = NO;
+        self.scrollEnabled = YES;
+        UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:pageControl.currentPage];
+        [page scrollCompleted];
+    }
+}
+
+
+-(void)notifyVisiblePage {
+    
+    CGPoint referencePoint;
+    if (direction == ScrollViewDirectionLeft) {
+        referencePoint = CGPointMake(self.contentOffset.x + self.bounds.size.width, 0);
+    } else {
+        referencePoint = self.contentOffset;
+    }
+    
+    NSInteger pageIndex = [self pageAtPoint:referencePoint];
+    if (pageIndex < [pageArray count]) {
+        UIView <FigureRowPageProtocol> *page = pageArray[pageIndex];
+        
+        [page becameVisible];
+    }
+    
+}
+
+-(NSInteger)pageAtPoint:(CGPoint)point {
+    NSInteger pageIndex = floor(point.x / (self.bounds.size.width + SpaceBetweenFigureRowPages));
+    return pageIndex;
+}
+
+-(void)setScrollViewDirection {
+    
+    if (self.contentOffset.x > lastScrollPoint.x) {
+        direction = ScrollViewDirectionLeft;
+    } else {
+        direction = ScrollViewDirectionRight;
+    }
+    lastScrollPoint = self.contentOffset;
+}
+
 #pragma mark UIScrollViewDelegate
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
@@ -170,6 +225,9 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    [self checkIfScrollCompletedAndNotifyPage];
+    [self setScrollViewDirection];
+    [self notifyVisiblePage];
     if (scrollView.contentOffset.x > self.bounds.size.width) {
         pageControl.frame = CGRectMake(scrollView.contentOffset.x + 20, pageControl.frame.origin.y, pageControl.frame.size.width, pageControl.frame.size.height);
         if (pageControl.alpha != 1) {
@@ -200,35 +258,39 @@
 }
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
-
-    if (self.contentOffset.x != lastPoint.x && self.contentOffset.x <= self.contentSize.width - [self frameAtIndex:pageControl.currentPage].size.width) {
-        if (self.contentOffset.x > lastPoint.x) {
-            pageControl.currentPage++;
+    
+    NSUInteger nextPage = pageControl.currentPage;
+    
+    if (self.contentOffset.x != departurePoint.x && paginationInProgress == NO) {
+        
+        if (self.contentOffset.x > departurePoint.x) {
+            nextPage++;
         } else {
-            pageControl.currentPage--;
+            nextPage--;
         }
         
-        if (pageControl.currentPage >= 0 && [pageArray count] > 0 && pageControl.currentPage < [pageArray count]) {
-            UIView <FigureRowPageProtocol> *page = pageArray[pageControl.currentPage];
-            lastPoint = CGPointMake(page.frame.origin.x, 0);
-            if ([page isKindOfClass:[LegacyWebView class]]) {
-                [(LegacyWebView *)page loadRequest];
-            } 
-            [self scrollToPage:pageControl.currentPage];
+        if ([pageArray count] > 0 && nextPage < [pageArray count]) {
+            [self scrollToPage:nextPage];
         }
+    } else if (paginationInProgress == YES) {
+        [self setContentOffset:destinationPoint animated:YES];
     }
+    
 }
+
 
 -(void)scrollToPage:(NSInteger)page {
     
-    CGFloat xPoint = 0;
-
-    UIView <FigureRowPageProtocol> *pageView = pageArray[page];
-    xPoint = pageView.frame.origin.x;
-    pageControl.currentPage = page;
-    CGPoint pagePoint = CGPointMake(xPoint, self.contentOffset.y);
-    [self setContentOffset:pagePoint animated:YES];
-    lastPoint = pagePoint;
+    if (pageControl.currentPage != page) {
+        CGPoint pagePoint = [self frameAtIndex:page].origin;
+        departurePoint = [self frameAtIndex:pageControl.currentPage].origin;
+        destinationPoint = pagePoint;
+        paginationInProgress = YES;
+        self.scrollEnabled = NO;
+        [self setContentOffset:pagePoint animated:YES];
+        departurePoint = pagePoint;
+        pageControl.currentPage = page;
+    }
 }
 
 @end

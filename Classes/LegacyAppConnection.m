@@ -25,9 +25,14 @@
         
         _block(request, JSON, NULL);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"Json: %@ Error: %@ response:%@", JSON, error, response);
     }];
     [operation start];
+}
+
+-(void)postWithCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block {
+    
+//    AFHTTPRequestOperation *operation = [AFHTTPRequestOperation set]
+    
 }
 
 @end

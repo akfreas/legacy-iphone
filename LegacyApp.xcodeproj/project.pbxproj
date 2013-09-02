@@ -40,6 +40,8 @@
 		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
+		1945775817D3EAA000C5DB62 /* button-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775617D3EAA000C5DB62 /* button-back.png */; };
+		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* LegacyWebView.xib */; };
 		195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */; };
@@ -175,6 +177,8 @@
 		192E42B2174668E900192BD5 /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
 		192E6E411724B1AA008C9153 /* ImageWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWidget.h; sourceTree = "<group>"; };
 		192E6E421724B1AA008C9153 /* ImageWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidget.m; sourceTree = "<group>"; };
+		1945775617D3EAA000C5DB62 /* button-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-back.png"; path = "images/button-back.png"; sourceTree = "<group>"; };
+		1945775717D3EAA000C5DB62 /* button-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-forward.png"; path = "images/button-forward.png"; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* LegacyWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyWebView.xib; sourceTree = "<group>"; };
 		195B5FFD16DEB7D3006215E9 /* EventDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDescriptionView.h; sourceTree = "<group>"; };
 		195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EventDescriptionView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -420,6 +424,8 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1945775617D3EAA000C5DB62 /* button-back.png */,
+				1945775717D3EAA000C5DB62 /* button-forward.png */,
 				1909A8801777559000256ED0 /* 10-medical.png */,
 				1909A8811777559000256ED0 /* 10-medical@2x.png */,
 				1909A85F1772D44300256ED0 /* informationcircle.png */,
@@ -683,6 +689,8 @@
 				1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */,
 				1975752617D06CBD00822779 /* WebViewControls.xib in Resources */,
 				1975752817D06EA800822779 /* EventInfoHeaderCell.xib in Resources */,
+				1945775817D3EAA000C5DB62 /* button-back.png in Resources */,
+				1945775917D3EAA000C5DB62 /* button-forward.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

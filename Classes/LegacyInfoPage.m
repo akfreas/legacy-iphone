@@ -13,4 +13,15 @@
     return self;
 }
 
+
+#pragma mark FigureRowPageProtocol Delegate Methods
+
+-(void)becameVisible {
+    
+}
+
+-(void)scrollCompleted {
+    
+}
+
 @end

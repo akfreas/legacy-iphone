@@ -9,10 +9,10 @@
 
 -(id)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     
-    if (self = [self initWithFrame:CGRectMake(startPoint.x - RightIndicatorLinesFrameWidth / 2, startPoint.y, RightIndicatorLinesFrameWidth, RightIndicatorLinesFrameHeight)]) {
-        _lineStartPoint = CGPointMake(RightIndicatorLinesFrameWidth /2, 0);// startPoint;// CGPointMake(startPoint.x + RightIndicatorLinesFrameWidth/2, startPoint.y);
-        _lineEndPoint = CGPointMake(endPoint.x + RightIndicatorLinesFrameWidth/2, endPoint.y);
-//        self.backgroundColor = [UIColor greenColor];
+    if (self = [self initWithFrame:CGRectMake(startPoint.x - RightIndicatorLinesFrameWidth / 2, startPoint.y, MAX(startPoint.x, endPoint.x) - MIN(endPoint.x, startPoint.x) , MAX(startPoint.y, endPoint.y) - MIN(endPoint.y, startPoint.y))]) {
+        _lineStartPoint = startPoint;
+        _lineEndPoint = endPoint;
+        self.backgroundColor = [UIColor greenColor];
     }
     return self;
 }

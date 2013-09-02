@@ -51,7 +51,7 @@
 #define ImageWidgetInitialWidth 90
 #define ImageWidgetExpandTransformFactor 2
 
-#define RightIndicatorLinesFrameWidth 100
+#define RightIndicatorLinesFrameWidth 200
 #define RightIndicatorLinesFrameHeight 400
 
 #define LeftActionTabPageWidth 30

@@ -6,7 +6,7 @@
 
 @property (nonatomic) Event *event;
 @property (nonatomic, readonly) UIScrollView *scrollView;
-@property (copy) void(^loadingCompleteBlock)();
+//@property (copy) void(^loadingCompleteBlock)();
 
 -(void)loadRequest;
 

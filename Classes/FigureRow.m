@@ -1,7 +1,5 @@
 #import "FigureRow.h"
 #import "MainFigureInfoPage.h"
-#import "LeftActionTabPage.h"
-#import "DescriptionPage.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
 #import "Figure.h"
@@ -18,7 +16,6 @@
     
     MainFigureInfoPage *infoPage;
     LegacyWebView *webView;
-    LeftActionTabPage *tabPage;
     FigureRowActionOverlay *actionOverlay;
     
     LegacyAppConnection *connection;

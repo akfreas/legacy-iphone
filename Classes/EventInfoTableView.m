@@ -5,6 +5,7 @@
 #import "Figure.h"
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
+#import "RightIndicatorLines.h"
 
 @interface EventInfoTableView () <UITableViewDataSource, UITableViewDelegate>
 
@@ -15,7 +16,7 @@
     Person *person;
     Event *event;
     ObjectArchiveAccessor *accessor;
-    
+    RightIndicatorLines *indicatorLines;
     
     NSArray *arrayOfEvents;
 }
@@ -40,23 +41,35 @@
     arrayOfEvents = [accessor eventsForFigure:event.figure];
 }
 
+-(void)addStickLines {
+    
+    indicatorLines  = [RightIndicatorLines new];
+    EventInfoHeaderCell *cell = (EventInfoHeaderCell *)[self tableView:self cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    CGPoint translatedPoint = [self convertPoint:cell.pointForLines toView:self];
+    indicatorLines = [[RightIndicatorLines alloc] initWithStartPoint:CGPointMake(100, 100) endPoint:CGPointMake(300, 400)];
+    [self addSubview:indicatorLines];
+}
+
 #pragma mark TableView Methods
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
     if (indexPath.row == 0) {
-        static NSString *HeaderReuseId = @"HeaderTableViewCell";
+        static NSString *HeaderReuseId = TableViewCellIdentifierForHeader;
         
         cell = [self dequeueReusableCellWithIdentifier:HeaderReuseId];
         if (cell == nil) {
             cell = [[EventInfoHeaderCell alloc] initWithEvent:event];
         }
-        cell.frame = CGRectSetHeightForRect(100, cell.frame);
+//        if (indicatorLines == nil) {
+//            [self addStickLines];
+//        }
+//        cell.frame = CGRectSetHeightForRect(100, cell.frame);
     } else {
         NSInteger eventIndex = indexPath.row - 1;
         Event *theEvent = [arrayOfEvents objectAtIndex:eventIndex];
-        static NSString *ReuseId = @"mainTableViewCells";
+        static NSString *ReuseId = TableViewCellIdentifierForMainCell;
         cell = [self dequeueReusableCellWithIdentifier:ReuseId];
         if (cell == nil) {
             cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
@@ -85,6 +98,16 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+
+#pragma mark FigureRowPageProtocol Delegate Methods
+
+-(void)becameVisible {
+    
+}
+
+-(void)scrollCompleted {
+    
 }
 
 @end

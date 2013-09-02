@@ -17,39 +17,53 @@
     CircleImageView *personImageView;
     
     UIImage *mainImage;
-    
-    NSOperationQueue *queue;
+
+    IBOutlet UIView *mainImagePlaceholder;
+    IBOutlet UILabel *figureNameLabel;
 }
 
 -(id)initWithEvent:(Event *)anEvent {
-    self = [super init];
+    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.class) owner:self options:nil][0];
     
     if (self) {
         event = anEvent;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor orangeColor];
-        self.reuseIdentifier = @"HeaderTableViewCell";
-        queue = [[NSOperationQueue alloc] init];
+        self.reuseIdentifier = TableViewCellIdentifierForHeader;
+        figureNameLabel.text = event.figure.name;
         [self fetchFigureProfilePic];
     }
     
     return self;
 }
 
+#pragma mark Accessors
+
+-(CGPoint)pointForLines {
+    
+        CGPoint newPoint = CGPointMake(mainImagePlaceholder.frame.size.width, mainImageView.frame.size.height / 2);
+        CGPoint relevantPoint = [self convertPoint:newPoint fromView:self];
+        
+        return newPoint;
+}
 
 #pragma mark View Helper Methods
 
 -(void)drawMainCircleImage {
     
     if (mainImageView == nil) {
-        mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:80];
-        [self addSubview:mainImageView];
+        mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:mainImagePlaceholder.frame.size.height/2];
+        [self insertSubview:mainImageView belowSubview:mainImagePlaceholder];
+//        figureNameLabel.frame = CGRectMakeFrameForCenter(mainImageView, figureNameLabel.frame.size, mainImageView.frame.size.height - 50);
+//        figureNameLabel.layer.cornerRadius = 10;
+//        figureNameLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:.5];
+//        [mainImageView addSubview:figureNameLabel];
 
     } else {
         mainImageView.image = mainImage;
     }
-    
-    mainImageView.frame = CGRectMakeFrameForDeadCenterInRect(self.frame, mainImageView.frame.size);
+    mainImageView.frame = CGRectMake(mainImagePlaceholder.frame.origin.x, mainImagePlaceholder.frame.origin.y, mainImageView.frame.size.width, mainImageView.frame.size.height);
+    [mainImagePlaceholder removeFromSuperview];
 }
 
 -(void)fetchFigureProfilePic {

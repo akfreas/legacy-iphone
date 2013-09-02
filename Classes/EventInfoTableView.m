@@ -17,6 +17,7 @@
     Event *keyEvent;
     ObjectArchiveAccessor *accessor;
     RightIndicatorLines *indicatorLines;
+    EventInfoHeaderCell *headerCell;
     
     NSInteger keyEventIndex;
     NSArray *arrayOfEvents;
@@ -32,6 +33,7 @@
         self.dataSource = self;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin);
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
@@ -46,7 +48,7 @@
         Event *theEvent = arrayOfEvents[i];
         if ([theEvent.eventId isEqualToNumber:keyEvent.eventId]) {
             theEvent.isKeyEvent = YES;
-            keyEventIndex = i + 1;
+            keyEventIndex = i;
         }
     }
 }
@@ -54,7 +56,7 @@
 -(void)addStickLinesForCell:(EventInfoHeaderCell *)cell {
     
     if (indicatorLines == nil) {
-        CGFloat indicatedCellMaxY = cell.frame.size.height + RelatedEventsLabelHeight * keyEventIndex   - RelatedEventsLabelHeight / 2;
+        CGFloat indicatedCellMaxY = cell.frame.size.height + RelatedEventsLabelHeight * (keyEventIndex );
         CGPoint translatedPoint = [self convertPoint:cell.pointForLines toView:self];
         
         indicatorLines  = [RightIndicatorLines new];
@@ -70,48 +72,55 @@
 
 #pragma mark TableView Methods
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (scrollView.contentOffset.y < 0) {
+        headerCell.nameLabelOriginYOffset = scrollView.contentOffset.y * 1.25;
+    }
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        if (headerCell == nil) {
+            headerCell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
+        }
+    }
+    return headerCell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 200.0f;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
-    if (indexPath.row == 0) {
-        static NSString *HeaderReuseId = TableViewCellIdentifierForHeader;
-        
-        cell = [self dequeueReusableCellWithIdentifier:HeaderReuseId];
-        if (cell == nil) {
-            cell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
-        }
-        //        if (person != nil) {
-        [self addStickLinesForCell:(EventInfoHeaderCell *)cell];
-        //        }
-        //        cell.frame = CGRectSetHeightForRect(100, cell.frame);
+    NSInteger eventIndex = indexPath.row;
+    Event *theEvent = arrayOfEvents[eventIndex];
+    static NSString *ReuseId = TableViewCellIdentifierForMainCell;
+    cell = [self dequeueReusableCellWithIdentifier:ReuseId];
+    if (cell == nil) {
+        cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
     } else {
-        NSInteger eventIndex = indexPath.row - 1;
-        Event *theEvent = [arrayOfEvents objectAtIndex:eventIndex];
-        static NSString *ReuseId = TableViewCellIdentifierForMainCell;
-        cell = [self dequeueReusableCellWithIdentifier:ReuseId];
-        if (cell == nil) {
-            cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
-        } else {
-            
-            EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)cell;
-            timelineCell.event = theEvent;
-        }
-        cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);
-        cell.backgroundColor = [UIColor orangeColor];
+        EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)cell;
+        timelineCell.event = theEvent;
     }
+    
+    if (eventIndex == keyEventIndex) {
+        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    }
+    
+    cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);
+    cell.backgroundColor = [UIColor orangeColor];
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 200;
-    } else {
-        return RelatedEventsLabelHeight;
-    }
+    return RelatedEventsLabelHeight;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrayOfEvents count] + 1;
+    return [arrayOfEvents count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

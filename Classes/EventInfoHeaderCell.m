@@ -17,6 +17,7 @@
     CircleImageView *personImageView;
     
     UIImage *mainImage;
+    CGRect figureNameLabelInitialFrame;
 
     IBOutlet UIView *mainImagePlaceholder;
     IBOutlet UILabel *figureNameLabel;
@@ -30,6 +31,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.reuseIdentifier = TableViewCellIdentifierForHeader;
         figureNameLabel.text = event.figure.name;
+        figureNameLabelInitialFrame = figureNameLabel.frame;
         [self fetchFigureProfilePic];
     }
     
@@ -37,6 +39,12 @@
 }
 
 #pragma mark Accessors
+
+
+-(void)setNameLabelOriginYOffset:(CGFloat)offset {
+    
+    figureNameLabel.frame = CGRectSetOriginOnRect(figureNameLabel.frame, figureNameLabelInitialFrame.origin.x, figureNameLabelInitialFrame.origin.y + offset);
+}
 
 -(CGPoint)pointForLines {
     
@@ -47,16 +55,21 @@
 
 #pragma mark View Helper Methods
 
+-(void)drawFigureNameLabel {
+    CGFloat actualFontSize;
+    CGSize nameLabelSize = [figureNameLabel.text sizeWithFont:[UIFont fontWithName:@"Georgia" size:60] minFontSize:12 actualFontSize:&actualFontSize forWidth:self.bounds.size.width - 20 lineBreakMode:NSLineBreakByTruncatingTail];
+    figureNameLabel.frame = figureNameLabelInitialFrame = CGRectMake(10, 20, nameLabelSize.width, nameLabelSize.height);
+    figureNameLabel.font = [UIFont fontWithName:@"Georgia" size:actualFontSize];
+    [self insertSubview:figureNameLabel belowSubview:mainImageView];
+
+}
+
 -(void)drawMainCircleImage {
     
     if (mainImageView == nil) {
         mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:mainImagePlaceholder.frame.size.height/2];
         [self insertSubview:mainImageView belowSubview:mainImagePlaceholder];
-//        figureNameLabel.frame = CGRectMakeFrameForCenter(mainImageView, figureNameLabel.frame.size, mainImageView.frame.size.height - 50);
-//        figureNameLabel.layer.cornerRadius = 10;
-//        figureNameLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:.5];
-//        [mainImageView addSubview:figureNameLabel];
-
+        [self drawFigureNameLabel];
     } else {
         mainImageView.image = mainImage;
     }

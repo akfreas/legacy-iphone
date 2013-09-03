@@ -45,7 +45,6 @@
 		1945775B17D4F37800C5DB62 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945775A17D4F37800C5DB62 /* CoreImage.framework */; };
 		1945775E17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */; };
 		1945776017D5056C00C5DB62 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945775F17D5056C00C5DB62 /* OpenGLES.framework */; };
-		1945776517D5187100C5DB62 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776417D5187100C5DB62 /* GPUImage.framework */; };
 		1945776717D5188000C5DB62 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776617D5187F00C5DB62 /* AVFoundation.framework */; };
 		1945776917D5189F00C5DB62 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776817D5189F00C5DB62 /* CoreMedia.framework */; };
 		1945776B17D518AC00C5DB62 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776A17D518AC00C5DB62 /* CoreVideo.framework */; };
@@ -191,7 +190,6 @@
 		1945775C17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureNameLabelBlurLayer.h; sourceTree = "<group>"; };
 		1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureNameLabelBlurLayer.m; sourceTree = "<group>"; };
 		1945775F17D5056C00C5DB62 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		1945776417D5187100C5DB62 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = Dependencies/GPUImage.framework; sourceTree = "<group>"; };
 		1945776617D5187F00C5DB62 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1945776817D5189F00C5DB62 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		1945776A17D518AC00C5DB62 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -332,7 +330,6 @@
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
 				19D29F5C16A5481D00D46B0A /* FacebookSDK.framework in Frameworks */,
 				19D4C3EE17CDB47A00E7ED6A /* Reveal.framework in Frameworks */,
-				1945776517D5187100C5DB62 /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +483,6 @@
 				1945776A17D518AC00C5DB62 /* CoreVideo.framework */,
 				1945776817D5189F00C5DB62 /* CoreMedia.framework */,
 				1945776617D5187F00C5DB62 /* AVFoundation.framework */,
-				1945776417D5187100C5DB62 /* GPUImage.framework */,
 				1945775F17D5056C00C5DB62 /* OpenGLES.framework */,
 				1945775A17D4F37800C5DB62 /* CoreImage.framework */,
 				19C55E4B1783A7900099AE4A /* icon@2x.png */,

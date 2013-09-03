@@ -13,7 +13,6 @@
 
 @implementation EventInfoTableView {
     
-    Person *person;
     Event *keyEvent;
     ObjectArchiveAccessor *accessor;
     RightIndicatorLines *indicatorLines;
@@ -48,7 +47,7 @@
         Event *theEvent = arrayOfEvents[i];
         if ([theEvent.eventId isEqualToNumber:keyEvent.eventId]) {
             theEvent.isKeyEvent = YES;
-            keyEventIndex = i + 1;
+            keyEventIndex = i;
         }
     }
 }
@@ -64,9 +63,14 @@
         [self addSubview:indicatorLines];
     }
     
+    indicatorLines.person = _person;
+}
+#pragma mark Accessors
+
+
+-(void)setPerson:(Person *)person {
+    _person = person;
     indicatorLines.person = person;
-    
-    
     
 }
 
@@ -85,8 +89,10 @@
     if (indexPath.row == 0) {
         if (headerCell == nil) {
             headerCell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
-            
+            [self addStickLinesForCell:headerCell];
         }
+        
+        
         return headerCell;
     } else {
         NSInteger eventIndex = indexPath.row - 1;

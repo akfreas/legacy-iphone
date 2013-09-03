@@ -120,7 +120,7 @@ typedef enum ScrollViewDirection {
     Event *theEvent = userInfo[@"event"];
     
     EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithEvent:theEvent];
-    
+    infoPage.person = userInfo[@"person"];
     infoPage.frame = [self frameAtIndex:TimelinePageNumber];
     [infoPage reloadData];
     [self addPage:infoPage];

@@ -42,6 +42,14 @@
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		1945775817D3EAA000C5DB62 /* button-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775617D3EAA000C5DB62 /* button-back.png */; };
 		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
+		1945775B17D4F37800C5DB62 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945775A17D4F37800C5DB62 /* CoreImage.framework */; };
+		1945775E17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */; };
+		1945776017D5056C00C5DB62 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945775F17D5056C00C5DB62 /* OpenGLES.framework */; };
+		1945776517D5187100C5DB62 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776417D5187100C5DB62 /* GPUImage.framework */; };
+		1945776717D5188000C5DB62 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776617D5187F00C5DB62 /* AVFoundation.framework */; };
+		1945776917D5189F00C5DB62 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776817D5189F00C5DB62 /* CoreMedia.framework */; };
+		1945776B17D518AC00C5DB62 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776A17D518AC00C5DB62 /* CoreVideo.framework */; };
+		1945776E17D5A02E00C5DB62 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* LegacyWebView.xib */; };
 		195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */; };
@@ -179,6 +187,16 @@
 		192E6E421724B1AA008C9153 /* ImageWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidget.m; sourceTree = "<group>"; };
 		1945775617D3EAA000C5DB62 /* button-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-back.png"; path = "images/button-back.png"; sourceTree = "<group>"; };
 		1945775717D3EAA000C5DB62 /* button-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-forward.png"; path = "images/button-forward.png"; sourceTree = "<group>"; };
+		1945775A17D4F37800C5DB62 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		1945775C17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureNameLabelBlurLayer.h; sourceTree = "<group>"; };
+		1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureNameLabelBlurLayer.m; sourceTree = "<group>"; };
+		1945775F17D5056C00C5DB62 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		1945776417D5187100C5DB62 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = Dependencies/GPUImage.framework; sourceTree = "<group>"; };
+		1945776617D5187F00C5DB62 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1945776817D5189F00C5DB62 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1945776A17D518AC00C5DB62 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		1945776C17D59F7100C5DB62 /* UIImage+StackBlur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+StackBlur.h"; sourceTree = "<group>"; };
+		1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* LegacyWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyWebView.xib; sourceTree = "<group>"; };
 		195B5FFD16DEB7D3006215E9 /* EventDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDescriptionView.h; sourceTree = "<group>"; };
 		195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EventDescriptionView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -297,6 +315,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1945776B17D518AC00C5DB62 /* CoreVideo.framework in Frameworks */,
+				1945776917D5189F00C5DB62 /* CoreMedia.framework in Frameworks */,
+				1945776717D5188000C5DB62 /* AVFoundation.framework in Frameworks */,
+				1945776017D5056C00C5DB62 /* OpenGLES.framework in Frameworks */,
+				1945775B17D4F37800C5DB62 /* CoreImage.framework in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
 				19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */,
 				19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */,
@@ -309,6 +332,7 @@
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
 				19D29F5C16A5481D00D46B0A /* FacebookSDK.framework in Frameworks */,
 				19D4C3EE17CDB47A00E7ED6A /* Reveal.framework in Frameworks */,
+				1945776517D5187100C5DB62 /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +385,8 @@
 				197305E617C5B32D00958D15 /* EventInfoHeaderCell.h */,
 				197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */,
 				1975752717D06EA800822779 /* EventInfoHeaderCell.xib */,
+				1945775C17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.h */,
+				1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */,
 				197305E917C5B66A00958D15 /* EventInfoTableView.h */,
 				197305EA17C5B66A00958D15 /* EventInfoTableView.m */,
 				197305EC17C5C41500958D15 /* EventInfoTimelineCell.h */,
@@ -390,6 +416,8 @@
 		19D61CB916B06D2600C81E60 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1945776C17D59F7100C5DB62 /* UIImage+StackBlur.h */,
+				1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */,
 				19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */,
 				19C7BD8D174BF494004C8B0A /* CGRectUtils.h */,
 				1909A8511772BCCD00256ED0 /* DataSyncUtility.h */,
@@ -455,6 +483,12 @@
 		4EEA6CD315268ED200B96EFD = {
 			isa = PBXGroup;
 			children = (
+				1945776A17D518AC00C5DB62 /* CoreVideo.framework */,
+				1945776817D5189F00C5DB62 /* CoreMedia.framework */,
+				1945776617D5187F00C5DB62 /* AVFoundation.framework */,
+				1945776417D5187100C5DB62 /* GPUImage.framework */,
+				1945775F17D5056C00C5DB62 /* OpenGLES.framework */,
+				1945775A17D4F37800C5DB62 /* CoreImage.framework */,
 				19C55E4B1783A7900099AE4A /* icon@2x.png */,
 				19C55E491783A7890099AE4A /* icon.png */,
 				4EEA6D021526902D00B96EFD /* Classes */,
@@ -753,6 +787,8 @@
 				1975751E17D04F4700822779 /* Figure.m in Sources */,
 				1975752117D053D900822779 /* ImageDownloadUtil.m in Sources */,
 				1975752417D06CA100822779 /* WebViewControls.m in Sources */,
+				1945775E17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m in Sources */,
+				1945776E17D5A02E00C5DB62 /* UIImage+StackBlur.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

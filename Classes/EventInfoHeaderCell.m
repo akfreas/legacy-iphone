@@ -3,6 +3,9 @@
 #import "Event.h"
 #import "Figure.h"
 #import "ImageDownloadUtil.h"
+#import "FigureNameLabelBlurLayer.h"
+
+#import <CoreImage/CoreImage.h>
 
 @interface EventInfoHeaderCell ()
 
@@ -15,12 +18,13 @@
     Event *event;
     CircleImageView *mainImageView;
     CircleImageView *personImageView;
+    FigureNameLabelBlurLayer *blurLayer;
     
     UIImage *mainImage;
+    UIImageView *labelImageView;
     CGRect figureNameLabelInitialFrame;
 
     IBOutlet UIView *mainImagePlaceholder;
-    IBOutlet UILabel *figureNameLabel;
 }
 
 -(id)initWithEvent:(Event *)anEvent {
@@ -30,8 +34,9 @@
         event = anEvent;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.reuseIdentifier = TableViewCellIdentifierForHeader;
-        figureNameLabel.text = event.figure.name;
-        figureNameLabelInitialFrame = figureNameLabel.frame;
+        blurLayer = [[FigureNameLabelBlurLayer alloc] initWithString:event.figure.name];
+        blurLayer.frame = CGRectMake(0, 40, 320, 75);
+        figureNameLabelInitialFrame = blurLayer.frame;
         [self fetchFigureProfilePic];
     }
     
@@ -43,7 +48,8 @@
 
 -(void)setNameLabelOriginYOffset:(CGFloat)offset {
     
-    figureNameLabel.frame = CGRectSetOriginOnRect(figureNameLabel.frame, figureNameLabelInitialFrame.origin.x, figureNameLabelInitialFrame.origin.y + offset);
+    blurLayer.frame = CGRectSetOriginOnRect(blurLayer.frame, figureNameLabelInitialFrame.origin.x, figureNameLabelInitialFrame.origin.y + offset);
+    blurLayer.blurFactor = offset;
 }
 
 -(CGPoint)pointForLines {
@@ -56,11 +62,8 @@
 #pragma mark View Helper Methods
 
 -(void)drawFigureNameLabel {
-    CGFloat actualFontSize;
-    CGSize nameLabelSize = [figureNameLabel.text sizeWithFont:[UIFont fontWithName:@"Georgia" size:60] minFontSize:12 actualFontSize:&actualFontSize forWidth:self.bounds.size.width - 20 lineBreakMode:NSLineBreakByTruncatingTail];
-    figureNameLabel.frame = figureNameLabelInitialFrame = CGRectMake(10, 20, nameLabelSize.width, nameLabelSize.height);
-    figureNameLabel.font = [UIFont fontWithName:@"Georgia" size:actualFontSize];
-    [self insertSubview:figureNameLabel belowSubview:mainImageView];
+
+    [self insertSubview:blurLayer atIndex:1];
 
 }
 
@@ -68,7 +71,8 @@
     
     if (mainImageView == nil) {
         mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:mainImagePlaceholder.frame.size.height/2];
-        [self insertSubview:mainImageView belowSubview:mainImagePlaceholder];
+
+        [self insertSubview:mainImageView atIndex:2];
         [self drawFigureNameLabel];
     } else {
         mainImageView.image = mainImage;

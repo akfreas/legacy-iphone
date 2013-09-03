@@ -111,7 +111,6 @@
     }
     
     cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);
-    cell.backgroundColor = [UIColor orangeColor];
     return cell;
 }
 

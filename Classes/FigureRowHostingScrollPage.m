@@ -5,7 +5,6 @@
 #import "LegacyAppConnection.h"
 #import "EventDescriptionView.h"
 #import "FigureRow.h"
-#import "MainFigureInfoPage.h"
 #import "Event.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
@@ -26,6 +25,7 @@
     NSMutableArray *pageArray;
     NSArray *eventArray;
     CGPoint priorPoint;
+    CGRect actionViewTopInitialFrame; 
     LegacyAppConnection *connection;
     BottomFacebookSignInRowView *signInActionRow;
     TopActionView *actionViewTop;
@@ -60,7 +60,7 @@
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat width = self.bounds.size.width;
     
-    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
+    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index + actionViewTop.frame.size.height, width, FigureRowPageInitialHeight);
 }
 
 -(NSInteger)indexAtPoint:(CGPoint)point {
@@ -83,6 +83,14 @@
     
     if ([arrayOfFigureRows count] < 1) {
         scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
+    }
+    if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
+        if (actionViewTop == nil) {
+            actionViewTopInitialFrame = CGRectMake(0, 0, self.bounds.size.width, 50);
+            actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
+            scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, 50);
+            [self addSubview:actionViewTop];
+        }
     }
     
     for (int i=0; i < [eventArray count]; i++) {
@@ -137,22 +145,17 @@
 }
 
 -(void)addTopActionForScrollAction:(UIScrollView *)scrollView {
-    if (actionViewTop == nil) {
-        CGFloat height = 50;
-        actionViewTop = [[TopActionView alloc] initWithFrame:CGRectMake(0, -height, self.bounds.size.width, height)];
-        [self addSubview:actionViewTop];
-        priorPoint = scrollView.contentOffset;
-    }
     
-    if (priorPoint.y > scrollView.contentOffset.y) {
-        [UIView animateWithDuration:0.1 animations:^{
-            actionViewTop.frame = CGRectSetOriginOnRect(actionViewTop.frame, 0, 0);
-        }];
-    } else {
-        [UIView animateWithDuration:0.1 animations:^{
-            actionViewTop.frame = CGRectSetOriginOnRect(actionViewTop.frame, 0, -actionViewTop.frame.size.height);
-        }];
-    }
+    CGPoint contentOffset = scrollView.contentOffset;
+    
+    CGFloat diff = priorPoint.y - contentOffset.y;
+    
+        if (actionViewTop.frame.origin.y <= 0) {
+            actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
+        } else if (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height) {
+            
+            actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
+        }
     priorPoint = scrollView.contentOffset;
 }
 

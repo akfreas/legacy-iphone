@@ -43,8 +43,10 @@
 								<reference key="NSNextResponder" ref="262612982"/>
 								<int key="NSvFlags">301</int>
 								<array class="NSMutableArray" key="NSSubviews"/>
-								<string key="NSFrame">{{103, 49}, {130, 130}}</string>
+								<string key="NSFrame">{{90, 39}, {140, 140}}</string>
 								<reference key="NSSuperview" ref="262612982"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="127036934">
 									<int key="NSColorSpace">3</int>
@@ -55,6 +57,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 199}</string>
 						<reference key="NSSuperview" ref="35381003"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="945003100"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<reference key="IBUIBackgroundColor" ref="127036934"/>
@@ -67,6 +70,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 200}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="262612982"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -138,7 +142,29 @@
 			<nil key="sourceID"/>
 			<int key="maxID">10</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">EventInfoHeaderCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">mainImagePlaceholder</string>
+						<string key="NS.object.0">UIView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">mainImagePlaceholder</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">mainImagePlaceholder</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EventInfoHeaderCell.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

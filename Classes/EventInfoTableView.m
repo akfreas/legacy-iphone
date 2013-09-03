@@ -48,7 +48,7 @@
         Event *theEvent = arrayOfEvents[i];
         if ([theEvent.eventId isEqualToNumber:keyEvent.eventId]) {
             theEvent.isKeyEvent = YES;
-            keyEventIndex = i;
+            keyEventIndex = i + 1;
         }
     }
 }
@@ -79,47 +79,46 @@
     }
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        if (headerCell == nil) {
-            headerCell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
-        }
-    }
-    return headerCell;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 200.0f;
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
-    NSInteger eventIndex = indexPath.row;
-    Event *theEvent = arrayOfEvents[eventIndex];
-    static NSString *ReuseId = TableViewCellIdentifierForMainCell;
-    cell = [self dequeueReusableCellWithIdentifier:ReuseId];
-    if (cell == nil) {
-        cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
+    if (indexPath.row == 0) {
+        if (headerCell == nil) {
+            headerCell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
+            
+        }
+        return headerCell;
     } else {
-        EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)cell;
-        timelineCell.event = theEvent;
+        NSInteger eventIndex = indexPath.row - 1;
+        Event *theEvent = arrayOfEvents[eventIndex];
+        static NSString *ReuseId = TableViewCellIdentifierForMainCell;
+        cell = [self dequeueReusableCellWithIdentifier:ReuseId];
+        if (cell == nil) {
+            cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
+        } else {
+            EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)cell;
+            timelineCell.event = theEvent;
+        }
+        
+        if (eventIndex == keyEventIndex) {
+            [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        }
+        
+        cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);
+        return cell;
     }
-    
-    if (eventIndex == keyEventIndex) {
-        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    }
-    
-    cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);
-    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return RelatedEventsLabelHeight;
+    if (indexPath.row == 0) {
+        return 200;
+    } else {
+        return RelatedEventsLabelHeight;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrayOfEvents count];
+    return [arrayOfEvents count] + 1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

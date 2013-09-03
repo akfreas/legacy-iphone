@@ -1,4 +1,3 @@
-#import <GPUImage/GPUImage.h>
 #import "FigureNameLabelBlurLayer.h"
 #import "UIImage+StackBlur.h"
 
@@ -10,9 +9,6 @@
     UIImage *labelImage;
     CIImage *labelCiImage;
     
-    GPUImageGaussianBlurFilter *filter;
-    GPUImagePicture *pic;
-    
     CGFloat initialBlur;
 }
 
@@ -22,18 +18,13 @@
         nameString = string;
 
 
-        self.frame = CGRectMake(0, 0, 320, 60);
-        initialBlur = 10;
+        self.frame = CGRectMake(0, 0, 320, 70);
+        initialBlur = 13;
         self.backgroundColor = [UIColor clearColor];
 //        self.backgroundColor = [UIColor redColor];
 //        [self addSubview:nativeLabel];
-
-        filter = [[GPUImageGaussianBlurFilter alloc] init];
-        filter.blurSize = initialBlur;
         labelImage = [self drawStringInContext:nil];
-        pic = [[GPUImagePicture alloc] initWithImage:labelImage];
         
-        [pic addTarget:filter];
         labelImageView = [[UIImageView alloc] initWithImage:labelImage];
         labelImageView.frame = self.bounds;
         [self addSubview:labelImageView];
@@ -68,8 +59,8 @@
     CGContextDrawPath(ctx, kCGPathFill);
     
     CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
-    
-    [nameString drawAtPoint:nameFrame.origin forWidth:nameFrame.size.width withFont:[UIFont fontWithName:@"Georgia" size:12] fontSize:actualFontSize lineBreakMode:NSLineBreakByTruncatingTail baselineAdjustment:UIBaselineAdjustmentNone];
+    CGPoint textBeginPoint = CGPointMake(nameFrame.origin.x + 10, nameFrame.origin.y);
+    [nameString drawAtPoint:textBeginPoint forWidth:nameFrame.size.width withFont:[UIFont fontWithName:@"Georgia" size:12] fontSize:actualFontSize lineBreakMode:NSLineBreakByTruncatingTail baselineAdjustment:UIBaselineAdjustmentNone];
 //    CGContextSaveGState(ctx);
 //    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 2.0);
 //    CGContextRef ctx = UIGraphicsGetCurrentContext();

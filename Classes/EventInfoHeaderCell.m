@@ -35,7 +35,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.reuseIdentifier = TableViewCellIdentifierForHeader;
         blurLayer = [[FigureNameLabelBlurLayer alloc] initWithString:event.figure.name];
-        blurLayer.frame = CGRectMake(0, 40, 320, 75);
+        blurLayer.frame = CGRectMakeFrameForDeadCenterInRect(self.frame, CGSizeMake(self.frame.size.width, 55));
         figureNameLabelInitialFrame = blurLayer.frame;
         [self fetchFigureProfilePic];
     }

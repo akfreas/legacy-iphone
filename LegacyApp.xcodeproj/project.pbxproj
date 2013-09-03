@@ -406,6 +406,7 @@
 				197305F117C5D54500958D15 /* LegacyInfoPage.h */,
 				197305F217C5D54500958D15 /* LegacyInfoPage.m */,
 				1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */,
+				197305E517C5B30400958D15 /* Event Info Components */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -553,7 +554,6 @@
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
 				4E0F3C971545080D00369BE1 /* MainScreenWebView.h */,
 				4E0F3C9E1545200B00369BE1 /* MainScreenWebView.m */,
-				197305E517C5B30400958D15 /* Event Info Components */,
 				1909A86F1776B41700256ED0 /* Row Components */,
 				1909A85A1772D21300256ED0 /* FigureRowActionOverlay.h */,
 				1909A85B1772D21500256ED0 /* FigureRowActionOverlay.m */,

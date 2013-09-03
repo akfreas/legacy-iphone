@@ -166,7 +166,6 @@
 }
 
 -(void)scrollCompleted {
-    [self reload];
 }
 
 @end

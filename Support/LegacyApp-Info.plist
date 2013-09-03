@@ -50,13 +50,13 @@
 	<key>CFBundleVersion</key>
 	<string>1.0.10</string>
 	<key>DebugResourceUrl</key>
-	<string>http://atyourage.sashimiblade.com</string>
+	<string>http://legacyapp.sashimiblade.com</string>
 	<key>FacebookAppID</key>
 	<string>562062263833279</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ResourceUrl</key>
-	<string>http://atyourage.sashimiblade.com</string>
+	<string>http://legacyapp.sashimiblade.com</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

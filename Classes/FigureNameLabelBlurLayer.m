@@ -34,12 +34,6 @@
     return self;
 }
 
--(void)drawRect:(CGRect)rect {
- 
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-//    [self drawStringInContext:nil];
-}
 -(UIImage *)drawStringInContext:(CGContextRef)ctcx {
     
     CGFloat actualFontSize;
@@ -49,9 +43,7 @@
     
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 2.0);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-//    CGContextTranslateCTM(ctx, 0.0, self.frame.size.height);
-//    CGContextScaleCTM(ctx, 2.0, -2.0);
-    
+
     CGContextSetLineWidth(ctx, 1.0);
     
     CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
@@ -61,26 +53,14 @@
     CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
     CGPoint textBeginPoint = CGPointMake(nameFrame.origin.x + 10, nameFrame.origin.y);
     [nameString drawAtPoint:textBeginPoint forWidth:nameFrame.size.width withFont:[UIFont fontWithName:@"Georgia" size:12] fontSize:actualFontSize lineBreakMode:NSLineBreakByTruncatingTail baselineAdjustment:UIBaselineAdjustmentNone];
-//    CGContextSaveGState(ctx);
-//    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 2.0);
-//    CGContextRef ctx = UIGraphicsGetCurrentContext();
-
-//    CGContextRelease(ctx);
-//    CGContextRestoreGState(ctx);
-    
-    
     
     CGImageRef ref = CGBitmapContextCreateImage(ctx);
-//    CGContextStrokeRect(ctx, CGRectMake(0, 0, 10, 10));
+
     UIImage *img = [UIImage imageWithCGImage:ref];
-//    UIImage *img = [UIImage imageNamed:@"icon.png"];
     return img;
 }
 
 -(void)blurLabelWithRadius:(CGFloat)radius {
-    if (labelCiImage == nil) {
-        labelCiImage = [CIImage imageWithCGImage:labelImage.CGImage];
-    }
     labelImageView.image = [labelImage stackBlur:radius];
     
 }

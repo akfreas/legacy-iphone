@@ -1,10 +1,10 @@
 #import "LegacyInfoPage.h"
-#import "BottomFacebookSignInRowView.h"
+#import "FacebookSignInButton.h"
 
 @implementation LegacyInfoPage {
     
     IBOutlet UISwitch *notificationSwitch;
-    IBOutlet BottomFacebookSignInRowView *facebookButton;
+    IBOutlet FacebookSignInButton *facebookButton;
 }
 
 - (id)initWithFrame:(CGRect)frame

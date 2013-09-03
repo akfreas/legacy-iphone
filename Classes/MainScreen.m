@@ -22,7 +22,7 @@
     IBOutlet LeftRightHostingScrollView *infoScreen;
     LegacyAppConnection *connection;
     
-    DataSyncUtility *dataSync;
+    __unsafe_unretained DataSyncUtility *dataSync;
 }
 
 

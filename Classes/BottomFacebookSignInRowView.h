@@ -1,3 +1,0 @@
-@interface BottomFacebookSignInRowView : UIView
-
-@end

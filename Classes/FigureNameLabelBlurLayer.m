@@ -86,7 +86,7 @@
 }
 
 -(void)setBlurFactor:(CGFloat)blurFactor {
-    _blurFactor = MAX(0, initialBlur + blurFactor);
+    _blurFactor = MAX(0, initialBlur + blurFactor*.20);
     [self blurLabelWithRadius:_blurFactor];
 //    [self addSubview:nativeLabel];
 

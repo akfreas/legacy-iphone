@@ -1,8 +1,8 @@
-#import "BottomFacebookSignInRowView.h"
+#import "FacebookSignInButton.h"
 #import "ObjectArchiveAccessor.h"
 #import "DataSyncUtility.h"
 
-@implementation BottomFacebookSignInRowView {
+@implementation FacebookSignInButton {
     
     IBOutlet UIView *view;
 }
@@ -28,14 +28,14 @@
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     view.frame = CGRectMakeFrameWithSizeFromFrame(frame);
-}
+    }
 
 -(void)hide {
-    
-    CGSize sizeChange = CGSizeMake(0, -self.frame.size.height);
-    NSDictionary *dict = @{@"animation_duration" : [NSNumber numberWithFloat:0.5], @"size_change" : [NSValue valueWithCGSize:sizeChange]};
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowContentChanged object:self userInfo:dict];
+    [UIView animateWithDuration:.25 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 -(void)setAlpha:(CGFloat)alpha {
@@ -76,6 +76,7 @@
     
     [session openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
         if (status == FBSessionStateOpen) {
+            [FBSession setActiveSession:session];
             [self getAndSavePrimaryUser];
         }
     }];

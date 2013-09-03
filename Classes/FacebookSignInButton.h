@@ -1,0 +1,3 @@
+@interface FacebookSignInButton : UIView
+
+@end

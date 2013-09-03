@@ -8,7 +8,7 @@
 #import "Event.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
-#import "BottomFacebookSignInRowView.h"
+#import "FacebookSignInButton.h"
 #import "TopActionView.h"
 
 #import "FigureRowHostingScrollPage.h"
@@ -27,7 +27,7 @@
     CGPoint priorPoint;
     CGRect actionViewTopInitialFrame; 
     LegacyAppConnection *connection;
-    BottomFacebookSignInRowView *signInActionRow;
+    FacebookSignInButton *signInActionRow;
     TopActionView *actionViewTop;
 }
 
@@ -41,7 +41,7 @@
         
         self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         priorPoint = CGPointZero;
-        accessor = [ObjectArchiveAccessor sharedInstance];
+        accessor = [[ObjectArchiveAccessor alloc] init];
         pageArray = [NSMutableArray array];
         scroller = [[UIScrollView alloc] initWithFrame:self.bounds];
         scroller.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
@@ -78,13 +78,13 @@
 
 -(void)reload {
     
-    accessor = [[ObjectArchiveAccessor alloc] init];
     eventArray = [accessor getStoredEventRelations];
     
     if ([arrayOfFigureRows count] < 1) {
         scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
     }
-    if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
+
+    if ([FBSession activeSession].state == FBSessionStateOpen) {
         if (actionViewTop == nil) {
             actionViewTopInitialFrame = CGRectMake(0, 0, self.bounds.size.width, 50);
             actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
@@ -166,7 +166,7 @@
 }
 
 -(void)scrollCompleted {
-    
+    [self reload];
 }
 
 @end

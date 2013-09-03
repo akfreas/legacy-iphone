@@ -523,6 +523,7 @@ static NSString *PersonEntityName = @"Person";
                 dispatch_async(dispatch_get_main_queue(), ^{
                     newPerson.thumbnail = data;
                     [self save];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
                     completionBlock(newPerson);
                 });
             }];

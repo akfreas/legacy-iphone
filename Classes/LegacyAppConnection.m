@@ -24,7 +24,8 @@
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request.urlRequest success:^(NSURLRequest *URLRequest, NSHTTPURLResponse *response, id JSON) {
         
         _block(request, JSON, NULL);
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(NSURLRequest *theRequest, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"URL: %@ Response: %@ Error: %@ JSON:%@", theRequest.URL, response, error, JSON);
     }];
     [operation start];
 }

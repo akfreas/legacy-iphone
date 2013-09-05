@@ -10,6 +10,7 @@
     
     NSOperationQueue *queue;
     ObjectArchiveAccessor *accessor;
+    LegacyAppConnection *connection;
     void (^completion)();
 }
 
@@ -43,7 +44,7 @@
 
     request = [LegacyAppRequest requestToGetStoriesForPerson:primaryPerson];
     
-    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
+    connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
         ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];
@@ -59,8 +60,12 @@
     Person *primaryPerson = [accessor primaryPerson];
     LegacyAppRequest *request = [LegacyAppRequest requestToSaveFacebookUsers:persons forPerson:primaryPerson];
     
-    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
+    connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
+    
+    
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+        
+        
         if (completionBlock != NULL) {
             completionBlock();
         }
@@ -91,7 +96,7 @@
         for (Figure *theFigure in figures) {
             LegacyAppRequest *request = [LegacyAppRequest requestToGetAllEventsForFigure:theFigure];
             
-            LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
+            connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
             
             [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
                 ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];

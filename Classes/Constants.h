@@ -10,6 +10,8 @@
 #define KeyForInfoOverlayButtonTapped @"OverlayInfoButtonTapped"
 #define KeyForAddFriendButtonTapped @"AddFriendButtonTapped"
 #define KeyForPersonThumbnailUpdated @"PersonThumbnailUpdated"
+#define KeyForUserHasAuthenticatedWithFacebook @"HasAuthenticatedWithFacebook"
+
 #define TableViewCellIdentifierForHeader @"HeaderCellIdentifier"
 #define TableViewCellIdentifierForMainCell @"MainTableViewCell"
 

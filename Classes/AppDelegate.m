@@ -73,10 +73,14 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 +(void)openSessionWithCompletionBlock:(void(^)(FBSession *, FBSessionState, NSError *))completionBlock {
     
-    NSArray *perms = [NSArray arrayWithObjects:@"user_birthday", @"friends_birthday", nil];
-    [FBSession openActiveSessionWithReadPermissions:perms
-                                       allowLoginUI:YES
-                                  completionHandler:completionBlock];
+    BOOL hasAuthenticated = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForUserHasAuthenticatedWithFacebook];
+    
+    if (hasAuthenticated == YES) {
+        NSArray *perms = [NSArray arrayWithObjects:@"user_birthday", @"friends_birthday", nil];
+        [FBSession openActiveSessionWithReadPermissions:perms
+                                           allowLoginUI:YES
+                                      completionHandler:completionBlock];
+    }
 }
 
 @end

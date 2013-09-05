@@ -393,13 +393,17 @@ static NSString *PersonEntityName = @"Person";
             dispatch_async(dispatch_get_main_queue(), ^{
                 person.thumbnail = imageData;
                 [self save];
-                if ([person.objectID isTemporaryID] == NO) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonThumbnailUpdated object:self userInfo:@{@"person": person}];
-                }
+                [self notifyPersonThumbnailUpdated:person];
             });
         }
     }];
     return person;
+}
+
+-(void)notifyPersonThumbnailUpdated:(Person *)person {
+    if ([person.objectID isTemporaryID] == NO) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonThumbnailUpdated object:self userInfo:@{@"person": person}];
+    }
 }
 
 -(void)addEventAndFigureRelationWithJson:(NSDictionary *)json {
@@ -498,7 +502,6 @@ static NSString *PersonEntityName = @"Person";
     newPerson.isPrimary = [NSNumber numberWithBool:NO];
     newPerson.firstName = fbUser.first_name;
     newPerson.lastName = fbUser.last_name;
-    [self save];
     
     FBRequest *request = [FBRequest requestForGraphPath:[NSString stringWithFormat:@"me/friends/%@?fields=birthday,picture", fbUser.id]];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
@@ -517,6 +520,9 @@ static NSString *PersonEntityName = @"Person";
             } else {
                 newPerson.birthday = theBirthday;
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self save];
+            });
             
             NSString *urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=140", fbUser.id];
             
@@ -525,7 +531,7 @@ static NSString *PersonEntityName = @"Person";
                 dispatch_async(dispatch_get_main_queue(), ^{
                     newPerson.thumbnail = data;
                     [self save];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
+                    [self notifyPersonThumbnailUpdated:newPerson];
                     completionBlock(newPerson);
                 });
             }];
@@ -541,7 +547,7 @@ static NSString *PersonEntityName = @"Person";
         if ([user conformsToProtocol:@protocol(FBGraphUser)]) {
             id<FBGraphUser> fbUser = user;
             [self getOrCreatePersonWithFacebookGraphUser:fbUser completionBlock:^(Person *person){
-                userCount--;
+                --userCount;
                 
                 if (userCount == 0) {
                     completionBlock();

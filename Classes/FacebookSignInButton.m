@@ -77,7 +77,10 @@
     [session openWithBehavior:FBSessionLoginBehaviorUseSystemAccountIfPresent completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
         if (status == FBSessionStateOpen) {
             [FBSession setActiveSession:session];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyForUserHasAuthenticatedWithFacebook];
             [self getAndSavePrimaryUser];
+        } else {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:KeyForUserHasAuthenticatedWithFacebook];
         }
     }];
 }

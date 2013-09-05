@@ -17,19 +17,21 @@
             __unsafe_unretained typeof(self) weakSelf = self;
             [accessor addFacebookUsers:sender.selection completionBlock:^{
                 [[DataSyncUtility sharedInstance] syncFacebookFriends:^{
-                    [weakSelf useCompletion];
+                    [weakSelf useCompletion:sender];
                 }];
 
             }];
-            [sender dismissViewControllerAnimated:YES completion:NULL];
         } else {
             [sender dismissViewControllerAnimated:YES completion:NULL];
         }
     };
 }
 
--(void)useCompletion{
-    friendPickerCompletionBlock();
+-(void)useCompletion:(id)sender {
+    
+    [sender dismissViewControllerAnimated:YES completion:^{
+        [[DataSyncUtility sharedInstance] sync:NULL];
+    }];
 }
 
 -(void)friendPickerViewControllerDataDidChange:(FBFriendPickerViewController *)friendPicker {

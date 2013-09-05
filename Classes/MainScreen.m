@@ -160,7 +160,6 @@
     [activity startAnimating];
     [dataSync sync:^{
         [activity stopAnimating];
-        [infoScreen reload];
     }];
 }
 

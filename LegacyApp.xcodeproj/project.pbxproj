@@ -42,12 +42,7 @@
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		1945775817D3EAA000C5DB62 /* button-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775617D3EAA000C5DB62 /* button-back.png */; };
 		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
-		1945775B17D4F37800C5DB62 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945775A17D4F37800C5DB62 /* CoreImage.framework */; };
 		1945775E17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */; };
-		1945776017D5056C00C5DB62 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945775F17D5056C00C5DB62 /* OpenGLES.framework */; };
-		1945776717D5188000C5DB62 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776617D5187F00C5DB62 /* AVFoundation.framework */; };
-		1945776917D5189F00C5DB62 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776817D5189F00C5DB62 /* CoreMedia.framework */; };
-		1945776B17D518AC00C5DB62 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945776A17D518AC00C5DB62 /* CoreVideo.framework */; };
 		1945776E17D5A02E00C5DB62 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* LegacyWebView.xib */; };
@@ -186,13 +181,8 @@
 		192E6E421724B1AA008C9153 /* ImageWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidget.m; sourceTree = "<group>"; };
 		1945775617D3EAA000C5DB62 /* button-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-back.png"; path = "images/button-back.png"; sourceTree = "<group>"; };
 		1945775717D3EAA000C5DB62 /* button-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-forward.png"; path = "images/button-forward.png"; sourceTree = "<group>"; };
-		1945775A17D4F37800C5DB62 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		1945775C17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureNameLabelBlurLayer.h; sourceTree = "<group>"; };
 		1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureNameLabelBlurLayer.m; sourceTree = "<group>"; };
-		1945775F17D5056C00C5DB62 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		1945776617D5187F00C5DB62 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		1945776817D5189F00C5DB62 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		1945776A17D518AC00C5DB62 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		1945776C17D59F7100C5DB62 /* UIImage+StackBlur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+StackBlur.h"; sourceTree = "<group>"; };
 		1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* LegacyWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyWebView.xib; sourceTree = "<group>"; };
@@ -313,15 +303,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1945776B17D518AC00C5DB62 /* CoreVideo.framework in Frameworks */,
-				1945776917D5189F00C5DB62 /* CoreMedia.framework in Frameworks */,
-				1945776717D5188000C5DB62 /* AVFoundation.framework in Frameworks */,
-				1945776017D5056C00C5DB62 /* OpenGLES.framework in Frameworks */,
-				1945775B17D4F37800C5DB62 /* CoreImage.framework in Frameworks */,
+				19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
 				19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */,
 				19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */,
-				19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */,
 				19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */,
 				4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */,
 				199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */,
@@ -481,11 +466,6 @@
 		4EEA6CD315268ED200B96EFD = {
 			isa = PBXGroup;
 			children = (
-				1945776A17D518AC00C5DB62 /* CoreVideo.framework */,
-				1945776817D5189F00C5DB62 /* CoreMedia.framework */,
-				1945776617D5187F00C5DB62 /* AVFoundation.framework */,
-				1945775F17D5056C00C5DB62 /* OpenGLES.framework */,
-				1945775A17D4F37800C5DB62 /* CoreImage.framework */,
 				19C55E4B1783A7900099AE4A /* icon@2x.png */,
 				19C55E491783A7890099AE4A /* icon.png */,
 				4EEA6D021526902D00B96EFD /* Classes */,
@@ -871,6 +851,7 @@
 					"\"$(SRCROOT)/Dependencies\"",
 					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Socialize.embeddedframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/LegacyApp-Prefix.pch";
@@ -880,6 +861,7 @@
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -898,6 +880,7 @@
 					"\"$(SRCROOT)/Dependencies\"",
 					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Socialize.embeddedframework\"",
 				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -907,6 +890,7 @@
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -77,6 +77,7 @@ DualFrame * initFrame() {
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.widgetContainer];
 }
 
 -(void)setUpFrames {

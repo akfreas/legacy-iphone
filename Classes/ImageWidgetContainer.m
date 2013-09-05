@@ -30,6 +30,7 @@
         operationQueue = [[NSOperationQueue alloc] init];
         accessor = [[ObjectArchiveAccessor alloc] init];
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonThumbnail:) name:KeyForPersonThumbnailUpdated object:nil];
 //        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
         _widget = [[ImageWidget alloc] init];
 //        self.backgroundColor = [UIColor greenColor];
@@ -41,6 +42,17 @@
     return self;
 }
 
+-(void)updatePersonThumbnail:(NSNotification *)notif {
+    
+    id object = notif.userInfo[@"person"];
+    if ([object isKindOfClass:[Person class]]) {
+        Person *thePerson = (Person *)object;
+        
+        if ([thePerson.facebookId isEqualToString:_person.facebookId]) {
+            _widget.smallImage = [UIImage imageWithData:thePerson.thumbnail];
+        }
+    }
+}
 
 -(void)layoutSubviews {
     
@@ -54,7 +66,7 @@
     }
 }
 
--(void)getThumbnailImage {
+-(void)getFigureThumbnailImage {
     
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -74,7 +86,7 @@
     
     if (_event == nil) {
     } else {
-        [self getThumbnailImage];
+        [self getFigureThumbnailImage];
         [self setNeedsLayout];
     }
 }
@@ -83,7 +95,7 @@
 -(void)setPerson:(Person *)person {
     
     UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
-    
+    _person = person;
     _widget.smallImage = thumbnail;
     [self setNeedsLayout];
     

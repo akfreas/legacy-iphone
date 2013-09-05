@@ -97,7 +97,7 @@ static NSString *PersonEntityName = @"Person";
 #pragma mark Getter Methods
 
 -(Person *)primaryPerson {
-    
+
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"isPrimary == YES"];
     NSError *error;
@@ -393,7 +393,9 @@ static NSString *PersonEntityName = @"Person";
             dispatch_async(dispatch_get_main_queue(), ^{
                 person.thumbnail = imageData;
                 [self save];
-                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
+                if ([person.objectID isTemporaryID] == NO) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonThumbnailUpdated object:self userInfo:@{@"person": person}];
+                }
             });
         }
     }];

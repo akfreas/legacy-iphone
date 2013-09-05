@@ -79,7 +79,7 @@
 -(void)reload {
     
     eventArray = [accessor getStoredEventRelations];
-    
+    [self removeInfoViews];
     if ([arrayOfFigureRows count] < 1) {
         scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
     }

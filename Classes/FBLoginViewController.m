@@ -21,7 +21,7 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     
-    [appDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
+    [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
         switch (state) {
             case FBSessionStateOpen:
                 loggedInCompletion();

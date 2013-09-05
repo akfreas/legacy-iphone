@@ -10,10 +10,11 @@
 #import "LegacyWebView.h"
 #import "FacebookSignInButton.h"
 #import "TopActionView.h"
+#import "AppDelegate.h"
 
 #import "FigureRowHostingScrollPage.h"
 
-@interface FigureRowHostingScrollPage () <UIScrollViewDelegate, NSFetchedResultsControllerDelegate>
+@interface FigureRowHostingScrollPage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end
 
@@ -85,12 +86,13 @@
     }
 
     if ([FBSession activeSession].state == FBSessionStateOpen) {
-        if (actionViewTop == nil) {
-            actionViewTopInitialFrame = CGRectMake(0, 0, self.bounds.size.width, 50);
-            actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
-            scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, 50);
-            [self addSubview:actionViewTop];
-        }
+            [self addTopActionView];
+    } else {
+        [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
+            if (state == FBSessionStateOpen) {
+                [self addTopActionView];
+            }
+        }];
     }
     
     for (int i=0; i < [eventArray count]; i++) {
@@ -103,6 +105,16 @@
     }
 
     [self setNeedsLayout];
+}
+
+-(void)addTopActionView {
+    if (actionViewTop == nil) {
+
+        actionViewTopInitialFrame = CGRectMake(0, 0, self.bounds.size.width, 50);
+        actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
+        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, 50);
+        [self addSubview:actionViewTop];
+    }
 }
 
 -(FigureRow *)figureRowForIndex:(NSUInteger)index {

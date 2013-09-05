@@ -5,9 +5,11 @@
 #import "LegacyAppConnection.h"
 #import "ObjectArchiveAccessor.h"
 
+
 @implementation AppDelegate {
     
     UINavigationController *mainNavController;
+
 }
 
 @synthesize window = _window;
@@ -69,7 +71,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     return [FBSession.activeSession handleOpenURL:url];
 }
 
--(void)openSessionWithCompletionBlock:(void(^)(FBSession *, FBSessionState, NSError *))completionBlock {
++(void)openSessionWithCompletionBlock:(void(^)(FBSession *, FBSessionState, NSError *))completionBlock {
     
     NSArray *perms = [NSArray arrayWithObjects:@"user_birthday", @"friends_birthday", nil];
     [FBSession openActiveSessionWithReadPermissions:perms

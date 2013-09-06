@@ -112,9 +112,9 @@
 
         actionViewTopInitialFrame = CGRectMake(0, 0, self.bounds.size.width, 50);
         actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
-        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, 50);
         [self addSubview:actionViewTop];
     }
+    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, 50);
 }
 
 -(FigureRow *)figureRowForIndex:(NSUInteger)index {

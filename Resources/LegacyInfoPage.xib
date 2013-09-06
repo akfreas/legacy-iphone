@@ -33,7 +33,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUISwitch" id="732314241">
@@ -41,6 +41,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{192, 89}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="601634676"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -53,6 +54,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{80, 20}, {151, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1052553012"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -87,6 +89,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{27, 92}, {165, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="732314241"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -114,6 +117,8 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{15, 174}, {290, 67}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -123,6 +128,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="464021357"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -173,10 +180,10 @@
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">notificationSwitch:</string>
 						<reference key="source" ref="732314241"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">3</int>
+						<reference key="destination" ref="191373211"/>
+						<int key="IBEventType">13</int>
 					</object>
-					<int key="connectionID">31</int>
+					<int key="connectionID">35</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -249,13 +256,57 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">33</int>
+			<int key="maxID">35</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
+					<string key="className">FacebookSignInButton</string>
+					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">view</string>
+						<string key="NS.object.0">UIView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">view</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">view</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/FacebookSignInButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">LegacyInfoPage</string>
 					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">notificationSwitch:</string>
+						<string key="NS.object.0">UISwitch</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">notificationSwitch:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">notificationSwitch:</string>
+							<string key="candidateClassName">UISwitch</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="facebookButton">FacebookSignInButton</string>
+						<string key="notificationSwitch">UISwitch</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="facebookButton">
+							<string key="name">facebookButton</string>
+							<string key="candidateClassName">FacebookSignInButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="notificationSwitch">
+							<string key="name">notificationSwitch</string>
+							<string key="candidateClassName">UISwitch</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/LegacyInfoPage.h</string>

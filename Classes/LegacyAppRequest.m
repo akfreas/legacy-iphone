@@ -4,7 +4,7 @@
 #import "Figure.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
-
+#import <TargetConditionals.h>
 @implementation LegacyAppRequest {
     
 }
@@ -14,7 +14,7 @@
 
 +(NSURL *)baseUrl {
     
-#ifdef DEBUG
+#if TARGET_IPHONE_SIMULATOR
     NSString *path = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"DebugResourceUrl"];
 #else
     NSString *path = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ResourceUrl"];

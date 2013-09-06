@@ -30,8 +30,8 @@
 -(void)useCompletion:(id)sender {
     
     [sender dismissViewControllerAnimated:YES completion:^{
-        [[DataSyncUtility sharedInstance] sync:NULL];
     }];
+    [[DataSyncUtility sharedInstance] sync:NULL];
 }
 
 -(void)friendPickerViewControllerDataDidChange:(FBFriendPickerViewController *)friendPicker {

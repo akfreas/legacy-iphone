@@ -81,7 +81,9 @@
     [accessor save];
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
-        completion();
+        if (completion != NULL) {
+            completion();
+        }
     });
     [self syncRelatedEvents];
 }

@@ -142,7 +142,8 @@ typedef enum ScrollViewDirection {
 
 -(void)addPageControl {
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(PageControlXPosition, PageControlYPosition, PageControlWidthPerPage * 3, PageControlHeight)];
+    CGFloat pageControlWidth = 20 * 4;
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2 - pageControlWidth / 2, PageControlYPosition, pageControlWidth, PageControlHeight)];
     pageControl.layer.cornerRadius = PageControlCornerRadius;
     pageControl.alpha = 0;
     pageControl.currentPage = 0;
@@ -229,7 +230,7 @@ typedef enum ScrollViewDirection {
     [self setScrollViewDirection];
     [self notifyVisiblePage];
     if (scrollView.contentOffset.x > self.bounds.size.width) {
-        pageControl.frame = CGRectMake(scrollView.contentOffset.x + 20, pageControl.frame.origin.y, pageControl.frame.size.width, pageControl.frame.size.height);
+        pageControl.frame = CGRectMake(scrollView.contentOffset.x + (self.bounds.size.width / 2 - (20 * 4) / 2), pageControl.frame.origin.y, pageControl.frame.size.width, pageControl.frame.size.height);
         if (pageControl.alpha != 1) {
             [UIView animateWithDuration:0.2 animations:^{
                 pageControl.alpha = 1;

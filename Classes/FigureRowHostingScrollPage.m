@@ -61,7 +61,7 @@
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat width = self.bounds.size.width;
     
-    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index + actionViewTop.frame.size.height, width, FigureRowPageInitialHeight);
+    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
 }
 
 -(NSInteger)indexAtPoint:(CGPoint)point {
@@ -110,11 +110,11 @@
 -(void)addTopActionView {
     if (actionViewTop == nil) {
 
-        actionViewTopInitialFrame = CGRectMake(0, 0, self.bounds.size.width, 50);
+        actionViewTopInitialFrame = CGRectMake(0, -50, self.bounds.size.width, 50);
         actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
         [self addSubview:actionViewTop];
     }
-    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, 50);
+//    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize,);
 }
 
 -(FigureRow *)figureRowForIndex:(NSUInteger)index {
@@ -151,7 +151,7 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    if ([[FBSession activeSession] state] != FBSessionStateCreated) {
+    if ([actionViewTop superview] == self) {
         [self addTopActionForScrollAction:scrollView];
     }
 }
@@ -162,12 +162,10 @@
     
     CGFloat diff = priorPoint.y - contentOffset.y;
     
-        if (actionViewTop.frame.origin.y <= 0) {
-            actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
-        } else if (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height) {
-            
-            actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
-        }
+if ((diff > 0 && actionViewTop.frame.origin.y <= -10) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height)) {
+        actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
+    }
+    
     priorPoint = scrollView.contentOffset;
 }
 

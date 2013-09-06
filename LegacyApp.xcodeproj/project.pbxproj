@@ -44,6 +44,7 @@
 		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
 		1945775E17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */; };
 		1945776E17D5A02E00C5DB62 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */; };
+		1945794C17D9A0E300C5DB62 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1945794B17D9A0E300C5DB62 /* Reveal.framework */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* LegacyWebView.xib */; };
 		195B600116DEB7D3006215E9 /* EventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */; };
@@ -97,7 +98,6 @@
 		19D29F7C16A6716F00D46B0A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19D29F7B16A6716F00D46B0A /* FacebookSDKResources.bundle */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
-		19D4C3EE17CDB47A00E7ED6A /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D4C3ED17CDB47A00E7ED6A /* Reveal.framework */; };
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19D61CC416B224FF00C81E60 /* HeaderImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */; };
 		19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D61CC516B2370A00C81E60 /* 19-gear.png */; };
@@ -185,6 +185,7 @@
 		1945775D17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureNameLabelBlurLayer.m; sourceTree = "<group>"; };
 		1945776C17D59F7100C5DB62 /* UIImage+StackBlur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+StackBlur.h"; sourceTree = "<group>"; };
 		1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
+		1945794B17D9A0E300C5DB62 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* LegacyWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyWebView.xib; sourceTree = "<group>"; };
 		195B5FFD16DEB7D3006215E9 /* EventDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDescriptionView.h; sourceTree = "<group>"; };
 		195B5FFE16DEB7D3006215E9 /* EventDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EventDescriptionView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -257,7 +258,6 @@
 		19D29F7D16A671C800D46B0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		19D29F7F16A674C200D46B0A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreen.h; sourceTree = "<group>"; };
 		19D29F8016A674C200D46B0A /* MainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19D4C3ED17CDB47A00E7ED6A /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ObjectArchiveAccessor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ObjectArchiveAccessor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19D61CC316B224FF00C81E60 /* HeaderImg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeaderImg@2x.png"; sourceTree = "<group>"; };
@@ -314,7 +314,7 @@
 				4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */,
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
 				19D29F5C16A5481D00D46B0A /* FacebookSDK.framework in Frameworks */,
-				19D4C3EE17CDB47A00E7ED6A /* Reveal.framework in Frameworks */,
+				1945794C17D9A0E300C5DB62 /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +488,7 @@
 		4EEA6CE115268ED300B96EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1945794B17D9A0E300C5DB62 /* Reveal.framework */,
 				4E0F3CA0154533E800369BE1 /* QuartzCore.framework */,
 				4EEA6CE215268ED300B96EFD /* UIKit.framework */,
 				4EEA6CE415268ED300B96EFD /* Foundation.framework */,
@@ -591,7 +592,6 @@
 		4EEA6D101526906000B96EFD /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				19D4C3ED17CDB47A00E7ED6A /* Reveal.framework */,
 				191F78E11782DD4800729F2A /* AFNetworking */,
 				19D29F7D16A671C800D46B0A /* Accounts.framework */,
 				199C0CAB16C0C0D900068E73 /* CoreData.framework */,

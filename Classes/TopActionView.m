@@ -35,7 +35,7 @@
     Person *mainPerson = [accessor primaryPerson];
     UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
     profilePicButton = [[CircleImageView alloc] initWithImage:thumb radius:buttonRadii];
-    profilePicButton.frame = CGRectMake(PageControlXPosition + PageControlWidthPerPage * 4, 5, profilePicButton.frame.size.width, profilePicButton.frame.size.height);
+    profilePicButton.frame = CGRectMake(5, 5, profilePicButton.frame.size.width, profilePicButton.frame.size.height);
     [self addSubview:profilePicButton];
 }
 

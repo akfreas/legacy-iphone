@@ -10,6 +10,7 @@
     CIImage *labelCiImage;
     
     CGFloat initialBlur;
+    CGFloat currentBlur;
 }
 
 -(id)initWithString:(NSString *)string {
@@ -17,9 +18,10 @@
     if (self) {
         nameString = string;
 
-
+        
         self.frame = CGRectMake(0, 0, 320, 70);
         initialBlur = 13;
+        currentBlur = initialBlur;
         self.backgroundColor = [UIColor clearColor];
 //        self.backgroundColor = [UIColor redColor];
 //        [self addSubview:nativeLabel];
@@ -66,10 +68,11 @@
 }
 
 -(void)setBlurFactor:(CGFloat)blurFactor {
+    
     _blurFactor = MAX(0, initialBlur + blurFactor*.20);
-    [self blurLabelWithRadius:_blurFactor];
-//    [self addSubview:nativeLabel];
-
+    if (_blurFactor != currentBlur) {
+        [self blurLabelWithRadius:_blurFactor];
+    }
 }
 
 

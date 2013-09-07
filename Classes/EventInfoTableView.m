@@ -74,6 +74,14 @@
     
 }
 
+-(Event *)event {
+    return keyEvent;
+}
+
+-(void)setEvent:(Event *)event {
+    keyEvent = event;
+}
+
 #pragma mark TableView Methods
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

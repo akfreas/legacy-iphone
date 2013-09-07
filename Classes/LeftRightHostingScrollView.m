@@ -131,10 +131,6 @@ typedef enum ScrollViewDirection {
         [theRow reset];
     }
     
-    LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
-    webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
-    webView.event = theEvent;
-    [self addPage:webView];
 }
 
 
@@ -180,6 +176,13 @@ typedef enum ScrollViewDirection {
         paginationInProgress = NO;
         self.scrollEnabled = YES;
         UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:pageControl.currentPage];
+        if ([page isKindOfClass:[EventInfoTableView class]]) {
+            
+            LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
+            webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
+            webView.event = page.event;
+            [self addPage:webView];
+        }
         [page scrollCompleted];
     }
 }

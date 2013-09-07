@@ -65,19 +65,19 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Label</string>
+						<string key="IBUIText">@25 years, 2 months, 25 days old</string>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<string key="name">HelveticaNeue-Medium</string>
-							<string key="family">Helvetica Neue</string>
-							<int key="traits">0</int>
-							<double key="pointSize">12</double>
+							<string key="name">Cochin-BoldItalic</string>
+							<string key="family">Cochin</string>
+							<int key="traits">3</int>
+							<double key="pointSize">14</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">HelveticaNeue-Medium</string>
-							<double key="NSSize">12</double>
+							<string key="NSName">Cochin-BoldItalic</string>
+							<double key="NSSize">14</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -88,6 +88,7 @@
 						<string key="NSFrame">{{111, 55}, {209, 66}}</string>
 						<reference key="NSSuperview" ref="589461115"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="228446864"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -121,6 +122,7 @@
 						<string key="NSFrame">{{41, 9}, {267, 21}}</string>
 						<reference key="NSSuperview" ref="589461115"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="307835401"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -137,12 +139,14 @@
 						<int key="IBUIBaselineAdjustment">0</int>
 						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">1</int>
-							<double key="pointSize">17</double>
+							<string key="name">Cochin-Bold</string>
+							<string key="family">Cochin</string>
+							<int key="traits">2</int>
+							<double key="pointSize">19</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
+							<string key="NSName">Cochin-Bold</string>
+							<double key="NSSize">19</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -151,7 +155,7 @@
 				<string key="NSFrameSize">{320, 140}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="307835401"/>
+				<reference key="NSNextKeyView" ref="513340855"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -282,35 +286,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ImageWidgetContainer</string>
 					<string key="superclassName">UIView</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="birthdayLabel">UILabel</string>
-						<string key="eventView">UIView</string>
-						<string key="firstNameLabel">UILabel</string>
-						<string key="lastNameLabel">UILabel</string>
-						<string key="personThumbnail">UIImageView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="birthdayLabel">
-							<string key="name">birthdayLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="eventView">
-							<string key="name">eventView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="firstNameLabel">
-							<string key="name">firstNameLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lastNameLabel">
-							<string key="name">lastNameLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="personThumbnail">
-							<string key="name">personThumbnail</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ImageWidgetContainer.h</string>
@@ -319,43 +294,11 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">MainFigureInfoPage</string>
 					<string key="superclassName">UIScrollView</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">trashcanButtonAction:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">trashcanButtonAction:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">trashcanButtonAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="ageLabel">UILabel</string>
-						<string key="eventDescriptionText">UITextView</string>
-						<string key="figureNameLabel">UILabel</string>
-						<string key="trashcanButton">UIButton</string>
 						<string key="view">UIView</string>
 						<string key="widgetContainer">ImageWidgetContainer</string>
-						<string key="wikipediaButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="ageLabel">
-							<string key="name">ageLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="eventDescriptionText">
-							<string key="name">eventDescriptionText</string>
-							<string key="candidateClassName">UITextView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="figureNameLabel">
-							<string key="name">figureNameLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="trashcanButton">
-							<string key="name">trashcanButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="view">
 							<string key="name">view</string>
 							<string key="candidateClassName">UIView</string>
@@ -363,10 +306,6 @@
 						<object class="IBToOneOutletInfo" key="widgetContainer">
 							<string key="name">widgetContainer</string>
 							<string key="candidateClassName">ImageWidgetContainer</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="wikipediaButton">
-							<string key="name">wikipediaButton</string>
-							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

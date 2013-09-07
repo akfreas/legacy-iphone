@@ -162,11 +162,45 @@
     
     CGFloat diff = priorPoint.y - contentOffset.y;
     
-if ((diff > 0 && actionViewTop.frame.origin.y <= -10) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height)) {
+    if ((diff > 0 && actionViewTop.frame.origin.y  + diff <= 0) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height)) {
         actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
     }
     
     priorPoint = scrollView.contentOffset;
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    [self resetFrameOnActionViewInScrollView:scrollView];
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self resetFrameOnActionViewInScrollView:scrollView];
+}
+
+-(void)resetFrameOnActionViewInScrollView:(UIScrollView *)scrollView {
+    
+    if (scrollView.contentOffset.y == 0) {
+        [self slideUpActionView];
+    } else if (actionViewTop.frame.origin.y < -actionViewTop.frame.size.height / 2) {
+        [self slideUpActionView];
+    } else if (actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height / 2) {
+        [self slideDownActionView];
+    }
+}
+
+-(void)slideUpActionView {
+    [UIView animateWithDuration:.2 animations:^{
+        actionViewTop.frame = CGRectSetOriginOnRect(actionViewTop.frame, 0, -actionViewTop.frame.size.height);
+    }];
+}
+
+-(void)slideDownActionView {
+    [UIView animateWithDuration:.2 animations:^{
+        actionViewTop.frame = CGRectSetOriginOnRect(actionViewTop.frame, 0, 0);
+    }];
+
 }
 
 #pragma mark FigureRowPageProtocol Delegate Methods

@@ -47,7 +47,6 @@
         scroller = [[UIScrollView alloc] initWithFrame:self.bounds];
         scroller.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         scroller.delegate = self;
-
         [self addSubview:scroller];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:KeyForRowDataUpdated object:nil];
@@ -61,7 +60,7 @@
 -(CGRect)frameAtIndex:(NSInteger)index {
     CGFloat width = self.bounds.size.width;
     
-    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index, width, FigureRowPageInitialHeight);
+    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index + actionViewTopInitialFrame.size.height, width, FigureRowPageInitialHeight);
 }
 
 -(NSInteger)indexAtPoint:(CGPoint)point {
@@ -107,12 +106,20 @@
     [self setNeedsLayout];
 }
 
+-(void)shiftRowsFrameByYValue:(CGFloat)yValue {
+    
+    for (FigureRow *row in arrayOfFigureRows) {
+        row.frame = CGRectSetOriginOnRect(row.frame, row.frame.origin.x, row.frame.origin.y + yValue);
+    }
+}
+
 -(void)addTopActionView {
     if (actionViewTop == nil) {
-
+        
         actionViewTopInitialFrame = CGRectMake(0, -50, self.bounds.size.width, 50);
         actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
         [self addSubview:actionViewTop];
+        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, actionViewTop.bounds.size.height);
     }
 //    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize,);
 }
@@ -162,8 +169,10 @@
     
     CGFloat diff = priorPoint.y - contentOffset.y;
     
-    if ((diff > 0 && actionViewTop.frame.origin.y  + diff <= 0) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height)) {
+    if (contentOffset.y >= 0 && ((diff > 0 && actionViewTop.frame.origin.y  + diff <= 0) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height))) {
         actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
+    } else if (scrollView.contentOffset.y < 0) {
+        actionViewTop.frame = CGRectMake(0, -scrollView.contentOffset.y, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
     }
     
     priorPoint = scrollView.contentOffset;
@@ -182,7 +191,7 @@
 -(void)resetFrameOnActionViewInScrollView:(UIScrollView *)scrollView {
     
     if (scrollView.contentOffset.y == 0) {
-        [self slideUpActionView];
+        [self slideDownActionView];
     } else if (actionViewTop.frame.origin.y < -actionViewTop.frame.size.height / 2) {
         [self slideUpActionView];
     } else if (actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height / 2) {

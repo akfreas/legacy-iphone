@@ -7,7 +7,7 @@
 #import "FigureRowPageProtocol.h"
 #import "LegacyWebView.h"
 #import "FigureRowActionOverlay.h"
-
+#import <FacebookSDK/FBNativeDialogs.h>
 @interface FigureRow () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end
@@ -106,6 +106,11 @@ CGFloat pageWidth = 320;
     NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:@{@"event": _event}];
     actionOverlay.infoButtonAction = ^{
         [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
+    };
+    
+    NSNotification *facebookNotification = [NSNotification notificationWithName:KeyForFacebookButtonTapped object:self userInfo:@{@"event" : _event}];
+    actionOverlay.facebookButtonAction = ^{
+        [[NSNotificationCenter defaultCenter] postNotification:facebookNotification];
     };
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForOverlayViewShown object:self];
 }

@@ -3,6 +3,7 @@
 #import "FBLoginViewController.h"
 #import "SettingsModalView.h"
 #import "Person.h"
+#import "Figure.h"
 #import "ObjectArchiveAccessor.h"
 #import "AFAlertView.h"
 #import "Utility_AppSettings.h"
@@ -12,6 +13,7 @@
 #import "LegacyAppConnection.h"
 #import "LegacyAppRequest.h"
 #import "DataSyncUtility.h"
+
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
@@ -33,9 +35,22 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showShareDialog:) name:KeyForFacebookButtonTapped object:nil];
         dataSync = [DataSyncUtility sharedInstance];
     }
     return self;
+}
+
+-(void)showShareDialog:(NSNotification *)notif {
+    
+    Event *event = notif.userInfo[@"event"];
+    NSString *eventAgeString = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
+    
+    [FBDialogs presentShareDialogWithLink:[NSURL URLWithString:@"http://google.com"] name:event.figure.name caption:eventAgeString description:event.eventDescription picture:[NSURL URLWithString:event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+        
+    }];
+    
+
 }
 
 

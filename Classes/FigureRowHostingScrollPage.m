@@ -116,10 +116,10 @@
 -(void)addTopActionView {
     if (actionViewTop == nil) {
         
-        actionViewTopInitialFrame = CGRectMake(0, -50, self.bounds.size.width, 50);
-        actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopInitialFrame];
-        [self addSubview:actionViewTop];
+        actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight, self.bounds.size.width, TopActionViewHeight);
+        actionViewTop = [[TopActionView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight)];
         scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, actionViewTop.bounds.size.height);
+        [self addSubview:actionViewTop];
     }
 //    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize,);
 }

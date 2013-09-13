@@ -56,9 +56,7 @@
 #define RightIndicatorLinesFrameWidth 200
 #define RightIndicatorLinesFrameHeight 400
 
-#define LeftActionTabPageWidth 30
-#define LeftActionTabPageButtonWidth 30
-#define LeftActionTabPageButtonHeight 30
+#define TopActionViewHeight 50
 
 #define FigureRowNameContainerViewHeight 40
 

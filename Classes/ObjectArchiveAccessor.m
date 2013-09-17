@@ -473,10 +473,8 @@ static NSString *PersonEntityName = @"Person";
     return returnFigure;
 }
 
-
--(NSArray *)getStoredEventRelations {
+-(NSArray *)eventRelationSortDescriptors {
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
     NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
     NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
     NSSortDescriptor *bdaySorter = [NSSortDescriptor sortDescriptorWithKey:@"person.birthday" ascending:NO];
@@ -485,12 +483,18 @@ static NSString *PersonEntityName = @"Person";
     NSSortDescriptor *ageMonthSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageMonths" ascending:YES];
     NSSortDescriptor *ageDaySorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageDays" ascending:YES];
     
-    request.sortDescriptors = @[meSorter, friendSorter, bdaySorter, ageYearSorter, ageMonthSorter, ageDaySorter];
+    return @[meSorter, friendSorter, bdaySorter, ageYearSorter, ageMonthSorter, ageDaySorter];
+}
+
+-(NSArray *)getStoredEventRelations {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
+    request.sortDescriptors = [self eventRelationSortDescriptors];
     NSError *error;
     NSArray *events = [self.managedObjectContext executeFetchRequest:request error:&error];
     
     return events;
 }
+
 
 -(Person *)addPersonWithFacebookUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock {
     
@@ -567,11 +571,9 @@ static NSString *PersonEntityName = @"Person";
 -(NSFetchedResultsController *)fetchedResultsControllerForRelations {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
-    NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
-    NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
-    fetchRequest.sortDescriptors = @[meSorter, friendSorter];
+    fetchRequest.sortDescriptors = [self eventRelationSortDescriptors];
     
-    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:@"EventPersonRelationCache"];
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"EventPersonRelationCache"];
     return resultsController;
 }
 

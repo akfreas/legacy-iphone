@@ -14,6 +14,13 @@
     }
     return self;
 }
+-(void)setSelected:(BOOL)selected {
+    row.selected = selected;
+}
+
+-(BOOL)isSelected {
+    return row.selected;
+}
 
 -(void)setEvent:(Event *)event {
     row.event = event;

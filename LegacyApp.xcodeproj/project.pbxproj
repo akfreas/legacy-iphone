@@ -66,6 +66,7 @@
 		1975752417D06CA100822779 /* WebViewControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975752317D06CA100822779 /* WebViewControls.m */; };
 		1975752617D06CBD00822779 /* WebViewControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752517D06CBD00822779 /* WebViewControls.xib */; };
 		1975752817D06EA800822779 /* EventInfoHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752717D06EA800822779 /* EventInfoHeaderCell.xib */; };
+		1980719017E8117B0039FC65 /* FigureRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980718F17E8117B0039FC65 /* FigureRowCell.m */; };
 		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
@@ -217,6 +218,8 @@
 		1975752317D06CA100822779 /* WebViewControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewControls.m; sourceTree = "<group>"; };
 		1975752517D06CBD00822779 /* WebViewControls.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewControls.xib; sourceTree = "<group>"; };
 		1975752717D06EA800822779 /* EventInfoHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventInfoHeaderCell.xib; path = ../Resources/EventInfoHeaderCell.xib; sourceTree = "<group>"; };
+		1980718E17E8117B0039FC65 /* FigureRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowCell.h; sourceTree = "<group>"; };
+		1980718F17E8117B0039FC65 /* FigureRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowCell.m; sourceTree = "<group>"; };
 		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
 		199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftRightHostingScrollView.m; sourceTree = "<group>"; };
@@ -324,6 +327,8 @@
 			children = (
 				191CF63C1749635C00086D5E /* FigureRow.h */,
 				191CF63D1749635D00086D5E /* FigureRow.m */,
+				1980718E17E8117B0039FC65 /* FigureRowCell.h */,
+				1980718F17E8117B0039FC65 /* FigureRowCell.m */,
 				1909A8701776B45000256ED0 /* FacebookSignInButton.h */,
 				1909A8711776B45100256ED0 /* FacebookSignInButton.m */,
 				1909A8721776B45100256ED0 /* FacebookSignInButton.xib */,
@@ -761,6 +766,7 @@
 				1975752417D06CA100822779 /* WebViewControls.m in Sources */,
 				1945775E17D4F68C00C5DB62 /* FigureNameLabelBlurLayer.m in Sources */,
 				1945776E17D5A02E00C5DB62 /* UIImage+StackBlur.m in Sources */,
+				1980719017E8117B0039FC65 /* FigureRowCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

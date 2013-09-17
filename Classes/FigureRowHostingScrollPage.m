@@ -4,13 +4,13 @@
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
 #import "EventDescriptionView.h"
-#import "FigureRow.h"
 #import "Event.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
 #import "FacebookSignInButton.h"
 #import "TopActionView.h"
 #import "AppDelegate.h"
+#import "FigureRowCell.h"
 
 #import "FigureRowHostingScrollPage.h"
 
@@ -21,7 +21,7 @@
 @implementation FigureRowHostingScrollPage {
     ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfFigureRows;
-    UIScrollView *scroller;
+    UITableView *scroller;
     UIPageControl *pageControl;
     NSMutableArray *pageArray;
     NSArray *eventArray;
@@ -32,7 +32,7 @@
     TopActionView *actionViewTop;
 }
 
-
+static NSString *ReuseID = @"CellReuseId";
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -44,9 +44,10 @@
         priorPoint = CGPointZero;
         accessor = [[ObjectArchiveAccessor alloc] init];
         pageArray = [NSMutableArray array];
-        scroller = [[UIScrollView alloc] initWithFrame:self.bounds];
+        scroller = [[UITableView alloc] initWithFrame:self.bounds];
         scroller.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         scroller.delegate = self;
+        scroller.dataSource = self;
         [self addSubview:scroller];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:KeyForRowDataUpdated object:nil];
@@ -57,61 +58,23 @@
 }
 
 
--(CGRect)frameAtIndex:(NSInteger)index {
-    CGFloat width = self.bounds.size.width;
-    
-    return CGRectMake(0, (FigureRowPageInitialHeight + FigureRowScrollViewPadding)  * index + actionViewTopInitialFrame.size.height, width, FigureRowPageInitialHeight);
-}
-
--(NSInteger)indexAtPoint:(CGPoint)point {
-    
-    NSInteger index = point.x / (FigureRowPageInitialHeight + FigureRowScrollViewPadding);
-    return index;
-}
-
--(void)removeInfoViews {
-    for (UIView *infoView in arrayOfFigureRows) {
-        [infoView removeFromSuperview];
-    }
-    [arrayOfFigureRows removeAllObjects];
-}
 
 -(void)reload {
     
     eventArray = [accessor getStoredEventRelations];
-    [self removeInfoViews];
-    if ([arrayOfFigureRows count] < 1) {
-        scroller.contentSize = CGSizeMake(self.bounds.size.width, 0);
-    }
-
     if ([FBSession activeSession].state == FBSessionStateOpen) {
             [self addTopActionView];
     } else {
         [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
             if (state == FBSessionStateOpen) {
-                [self addTopActionView];
+                    [self addTopActionView];
             }
         }];
     }
-    
-    for (int i=0; i < [eventArray count]; i++) {
-        
-        FigureRow *row = [self figureRowForIndex:i];
-        if ([row superview] == nil) {
-            scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, row.frame.size.height + FigureRowScrollViewPadding);
-            [scroller addSubview:row];
-        }
-    }
-
-    [self setNeedsLayout];
+    [scroller reloadData];
 }
 
--(void)shiftRowsFrameByYValue:(CGFloat)yValue {
-    
-    for (FigureRow *row in arrayOfFigureRows) {
-        row.frame = CGRectSetOriginOnRect(row.frame, row.frame.origin.x, row.frame.origin.y + yValue);
-    }
-}
+#pragma mark TopActionView Control Methods
 
 -(void)addTopActionView {
     if (actionViewTop == nil) {
@@ -121,47 +84,9 @@
         scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, actionViewTop.bounds.size.height);
         [self addSubview:actionViewTop];
     }
-//    scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize,);
 }
 
--(FigureRow *)figureRowForIndex:(NSUInteger)index {
-    
-    FigureRow *row;
-    EventPersonRelation *relation = [eventArray objectAtIndex:index];
-//    [relation addObserver:self forKeyPath:@"person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
-    if (index < [arrayOfFigureRows count] && [arrayOfFigureRows count] > 0) {
-        row = [arrayOfFigureRows objectAtIndex:index];
-    } else {
-        row  = [[FigureRow alloc] initWithOrigin:[self frameAtIndex:index].origin];
-        
-        [arrayOfFigureRows addObject:row];
-    }
-    row.event = relation.event;
-    row.person = relation.person;
-    return row;
-}
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-    NSUInteger index = [eventArray indexOfObject:object];
-    if (index != NSNotFound) {
-
-        FigureRow *row = [self figureRowForIndex:index];
-        
-        if ([object isKindOfClass:[EventPersonRelation class]]) {
-            EventPersonRelation *changedObject = (EventPersonRelation *)object;
-            row.person = changedObject.person;
-            row.event = changedObject.event;
-        }
-    }
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    if ([actionViewTop superview] == self) {
-        [self addTopActionForScrollAction:scrollView];
-    }
-}
 
 -(void)addTopActionForScrollAction:(UIScrollView *)scrollView {
     
@@ -178,15 +103,6 @@
     priorPoint = scrollView.contentOffset;
 }
 
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
-    [self resetFrameOnActionViewInScrollView:scrollView];
-    
-}
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self resetFrameOnActionViewInScrollView:scrollView];
-}
 
 -(void)resetFrameOnActionViewInScrollView:(UIScrollView *)scrollView {
     
@@ -211,6 +127,58 @@
     }];
 
 }
+
+#pragma mark UITableView Datasource Methods
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FigureRowCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseID];
+    
+    if (cell == nil) {
+        cell = [[FigureRowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseID];
+    }
+    
+    EventPersonRelation *eventRelation = [eventArray objectAtIndex:indexPath.row];
+    
+    cell.event = eventRelation.event;
+    cell.person = eventRelation.person;
+    
+    return cell;
+    
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [eventArray count];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return FigureRowPageInitialHeight;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return actionViewTop;
+}
+
+#pragma mark UITableView Delegate Methods
+
+
+#pragma mark UIScrollView Delegate Methods
+
+//
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+//    
+//    [self resetFrameOnActionViewInScrollView:scrollView];
+//    
+//}
+//
+//-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    [self resetFrameOnActionViewInScrollView:scrollView];
+//}
+
 
 #pragma mark FigureRowPageProtocol Delegate Methods
 

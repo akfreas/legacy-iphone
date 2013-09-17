@@ -130,7 +130,7 @@ CGFloat pageWidth = 320;
 }
 
 -(void)reset {
-    [self performSelector:@selector(resetContentOffset) withObject:self afterDelay:1];
+    [self performSelector:@selector(resetContentOffset) withObject:self afterDelay:.5];
 }
 
 -(void)resetContentOffset {
@@ -142,9 +142,14 @@ CGFloat pageWidth = 320;
 -(void)removeActionOverlay:(NSNotification *)notif {
     
     if (notif.object != self) {
-        [actionOverlay hide];
+        [self removeActionOverlay];
     }
 }
+
+-(void)removeActionOverlay {
+    [actionOverlay hide];
+}
+
 
 -(void)registerForNotifications {
         
@@ -170,8 +175,22 @@ CGFloat pageWidth = 320;
 
 -(void)setPerson:(Person *)person {
     _person = person;
-    if (person != nil) {
-        infoPage.person = person;
+    infoPage.person = person;
+}
+
+-(BOOL)selected {
+    if ([actionOverlay superview] == self) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(void)setSelected:(BOOL)selected {
+    if (selected) {
+        [self addActionOverlay];
+    } else {
+        [self removeActionOverlay];
     }
 }
 

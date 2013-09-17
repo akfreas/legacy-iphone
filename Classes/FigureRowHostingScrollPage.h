@@ -1,6 +1,6 @@
 #import "FigureRowPageProtocol.h"
 
-@interface FigureRowHostingScrollPage : UIView <FigureRowPageProtocol>
+@interface FigureRowHostingScrollPage : UITableView <FigureRowPageProtocol>
 
 -(void)reload;
 

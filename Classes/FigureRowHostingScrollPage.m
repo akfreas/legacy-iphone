@@ -20,16 +20,11 @@
 
 @implementation FigureRowHostingScrollPage {
     ObjectArchiveAccessor *accessor;
-    NSMutableArray *arrayOfFigureRows;
-    UITableView *scroller;
-    UIPageControl *pageControl;
-    NSMutableArray *pageArray;
-    NSArray *eventArray;
     CGPoint priorPoint;
     CGRect actionViewTopInitialFrame; 
     LegacyAppConnection *connection;
-    FacebookSignInButton *signInActionRow;
     TopActionView *actionViewTop;
+    NSFetchedResultsController *fetchController;
 }
 
 static NSString *ReuseID = @"CellReuseId";
@@ -42,16 +37,13 @@ static NSString *ReuseID = @"CellReuseId";
         
         self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         priorPoint = CGPointZero;
-        accessor = [[ObjectArchiveAccessor alloc] init];
-        pageArray = [NSMutableArray array];
-        scroller = [[UITableView alloc] initWithFrame:self.bounds];
-        scroller.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
-        scroller.delegate = self;
-        scroller.dataSource = self;
-        [self addSubview:scroller];
-        arrayOfFigureRows = [[NSMutableArray alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:KeyForRowDataUpdated object:nil];
-
+        accessor = [[ObjectArchiveAccessor alloc] init];        
+        self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
+        self.delegate = self;
+        self.dataSource = self;
+        fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
+        fetchController.delegate = self;
+        [fetchController performFetch:NULL];
     }
     return self;
 
@@ -59,20 +51,20 @@ static NSString *ReuseID = @"CellReuseId";
 
 
 
--(void)reload {
-    
-    eventArray = [accessor getStoredEventRelations];
-    if ([FBSession activeSession].state == FBSessionStateOpen) {
-            [self addTopActionView];
-    } else {
-        [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
-            if (state == FBSessionStateOpen) {
-                    [self addTopActionView];
-            }
-        }];
-    }
-    [scroller reloadData];
-}
+//-(void)reload {
+//    
+//    eventArray = [accessor getStoredEventRelations];
+//    if ([FBSession activeSession].state == FBSessionStateOpen) {
+//            [self addTopActionView];
+//    } else {
+//        [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
+//            if (state == FBSessionStateOpen) {
+//                    [self addTopActionView];
+//            }
+//        }];
+//    }
+//    [self reloadData];
+//}
 
 #pragma mark TopActionView Control Methods
 
@@ -81,7 +73,6 @@ static NSString *ReuseID = @"CellReuseId";
         
         actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight, self.bounds.size.width, TopActionViewHeight);
         actionViewTop = [[TopActionView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight)];
-        scroller.contentSize = CGSizeAddHeightToSize(scroller.contentSize, actionViewTop.bounds.size.height);
         [self addSubview:actionViewTop];
     }
 }
@@ -128,27 +119,40 @@ static NSString *ReuseID = @"CellReuseId";
 
 }
 
+#pragma mark NSFetchedResultsController Delegate Methods
+
+-(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self beginUpdates];
+}
+
+-(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    [self configureCell:(FigureRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+}
+
 #pragma mark UITableView Datasource Methods
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(FigureRowCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     FigureRowCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseID];
     
     if (cell == nil) {
         cell = [[FigureRowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseID];
     }
-    
-    EventPersonRelation *eventRelation = [eventArray objectAtIndex:indexPath.row];
-    
-    cell.event = eventRelation.event;
-    cell.person = eventRelation.person;
-    
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
     
 }
 
+-(void)configureCell:(FigureRowCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
+    
+    cell.event = eventRelation.event;
+    cell.person = eventRelation.person;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [eventArray count];
+    return [[[fetchController sections] objectAtIndex:0] numberOfObjects];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -62,6 +62,7 @@
 
 -(void)setSmallImage:(UIImage *)smallImage {
     _smallImage = smallImage;
+    [self setNeedsDisplay];
 }
 
 -(void)setLargeImage:(UIImage *)largeImage {
@@ -135,37 +136,40 @@
     }
     
     largeCircleImage.image = _largeImage;
-    if (_smallImage != nil) {
-        [self drawSmallImage];
-    }
+    [self drawSmallImage];
 }
 
 -(void)drawSmallImage {
     
-    CGSize smImgSize = _smallImage.size;
-    CGFloat scale = MAX((_smallImageRadius * 2) / smImgSize.width, (_smallImageRadius * 2) / smImgSize.height);
-    
-    
-    CGPoint arcCenter = CGPointMake(_largeImageRadius - (_largeImageRadius - _smallImageOffset) * cos(_angle * M_PI/180), _largeImageRadius +  (_largeImageRadius - _smallImageOffset) * sin(_angle * M_PI / 180));
-    
-    CGFloat smImgWidth = _smallImage.size.width * scale;
-    CGFloat smImgHeight = _smallImage.size.height * scale;
-    
-    CGRect smImgRect;
-    
-    if (smImgWidth > smImgHeight) {
-        smImgRect = CGRectMake(arcCenter.x -  smImgWidth / 2, arcCenter.y - smImgHeight / 2, smImgWidth, smImgHeight);
+    if (_smallImage != nil) {
+        CGSize smImgSize = _smallImage.size;
+        CGFloat scale = MAX((_smallImageRadius * 2) / smImgSize.width, (_smallImageRadius * 2) / smImgSize.height);
+        
+        
+        CGPoint arcCenter = CGPointMake(_largeImageRadius - (_largeImageRadius - _smallImageOffset) * cos(_angle * M_PI/180), _largeImageRadius +  (_largeImageRadius - _smallImageOffset) * sin(_angle * M_PI / 180));
+        
+        CGFloat smImgWidth = _smallImage.size.width * scale;
+        CGFloat smImgHeight = _smallImage.size.height * scale;
+        
+        CGRect smImgRect;
+        
+        if (smImgWidth > smImgHeight) {
+            smImgRect = CGRectMake(arcCenter.x -  smImgWidth / 2, arcCenter.y - smImgHeight / 2, smImgWidth, smImgHeight);
+        } else {
+            smImgRect = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
+        }
+        if (smallCircleImage == nil) {
+            smallCircleImage = [[CircleImageLayer alloc] initWithImage:_smallImage radius:_smallImageRadius];
+            [self.layer addSublayer:smallCircleImage];
+        } else {
+            smallCircleImage.hidden = NO;
+            smallCircleImage.image = _smallImage;
+        }
+        smallCircleImage.frame = smImgRect;
     } else {
-        smImgRect = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
+        smallCircleImage.hidden = YES;
     }
-    if (smallCircleImage == nil) {
-        smallCircleImage = [[CircleImageLayer alloc] initWithImage:_smallImage radius:_smallImageRadius];
-    } else {
-        smallCircleImage.image = _smallImage;
-    }
-    smallCircleImage.frame = smImgRect;
 
-    [self.layer addSublayer:smallCircleImage];
     
 }
 

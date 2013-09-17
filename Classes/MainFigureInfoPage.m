@@ -117,9 +117,6 @@ DualFrame * initFrame() {
     _person = person;
     //    personInfo.person = person;
     self.widgetContainer.person = person;
-    if ([_person.isPrimary isEqualToNumber: [NSNumber numberWithBool:NO]]) {
-        trashcanButton.hidden = NO;
-    }
 }
 
 -(void)recordHeightDelta:(NSNotification *)notification {

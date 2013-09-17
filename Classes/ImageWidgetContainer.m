@@ -94,9 +94,13 @@
 
 -(void)setPerson:(Person *)person {
     
-    UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
     _person = person;
-    _widget.smallImage = thumbnail;
+    if (person != nil) {
+        UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
+        _widget.smallImage = thumbnail;
+    } else {
+        _widget.smallImage = nil;
+    }
     [self setNeedsLayout];
     
 }

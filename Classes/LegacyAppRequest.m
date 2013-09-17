@@ -29,17 +29,6 @@
     return url;
 }
 
-
-+(NSURL *)storyUrlForBirthday:(NSDate *)theDate Person:(NSString *)user {
-        
-    NSURL *url = [LegacyAppRequest baseUrl];
-    NSString *pathString = [NSString stringWithFormat:@"user/%@/story", user];
-    
-    url = [url URLByAppendingPathComponent:pathString];
-    
-    return url;
-}
-
 +(NSURL *)urlToUpdateBirthdayForPerson:(NSString *)user {
     
     NSURL *url = [LegacyAppRequest baseUrl];
@@ -55,15 +44,6 @@
     NSURL *url = [LegacyAppRequest baseUrl];
     NSString *pathString = [NSString stringWithFormat:@"users/add"];
     url = [url URLByAppendingPathComponent:pathString];
-    return url;
-}
-
-+(NSURL *)urlToGetRelatedEventsForEvent:(NSString *)eventId {
-    NSURL *url = [LegacyAppRequest baseUrl];
-    NSString *pathString = [NSString stringWithFormat:@"event/%@/related", eventId];
-    
-    url = [url URLByAppendingPathComponent:pathString];
-    
     return url;
 }
 
@@ -88,14 +68,6 @@
     return url;
 }
 
-+(NSURL *)urlToGetFigureWithId:(NSString *)theId {
-    NSURL *url = [LegacyAppRequest baseUrl];
-    NSString *pathString = [NSString stringWithFormat:@"figure/%@", theId];
-    
-    url = [url URLByAppendingPathComponent:pathString];
-    
-    return url;
-}
 
 +(NSURL *)urlToGetRandomEvents {
     NSURL *url = [LegacyAppRequest baseUrl];
@@ -131,33 +103,6 @@
     request.urlRequest.HTTPMethod = @"POST";
     request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:deviceInfo options:NSJSONWritingPrettyPrinted error:NULL];
     
-    return request;
-}
-
-+(LegacyAppRequest *)requestToGetFigureWithId:(NSString *)theId requester:(Person *)requester {
-    
-    LegacyAppRequest *request = [self baseRequestForPerson:requester];
-    request.urlRequest.URL = [self urlToGetFigureWithId:theId];
-    request.classToParse = [Figure class];
-    
-    return request;
-}
-
-+(LegacyAppRequest *)requestToGetStoryForPerson:(Person *)person {
-    
-    LegacyAppRequest *request = [self baseRequestForPerson:person];
-    NSURL *url = [LegacyAppRequest storyUrlForBirthday:person.birthday Person:person.facebookId];
-    request.urlRequest.URL = url;
-    request.classToParse = [Event class];
-    
-    return request;
-}
-
-+(LegacyAppRequest *)requestToGetRandomStories {
-
-    LegacyAppRequest *request = [LegacyAppRequest baseRequest];
-    NSURL *url = [LegacyAppRequest urlToGetRandomEvents];
-    [request.urlRequest setURL:url];
     return request;
 }
 
@@ -202,16 +147,7 @@
     return request;
 }
 
-+(LegacyAppRequest *)requestToGetRelatedEventsForEvent:(NSString *)event requester:(Person *)person {
-    
-    LegacyAppRequest *request = [self baseRequestForPerson:person];
-    
-    NSURL *url = [LegacyAppRequest urlToGetRelatedEventsForEvent:event];
-    
-    request.urlRequest.URL = url;
 
-    return request;
-}
 
 +(LegacyAppRequest *)requestToGetAllEventsForFigure:(Figure *)figure {
     

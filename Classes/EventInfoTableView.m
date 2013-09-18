@@ -26,7 +26,7 @@
     self = [super init];
     if (self) {
         keyEvent = anEvent;
-        accessor = [[ObjectArchiveAccessor alloc] init];
+        accessor = [ObjectArchiveAccessor sharedInstance];
         [self fetchRelatedEvents];
         self.delegate = self;
         self.dataSource = self;

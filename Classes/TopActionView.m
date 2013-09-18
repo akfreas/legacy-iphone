@@ -31,7 +31,7 @@
 }
 
 -(void)addProfilePicButton {
-    ObjectArchiveAccessor *accessor = [[ObjectArchiveAccessor alloc] init];
+    ObjectArchiveAccessor *accessor = [ObjectArchiveAccessor sharedInstance];
     Person *mainPerson = [accessor primaryPerson];
     UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
     profilePicButton = [[CircleImageView alloc] initWithImage:thumb radius:buttonRadii];

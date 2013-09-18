@@ -29,7 +29,7 @@
     self = [super init];
     
     if (self) {
-        accessor = [[ObjectArchiveAccessor alloc] init];
+        accessor = [ObjectArchiveAccessor sharedInstance];
         queue = [[NSOperationQueue alloc] init];
     }
     return self;

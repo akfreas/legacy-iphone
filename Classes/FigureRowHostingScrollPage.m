@@ -122,11 +122,25 @@ static NSString *ReuseID = @"CellReuseId";
 #pragma mark NSFetchedResultsController Delegate Methods
 
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self beginUpdates];
+//    [self beginUpdates];
+}
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self reload];
 }
 
 -(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    [self configureCell:(FigureRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:(FigureRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+        case NSFetchedResultsChangeDelete:
+            [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        default:
+            break;
+    }
 }
 
 #pragma mark UITableView Datasource Methods

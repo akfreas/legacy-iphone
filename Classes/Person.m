@@ -19,7 +19,6 @@
 @dynamic isPrimary;
 @dynamic lastName;
 @dynamic thumbnail;
-@dynamic events;
 
 -(NSString *)fullName {
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];

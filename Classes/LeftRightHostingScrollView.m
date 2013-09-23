@@ -1,5 +1,4 @@
     #import "LeftRightHostingScrollView.h"
-#import "ObjectArchiveAccessor.h"
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
@@ -21,7 +20,6 @@ typedef enum ScrollViewDirection {
 } ScrollViewDirection;
 
 @implementation LeftRightHostingScrollView {
-    ObjectArchiveAccessor *accessor;
     NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
     
@@ -55,7 +53,6 @@ typedef enum ScrollViewDirection {
         self.showsVerticalScrollIndicator = NO;
         self.bounces = NO;
         departurePoint = CGPointZero;
-        accessor = [ObjectArchiveAccessor sharedInstance];
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         controls = [[WebViewControls alloc] initWithOrigin:CGPointMake(self.contentOffset.x, 0)];
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];

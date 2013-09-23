@@ -20,7 +20,6 @@
 @property (nonatomic, retain) NSNumber * isPrimary;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSData * thumbnail;
-@property (nonatomic, retain) NSSet *events;
 @end
 
 @interface Person (CoreDataGeneratedAccessors)

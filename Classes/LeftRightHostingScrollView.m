@@ -276,6 +276,11 @@ typedef enum ScrollViewDirection {
 -(void)scrollToPage:(NSInteger)page {
     
     if (pageControl.currentPage != page) {
+        
+        
+        NSDictionary *params = @{@"from_page": [NSNumber numberWithInteger:pageControl.currentPage], @"to_page" : [NSNumber numberWithInteger:page]};
+        [Flurry logEvent:@"page_movement" withParameters:params];
+        
         CGPoint pagePoint = [self frameAtIndex:page].origin;
         departurePoint = [self frameAtIndex:pageControl.currentPage].origin;
         destinationPoint = pagePoint;

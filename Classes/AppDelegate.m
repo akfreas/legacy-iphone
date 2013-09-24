@@ -31,11 +31,11 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-
+    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:@"BM6HRVCKMTZK83B29BTH"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    [FBProfilePictureView class];
     [self configureInitialViewHeirarchy];
     MainScreen *mainScreen = [[MainScreen alloc] init];
 

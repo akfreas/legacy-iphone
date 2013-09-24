@@ -2,6 +2,4 @@
 
 @interface FigureRowHostingScrollPage : UITableView <FigureRowPageProtocol>
 
--(void)reload;
-
 @end

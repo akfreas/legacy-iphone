@@ -19,7 +19,6 @@
 @end
 
 @implementation FigureRowHostingScrollPage {
-    ObjectArchiveAccessor *accessor;
     CGPoint priorPoint;
     CGRect actionViewTopInitialFrame; 
     LegacyAppConnection *connection;
@@ -37,7 +36,6 @@ static NSString *ReuseID = @"CellReuseId";
         
         self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         priorPoint = CGPointZero;
-        accessor = [[ObjectArchiveAccessor alloc] init];        
         self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         self.delegate = self;
         self.dataSource = self;
@@ -122,24 +120,27 @@ static NSString *ReuseID = @"CellReuseId";
 #pragma mark NSFetchedResultsController Delegate Methods
 
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//    [self beginUpdates];
+    [self beginUpdates];
 }
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self reload];
+    [self endUpdates];
 }
 
 -(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:(FigureRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-        case NSFetchedResultsChangeDelete:
-            [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        default:
-            break;
+    
+    if (anObject != nil) {
+        switch (type) {
+            case NSFetchedResultsChangeInsert:
+                [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            case NSFetchedResultsChangeUpdate:
+                [self configureCell:(FigureRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            case NSFetchedResultsChangeDelete:
+                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            default:
+                break;
+        }
     }
 }
 
@@ -166,7 +167,12 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[fetchController sections] objectAtIndex:0] numberOfObjects];
+    
+    if ([[fetchController sections] count] > 0) {
+        return [[[fetchController sections] objectAtIndex:section] numberOfObjects];
+    } else {
+        return 0;
+    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -197,6 +203,9 @@ static NSString *ReuseID = @"CellReuseId";
 //    [self resetFrameOnActionViewInScrollView:scrollView];
 //}
 
+-(void)dealloc {
+    fetchController = nil;
+}
 
 #pragma mark FigureRowPageProtocol Delegate Methods
 

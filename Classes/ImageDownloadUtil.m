@@ -29,13 +29,15 @@
 
 -(void)fetchAndSaveImageForFigure:(Figure *)figure completion:(void(^)(UIImage *))completion {
     NSManagedObjectID *figureId = [figure objectID];
+    __block Figure *ourFigure = figure;
     if (figure.imageData == nil) {
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:figure.imageURL]];
         [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            ObjectArchiveAccessor *accessor = [[ObjectArchiveAccessor alloc] init];
-            Figure *ourFigure = (Figure *)[accessor.managedObjectContext objectWithID:figureId];
-            ourFigure.imageData = data;
-            [accessor save];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ObjectArchiveAccessor *accessor = [ObjectArchiveAccessor sharedInstance];
+                ourFigure.imageData = data;
+//                [accessor save];
+            });
             UIImage *theImage = [UIImage imageWithData:data];
             completion(theImage);
         }];

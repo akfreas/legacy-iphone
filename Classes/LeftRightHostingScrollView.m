@@ -173,6 +173,7 @@ typedef enum ScrollViewDirection {
             webView.event = page.event;
             [self addPage:webView];
         }
+        
         [page scrollCompleted];
     }
 }
@@ -190,7 +191,6 @@ typedef enum ScrollViewDirection {
     NSInteger pageIndex = [self pageAtPoint:referencePoint];
     if (pageIndex < [pageArray count]) {
         UIView <FigureRowPageProtocol> *page = pageArray[pageIndex];
-        
         [page becameVisible];
     }
     

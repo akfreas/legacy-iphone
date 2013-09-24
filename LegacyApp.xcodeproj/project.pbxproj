@@ -69,7 +69,6 @@
 		1975752617D06CBD00822779 /* WebViewControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752517D06CBD00822779 /* WebViewControls.xib */; };
 		1975752817D06EA800822779 /* EventInfoHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752717D06EA800822779 /* EventInfoHeaderCell.xib */; };
 		1980719017E8117B0039FC65 /* FigureRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980718F17E8117B0039FC65 /* FigureRowCell.m */; };
-		199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199354F016D4A05E00D73389 /* PersonInfoView.xib */; };
 		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
 		1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
@@ -120,7 +119,6 @@
 		4EEA6D3F1526A80B00B96EFD /* FBLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */; };
 		4EEA6D451526A90200B96EFD /* LegacyAppConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */; };
 		4EEA6D5D1526CAEF00B96EFD /* LegacyAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */; };
-		4EEA6D671526DCE100B96EFD /* EventInfoHostingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,7 +223,6 @@
 		1975752717D06EA800822779 /* EventInfoHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventInfoHeaderCell.xib; path = ../Resources/EventInfoHeaderCell.xib; sourceTree = "<group>"; };
 		1980718E17E8117B0039FC65 /* FigureRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowCell.h; sourceTree = "<group>"; };
 		1980718F17E8117B0039FC65 /* FigureRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowCell.m; sourceTree = "<group>"; };
-		199354F016D4A05E00D73389 /* PersonInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoView.xib; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
 		199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftRightHostingScrollView.m; sourceTree = "<group>"; };
 		1993550816D4E89900D73389 /* ImageWidgetContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageWidgetContainer.xib; sourceTree = "<group>"; };
@@ -301,7 +298,6 @@
 		4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyAppConnection.m; sourceTree = "<group>"; };
 		4EEA6D5B1526CAEF00B96EFD /* LegacyAppRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LegacyAppRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LegacyAppRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInfoHostingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -580,12 +576,10 @@
 				194E327316DF4150007A55D7 /* LegacyWebView.xib */,
 				1997B72816DEBA31009692F5 /* LegacyModel.xcdatamodeld */,
 				19D61CCF16B23B6400C81E60 /* Images */,
-				4EEA6D661526DCE100B96EFD /* EventInfoHostingView.xib */,
 				1993550816D4E89900D73389 /* ImageWidgetContainer.xib */,
 				19DFB9FB16D5E6E60019E2B2 /* EventDescriptionView.xib */,
 				4EEA6D3E1526A80B00B96EFD /* FBLoginView.xib */,
 				191866FC16D4373500220A42 /* MainScreen.xib */,
-				199354F016D4A05E00D73389 /* PersonInfoView.xib */,
 				19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */,
 				19277236173B560D00A9F51D /* RelatedEventLabel.xib */,
 			);
@@ -668,7 +662,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EEA6D3F1526A80B00B96EFD /* FBLoginView.xib in Resources */,
-				4EEA6D671526DCE100B96EFD /* EventInfoHostingView.xib in Resources */,
 				19D29F5816A5461000D46B0A /* Default-568h@2x.png in Resources */,
 				19D29F5A16A5462300D46B0A /* Default@2x.png in Resources */,
 				1993916116AA1FDF00DA3CD9 /* icon.png in Resources */,
@@ -682,7 +675,6 @@
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
 				191866FD16D4373500220A42 /* MainScreen.xib in Resources */,
-				199354F116D4A05E00D73389 /* PersonInfoView.xib in Resources */,
 				1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */,
 				1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */,
 				19DFB9FC16D5E6E60019E2B2 /* EventDescriptionView.xib in Resources */,

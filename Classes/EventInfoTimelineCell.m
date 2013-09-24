@@ -23,7 +23,6 @@
     if (self) {
         _event = anEvent;
         self.reuseIdentifier = TableViewCellIdentifierForMainCell;
-//        self.backgroundColor = [UIColor redColor];
         [self drawEventLabel];
     }
     return self;

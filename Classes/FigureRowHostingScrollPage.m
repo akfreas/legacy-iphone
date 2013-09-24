@@ -47,23 +47,6 @@ static NSString *ReuseID = @"CellReuseId";
 
 }
 
-
-
-//-(void)reload {
-//    
-//    eventArray = [accessor getStoredEventRelations];
-//    if ([FBSession activeSession].state == FBSessionStateOpen) {
-//            [self addTopActionView];
-//    } else {
-//        [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
-//            if (state == FBSessionStateOpen) {
-//                    [self addTopActionView];
-//            }
-//        }];
-//    }
-//    [self reloadData];
-//}
-
 #pragma mark TopActionView Control Methods
 
 -(void)addTopActionView {

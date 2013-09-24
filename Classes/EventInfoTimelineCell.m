@@ -1,7 +1,7 @@
 #import "EventInfoTimelineCell.h"
 #import "RelatedEventLabel.h"
 #import "Event.h"
-
+#import <CoreGraphics/CoreGraphics.h>
 @interface EventInfoTimelineCell ()
 
 @property (strong, nonatomic, readwrite) NSString *reuseIdentifier;
@@ -13,6 +13,7 @@
     
     IBOutlet UITextView *textView;
     IBOutlet UILabel *ageLabel;
+    UIView *lineView;
 }
 
 -(id)initWithEvent:(Event *)anEvent {
@@ -39,6 +40,17 @@
     [self drawEventLabel];
 }
 
+-(void)setSelected:(BOOL)selected {
+    if (selected == YES) {
+        if (lineView == nil) {
+            lineView = [[UIView alloc] initWithFrame:CGRectMake(7, ageLabel.frame.origin.y + ageLabel.frame.size.height, ageLabel.frame.size.width, 1)];
+            lineView.backgroundColor = [UIColor blackColor];
+            [self addSubview:lineView];
+        }
+    } else {
+        ageLabel.layer.borderColor = [UIColor clearColor].CGColor;
+    }
+}
 
 
 

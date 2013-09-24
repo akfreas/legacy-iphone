@@ -33,6 +33,8 @@
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin);
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.allowsSelection = NO;
+//        self.backgroundColor = UIColor.clearColor;
     }
     return self;
 }
@@ -59,7 +61,7 @@
         CGPoint translatedPoint = [self convertPoint:cell.pointForLines toView:self];
         
         indicatorLines  = [RightIndicatorLines new];
-        indicatorLines = [[RightIndicatorLines alloc] initWithStartPoint:translatedPoint endPoint:CGPointMake(self.bounds.size.width, indicatedCellMaxY)];
+        indicatorLines = [[RightIndicatorLines alloc] initWithStartPoint:translatedPoint endPoint:CGPointMake(self.bounds.size.width, indicatedCellMaxY + 20)];
         [self addSubview:indicatorLines];
     }
     
@@ -115,7 +117,7 @@
         }
         
         if (eventIndex == keyEventIndex) {
-            [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+            cell.selected = YES;
         }
         
         cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);

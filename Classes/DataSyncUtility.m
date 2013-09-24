@@ -47,9 +47,12 @@
     connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
-        ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];
-        [ourAccessor clearEventsAndFiguresAndSave];
-        [self parseArrayOfEventsForTable:result];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ObjectArchiveAccessor *ourAccessor = [ObjectArchiveAccessor sharedInstance];
+            [ourAccessor clearEventsAndFiguresAndSave];
+            [self parseArrayOfEventsForTable:result];
+        });
     }];
     
 }
@@ -78,7 +81,6 @@
         [accessor addEventAndFigureRelationWithJson:eventDict];
     }
 
-    [accessor save];
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
         if (completion != NULL) {
@@ -91,7 +93,6 @@
 -(void)syncRelatedEvents {
     
     NSArray *figures = [accessor allFigures];
-//    for (Figure *figure in figures) {
     
     if ([figures count] > 0) {
         
@@ -101,10 +102,12 @@
             connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
             
             [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-                ObjectArchiveAccessor *ourAccessor = [[ObjectArchiveAccessor alloc] init];
+                ObjectArchiveAccessor *ourAccessor = [ObjectArchiveAccessor sharedInstance];
                 NSArray *resultArray = (NSArray *)result;
                 for (NSDictionary *relatedEvent in resultArray) {
-                    [ourAccessor addEventAndFigureWithJson:relatedEvent];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [ourAccessor addEventAndFigureWithJson:relatedEvent];
+                    });
                 }
             }];
         }

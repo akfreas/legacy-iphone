@@ -41,8 +41,19 @@ static NSString *PersonEntityName = @"Person";
     
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
     }
     return self;
+}
+
+-(void)managedObjectContextDidSave:(NSNotification *)notif {
+    if (notif.object != self.managedObjectContext) {
+        if ([NSThread isMainThread] == NO) {
+            [self performSelectorOnMainThread:@selector(managedObjectContextDidSave:) withObject:notif waitUntilDone:YES];
+            return;
+        }
+        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notif];
+    }
 }
 
 #pragma mark Core Data Utility Functions
@@ -50,7 +61,7 @@ static NSString *PersonEntityName = @"Person";
 -(NSManagedObjectContext *)managedObjectContext {
     
     if (_managedObjectContext == nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         _managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
     }
     return _managedObjectContext;
@@ -275,21 +286,21 @@ static NSString *PersonEntityName = @"Person";
 
 -(void)clearEventsAndFiguresAndSave {
     
-    NSFetchRequest *eventDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+//    NSFetchRequest *eventDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
     NSError *error;
-    NSArray *arrayOfEvents = [self.managedObjectContext executeFetchRequest:eventDeleteFetchRequest error:&error];
-    
-    for (Event *event in arrayOfEvents) {
-        [self.managedObjectContext deleteObject:event];
-    }
-    
-    NSFetchRequest *figureDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
-    
-    NSArray *arrayOfFigures = [self.managedObjectContext executeFetchRequest:figureDeleteFetchRequest error:&error];
-    
-    for (Figure *figure in arrayOfFigures) {
-        [self.managedObjectContext deleteObject:figure];
-    }
+//    NSArray *arrayOfEvents = [self.managedObjectContext executeFetchRequest:eventDeleteFetchRequest error:&error];
+//    
+//    for (Event *event in arrayOfEvents) {
+//        [self.managedObjectContext deleteObject:event];
+//    }
+//    
+//    NSFetchRequest *figureDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
+//    
+//    NSArray *arrayOfFigures = [self.managedObjectContext executeFetchRequest:figureDeleteFetchRequest error:&error];
+//    
+//    for (Figure *figure in arrayOfFigures) {
+//        [self.managedObjectContext deleteObject:figure];
+//    }
     
     NSFetchRequest *relationDeleteFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"EventPersonRelation"];
     
@@ -298,8 +309,6 @@ static NSString *PersonEntityName = @"Person";
     for (EventPersonRelation *relation in arrayOfRelations) {
         [self.managedObjectContext deleteObject:relation];
     }
-    
-    [self save];
 }
 
 -(Event *)addEventWithJson:(NSDictionary *)json {
@@ -573,7 +582,7 @@ static NSString *PersonEntityName = @"Person";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
     fetchRequest.sortDescriptors = [self eventRelationSortDescriptors];
     
-    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"EventPersonRelationCache"];
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     return resultsController;
 }
 

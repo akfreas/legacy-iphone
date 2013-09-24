@@ -130,7 +130,7 @@ CGFloat pageWidth = 320;
 }
 
 -(void)reset {
-    [self performSelector:@selector(resetContentOffset) withObject:self afterDelay:.5];
+    [self performSelector:@selector(resetContentOffset) withObject:self afterDelay:.2];
 }
 
 -(void)resetContentOffset {

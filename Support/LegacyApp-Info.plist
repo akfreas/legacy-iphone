@@ -56,7 +56,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ResourceUrl</key>
-	<string>http://legacyapp.sashimiblade.com</string>
+	<string>http://api.legacyapp.net</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

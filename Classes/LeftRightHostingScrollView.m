@@ -160,13 +160,6 @@ typedef enum ScrollViewDirection {
     [arrayOfFigureRows removeAllObjects];
 }
 
--(void)reload {
-    if (figurePage == nil) {
-        [self addFigurePage];
-    }
-    [figurePage reload];
-}
-
 -(void)checkIfScrollCompletedAndNotifyPage {
     
     if (CGPointEqualToPoint(self.contentOffset, destinationPoint)) {

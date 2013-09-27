@@ -33,7 +33,7 @@
 #define RelatedEventsLabelTopMargin 0
 #define ImageLayerDefaultStrokeWidth 2
 
-#define RelatedEventsLabelHeight 75
+#define RelatedEventsLabelHeight 85
 #define RelatedEventsLabelWidth 300
 
 

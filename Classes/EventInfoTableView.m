@@ -118,6 +118,8 @@
         
         if (eventIndex == keyEventIndex) {
             cell.selected = YES;
+        } else {
+            cell.selected = NO;
         }
         
         cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);

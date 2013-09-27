@@ -93,7 +93,7 @@ CGFloat pageWidth = 320;
     swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(beginSwiping:)];
     swipeGesture.delegate = self;
     swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self addGestureRecognizer:swipeGesture];
+//    [self addGestureRecognizer:swipeGesture];
     [self addGestureRecognizer:gesture];
 }
 

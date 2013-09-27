@@ -46,7 +46,9 @@
     Event *event = notif.userInfo[@"event"];
     NSString *eventAgeString = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
     
-    [FBDialogs presentShareDialogWithLink:[NSURL URLWithString:@"http://google.com"] name:event.figure.name caption:eventAgeString description:event.eventDescription picture:[NSURL URLWithString:event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+    NSString *nameWithUnderscores = [event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    NSURL *wikipediaUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
+    [FBDialogs presentShareDialogWithLink:wikipediaUrl name:event.figure.name caption:eventAgeString description:event.eventDescription picture:[NSURL URLWithString:event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
         
     }];
     

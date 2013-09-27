@@ -174,7 +174,7 @@
     
     Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
     
-    NSString *token = FBSession.activeSession.accessToken;
+    NSString *token = FBSession.activeSession.accessTokenData.accessToken;
     NSString *activeFbUserId = primaryPerson.facebookId;
     
     NSDictionary *cookieDict = [NSDictionary dictionaryWithObjectsAndKeys:token, @"token", activeFbUserId, @"activeUserId", nil];

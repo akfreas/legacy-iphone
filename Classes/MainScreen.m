@@ -50,14 +50,13 @@
         
     }];
     
-
+    
 }
 
 
 -(void)removePerson:(NSNotification *)notification {
     Person *thePerson = notification.userInfo[@"person"];
     [accessor removePerson:thePerson];
-    [infoScreen reload];
 }
 
 -(void)showAlertForNoBirthday:(NSNotification *)notification {
@@ -89,7 +88,7 @@
     bDayDatePicker.datePickerMode = UIDatePickerModeDate;
     bDayDatePicker.date = newBirthday;
     bDayDatePicker.accessibilityLabel = @"BirthdayInput";
-
+    
     
     
     [alertView insertUIComponent:bDayDatePicker atIndex:2];

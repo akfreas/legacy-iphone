@@ -32,6 +32,9 @@
         [self setAlphaOnCircleViews:0];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
+        self.infoButtonAction = NULL;
+        self.deleteButtonAction = NULL;
+        self.facebookButtonAction = NULL;
     }];
 }
 

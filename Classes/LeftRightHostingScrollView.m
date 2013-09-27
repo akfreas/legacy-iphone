@@ -2,7 +2,6 @@
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
-#import "EventDescriptionView.h"
 #import "FigureRow.h"
 #import "Event.h"
 #import "LegacyWebView.h"
@@ -166,7 +165,7 @@ typedef enum ScrollViewDirection {
         paginationInProgress = NO;
         self.scrollEnabled = YES;
         UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:pageControl.currentPage];
-        if ([page isKindOfClass:[EventInfoTableView class]]) {
+        if ([page isKindOfClass:[EventInfoTableView class]] && pageControl.currentPage == [pageArray count] - 1) {
             
             LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
             webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);

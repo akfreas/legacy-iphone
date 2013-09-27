@@ -402,17 +402,10 @@ static NSString *PersonEntityName = @"Person";
             dispatch_async(dispatch_get_main_queue(), ^{
                 person.thumbnail = imageData;
                 [self save];
-                [self notifyPersonThumbnailUpdated:person];
             });
         }
     }];
     return person;
-}
-
--(void)notifyPersonThumbnailUpdated:(Person *)person {
-    if ([person.objectID isTemporaryID] == NO) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForPersonThumbnailUpdated object:self userInfo:@{@"person": person}];
-    }
 }
 
 -(void)addEventAndFigureRelationWithJson:(NSDictionary *)json {
@@ -544,7 +537,6 @@ static NSString *PersonEntityName = @"Person";
                 dispatch_async(dispatch_get_main_queue(), ^{
                     newPerson.thumbnail = data;
                     [self save];
-                    [self notifyPersonThumbnailUpdated:newPerson];
                     completionBlock(newPerson);
                 });
             }];

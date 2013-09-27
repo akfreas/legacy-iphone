@@ -80,6 +80,8 @@ void uncaughtExceptionHandler(NSException *exception) {
         [FBSession openActiveSessionWithReadPermissions:perms
                                            allowLoginUI:YES
                                       completionHandler:completionBlock];
+    } else {
+        NSLog(@"Not logged into facebook.");
     }
 }
 

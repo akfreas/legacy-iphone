@@ -30,8 +30,6 @@
         operationQueue = [[NSOperationQueue alloc] init];
         accessor = [ObjectArchiveAccessor sharedInstance];
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonThumbnail:) name:KeyForPersonThumbnailUpdated object:nil];
-//        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
         _widget = [[ImageWidget alloc] init];
 //        self.backgroundColor = [UIColor greenColor];
         [self addSubview:_widget];
@@ -40,6 +38,13 @@
     }
     
     return self;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    id newObject = change[NSKeyValueChangeNewKey];
+    if (newObject != nil && [newObject isKindOfClass:[NSData class]]) {
+        _widget.smallImage = [UIImage imageWithData:newObject];
+    }
 }
 
 -(void)updatePersonThumbnail:(NSNotification *)notif {
@@ -98,6 +103,7 @@
     if (person != nil) {
         UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
         _widget.smallImage = thumbnail;
+        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
     } else {
         _widget.smallImage = nil;
     }

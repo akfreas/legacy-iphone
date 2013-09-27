@@ -144,35 +144,30 @@
 }
 
 -(void)showFriendPicker {
-        friendPickerDelegate = [[FriendPickerHandler alloc] init];
-        friendPicker = [[FBFriendPickerViewController alloc] init];
-        friendPicker.delegate = friendPickerDelegate;
-        friendPickerDelegate.friendPickerCompletionBlock = ^{
-            [dataSync sync:^{
-                
-            }];
-        };
-        friendPicker.session = [FBSession activeSession];
-        Person *currentPerson = [accessor primaryPerson];
-        friendPicker.userID = currentPerson.facebookId;
-        [friendPicker loadData];
-        [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
+    friendPickerDelegate = [[FriendPickerHandler alloc] init];
+    friendPicker = [[FBFriendPickerViewController alloc] init];
+    friendPicker.allowsMultipleSelection = NO;
+    friendPicker.delegate = friendPickerDelegate;
+    friendPickerDelegate.friendPickerCompletionBlock = ^{
+        [dataSync sync:^{
+            
+        }];
+    };
+    friendPicker.session = [FBSession activeSession];
+    Person *currentPerson = [accessor primaryPerson];
+    friendPicker.userID = currentPerson.facebookId;
+    [friendPicker loadData];
+    [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
 }
 
--(void)reloadScreen {
-    [infoScreen reload];
-}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activity.frame = CGRectInset(self.view.frame, 0, 0);
-    [self.view addSubview:activity];
-    [activity startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [dataSync sync:^{
-        [activity stopAnimating];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
 }
 
-                    
+
 @end

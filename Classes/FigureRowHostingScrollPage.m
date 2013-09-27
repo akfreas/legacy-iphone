@@ -3,7 +3,6 @@
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
-#import "EventDescriptionView.h"
 #import "Event.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
@@ -24,6 +23,8 @@
     LegacyAppConnection *connection;
     TopActionView *actionViewTop;
     NSFetchedResultsController *fetchController;
+    UITableView *hostingTableView;
+    UIView *headerViewWrapper;
 }
 
 static NSString *ReuseID = @"CellReuseId";
@@ -37,6 +38,7 @@ static NSString *ReuseID = @"CellReuseId";
         self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         priorPoint = CGPointZero;
         self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
+        [self createHeaderWrapperView];
         self.delegate = self;
         self.dataSource = self;
         fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
@@ -44,17 +46,21 @@ static NSString *ReuseID = @"CellReuseId";
         [fetchController performFetch:NULL];
     }
     return self;
-
 }
 
 #pragma mark TopActionView Control Methods
+
+-(void)createHeaderWrapperView {
+    headerViewWrapper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight)];
+    headerViewWrapper.backgroundColor = [UIColor clearColor];
+}
 
 -(void)addTopActionView {
     if (actionViewTop == nil) {
         
         actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight, self.bounds.size.width, TopActionViewHeight);
         actionViewTop = [[TopActionView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight)];
-        [self addSubview:actionViewTop];
+        [headerViewWrapper addSubview:actionViewTop];
     }
 }
 
@@ -69,7 +75,7 @@ static NSString *ReuseID = @"CellReuseId";
     if (contentOffset.y >= 0 && ((diff > 0 && actionViewTop.frame.origin.y  + diff <= 0) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height))) {
         actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
     } else if (scrollView.contentOffset.y < 0) {
-        actionViewTop.frame = CGRectMake(0, -scrollView.contentOffset.y, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
+//        actionViewTop.frame = CGRectMake(0, -scrollView.contentOffset.y, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
     }
     
     priorPoint = scrollView.contentOffset;
@@ -167,7 +173,11 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return actionViewTop;
+    return headerViewWrapper;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return TopActionViewHeight;
 }
 
 #pragma mark UITableView Delegate Methods
@@ -175,16 +185,22 @@ static NSString *ReuseID = @"CellReuseId";
 
 #pragma mark UIScrollView Delegate Methods
 
-//
-//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//    
-//    [self resetFrameOnActionViewInScrollView:scrollView];
-//    
-//}
-//
-//-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-//    [self resetFrameOnActionViewInScrollView:scrollView];
-//}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (actionViewTop != nil) {
+        [self addTopActionForScrollAction:scrollView];
+    }
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    [self resetFrameOnActionViewInScrollView:scrollView];
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self resetFrameOnActionViewInScrollView:scrollView];
+}
 
 -(void)dealloc {
     fetchController = nil;
@@ -193,6 +209,16 @@ static NSString *ReuseID = @"CellReuseId";
 #pragma mark FigureRowPageProtocol Delegate Methods
 
 -(void)becameVisible {
+    
+    [self addTopActionView];
+    if ([FBSession activeSession].state == FBSessionStateOpen) {
+    } else {
+        [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
+            if (state == FBSessionStateOpen) {
+                [self addTopActionView];
+            }
+        }];
+    }
     
 }
 

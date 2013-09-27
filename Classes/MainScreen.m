@@ -104,20 +104,18 @@
         NSLog(@"Chosen date: %@", birthday);
         thePerson.birthday = birthday;
         [accessor save];
-        
         LegacyAppRequest *updateBirthdayRequest = [LegacyAppRequest requestToUpdateBirthday:birthday forPerson:thePerson];
         connection = [[LegacyAppConnection alloc] initWithLegacyRequest:updateBirthdayRequest];
         
         [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
             NSLog(@"result: %@", result);
+            [dataSync sync:^{}];
         }];
-                
-        [infoScreen reload];
+        
     };
     alertView.rightButtonTitle = @"Cancel";
     alertView.rightButtonActionBlock = ^(NSArray *uiComponents){
         [accessor removePerson:thePerson];
-        [infoScreen reload];
     };
     [alertView showInView:self.view];
 }
@@ -130,7 +128,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 accessor = [ObjectArchiveAccessor sharedInstance];
                 [accessor createAndSetPrimaryUser:user completionBlock:^(Person *thePerson) {
-                    [infoScreen reload];
                 }];
             });
         }];

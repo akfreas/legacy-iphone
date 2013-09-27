@@ -30,7 +30,7 @@
         operationQueue = [[NSOperationQueue alloc] init];
         accessor = [ObjectArchiveAccessor sharedInstance];
         [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonThumbnail:) name:KeyForPersonThumbnailUpdated object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonThumbnail:) name:KeyForPersonThumbnailUpdated object:nil];
 //        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
         _widget = [[ImageWidget alloc] init];
 //        self.backgroundColor = [UIColor greenColor];

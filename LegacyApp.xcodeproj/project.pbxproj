@@ -67,6 +67,7 @@
 		1975752417D06CA100822779 /* WebViewControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975752317D06CA100822779 /* WebViewControls.m */; };
 		1975752617D06CBD00822779 /* WebViewControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752517D06CBD00822779 /* WebViewControls.xib */; };
 		1975752817D06EA800822779 /* EventInfoHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752717D06EA800822779 /* EventInfoHeaderCell.xib */; };
+		197EA5A617F543740015DD78 /* 298-circlex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197EA5A517F543740015DD78 /* 298-circlex@2x.png */; };
 		1980719017E8117B0039FC65 /* FigureRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980718F17E8117B0039FC65 /* FigureRowCell.m */; };
 		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
@@ -216,6 +217,7 @@
 		1975752317D06CA100822779 /* WebViewControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewControls.m; sourceTree = "<group>"; };
 		1975752517D06CBD00822779 /* WebViewControls.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewControls.xib; sourceTree = "<group>"; };
 		1975752717D06EA800822779 /* EventInfoHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventInfoHeaderCell.xib; path = ../Resources/EventInfoHeaderCell.xib; sourceTree = "<group>"; };
+		197EA5A517F543740015DD78 /* 298-circlex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "298-circlex@2x.png"; path = "images/298-circlex@2x.png"; sourceTree = "<group>"; };
 		1980718E17E8117B0039FC65 /* FigureRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowCell.h; sourceTree = "<group>"; };
 		1980718F17E8117B0039FC65 /* FigureRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowCell.m; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				197EA5A517F543740015DD78 /* 298-circlex@2x.png */,
 				1945775617D3EAA000C5DB62 /* button-back.png */,
 				1945775717D3EAA000C5DB62 /* button-forward.png */,
 				1909A8801777559000256ED0 /* 10-medical.png */,
@@ -677,6 +680,7 @@
 				19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */,
 				19C7BD861749DD68004C8B0A /* DescriptionPage.xib in Resources */,
 				19FAD78617632517006FA829 /* wikipedia-icon.png in Resources */,
+				197EA5A617F543740015DD78 /* 298-circlex@2x.png in Resources */,
 				19FAD78717632517006FA829 /* wikipedia-icon@2x.png in Resources */,
 				1909A85E1772D3B300256ED0 /* FB-f-Logo__blue_100.png in Resources */,
 				1909A8601772D44300256ED0 /* informationcircle.png in Resources */,

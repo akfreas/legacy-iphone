@@ -572,8 +572,7 @@ static NSString *PersonEntityName = @"Person";
 
 -(void)removePerson:(Person *)user {
     
-    Person *userInArray = [self personWithFacebookId:user.facebookId];
-    [self.managedObjectContext deleteObject:userInArray];
+    [self.managedObjectContext deleteObject:user];
     [self save];
 }
 

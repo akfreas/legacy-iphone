@@ -4,7 +4,7 @@
 
 @implementation FigureRowActionOverlay {
     
-    NSArray *circleImageViews;
+    NSMutableArray *circleImageViews;
     Event *event;
 }
 
@@ -65,31 +65,51 @@
     return infoCircle;
 }
 
+-(CircleImageView *)deleteCircle {
+    CircleImageView *deleteCircle = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"298-circlex@2x"] radius:OverlayViewButtonRadius];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteAction)];
+    [deleteCircle addGestureRecognizer:tapGesture];
+    
+    return deleteCircle;
+}
+
 -(void)setAlphaOnCircleViews:(CGFloat)alpha {
     for (CircleImageView *circleView in circleImageViews) {
-        circleView.alpha = alpha;
+        if ([circleView isKindOfClass:[CircleImageView class]]) {
+            circleView.alpha = alpha;
+        }
     }
 }
 
 -(void)prepareCircles {
     
+    circleImageViews = [NSMutableArray array];
     
+    if (self.deleteButtonAction != NULL) {
+        [circleImageViews addObject:[self deleteCircle]];
+    }
     
-    circleImageViews = [NSArray arrayWithObjects:[self fbCircle], [self infoCircle], nil];
+    [circleImageViews addObjectsFromArray:@[[NSNumber numberWithFloat:130], [self fbCircle], [self infoCircle]]];
 
     CGPoint startPoint = CGPointMake(0, self.frame.size.height / 2 - OverlayViewButtonRadius);
     
     CGFloat originXOffset = 0;
-    CGFloat padding = 5;
+    CGFloat padding = 10;
     
     for (int i=0; i < [circleImageViews count]; i++) {
         
-        CircleImageView *circleView = [circleImageViews objectAtIndex:i];
-        CGFloat xPointForCircle = startPoint.x + originXOffset + padding;
-        
-        CGPoint layerOrigin = CGPointMake(xPointForCircle, startPoint.y);
-        circleView.frame = CGRectSetOriginOnRect(circleView.frame, layerOrigin.x, layerOrigin.y);
-        originXOffset += circleView.frame.size.width + padding;
+        id imageItem = [circleImageViews objectAtIndex:i];
+        if ([imageItem isKindOfClass:[CircleImageView class]]) {
+            CircleImageView *circleView = (CircleImageView*)imageItem;
+            CGFloat xPointForCircle = startPoint.x + originXOffset + padding;
+            
+            CGPoint layerOrigin = CGPointMake(xPointForCircle, startPoint.y);
+            circleView.frame = CGRectSetOriginOnRect(circleView.frame, layerOrigin.x, layerOrigin.y);
+            originXOffset += circleView.frame.size.width + padding;
+        } else if ([imageItem isKindOfClass:[NSNumber class]]) {
+            NSNumber *paddingItem = (NSNumber *)imageItem;
+            originXOffset += [paddingItem floatValue];
+        }
 
     }
     
@@ -97,8 +117,10 @@
     CGFloat centeredXOffset = centerOfFrame.x - originXOffset / 2;
     
     for (CircleImageView *circleView in circleImageViews) {
-        circleView.frame = CGRectOffset(circleView.frame, centeredXOffset, 0);
-        [self addSubview:circleView];
+        if ([circleView isKindOfClass:[CircleImageView class]]) {
+            circleView.frame = CGRectOffset(circleView.frame, centeredXOffset, 0);
+            [self addSubview:circleView];
+        }
     }
     [self setAlphaOnCircleViews:0];
     [self setNeedsLayout];
@@ -115,6 +137,12 @@
 -(void)infoAction {
     if (self.infoButtonAction != NULL) {
         self.infoButtonAction();
+    }
+}
+
+-(void)deleteAction {
+    if (self.deleteButtonAction != NULL) {
+        self.deleteButtonAction();
     }
 }
 

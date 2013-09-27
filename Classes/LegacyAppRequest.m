@@ -68,6 +68,15 @@
     return url;
 }
 
++(NSURL *)urlToDeletePerson:(Person *)person {
+    NSURL *url = [LegacyAppRequest baseUrl];
+    
+    NSString *pathString = [NSString stringWithFormat:@"user/%@/delete", person.facebookId];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    return url;
+}
+
 
 +(NSURL *)urlToGetRandomEvents {
     NSURL *url = [LegacyAppRequest baseUrl];
@@ -190,6 +199,16 @@
     NSDictionary *headers = [NSHTTPCookie requestHeaderFieldsWithCookies:[NSArray arrayWithObject:cookie]];
 //    NSLog(@"URL: %@", url);
     [urlRequest setAllHTTPHeaderFields:headers];
+    
+    return request;
+}
+
++(LegacyAppRequest *)requestToDeletePerson:(Person *)person {
+    LegacyAppRequest *request = [LegacyAppRequest baseRequestForPerson:nil];
+    
+    NSURL *urlToDelete = [LegacyAppRequest urlToDeletePerson:person];
+    
+    request.urlRequest.URL = urlToDelete;
     
     return request;
 }

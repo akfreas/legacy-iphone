@@ -102,17 +102,25 @@ CGFloat pageWidth = 320;
     if (actionOverlay == nil) {
         actionOverlay = [[FigureRowActionOverlay alloc] initWithEvent:self.event];
     }
-    [actionOverlay showInView:self];
     NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:@{@"event": _event}];
     actionOverlay.infoButtonAction = ^{
         [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
     };
-    
+    if (_person != nil) {
+        NSNotification *deleteNotif = [NSNotification notificationWithName:KeyForRemovePersonButtonTappedNotification object:self userInfo:@{@"person" : _person}];
+        actionOverlay.deleteButtonAction = ^{
+            [[NSNotificationCenter defaultCenter] postNotification:deleteNotif];
+        };
+    }
     NSNotification *facebookNotification = [NSNotification notificationWithName:KeyForFacebookButtonTapped object:self userInfo:@{@"event" : _event}];
     actionOverlay.facebookButtonAction = ^{
         [[NSNotificationCenter defaultCenter] postNotification:facebookNotification];
     };
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForOverlayViewShown object:self];
+    
+    [actionOverlay showInView:self];
+
 }
 
 -(void)swipeOnRow {

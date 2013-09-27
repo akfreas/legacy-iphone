@@ -44,6 +44,7 @@ static NSString *ReuseID = @"CellReuseId";
         fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
         fetchController.delegate = self;
         [fetchController performFetch:NULL];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
     }
     return self;
 }
@@ -178,6 +179,23 @@ static NSString *ReuseID = @"CellReuseId";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return TopActionViewHeight;
+}
+
+#pragma mark Notifications
+
+-(void)deletePerson:(NSNotification *)notif {
+    
+    Person *personToDelete = notif.userInfo[@"person"];
+    
+    LegacyAppRequest *requestToDelete = [LegacyAppRequest requestToDeletePerson:personToDelete];
+    LegacyAppConnection *delConnection = [[LegacyAppConnection alloc] initWithLegacyRequest:requestToDelete];
+    
+    [delConnection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[ObjectArchiveAccessor sharedInstance] removePerson:personToDelete];
+        });
+    }];
+    
 }
 
 #pragma mark UITableView Delegate Methods

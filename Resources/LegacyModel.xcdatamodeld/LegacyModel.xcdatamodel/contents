@@ -10,7 +10,7 @@
     </entity>
     <entity name="EventPersonRelation" representedClassName="EventPersonRelation" syncable="YES">
         <relationship name="event" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Event" syncable="YES"/>
-        <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Person" syncable="YES"/>
+        <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="Person" syncable="YES"/>
     </entity>
     <entity name="Figure" representedClassName="Figure" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>

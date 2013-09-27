@@ -34,7 +34,12 @@
     [[DataSyncUtility sharedInstance] sync:NULL];
 }
 
--(void)friendPickerViewControllerDataDidChange:(FBFriendPickerViewController *)friendPicker {
+-(void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker {
+    
+    
+    FBModalCompletionHandler completion = [self completionHandler];
+    completion(friendPicker, YES);
+    [friendPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 

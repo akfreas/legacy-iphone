@@ -4,6 +4,7 @@
 #import "LegacyAppConnection.h"
 #import "Figure.h"
 #import "Event.h"
+#import "Person.h"
 #import "FigureRowPageProtocol.h"
 #import "LegacyWebView.h"
 #import "FigureRowActionOverlay.h"
@@ -106,7 +107,7 @@ CGFloat pageWidth = 320;
     actionOverlay.infoButtonAction = ^{
         [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
     };
-    if (_person != nil) {
+    if (_person != nil && [_person.isPrimary isEqualToNumber:[NSNumber numberWithBool:YES]] == NO) {
         NSNotification *deleteNotif = [NSNotification notificationWithName:KeyForRemovePersonButtonTappedNotification object:self userInfo:@{@"person" : _person}];
         actionOverlay.deleteButtonAction = ^{
             [[NSNotificationCenter defaultCenter] postNotification:deleteNotif];

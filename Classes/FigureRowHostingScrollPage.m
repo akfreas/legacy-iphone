@@ -127,7 +127,7 @@ static NSString *ReuseID = @"CellReuseId";
             case NSFetchedResultsChangeUpdate:
                 [self configureCell:(FigureRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             case NSFetchedResultsChangeDelete:
-                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             default:
                 break;
         }

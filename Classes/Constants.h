@@ -60,4 +60,4 @@
 
 #define FigureRowNameContainerViewHeight 40
 
-#define OverlayViewButtonRadius 20
+#define OverlayViewButtonRadius 25

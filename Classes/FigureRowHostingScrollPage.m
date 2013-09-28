@@ -37,10 +37,10 @@ static NSString *ReuseID = @"CellReuseId";
         
         self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         priorPoint = CGPointZero;
-        self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
         [self createHeaderWrapperView];
         self.delegate = self;
         self.dataSource = self;
+        self.bounces = NO;
         fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
         fetchController.delegate = self;
         [fetchController performFetch:NULL];

@@ -7,8 +7,8 @@
 
 @interface MainFigureInfoPage : UIScrollView <FigureRowPageProtocol>
 
-@property (nonatomic) Person *person;
-@property (nonatomic) Event *event;
+@property (nonatomic, strong) Person *person;
+@property (nonatomic, strong) Event *event;
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic) IBOutlet ImageWidgetContainer *widgetContainer;
 

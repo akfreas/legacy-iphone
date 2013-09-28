@@ -29,7 +29,7 @@
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
         accessor = [ObjectArchiveAccessor sharedInstance];
-        [[NSBundle mainBundle] loadNibNamed:@"ImageWidgetContainer" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.class) owner:self options:nil];
         _widget = [[ImageWidget alloc] init];
 //        self.backgroundColor = [UIColor greenColor];
         [self addSubview:_widget];

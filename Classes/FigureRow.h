@@ -9,6 +9,7 @@
 @property (nonatomic) Event *event;
 @property (nonatomic) Person *person;
 @property (nonatomic, assign) BOOL selected;
+
 - (id)initWithOrigin:(CGPoint)origin;
 -(void)reset;
 

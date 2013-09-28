@@ -151,9 +151,7 @@
     friendPicker.allowsMultipleSelection = NO;
     friendPicker.delegate = friendPickerDelegate;
     friendPickerDelegate.friendPickerCompletionBlock = ^{
-        [dataSync sync:^{
-            
-        }];
+        [dataSync sync:NULL];
     };
     friendPicker.session = [FBSession activeSession];
     Person *currentPerson = [accessor primaryPerson];
@@ -163,12 +161,34 @@
 }
 
 
--(void)viewDidLoad {
-    [super viewDidLoad];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [dataSync sync:^{
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    }];
+-(BOOL)shouldSyncNow {
+    NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:KeyForLastDateSynced];
+    if (lastDate == nil) {
+        return YES;
+    }
+    
+    if ([(NSDate *)[lastDate dateByAddingTimeInterval:60*60*24] compare:[NSDate date]] == NSOrderedAscending) {
+        return YES;
+    } else {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSUInteger dayOfLastDate = [calendar ordinalityOfUnit:NSCalendarUnitDay inUnit:NSYearCalendarUnit forDate:lastDate];
+        NSUInteger dayOfCurrentDate = [calendar ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitYear forDate:[NSDate date]];
+        NSInteger dateDifference = ABS(dayOfLastDate - dayOfCurrentDate);
+        
+        if (dateDifference > 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([self shouldSyncNow]) {
+        [dataSync sync:NULL];
+    }
 }
 
 

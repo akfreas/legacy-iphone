@@ -37,7 +37,7 @@
 
 -(void)sync:(void (^)())completionBlock {
     
-    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     LegacyAppRequest *request;
     completion = completionBlock;
     Person *primaryPerson = [accessor primaryPerson];
@@ -111,6 +111,9 @@
                 }
             }];
         }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:KeyForLastDateSynced];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

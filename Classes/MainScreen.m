@@ -173,7 +173,7 @@
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSUInteger dayOfLastDate = [calendar ordinalityOfUnit:NSCalendarUnitDay inUnit:NSYearCalendarUnit forDate:lastDate];
         NSUInteger dayOfCurrentDate = [calendar ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitYear forDate:[NSDate date]];
-        NSInteger dateDifference = ABS(dayOfLastDate - dayOfCurrentDate);
+        NSInteger dateDifference = abs(dayOfLastDate - dayOfCurrentDate);
         
         if (dateDifference > 0) {
             return YES;

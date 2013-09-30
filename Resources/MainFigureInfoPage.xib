@@ -26,7 +26,7 @@
                     <gestureRecognizers/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="@25 years, 2 months, 25 days old" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="73">
-                    <rect key="frame" x="61" y="38" width="259" height="21"/>
+                    <rect key="frame" x="53" y="38" width="259" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
                     <nil key="highlightedColor"/>

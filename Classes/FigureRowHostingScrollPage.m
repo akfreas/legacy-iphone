@@ -288,18 +288,20 @@ static NSString *ReuseID = @"CellReuseId";
 -(void)becameVisible {
     
     [self addTopActionView];
+    actionViewTop.isVisible = YES;
     if ([FBSession activeSession].state == FBSessionStateOpen) {
     } else {
         [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
             if (state == FBSessionStateOpen) {
-                [self addTopActionView];
+                NSLog(@"Logged into Facebook.");
             }
         }];
     }
-    
+
 }
 
 -(void)scrollCompleted {
+    
 }
 
 @end

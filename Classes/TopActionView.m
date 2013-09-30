@@ -11,7 +11,7 @@
     UIImageView *headerImage;
     CGFloat yButtonOrigin;
 }
-#define TopBarButtonRadius 20
+#define TopBarButtonRadius 17
 #define TopBarLeftMargin 15
 #define TopBarTopMargin 15
 

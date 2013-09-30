@@ -40,15 +40,16 @@
     [self drawEventLabel];
 }
 
--(void)setSelected:(BOOL)selected {
-    if (selected == YES) {
+-(void)setShowAsKey:(BOOL)showAsKey {
+    if (showAsKey == YES) {
         if (lineView == nil) {
             lineView = [[UIView alloc] initWithFrame:CGRectMake(7, ageLabel.frame.origin.y + ageLabel.frame.size.height, ageLabel.frame.size.width, 1)];
             lineView.backgroundColor = [UIColor blackColor];
             [self addSubview:lineView];
         }
+        lineView.hidden = NO;
     } else {
-        ageLabel.layer.borderColor = [UIColor clearColor].CGColor;
+        lineView.hidden = YES;
     }
 }
 

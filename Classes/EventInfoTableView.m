@@ -94,7 +94,6 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
     
     if (indexPath.row == 0) {
         if (headerCell == nil) {
@@ -108,22 +107,21 @@
         NSInteger eventIndex = indexPath.row - 1;
         Event *theEvent = arrayOfEvents[eventIndex];
         static NSString *ReuseId = TableViewCellIdentifierForMainCell;
-        cell = [self dequeueReusableCellWithIdentifier:ReuseId];
-        if (cell == nil) {
-            cell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
+        EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)[self dequeueReusableCellWithIdentifier:ReuseId];
+        if (timelineCell == nil) {
+            timelineCell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
         } else {
-            EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)cell;
             timelineCell.event = theEvent;
         }
         
         if (eventIndex == keyEventIndex) {
-            cell.selected = YES;
+            timelineCell.showAsKey = YES;
         } else {
-            cell.selected = NO;
+            timelineCell.showAsKey = NO;
         }
         
-        cell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, cell.frame);
-        return cell;
+        timelineCell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, timelineCell.frame);
+        return timelineCell;
     }
 }
 

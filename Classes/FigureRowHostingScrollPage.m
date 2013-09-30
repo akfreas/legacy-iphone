@@ -90,9 +90,10 @@ static NSString *ReuseID = @"CellReuseId";
     
     if (contentOffset.y >= 0 && ((diff > 0 && actionViewTop.frame.origin.y  + diff <= 0) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height))) {
         actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
-    } else if (scrollView.contentOffset.y < 0) {
-//        actionViewTop.frame = CGRectMake(0, -scrollView.contentOffset.y, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
     }
+    
+    actionViewTop.isVisible = (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height);
+    
     
     priorPoint = scrollView.contentOffset;
 }

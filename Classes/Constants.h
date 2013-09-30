@@ -14,7 +14,7 @@
 #define KeyForLastDateSynced @"LastDaySynced"
 #define TableViewCellIdentifierForHeader @"HeaderCellIdentifier"
 #define TableViewCellIdentifierForMainCell @"MainTableViewCell"
-
+#define TopActionViewDefaultTintColor [UIColor colorWithWhite:1 alpha:.85]
 
 #define FigureRowPageInitialHeight 140
 #define FigureRowPageWidth 320

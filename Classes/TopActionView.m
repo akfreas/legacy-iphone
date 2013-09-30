@@ -23,13 +23,13 @@
         toolBar = [[UIToolbar alloc] initWithFrame:self.bounds];
         [self.layer insertSublayer:toolBar.layer atIndex:0];
         if ([toolBar respondsToSelector:@selector(setBarTintColor:)]) {
-            [toolBar setBarTintColor:[UIColor colorWithWhite:1 alpha:.85]];
+            [toolBar setBarTintColor:TopActionViewDefaultTintColor];
         } else {
             toolBar.alpha = 0.96f;
             toolBar.tintColor = [UIColor whiteColor];
         }
         
-        yButtonOrigin = self.frame.size.height / 2 - TopBarButtonRadius;
+        yButtonOrigin = self.frame.size.height / 2 - TopBarButtonRadius + 5;
         [self addAddFriendsButton];
         [self addProfilePicButton];
         [self addHeaderTextImage];
@@ -79,6 +79,12 @@
 -(void)setIsVisible:(BOOL)isVisible {
     if (isVisible && profilePicButton.image == nil) {
         [self configureProfilePicButton];
+    }
+}
+
+-(void)setTintColor:(UIColor *)tintColor {
+    if ([toolBar respondsToSelector:@selector(setBarTintColor:)]) {
+        [toolBar setBarTintColor:tintColor];
     }
 }
 

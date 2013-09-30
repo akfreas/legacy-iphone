@@ -26,6 +26,8 @@
     NSFetchedResultsController *fetchController;
     UITableView *hostingTableView;
     UIView *headerViewWrapper;
+    UIToolbar *toolBar;
+    UIView *lineView;
 }
 
 static NSString *ReuseID = @"CellReuseId";
@@ -54,7 +56,7 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(void)addTopLine {
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, actionViewTop.frame.size.height - 1, 320 - 30 , .5)];
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(15, actionViewTop.frame.size.height - 1, 320 - 30 , .5)];
     lineView.backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
     [actionViewTop addSubview:lineView];
 }
@@ -69,12 +71,14 @@ static NSString *ReuseID = @"CellReuseId";
     } else {
         headerWrapperFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_OS7);
     }
-    
+
     headerViewWrapper = [[UIView alloc] initWithFrame:headerWrapperFrame];
     headerViewWrapper.backgroundColor = [UIColor clearColor];
 }
 
 -(void)addTopActionView {
+    
+    
     if (actionViewTop == nil) {
         
         CGRect actionViewTopFrame;
@@ -89,6 +93,11 @@ static NSString *ReuseID = @"CellReuseId";
         [headerViewWrapper addSubview:actionViewTop];
         [self addTopLine];
     }
+    
+    
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    [toolBar setBarTintColor:[UIColor colorWithWhite:1 alpha:.85]];
+    [headerViewWrapper.layer insertSublayer:toolBar.layer below:actionViewTop.layer];
 }
 
 
@@ -101,6 +110,16 @@ static NSString *ReuseID = @"CellReuseId";
     
     if (contentOffset.y >= 0 && ((diff > 0 && actionViewTop.frame.origin.y  + diff <= 0) || (diff < 0 && actionViewTop.frame.origin.y >= -actionViewTop.frame.size.height))) {
         actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
+    }
+    
+    if (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height + toolBar.frame.size.height) {
+        lineView.alpha = 1;
+//        toolBar.hidden = YES;
+        actionViewTop.tintColor = TopActionViewDefaultTintColor;
+    } else {
+        actionViewTop.tintColor = [UIColor clearColor];
+        lineView.alpha = 0;
+//        toolBar.hidden = NO;
     }
     
     actionViewTop.isVisible = (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height);
@@ -123,12 +142,14 @@ static NSString *ReuseID = @"CellReuseId";
 
 -(void)slideUpActionView {
     [UIView animateWithDuration:.2 animations:^{
+        lineView.alpha = 0;
         actionViewTop.frame = CGRectSetOriginOnRect(actionViewTop.frame, 0, -actionViewTop.frame.size.height);
     }];
 }
 
 -(void)slideDownActionView {
     [UIView animateWithDuration:.2 animations:^{
+        lineView.alpha = 1;
         actionViewTop.frame = CGRectSetOriginOnRect(actionViewTop.frame, 0, 0);
     }];
 

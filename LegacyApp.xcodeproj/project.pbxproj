@@ -26,7 +26,7 @@
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
 		191CF63E1749635D00086D5E /* FigureRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* FigureRow.m */; };
-		191E849717F8E1B6003A37AC /* legacy-mockup_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E849617F8E1B6003A37AC /* legacy-mockup_03.png */; };
+		191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E849617F8E1B6003A37AC /* add-friends-button.png */; };
 		191E849D17F9265D003A37AC /* Cinzel-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 191E849A17F92655003A37AC /* Cinzel-Black.ttf */; };
 		191E849E17F9265D003A37AC /* Cinzel-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 191E849B17F92655003A37AC /* Cinzel-Bold.ttf */; };
 		191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 191E849C17F92655003A37AC /* Cinzel-Regular.ttf */; };
@@ -158,7 +158,7 @@
 		191CF63A17488CE700086D5E /* CircleImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageLayer.m; sourceTree = "<group>"; };
 		191CF63C1749635C00086D5E /* FigureRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRow.h; sourceTree = "<group>"; };
 		191CF63D1749635D00086D5E /* FigureRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRow.m; sourceTree = "<group>"; };
-		191E849617F8E1B6003A37AC /* legacy-mockup_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-mockup_03.png"; sourceTree = "<group>"; };
+		191E849617F8E1B6003A37AC /* add-friends-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends-button.png"; sourceTree = "<group>"; };
 		191E849A17F92655003A37AC /* Cinzel-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cinzel-Black.ttf"; sourceTree = "<group>"; };
 		191E849B17F92655003A37AC /* Cinzel-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cinzel-Bold.ttf"; sourceTree = "<group>"; };
 		191E849C17F92655003A37AC /* Cinzel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cinzel-Regular.ttf"; sourceTree = "<group>"; };
@@ -453,7 +453,7 @@
 				192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */,
 				197EA5A517F543740015DD78 /* 298-circlex@2x.png */,
 				1945775617D3EAA000C5DB62 /* button-back.png */,
-				191E849617F8E1B6003A37AC /* legacy-mockup_03.png */,
+				191E849617F8E1B6003A37AC /* add-friends-button.png */,
 				1945775717D3EAA000C5DB62 /* button-forward.png */,
 				1909A8801777559000256ED0 /* 10-medical.png */,
 				1909A8811777559000256ED0 /* 10-medical@2x.png */,
@@ -686,7 +686,7 @@
 				19D61CC716B2370A00C81E60 /* 19-gear.png in Resources */,
 				19D61CC816B2370A00C81E60 /* 19-gear@2x.png in Resources */,
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
-				191E849717F8E1B6003A37AC /* legacy-mockup_03.png in Resources */,
+				191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
 				191866FD16D4373500220A42 /* MainScreen.xib in Resources */,

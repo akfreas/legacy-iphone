@@ -67,5 +67,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Cinzel-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

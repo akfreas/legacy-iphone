@@ -11,5 +11,6 @@
 @interface TopActionView : UIView
 
 @property (nonatomic, assign) BOOL isVisible;
+@property (nonatomic, strong) UIColor *tintColor;
 
 @end

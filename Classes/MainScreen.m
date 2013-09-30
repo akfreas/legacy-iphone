@@ -13,6 +13,7 @@
 #import "LegacyAppConnection.h"
 #import "LegacyAppRequest.h"
 #import "DataSyncUtility.h"
+#import "FacebookUtils.h"
 
 
 @implementation MainScreen {
@@ -138,21 +139,36 @@
         viewForSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsModalView alloc] init]];
     }
     [self presentViewController:viewForSettings animated:YES completion:NULL];
+
 }
 
+
 -(void)showFriendPicker {
-    friendPickerDelegate = [[FriendPickerHandler alloc] init];
-    friendPicker = [[FBFriendPickerViewController alloc] init];
-    friendPicker.allowsMultipleSelection = NO;
-    friendPicker.delegate = friendPickerDelegate;
-    friendPickerDelegate.friendPickerCompletionBlock = ^{
-        [dataSync sync:NULL];
-    };
-    friendPicker.session = [FBSession activeSession];
-    Person *currentPerson = [accessor primaryPerson];
-    friendPicker.userID = currentPerson.facebookId;
-    [friendPicker loadData];
-    [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
+    FBSessionState state = [FBSession activeSession].state;
+        if (state == FBSessionStateOpen || state == FBSessionStateCreatedTokenLoaded) {
+            friendPickerDelegate = [[FriendPickerHandler alloc] init];
+            friendPicker = [[FBFriendPickerViewController alloc] init];
+            friendPicker.allowsMultipleSelection = NO;
+            friendPicker.delegate = friendPickerDelegate;
+            friendPickerDelegate.friendPickerCompletionBlock = ^{
+                [dataSync sync:NULL];
+            };
+            friendPicker.session = [FBSession activeSession];
+            Person *currentPerson = [accessor primaryPerson];
+            friendPicker.userID = currentPerson.facebookId;
+            [friendPicker loadData];
+            [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
+            
+        } else {
+            AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"Connect to Facebook?"];
+            alert.description = @"Connecting to Facebook allows you to discover what happened in someone else's life at your friend's exact age.";
+            alert.leftButtonActionBlock = ^(NSArray *components) {
+                [FacebookUtils loginWithFacebook:NULL];
+            };
+            alert.leftButtonTitle = @"OK";
+            alert.rightButtonTitle = @"No Thanks";
+            [alert showInView:self.view];
+        }
 }
 
 

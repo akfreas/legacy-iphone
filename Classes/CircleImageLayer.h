@@ -4,6 +4,7 @@
 @property (nonatomic) UIImage *image;
 @property (assign) CGFloat radius;
 @property (assign) CGRect frame;
+@property (assign) CGFloat borderWidth;
 
 
 -(id)initWithRadius:(CGFloat)theRadius;

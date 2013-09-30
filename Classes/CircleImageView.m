@@ -18,11 +18,16 @@
         self.contentScaleFactor = [UIScreen mainScreen].scale;
         [(CircleImageLayer *)self.layer setRadius:theRadius];
         [(CircleImageLayer *)self.layer setImage:theImage];
+        [(CircleImageLayer *)self.layer setBorderWidth:ImageLayerDefaultStrokeWidth];
     }
     return self;
 }
 
--(void)layoutSubviews { 
+-(void)setBorderWidth:(CGFloat)borderWidth {
+    [(CircleImageLayer *)self.layer setBorderWidth:borderWidth];
+}
+
+-(void)layoutSubviews {
     self.layer.frame = self.frame;
 }
 

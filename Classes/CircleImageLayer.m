@@ -4,8 +4,10 @@
     
 
     CGFloat _radius;
+    CGFloat _borderWidth;
     CGMutablePathRef circlePath;
 }
+
 
 @dynamic radius;
 
@@ -15,7 +17,7 @@
     if (self == [self init]) {
         _radius = theRadius;
         self.frame = CGRectMake(0, 0, theRadius * 2 + ImageLayerDefaultStrokeWidth, theRadius * 2 + ImageLayerDefaultStrokeWidth);
-        
+        self.borderWidth = ImageLayerDefaultStrokeWidth;
 //        [self drawBackgroundBorderLayer];
 //        [self drawImageHostingLayer];
     }
@@ -28,6 +30,11 @@
         [self setNeedsDisplay];
     }
     return self;
+}
+
+-(void)setBorderWidth:(CGFloat)borderWidth {
+    _borderWidth = borderWidth;
+    self.frame = CGRectMake(0, 0, _radius * 2 + borderWidth, _radius * 2 + self.borderWidth);
 }
 
 -(id)initWithImage:(UIImage *)theImage radius:(CGFloat)theRadius {
@@ -130,8 +137,8 @@
         CGContextSetFillColorWithColor(ctx, [UIColor grayColor].CGColor);
         drawingMode = kCGPathFillStroke;
     }
-    CGContextAddArc(ctx, center.x, center.y, _radius - ImageLayerDefaultStrokeWidth / 2, 0, M_PI * 2, 1);
-    CGContextSetLineWidth(ctx, ImageLayerDefaultStrokeWidth);
+    CGContextAddArc(ctx, center.x, center.y, _radius - _borderWidth / 2, 0, M_PI * 2, 1);
+    CGContextSetLineWidth(ctx, _borderWidth);
     CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0 alpha:.8].CGColor);
     CGContextDrawPath(ctx, drawingMode);
 }

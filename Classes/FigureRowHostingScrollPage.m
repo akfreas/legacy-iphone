@@ -52,15 +52,30 @@ static NSString *ReuseID = @"CellReuseId";
 #pragma mark TopActionView Control Methods
 
 -(void)createHeaderWrapperView {
-    headerViewWrapper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight)];
+    CGRect headerWrapperFrame;
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        headerWrapperFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_non_OS7);
+        
+    } else {
+        headerWrapperFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_OS7);
+    }
+    
+    headerViewWrapper = [[UIView alloc] initWithFrame:headerWrapperFrame];
     headerViewWrapper.backgroundColor = [UIColor clearColor];
 }
 
 -(void)addTopActionView {
     if (actionViewTop == nil) {
         
-        actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight, self.bounds.size.width, TopActionViewHeight);
-        actionViewTop = [[TopActionView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight)];
+        CGRect actionViewTopFrame;
+        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight_non_OS7, self.bounds.size.width, TopActionViewHeight_non_OS7);
+            actionViewTopFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_non_OS7);
+        } else {
+            actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight_OS7, self.bounds.size.width, TopActionViewHeight_OS7);
+            actionViewTopFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_OS7);
+        }
+        actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopFrame];
         [headerViewWrapper addSubview:actionViewTop];
     }
 }
@@ -178,7 +193,7 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return TopActionViewHeight;
+    return actionViewTopInitialFrame.size.height;
 }
 
 #pragma mark Notifications

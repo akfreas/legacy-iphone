@@ -56,7 +56,8 @@
 #define RightIndicatorLinesFrameWidth 200
 #define RightIndicatorLinesFrameHeight 400
 
-#define TopActionViewHeight 50
+#define TopActionViewHeight_OS7 64
+#define TopActionViewHeight_non_OS7 64
 
 #define FigureRowNameContainerViewHeight 40
 

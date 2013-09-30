@@ -40,7 +40,7 @@
     
     CGFloat actualFontSize;
 
-    CGSize nameLabelSize = [nameString sizeWithFont:[UIFont fontWithName:@"Georgia" size:60] minFontSize:12 actualFontSize:&actualFontSize forWidth:self.bounds.size.width - 20 lineBreakMode:NSLineBreakByTruncatingTail];
+    CGSize nameLabelSize = [nameString sizeWithFont:[UIFont fontWithName:@"Cinzel-Regular" size:60] minFontSize:12 actualFontSize:&actualFontSize forWidth:self.bounds.size.width - 20 lineBreakMode:NSLineBreakByTruncatingTail];
     CGRect nameFrame = CGRectMake(0, 0, nameLabelSize.width, nameLabelSize.height);
     
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 2.0);
@@ -54,7 +54,7 @@
     
     CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
     CGPoint textBeginPoint = CGPointMake(nameFrame.origin.x + 10, nameFrame.origin.y);
-    [nameString drawAtPoint:textBeginPoint forWidth:nameFrame.size.width withFont:[UIFont fontWithName:@"Georgia" size:12] fontSize:actualFontSize lineBreakMode:NSLineBreakByTruncatingTail baselineAdjustment:UIBaselineAdjustmentNone];
+    [nameString drawAtPoint:textBeginPoint forWidth:nameFrame.size.width withFont:[UIFont fontWithName:@"Cinzel-Regular" size:12] fontSize:actualFontSize lineBreakMode:NSLineBreakByTruncatingTail baselineAdjustment:UIBaselineAdjustmentNone];
     
     CGImageRef ref = CGBitmapContextCreateImage(ctx);
 

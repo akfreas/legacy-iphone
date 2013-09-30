@@ -9,13 +9,17 @@
     UIToolbar *toolBar;
     CGFloat buttonRadii;
     UIImageView *headerImage;
+    CGFloat yButtonOrigin;
 }
+#define TopBarButtonRadius 20
+#define TopBarLeftMargin 15
+#define TopBarTopMargin 15
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        buttonRadii = 20;
+        buttonRadii = TopBarButtonRadius;
         toolBar = [[UIToolbar alloc] initWithFrame:self.bounds];
         [self.layer insertSublayer:toolBar.layer atIndex:0];
         if ([toolBar respondsToSelector:@selector(setBarTintColor:)]) {
@@ -24,6 +28,8 @@
             toolBar.alpha = 0.96f;
             toolBar.tintColor = [UIColor whiteColor];
         }
+        
+        yButtonOrigin = self.frame.size.height / 2 - TopBarButtonRadius;
         [self addAddFriendsButton];
         [self addProfilePicButton];
         [self addHeaderTextImage];
@@ -41,7 +47,7 @@
 -(void)addAddFriendsButton {
     
     addFriendsButton = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"add-friends-button.png"] radius:buttonRadii];
-    addFriendsButton.frame = CGRectMake(self.frame.size.width - buttonRadii*2 - 15, 15, addFriendsButton.frame.size.height, addFriendsButton.frame.size.width);
+    addFriendsButton.frame = CGRectMake(self.frame.size.width - buttonRadii*2 - TopBarLeftMargin, yButtonOrigin, addFriendsButton.frame.size.height, addFriendsButton.frame.size.width);
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addFriendsButtonTappedAction)];
     [addFriendsButton addGestureRecognizer:gesture];
     [self addSubview:addFriendsButton];
@@ -54,7 +60,7 @@
         UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
         profilePicButton = [[CircleImageView alloc] initWithImage:thumb radius:buttonRadii];
         profilePicButton.borderWidth = 0;
-        profilePicButton.frame = CGRectMake(15, 15, profilePicButton.frame.size.width, profilePicButton.frame.size.height);
+        profilePicButton.frame = CGRectMake(TopBarLeftMargin, yButtonOrigin, profilePicButton.frame.size.width, profilePicButton.frame.size.height);
         [self addSubview:profilePicButton];
     }
 }

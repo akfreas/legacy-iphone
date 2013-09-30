@@ -10,6 +10,7 @@
 #import "TopActionView.h"
 #import "AppDelegate.h"
 #import "FigureRowCell.h"
+#import "AFAlertView.h"
 
 #import "FigureRowHostingScrollPage.h"
 

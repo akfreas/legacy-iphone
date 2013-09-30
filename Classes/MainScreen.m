@@ -33,7 +33,6 @@
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showShareDialog:) name:KeyForFacebookButtonTapped object:nil];
         dataSync = [DataSyncUtility sharedInstance];
@@ -56,10 +55,6 @@
 }
 
 
--(void)removePerson:(NSNotification *)notification {
-    Person *thePerson = notification.userInfo[@"person"];
-    [accessor removePerson:thePerson];
-}
 
 -(void)showAlertForNoBirthday:(NSNotification *)notification {
     

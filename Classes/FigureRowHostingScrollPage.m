@@ -212,16 +212,27 @@ static NSString *ReuseID = @"CellReuseId";
 -(void)deletePerson:(NSNotification *)notif {
     
     Person *personToDelete = notif.userInfo[@"person"];
-    
-    LegacyAppRequest *requestToDelete = [LegacyAppRequest requestToDeletePerson:personToDelete];
-    LegacyAppConnection *delConnection = [[LegacyAppConnection alloc] initWithLegacyRequest:requestToDelete];
-    
-    [delConnection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[ObjectArchiveAccessor sharedInstance] removePerson:personToDelete];
-        });
-    }];
-    
+        
+        
+        AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"Confirm"];
+        alert.description = [NSString stringWithFormat:@"Are you sure you want to remove %@?", personToDelete.firstName];
+        alert.leftButtonTitle = @"YES";
+        alert.leftButtonActionBlock = ^(NSArray *components){
+            
+            LegacyAppRequest *requestToDelete = [LegacyAppRequest requestToDeletePerson:personToDelete];
+            LegacyAppConnection *delConnection = [[LegacyAppConnection alloc] initWithLegacyRequest:requestToDelete];
+            
+            [delConnection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[ObjectArchiveAccessor sharedInstance] removePerson:personToDelete];
+                });
+            }];
+        
+        };
+        
+        alert.rightButtonTitle = @"NO";
+        
+        [alert showInView:self];
 }
 
 #pragma mark UITableView Delegate Methods

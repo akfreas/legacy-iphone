@@ -57,6 +57,9 @@ typedef enum ScrollViewDirection {
         self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
+        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToInfoPage) name:@"ScrollToInfo" object:nil];
+        }
         [self addPageControl];
         [self addLegacyInfoPage];
         [self addFigurePage];

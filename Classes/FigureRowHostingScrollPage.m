@@ -41,12 +41,21 @@ static NSString *ReuseID = @"CellReuseId";
         self.delegate = self;
         self.dataSource = self;
         self.bounces = NO;
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+            self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        }
         fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
         fetchController.delegate = self;
         [fetchController performFetch:NULL];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
     }
     return self;
+}
+
+-(void)addTopLine {
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, actionViewTop.frame.size.height - 1, 320 - 30 , .5)];
+    lineView.backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
+    [actionViewTop addSubview:lineView];
 }
 
 #pragma mark TopActionView Control Methods
@@ -77,6 +86,7 @@ static NSString *ReuseID = @"CellReuseId";
         }
         actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopFrame];
         [headerViewWrapper addSubview:actionViewTop];
+        [self addTopLine];
     }
 }
 

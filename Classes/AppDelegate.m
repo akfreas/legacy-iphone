@@ -6,11 +6,7 @@
 #import "ObjectArchiveAccessor.h"
 
 
-@implementation AppDelegate {
-    
-    UINavigationController *mainNavController;
-
-}
+@implementation AppDelegate 
 
 @synthesize window = _window;
 
@@ -19,15 +15,6 @@ void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
     // Internal error reporting
 }
-
--(void)configureInitialViewHeirarchy {
-    
-    MainScreen *mainScreen = [[MainScreen alloc] init];
-    
-    mainNavController = [[UINavigationController alloc] initWithRootViewController:mainScreen];
-    [mainNavController setNavigationBarHidden:NO];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
@@ -36,8 +23,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    [self configureInitialViewHeirarchy];
-    MainScreen *mainScreen = [[MainScreen alloc] init];
+    MainScreen *mainScreen = [MainScreen sharedInstance];
 
     self.window.rootViewController = mainScreen;
     
@@ -68,6 +54,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForLoggedIntoFacebookNotification object:nil];
     return [FBSession.activeSession handleOpenURL:url];
 }
 
@@ -80,9 +68,7 @@ void uncaughtExceptionHandler(NSException *exception) {
         [FBSession openActiveSessionWithReadPermissions:perms
                                            allowLoginUI:YES
                                       completionHandler:completionBlock];
-    } else {
-        NSLog(@"Not logged into facebook.");
-    }
+    } 
 }
 
 @end

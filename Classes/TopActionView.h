@@ -13,4 +13,6 @@
 @property (nonatomic, assign) BOOL isVisible;
 @property (nonatomic, strong) UIColor *tintColor;
 
+-(void)addFriendsButtonTappedAction;
+
 @end

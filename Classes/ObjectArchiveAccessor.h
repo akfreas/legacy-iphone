@@ -11,7 +11,6 @@
 -(NSArray *)allFigures;
 -(NSArray *)addedPeople;
 -(NSArray *)eventsForFigure:(Figure *)figure;
--(NSArray *)getStoredEventRelations;
 
 -(void)setPrimaryPerson:(Person *)user;
 -(void)addEventAndFigureWithJson:(NSDictionary *)json;
@@ -21,7 +20,6 @@
 -(void)getOrCreatePersonWithFacebookGraphUser:(id<FBGraphUser>)facebookUser completionBlock:(void(^)(Person *thePerson))completionBlock;
 -(void)createAndSetPrimaryUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock;
 
--(void)addPerson:(Person *)person;
 -(void)removePerson:(Person *)person;
 -(void)clearEventsAndFiguresAndSave;
 -(void)save;

@@ -29,13 +29,24 @@
 }
 
 
++(MainScreen *)sharedInstance {
+    static MainScreen *instance;
+    if (instance == nil) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            instance = [[MainScreen alloc] init];
+        });
+    }
+    return instance;
+}
+
 -(id)init {
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertForNoBirthday:) name:KeyForNoBirthdayNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToWikipedia:) name:KeyForWikipediaButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showShareDialog:) name:KeyForFacebookButtonTapped object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
+
         dataSync = [DataSyncUtility sharedInstance];
     }
     return self;
@@ -57,10 +68,8 @@
 
 
 
--(void)showAlertForNoBirthday:(NSNotification *)notification {
+-(void)showAlertForNoBirthday:(Person *)thePerson completion:(void(^)(Person *person))completion cancellation:(void(^)(Person *person))cancellation {
     
-    NSDictionary *userInfo = [notification userInfo];
-    __block Person *thePerson = userInfo[KeyForPersonInBirthdayNotFoundNotification];
     accessor = [ObjectArchiveAccessor sharedInstance];
     AFAlertView *alertView = [[AFAlertView alloc] initWithTitle:@"No Birthday Found"];
     alertView.prompt = [NSString stringWithFormat:@"%@ doesn't have their full birthday listed.  Please correct the date below.", thePerson.firstName];
@@ -102,18 +111,11 @@
         NSLog(@"Chosen date: %@", birthday);
         thePerson.birthday = birthday;
         [accessor save];
-        LegacyAppRequest *updateBirthdayRequest = [LegacyAppRequest requestToUpdateBirthday:birthday forPerson:thePerson];
-        connection = [[LegacyAppConnection alloc] initWithLegacyRequest:updateBirthdayRequest];
-        
-        [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-            NSLog(@"result: %@", result);
-            [dataSync sync:^{}];
-        }];
-        
+        completion(thePerson);
     };
     alertView.rightButtonTitle = @"Cancel";
     alertView.rightButtonActionBlock = ^(NSArray *uiComponents){
-        [accessor removePerson:thePerson];
+        cancellation(thePerson);
     };
     [alertView showInView:self.view];
 }
@@ -194,8 +196,34 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(void)deletePerson:(NSNotification *)notif {
+    
+    Person *personToDelete = notif.userInfo[@"person"];
+    
+    
+    AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"Confirm"];
+    alert.description = [NSString stringWithFormat:@"Are you sure you want to remove %@?", personToDelete.firstName];
+    alert.leftButtonTitle = @"YES";
+    alert.leftButtonActionBlock = ^(NSArray *components){
+        
+        LegacyAppRequest *requestToDelete = [LegacyAppRequest requestToDeletePerson:personToDelete];
+        LegacyAppConnection *delConnection = [[LegacyAppConnection alloc] initWithLegacyRequest:requestToDelete];
+        
+        [delConnection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[ObjectArchiveAccessor sharedInstance] removePerson:personToDelete];
+            });
+        }];
+        
+    };
+    
+    alert.rightButtonTitle = @"NO";
+    
+    [alert showInView:self.view];
+}
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
     
     if ([self shouldSyncNow]) {
         [dataSync sync:NULL];

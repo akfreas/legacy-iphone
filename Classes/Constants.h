@@ -5,7 +5,7 @@
 #define KeyForOverlayViewShown @"OverlayViewShown"
 
 #define KeyForFigureRowContentChanged @"FigureRowContentChanged"
-#define KeyForRowDataUpdated @"RowsUpdated"
+//#define KeyForRowDataUpdated @"RowsUpdated"
 #define KeyForFacebookButtonTapped @"FacebookButtonTapped"
 #define KeyForInfoOverlayButtonTapped @"OverlayInfoButtonTapped"
 #define KeyForAddFriendButtonTapped @"AddFriendButtonTapped"
@@ -14,9 +14,12 @@
 #define KeyForLastDateSynced @"LastDaySynced"
 #define TableViewCellIdentifierForHeader @"HeaderCellIdentifier"
 #define TableViewCellIdentifierForMainCell @"MainTableViewCell"
+#define NoEventErrorKey @"NoEventError"
+#define KeyForLoggedIntoFacebookNotification @"LoggedIntoFacebookNotification"
 #define TopActionViewDefaultTintColor [UIColor colorWithWhite:1 alpha:.85]
 
 #define FigureRowPageInitialHeight 140
+#define NoEventFigureRowHeight 60
 #define FigureRowPageWidth 320
 
 

@@ -4,6 +4,7 @@
 #import "Figure.h"
 #import "ObjectArchiveAccessor.h"
 #import "Utility_AppSettings.h"
+#import "MainScreen.h"
 
 @interface ObjectArchiveAccessor ()
 
@@ -99,10 +100,14 @@ static NSString *PersonEntityName = @"Person";
 }
 
 -(void)save {
-    NSError *error;
-    if([self.managedObjectContext hasChanges]) {
-        [self.managedObjectContext save:&error];
-    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        NSError *error;
+        if([self.managedObjectContext hasChanges]) {
+            [self.managedObjectContext save:&error];
+        }
+    });
 }
 
 #pragma mark Getter Methods
@@ -222,10 +227,6 @@ static NSString *PersonEntityName = @"Person";
     [self save];
 }
 
--(void)addPerson:(Person *)user {
-    [self.managedObjectContext insertObject:user];
-    [self save];
-}
 
 
 -(void)createAndSetPrimaryUser:(id<FBGraphUser>)fbUser completionBlock:(void(^)(Person *thePerson))completionBlock {
@@ -323,8 +324,6 @@ static NSString *PersonEntityName = @"Person";
     newEvent.ageDays = [NSNumber numberWithInt:[json[@"age_days"] intValue]];
     newEvent.eventId = [NSNumber numberWithInt:[json[@"event_id"] intValue]];
     
-    [self save];
-    
     return newEvent;
 }
 
@@ -343,8 +342,6 @@ static NSString *PersonEntityName = @"Person";
         eventFigure.id = json[@"id"];
         
     }
-    
-    [self save];
     
     return eventFigure;
 }
@@ -391,8 +388,6 @@ static NSString *PersonEntityName = @"Person";
         person.lastName = json[@"last_name"];
         person.birthday = [[Utility_AppSettings dateFormatterForRequest] dateFromString:json[@"birthday"]];
         person.isFacebookUser = [NSNumber numberWithBool:YES];
-        [self save];
-        
     }
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:json[@"profile_pic"]]];
     [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *imageData, NSError *error) {
@@ -410,34 +405,43 @@ static NSString *PersonEntityName = @"Person";
 
 -(void)addEventAndFigureRelationWithJson:(NSDictionary *)json {
     
+    NSString *jsonError = json[@"error"];
     
-    NSString *eventId = json[@"event_id"];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", eventId];
-    NSError *error;
-    NSArray *events =  [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    NSEntityDescription *relationEntityDesc = [NSEntityDescription entityForName:@"EventPersonRelation" inManagedObjectContext:self.managedObjectContext];
+    EventPersonRelation *relation = [[EventPersonRelation alloc] initWithEntity:relationEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
+    
     Event *newEvent;
-    if ([events count] < 1) {
+
+    if (jsonError == nil) {
+        NSString *eventId = json[@"event_id"];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", eventId];
+        NSError *error;
+        NSArray *events = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if ([events count] < 1) {
+            
+            newEvent = [self addEventWithJson:json];
+            
+        } else if (eventId != nil) {
+            newEvent = [events lastObject];
+        }
+        NSDictionary *figureJson = json[@"figure"];
+        NSFetchRequest *eventFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
+        eventFetchRequest.predicate = [NSPredicate predicateWithFormat:@"id == %@", figureJson[@"id"]];
+        NSArray *figures = [self.managedObjectContext executeFetchRequest:eventFetchRequest error:&error];
         
-        newEvent = [self addEventWithJson:json];
+        Figure *assocFigure;
         
-    } else {
-        newEvent = [events lastObject];
+        if ([figures count] > 0) {
+            assocFigure = [figures lastObject];
+        } else {
+            assocFigure = [self addFigureWithJson:figureJson];
+        }
+        
+        newEvent.figure = assocFigure;
+        relation.event = newEvent;
     }
-    NSDictionary *figureJson = json[@"figure"];
-    NSFetchRequest *eventFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
-    eventFetchRequest.predicate = [NSPredicate predicateWithFormat:@"id == %@", figureJson[@"id"]];
-    NSArray *figures = [self.managedObjectContext executeFetchRequest:eventFetchRequest error:&error];
-    
-    Figure *assocFigure;
-    
-    if ([figures count] > 0) {
-        assocFigure = [figures lastObject];
-    } else {
-        assocFigure = [self addFigureWithJson:figureJson];
-    }
-    
-    newEvent.figure = assocFigure;
     
     
     NSDictionary *personDict = json[@"person"];
@@ -446,14 +450,18 @@ static NSString *PersonEntityName = @"Person";
         assocPerson = [self personWithJson:personDict];
     }
     
-    NSEntityDescription *relationEntityDesc = [NSEntityDescription entityForName:@"EventPersonRelation"  inManagedObjectContext:self.managedObjectContext];
-    EventPersonRelation *relation = [[EventPersonRelation alloc] initWithEntity:relationEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
     
-    relation.event = newEvent;
     relation.person = assocPerson;
+    if (newEvent == nil) {
+        relation.pinsToTop = [NSNumber numberWithBool:YES];
+    } else  {
+        relation.pinsToTop = [NSNumber numberWithBool:NO];
+    }
     
     
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self save];
+    });
 }
 
 -(Figure *)fetchFigureWithId:(NSNumber *)figureId {
@@ -477,6 +485,7 @@ static NSString *PersonEntityName = @"Person";
 
 -(NSArray *)eventRelationSortDescriptors {
     
+    NSSortDescriptor *nilSorter = [NSSortDescriptor sortDescriptorWithKey:@"pinsToTop" ascending:NO];
     NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
     NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
     NSSortDescriptor *bdaySorter = [NSSortDescriptor sortDescriptorWithKey:@"person.birthday" ascending:NO];
@@ -485,16 +494,7 @@ static NSString *PersonEntityName = @"Person";
     NSSortDescriptor *ageMonthSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageMonths" ascending:YES];
     NSSortDescriptor *ageDaySorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageDays" ascending:YES];
     
-    return @[meSorter, friendSorter, bdaySorter, ageYearSorter, ageMonthSorter, ageDaySorter];
-}
-
--(NSArray *)getStoredEventRelations {
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
-    request.sortDescriptors = [self eventRelationSortDescriptors];
-    NSError *error;
-    NSArray *events = [self.managedObjectContext executeFetchRequest:request error:&error];
-    
-    return events;
+    return @[nilSorter, meSorter, friendSorter, bdaySorter, ageYearSorter, ageMonthSorter, ageDaySorter];
 }
 
 
@@ -522,13 +522,18 @@ static NSString *PersonEntityName = @"Person";
             if (theBirthday == nil) {
                 theBirthday = [[Utility_AppSettings dateFormatterForPartialBirthday] dateFromString:birthdayString];
                 newPerson.birthday = theBirthday;
-                [[NSNotificationCenter defaultCenter] postNotificationName:KeyForNoBirthdayNotification object:nil userInfo:@{KeyForPersonInBirthdayNotFoundNotification : newPerson}];
+                [[MainScreen sharedInstance] showAlertForNoBirthday:newPerson completion:^(Person *person) {
+                    [self save];
+                    completionBlock(newPerson);
+                } cancellation:^(Person *person) {
+                    [self removePerson:person];
+                    [self save];
+                    completionBlock(nil);
+                }];
             } else {
                 newPerson.birthday = theBirthday;
+                completionBlock(newPerson);
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self save];
-            });
             
             NSString *urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=140", fbUser.id];
             
@@ -537,7 +542,6 @@ static NSString *PersonEntityName = @"Person";
                 dispatch_async(dispatch_get_main_queue(), ^{
                     newPerson.thumbnail = data;
                     [self save];
-                    completionBlock(newPerson);
                 });
             }];
         }
@@ -551,13 +555,7 @@ static NSString *PersonEntityName = @"Person";
     for (id user in users) {
         if ([user conformsToProtocol:@protocol(FBGraphUser)]) {
             id<FBGraphUser> fbUser = user;
-            [self getOrCreatePersonWithFacebookGraphUser:fbUser completionBlock:^(Person *person){
-                --userCount;
-                
-                if (userCount == 0) {
-                    completionBlock();
-                }
-            }];
+            [self getOrCreatePersonWithFacebookGraphUser:fbUser completionBlock:completionBlock];
         }
     }
 }
@@ -573,7 +571,7 @@ static NSString *PersonEntityName = @"Person";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
     fetchRequest.sortDescriptors = [self eventRelationSortDescriptors];
     
-    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"pinsToTop" cacheName:nil];
     return resultsController;
 }
 

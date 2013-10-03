@@ -36,7 +36,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 ObjectArchiveAccessor *accessor = [ObjectArchiveAccessor sharedInstance];
                 ourFigure.imageData = data;
-//                [accessor save];
+                [accessor save];
             });
             UIImage *theImage = [UIImage imageWithData:data];
             completion(theImage);

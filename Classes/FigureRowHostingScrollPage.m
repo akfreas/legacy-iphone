@@ -28,6 +28,7 @@
     UIView *headerViewWrapper;
     UIToolbar *toolBar;
     UIView *lineView;
+    UIView *clearView;
 }
 
 static NSString *ReuseID = @"CellReuseId";
@@ -49,8 +50,8 @@ static NSString *ReuseID = @"CellReuseId";
         }
         fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
         fetchController.delegate = self;
+        self.contentOffset = CGPointMake(0, TopActionViewHeight_OS7);
         [fetchController performFetch:NULL];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
     }
     return self;
 }
@@ -73,7 +74,7 @@ static NSString *ReuseID = @"CellReuseId";
     }
 
     headerViewWrapper = [[UIView alloc] initWithFrame:headerWrapperFrame];
-    headerViewWrapper.backgroundColor = [UIColor clearColor];
+    [self addSubview:headerViewWrapper];
 }
 
 -(void)addTopActionView {
@@ -180,7 +181,20 @@ static NSString *ReuseID = @"CellReuseId";
                 break;
         }
     }
+
 }
+
+-(void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [self insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [self deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
 
 #pragma mark UITableView Datasource Methods
 
@@ -199,63 +213,58 @@ static NSString *ReuseID = @"CellReuseId";
 -(void)configureCell:(FigureRowCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
-    
-    cell.event = eventRelation.event;
-    cell.person = eventRelation.person;
+    cell.eventPersonRelation = eventRelation;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if ([[fetchController sections] count] > 0) {
         return [[[fetchController sections] objectAtIndex:section] numberOfObjects];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger numberOfSections = [[fetchController sections] count];
+    return numberOfSections;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0 && [[fetchController sections] count] > 1) {
+        return NoEventFigureRowHeight;
+    } else {
+        return FigureRowPageInitialHeight;
+    }
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    return headerViewWrapper;
+    if (section == 0) {
+        clearView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, headerViewWrapper.frame.size.height)];
+        clearView.backgroundColor = [UIColor clearColor];
+        clearView.tag = 7;
+        return clearView;
+    }
+    return nil;
+}
+
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *ourHit = [super hitTest:point withEvent:event];
+    if (ourHit == clearView) {
+        [actionViewTop addFriendsButtonTappedAction];
+        return actionViewTop;
+    } else {
+        return ourHit;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        return actionViewTopInitialFrame.size.height;
     } else {
         return 0;
     }
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return FigureRowPageInitialHeight;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return headerViewWrapper;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return actionViewTopInitialFrame.size.height;
-}
-
 #pragma mark Notifications
-
--(void)deletePerson:(NSNotification *)notif {
-    
-    Person *personToDelete = notif.userInfo[@"person"];
-        
-        
-        AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"Confirm"];
-        alert.description = [NSString stringWithFormat:@"Are you sure you want to remove %@?", personToDelete.firstName];
-        alert.leftButtonTitle = @"YES";
-        alert.leftButtonActionBlock = ^(NSArray *components){
-            
-            LegacyAppRequest *requestToDelete = [LegacyAppRequest requestToDeletePerson:personToDelete];
-            LegacyAppConnection *delConnection = [[LegacyAppConnection alloc] initWithLegacyRequest:requestToDelete];
-            
-            [delConnection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[ObjectArchiveAccessor sharedInstance] removePerson:personToDelete];
-                });
-            }];
-        
-        };
-        
-        alert.rightButtonTitle = @"NO";
-        
-        [alert showInView:self];
-}
 
 #pragma mark UITableView Delegate Methods
 
@@ -267,6 +276,8 @@ static NSString *ReuseID = @"CellReuseId";
     if (actionViewTop != nil) {
         [self addTopActionForScrollAction:scrollView];
     }
+    
+    headerViewWrapper.frame = CGRectMake(scrollView.contentOffset.x, scrollView.contentOffset.y, headerViewWrapper.frame.size.width, headerViewWrapper.frame.size.height);
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

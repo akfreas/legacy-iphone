@@ -1,9 +1,10 @@
+#import "RowProtocol.h"
 @class Person;
 @class Event;
 
 
 
-@interface FigureRow : UIScrollView <UIScrollViewDelegate>
+@interface FigureRow : UIScrollView <RowProtocol, UIScrollViewDelegate>
 
 
 @property (nonatomic) Event *event;

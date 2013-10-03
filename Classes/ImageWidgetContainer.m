@@ -111,6 +111,13 @@
     
 }
 
+-(void)dealloc {
+    
+    if (_person != nil) {
+        [self removeObserver:self forKeyPath:@"self.person.thumbnail"];
+    }
+}
+
 -(void)expandWidget {
     _widget.expanded = YES;
 }

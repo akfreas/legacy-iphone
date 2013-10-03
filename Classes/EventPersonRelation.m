@@ -1,8 +1,8 @@
 //
 //  EventPersonRelation.m
-//  Legacy
+//  LegacyApp
 //
-//  Created by Alexander Freas on 6/23/13.
+//  Created by Alexander Freas on 10/2/13.
 //
 //
 
@@ -13,8 +13,8 @@
 
 @implementation EventPersonRelation
 
+@dynamic pinsToTop;
 @dynamic event;
 @dynamic person;
-
 
 @end

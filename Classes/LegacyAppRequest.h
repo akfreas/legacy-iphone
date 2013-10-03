@@ -2,7 +2,6 @@
 @class Figure;
 @interface LegacyAppRequest : NSObject
 
-+(LegacyAppRequest *)requestToUpdateBirthday:(NSDate *)birthday forPerson:(Person *)person;
 +(LegacyAppRequest *)requestToGetStoriesForPerson:(Person *)person;
 +(LegacyAppRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person;
 +(LegacyAppRequest *)requestToGetAllEventsForFigure:(Figure *)figure;

@@ -23,6 +23,14 @@
     return self;
 }
 
+-(void)setImage:(UIImage *)image {
+    [(CircleImageLayer *)self.layer setImage:image];
+}
+
+-(void)setRadius:(CGFloat)radius {
+    [(CircleImageLayer *)self.layer setRadius:radius];
+}
+
 -(void)setBorderWidth:(CGFloat)borderWidth {
     [(CircleImageLayer *)self.layer setBorderWidth:borderWidth];
 }

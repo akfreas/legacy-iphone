@@ -127,16 +127,19 @@
 +(LegacyAppRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person {
     
     
-    NSMutableArray *arrayOfUserIds = [NSMutableArray array];
+    NSMutableArray *arrayOfUserInfo = [NSMutableArray array];
     
     for (Person *person in users) {
-        [arrayOfUserIds addObject:person.facebookId];
+        
+        
+        NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
+        [arrayOfUserInfo addObject:@{@"facebook_id" : person.facebookId, @"birthday" : [formatter stringFromDate:person.birthday]}];
     }
     
     LegacyAppRequest *request = [self baseRequestForPerson:person];
     request.urlRequest.URL = [self urlToPostUsers];
     request.urlRequest.HTTPMethod = @"POST";
-    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:arrayOfUserIds options:NSJSONWritingPrettyPrinted error:NULL];
+    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:arrayOfUserInfo options:NSJSONWritingPrettyPrinted error:NULL];
     
     return request;
 }

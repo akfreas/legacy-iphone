@@ -60,6 +60,8 @@ typedef enum ScrollViewDirection {
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToInfoPage) name:@"ScrollToInfo" object:nil];
         }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToLandingPage) name:KeyForLoggedIntoFacebookNotification object:nil];
         [self addPageControl];
         [self addLegacyInfoPage];
         [self addFigurePage];
@@ -70,6 +72,10 @@ typedef enum ScrollViewDirection {
          
 -(void)scrollToInfoPage {
     [self scrollToPage:InfoPageNumber];
+}
+
+-(void)scrollToLandingPage {
+    [self scrollToPage:LandingPageNumber];
 }
 
 -(void)addFigurePage {
@@ -144,7 +150,7 @@ typedef enum ScrollViewDirection {
     pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
     pageControl.numberOfPages = LastPageNumber;
     pageControl.userInteractionEnabled = NO;
-    [self addSubview:pageControl];
+//    [self addSubview:pageControl];
     
 }
 

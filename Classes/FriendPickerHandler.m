@@ -14,10 +14,10 @@
     return (FBModalCompletionHandler)^(FBFriendPickerViewController *sender, BOOL donePressed){
         if (donePressed) {
             accessor = [ObjectArchiveAccessor sharedInstance];
-            __unsafe_unretained typeof(self) weakSelf = self;
             [accessor addFacebookUsers:sender.selection completionBlock:^{
                 [[DataSyncUtility sharedInstance] syncFacebookFriends:^{
-                    [weakSelf useCompletion:sender];
+                    [sender dismissViewControllerAnimated:YES completion:NULL];
+                    [[DataSyncUtility sharedInstance] sync:NULL];
                 }];
 
             }];

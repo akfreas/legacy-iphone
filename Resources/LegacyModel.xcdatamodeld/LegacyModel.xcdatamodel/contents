@@ -9,6 +9,7 @@
         <relationship name="figure" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Figure" inverseName="events" inverseEntity="Figure" syncable="YES"/>
     </entity>
     <entity name="EventPersonRelation" representedClassName="EventPersonRelation" syncable="YES">
+        <attribute name="pinsToTop" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="event" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Event" syncable="YES"/>
         <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="eventRelation" inverseEntity="Person" syncable="YES"/>
     </entity>
@@ -31,7 +32,7 @@
     </entity>
     <elements>
         <element name="Event" positionX="214" positionY="234" width="128" height="135"/>
-        <element name="EventPersonRelation" positionX="268" positionY="27" width="128" height="73"/>
+        <element name="EventPersonRelation" positionX="268" positionY="27" width="128" height="101"/>
         <element name="Figure" positionX="441" positionY="233" width="128" height="118"/>
         <element name="Person" positionX="0" positionY="0" width="128" height="163"/>
     </elements>

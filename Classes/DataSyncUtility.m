@@ -68,7 +68,6 @@
     
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
         
-        
         if (completionBlock != NULL) {
             completionBlock();
         }
@@ -82,7 +81,6 @@
     }
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForRowDataUpdated object:nil];
         if (completion != NULL) {
             completion();
         }

@@ -1,7 +1,6 @@
-@class Event;
-@class Person;
+@class EventPersonRelation;
 @interface FigureRowCell : UITableViewCell
 
-@property (nonatomic) Event *event;
-@property (nonatomic) Person *person;
+@property (weak, nonatomic) EventPersonRelation *eventPersonRelation;
+@property (nonatomic, readonly) CGFloat height;
 @end

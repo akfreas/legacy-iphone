@@ -11,6 +11,7 @@
 #define KeyForAddFriendButtonTapped @"AddFriendButtonTapped"
 #define KeyForPersonThumbnailUpdated @"PersonThumbnailUpdated"
 #define KeyForUserHasAuthenticatedWithFacebook @"HasAuthenticatedWithFacebook"
+#define KeyForHasBeenShownSwipeMessage @"HasShownSwipeMessage"
 #define KeyForLastDateSynced @"LastDaySynced"
 #define TableViewCellIdentifierForHeader @"HeaderCellIdentifier"
 #define TableViewCellIdentifierForMainCell @"MainTableViewCell"

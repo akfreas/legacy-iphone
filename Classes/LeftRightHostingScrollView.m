@@ -230,7 +230,7 @@ typedef enum ScrollViewDirection {
     [self setScrollViewDirection];
     [self notifyVisiblePage];
     if (scrollView.contentOffset.x > self.bounds.size.width * 2) {
-        pageControl.frame = CGRectMake(scrollView.contentOffset.x + (self.bounds.size.width / 2 - (20 * 4) / 2), pageControl.frame.origin.y, pageControl.frame.size.width, pageControl.frame.size.height);
+        pageControl.frame = CGRectMake (scrollView.contentOffset.x + (self.bounds.size.width / 2 - (20 * 4) / 2), pageControl.frame.origin.y, pageControl.frame.size.width, pageControl.frame.size.height);
         if (pageControl.alpha != 1) {
             [UIView animateWithDuration:0.2 animations:^{
                 pageControl.alpha = 1;
@@ -293,9 +293,9 @@ typedef enum ScrollViewDirection {
         destinationPoint = pagePoint;
         paginationInProgress = YES;
         self.scrollEnabled = NO;
+        pageControl.currentPage = page;
         [self setContentOffset:pagePoint animated:YES];
         departurePoint = pagePoint;
-        pageControl.currentPage = page;
     }
 }
 

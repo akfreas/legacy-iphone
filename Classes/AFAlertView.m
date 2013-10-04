@@ -1,4 +1,5 @@
 #import "AFAlertView.h"
+#import "CircleImageView.h"
 #define PADDING 10
 
 @implementation AFAlertView {
@@ -8,9 +9,11 @@
     IBOutlet UITextView *descriptionTextView;
     IBOutlet UILabel *titleLabel;
     IBOutlet UILabel *promptLabel;
-    
+    CircleImageView *leftCircle;
+    CircleImageView *rightCircle;
     IBOutlet UIView *view;
     IBOutlet UIView *alertDialogView;
+    IBOutlet UIView *buttonHostingView;
     
     
     UIView *superView;
@@ -73,11 +76,18 @@
         leftButton.backgroundColor = [UIColor clearColor];
         UIEdgeInsets insets = UIEdgeInsetsMake(0, 20, 0, 20);
 
-        [leftButton setBackgroundImage:[[UIImage imageNamed:@"button.png"] resizableImageWithCapInsets:insets]
-                              forState:UIControlStateNormal];
-        
-        [leftButton setBackgroundImage:[[UIImage imageNamed:@"button-pressed.png"] resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
+//        [leftButton setBackgroundImage:[[UIImage imageNamed:@"button.png"] resizableImageWithCapInsets:insets]
+//                              forState:UIControlStateNormal];
+//        
+//        [leftButton setBackgroundImage:[[UIImage imageNamed:@"button-pressed.png"] resizableImageWithCapInsets:insets] forState:UIControlStateNormal];
         leftButton.titleLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:17];
+        
+        leftCircle = [[CircleImageView alloc]  initWithImage:nil radius:30];
+        leftCircle.frame = CGRectMakeFrameForDeadCenterInRect(leftButton.frame, leftCircle.frame.size);
+        leftButton.frame = CGRectMakeFrameForDeadCenterInRect(leftCircle.frame, leftButton.frame.size);
+        [leftButton removeFromSuperview];
+        [leftCircle addSubview:leftButton];
+        [buttonHostingView addSubview:leftCircle];
     }
 }
 
@@ -90,10 +100,10 @@
         [rightButton setTitle:self.rightButtonTitle forState:UIControlStateNormal];
         rightButton.backgroundColor = [UIColor clearColor];
         
-        [rightButton setBackgroundImage:[[UIImage imageNamed:@"button.png"] stretchableImageWithLeftCapWidth:15
-                                                                                                  topCapHeight:15] forState:UIControlStateNormal];
-        
-        [rightButton setBackgroundImage:[[UIImage imageNamed:@"button-pressed.png"] stretchableImageWithLeftCapWidth:5                                                                                                        topCapHeight:20] forState:UIControlStateHighlighted];
+//        [rightButton setBackgroundImage:[[UIImage imageNamed:@"button.png"] stretchableImageWithLeftCapWidth:15
+//                                                                                                  topCapHeight:15] forState:UIControlStateNormal];
+//        
+//        [rightButton setBackgroundImage:[[UIImage imageNamed:@"button-pressed.png"] stretchableImageWithLeftCapWidth:5                                                                                                        topCapHeight:20] forState:UIControlStateHighlighted];
         rightButton.titleLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:17];
     }
 }

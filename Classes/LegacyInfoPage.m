@@ -3,8 +3,8 @@
 
 @implementation LegacyInfoPage {
     
-    IBOutlet UISwitch *notificationSwitch;
     IBOutlet FacebookSignInButton *facebookButton;
+    IBOutlet UILabel *pushNotificationLabel;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -12,23 +12,24 @@
     self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.class) owner:nil options:nil][0];
     if (self) {
         self.frame = frame;
-        [self checkIfPushEnabledAndFlipSwitch];
+        pushNotificationLabel.font = [UIFont fontWithName:@"Cinzel-Regular" size:16.0f];
+//        [self checkIfPushEnabledAndFlipSwitch];
         [self removeFacebookButtonIfAuthorized];
     }
     return self;
 }
 
--(void)checkIfPushEnabledAndFlipSwitch {
-    
-    UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    
-    if (types == UIRemoteNotificationTypeNone) {
-        notificationSwitch.on = NO;
-    } else {
-        notificationSwitch.on = YES;
-    }
-    
-}
+//-(void)checkIfPushEnabledAndFlipSwitch {
+//    
+//    UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+//    
+//    if (types == UIRemoteNotificationTypeNone) {
+//        notificationSwitch.on = NO;
+//    } else {
+//        notificationSwitch.on = YES;
+//    }
+//    
+//}
 
 -(void)removeFacebookButtonIfAuthorized {
     if ([FBSession activeSession].state != FBSessionStateCreatedTokenLoaded) {

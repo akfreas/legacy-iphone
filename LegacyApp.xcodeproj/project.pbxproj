@@ -84,7 +84,7 @@
 		19BDFDC417FBE99800B415C1 /* EventPersonRelation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */; };
 		19BDFDC817FD157A00B415C1 /* legacy-fb-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDC717FD157A00B415C1 /* legacy-fb-button.png */; };
 		19BDFDCA17FD1E0500B415C1 /* left-right-swipe-message.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDC917FD1E0500B415C1 /* left-right-swipe-message.png */; };
-		19BDFDCC17FD1E8500B415C1 /* SwipeMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDCB17FD1E8500B415C1 /* SwipeMessage.xib */; };
+		19BDFDCC17FD1E8500B415C1 /* SwipeMessage_OS7.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDCB17FD1E8500B415C1 /* SwipeMessage_OS7.xib */; };
 		19BDFDCF17FD1EA200B415C1 /* SwipeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDCE17FD1EA200B415C1 /* SwipeMessage.m */; };
 		19BDFDD217FD3A8100B415C1 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDD117FD3A8100B415C1 /* AMBlurView.m */; };
 		19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EA716CA2BA400304AD6 /* AFAlertView.m */; };
@@ -240,7 +240,7 @@
 		19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventPersonRelation.m; sourceTree = "<group>"; };
 		19BDFDC717FD157A00B415C1 /* legacy-fb-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-fb-button.png"; sourceTree = "<group>"; };
 		19BDFDC917FD1E0500B415C1 /* left-right-swipe-message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message.png"; sourceTree = "<group>"; };
-		19BDFDCB17FD1E8500B415C1 /* SwipeMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwipeMessage.xib; path = Resources/SwipeMessage.xib; sourceTree = SOURCE_ROOT; };
+		19BDFDCB17FD1E8500B415C1 /* SwipeMessage_OS7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwipeMessage_OS7.xib; path = Resources/SwipeMessage_OS7.xib; sourceTree = SOURCE_ROOT; };
 		19BDFDCD17FD1EA200B415C1 /* SwipeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeMessage.h; sourceTree = "<group>"; };
 		19BDFDCE17FD1EA200B415C1 /* SwipeMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeMessage.m; sourceTree = "<group>"; };
 		19BDFDD017FD3A8100B415C1 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
@@ -528,7 +528,7 @@
 				199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */,
 				19BDFDCD17FD1EA200B415C1 /* SwipeMessage.h */,
 				19BDFDCE17FD1EA200B415C1 /* SwipeMessage.m */,
-				19BDFDCB17FD1E8500B415C1 /* SwipeMessage.xib */,
+				19BDFDCB17FD1E8500B415C1 /* SwipeMessage_OS7.xib */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19D61CD016B250E100C81E60 /* FriendTableViewController.h */,
@@ -670,7 +670,7 @@
 				191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */,
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
 				191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */,
-				19BDFDCC17FD1E8500B415C1 /* SwipeMessage.xib in Resources */,
+				19BDFDCC17FD1E8500B415C1 /* SwipeMessage_OS7.xib in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
 				191866FD16D4373500220A42 /* MainScreen.xib in Resources */,

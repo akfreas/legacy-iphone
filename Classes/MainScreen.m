@@ -14,6 +14,7 @@
 #import "LegacyAppRequest.h"
 #import "DataSyncUtility.h"
 #import "FacebookUtils.h"
+#import "SwipeMessage.h"
 
 
 @implementation MainScreen {
@@ -24,6 +25,7 @@
     FBFriendPickerViewController *friendPicker;
     IBOutlet LeftRightHostingScrollView *infoScreen;
     LegacyAppConnection *connection;
+    SwipeMessage *swipeMessage;
     
     __unsafe_unretained DataSyncUtility *dataSync;
 }
@@ -222,12 +224,27 @@
     [alert showInView:self.view];
 }
 
--(void)viewDidLoad {
-    [super viewDidLoad];
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     
     if ([self shouldSyncNow]) {
         [dataSync sync:NULL];
     }
+    
+    
+    
+    BOOL hasBeenShownSwipeMessage = NO;// [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
+    if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
+        swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
+//        [swipeMessage show];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyForHasBeenShownSwipeMessage];
+    }
+}
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    
 }
 
 

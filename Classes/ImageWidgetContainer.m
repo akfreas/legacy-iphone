@@ -66,8 +66,8 @@
     if (self.event == nil) {
         
     } else {
-            personThumbnail.image = imageForThumb;
-            _widget.largeImage = personThumbnail.image;
+        personThumbnail.image = imageForThumb;
+        _widget.largeImage = personThumbnail.image;
     }
 }
 
@@ -89,6 +89,10 @@
 -(void)setEvent:(Event *)event {
     _event = event;
     
+    imageForThumb = nil;
+    personThumbnail.image = nil;
+    _widget.largeImage = nil;
+    progressIndicator.hidden = YES;
     if (_event == nil) {
     } else {
         [self getFigureThumbnailImage];

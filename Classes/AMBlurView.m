@@ -56,6 +56,10 @@
     [self.toolbar setBarTintColor:blurTintColor];
 }
 
+-(void)setTintColor:(UIColor *)tintColor {
+    self.toolbar.tintColor = tintColor;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.toolbar setFrame:[self bounds]];

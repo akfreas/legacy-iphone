@@ -67,6 +67,7 @@
 		1967B96E1804B8440092766D /* chevron-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96B1804B8440092766D /* chevron-left@2x.png */; };
 		1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96C1804B8440092766D /* chevron-right@2x.png */; };
 		1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */; };
+		1967B9721804C3610092766D /* SwipeMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1967B9711804C3610092766D /* SwipeMessage.xib */; };
 		197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */; };
 		197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305EA17C5B66A00958D15 /* EventInfoTableView.m */; };
 		197305EE17C5C41500958D15 /* EventInfoTimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305ED17C5C41500958D15 /* EventInfoTimelineCell.m */; };
@@ -218,6 +219,7 @@
 		1967B96B1804B8440092766D /* chevron-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-left@2x.png"; sourceTree = "<group>"; };
 		1967B96C1804B8440092766D /* chevron-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-right@2x.png"; sourceTree = "<group>"; };
 		1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message@2x.png"; sourceTree = "<group>"; };
+		1967B9711804C3610092766D /* SwipeMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwipeMessage.xib; path = Resources/SwipeMessage.xib; sourceTree = SOURCE_ROOT; };
 		197305E617C5B32D00958D15 /* EventInfoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoHeaderCell.h; sourceTree = "<group>"; };
 		197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoHeaderCell.m; sourceTree = "<group>"; };
 		197305E917C5B66A00958D15 /* EventInfoTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoTableView.h; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				19BDFDCB17FD1E8500B415C1 /* SwipeMessage_OS7.xib */,
 				1967B95F18048ED90092766D /* SwipeMessage.xib */,
 				1967B9651804A85C0092766D /* SwipeMessage_OS7.xib */,
+				1967B9711804C3610092766D /* SwipeMessage.xib */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */,
@@ -704,6 +707,7 @@
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
 				1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */,
 				191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */,
+				1967B9721804C3610092766D /* SwipeMessage.xib in Resources */,
 				1967B963180491B60092766D /* chevron-arrow@2x.png in Resources */,
 				1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */,
 				19BDFDCC17FD1E8500B415C1 /* SwipeMessage_OS7.xib in Resources */,
@@ -885,8 +889,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Freas";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (397NMKG2NM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Dependencies\\\"",
@@ -921,8 +925,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Freas";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Freas (397NMKG2NM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Dependencies\\\"",
@@ -946,8 +950,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90220C05-ECD6-4EF8-A256-F13475C917D5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "90220C05-ECD6-4EF8-A256-F13475C917D5";
+				PROVISIONING_PROFILE = "E5CD1C33-77C8-4A11-913F-823EB738CF4E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5CD1C33-77C8-4A11-913F-823EB738CF4E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

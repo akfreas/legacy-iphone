@@ -47,13 +47,21 @@ CGFloat InfoPageWidth = 280;
     self = [super init];
     
     if (self) {
+        
+        
+        topToolbar = 0;
+        if(SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            topToolbar = 20;
+        }
         superView = view;
         
+        [[NSBundle mainBundle] loadNibNamed:@"SwipeMessage_OS7" owner:self options:nil];
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-            [[NSBundle mainBundle] loadNibNamed:@"SwipeMessage_OS7" owner:self options:nil];
             [hostingBlurView setValue:[UIColor colorWithWhite:1 alpha:.1] forKey:@"blurTintColor"];
         } else {
-            [[NSBundle mainBundle] loadNibNamed:@"SwipeMessage" owner:self options:nil];
+            hostingBlurView.tintColor = [UIColor colorWithWhite:1 alpha:0.6f];
+            hostingBlurView.backgroundColor = [UIColor clearColor];
+//            [[NSBundle mainBundle] loadNibNamed:@"SwipeMessage" owner:self options:nil];
         }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFigureRowCellFromNotif:) name:KeyForFigureRowTransportNotification object:nil];
         
@@ -128,7 +136,7 @@ CGFloat InfoPageWidth = 280;
 }
 
 -(void)cleanUpFromThirdStep {
-    superView.frame = CGRectSetOriginOnRect(superView.frame, 0, 0);
+    superView.frame = CGRectSetOriginOnRect(superView.frame, 0, topToolbar);
     [self removeWebviewAnnotationView];
 }
 
@@ -264,10 +272,11 @@ CGFloat InfoPageWidth = 280;
 
 -(void)addWebviewAnnotationView {
     
+    
     webviewAnnotationHostingView.alpha = 0;
-    superView.frame = CGRectSetOriginOnRect(superView.frame, superView.frame.origin.x, webviewAnnotationHostingView.frame.size.height - 44);
+    superView.frame = CGRectSetOriginOnRect(superView.frame, superView.frame.origin.x, webviewAnnotationHostingView.frame.size.height - 44 + topToolbar);
     [superView addSubview:webviewAnnotationHostingView];
-    webviewAnnotationHostingView.frame = CGRectSetOriginOnRect(webviewAnnotationHostingView.frame, superView.frame.size.width, -webviewAnnotationHostingView.frame.size.height);
+    webviewAnnotationHostingView.frame = CGRectSetOriginOnRect(webviewAnnotationHostingView.frame, superView.frame.size.width, -webviewAnnotationHostingView.frame.size.height / 2 + topToolbar);
     [UIView animateWithDuration:0.5f animations:^{
         webviewAnnotationHostingView.frame = CGRectSetOriginOnRect(webviewAnnotationHostingView.frame, 0, -webviewAnnotationHostingView.frame.size.height + 44); //TODO: this is a hack.
         webviewAnnotationHostingView.alpha = 1;

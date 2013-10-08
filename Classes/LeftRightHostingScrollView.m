@@ -60,7 +60,7 @@ typedef enum ScrollViewDirection {
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToInfoPage) name:@"ScrollToInfo" object:nil];
         }
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPageWithNotif:) name:KeyForScrollToPageNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToLandingPage) name:KeyForLoggedIntoFacebookNotification object:nil];
         [self addPageControl];
         [self addLegacyInfoPage];
@@ -173,6 +173,8 @@ typedef enum ScrollViewDirection {
         paginationInProgress = NO;
         self.scrollEnabled = YES;
         UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:pageControl.currentPage];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForHasScrolledToPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [page class]}];
         if ([page isKindOfClass:[EventInfoTableView class]] && pageControl.currentPage == [pageArray count] - 1) {
             
             LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
@@ -280,6 +282,13 @@ typedef enum ScrollViewDirection {
 }
 
 
+-(void)scrollToPageWithNotif:(NSNotification *)notif {
+    
+    NSNumber *page = notif.userInfo[KeyForPageNumberInUserInfo];
+    
+    [self scrollToPage:[page integerValue]];
+}
+
 -(void)scrollToPage:(NSInteger)page {
     
     if (pageControl.currentPage != page) {
@@ -287,7 +296,7 @@ typedef enum ScrollViewDirection {
         
         NSDictionary *params = @{@"from_page": [NSNumber numberWithInteger:pageControl.currentPage], @"to_page" : [NSNumber numberWithInteger:page]};
         [Flurry logEvent:@"page_movement" withParameters:params];
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForScrollingFromPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [[pageArray objectAtIndex:pageControl.currentPage] class]}];
         CGPoint pagePoint = [self frameAtIndex:page].origin;
         departurePoint = [self frameAtIndex:pageControl.currentPage].origin;
         destinationPoint = pagePoint;

@@ -48,6 +48,7 @@
     
     addFriendsButton = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"add-friends-button.png"] radius:buttonRadii];
     addFriendsButton.frame = CGRectMake(self.frame.size.width - buttonRadii*2 - TopBarLeftMargin, yButtonOrigin, addFriendsButton.frame.size.height, addFriendsButton.frame.size.width);
+    addFriendsButton.tag = 8;
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addFriendsButtonTappedAction)];
     [addFriendsButton addGestureRecognizer:gesture];
     [self addSubview:addFriendsButton];

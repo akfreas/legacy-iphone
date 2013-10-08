@@ -74,7 +74,7 @@
         
         
         leftButton.backgroundColor = [UIColor clearColor];
-        UIEdgeInsets insets = UIEdgeInsetsMake(0, 20, 0, 20);
+//        UIEdgeInsets insets = UIEdgeInsetsMake(0, 20, 0, 20);
 
 //        [leftButton setBackgroundImage:[[UIImage imageNamed:@"button.png"] resizableImageWithCapInsets:insets]
 //                              forState:UIControlStateNormal];
@@ -104,7 +104,15 @@
 //                                                                                                  topCapHeight:15] forState:UIControlStateNormal];
 //        
 //        [rightButton setBackgroundImage:[[UIImage imageNamed:@"button-pressed.png"] stretchableImageWithLeftCapWidth:5                                                                                                        topCapHeight:20] forState:UIControlStateHighlighted];
+        
         rightButton.titleLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:17];
+        
+        rightCircle = [[CircleImageView alloc]  initWithImage:nil radius:30];
+        rightCircle.frame = CGRectSetOriginOnRect(rightCircle.frame, rightButton.frame.origin.x, leftButton.frame.origin.y);
+        rightButton.frame = CGRectMakeFrameForDeadCenterInRect(rightCircle.frame, rightButton.frame.size);
+        [rightButton removeFromSuperview];
+        [rightCircle addSubview:rightButton];
+        [buttonHostingView addSubview:rightCircle];
     }
 }
 

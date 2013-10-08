@@ -38,6 +38,7 @@
     
     FigureRow *exampleRow;
     UIView *exampleRowBackground;
+    CGFloat topToolbar;
 }
 
 CGFloat InfoPageWidth = 280;

@@ -27,6 +27,7 @@
     UIView *nameContainerView;
     
     UISwipeGestureRecognizer *swipeGesture;
+    UITapGestureRecognizer *tapGesture;
     CGPoint lastPoint;
     BOOL isSwiping;
 }
@@ -88,14 +89,15 @@ CGFloat pageWidth = 320;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollToInfo" object:nil];
 }
 
+
 -(void)addTapGestureRecognizer {
 
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
     swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(beginSwiping:)];
     swipeGesture.delegate = self;
     swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
     [self addGestureRecognizer:swipeGesture];
-    [self addGestureRecognizer:gesture];
+    [self addGestureRecognizer:tapGesture];
 }
 
 
@@ -200,6 +202,15 @@ CGFloat pageWidth = 320;
         [self addActionOverlay];
     } else {
         [self removeActionOverlay];
+    }
+}
+
+-(void)setAllowsSelection:(BOOL)allowsSelection {
+    if (allowsSelection) {
+        [self addTapGestureRecognizer];
+    } else {
+        [tapGesture removeTarget:self action:NULL];
+        [swipeGesture removeTarget:self action:NULL];
     }
 }
 

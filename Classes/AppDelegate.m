@@ -24,9 +24,10 @@ void uncaughtExceptionHandler(NSException *exception) {
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     MainScreen *mainScreen = [MainScreen sharedInstance];
-
+    [UIDevice currentDevice];
     self.window.rootViewController = mainScreen;
     
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -80,6 +80,7 @@ static NSString *ReuseID = @"CellReuseId";
 -(void)addTopActionView {
     
     
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
     if (actionViewTop == nil) {
         
         CGRect actionViewTopFrame;
@@ -87,7 +88,10 @@ static NSString *ReuseID = @"CellReuseId";
             actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight_non_OS7, self.bounds.size.width, TopActionViewHeight_non_OS7);
             actionViewTopFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_non_OS7);
         } else {
+            [headerViewWrapper.layer insertSublayer:toolBar.layer below:actionViewTop.layer];
             actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight_OS7, self.bounds.size.width, TopActionViewHeight_OS7);
+            [toolBar setBarTintColor:[UIColor colorWithWhite:1 alpha:.85]];
+
             actionViewTopFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_OS7);
         }
         actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopFrame];
@@ -96,9 +100,6 @@ static NSString *ReuseID = @"CellReuseId";
     }
     
     
-    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-    [toolBar setBarTintColor:[UIColor colorWithWhite:1 alpha:.85]];
-    [headerViewWrapper.layer insertSublayer:toolBar.layer below:actionViewTop.layer];
 }
 
 
@@ -156,6 +157,18 @@ static NSString *ReuseID = @"CellReuseId";
 
 }
 
+-(void)notifyWithFigureRowData:(EventPersonRelation *)relation point:(CGPoint)origin {
+    
+    
+    BOOL hasBeenShownSwipeMessage = NO;// [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
+    if (hasBeenShownSwipeMessage == NO) {
+        
+
+        NSDictionary *figureRowInfo = @{@"event_person_relation": relation, @"row_origin" : [NSValue valueWithCGPoint:origin]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowTransportNotification object:nil userInfo:figureRowInfo];
+    }
+}
+
 #pragma mark NSFetchedResultsController Delegate Methods
 
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -164,6 +177,14 @@ static NSString *ReuseID = @"CellReuseId";
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self endUpdates];
+    
+    
+    if ([[[fetchController sections] objectAtIndex:[[fetchController sections] count] - 1] numberOfObjects] > 0) {
+        NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:[self numberOfSections] - 1];
+        EventPersonRelation *relation = [fetchController objectAtIndexPath:path];
+        UITableViewCell *cell = [self cellForRowAtIndexPath:path];
+        [self notifyWithFigureRowData:relation point:cell.frame.origin];
+    }
 }
 
 -(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {

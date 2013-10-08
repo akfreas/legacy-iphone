@@ -17,6 +17,12 @@
 #define TableViewCellIdentifierForMainCell @"MainTableViewCell"
 #define NoEventErrorKey @"NoEventError"
 #define KeyForLoggedIntoFacebookNotification @"LoggedIntoFacebookNotification"
+#define KeyForFigureRowTransportNotification @"FigureRowIncoming"
+#define KeyForScrollToPageNotification @"ScrollToPageNotification"
+#define KeyForPageNumberInUserInfo @"PageNumber"
+#define KeyForPageTypeInUserInfo @"PageType"
+#define KeyForHasScrolledToPageNotification @"HasScrolledToPage"
+#define KeyForScrollingFromPageNotification @"ScrollingFromPage"
 #define TopActionViewDefaultTintColor [UIColor colorWithWhite:1 alpha:.85]
 
 #define FigureRowPageInitialHeight 140
@@ -40,16 +46,18 @@
 #define RelatedEventsLabelHeight 85
 #define RelatedEventsLabelWidth 300
 
+#define EventInfoHeaderCellHeight 200
+
 
 #define MoreCloseButtonHeight 20
 #define MoreCloseButtonWidth 100
 #define MoreCloseButtonCornerRadius 7.0
 
 
-#define EventDescriptionX 10
-#define EventDescriptionY 185
-#define EventDescriptionHeight 60
-#define EventDescriptionWidth 300
+//#define EventDescriptionX 10
+//#define EventDescriptionY 185
+//#define EventDescriptionHeight 60
+//#define EventDescriptionWidth 300
 
 #define LargeImageWidgetExpandedRadius 40
 

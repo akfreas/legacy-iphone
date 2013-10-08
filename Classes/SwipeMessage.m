@@ -146,7 +146,7 @@ CGFloat InfoPageWidth = 280;
             [view removeFromSuperview];
         }
     }];
-    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyForHasBeenShownSwipeMessage];
     [swipeGestureRecognizer removeTarget:self action:NULL];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

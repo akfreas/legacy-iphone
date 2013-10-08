@@ -234,11 +234,10 @@
     
     
     
-    BOOL hasBeenShownSwipeMessage = NO;// [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
+    BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
     if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
         swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
-//        [swipeMessage show];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyForHasBeenShownSwipeMessage];
+        [swipeMessage show];
     }
 }
 

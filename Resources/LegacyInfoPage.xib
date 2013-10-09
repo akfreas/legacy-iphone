@@ -30,26 +30,32 @@
                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" usesAttributedText="YES" id="0dX-59-Hhr">
-                    <rect key="frame" x="31" y="289" width="258" height="128"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QkT-JX-ex0">
+                    <rect key="frame" x="79" y="358" width="163" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Leave us some quick feedback!">
-                            <attributes>
-                                <font key="NSFont" size="16" name="Cochin-Bold"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
-                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                </textView>
+                    <fontDescription key="fontDescription" name="Cochin-Bold" family="Cochin" pointSize="18"/>
+                    <state key="normal" title="Drop a line!">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="sendMessageButton:" destination="1" eventType="touchUpInside" id="aFk-6T-bqJ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fwr-cm-a9s">
+                    <rect key="frame" x="20" y="264" width="300" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <string key="text">We are currently in the process of developing and improving this app.  
+Your feedback is encouraged!</string>
+                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="facebookButton" destination="32" id="33"/>
+                <outlet property="sendMailButton" destination="QkT-JX-ex0" id="V6o-7F-SQk"/>
             </connections>
         </view>
     </objects>

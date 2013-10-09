@@ -29,6 +29,8 @@
     UIToolbar *toolBar;
     UIView *lineView;
     UIView *clearView;
+    
+    BOOL hasPostedCell;
 }
 
 static NSString *ReuseID = @"CellReuseId";
@@ -45,6 +47,7 @@ static NSString *ReuseID = @"CellReuseId";
         self.delegate = self;
         self.dataSource = self;
         self.bounces = NO;
+        hasPostedCell = NO;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         }
@@ -179,13 +182,10 @@ static NSString *ReuseID = @"CellReuseId";
     [self endUpdates];
     
     
-    if ([[[fetchController sections] objectAtIndex:[[fetchController sections] count] - 1] numberOfObjects] > 0) {
-        NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:[self numberOfSections] - 1];
-        EventPersonRelation *relation = [fetchController objectAtIndexPath:path];
-        UITableViewCell *cell = [self cellForRowAtIndexPath:path];
-        [self notifyWithFigureRowData:relation point:cell.frame.origin];
-    }
 }
+
+
+
 
 -(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
@@ -227,7 +227,22 @@ static NSString *ReuseID = @"CellReuseId";
         cell = [[FigureRowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseID];
     }
     [self configureCell:cell atIndexPath:indexPath];
+    
+    if (hasPostedCell == NO && indexPath.row == 2) {
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        EventPersonRelation *relation = [fetchController objectAtIndexPath:indexPath];
+        UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+        [cell addObserver:self forKeyPath:@"cell.frame" options:NSKeyValueObservingOptionNew context:nil];
+        [self notifyWithFigureRowData:relation point:cell.frame.origin] ;
+        hasPostedCell = YES;
+    }
+    
+
     return cell;
+    
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
 }
 
@@ -333,7 +348,7 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(void)scrollCompleted {
-    
+
 }
 
 @end

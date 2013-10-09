@@ -1,10 +1,13 @@
 #import "LegacyInfoPage.h"
 #import "FacebookSignInButton.h"
 
+#import <MessageUI/MessageUI.h>
+
 @implementation LegacyInfoPage {
     
     IBOutlet FacebookSignInButton *facebookButton;
     IBOutlet UILabel *pushNotificationLabel;
+    IBOutlet UIButton *sendMailButton;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -13,6 +16,9 @@
     if (self) {
         self.frame = frame;
         pushNotificationLabel.font = [UIFont fontWithName:@"Cinzel-Regular" size:16.0f];
+        if ([MFMailComposeViewController canSendMail] == NO) {
+            sendMailButton.hidden = YES;
+        }
 //        [self checkIfPushEnabledAndFlipSwitch];
         [self removeFacebookButtonIfAuthorized];
     }
@@ -39,7 +45,12 @@
     }
 }
 
+
 #pragma mark IBActions
+
+-(IBAction)sendMessageButton:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMail" object:nil];
+}
 
 -(IBAction)notificationSwitch:(UISwitch *)theSwitch {
     

@@ -16,6 +16,11 @@
 #import "FacebookUtils.h"
 #import "SwipeMessage.h"
 
+#import <MessageUI/MessageUI.h>
+
+@interface MainScreen ()  <MFMailComposeViewControllerDelegate>
+
+@end
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
@@ -48,7 +53,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showShareDialog:) name:KeyForFacebookButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
-
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFigureRowCellFromNotif:) name:KeyForFigureRowTransportNotification object:nil];
+        
         dataSync = [DataSyncUtility sharedInstance];
     }
     return self;
@@ -57,11 +64,11 @@
 -(void)showShareDialog:(NSNotification *)notif {
     
     Event *event = notif.userInfo[@"event"];
-    NSString *eventAgeString = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
-    
+    NSString *eventAgeString = [NSString stringWithFormat:@"@%@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
+    NSString *eventDescriptionString = [NSString stringWithFormat:@"%@: %@", eventAgeString, event.eventDescription];
     NSString *nameWithUnderscores = [event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     NSURL *wikipediaUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
-    [FBDialogs presentShareDialogWithLink:wikipediaUrl name:event.figure.name caption:eventAgeString description:event.eventDescription picture:[NSURL URLWithString:event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+    [FBDialogs presentShareDialogWithLink:wikipediaUrl name:event.figure.name caption:eventAgeString description:eventDescriptionString picture:[NSURL URLWithString:event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
         
     }];
     
@@ -224,6 +231,39 @@
     [alert showInView:self.view];
 }
 
+-(void)addFigureRowCellFromNotif:(NSNotification *)notif {
+    
+      EventPersonRelation *rowData = notif.userInfo[@"event_person_relation"];
+      CGPoint rowLocation = [notif.userInfo[@"row_origin"] CGPointValue];
+    [swipeMessage setEventRelation:rowData cellOrigin:rowLocation];
+}
+
+
+- (NSString *)applicationDocumentsDirectory {
+	
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
+-(void)presentMailMessage {
+    MFMailComposeViewController *composeController = [[MFMailComposeViewController alloc] init];
+    [composeController setSubject:@"Hello!"];
+    [composeController setToRecipients:@[@"apps@sashimiblade.com"]];
+    
+    NSURL *dbPath = [NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"Legacy.sqlite"]];
+    NSData *data = [NSData dataWithContentsOfURL:dbPath];
+    [composeController addAttachmentData:data mimeType:@"application/x-legacyapp-data" fileName:@"legacy-database"];
+    composeController.mailComposeDelegate = self;
+    [self presentViewController:composeController animated:YES completion:NULL];
+    
+}
+#pragma mark Mail Compose Delegate
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -232,11 +272,7 @@
         [dataSync sync:NULL];
     }
     
-    
-    
-    BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
-    if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
-        swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
+    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO) {
         [swipeMessage show];
     }
 }
@@ -244,6 +280,10 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
+    if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
+        swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
+    }
 }
 
 

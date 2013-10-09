@@ -64,8 +64,6 @@ CGFloat InfoPageWidth = 280;
             hostingBlurView.backgroundColor = [UIColor clearColor];
 //            [[NSBundle mainBundle] loadNibNamed:@"SwipeMessage" owner:self options:nil];
         }
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFigureRowCellFromNotif:) name:KeyForFigureRowTransportNotification object:nil];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleScrolledToPageNotification:) name:KeyForHasScrolledToPageNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleScrollingFromPageNotification:) name:KeyForScrollingFromPageNotification object:nil];
         [self setupSelectorStack];
@@ -80,9 +78,9 @@ CGFloat InfoPageWidth = 280;
 //                                                     @[NSStringFromSelector(@selector(finalCleanup))],
 
                      @[NSStringFromSelector(@selector(configureViewForFirstStep))],
-                      @[NSStringFromSelector(@selector(configureViewForSecondStep)), NSStringFromSelector(@selector(cleanUpFromFirstStep))],
-                      @[NSStringFromSelector(@selector(configureViewForThirdStep)), NSStringFromSelector(@selector(cleanUpFromSecondStep))],
-                      @[NSStringFromSelector(@selector(configureViewForFourthStep)), NSStringFromSelector(@selector(cleanUpFromThirdStep))],
+                      @[NSStringFromSelector(@selector(cleanUpFromFirstStep)), NSStringFromSelector(@selector(configureViewForSecondStep))],
+                      @[NSStringFromSelector(@selector(cleanUpFromSecondStep)), NSStringFromSelector(@selector(configureViewForThirdStep))],
+                      @[NSStringFromSelector(@selector(cleanUpFromThirdStep)), NSStringFromSelector(@selector(configureViewForFourthStep))],
                      @[NSStringFromSelector(@selector(finalCleanup))]
                      ]];
 }
@@ -119,14 +117,15 @@ CGFloat InfoPageWidth = 280;
 
 #pragma mark Cleanup Methods
 
-
-
 -(void)cleanUpFromFirstStep {
     
     [exampleRow removeFromSuperview];
     [swipeMessageDisplay removeFromSuperview];
-    [self fadeOutHostingView:^{
-        
+    [exampleRowBackground removeFromSuperview];
+    [UIView animateWithDuration:0.2 animations:^{
+        hostingBlurView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [hostingBlurView removeFromSuperview];
     }];
 }
 
@@ -197,7 +196,7 @@ CGFloat InfoPageWidth = 280;
 
 -(void)configureViewForFourthStep {
     [[NSNotificationCenter defaultCenter] postNotificationName:KeyForScrollToPageNotification object:nil userInfo:@{KeyForPageNumberInUserInfo: [NSNumber numberWithInteger:1]}];
-    
+    [mainTouchInterceptionView removeFromSuperview];
     [fourthStepUIComponents sortUsingComparator:^NSComparisonResult(UIView *view1, UIView *view2) {
         if (view1.tag > view2.tag) {
             return NSOrderedDescending;
@@ -222,26 +221,13 @@ CGFloat InfoPageWidth = 280;
     
     if ([fourthStepUIComponents count] > 0) {
         UIView *view = [fourthStepUIComponents objectAtIndex:0];
-        [UIView animateWithDuration:1.0f animations:^{
+        [UIView animateWithDuration:1.5f animations:^{
             view.alpha = 1;
         } completion:^(BOOL finished) {
             [fourthStepUIComponents removeObjectAtIndex:0];
             [self fadeInFourthStepUIViews];
         }];
     }
-}
-
--(void)fadeOutHostingView:(void(^)())completion {
-    
-    [UIView animateWithDuration:1.0 animations:^{
-        hostingBlurView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [hostingBlurView removeFromSuperview];
-        if (finished) {
-            completion();
-        }
-    }];
-    
 }
 
 -(void)addTimelineAnnotationView {
@@ -261,7 +247,7 @@ CGFloat InfoPageWidth = 280;
 }
 
 -(void)removeTimelineAnnotationView:(void(^)())completion {
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:0.1f animations:^{
         timelineAnnotationHostingView.alpha = 0;
     } completion:^(BOOL finished) {
         [timelineAnnotationHostingView removeFromSuperview];
@@ -294,12 +280,10 @@ CGFloat InfoPageWidth = 280;
 
 }
 
--(void)addFigureRowCellFromNotif:(NSNotification *)notif {
+-(void)setEventRelation:(EventPersonRelation *)rowData cellOrigin:(CGPoint)rowLocation {
     
-    EventPersonRelation *rowData = notif.userInfo[@"event_person_relation"];
-    CGPoint rowLocation = [notif.userInfo[@"row_origin"] CGPointValue];
     
-    exampleRow = [[FigureRow alloc] initWithOrigin:rowLocation];
+    exampleRow = [[FigureRow alloc] initWithOrigin:CGPointMake(0, 200)];
     exampleRow.allowsSelection = NO;
     exampleRow.event = rowData.event;
     exampleRow.person = rowData.person;

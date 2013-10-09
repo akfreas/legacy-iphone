@@ -59,7 +59,6 @@
 		1967B95A180480C50092766D /* left-right-swipe-message.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B959180480C50092766D /* left-right-swipe-message.png */; };
 		1967B95C180483D30092766D /* timeline-annotation-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B95B180483D30092766D /* timeline-annotation-image@2x.png */; };
 		1967B95E180484790092766D /* webview-annotation-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B95D180484790092766D /* webview-annotation-image@2x.png */; };
-		1967B96018048ED90092766D /* SwipeMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1967B95F18048ED90092766D /* SwipeMessage.xib */; };
 		1967B963180491B60092766D /* chevron-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B961180491B60092766D /* chevron-arrow@2x.png */; };
 		1967B9661804A85C0092766D /* SwipeMessage_OS7.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1967B9651804A85C0092766D /* SwipeMessage_OS7.xib */; };
 		1967B9691804AB170092766D /* chevron-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B9671804AB170092766D /* chevron-left.png */; };
@@ -67,7 +66,7 @@
 		1967B96E1804B8440092766D /* chevron-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96B1804B8440092766D /* chevron-left@2x.png */; };
 		1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96C1804B8440092766D /* chevron-right@2x.png */; };
 		1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */; };
-		1967B9721804C3610092766D /* SwipeMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1967B9711804C3610092766D /* SwipeMessage.xib */; };
+		196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196C6B1C18051FCD00475ACB /* MessageUI.framework */; };
 		197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */; };
 		197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305EA17C5B66A00958D15 /* EventInfoTableView.m */; };
 		197305EE17C5C41500958D15 /* EventInfoTimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305ED17C5C41500958D15 /* EventInfoTimelineCell.m */; };
@@ -95,7 +94,6 @@
 		19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDBC17FBA4ED00B415C1 /* NoEventPersonRow.xib */; };
 		19BDFDC417FBE99800B415C1 /* EventPersonRelation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */; };
 		19BDFDC817FD157A00B415C1 /* legacy-fb-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDC717FD157A00B415C1 /* legacy-fb-button.png */; };
-		19BDFDCC17FD1E8500B415C1 /* SwipeMessage_OS7.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDCB17FD1E8500B415C1 /* SwipeMessage_OS7.xib */; };
 		19BDFDCF17FD1EA200B415C1 /* SwipeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDCE17FD1EA200B415C1 /* SwipeMessage.m */; };
 		19BDFDD217FD3A8100B415C1 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDD117FD3A8100B415C1 /* AMBlurView.m */; };
 		19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EA716CA2BA400304AD6 /* AFAlertView.m */; };
@@ -211,7 +209,6 @@
 		1967B959180480C50092766D /* left-right-swipe-message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message.png"; sourceTree = "<group>"; };
 		1967B95B180483D30092766D /* timeline-annotation-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline-annotation-image@2x.png"; sourceTree = "<group>"; };
 		1967B95D180484790092766D /* webview-annotation-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "webview-annotation-image@2x.png"; sourceTree = "<group>"; };
-		1967B95F18048ED90092766D /* SwipeMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwipeMessage.xib; path = Resources/SwipeMessage.xib; sourceTree = SOURCE_ROOT; };
 		1967B961180491B60092766D /* chevron-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-arrow@2x.png"; sourceTree = "<group>"; };
 		1967B9651804A85C0092766D /* SwipeMessage_OS7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwipeMessage_OS7.xib; path = Resources/SwipeMessage_OS7.xib; sourceTree = SOURCE_ROOT; };
 		1967B9671804AB170092766D /* chevron-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-left.png"; sourceTree = "<group>"; };
@@ -219,7 +216,7 @@
 		1967B96B1804B8440092766D /* chevron-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-left@2x.png"; sourceTree = "<group>"; };
 		1967B96C1804B8440092766D /* chevron-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-right@2x.png"; sourceTree = "<group>"; };
 		1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message@2x.png"; sourceTree = "<group>"; };
-		1967B9711804C3610092766D /* SwipeMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwipeMessage.xib; path = Resources/SwipeMessage.xib; sourceTree = SOURCE_ROOT; };
+		196C6B1C18051FCD00475ACB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		197305E617C5B32D00958D15 /* EventInfoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoHeaderCell.h; sourceTree = "<group>"; };
 		197305E717C5B32D00958D15 /* EventInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoHeaderCell.m; sourceTree = "<group>"; };
 		197305E917C5B66A00958D15 /* EventInfoTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoTableView.h; sourceTree = "<group>"; };
@@ -261,7 +258,6 @@
 		19BDFDC217FBE99800B415C1 /* EventPersonRelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventPersonRelation.h; sourceTree = "<group>"; };
 		19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventPersonRelation.m; sourceTree = "<group>"; };
 		19BDFDC717FD157A00B415C1 /* legacy-fb-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-fb-button.png"; sourceTree = "<group>"; };
-		19BDFDCB17FD1E8500B415C1 /* SwipeMessage_OS7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SwipeMessage_OS7.xib; path = Resources/SwipeMessage_OS7.xib; sourceTree = SOURCE_ROOT; };
 		19BDFDCD17FD1EA200B415C1 /* SwipeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeMessage.h; sourceTree = "<group>"; };
 		19BDFDCE17FD1EA200B415C1 /* SwipeMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeMessage.m; sourceTree = "<group>"; };
 		19BDFDD017FD3A8100B415C1 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
@@ -322,6 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */,
 				19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */,
 				19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
@@ -517,6 +514,7 @@
 		4EEA6CE115268ED300B96EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				196C6B1C18051FCD00475ACB /* MessageUI.framework */,
 				19354F1C17F1BA98007569F9 /* Security.framework */,
 				19354F1917F1BA17007569F9 /* Flurry.h */,
 				19354F1A17F1BA17007569F9 /* libFlurry_4.2.3.a */,
@@ -555,10 +553,7 @@
 				199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */,
 				19BDFDCD17FD1EA200B415C1 /* SwipeMessage.h */,
 				19BDFDCE17FD1EA200B415C1 /* SwipeMessage.m */,
-				19BDFDCB17FD1E8500B415C1 /* SwipeMessage_OS7.xib */,
-				1967B95F18048ED90092766D /* SwipeMessage.xib */,
 				1967B9651804A85C0092766D /* SwipeMessage_OS7.xib */,
-				1967B9711804C3610092766D /* SwipeMessage.xib */,
 				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
 				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */,
@@ -707,10 +702,8 @@
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
 				1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */,
 				191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */,
-				1967B9721804C3610092766D /* SwipeMessage.xib in Resources */,
 				1967B963180491B60092766D /* chevron-arrow@2x.png in Resources */,
 				1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */,
-				19BDFDCC17FD1E8500B415C1 /* SwipeMessage_OS7.xib in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
 				191866FD16D4373500220A42 /* MainScreen.xib in Resources */,
@@ -739,7 +732,6 @@
 				1975752817D06EA800822779 /* EventInfoHeaderCell.xib in Resources */,
 				1967B96A1804AB170092766D /* chevron-right.png in Resources */,
 				1945775817D3EAA000C5DB62 /* button-back.png in Resources */,
-				1967B96018048ED90092766D /* SwipeMessage.xib in Resources */,
 				1945775917D3EAA000C5DB62 /* button-forward.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

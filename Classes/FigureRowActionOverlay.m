@@ -91,8 +91,12 @@
     if (self.deleteButtonAction != NULL) {
         [circleImageViews addObject:[self deleteCircle]];
     }
+    [circleImageViews addObjectsFromArray:@[[NSNumber numberWithFloat:130], [self infoCircle]]];
     
-    [circleImageViews addObjectsFromArray:@[[NSNumber numberWithFloat:130], [self fbCircle], [self infoCircle]]];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
+        [circleImageViews addObject:[self fbCircle]];
+    }
+    
 
     CGPoint startPoint = CGPointMake(0, self.frame.size.height / 2 - OverlayViewButtonRadius);
     

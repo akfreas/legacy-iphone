@@ -15,6 +15,7 @@
 #import "DataSyncUtility.h"
 #import "FacebookUtils.h"
 #import "SwipeMessage.h"
+#import "PasscodeScreenViewController.h"
 
 #import <MessageUI/MessageUI.h>
 
@@ -217,7 +218,7 @@
         
         LegacyAppRequest *requestToDelete = [LegacyAppRequest requestToDeletePerson:personToDelete];
         LegacyAppConnection *delConnection = [[LegacyAppConnection alloc] initWithLegacyRequest:requestToDelete];
-        
+        [Flurry logEvent:@"delete_person_confirmed" withParameters:@{@"person": personToDelete.facebookId}];
         [delConnection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[ObjectArchiveAccessor sharedInstance] removePerson:personToDelete];
@@ -272,18 +273,26 @@
         [dataSync sync:NULL];
     }
     
-    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO) {
+    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == YES) {
         [swipeMessage show];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == NO) {
+        PasscodeScreenViewController *passcodeController = [[PasscodeScreenViewController alloc] init];
+        [self presentViewController:passcodeController animated:NO completion:NULL];
     }
 }
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
-    if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
-        swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
-    }
+//    if ([[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == YES) {
+    
+        BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
+        if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
+            swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
+        }
+//    }
 }
 
 

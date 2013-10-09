@@ -7,6 +7,7 @@
 +(LegacyAppRequest *)requestToGetAllEventsForFigure:(Figure *)figure;
 +(LegacyAppRequest *)requestToPostDeviceInformation:(NSDictionary *)deviceInfo person:(Person *)person;
 +(LegacyAppRequest *)requestToDeletePerson:(Person *)person;
++(LegacyAppRequest *)requestToVerifyPasscode:(NSString *)passcode;
 @property (strong, nonatomic) NSMutableURLRequest *urlRequest;
 @property (strong, nonatomic) Class classToParse;
 

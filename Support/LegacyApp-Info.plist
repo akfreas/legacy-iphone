@@ -31,7 +31,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.10</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -48,15 +48,21 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.10</string>
+	<string>1.0</string>
 	<key>DebugResourceUrl</key>
-	<string>http://localhost:8000/</string>
+	<string>http://localhost:8000</string>
 	<key>FacebookAppID</key>
 	<string>562062263833279</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ResourceUrl</key>
 	<string>http://api.legacyapp.net</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Cinzel-Regular.ttf</string>
+	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -66,10 +72,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Cinzel-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

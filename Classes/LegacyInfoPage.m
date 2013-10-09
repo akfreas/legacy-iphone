@@ -49,6 +49,7 @@
 #pragma mark IBActions
 
 -(IBAction)sendMessageButton:(id)sender {
+    [Flurry logEvent:@"send_message_button_tapped"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMail" object:nil];
 }
 

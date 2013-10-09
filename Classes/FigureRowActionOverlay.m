@@ -1,6 +1,7 @@
 #import "FigureRowActionOverlay.h"
 #import "CircleImageView.h"
 #import "Event.h"
+#import "Flurry.h"
 
 @implementation FigureRowActionOverlay {
     

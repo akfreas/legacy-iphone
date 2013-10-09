@@ -102,21 +102,33 @@ CGFloat pageWidth = 320;
 
 
 -(void)addActionOverlay {
+    
+    NSMutableDictionary *flurryDict = [NSMutableDictionary new];
+    
+    flurryDict[@"event"] = _event;
+    
+    if (_person != nil) {
+        flurryDict[@"person_id"] = _person.facebookId;
+    }
+    
     if (actionOverlay == nil) {
         actionOverlay = [[FigureRowActionOverlay alloc] initWithEvent:self.event];
     }
     NSNotification *infoButtonNotification = [NSNotification notificationWithName:KeyForInfoOverlayButtonTapped object:self userInfo:@{@"event": _event}];
     actionOverlay.infoButtonAction = ^{
+        [Flurry logEvent:@"tapped_info_button" withParameters:flurryDict];
         [[NSNotificationCenter defaultCenter] postNotification:infoButtonNotification];
     };
     if (_person != nil && [_person.isPrimary isEqualToNumber:[NSNumber numberWithBool:YES]] == NO) {
         NSNotification *deleteNotif = [NSNotification notificationWithName:KeyForRemovePersonButtonTappedNotification object:self userInfo:@{@"person" : _person}];
         actionOverlay.deleteButtonAction = ^{
+            [Flurry logEvent:@"tapped_delete_button" withParameters:flurryDict];
             [[NSNotificationCenter defaultCenter] postNotification:deleteNotif];
         };
     }
     NSNotification *facebookNotification = [NSNotification notificationWithName:KeyForFacebookButtonTapped object:self userInfo:@{@"event" : _event}];
     actionOverlay.facebookButtonAction = ^{
+        [Flurry logEvent:@"tapped_fb_share_buttton" withParameters:flurryDict];
         [[NSNotificationCenter defaultCenter] postNotification:facebookNotification];
     };
     

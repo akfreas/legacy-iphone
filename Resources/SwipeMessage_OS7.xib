@@ -103,18 +103,25 @@
                     <rect key="frame" x="287" y="11" width="23" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G5C-nn-aAU">
-                    <rect key="frame" x="144" y="48" width="166" height="56"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G5C-nn-aAU">
+                    <rect key="frame" x="144" y="48" width="166" height="63"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <attributedString key="attributedText">
                         <fragment>
                             <string key="content">Tap here to connect
 with Facebook. 
-(optional)</string>
+</string>
                             <attributes>
                                 <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <font key="NSFont" size="18" name="Cochin"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="(optional)">
+                            <attributes>
+                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <font key="NSFont" size="14" name="Cochin"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                             </attributes>
                         </fragment>
@@ -175,7 +182,7 @@ with Facebook.
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(tap to close)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fBM-ND-OZf">
-                    <rect key="frame" x="110" y="303" width="100" height="21"/>
+                    <rect key="frame" x="110" y="309" width="100" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                     <nil key="highlightedColor"/>

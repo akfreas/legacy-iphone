@@ -216,6 +216,12 @@
     return request;
 }
 
++(LegacyAppRequest *)requestToVerifyPasscode:(NSString *)passcode {
+    LegacyAppRequest *request = [LegacyAppRequest baseRequest];
+    request.urlRequest.URL = [[LegacyAppRequest baseUrl] URLByAppendingPathComponent:[NSString stringWithFormat:@"/passcode/verify/%@", passcode]];
+    return request;
+}
+
 -(id)initWithRequest:(NSMutableURLRequest *)theRequest {
     self = [super init];
     

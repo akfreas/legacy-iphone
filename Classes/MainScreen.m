@@ -56,7 +56,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFigureRowCellFromNotif:) name:KeyForFigureRowTransportNotification object:nil];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
         dataSync = [DataSyncUtility sharedInstance];
     }
     return self;
@@ -268,10 +268,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
-    if ([self shouldSyncNow]) {
-        [dataSync sync:NULL];
-    }
+   
     
     if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == YES) {
         [swipeMessage show];
@@ -280,6 +277,13 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == NO) {
         PasscodeScreenViewController *passcodeController = [[PasscodeScreenViewController alloc] init];
         [self presentViewController:passcodeController animated:NO completion:NULL];
+    }
+}
+
+-(void)startDataSync {
+    
+    if ([self shouldSyncNow]) {
+        [dataSync sync:NULL];
     }
 }
 

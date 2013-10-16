@@ -270,11 +270,11 @@
     
    
     
-    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == YES) {
+    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthed] == YES) {
         [swipeMessage show];
     }
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == NO) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthed] == NO) {
         PasscodeScreenViewController *passcodeController = [[PasscodeScreenViewController alloc] init];
         [self presentViewController:passcodeController animated:NO completion:NULL];
     }

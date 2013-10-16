@@ -40,6 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [passcodeTextField becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -75,13 +76,13 @@
 
 -(void)passcodeVerifictionSuccess:(NSString *)message {
     AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"You're in!"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyForHasBeenAuthedForBeta];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyForHasBeenAuthed];
     alert.description = message;
     
     alert.leftButtonActionBlock = ^(NSArray *ui){
         [self dismissViewControllerAnimated:YES completion:NULL];
     };
-    alert.leftButtonTitle = @"Sweet!";
+    alert.leftButtonTitle = @"OK!";
     
     [alert showInView:self.view];
 }

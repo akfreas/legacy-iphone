@@ -27,13 +27,6 @@
     };
 }
 
--(void)useCompletion:(id)sender {
-    
-    [sender dismissViewControllerAnimated:YES completion:^{
-    }];
-    [[DataSyncUtility sharedInstance] sync:NULL];
-}
-
 -(void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker {
     
     

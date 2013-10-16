@@ -3,6 +3,8 @@
 #import "EventPersonRelation.h"
 #import "NoEventPersonRow.h"
 #import "RowProtocol.h"
+#import "Event.h"
+#import "Figure.h"
 
 @implementation FigureRowCell {
     UIView <RowProtocol> *row;
@@ -45,11 +47,45 @@
     } else {
         NSLog(@"Wat.");
     }
-    
+#ifdef DEBUG
+    if (eventPersonRelation.event.figure.imageData != nil) {
+        [self createImageFromView:row name:eventPersonRelation.event.figure.name];
+    }
+#endif
     [row removeFromSuperview];
     row = rowView;
     [self addSubview:row];
 }
+
+-(void)createImageFromView:(UIView *)view name:(NSString *)name
+
+{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+
+    NSString *_fileName = [NSString stringWithFormat:@"%@.jpg", name];
+    
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:_fileName];
+    
+    /* creating image context to create an image using view */
+    
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 2.0);
+    
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    
+    [imageData writeToFile:filePath atomically:YES];
+    
+}
+
+
 
 -(Person *)person {
     return self.eventPersonRelation.person;

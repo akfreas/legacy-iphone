@@ -169,9 +169,9 @@ CGFloat InfoPageWidth = 280;
 
 -(void)configureViewForFirstStep {
 
-    hostingBlurView.autoresizingMask = superView.autoresizingMask;
-    hostingBlurView.bounds = [UIApplication sharedApplication].keyWindow.frame;
-    hostingBlurView.alpha = 0;
+//    hostingBlurView.autoresizingMask = superView.autoresizingMask;
+    hostingBlurView.frame = [UIApplication sharedApplication].keyWindow.frame;
+//    hostingBlurView.alpha = 0;
     [superView addSubview:hostingBlurView];
     [UIView animateWithDuration:0.2f animations:^{
         hostingBlurView.alpha = 1;
@@ -221,7 +221,7 @@ CGFloat InfoPageWidth = 280;
     
     if ([fourthStepUIComponents count] > 0) {
         UIView *view = [fourthStepUIComponents objectAtIndex:0];
-        [UIView animateWithDuration:1.5f animations:^{
+        [UIView animateWithDuration:0.5f animations:^{
             view.alpha = 1;
         } completion:^(BOOL finished) {
             [fourthStepUIComponents removeObjectAtIndex:0];
@@ -233,7 +233,7 @@ CGFloat InfoPageWidth = 280;
 -(void)addTimelineAnnotationView {
     timelineAnnotationHostingView.frame = CGRectSetOriginOnRect(timelineAnnotationHostingView.frame, 0, -timelineAnnotationHostingView.frame.size.height);
     timelineAnnotationHostingView.alpha = 0;
-    [superView addSubview:timelineAnnotationHostingView];
+    [superView insertSubview:timelineAnnotationHostingView belowSubview:mainTouchInterceptionView];
     [UIView animateWithDuration:0.5f animations:^{
         timelineAnnotationHostingView.frame = CGRectSetOriginOnRect(timelineAnnotationHostingView.frame, 0, 0);
         timelineAnnotationHostingView.alpha = 1;
@@ -250,6 +250,7 @@ CGFloat InfoPageWidth = 280;
     [UIView animateWithDuration:0.1f animations:^{
         timelineAnnotationHostingView.alpha = 0;
     } completion:^(BOOL finished) {
+        [timelineAnnotationHostingView removeGestureRecognizer:[[timelineAnnotationHostingView gestureRecognizers] lastObject]];
         [timelineAnnotationHostingView removeFromSuperview];
         if (finished) {
             completion();
@@ -262,7 +263,7 @@ CGFloat InfoPageWidth = 280;
     
     webviewAnnotationHostingView.alpha = 0;
     superView.frame = CGRectSetOriginOnRect(superView.frame, superView.frame.origin.x, webviewAnnotationHostingView.frame.size.height - 44 + topToolbar);
-    [superView addSubview:webviewAnnotationHostingView];
+    [superView insertSubview:webviewAnnotationHostingView belowSubview:mainTouchInterceptionView];
     webviewAnnotationHostingView.frame = CGRectSetOriginOnRect(webviewAnnotationHostingView.frame, superView.frame.size.width, -webviewAnnotationHostingView.frame.size.height / 2 + topToolbar);
     [UIView animateWithDuration:0.5f animations:^{
         webviewAnnotationHostingView.frame = CGRectSetOriginOnRect(webviewAnnotationHostingView.frame, 0, -webviewAnnotationHostingView.frame.size.height + 44); //TODO: this is a hack.

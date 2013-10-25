@@ -40,6 +40,9 @@ typedef enum ScrollViewDirection {
 #define WebViewPageNumber TimelinePageNumber + 1
 #define LastPageNumber WebViewPageNumber + 1
 
++(BOOL)requiresConstraintBasedLayout {
+    return YES;
+}
 
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -97,6 +100,7 @@ typedef enum ScrollViewDirection {
     [pageArray addObject:page];
     page.frame = [self frameAtIndex:[pageArray count] - 1];
     [self insertSubview:page belowSubview:pageControl];
+//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[page]-0-|" options:NSLayoutFormatAlignAllTop metrics:nil views:@{@"page": page}]];
     self.contentSize = CGSizeAddWidthToSize(self.contentSize, page.frame.size.width + SpaceBetweenFigureRowPages);
     
 }
@@ -157,7 +161,9 @@ typedef enum ScrollViewDirection {
 
 
 -(CGRect)frameAtIndex:(NSInteger)index {
-    return CGRectMake((self.bounds.size.width + SpaceBetweenFigureRowPages) * index , 0, self.bounds.size.width, self.bounds.size.height);
+
+    CGRect windowFrame = [[[[UIApplication sharedApplication] windows] lastObject] frame];
+    return CGRectMake((self.bounds.size.width + SpaceBetweenFigureRowPages) * index , 0, self.bounds.size.width, windowFrame.size.height);
 }
 
 -(void)removeInfoViews {

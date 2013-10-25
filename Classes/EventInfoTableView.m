@@ -31,7 +31,6 @@
         self.delegate = self;
         self.dataSource = self;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin);
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.allowsSelection = NO;
 //        self.backgroundColor = UIColor.clearColor;

@@ -37,11 +37,10 @@ static NSString *ReuseID = @"CellReuseId";
 
 - (id)initWithFrame:(CGRect)frame
 {
+    
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        
-        self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
+        self.frame = frame;
         priorPoint = CGPointZero;
         [self createHeaderWrapperView];
         self.delegate = self;

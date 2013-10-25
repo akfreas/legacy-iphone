@@ -47,11 +47,6 @@
     } else {
         NSLog(@"Wat.");
     }
-#ifdef DEBUG
-    if (eventPersonRelation.event.figure.imageData != nil) {
-        [self createImageFromView:row name:eventPersonRelation.event.figure.name];
-    }
-#endif
     [row removeFromSuperview];
     row = rowView;
     [self addSubview:row];

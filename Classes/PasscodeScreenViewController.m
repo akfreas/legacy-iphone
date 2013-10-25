@@ -76,7 +76,6 @@
 
 -(void)passcodeVerifictionSuccess:(NSString *)message {
     AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"You're in!"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyForHasBeenAuthed];
     alert.description = message;
     
     alert.leftButtonActionBlock = ^(NSArray *ui){

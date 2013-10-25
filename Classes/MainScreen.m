@@ -15,7 +15,6 @@
 #import "DataSyncUtility.h"
 #import "FacebookUtils.h"
 #import "SwipeMessage.h"
-#import "PasscodeScreenViewController.h"
 
 #import <MessageUI/MessageUI.h>
 
@@ -270,13 +269,8 @@
     
    
     
-    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthed] == YES) {
+    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO) {
         [swipeMessage show];
-    }
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthed] == NO) {
-        PasscodeScreenViewController *passcodeController = [[PasscodeScreenViewController alloc] init];
-        [self presentViewController:passcodeController animated:NO completion:NULL];
     }
 }
 
@@ -289,14 +283,10 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
-//    if ([[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenAuthedForBeta] == YES) {
-    
-        BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
-        if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
-            swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
-        }
-//    }
+    BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
+    if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
+        swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
+    }
 }
 
 

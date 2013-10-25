@@ -8,11 +8,12 @@
     IBOutlet FacebookSignInButton *facebookButton;
     IBOutlet UILabel *pushNotificationLabel;
     IBOutlet UIButton *sendMailButton;
+    IBOutlet UITextView *facebookText;
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.class) owner:nil options:nil][0];
+    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.class) owner:self options:nil][0];
     if (self) {
         self.frame = frame;
         pushNotificationLabel.font = [UIFont fontWithName:@"Cinzel-Regular" size:16.0f];
@@ -39,9 +40,9 @@
 
 -(void)removeFacebookButtonIfAuthorized {
     if ([FBSession activeSession].state != FBSessionStateCreatedTokenLoaded) {
-        facebookButton.hidden = NO;
+        facebookButton.hidden = facebookText.hidden = NO;
     } else {
-        facebookButton.hidden = YES;
+        facebookButton.hidden = facebookText.hidden = YES;
     }
 }
 

@@ -45,7 +45,7 @@ static NSString *ReuseID = @"CellReuseId";
         [self createHeaderWrapperView];
         self.delegate = self;
         self.dataSource = self;
-        self.bounces = NO;
+        self.bounces = YES;
         hasPostedCell = NO;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);

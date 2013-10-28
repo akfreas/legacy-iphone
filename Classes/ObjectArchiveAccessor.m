@@ -389,17 +389,20 @@ static NSString *PersonEntityName = @"Person";
         person.birthday = [[Utility_AppSettings dateFormatterForRequest] dateFromString:json[@"birthday"]];
         person.isFacebookUser = [NSNumber numberWithBool:YES];
     }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:json[@"profile_pic"]]];
-    [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *imageData, NSError *error) {
-        
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                person.thumbnail = imageData;
-                [self save];
-            });
-        }
-    }];
+    id profilePicURL = json[@"profile_pic"];
+    if ([profilePicURL isKindOfClass:[NSNull class]] == NO) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:json[@"profile_pic"]]];
+        [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *imageData, NSError *error) {
+            
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if (httpResponse.statusCode == 200) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    person.thumbnail = imageData;
+                    [self save];
+                });
+            }
+        }];
+    }
     return person;
 }
 

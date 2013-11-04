@@ -48,7 +48,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>DebugResourceUrl</key>
 	<string>http://api.legacyapp.net</string>
 	<key>CFBundleGetInfoString</key>

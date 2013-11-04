@@ -249,6 +249,7 @@ static NSString *ReuseID = @"CellReuseId";
     
     EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
     cell.eventPersonRelation = eventRelation;
+    [cell reset];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

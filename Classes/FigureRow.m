@@ -152,8 +152,12 @@ CGFloat pageWidth = 320;
     isSwiping = NO;
 }
 
--(void)reset {
+-(void)delayedReset {
     [self performSelector:@selector(resetContentOffset) withObject:self afterDelay:.2];
+}
+
+-(void)reset {
+    [self resetContentOffset];
 }
 
 -(void)resetContentOffset {

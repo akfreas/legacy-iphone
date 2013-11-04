@@ -4,7 +4,7 @@
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
 #import "ObjectArchiveAccessor.h"
-
+#import "GAI.h"
 
 @implementation AppDelegate 
 
@@ -22,6 +22,17 @@ void uncaughtExceptionHandler(NSException *exception) {
     [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:@"BM6HRVCKMTZK83B29BTH"];
 #endif
+    
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    // Initialize tracker.
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-XXXX-Y"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

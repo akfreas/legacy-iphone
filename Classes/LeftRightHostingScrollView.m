@@ -136,7 +136,7 @@ typedef enum ScrollViewDirection {
     
     if ([notif.object isKindOfClass:[FigureRow class]]) {
         FigureRow *theRow = (FigureRow *)notif.object;
-        [theRow reset];
+        [theRow delayedReset];
     }
     
 }

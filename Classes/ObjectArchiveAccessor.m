@@ -42,20 +42,20 @@ static NSString *PersonEntityName = @"Person";
     
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
     }
     return self;
 }
 
--(void)managedObjectContextDidSave:(NSNotification *)notif {
-    if (notif.object != self.managedObjectContext) {
-        if ([NSThread isMainThread] == NO) {
-            [self performSelectorOnMainThread:@selector(managedObjectContextDidSave:) withObject:notif waitUntilDone:YES];
-            return;
-        }
-        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notif];
-    }
-}
+//-(void)managedObjectContextDidSave:(NSNotification *)notif {
+//    if (notif.object != self.managedObjectContext) {
+//        if ([NSThread isMainThread] == NO) {
+//            [self performSelectorOnMainThread:@selector(managedObjectContextDidSave:) withObject:notif waitUntilDone:YES];
+//            return;
+//        }
+//        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notif];
+//    }
+//}
 
 #pragma mark Core Data Utility Functions
 

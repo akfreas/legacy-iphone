@@ -21,6 +21,13 @@
     }
     return self;
 }
+
+-(void)reset {
+    if ([row isKindOfClass:figureRow.class]) {
+        [(FigureRow *)row reset];
+    }
+}
+
 -(void)setSelected:(BOOL)selected {
     row.selected = selected;
 }
@@ -28,6 +35,7 @@
 -(BOOL)isSelected {
     return row.selected;
 }
+
 -(void)setEventPersonRelation:(EventPersonRelation *)eventPersonRelation {
     
     UIView <RowProtocol> *rowView;

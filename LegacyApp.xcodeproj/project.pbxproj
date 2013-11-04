@@ -35,6 +35,8 @@
 		191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78FF1783990B00729F2A /* RelatedEventLabel.m */; };
 		1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
+		192784A81827C35500DAA196 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 192784A71827C35500DAA196 /* libGoogleAnalyticsServices.a */; };
+		192784AA1827C37E00DAA196 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 192784A91827C37E00DAA196 /* libz.dylib */; };
 		192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */; };
 		192BA7DC17F9575400ECBA49 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7DB17F9575400ECBA49 /* Images.xcassets */; };
 		192BA7DE17F9595F00ECBA49 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7DD17F9595F00ECBA49 /* Default.png */; };
@@ -178,6 +180,14 @@
 		191F78FF1783990B00729F2A /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
 		1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LegacyInfoPage.xib; path = Resources/LegacyInfoPage.xib; sourceTree = SOURCE_ROOT; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
+		192784A01827C34000DAA196 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		192784A11827C34000DAA196 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		192784A21827C34000DAA196 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		192784A31827C34000DAA196 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		192784A41827C34000DAA196 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		192784A51827C34000DAA196 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		192784A71827C35500DAA196 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		192784A91827C37E00DAA196 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-header-text@2x.png"; sourceTree = "<group>"; };
 		192BA7DB17F9575400ECBA49 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LegacyApp/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		192BA7DD17F9595F00ECBA49 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
@@ -320,14 +330,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */,
+				192784AA1827C37E00DAA196 /* libz.dylib in Frameworks */,
 				196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */,
 				19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */,
 				19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
 				19354F1B17F1BA17007569F9 /* libFlurry_4.2.3.a in Frameworks */,
 				19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */,
-				19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */,
 				19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */,
+				192784A81827C35500DAA196 /* libGoogleAnalyticsServices.a in Frameworks */,
 				4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */,
 				199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */,
 				4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */,
@@ -384,6 +396,20 @@
 				191F78F41782DD6700729F2A /* UIImageView+AFNetworking.m */,
 			);
 			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		192784A61827C34600DAA196 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				192784A71827C35500DAA196 /* libGoogleAnalyticsServices.a */,
+				192784A01827C34000DAA196 /* GAI.h */,
+				192784A11827C34000DAA196 /* GAIDictionaryBuilder.h */,
+				192784A21827C34000DAA196 /* GAIFields.h */,
+				192784A31827C34000DAA196 /* GAILogger.h */,
+				192784A41827C34000DAA196 /* GAITrackedViewController.h */,
+				192784A51827C34000DAA196 /* GAITracker.h */,
+			);
+			name = "Google Analytics";
 			sourceTree = "<group>";
 		};
 		197305E517C5B30400958D15 /* Event Info Components */ = {
@@ -516,6 +542,8 @@
 		4EEA6CE115268ED300B96EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				192784A91827C37E00DAA196 /* libz.dylib */,
+				192784A61827C34600DAA196 /* Google Analytics */,
 				196C6B1C18051FCD00475ACB /* MessageUI.framework */,
 				19354F1C17F1BA98007569F9 /* Security.framework */,
 				19354F1917F1BA17007569F9 /* Flurry.h */,
@@ -902,6 +930,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp,
+					"/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/legacy-iphone",
 				);
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = (
@@ -939,6 +968,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp,
+					"/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/legacy-iphone",
 				);
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",

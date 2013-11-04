@@ -18,8 +18,10 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+#if DEBUG==0
     [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:@"BM6HRVCKMTZK83B29BTH"];
+#endif
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

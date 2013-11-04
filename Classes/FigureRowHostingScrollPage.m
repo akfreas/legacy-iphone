@@ -52,7 +52,7 @@ static NSString *ReuseID = @"CellReuseId";
         }
         fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
         fetchController.delegate = self;
-        self.contentOffset = CGPointMake(0, TopActionViewHeight_OS7);
+        self.contentOffset = CGPointMake(0, 0);
         [fetchController performFetch:NULL];
     }
     return self;

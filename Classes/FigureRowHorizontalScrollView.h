@@ -4,7 +4,7 @@
 
 
 
-@interface FigureRowHorizontalScrolView : UIScrollView <RowProtocol, UIScrollViewDelegate>
+@interface FigureRowHorizontalScrollView : UIScrollView <RowProtocol, UIScrollViewDelegate>
 
 
 @property (nonatomic) Event *event;

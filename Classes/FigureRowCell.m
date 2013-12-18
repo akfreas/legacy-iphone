@@ -1,5 +1,5 @@
 #import "FigureRowCell.h"
-#import "FigureRowHorizontalScrolView.h"
+#import "FigureRowHorizontalScrollView.h"
 #import "EventPersonRelation.h"
 #import "NoEventPersonRow.h"
 #import "RowProtocol.h"
@@ -10,7 +10,7 @@
     UIView <RowProtocol> *row;
     
     NoEventPersonRow *noEventRow;
-    FigureRowHorizontalScrolView *figureRow;
+    FigureRowHorizontalScrollView *figureRow;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -24,7 +24,7 @@
 
 -(void)reset {
     if ([row isKindOfClass:figureRow.class]) {
-        [(FigureRowHorizontalScrolView *)row reset];
+        [(FigureRowHorizontalScrollView *)row reset];
     }
 }
 
@@ -47,7 +47,7 @@
         rowView = noEventRow;
     } else if (eventPersonRelation.event != nil) {
         if (figureRow == nil) {
-            figureRow = [[FigureRowHorizontalScrolView alloc] initWithOrigin:CGPointZero];
+            figureRow = [[FigureRowHorizontalScrollView alloc] initWithOrigin:CGPointZero];
         }
         figureRow.person = eventPersonRelation.person;
         figureRow.event = eventPersonRelation.event;

@@ -1,6 +1,6 @@
 #import "SwipeMessage.h"
 #import "AMBlurView.h"
-#import "FigureRowHorizontalScrolView.h"
+#import "FigureRowHorizontalScrollView.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
 #import "EventInfoTableView.h"
@@ -36,7 +36,7 @@
     
     NSMutableArray *selectorStack;
     
-    FigureRowHorizontalScrolView *exampleRow;
+    FigureRowHorizontalScrollView *exampleRow;
     UIView *exampleRowBackground;
     CGFloat topToolbar;
 }
@@ -283,7 +283,7 @@ CGFloat InfoPageWidth = 280;
 -(void)setEventRelation:(EventPersonRelation *)rowData cellOrigin:(CGPoint)rowLocation {
     
     
-    exampleRow = [[FigureRowHorizontalScrolView alloc] initWithOrigin:CGPointMake(0, 200)];
+    exampleRow = [[FigureRowHorizontalScrollView alloc] initWithOrigin:CGPointMake(0, 200)];
     exampleRow.allowsSelection = NO;
     exampleRow.event = rowData.event;
     exampleRow.person = rowData.person;

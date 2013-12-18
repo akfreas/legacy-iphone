@@ -20,7 +20,7 @@
 		1909A87B1777471E00256ED0 /* TopActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A87A1777471E00256ED0 /* TopActionView.m */; };
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
-		191CF63E1749635D00086D5E /* FigureRowHorizontalScrolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* FigureRowHorizontalScrolView.m */; };
+		191CF63E1749635D00086D5E /* FigureRowHorizontalScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* FigureRowHorizontalScrollView.m */; };
 		191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 191E849C17F92655003A37AC /* Cinzel-Regular.ttf */; };
 		191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78FF1783990B00729F2A /* RelatedEventLabel.m */; };
 		1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */; };
@@ -146,8 +146,8 @@
 		191CF6371747341700086D5E /* RightIndicatorLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightIndicatorLines.m; sourceTree = "<group>"; };
 		191CF63917488CE700086D5E /* CircleImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleImageLayer.h; sourceTree = "<group>"; };
 		191CF63A17488CE700086D5E /* CircleImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageLayer.m; sourceTree = "<group>"; };
-		191CF63C1749635C00086D5E /* FigureRowHorizontalScrolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowHorizontalScrolView.h; sourceTree = "<group>"; };
-		191CF63D1749635D00086D5E /* FigureRowHorizontalScrolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowHorizontalScrolView.m; sourceTree = "<group>"; };
+		191CF63C1749635C00086D5E /* FigureRowHorizontalScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowHorizontalScrollView.h; sourceTree = "<group>"; };
+		191CF63D1749635D00086D5E /* FigureRowHorizontalScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowHorizontalScrollView.m; sourceTree = "<group>"; };
 		191E849C17F92655003A37AC /* Cinzel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cinzel-Regular.ttf"; sourceTree = "<group>"; };
 		191F78FE1783990B00729F2A /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		191F78FF1783990B00729F2A /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
@@ -327,8 +327,8 @@
 		1909A86F1776B41700256ED0 /* Row Components */ = {
 			isa = PBXGroup;
 			children = (
-				191CF63C1749635C00086D5E /* FigureRowHorizontalScrolView.h */,
-				191CF63D1749635D00086D5E /* FigureRowHorizontalScrolView.m */,
+				191CF63C1749635C00086D5E /* FigureRowHorizontalScrollView.h */,
+				191CF63D1749635D00086D5E /* FigureRowHorizontalScrollView.m */,
 				1980718E17E8117B0039FC65 /* FigureRowCell.h */,
 				1980718F17E8117B0039FC65 /* FigureRowCell.m */,
 				19BDFDB717FBA44900B415C1 /* NoEventPersonRow.h */,
@@ -770,7 +770,7 @@
 				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,
 				191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */,
 				191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */,
-				191CF63E1749635D00086D5E /* FigureRowHorizontalScrolView.m in Sources */,
+				191CF63E1749635D00086D5E /* FigureRowHorizontalScrollView.m in Sources */,
 				192BA7E717F9D76600ECBA49 /* FacebookUtils.m in Sources */,
 				19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */,
 				1909A84D1771F4B100256ED0 /* Event.m in Sources */,

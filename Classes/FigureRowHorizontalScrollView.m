@@ -1,4 +1,4 @@
-#import "FigureRowHorizontalScrolView.h"
+#import "FigureRowHorizontalScrollView.h"
 #import "MainFigureInfoPage.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
@@ -9,11 +9,11 @@
 #import "LegacyWebView.h"
 #import "FigureRowActionOverlay.h"
 #import <FacebookSDK/FBNativeDialogs.h>
-@interface FigureRowHorizontalScrolView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface FigureRowHorizontalScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end
 
-@implementation FigureRowHorizontalScrolView {
+@implementation FigureRowHorizontalScrollView {
     
     MainFigureInfoPage *infoPage;
     LegacyWebView *webView;

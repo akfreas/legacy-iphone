@@ -1,25 +1,22 @@
 #import "FigureRowHorizontalScrollView.h"
-#import "MainFigureInfoPage.h"
+#import "FigureRowContentView.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
 #import "Figure.h"
 #import "Event.h"
 #import "Person.h"
-#import "FigureRowPageProtocol.h"
-#import "LegacyWebView.h"
 #import "FigureRowActionOverlay.h"
-#import <FacebookSDK/FBNativeDialogs.h>
+
 @interface FigureRowHorizontalScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end
 
 @implementation FigureRowHorizontalScrollView {
     
-    MainFigureInfoPage *infoPage;
-    LegacyWebView *webView;
+    FigureRowContentView *figureContentView;
     FigureRowActionOverlay *actionOverlay;
     
-    LegacyAppConnection *connection;
+//    LegacyAppConnection *connection;
     
     UILabel *figureNameLabel;
     UIPageControl *pageControl;
@@ -30,9 +27,6 @@
     CGPoint lastPoint;
     BOOL isSwiping;
 }
-
-
-CGFloat pageWidth = 320;
 
 - (id)initWithOrigin:(CGPoint)origin
 {
@@ -45,7 +39,7 @@ CGFloat pageWidth = 320;
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
         self.scrollEnabled = YES;
-        [self setupPages];
+        [self addContentView];
         [self registerForNotifications];
         [self addTapGestureRecognizer];
     }
@@ -177,13 +171,13 @@ CGFloat pageWidth = 320;
     
     _event = event;
     if (event != nil) {
-        infoPage.event = event;
+        figureContentView.event = event;
     }
 }
 
 -(void)setPerson:(Person *)person {
     _person = person;
-    infoPage.person = person;
+    figureContentView.person = person;
 }
 
 -(BOOL)selected {
@@ -212,31 +206,9 @@ CGFloat pageWidth = 320;
 
 #pragma mark Page Management
 
--(void)setupPages {
-    pageArray = [NSMutableArray arrayWithObjects:[self figureInfoPage], nil];
-    
-    [self setPageFrames];
-    
-    for (UIView <FigureRowPageProtocol> *page in pageArray) {
-        [self addSubview:page];
-    }
-}
-
--(void)setPageFrames {
-    
-    CGFloat currentXOffset = 0;
-    
-    for (int i=0; i < [pageArray count]; i++) {
-        UIView <FigureRowPageProtocol> *page = pageArray[i];
-        page.frame = CGRectSetOriginOnRect(page.frame, currentXOffset, 0);
-        CGFloat widthDelta = CGRectGetWidth(page.frame) + SpaceBetweenFigureRowPages;
-        currentXOffset += widthDelta;
-    }
-}
-
--(MainFigureInfoPage *)figureInfoPage {
-    infoPage = [[MainFigureInfoPage alloc] initWithFrame:CGRectMake(0, 0, FigureRowPageWidth, FigureRowPageInitialHeight)];
-    return infoPage;
+-(void)addContentView {
+    figureContentView = [[FigureRowContentView alloc] initWithFrame:CGRectMake(0, 0, FigureRowPageWidth, FigureRowPageInitialHeight)];
+    [self addSubview:figureContentView];
 }
 
 

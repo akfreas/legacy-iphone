@@ -41,8 +41,8 @@
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* LegacyWebView.xib */; };
 		195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B600016DEB7D3006215E9 /* LegacyWebView.m */; };
-		19632B9316DB028400E0EA75 /* MainFigureInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */; };
-		19632B9616DB036900E0EA75 /* MainFigureInfoPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */; };
+		19632B9316DB028400E0EA75 /* FigureRowContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19632B9216DB028400E0EA75 /* FigureRowContentView.xib */; };
+		19632B9616DB036900E0EA75 /* FigureRowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* FigureRowContentView.m */; };
 		1967B95A180480C50092766D /* left-right-swipe-message.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B959180480C50092766D /* left-right-swipe-message.png */; };
 		1967B95C180483D30092766D /* timeline-annotation-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B95B180483D30092766D /* timeline-annotation-image@2x.png */; };
 		1967B95E180484790092766D /* webview-annotation-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B95D180484790092766D /* webview-annotation-image@2x.png */; };
@@ -173,9 +173,9 @@
 		194E327316DF4150007A55D7 /* LegacyWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyWebView.xib; sourceTree = "<group>"; };
 		195B5FFF16DEB7D3006215E9 /* LegacyWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LegacyWebView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		195B600016DEB7D3006215E9 /* LegacyWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LegacyWebView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainFigureInfoPage.xib; sourceTree = "<group>"; };
-		19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFigureInfoPage.h; sourceTree = "<group>"; };
-		19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFigureInfoPage.m; sourceTree = "<group>"; };
+		19632B9216DB028400E0EA75 /* FigureRowContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FigureRowContentView.xib; sourceTree = "<group>"; };
+		19632B9416DB036900E0EA75 /* FigureRowContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowContentView.h; sourceTree = "<group>"; };
+		19632B9516DB036900E0EA75 /* FigureRowContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowContentView.m; sourceTree = "<group>"; };
 		19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewStickLines.h; sourceTree = "<group>"; };
 		19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewStickLines.m; sourceTree = "<group>"; };
 		1967B959180480C50092766D /* left-right-swipe-message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message.png"; sourceTree = "<group>"; };
@@ -365,8 +365,8 @@
 			isa = PBXGroup;
 			children = (
 				19FAD7831763005E006FA829 /* FigureRowPageProtocol.h */,
-				19632B9416DB036900E0EA75 /* MainFigureInfoPage.h */,
-				19632B9516DB036900E0EA75 /* MainFigureInfoPage.m */,
+				19632B9416DB036900E0EA75 /* FigureRowContentView.h */,
+				19632B9516DB036900E0EA75 /* FigureRowContentView.m */,
 				195B5FFF16DEB7D3006215E9 /* LegacyWebView.h */,
 				195B600016DEB7D3006215E9 /* LegacyWebView.m */,
 				1909A8671776192100256ED0 /* FigureRowHostingScrollPage.h */,
@@ -569,7 +569,7 @@
 				1997B72816DEBA31009692F5 /* LegacyModel.xcdatamodeld */,
 				19D61CCF16B23B6400C81E60 /* Images */,
 				1993550816D4E89900D73389 /* ImageWidgetContainer.xib */,
-				19632B9216DB028400E0EA75 /* MainFigureInfoPage.xib */,
+				19632B9216DB028400E0EA75 /* FigureRowContentView.xib */,
 				19277236173B560D00A9F51D /* RelatedEventLabel.xib */,
 			);
 			path = Resources;
@@ -675,7 +675,7 @@
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
 				1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */,
 				1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */,
-				19632B9316DB028400E0EA75 /* MainFigureInfoPage.xib in Resources */,
+				19632B9316DB028400E0EA75 /* FigureRowContentView.xib in Resources */,
 				19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */,
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
 				196C6B2218052D8200475ACB /* PasscodeScreenViewController.xib in Resources */,
@@ -763,7 +763,7 @@
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
 				19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */,
 				199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */,
-				19632B9616DB036900E0EA75 /* MainFigureInfoPage.m in Sources */,
+				19632B9616DB036900E0EA75 /* FigureRowContentView.m in Sources */,
 				195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */,
 				192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */,

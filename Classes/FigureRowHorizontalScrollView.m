@@ -26,17 +26,15 @@
     BOOL isSwiping;
 }
 
-- (id)initWithOrigin:(CGPoint)origin
-{
-    CGRect frame = CGRectMake(origin.x, origin.y, FigureRowCellWidth, FigureRowCellHeight);
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.contentSize = CGSizeAddWidthToSize(self.bounds.size, 100);
         self.bounces = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
         self.scrollEnabled = YES;
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         [self addContentView];
         [self registerForNotifications];
         [self addTapGestureRecognizer];
@@ -71,6 +69,11 @@
 
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
     [self addGestureRecognizer:tapGesture];
+}
+
+-(void)setContentSize:(CGSize)contentSize {
+    contentSize = CGSizeAddWidthToSize(contentSize, 100);
+    [super setContentSize:contentSize];
 }
 
 
@@ -202,11 +205,18 @@
     }
 }
 
+-(CGSize)intrinsicContentSize {
+    return figureContentView.intrinsicContentSize;
+}
+
 #pragma mark Page Management
 
 -(void)addContentView {
-    figureContentView = [[FigureRowContentView alloc] initWithFrame:CGRectMake(0, 0, FigureRowCellWidth, FigureRowCellHeight)];
+    figureContentView = [[FigureRowContentView alloc] initWithFrame:CGRectZero];
     [self addSubview:figureContentView];
+    UIBind(figureContentView);
+    [self addConstraintWithVisualFormat:@"H:|[figureContentView]|" bindings:UIBindings];
+    [self addConstraintWithVisualFormat:@"V:|[figureContentView]|" bindings:UIBindings];
 }
 
 

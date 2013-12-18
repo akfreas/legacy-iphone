@@ -25,7 +25,7 @@
 #define KeyForScrollingFromPageNotification @"ScrollingFromPage"
 #define TopActionViewDefaultTintColor [UIColor colorWithWhite:1 alpha:.85]
 
-#define FigureRowPageInitialHeight 140
+#define FigureRowCellHeight 140
 #define NoEventFigureRowHeight 60
 #define FigureRowPageWidth 320
 

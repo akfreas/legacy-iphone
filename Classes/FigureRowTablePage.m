@@ -261,7 +261,7 @@ static NSString *ReuseID = @"CellReuseId";
     if (indexPath.section == 0 && [[fetchController sections] count] > 1) {
         return NoEventFigureRowHeight;
     } else {
-        return FigureRowPageInitialHeight;
+        return FigureRowCellHeight;
     }
 }
 

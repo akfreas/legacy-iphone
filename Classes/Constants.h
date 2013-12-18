@@ -53,12 +53,6 @@
 #define MoreCloseButtonWidth 100
 #define MoreCloseButtonCornerRadius 7.0
 
-
-//#define EventDescriptionX 10
-//#define EventDescriptionY 185
-//#define EventDescriptionHeight 60
-//#define EventDescriptionWidth 300
-
 #define LargeImageWidgetExpandedRadius 40
 
 #define ImageWidgetInitialHeight 90
@@ -74,3 +68,25 @@
 #define FigureRowNameContainerViewHeight 40
 
 #define OverlayViewButtonRadius 25
+
+
+#define HeaderBackgroundColor @"3E94E0"
+#define DateFontColor @"9B9B9B"
+#define LineSeparatorColor @"E1E4E6"
+#define TitleColor @"000000"
+#define TextLine1FontColor @"000000"
+#define PersonPhotoBorderColor @"FFFFFF"
+
+#define TitleFontName @"Helvetica Neue Light"
+#define TitleFontSize 36
+
+#define DateFontName @"Helvetica Neue Light"
+#define DateFontSize 24
+
+#define SubtitleFontName @"Helvetica Neue Light"
+#define SubtitleFontSize 24
+
+#define LegacyEntryHeight 150
+#define PersonPhotoRadius 25
+#define PersonPhotoBorderSize 4
+#define PersonPhotoOffset 10

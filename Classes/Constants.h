@@ -41,7 +41,7 @@
 #define PageControlCornerRadius 10.0
 
 #define RelatedEventsLabelTopMargin 0
-#define ImageLayerDefaultStrokeWidth 1
+#define ImageLayerDefaultStrokeWidth 0
 
 #define RelatedEventsLabelHeight 85
 #define RelatedEventsLabelWidth 300
@@ -70,6 +70,10 @@
 #define OverlayViewButtonRadius 25
 
 
+#define TopBarButtonRadius 11
+#define TopBarLeftMargin 15
+#define TopBarTopMargin 15
+
 #define HeaderBackgroundColor @"3E94E0"
 #define DateFontColor @"9B9B9B"
 #define LineSeparatorColor @"E1E4E6"
@@ -77,16 +81,29 @@
 #define TextLine1FontColor @"000000"
 #define PersonPhotoBorderColor @"FFFFFF"
 
-#define TitleFontName @"Helvetica Neue Light"
+#define TitleFontName @"HelveticaNeue-Light"
 #define TitleFontSize 36
 
-#define DateFontName @"Helvetica Neue Light"
+#define TitleFont [UIFont fontWithName:TitleFontName size:TitleFontSize]
+
+#define DateFontName @"HelveticaNeue-Light"
 #define DateFontSize 24
 
-#define SubtitleFontName @"Helvetica Neue Light"
+#define DateFont [UIFont fontWithName:DateFontName size:DateFontSize]
+
+#define SubtitleFontName @"HelveticaNeue-Light"
 #define SubtitleFontSize 24
+
+#define SubtitleFont [UIFont fontWithName:SubtitleFontName size:SubtitleFontSize]
+
+#define HeaderFontName @"HelveticaNeue-Bold"
+#define HeaderFontSize 25
+
+#define HeaderFont [UIFont fontWithName:HeaderFontName size:HeaderFontSize]
 
 #define LegacyEntryHeight 150
 #define PersonPhotoRadius 25
 #define PersonPhotoBorderSize 4
 #define PersonPhotoOffset 10
+
+#define UIBind(...)  NSDictionary *UIBindings = MXDictionaryOfVariableBindings(__VA_ARGS__)

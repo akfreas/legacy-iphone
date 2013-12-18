@@ -8,6 +8,7 @@
 #import <HexColors/HexColor.h>
 #import "Utility_AppSettings.h"
 #import "CGRectUtils.h"
+#import "UIView+LayoutHelpers.h"
 #import "Flurry.h"
 
 

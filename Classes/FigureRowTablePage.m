@@ -1,4 +1,4 @@
-#import "LeftRightHostingScrollView.h"
+#import "HorizontalContentHostingScrollView.h"
 #import "ObjectArchiveAccessor.h"
 #import "Person.h"
 #import "LegacyAppRequest.h"

@@ -1,4 +1,0 @@
-@interface LeftRightHostingScrollView : UIScrollView
-
-
-@end

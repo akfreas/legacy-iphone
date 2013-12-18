@@ -75,7 +75,7 @@
 		198263A118616D1A00CA3FEE /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198263A018616D1A00CA3FEE /* Reveal.framework */; };
 		198263A418616DC600CA3FEE /* add-friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A218616DC600CA3FEE /* add-friends.png */; };
 		198263A518616DC600CA3FEE /* add-friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A318616DC600CA3FEE /* add-friends@2x.png */; };
-		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
+		199354FD16D4A29700D73389 /* HorizontalContentHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* HorizontalContentHostingScrollView.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
 		1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		1993916116AA1FDF00DA3CD9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1993915F16AA1FDF00DA3CD9 /* icon.png */; };
@@ -222,8 +222,8 @@
 		198263A018616D1A00CA3FEE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		198263A218616DC600CA3FEE /* add-friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends.png"; sourceTree = "<group>"; };
 		198263A318616DC600CA3FEE /* add-friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends@2x.png"; sourceTree = "<group>"; };
-		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
-		199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LeftRightHostingScrollView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		199354FB16D4A29700D73389 /* HorizontalContentHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalContentHostingScrollView.h; sourceTree = "<group>"; };
+		199354FC16D4A29700D73389 /* HorizontalContentHostingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HorizontalContentHostingScrollView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1993550816D4E89900D73389 /* ImageWidgetContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageWidgetContainer.xib; sourceTree = "<group>"; };
 		1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidgetContainer.m; sourceTree = "<group>"; };
 		1993550C16D4E8F600D73389 /* ImageWidgetContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageWidgetContainer.h; sourceTree = "<group>"; };
@@ -515,8 +515,8 @@
 				1975752217D06CA000822779 /* WebViewControls.h */,
 				1975752317D06CA100822779 /* WebViewControls.m */,
 				19C7BD8A174BC7AA004C8B0A /* Pages */,
-				199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */,
-				199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */,
+				199354FB16D4A29700D73389 /* HorizontalContentHostingScrollView.h */,
+				199354FC16D4A29700D73389 /* HorizontalContentHostingScrollView.m */,
 				19BDFDCD17FD1EA200B415C1 /* SwipeMessage.h */,
 				19BDFDCE17FD1EA200B415C1 /* SwipeMessage.m */,
 				1967B9651804A85C0092766D /* SwipeMessage_OS7.xib */,
@@ -762,7 +762,7 @@
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
 				19C49EA916CA2BA400304AD6 /* AFAlertView.m in Sources */,
-				199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */,
+				199354FD16D4A29700D73389 /* HorizontalContentHostingScrollView.m in Sources */,
 				19632B9616DB036900E0EA75 /* FigureRowContentView.m in Sources */,
 				195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */,

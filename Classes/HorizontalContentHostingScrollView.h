@@ -1,0 +1,4 @@
+@interface HorizontalContentHostingScrollView : UIScrollView
+
+
+@end

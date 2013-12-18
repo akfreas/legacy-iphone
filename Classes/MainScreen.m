@@ -1,5 +1,5 @@
 #import "MainScreen.h"
-#import "LeftRightHostingScrollView.h"
+#import "HorizontalContentHostingScrollView.h"
 #import "FBLoginViewController.h"
 #import "SettingsModalView.h"
 #import "Person.h"
@@ -28,7 +28,7 @@
     ObjectArchiveAccessor *accessor;
     FriendPickerHandler *friendPickerDelegate;
     FBFriendPickerViewController *friendPicker;
-    IBOutlet LeftRightHostingScrollView *infoScreen;
+    IBOutlet HorizontalContentHostingScrollView *infoScreen;
     LegacyAppConnection *connection;
     SwipeMessage *swipeMessage;
     

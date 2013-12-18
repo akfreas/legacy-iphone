@@ -1,4 +1,4 @@
-#import "LeftRightHostingScrollView.h"
+#import "HorizontalContentHostingScrollView.h"
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
@@ -10,7 +10,7 @@
 #import "LegacyInfoPage.h"
 #import "WebViewControls.h"
 
-@interface LeftRightHostingScrollView () <UIScrollViewDelegate>
+@interface HorizontalContentHostingScrollView () <UIScrollViewDelegate>
 @end
 
 typedef enum ScrollViewDirection {
@@ -18,7 +18,7 @@ typedef enum ScrollViewDirection {
     ScrollViewDirectionLeft,
 } ScrollViewDirection;
 
-@implementation LeftRightHostingScrollView {
+@implementation HorizontalContentHostingScrollView {
     NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
     

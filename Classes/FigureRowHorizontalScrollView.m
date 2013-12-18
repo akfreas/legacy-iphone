@@ -15,9 +15,7 @@
     
     FigureRowContentView *figureContentView;
     FigureRowActionOverlay *actionOverlay;
-    
-//    LegacyAppConnection *connection;
-    
+
     UILabel *figureNameLabel;
     UIPageControl *pageControl;
     NSMutableArray *pageArray;

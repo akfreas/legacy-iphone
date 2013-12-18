@@ -4,7 +4,7 @@
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
 #import "EventInfoTableView.h"
-#import "FigureRowHostingScrollPage.h"
+#import "FigureRowTablePage.h"
 
 
 @interface SwipeMessage () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
@@ -88,7 +88,7 @@ CGFloat InfoPageWidth = 280;
 -(void)handleScrollingFromPageNotification:(NSNotification *)notif {
     
     Class pageClass = notif.userInfo[KeyForPageTypeInUserInfo];
-    if ([FigureRowHostingScrollPage class] == pageClass) {
+    if ([FigureRowTablePage class] == pageClass) {
         [self advanceInState];
     }
 }

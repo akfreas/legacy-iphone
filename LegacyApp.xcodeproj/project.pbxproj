@@ -14,7 +14,7 @@
 		1909A85E1772D3B300256ED0 /* FB-f-Logo__blue_100.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85D1772D3B300256ED0 /* FB-f-Logo__blue_100.png */; };
 		1909A8601772D44300256ED0 /* informationcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85F1772D44300256ED0 /* informationcircle.png */; };
 		1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8621772E6B000256ED0 /* CircleImageView.m */; };
-		1909A8691776192100256ED0 /* FigureRowHostingScrollPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8681776192100256ED0 /* FigureRowHostingScrollPage.m */; };
+		1909A8691776192100256ED0 /* FigureRowTablePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8681776192100256ED0 /* FigureRowTablePage.m */; };
 		1909A8731776B45100256ED0 /* FacebookSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8711776B45100256ED0 /* FacebookSignInButton.m */; };
 		1909A8741776B45100256ED0 /* FacebookSignInButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1909A8721776B45100256ED0 /* FacebookSignInButton.xib */; };
 		1909A87B1777471E00256ED0 /* TopActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A87A1777471E00256ED0 /* TopActionView.m */; };
@@ -135,8 +135,8 @@
 		1909A85F1772D44300256ED0 /* informationcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = informationcircle.png; sourceTree = "<group>"; };
 		1909A8611772E6AE00256ED0 /* CircleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleImageView.h; sourceTree = "<group>"; };
 		1909A8621772E6B000256ED0 /* CircleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageView.m; sourceTree = "<group>"; };
-		1909A8671776192100256ED0 /* FigureRowHostingScrollPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowHostingScrollPage.h; sourceTree = "<group>"; };
-		1909A8681776192100256ED0 /* FigureRowHostingScrollPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowHostingScrollPage.m; sourceTree = "<group>"; };
+		1909A8671776192100256ED0 /* FigureRowTablePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowTablePage.h; sourceTree = "<group>"; };
+		1909A8681776192100256ED0 /* FigureRowTablePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowTablePage.m; sourceTree = "<group>"; };
 		1909A8701776B45000256ED0 /* FacebookSignInButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSignInButton.h; sourceTree = "<group>"; };
 		1909A8711776B45100256ED0 /* FacebookSignInButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSignInButton.m; sourceTree = "<group>"; };
 		1909A8721776B45100256ED0 /* FacebookSignInButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FacebookSignInButton.xib; sourceTree = "<group>"; };
@@ -369,8 +369,8 @@
 				19632B9516DB036900E0EA75 /* FigureRowContentView.m */,
 				195B5FFF16DEB7D3006215E9 /* LegacyWebView.h */,
 				195B600016DEB7D3006215E9 /* LegacyWebView.m */,
-				1909A8671776192100256ED0 /* FigureRowHostingScrollPage.h */,
-				1909A8681776192100256ED0 /* FigureRowHostingScrollPage.m */,
+				1909A8671776192100256ED0 /* FigureRowTablePage.h */,
+				1909A8681776192100256ED0 /* FigureRowTablePage.m */,
 				197305F117C5D54500958D15 /* LegacyInfoPage.h */,
 				197305F217C5D54500958D15 /* LegacyInfoPage.m */,
 				1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */,
@@ -778,7 +778,7 @@
 				1909A8531772BCCD00256ED0 /* DataSyncUtility.m in Sources */,
 				1909A85C1772D21600256ED0 /* FigureRowActionOverlay.m in Sources */,
 				1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */,
-				1909A8691776192100256ED0 /* FigureRowHostingScrollPage.m in Sources */,
+				1909A8691776192100256ED0 /* FigureRowTablePage.m in Sources */,
 				1909A8731776B45100256ED0 /* FacebookSignInButton.m in Sources */,
 				1909A87B1777471E00256ED0 /* TopActionView.m in Sources */,
 				19BDFDC417FBE99800B415C1 /* EventPersonRelation.m in Sources */,

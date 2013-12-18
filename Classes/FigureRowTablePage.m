@@ -12,13 +12,13 @@
 #import "FigureRowCell.h"
 #import "AFAlertView.h"
 
-#import "FigureRowHostingScrollPage.h"
+#import "FigureRowTablePage.h"
 
-@interface FigureRowHostingScrollPage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface FigureRowTablePage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end
 
-@implementation FigureRowHostingScrollPage {
+@implementation FigureRowTablePage {
     CGPoint priorPoint;
     CGRect actionViewTopInitialFrame; 
     LegacyAppConnection *connection;

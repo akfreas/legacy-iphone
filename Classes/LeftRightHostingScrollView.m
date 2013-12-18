@@ -5,7 +5,7 @@
 #import "FigureRowHorizontalScrollView.h"
 #import "Event.h"
 #import "LegacyWebView.h"
-#import "FigureRowHostingScrollPage.h"
+#import "FigureRowTablePage.h"
 #import "EventInfoTableView.h"
 #import "LegacyInfoPage.h"
 #import "WebViewControls.h"
@@ -24,7 +24,7 @@ typedef enum ScrollViewDirection {
     
     NSInteger currentPage;
     NSMutableArray *pageArray;
-    FigureRowHostingScrollPage *figurePage;
+    FigureRowTablePage *figurePage;
     CGPoint departurePoint;
     CGPoint destinationPoint;
     CGPoint lastScrollPoint;
@@ -80,7 +80,7 @@ typedef enum ScrollViewDirection {
 
 -(void)addFigurePage {
     
-    figurePage = [[FigureRowHostingScrollPage alloc] initWithFrame:[self frameAtIndex:LandingPageNumber]];
+    figurePage = [[FigureRowTablePage alloc] initWithFrame:[self frameAtIndex:LandingPageNumber]];
     [self addPage:figurePage];
 }
 

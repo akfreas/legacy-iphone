@@ -325,7 +325,7 @@ static NSString *ReuseID = @"CellReuseId";
     fetchController = nil;
 }
 
-#pragma mark FigureRowPageProtocol Delegate Methods
+#pragma mark PageProtocol Delegate Methods
 
 -(void)becameVisible {
     

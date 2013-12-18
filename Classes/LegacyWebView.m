@@ -105,7 +105,7 @@
     [webView loadHTMLString:initialHtmlString baseURL:baseUrl];
 }
 
-#pragma mark FigureRowPageProtocol Delegate Methods
+#pragma mark PageProtocol Delegate Methods
 
 -(void)becameVisible {
     [self loadInitialState];

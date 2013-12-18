@@ -1,5 +1,5 @@
-#include "FigureRowPageProtocol.h"
+#include "PageProtocol.h"
 
-@interface LegacyInfoPage : UIView <FigureRowPageProtocol>
+@interface LegacyInfoPage : UIView <PageProtocol>
 
 @end

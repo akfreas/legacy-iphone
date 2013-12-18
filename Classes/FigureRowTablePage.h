@@ -1,5 +1,5 @@
-#import "FigureRowPageProtocol.h"
+#import "PageProtocol.h"
 
-@interface FigureRowTablePage : UITableView <FigureRowPageProtocol>
+@interface FigureRowTablePage : UITableView <PageProtocol>
 
 @end

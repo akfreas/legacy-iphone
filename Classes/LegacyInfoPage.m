@@ -64,7 +64,7 @@
 }
 
 
-#pragma mark FigureRowPageProtocol Delegate Methods
+#pragma mark PageProtocol Delegate Methods
 
 -(void)becameVisible {
     

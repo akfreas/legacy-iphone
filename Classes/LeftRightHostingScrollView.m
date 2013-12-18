@@ -90,7 +90,7 @@ typedef enum ScrollViewDirection {
     [self addPage:infoPage];
 }
 
--(void)addPage:(UIView <FigureRowPageProtocol> *)page {
+-(void)addPage:(UIView <PageProtocol> *)page {
     if (pageArray == nil) {
         pageArray = [NSMutableArray array];
     }
@@ -102,14 +102,14 @@ typedef enum ScrollViewDirection {
 }
 
 
--(void)removePage:(UIView <FigureRowPageProtocol> *)page {
+-(void)removePage:(UIView <PageProtocol> *)page {
     
     [page removeFromSuperview];
     [pageArray removeObject:page];
     
     CGSize newContentSize = CGSizeMake(0, self.bounds.size.height);
     
-    for (UIView <FigureRowPageProtocol> *thePage in pageArray) {
+    for (UIView <PageProtocol> *thePage in pageArray) {
         CGSize pageSize = thePage.frame.size;
         newContentSize = CGSizeAddWidthToSize(newContentSize, pageSize.width + SpaceBetweenFigureRowPages);
     }
@@ -157,7 +157,7 @@ typedef enum ScrollViewDirection {
     if (CGPointEqualToPoint(self.contentOffset, destinationPoint)) {
         paginationInProgress = NO;
         self.scrollEnabled = YES;
-        UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:currentPage];
+        UIView <PageProtocol> *page = [pageArray objectAtIndex:currentPage];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForHasScrolledToPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [page class]}];
         if ([page isKindOfClass:[EventInfoTableView class]] && currentPage == [pageArray count] - 1) {
@@ -184,7 +184,7 @@ typedef enum ScrollViewDirection {
     
     NSInteger pageIndex = [self pageAtPoint:referencePoint];
     if (pageIndex < [pageArray count]) {
-        UIView <FigureRowPageProtocol> *page = pageArray[pageIndex];
+        UIView <PageProtocol> *page = pageArray[pageIndex];
         [page becameVisible];
     }
     
@@ -220,7 +220,7 @@ typedef enum ScrollViewDirection {
         NSMutableArray *newArray = [NSMutableArray arrayWithArray:pageArray];
         for (int i=LandingPageNumber + 1; i < [newArray count]; i++) {
             
-            UIView <FigureRowPageProtocol> *page = [newArray objectAtIndex:i];
+            UIView <PageProtocol> *page = [newArray objectAtIndex:i];
             [self removePage:page];
         }
     }

@@ -1,10 +1,10 @@
 
 
-#include "FigureRowPageProtocol.h"
+#include "PageProtocol.h"
 
 @class Event;
 @class Person;
-@interface EventInfoTableView : UITableView <FigureRowPageProtocol>
+@interface EventInfoTableView : UITableView <PageProtocol>
 
 @property (nonatomic, weak) Person *person;
 @property (nonatomic, weak) Event *event;

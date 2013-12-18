@@ -1,6 +1,6 @@
 @class Event;
 
-@protocol FigureRowPageProtocol <NSObject>
+@protocol PageProtocol <NSObject>
 
 @required
 

@@ -140,7 +140,7 @@
     return 1;
 }
 
-#pragma mark FigureRowPageProtocol Delegate Methods
+#pragma mark PageProtocol Delegate Methods
 
 -(void)becameVisible {
     

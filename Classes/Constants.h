@@ -25,7 +25,7 @@
 #define KeyForScrollingFromPageNotification @"ScrollingFromPage"
 #define TopActionViewDefaultTintColor [UIColor colorWithWhite:1 alpha:.85]
 
-#define FigureRowCellHeight 140
+#define FigureRowCellHeight 75
 #define NoEventFigureRowHeight 60
 #define FigureRowCellWidth 320
 
@@ -55,8 +55,8 @@
 
 #define LargeImageWidgetExpandedRadius 40
 
-#define ImageWidgetInitialHeight 90
-#define ImageWidgetInitialWidth 90
+#define ImageWidgetInitialHeight 50
+#define ImageWidgetInitialWidth 50
 #define ImageWidgetExpandTransformFactor 2
 
 #define RightIndicatorLinesFrameWidth 200
@@ -74,25 +74,26 @@
 #define TopBarLeftMargin 15
 #define TopBarTopMargin 15
 
-#define HeaderBackgroundColor @"3E94E0"
-#define DateFontColor @"9B9B9B"
-#define LineSeparatorColor @"E1E4E6"
-#define TitleColor @"000000"
-#define TextLine1FontColor @"000000"
-#define PersonPhotoBorderColor @"FFFFFF"
+#define HeaderBackgroundColor [UIColor colorWithHexString:@"#3E94E0"]
+#define AgeLabelFontColor [UIColor colorWithHexString:@"#9B9B9B"]
+#define LineSeparatorColor [UIColor colorWithHexString:@"#E1E4E6"]
+#define TitleColor [UIColor colorWithHexString:@"#000000"]
+#define PersonPhotoBorderColor [UIColor colorWithHexString:@"#FFFFFF"]
 
-#define TitleFontName @"HelveticaNeue-Light"
-#define TitleFontSize 36
+#define FigureNameFontName @"HelveticaNeue"
+#define FigureNameFontSize 22
 
-#define TitleFont [UIFont fontWithName:TitleFontName size:TitleFontSize]
+#define FigureNameFont [UIFont fontWithName:FigureNameFontName size:FigureNameFontSize]
 
-#define DateFontName @"HelveticaNeue-Light"
-#define DateFontSize 24
+#define AgeLabelFontName @"HelveticaNeue-Light"
+#define AgeLabelFontSize 14
 
-#define DateFont [UIFont fontWithName:DateFontName size:DateFontSize]
+#define AgeLabelFont [UIFont fontWithName:AgeLabelFontName size:AgeLabelFontSize]
 
+
+#define SubtitleFontColor [UIColor colorWithHexString:@"#000000"]
 #define SubtitleFontName @"HelveticaNeue-Light"
-#define SubtitleFontSize 24
+#define SubtitleFontSize 14
 
 #define SubtitleFont [UIFont fontWithName:SubtitleFontName size:SubtitleFontSize]
 

@@ -1,4 +1,4 @@
-    #import "LeftRightHostingScrollView.h"
+#import "LeftRightHostingScrollView.h"
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
@@ -22,7 +22,7 @@ typedef enum ScrollViewDirection {
     NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
     
-    UIPageControl *pageControl;
+    NSInteger currentPage;
     NSMutableArray *pageArray;
     FigureRowHostingScrollPage *figurePage;
     CGPoint departurePoint;
@@ -34,8 +34,8 @@ typedef enum ScrollViewDirection {
     ScrollViewDirection direction;
 }
 
-#define InfoPageNumber 0
-#define LandingPageNumber InfoPageNumber + 1
+#define InfoPageNumber 999
+#define LandingPageNumber 0
 #define TimelinePageNumber LandingPageNumber + 1
 #define WebViewPageNumber TimelinePageNumber + 1
 #define LastPageNumber WebViewPageNumber + 1
@@ -57,7 +57,6 @@ typedef enum ScrollViewDirection {
         departurePoint = CGPointZero;
         arrayOfFigureRows = [[NSMutableArray alloc] init];
         controls = [[WebViewControls alloc] initWithOrigin:CGPointMake(self.contentOffset.x, 0)];
-        self.backgroundColor = [UIColor colorWithRed:13/255 green:20/355 blue:20/255 alpha:1];
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
@@ -65,14 +64,12 @@ typedef enum ScrollViewDirection {
         }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPageWithNotif:) name:KeyForScrollToPageNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToLandingPage) name:KeyForLoggedIntoFacebookNotification object:nil];
-        [self addPageControl];
-        [self addLegacyInfoPage];
         [self addFigurePage];
         [self scrollToPage:LandingPageNumber];
     }
     return self;
 }
-         
+
 -(void)scrollToInfoPage {
     [self scrollToPage:InfoPageNumber];
 }
@@ -99,8 +96,7 @@ typedef enum ScrollViewDirection {
     }
     [pageArray addObject:page];
     page.frame = [self frameAtIndex:[pageArray count] - 1];
-    [self insertSubview:page belowSubview:pageControl];
-//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[page]-0-|" options:NSLayoutFormatAlignAllTop metrics:nil views:@{@"page": page}]];
+    [self addSubview:page];
     self.contentSize = CGSizeAddWidthToSize(self.contentSize, page.frame.size.width + SpaceBetweenFigureRowPages);
     
 }
@@ -143,25 +139,8 @@ typedef enum ScrollViewDirection {
 
 
 
-
--(void)addPageControl {
-    
-    CGFloat pageControlWidth = 20 * 4;
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2 - pageControlWidth / 2, PageControlYPosition, pageControlWidth, PageControlHeight)];
-    pageControl.layer.cornerRadius = PageControlCornerRadius;
-    pageControl.alpha = 0;
-    pageControl.currentPage = 0;
-    pageControl.backgroundColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:.2];
-    pageControl.numberOfPages = LastPageNumber;
-    pageControl.userInteractionEnabled = NO;
-//    [self addSubview:pageControl];
-    
-}
-
-
-
 -(CGRect)frameAtIndex:(NSInteger)index {
-
+    
     CGRect windowFrame = [[[[UIApplication sharedApplication] windows] lastObject] frame];
     return CGRectMake((self.bounds.size.width + SpaceBetweenFigureRowPages) * index , 0, self.bounds.size.width, windowFrame.size.height);
 }
@@ -178,10 +157,10 @@ typedef enum ScrollViewDirection {
     if (CGPointEqualToPoint(self.contentOffset, destinationPoint)) {
         paginationInProgress = NO;
         self.scrollEnabled = YES;
-        UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:pageControl.currentPage];
+        UIView <FigureRowPageProtocol> *page = [pageArray objectAtIndex:currentPage];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForHasScrolledToPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [page class]}];
-        if ([page isKindOfClass:[EventInfoTableView class]] && pageControl.currentPage == [pageArray count] - 1) {
+        if ([page isKindOfClass:[EventInfoTableView class]] && currentPage == [pageArray count] - 1) {
             
             LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
             webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
@@ -237,14 +216,6 @@ typedef enum ScrollViewDirection {
     [self checkIfScrollCompletedAndNotifyPage];
     [self setScrollViewDirection];
     [self notifyVisiblePage];
-    if (scrollView.contentOffset.x > self.bounds.size.width * 2) {
-        pageControl.frame = CGRectMake (scrollView.contentOffset.x + (self.bounds.size.width / 2 - (20 * 4) / 2), pageControl.frame.origin.y, pageControl.frame.size.width, pageControl.frame.size.height);
-        if (pageControl.alpha != 1) {
-            [UIView animateWithDuration:0.2 animations:^{
-                pageControl.alpha = 1;
-            }];
-        }
-    }
     if (scrollView.contentOffset.x == [self frameAtIndex:LandingPageNumber].origin.x && [pageArray count] > 0) {
         NSMutableArray *newArray = [NSMutableArray arrayWithArray:pageArray];
         for (int i=LandingPageNumber + 1; i < [newArray count]; i++) {
@@ -253,7 +224,6 @@ typedef enum ScrollViewDirection {
             [self removePage:page];
         }
     }
-    
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -268,7 +238,7 @@ typedef enum ScrollViewDirection {
 
 -(void)paginateScrollView:(UIScrollView *)scrollView {
     
-    NSUInteger nextPage = pageControl.currentPage;
+    NSUInteger nextPage = currentPage;
     
     if (self.contentOffset.x != departurePoint.x && paginationInProgress == NO) {
         
@@ -297,18 +267,18 @@ typedef enum ScrollViewDirection {
 
 -(void)scrollToPage:(NSInteger)page {
     
-    if (pageControl.currentPage != page) {
+    if (currentPage != page) {
         
         
-        NSDictionary *params = @{@"from_page": [NSNumber numberWithInteger:pageControl.currentPage], @"to_page" : [NSNumber numberWithInteger:page]};
+        NSDictionary *params = @{@"from_page": [NSNumber numberWithInteger:currentPage], @"to_page" : [NSNumber numberWithInteger:page]};
         [Flurry logEvent:@"page_movement" withParameters:params];
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForScrollingFromPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [[pageArray objectAtIndex:pageControl.currentPage] class]}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForScrollingFromPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [[pageArray objectAtIndex:currentPage] class]}];
         CGPoint pagePoint = [self frameAtIndex:page].origin;
-        departurePoint = [self frameAtIndex:pageControl.currentPage].origin;
+        departurePoint = [self frameAtIndex:currentPage].origin;
         destinationPoint = pagePoint;
         paginationInProgress = YES;
         self.scrollEnabled = NO;
-        pageControl.currentPage = page;
+        currentPage = page;
         [self setContentOffset:pagePoint animated:YES];
         departurePoint = pagePoint;
     }

@@ -23,29 +23,17 @@
 		191CF63E1749635D00086D5E /* FigureRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* FigureRow.m */; };
 		191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E849617F8E1B6003A37AC /* add-friends-button.png */; };
 		191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 191E849C17F92655003A37AC /* Cinzel-Regular.ttf */; };
-		191F78F51782DD6700729F2A /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78E31782DD6700729F2A /* AFHTTPClient.m */; };
-		191F78F61782DD6700729F2A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78E51782DD6700729F2A /* AFHTTPRequestOperation.m */; };
-		191F78F71782DD6700729F2A /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78E71782DD6700729F2A /* AFImageRequestOperation.m */; };
-		191F78F81782DD6700729F2A /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78E91782DD6700729F2A /* AFJSONRequestOperation.m */; };
-		191F78F91782DD6700729F2A /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78EB1782DD6700729F2A /* AFNetworkActivityIndicatorManager.m */; };
-		191F78FA1782DD6700729F2A /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78EE1782DD6700729F2A /* AFPropertyListRequestOperation.m */; };
-		191F78FB1782DD6700729F2A /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78F01782DD6700729F2A /* AFURLConnectionOperation.m */; };
-		191F78FC1782DD6700729F2A /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78F21782DD6700729F2A /* AFXMLRequestOperation.m */; };
-		191F78FD1782DD6700729F2A /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78F41782DD6700729F2A /* UIImageView+AFNetworking.m */; };
 		191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78FF1783990B00729F2A /* RelatedEventLabel.m */; };
 		1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
-		192784A81827C35500DAA196 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 192784A71827C35500DAA196 /* libGoogleAnalyticsServices.a */; };
 		192784AA1827C37E00DAA196 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 192784A91827C37E00DAA196 /* libz.dylib */; };
 		192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */; };
 		192BA7DC17F9575400ECBA49 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7DB17F9575400ECBA49 /* Images.xcassets */; };
 		192BA7DE17F9595F00ECBA49 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7DD17F9595F00ECBA49 /* Default.png */; };
-		192BA7E417F9D32000ECBA49 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 192BA7E317F9D32000ECBA49 /* FacebookSDK.framework */; };
 		192BA7E717F9D76600ECBA49 /* FacebookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 192BA7E617F9D76600ECBA49 /* FacebookUtils.m */; };
 		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
-		19354F1B17F1BA17007569F9 /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19354F1A17F1BA17007569F9 /* libFlurry_4.2.3.a */; };
 		19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19354F1C17F1BA98007569F9 /* Security.framework */; };
 		1945775817D3EAA000C5DB62 /* button-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775617D3EAA000C5DB62 /* button-back.png */; };
 		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
@@ -83,6 +71,7 @@
 		1975752817D06EA800822779 /* EventInfoHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752717D06EA800822779 /* EventInfoHeaderCell.xib */; };
 		197EA5A617F543740015DD78 /* 298-circlex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197EA5A517F543740015DD78 /* 298-circlex@2x.png */; };
 		1980719017E8117B0039FC65 /* FigureRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980718F17E8117B0039FC65 /* FigureRowCell.m */; };
+		1982639C1861639100CA3FEE /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1982639A1861639100CA3FEE /* libFlurry_4.2.3.a */; };
 		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
 		1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
@@ -127,6 +116,7 @@
 		4EEA6D0E1526902D00B96EFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D071526902D00B96EFD /* main.m */; };
 		4EEA6D451526A90200B96EFD /* LegacyAppConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */; };
 		4EEA6D5D1526CAEF00B96EFD /* LegacyAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */; };
+		C12EEAC0084E419EA9E773D9 /* libPods-LegacyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4750656191454527BBB82BAF /* libPods-LegacyApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,49 +147,20 @@
 		191CF63D1749635D00086D5E /* FigureRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRow.m; sourceTree = "<group>"; };
 		191E849617F8E1B6003A37AC /* add-friends-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends-button.png"; sourceTree = "<group>"; };
 		191E849C17F92655003A37AC /* Cinzel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cinzel-Regular.ttf"; sourceTree = "<group>"; };
-		191F78E21782DD6700729F2A /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
-		191F78E31782DD6700729F2A /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
-		191F78E41782DD6700729F2A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		191F78E51782DD6700729F2A /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		191F78E61782DD6700729F2A /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
-		191F78E71782DD6700729F2A /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
-		191F78E81782DD6700729F2A /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
-		191F78E91782DD6700729F2A /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
-		191F78EA1782DD6700729F2A /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		191F78EB1782DD6700729F2A /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		191F78EC1782DD6700729F2A /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		191F78ED1782DD6700729F2A /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
-		191F78EE1782DD6700729F2A /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
-		191F78EF1782DD6700729F2A /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		191F78F01782DD6700729F2A /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		191F78F11782DD6700729F2A /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
-		191F78F21782DD6700729F2A /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
-		191F78F31782DD6700729F2A /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		191F78F41782DD6700729F2A /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		191F78FE1783990B00729F2A /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		191F78FF1783990B00729F2A /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
 		1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LegacyInfoPage.xib; path = Resources/LegacyInfoPage.xib; sourceTree = SOURCE_ROOT; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
-		192784A01827C34000DAA196 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		192784A11827C34000DAA196 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		192784A21827C34000DAA196 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		192784A31827C34000DAA196 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		192784A41827C34000DAA196 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		192784A51827C34000DAA196 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		192784A71827C35500DAA196 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		192784A91827C37E00DAA196 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-header-text@2x.png"; sourceTree = "<group>"; };
 		192BA7DB17F9575400ECBA49 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LegacyApp/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		192BA7DD17F9595F00ECBA49 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
-		192BA7E317F9D32000ECBA49 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		192BA7E517F9D76500ECBA49 /* FacebookUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookUtils.h; sourceTree = "<group>"; };
 		192BA7E617F9D76600ECBA49 /* FacebookUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookUtils.m; sourceTree = "<group>"; };
 		192E42B1174668E900192BD5 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
 		192E42B2174668E900192BD5 /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
 		192E6E411724B1AA008C9153 /* ImageWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWidget.h; sourceTree = "<group>"; };
 		192E6E421724B1AA008C9153 /* ImageWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidget.m; sourceTree = "<group>"; };
-		19354F1917F1BA17007569F9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		19354F1A17F1BA17007569F9 /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		19354F1C17F1BA98007569F9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1945775617D3EAA000C5DB62 /* button-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-back.png"; path = "images/button-back.png"; sourceTree = "<group>"; };
 		1945775717D3EAA000C5DB62 /* button-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-forward.png"; path = "images/button-forward.png"; sourceTree = "<group>"; };
@@ -252,6 +213,8 @@
 		197EA5A517F543740015DD78 /* 298-circlex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "298-circlex@2x.png"; path = "images/298-circlex@2x.png"; sourceTree = "<group>"; };
 		1980718E17E8117B0039FC65 /* FigureRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowCell.h; sourceTree = "<group>"; };
 		1980718F17E8117B0039FC65 /* FigureRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowCell.m; sourceTree = "<group>"; };
+		1982639A1861639100CA3FEE /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
+		1982639B1861639100CA3FEE /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
 		199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftRightHostingScrollView.m; sourceTree = "<group>"; };
 		1993550816D4E89900D73389 /* ImageWidgetContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageWidgetContainer.xib; sourceTree = "<group>"; };
@@ -300,6 +263,7 @@
 		19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ObjectArchiveAccessor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ObjectArchiveAccessor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19FAD7831763005E006FA829 /* FigureRowPageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowPageProtocol.h; sourceTree = "<group>"; };
+		4750656191454527BBB82BAF /* libPods-LegacyApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0F3CA0154533E800369BE1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility_AppSettings.h; path = ../Utility_AppSettings.h; sourceTree = "<group>"; };
 		4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility_AppSettings.m; path = ../Utility_AppSettings.m; sourceTree = "<group>"; };
@@ -323,6 +287,7 @@
 		4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyAppConnection.m; sourceTree = "<group>"; };
 		4EEA6D5B1526CAEF00B96EFD /* LegacyAppRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LegacyAppRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LegacyAppRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyApp.xcconfig"; path = "Pods/Pods-LegacyApp.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,17 +300,16 @@
 				196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */,
 				19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */,
 				19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */,
+				1982639C1861639100CA3FEE /* libFlurry_4.2.3.a in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
-				19354F1B17F1BA17007569F9 /* libFlurry_4.2.3.a in Frameworks */,
 				19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */,
 				19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */,
-				192784A81827C35500DAA196 /* libGoogleAnalyticsServices.a in Frameworks */,
 				4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */,
 				199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */,
 				4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */,
 				4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */,
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
-				192BA7E417F9D32000ECBA49 /* FacebookSDK.framework in Frameworks */,
+				C12EEAC0084E419EA9E773D9 /* libPods-LegacyApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,46 +334,6 @@
 				19BDFDBE17FBBFAA00B415C1 /* RowProtocol.h */,
 			);
 			name = "Row Components";
-			sourceTree = "<group>";
-		};
-		191F78E11782DD4800729F2A /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				191F78E21782DD6700729F2A /* AFHTTPClient.h */,
-				191F78E31782DD6700729F2A /* AFHTTPClient.m */,
-				191F78E41782DD6700729F2A /* AFHTTPRequestOperation.h */,
-				191F78E51782DD6700729F2A /* AFHTTPRequestOperation.m */,
-				191F78E61782DD6700729F2A /* AFImageRequestOperation.h */,
-				191F78E71782DD6700729F2A /* AFImageRequestOperation.m */,
-				191F78E81782DD6700729F2A /* AFJSONRequestOperation.h */,
-				191F78E91782DD6700729F2A /* AFJSONRequestOperation.m */,
-				191F78EA1782DD6700729F2A /* AFNetworkActivityIndicatorManager.h */,
-				191F78EB1782DD6700729F2A /* AFNetworkActivityIndicatorManager.m */,
-				191F78EC1782DD6700729F2A /* AFNetworking.h */,
-				191F78ED1782DD6700729F2A /* AFPropertyListRequestOperation.h */,
-				191F78EE1782DD6700729F2A /* AFPropertyListRequestOperation.m */,
-				191F78EF1782DD6700729F2A /* AFURLConnectionOperation.h */,
-				191F78F01782DD6700729F2A /* AFURLConnectionOperation.m */,
-				191F78F11782DD6700729F2A /* AFXMLRequestOperation.h */,
-				191F78F21782DD6700729F2A /* AFXMLRequestOperation.m */,
-				191F78F31782DD6700729F2A /* UIImageView+AFNetworking.h */,
-				191F78F41782DD6700729F2A /* UIImageView+AFNetworking.m */,
-			);
-			name = AFNetworking;
-			sourceTree = "<group>";
-		};
-		192784A61827C34600DAA196 /* Google Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				192784A71827C35500DAA196 /* libGoogleAnalyticsServices.a */,
-				192784A01827C34000DAA196 /* GAI.h */,
-				192784A11827C34000DAA196 /* GAIDictionaryBuilder.h */,
-				192784A21827C34000DAA196 /* GAIFields.h */,
-				192784A31827C34000DAA196 /* GAILogger.h */,
-				192784A41827C34000DAA196 /* GAITrackedViewController.h */,
-				192784A51827C34000DAA196 /* GAITracker.h */,
-			);
-			name = "Google Analytics";
 			sourceTree = "<group>";
 		};
 		197305E517C5B30400958D15 /* Event Info Components */ = {
@@ -528,6 +452,7 @@
 				4EEA6D101526906000B96EFD /* Dependencies */,
 				4EEA6CE115268ED300B96EFD /* Frameworks */,
 				4EEA6CDF15268ED200B96EFD /* Products */,
+				F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -542,16 +467,16 @@
 		4EEA6CE115268ED300B96EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1982639A1861639100CA3FEE /* libFlurry_4.2.3.a */,
+				1982639B1861639100CA3FEE /* Flurry.h */,
 				192784A91827C37E00DAA196 /* libz.dylib */,
-				192784A61827C34600DAA196 /* Google Analytics */,
 				196C6B1C18051FCD00475ACB /* MessageUI.framework */,
 				19354F1C17F1BA98007569F9 /* Security.framework */,
-				19354F1917F1BA17007569F9 /* Flurry.h */,
-				19354F1A17F1BA17007569F9 /* libFlurry_4.2.3.a */,
 				4E0F3CA0154533E800369BE1 /* QuartzCore.framework */,
 				4EEA6CE215268ED300B96EFD /* UIKit.framework */,
 				4EEA6CE415268ED300B96EFD /* Foundation.framework */,
 				4EEA6CE615268ED300B96EFD /* CoreGraphics.framework */,
+				4750656191454527BBB82BAF /* libPods-LegacyApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -651,8 +576,6 @@
 		4EEA6D101526906000B96EFD /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				192BA7E317F9D32000ECBA49 /* FacebookSDK.framework */,
-				191F78E11782DD4800729F2A /* AFNetworking */,
 				19D29F7D16A671C800D46B0A /* Accounts.framework */,
 				199C0CAB16C0C0D900068E73 /* CoreData.framework */,
 				19D29F7916A6706A00D46B0A /* CFNetwork.framework */,
@@ -670,9 +593,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "LegacyApp" */;
 			buildPhases = (
+				45D0B4F6EC714F2F97571EBE /* Check Pods Manifest.lock */,
 				4EEA6CDA15268ED200B96EFD /* Sources */,
 				4EEA6CDB15268ED200B96EFD /* Frameworks */,
 				4EEA6CDC15268ED200B96EFD /* Resources */,
+				2169295CF7D64867A65A23AB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -770,6 +695,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2169295CF7D64867A65A23AB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-LegacyApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		45D0B4F6EC714F2F97571EBE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4EEA6CDA15268ED200B96EFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -809,16 +767,7 @@
 				1909A8691776192100256ED0 /* FigureRowHostingScrollPage.m in Sources */,
 				1909A8731776B45100256ED0 /* FacebookSignInButton.m in Sources */,
 				1909A87B1777471E00256ED0 /* TopActionView.m in Sources */,
-				191F78F51782DD6700729F2A /* AFHTTPClient.m in Sources */,
-				191F78F61782DD6700729F2A /* AFHTTPRequestOperation.m in Sources */,
-				191F78F71782DD6700729F2A /* AFImageRequestOperation.m in Sources */,
-				191F78F81782DD6700729F2A /* AFJSONRequestOperation.m in Sources */,
 				19BDFDC417FBE99800B415C1 /* EventPersonRelation.m in Sources */,
-				191F78F91782DD6700729F2A /* AFNetworkActivityIndicatorManager.m in Sources */,
-				191F78FA1782DD6700729F2A /* AFPropertyListRequestOperation.m in Sources */,
-				191F78FB1782DD6700729F2A /* AFURLConnectionOperation.m in Sources */,
-				191F78FC1782DD6700729F2A /* AFXMLRequestOperation.m in Sources */,
-				191F78FD1782DD6700729F2A /* UIImageView+AFNetworking.m in Sources */,
 				191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */,
 				197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */,
 				197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */,
@@ -910,6 +859,7 @@
 		};
 		4EEA6CF715268ED300B96EFD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -934,6 +884,7 @@
 				);
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-lsqlite3.0",
 					"-ObjC",
 					"-all_load",
@@ -947,6 +898,7 @@
 		};
 		4EEA6CF815268ED300B96EFD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -974,6 +926,7 @@
 					"-lsqlite3.0",
 					"-ObjC",
 					"-all_load",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "CB2FAA9E-1EE3-4982-9EC4-DEA5C909FBB4";

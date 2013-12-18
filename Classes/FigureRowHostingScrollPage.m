@@ -54,14 +54,10 @@ static NSString *ReuseID = @"CellReuseId";
         fetchController.delegate = self;
         self.contentOffset = CGPointMake(0, 0);
         [fetchController performFetch:NULL];
+        
+        [self addTopActionView];
     }
     return self;
-}
-
--(void)addTopLine {
-    lineView = [[UIView alloc] initWithFrame:CGRectMake(15, actionViewTop.frame.size.height - 1, 320 - 30 , .5)];
-    lineView.backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
-    [actionViewTop addSubview:lineView];
 }
 
 #pragma mark TopActionView Control Methods
@@ -98,7 +94,6 @@ static NSString *ReuseID = @"CellReuseId";
         }
         actionViewTop = [[TopActionView alloc] initWithFrame:actionViewTopFrame];
         [headerViewWrapper addSubview:actionViewTop];
-        [self addTopLine];
     }
     
     
@@ -281,15 +276,15 @@ static NSString *ReuseID = @"CellReuseId";
     return nil;
 }
 
--(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *ourHit = [super hitTest:point withEvent:event];
-    if (ourHit == clearView) {
-        [actionViewTop addFriendsButtonTappedAction];
-        return actionViewTop;
-    } else {
-        return ourHit;
-    }
-}
+//-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    UIView *ourHit = [super hitTest:point withEvent:event];
+//    if (ourHit == clearView) {
+//        [actionViewTop addFriendsButtonTappedAction];
+//        return actionViewTop;
+//    } else {
+//        return ourHit;
+//    }
+//}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
@@ -334,7 +329,6 @@ static NSString *ReuseID = @"CellReuseId";
 
 -(void)becameVisible {
     
-    [self addTopActionView];
     actionViewTop.isVisible = YES;
     if ([FBSession activeSession].state == FBSessionStateOpen) {
     } else {

@@ -16,7 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         buttonRadii = TopBarButtonRadius;
-        self.backgroundColor = [UIColor colorWithHexString:HeaderBackgroundColor];
+        self.backgroundColor = HeaderBackgroundColor;
         yButtonOrigin = self.frame.size.height / 2 - TopBarButtonRadius + 5;
         [self addProfilePicButton];
         [self addTitle];

@@ -1,4 +1,4 @@
-#import "FigureRow.h"
+#import "FigureRowHorizontalScrolView.h"
 #import "MainFigureInfoPage.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
@@ -9,11 +9,11 @@
 #import "LegacyWebView.h"
 #import "FigureRowActionOverlay.h"
 #import <FacebookSDK/FBNativeDialogs.h>
-@interface FigureRow () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface FigureRowHorizontalScrolView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end
 
-@implementation FigureRow {
+@implementation FigureRowHorizontalScrolView {
     
     MainFigureInfoPage *infoPage;
     LegacyWebView *webView;
@@ -26,7 +26,6 @@
     NSMutableArray *pageArray;
     UIView *nameContainerView;
     
-    UISwipeGestureRecognizer *swipeGesture;
     UITapGestureRecognizer *tapGesture;
     CGPoint lastPoint;
     BOOL isSwiping;
@@ -40,8 +39,7 @@ CGFloat pageWidth = 320;
     CGRect frame = CGRectMake(origin.x, origin.y, FigureRowPageWidth, FigureRowPageInitialHeight);
     self = [super initWithFrame:frame];
     if (self) {
-
-//        [self addMoreLessButton];
+        
         self.contentSize = CGSizeAddWidthToSize(self.bounds.size, 100);
         self.bounces = NO;
         self.showsHorizontalScrollIndicator = NO;
@@ -75,28 +73,11 @@ CGFloat pageWidth = 320;
 
 #pragma mark Gesture Recognizer Methods
 
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
-    if (gestureRecognizer == swipeGesture || otherGestureRecognizer == swipeGesture) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
--(void)beginSwiping:(id)test {
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollToInfo" object:nil];
-}
 
 
 -(void)addTapGestureRecognizer {
 
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addActionOverlay)];
-    swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(beginSwiping:)];
-    swipeGesture.delegate = self;
-    swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self addGestureRecognizer:swipeGesture];
     [self addGestureRecognizer:tapGesture];
 }
 
@@ -226,7 +207,6 @@ CGFloat pageWidth = 320;
         [self addTapGestureRecognizer];
     } else {
         [tapGesture removeTarget:self action:NULL];
-        [swipeGesture removeTarget:self action:NULL];
     }
 }
 

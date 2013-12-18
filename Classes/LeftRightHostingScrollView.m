@@ -2,7 +2,7 @@
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
-#import "FigureRow.h"
+#import "FigureRowHorizontalScrolView.h"
 #import "Event.h"
 #import "LegacyWebView.h"
 #import "FigureRowHostingScrollPage.h"
@@ -130,8 +130,8 @@ typedef enum ScrollViewDirection {
     [self addPage:infoPage];
     [self scrollToPage:TimelinePageNumber];
     
-    if ([notif.object isKindOfClass:[FigureRow class]]) {
-        FigureRow *theRow = (FigureRow *)notif.object;
+    if ([notif.object isKindOfClass:[FigureRowHorizontalScrolView class]]) {
+        FigureRowHorizontalScrolView *theRow = (FigureRowHorizontalScrolView *)notif.object;
         [theRow delayedReset];
     }
     

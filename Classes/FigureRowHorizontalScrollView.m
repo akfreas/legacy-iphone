@@ -28,7 +28,7 @@
 
 - (id)initWithOrigin:(CGPoint)origin
 {
-    CGRect frame = CGRectMake(origin.x, origin.y, FigureRowPageWidth, FigureRowCellHeight);
+    CGRect frame = CGRectMake(origin.x, origin.y, FigureRowCellWidth, FigureRowCellHeight);
     self = [super initWithFrame:frame];
     if (self) {
         
@@ -205,7 +205,7 @@
 #pragma mark Page Management
 
 -(void)addContentView {
-    figureContentView = [[FigureRowContentView alloc] initWithFrame:CGRectMake(0, 0, FigureRowPageWidth, FigureRowCellHeight)];
+    figureContentView = [[FigureRowContentView alloc] initWithFrame:CGRectMake(0, 0, FigureRowCellWidth, FigureRowCellHeight)];
     [self addSubview:figureContentView];
 }
 

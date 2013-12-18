@@ -27,7 +27,7 @@
 
 #define FigureRowCellHeight 140
 #define NoEventFigureRowHeight 60
-#define FigureRowPageWidth 320
+#define FigureRowCellWidth 320
 
 
 #define SpaceBetweenFigureRowPages 1

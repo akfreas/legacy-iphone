@@ -4,6 +4,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <AFNetworking/AFNetworking.h>
+#import <HexColors/HexColor.h>
 #import "Utility_AppSettings.h"
 #import "CGRectUtils.h"
 #import "Flurry.h"

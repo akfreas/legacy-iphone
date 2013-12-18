@@ -21,12 +21,14 @@
 
 -(void)getWithCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block {
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request.urlRequest success:^(NSURLRequest *URLRequest, NSHTTPURLResponse *response, id JSON) {
-//        NSLog(@"Json from request: %@\n%@", request, JSON);
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request.urlRequest];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
         _block(request, JSON, NULL);
-    } failure:^(NSURLRequest *theRequest, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"URL: %@ Response: %@ Error: %@ JSON:%@", theRequest.URL, response, error, JSON);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"URL: %@ Error: %@", operation.request.URL, error);
     }];
+    
     [operation start];
 }
 

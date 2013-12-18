@@ -283,7 +283,7 @@ CGFloat InfoPageWidth = 280;
 -(void)setEventRelation:(EventPersonRelation *)rowData cellOrigin:(CGPoint)rowLocation {
     
     
-    exampleRow = [[FigureRowHorizontalScrollView alloc] initWithOrigin:CGPointMake(0, 200)];
+//    exampleRow = [[FigureRowHorizontalScrollView alloc] initWithOrigin:CGPointMake(0, 200)];
     exampleRow.allowsSelection = NO;
     exampleRow.event = rowData.event;
     exampleRow.person = rowData.person;

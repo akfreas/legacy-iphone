@@ -21,7 +21,6 @@
 		191CF6381747341700086D5E /* RightIndicatorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF6371747341700086D5E /* RightIndicatorLines.m */; };
 		191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
 		191CF63E1749635D00086D5E /* FigureRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* FigureRow.m */; };
-		191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E849617F8E1B6003A37AC /* add-friends-button.png */; };
 		191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 191E849C17F92655003A37AC /* Cinzel-Regular.ttf */; };
 		191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78FF1783990B00729F2A /* RelatedEventLabel.m */; };
 		1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */; };
@@ -72,6 +71,10 @@
 		197EA5A617F543740015DD78 /* 298-circlex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197EA5A517F543740015DD78 /* 298-circlex@2x.png */; };
 		1980719017E8117B0039FC65 /* FigureRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980718F17E8117B0039FC65 /* FigureRowCell.m */; };
 		1982639C1861639100CA3FEE /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1982639A1861639100CA3FEE /* libFlurry_4.2.3.a */; };
+		1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */; };
+		198263A118616D1A00CA3FEE /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198263A018616D1A00CA3FEE /* Reveal.framework */; };
+		198263A418616DC600CA3FEE /* add-friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A218616DC600CA3FEE /* add-friends.png */; };
+		198263A518616DC600CA3FEE /* add-friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A318616DC600CA3FEE /* add-friends@2x.png */; };
 		199354FD16D4A29700D73389 /* LeftRightHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
 		1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
@@ -145,7 +148,6 @@
 		191CF63A17488CE700086D5E /* CircleImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleImageLayer.m; sourceTree = "<group>"; };
 		191CF63C1749635C00086D5E /* FigureRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRow.h; sourceTree = "<group>"; };
 		191CF63D1749635D00086D5E /* FigureRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRow.m; sourceTree = "<group>"; };
-		191E849617F8E1B6003A37AC /* add-friends-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends-button.png"; sourceTree = "<group>"; };
 		191E849C17F92655003A37AC /* Cinzel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cinzel-Regular.ttf"; sourceTree = "<group>"; };
 		191F78FE1783990B00729F2A /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		191F78FF1783990B00729F2A /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
@@ -215,6 +217,11 @@
 		1980718F17E8117B0039FC65 /* FigureRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowCell.m; sourceTree = "<group>"; };
 		1982639A1861639100CA3FEE /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		1982639B1861639100CA3FEE /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		1982639D18616AD300CA3FEE /* UIView+LayoutHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayoutHelpers.h"; sourceTree = "<group>"; };
+		1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayoutHelpers.m"; sourceTree = "<group>"; };
+		198263A018616D1A00CA3FEE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
+		198263A218616DC600CA3FEE /* add-friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends.png"; sourceTree = "<group>"; };
+		198263A318616DC600CA3FEE /* add-friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends@2x.png"; sourceTree = "<group>"; };
 		199354FB16D4A29700D73389 /* LeftRightHostingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightHostingScrollView.h; sourceTree = "<group>"; };
 		199354FC16D4A29700D73389 /* LeftRightHostingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftRightHostingScrollView.m; sourceTree = "<group>"; };
 		1993550816D4E89900D73389 /* ImageWidgetContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageWidgetContainer.xib; sourceTree = "<group>"; };
@@ -306,6 +313,7 @@
 				19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */,
 				4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */,
 				199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */,
+				198263A118616D1A00CA3FEE /* Reveal.framework in Frameworks */,
 				4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */,
 				4EEA6CE515268ED300B96EFD /* Foundation.framework in Frameworks */,
 				4EEA6CE715268ED300B96EFD /* CoreGraphics.framework in Frameworks */,
@@ -374,6 +382,8 @@
 		19D61CB916B06D2600C81E60 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1982639D18616AD300CA3FEE /* UIView+LayoutHelpers.h */,
+				1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */,
 				1945776C17D59F7100C5DB62 /* UIImage+StackBlur.h */,
 				1945776D17D59F7100C5DB62 /* UIImage+StackBlur.m */,
 				19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */,
@@ -412,6 +422,8 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				198263A218616DC600CA3FEE /* add-friends.png */,
+				198263A318616DC600CA3FEE /* add-friends@2x.png */,
 				196C6B2318052DEC00475ACB /* legacyapp-headertext_03@2x.png */,
 				1967B96B1804B8440092766D /* chevron-left@2x.png */,
 				1967B96C1804B8440092766D /* chevron-right@2x.png */,
@@ -426,7 +438,6 @@
 				192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */,
 				197EA5A517F543740015DD78 /* 298-circlex@2x.png */,
 				1945775617D3EAA000C5DB62 /* button-back.png */,
-				191E849617F8E1B6003A37AC /* add-friends-button.png */,
 				1945775717D3EAA000C5DB62 /* button-forward.png */,
 				1909A85F1772D44300256ED0 /* informationcircle.png */,
 				1909A85D1772D3B300256ED0 /* FB-f-Logo__blue_100.png */,
@@ -467,6 +478,7 @@
 		4EEA6CE115268ED300B96EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				198263A018616D1A00CA3FEE /* Reveal.framework */,
 				1982639A1861639100CA3FEE /* libFlurry_4.2.3.a */,
 				1982639B1861639100CA3FEE /* Flurry.h */,
 				192784A91827C37E00DAA196 /* libz.dylib */,
@@ -657,7 +669,6 @@
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
 				1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */,
 				196B77521817D52E00DF0C65 /* MainScreen.xib in Resources */,
-				191E849717F8E1B6003A37AC /* add-friends-button.png in Resources */,
 				1967B963180491B60092766D /* chevron-arrow@2x.png in Resources */,
 				1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
@@ -671,6 +682,7 @@
 				194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */,
 				197308D41707B57C00FCADD3 /* question.png in Resources */,
 				19C6F811171BBA1D00DDD6D9 /* oldpaper-bg@2x.png in Resources */,
+				198263A418616DC600CA3FEE /* add-friends.png in Resources */,
 				19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */,
 				19C7BD861749DD68004C8B0A /* DescriptionPage.xib in Resources */,
 				197EA5A617F543740015DD78 /* 298-circlex@2x.png in Resources */,
@@ -678,6 +690,7 @@
 				192BA7DC17F9575400ECBA49 /* Images.xcassets in Resources */,
 				1909A85E1772D3B300256ED0 /* FB-f-Logo__blue_100.png in Resources */,
 				1909A8601772D44300256ED0 /* informationcircle.png in Resources */,
+				198263A518616DC600CA3FEE /* add-friends@2x.png in Resources */,
 				1909A8741776B45100256ED0 /* FacebookSignInButton.xib in Resources */,
 				19C55E4A1783A7890099AE4A /* icon.png in Resources */,
 				1967B96E1804B8440092766D /* chevron-left@2x.png in Resources */,
@@ -743,6 +756,7 @@
 				4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */,
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
 				19D29F6E16A66B8100D46B0A /* FBLoginViewController.m in Sources */,
+				1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */,
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
 				19BDFDB917FBA44900B415C1 /* NoEventPersonRow.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
@@ -867,11 +881,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Dependencies\\\"",
-					"\\\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\\\"",
+					"\\\\\\\"$(SRCROOT)/Dependencies\\\\\\\"",
+					"\\\\\\\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\\\\\\\"",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/Socialize.embeddedframework\\\"",
+					"\\\\\\\"$(SRCROOT)/Socialize.embeddedframework\\\\\\\"",
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp/Dependencies,
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/LegacyApp-Prefix.pch";
@@ -906,11 +921,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Dependencies\\\"",
-					"\\\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\\\"",
+					"\\\\\\\"$(SRCROOT)/Dependencies\\\\\\\"",
+					"\\\\\\\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\\\\\\\"",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/Socialize.embeddedframework\\\"",
+					"\\\\\\\"$(SRCROOT)/Socialize.embeddedframework\\\\\\\"",
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp/Dependencies,
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

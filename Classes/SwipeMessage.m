@@ -208,7 +208,6 @@ CGFloat InfoPageWidth = 280;
     doneButton.titleLabel.font = [UIFont fontWithName:@"Cinzel-Regular" size:30.0];
     
     [superView addSubview:facebookAnnotationHostingView];
-//    facebookAnnotationHostingView.backgroundColor = [UIColor redColor];// colorWithWhite:1 alpha:.5];
     facebookAnnotationHostingView.autoresizesSubviews = NO;
     UIView *facebookCircleButton = [superView viewWithTag:8];
     facebookAnnotationHostingView.frame = CGRectMake(0, facebookCircleButton.frame.size.height + facebookCircleButton.frame.origin.y, superView.frame.size.width, superView.frame.size.height - facebookCircleButton.frame.origin.y);

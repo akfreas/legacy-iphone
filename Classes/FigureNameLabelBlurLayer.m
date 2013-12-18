@@ -23,8 +23,6 @@
         initialBlur = 13;
         currentBlur = initialBlur;
         self.backgroundColor = [UIColor clearColor];
-//        self.backgroundColor = [UIColor redColor];
-//        [self addSubview:nativeLabel];
         labelImage = [self drawStringInContext:nil];
         
         labelImageView = [[UIImageView alloc] initWithImage:labelImage];

@@ -9,34 +9,25 @@
 #import "ImageDownloadUtil.h"
 
 @implementation ImageWidgetContainer {
-        
+    
     IBOutlet UIImageView *personThumbnail;
-    IBOutlet UILabel *birthdayLabel;
-    IBOutlet UILabel *firstNameLabel;
-    IBOutlet UILabel *lastNameLabel;
-    IBOutlet UIView *eventView;
     
     UIImage *imageForThumb;
-    ProgressIndicator *progressIndicator;
     NSOperationQueue *operationQueue;
     ObjectArchiveAccessor *accessor;
 }
 
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    
+-(id)init {
+    self = [super init];
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
         accessor = [ObjectArchiveAccessor sharedInstance];
-        [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.class) owner:self options:nil];
         _widget = [[ImageWidget alloc] init];
-//        self.backgroundColor = [UIColor greenColor];
+        //        self.backgroundColor = [UIColor greenColor];
         [self addSubview:_widget];
-        progressIndicator = [[ProgressIndicator alloc] initWithCenterPoint:_widget.center radius:_widget.largeImageRadius - ImageLayerDefaultStrokeWidth];
-        [_widget.layer addSublayer:progressIndicator];
+        
     }
-    
     return self;
 }
 
@@ -61,8 +52,6 @@
 
 -(void)layoutSubviews {
     
-    
-    
     if (self.event == nil) {
         
     } else {
@@ -72,13 +61,7 @@
 }
 
 -(void)getFigureThumbnailImage {
-    
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [progressIndicator animate];
-    });
     [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:self.event.figure completion:^(UIImage *theImage) {
-        [progressIndicator stopAnimating];
         imageForThumb = theImage;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setNeedsLayout];
@@ -92,7 +75,6 @@
     imageForThumb = nil;
     personThumbnail.image = nil;
     _widget.largeImage = nil;
-    progressIndicator.hidden = YES;
     if (_event == nil) {
     } else {
         [self getFigureThumbnailImage];
@@ -121,14 +103,5 @@
         [self removeObserver:self forKeyPath:@"self.person.thumbnail"];
     }
 }
-
--(void)expandWidget {
-    _widget.expanded = YES;
-}
-
--(void)collapseWidget {
-    _widget.expanded = NO;
-}
-
 
 @end

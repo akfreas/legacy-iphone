@@ -7,8 +7,7 @@
 
 @property (nonatomic, strong) Person *person;
 @property (nonatomic, strong) Event *event;
-@property (strong, nonatomic) IBOutlet UIView *view;
-@property (nonatomic) IBOutlet ImageWidgetContainer *widgetContainer;
+@property (nonatomic, readonly) ImageWidgetContainer *widgetContainer;
 
 @end
 

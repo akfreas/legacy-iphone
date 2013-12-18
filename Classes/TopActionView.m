@@ -6,47 +6,39 @@
 @implementation TopActionView {
     CircleImageView *addFriendsButton;
     CircleImageView *profilePicButton;
-    UIToolbar *toolBar;
     CGFloat buttonRadii;
-    UIImageView *headerImage;
     CGFloat yButtonOrigin;
+    UILabel *titleLabel;
 }
-#define TopBarButtonRadius 17
-#define TopBarLeftMargin 15
-#define TopBarTopMargin 15
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         buttonRadii = TopBarButtonRadius;
-        toolBar = [[UIToolbar alloc] initWithFrame:self.bounds];
-        [self.layer insertSublayer:toolBar.layer atIndex:0];
-        if ([toolBar respondsToSelector:@selector(setBarTintColor:)]) {
-            [toolBar setBarTintColor:TopActionViewDefaultTintColor];
-        } else {
-            toolBar.alpha = 0.96f;
-            toolBar.tintColor = [UIColor whiteColor];
-        }
-        
+        self.backgroundColor = [UIColor colorWithHexString:HeaderBackgroundColor];
         yButtonOrigin = self.frame.size.height / 2 - TopBarButtonRadius + 5;
-        [self addAddFriendsButton];
         [self addProfilePicButton];
-        [self addHeaderTextImage];
+        [self addTitle];
+        [self addAddFriendsButton];
     }
     return self;
 }
 
--(void)addHeaderTextImage {
-    
-    headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"legacy-header-text.png"]];
-    headerImage.frame = CGRectMakeFrameForDeadCenterInRect(self.frame, headerImage.bounds.size);
-    [self addSubview:headerImage];
+-(void)addTitle {
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleLabel.text = @"Legacy";
+    titleLabel.font = HeaderFont;
+    titleLabel.textColor = [UIColor whiteColor];
+    MXDictionaryOfVariableBindings(titleLabel);
+    [self addSubview:titleLabel];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 }
 
 -(void)addAddFriendsButton {
     
-    addFriendsButton = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"add-friends-button.png"] radius:buttonRadii];
+    addFriendsButton = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"add-friends.png"] radius:buttonRadii];
     addFriendsButton.frame = CGRectMake(self.frame.size.width - buttonRadii*2 - TopBarLeftMargin, yButtonOrigin, addFriendsButton.frame.size.height, addFriendsButton.frame.size.width);
     addFriendsButton.tag = 8;
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addFriendsButtonTappedAction)];
@@ -80,12 +72,6 @@
 -(void)setIsVisible:(BOOL)isVisible {
     if (isVisible && profilePicButton.image == nil) {
         [self configureProfilePicButton];
-    }
-}
-
--(void)setTintColor:(UIColor *)tintColor {
-    if ([toolBar respondsToSelector:@selector(setBarTintColor:)]) {
-        [toolBar setBarTintColor:tintColor];
     }
 }
 

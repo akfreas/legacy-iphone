@@ -21,7 +21,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 #if DEBUG==0
     [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:@"BM6HRVCKMTZK83B29BTH"];
-#endif
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     
@@ -33,6 +32,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     // Initialize tracker.
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45417322-1"];
+#endif
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

@@ -107,4 +107,4 @@
 #define PersonPhotoBorderSize 4
 #define PersonPhotoOffset 10
 
-#define UIBind(...)  NSDictionary *UIBindings = MXDictionaryOfVariableBindings(__VA_ARGS__)
+#define UIBind(...)  NSDictionary *BBindings = MXDictionaryOfVariableBindings(__VA_ARGS__)

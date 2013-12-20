@@ -35,12 +35,12 @@
                                                           attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:arrowView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     [arrowView addConstraint:[NSLayoutConstraint constraintWithItem:arrowImage attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:arrowView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
     UIBind(arrowView, arrowImage);
-//    [arrowView addConstraintWithVisualFormat:@"H:|[arrowImage]|" bindings:UIBindings];
-//    [arrowView addConstraintWithVisualFormat:@"V:|[arrowImage]|" bindings:UIBindings];
+//    [arrowView addConstraintWithVisualFormat:@"H:|[arrowImage]|" bindings:BBindings];
+//    [arrowView addConstraintWithVisualFormat:@"V:|[arrowImage]|" bindings:BBindings];
 
     [self.contentView addSubview:arrowView];
-    [self.contentView addConstraintWithVisualFormat:@"V:|[arrowView]|" bindings:UIBindings];
-    [self.contentView addConstraintWithVisualFormat:@"H:[arrowView(20)]|" bindings:UIBindings];
+    [self.contentView addConstraintWithVisualFormat:@"V:|[arrowView]|" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"H:[arrowView(20)]|" bindings:BBindings];
 }
 
 -(void)reset {
@@ -81,8 +81,8 @@
     row = rowView;
     [self.contentView addSubview:row];
     UIBind(row);
-    [self.contentView addConstraintWithVisualFormat:@"H:|[row]|" bindings:UIBindings];
-    [self.contentView addConstraintWithVisualFormat:@"V:|[row]|" bindings:UIBindings];
+    [self.contentView addConstraintWithVisualFormat:@"H:|[row]|" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"V:|[row]|" bindings:BBindings];
     if (arrowView == nil) {
         [self addArrowView];
     }

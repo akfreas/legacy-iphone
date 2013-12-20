@@ -24,8 +24,11 @@
         operationQueue = [[NSOperationQueue alloc] init];
         accessor = [ObjectArchiveAccessor sharedInstance];
         _widget = [[ImageWidget alloc] init];
-        //        self.backgroundColor = [UIColor greenColor];
+        self.backgroundColor = [UIColor greenColor];
         [self addSubview:_widget];
+        UIBind(_widget);
+        [self addConstraintWithVisualFormat:@"H:|[_widget]|" bindings:BBindings];
+        [self addConstraintWithVisualFormat:@"V:|[_widget]|" bindings:BBindings];
         
     }
     return self;
@@ -51,7 +54,8 @@
 }
 
 -(void)layoutSubviews {
-    
+    [super layoutSubviews];
+
     if (self.event == nil) {
         
     } else {
@@ -64,6 +68,7 @@
     [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:self.event.figure completion:^(UIImage *theImage) {
         imageForThumb = theImage;
         dispatch_async(dispatch_get_main_queue(), ^{
+            _widget.largeImage = theImage;
             [self setNeedsLayout];
         });
     }];
@@ -75,11 +80,8 @@
     imageForThumb = nil;
     personThumbnail.image = nil;
     _widget.largeImage = nil;
-    if (_event == nil) {
-    } else {
-        [self getFigureThumbnailImage];
-        [self setNeedsLayout];
-    }
+    [self getFigureThumbnailImage];
+    [self setNeedsLayout];
 }
 
 

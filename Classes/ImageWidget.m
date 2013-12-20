@@ -29,15 +29,13 @@
 
 -(id)init {
     
-    self = [super initWithFrame:CGRectMake(0, 0, ImageWidgetInitialWidth, ImageWidgetInitialHeight)];
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         _angle = 130;
         _smallImageRadius = 20;
-        _largeImageRadius = ImageWidgetInitialWidth / 2 - ImageLayerDefaultStrokeWidth / 2;
+        _largeImageRadius = 20;
         _smallImageOffset = 5;
-        _expanded = NO;
-        
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor redColor];
     }
     
     return self;
@@ -67,6 +65,7 @@
 
 -(void)setLargeImage:(UIImage *)largeImage {
     _largeImage = largeImage;
+    largeCircleImage.image = largeImage;
     [self setNeedsDisplay];
 }
 
@@ -75,59 +74,12 @@
     _smallImageOffset = smallImageOffset;
 }
 
--(void)setExpanded:(BOOL)expanded {
-    if (_expanded != expanded) {
-    _expanded = !expanded;
-        [self toggleExpand];
-        _expanded = expanded;
-    }
-}
-
 -(CGRect)largeImageFrame {
     return largeCircleImage.frame;
 }
 
--(void)toggleExpand {
-        [CATransaction begin];
-    [CATransaction setValue:[NSNumber numberWithDouble:0.2] forKey:kCATransactionAnimationDuration];
-
-    CGAffineTransform circleTransform = CGAffineTransformMakeScale(2, 2);
-    CGRect circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
-    
-    CGAffineTransform trans;
-    if (_expanded == YES) {
-        circleTransform = CGAffineTransformMakeScale(0, 0);
-        
-        trans = CGAffineTransformMakeScale(1, 1);
-        
-        largeCircleImage.transform = CATransform3DMakeAffineTransform(trans);
-        trans = CGAffineTransformMakeScale(.5, .5); /// HAX NONONO
-        smallCircleImage.opacity = 1;
-        largeCircleImage.anchorPoint = CGPointMake(.5, .5);
-    } else {
-        largeCircleImage.anchorPoint = CGPointMake(.25, .25);
-        smallCircleImage.opacity = 0;
-        
-        trans = CGAffineTransformMakeScale(2, 2);
-        largeCircleImage.transform = CATransform3DMakeAffineTransform(trans);
-    }
-    
-    self.frame = CGRectApplyAffineTransform(self.frame, trans);
-    circleFrame = CGRectMake(0, 0, _largeImageRadius * 2, _largeImageRadius * 2);
-    
-    CGRect largeImageFrame = CGRectApplyAffineTransform(circleFrame, circleTransform);
-
-    
-    CGFloat lgFrameWidthDiff = (largeImageFrame.size.width - circleFrame.size.width);
-    CGFloat lgFrameHeightDiff = (largeImageFrame.size.height - circleFrame.size.height);
-    
-    smallCircleImage.frame = CGRectMake(smallCircleImage.frame.origin.x + lgFrameWidthDiff, smallCircleImage.frame.origin.y + lgFrameHeightDiff, smallCircleImage.frame.size.width, smallCircleImage.frame.size.height);
-    [CATransaction commit];
-    [self setNeedsDisplay];
-}
 
 -(void)drawRect:(CGRect)rect {
-    
     
     if (largeCircleImage == nil) {
         largeCircleImage = [[CircleImageLayer alloc] initWithRadius:_largeImageRadius];

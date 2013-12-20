@@ -215,8 +215,8 @@
     figureContentView = [[FigureRowContentView alloc] initWithFrame:CGRectZero];
     [self addSubview:figureContentView];
     UIBind(figureContentView);
-    [self addConstraintWithVisualFormat:@"H:|[figureContentView]|" bindings:UIBindings];
-    [self addConstraintWithVisualFormat:@"V:|[figureContentView]|" bindings:UIBindings];
+    [self addConstraintWithVisualFormat:@"H:|[figureContentView]|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|[figureContentView]|" bindings:BBindings];
 }
 
 

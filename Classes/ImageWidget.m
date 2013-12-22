@@ -1,5 +1,5 @@
 #import "ImageWidget.h"
-#import "CircleImageLayer.h"
+#import "CircleImageView.h"
 
 
 
@@ -7,8 +7,8 @@
     
     CALayer *layer;
     CAShapeLayer *smallImageBorderLayer;
-    CircleImageLayer *largeCircleImage;
-    CircleImageLayer *smallCircleImage;
+    CircleImageView *largeCircleImage;
+    CircleImageView *smallCircleImage;
     CAShapeLayer *smallImageMask;
     
     UIImage *resizedLargeImage;
@@ -35,7 +35,6 @@
         _smallImageRadius = 20;
         _largeImageRadius = 20;
         _smallImageOffset = 5;
-        self.backgroundColor = [UIColor redColor];
     }
     
     return self;
@@ -60,13 +59,13 @@
 
 -(void)setSmallImage:(UIImage *)smallImage {
     _smallImage = smallImage;
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 -(void)setLargeImage:(UIImage *)largeImage {
     _largeImage = largeImage;
     largeCircleImage.image = largeImage;
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 
@@ -78,13 +77,12 @@
     return largeCircleImage.frame;
 }
 
-
--(void)drawRect:(CGRect)rect {
+-(void)layoutSubviews {
     
+    [super layoutSubviews];
     if (largeCircleImage == nil) {
-        largeCircleImage = [[CircleImageLayer alloc] initWithRadius:_largeImageRadius];
-        largeCircleImage.zPosition = -1;
-        [self.layer addSublayer:largeCircleImage];
+        largeCircleImage = [[CircleImageView alloc] initWithImage:_largeImage radius:_largeImageRadius];
+        [self addSubview:largeCircleImage];
     }
     
     largeCircleImage.image = _largeImage;
@@ -111,8 +109,8 @@
             smImgRect = CGRectMake(arcCenter.x - _smallImageRadius, arcCenter.y - _smallImageRadius, smImgWidth, smImgHeight);
         }
         if (smallCircleImage == nil) {
-            smallCircleImage = [[CircleImageLayer alloc] initWithImage:_smallImage radius:_smallImageRadius];
-            [self.layer addSublayer:smallCircleImage];
+            smallCircleImage = [[CircleImageView alloc] initWithImage:_smallImage radius:_smallImageRadius];
+            [self addSubview:smallCircleImage];
         } else {
             smallCircleImage.hidden = NO;
             smallCircleImage.image = _smallImage;

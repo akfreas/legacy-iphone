@@ -14,8 +14,6 @@
 #import "LegacyAppRequest.h"
 #import "DataSyncUtility.h"
 #import "FacebookUtils.h"
-#import "SwipeMessage.h"
-
 #import <MessageUI/MessageUI.h>
 
 @interface MainScreen ()  <MFMailComposeViewControllerDelegate>
@@ -30,7 +28,6 @@
     FBFriendPickerViewController *friendPicker;
     IBOutlet HorizontalContentHostingScrollView *infoScreen;
     LegacyAppConnection *connection;
-    SwipeMessage *swipeMessage;
     
     __unsafe_unretained DataSyncUtility *dataSync;
 }
@@ -54,7 +51,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showShareDialog:) name:KeyForFacebookButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFigureRowCellFromNotif:) name:KeyForFigureRowTransportNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
         dataSync = [DataSyncUtility sharedInstance];
     }
@@ -231,14 +227,6 @@
     [alert showInView:self.view];
 }
 
--(void)addFigureRowCellFromNotif:(NSNotification *)notif {
-    
-      EventPersonRelation *rowData = notif.userInfo[@"event_person_relation"];
-      CGPoint rowLocation = [notif.userInfo[@"row_origin"] CGPointValue];
-    [swipeMessage setEventRelation:rowData cellOrigin:rowLocation];
-}
-
-
 - (NSString *)applicationDocumentsDirectory {
 	
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -264,15 +252,6 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-   
-    
-    if (swipeMessage != nil && [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage] == NO) {
-        [swipeMessage show];
-    }
-}
 
 -(void)startDataSync {
     
@@ -284,9 +263,6 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
-    if (swipeMessage == nil && hasBeenShownSwipeMessage == NO) {
-        swipeMessage = [[SwipeMessage alloc] initWithSuperView:self.view];
-    }
 }
 
 

@@ -14,6 +14,7 @@
 -(id)initWithImage:(UIImage *)theImage radius:(CGFloat)theRadius {
     self = [super initWithFrame:CGRectMake(0, 0, theRadius * 2 + ImageLayerDefaultStrokeWidth, theRadius * 2 + ImageLayerDefaultStrokeWidth)];
     if (self) {
+        self.radius = theRadius;
         self.backgroundColor = [UIColor clearColor];
         self.contentScaleFactor = [UIScreen mainScreen].scale;
         [(CircleImageLayer *)self.layer setRadius:theRadius];
@@ -28,6 +29,7 @@
 }
 
 -(void)setRadius:(CGFloat)radius {
+    _radius = radius;
     [(CircleImageLayer *)self.layer setRadius:radius];
 }
 
@@ -37,6 +39,11 @@
 
 -(void)layoutSubviews {
     self.layer.frame = self.frame;
+    [super layoutSubviews];
+}
+
+-(CGSize)intrinsicContentSize {
+    return CGSizeMake(self.radius, self.radius);
 }
 
 @end

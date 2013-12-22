@@ -12,6 +12,7 @@
     NoEventPersonRow *noEventRow;
     FigureRowHorizontalScrollView *figureRow;
     UIView *arrowView;
+    UIButton *facebookButton;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -19,10 +20,27 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
         
+        self.backgroundColor = HeaderBackgroundColor;
+        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
+}
+
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    return [super hitTest:point withEvent:event];
+}
+-(void)addActionComponents {
+    
+    facebookButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [facebookButton setImage:[UIImage imageNamed:@"facebook-icon"] forState:UIControlStateNormal];
+    [self.contentView insertSubview:facebookButton belowSubview:figureRow];
+    [facebookButton bk_addEventHandler:^(id sender) {
+        NSLog(@"Captured hit.");
+    } forControlEvents:UIControlEventTouchUpInside];
+    UIBind(facebookButton, figureRow);
+    [self.contentView addConstraintWithVisualFormat:@"H:|-[facebookButton(20)]" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"V:|-[facebookButton]-|" bindings:BBindings];
 }
 
 -(void)addArrowView {
@@ -45,17 +63,8 @@
 
 -(void)reset {
     if ([row isKindOfClass:figureRow.class]) {
-        [(FigureRowHorizontalScrollView *)row reset];
+        [(FigureRowHorizontalScrollView *)row closeDrawer];
     }
-}
-
--(void)setSelected:(BOOL)selected {
-    row.selected = selected;
-}
-
-
--(BOOL)isSelected {
-    return row.selected;
 }
 
 -(void)setEventPersonRelation:(EventPersonRelation *)eventPersonRelation {
@@ -70,7 +79,10 @@
     } else if (eventPersonRelation.event != nil) {
         if (figureRow == nil) {
             figureRow = [[FigureRowHorizontalScrollView alloc] initWithFrame:CGRectZero];
+            [self addActionComponents];
+
         }
+        
         figureRow.person = eventPersonRelation.person;
         figureRow.event = eventPersonRelation.event;
         rowView = figureRow;

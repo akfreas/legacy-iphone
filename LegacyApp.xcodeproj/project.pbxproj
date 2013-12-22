@@ -99,6 +99,8 @@
 		19C55E4A1783A7890099AE4A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C55E491783A7890099AE4A /* icon.png */; };
 		19C55E4C1783A7900099AE4A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C55E4B1783A7900099AE4A /* icon@2x.png */; };
 		19C6F811171BBA1D00DDD6D9 /* oldpaper-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C6F810171BBA1D00DDD6D9 /* oldpaper-bg@2x.png */; };
+		19C7A16818670FD600130BEF /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C7A16618670FD600130BEF /* facebook-icon.png */; };
+		19C7A16918670FD600130BEF /* facebook-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C7A16718670FD600130BEF /* facebook-icon@2x.png */; };
 		19C7BD861749DD68004C8B0A /* DescriptionPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C7BD851749DD68004C8B0A /* DescriptionPage.xib */; };
 		19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */; };
 		19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F5D16A5483400D46B0A /* Social.framework */; };
@@ -257,6 +259,8 @@
 		19C55E491783A7890099AE4A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		19C55E4B1783A7900099AE4A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		19C6F810171BBA1D00DDD6D9 /* oldpaper-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oldpaper-bg@2x.png"; sourceTree = "<group>"; };
+		19C7A16618670FD600130BEF /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-icon.png"; sourceTree = "<group>"; };
+		19C7A16718670FD600130BEF /* facebook-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-icon@2x.png"; sourceTree = "<group>"; };
 		19C7BD851749DD68004C8B0A /* DescriptionPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionPage.xib; sourceTree = "<group>"; };
 		19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGRectUtils.m; sourceTree = "<group>"; };
 		19C7BD8D174BF494004C8B0A /* CGRectUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGRectUtils.h; sourceTree = "<group>"; };
@@ -432,6 +436,8 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				19C7A16618670FD600130BEF /* facebook-icon.png */,
+				19C7A16718670FD600130BEF /* facebook-icon@2x.png */,
 				198263A818619D6800CA3FEE /* next-arrow-gray.png */,
 				198263A918619D6800CA3FEE /* next-arrow-gray@2x.png */,
 				198263A218616DC600CA3FEE /* add-friends.png */,
@@ -669,12 +675,14 @@
 				19BDFDC817FD157A00B415C1 /* legacy-fb-button.png in Resources */,
 				1993916116AA1FDF00DA3CD9 /* icon.png in Resources */,
 				1993916216AA1FDF00DA3CD9 /* icon@2x.png in Resources */,
+				19C7A16918670FD600130BEF /* facebook-icon@2x.png in Resources */,
 				192BA7DE17F9595F00ECBA49 /* Default.png in Resources */,
 				1967B95E180484790092766D /* webview-annotation-image@2x.png in Resources */,
 				1993916416AA200A00DA3CD9 /* icon.png in Resources */,
 				1993916616AA201000DA3CD9 /* icon@2x.png in Resources */,
 				1967B9691804AB170092766D /* chevron-left.png in Resources */,
 				191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */,
+				19C7A16818670FD600130BEF /* facebook-icon.png in Resources */,
 				1967B95C180483D30092766D /* timeline-annotation-image@2x.png in Resources */,
 				1967B95A180480C50092766D /* left-right-swipe-message.png in Resources */,
 				19C49EAA16CA2BA400304AD6 /* AFAlertView.xib in Resources */,
@@ -903,7 +911,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/LegacyApp-Prefix.pch";
 				INFOPLIST_FILE = "Support/LegacyApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp,
@@ -944,7 +952,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/LegacyApp-Prefix.pch";
 				INFOPLIST_FILE = "Support/LegacyApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp,

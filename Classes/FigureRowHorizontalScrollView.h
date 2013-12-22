@@ -9,10 +9,8 @@
 
 @property (nonatomic) Event *event;
 @property (nonatomic) Person *person;
-@property (nonatomic, assign) BOOL selected;
-@property (nonatomic, assign) BOOL allowsSelection;
 -(void)delayedReset;
--(void)reset;
-
+-(void)openDrawer;
+-(void)closeDrawer:(void(^)())completion;
 
 @end

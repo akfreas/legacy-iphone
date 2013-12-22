@@ -20,14 +20,19 @@
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
         accessor = [ObjectArchiveAccessor sharedInstance];
-        _widget = [[ImageWidget alloc] init];
-        [self addSubview:_widget];
-        UIBind(_widget);
-        [self addConstraintWithVisualFormat:@"H:|[_widget]|" bindings:BBindings];
-        [self addConstraintWithVisualFormat:@"V:|[_widget]|" bindings:BBindings];
-        
+        [self addImageWidget];
     }
     return self;
+}
+
+-(void)addImageWidget {
+    _widget = [[ImageWidget alloc] init];
+    _widget.largeImageRadius = FigurePhotoRadius;
+    [self addSubview:_widget];
+    UIBind(_widget);
+    [self addConstraintWithVisualFormat:@"H:|[_widget]|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|[_widget]|" bindings:BBindings];
+
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

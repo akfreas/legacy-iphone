@@ -284,7 +284,6 @@ CGFloat InfoPageWidth = 280;
     
     
 //    exampleRow = [[FigureRowHorizontalScrollView alloc] initWithOrigin:CGPointMake(0, 200)];
-    exampleRow.allowsSelection = NO;
     exampleRow.event = rowData.event;
     exampleRow.person = rowData.person;
     [figureRowCellPlaceholder removeFromSuperview];

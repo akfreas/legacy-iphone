@@ -31,9 +31,8 @@
     
     self = [super initWithFrame:CGRectZero];
     if (self) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         _angle = 130;
-        _smallImageRadius = 20;
-        _largeImageRadius = 20;
         _smallImageOffset = 5;
     }
     
@@ -79,14 +78,18 @@
 
 -(void)layoutSubviews {
     
-    [super layoutSubviews];
     if (largeCircleImage == nil) {
         largeCircleImage = [[CircleImageView alloc] initWithImage:_largeImage radius:_largeImageRadius];
         [self addSubview:largeCircleImage];
+        UIBind(largeCircleImage);
+        [self addConstraintWithVisualFormat:@"V:|[largeCircleImage]|" bindings:BBindings];
+        [self addConstraintWithVisualFormat:@"H:|[largeCircleImage]|" bindings:BBindings];
     }
     
     largeCircleImage.image = _largeImage;
     [self drawSmallImage];
+    [super layoutSubviews];
+
 }
 
 -(void)drawSmallImage {

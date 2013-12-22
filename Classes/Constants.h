@@ -69,6 +69,7 @@
 
 #define OverlayViewButtonRadius 25
 
+#define DrawerWidth 50
 
 #define TopBarButtonRadius 11
 #define TopBarLeftMargin 15
@@ -103,6 +104,7 @@
 #define HeaderFont [UIFont fontWithName:HeaderFontName size:HeaderFontSize]
 
 #define LegacyEntryHeight 150
+#define FigurePhotoRadius 25
 #define PersonPhotoRadius 25
 #define PersonPhotoBorderSize 4
 #define PersonPhotoOffset 10

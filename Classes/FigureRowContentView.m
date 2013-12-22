@@ -16,12 +16,6 @@
     UILabel *ageLabel;
 }
 
-
-+ (Class)layerClass {
-    return [CAGradientLayer class];
-}
-
-
 -(CGSize)intrinsicContentSize {
     return CGSizeMake(FigureRowCellWidth, FigureRowCellHeight);
 }
@@ -29,6 +23,7 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         self.scrollEnabled = NO;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self addUIComponents];
@@ -50,8 +45,8 @@
     [self addConstraintWithVisualFormat:@"H:|-77-[eventSubtitleLabel]-10-|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"H:|-77-[ageLabel]-|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"V:|-(2)-[figureNameLabel]-(2)-[ageLabel]-(2)-[eventSubtitleLabel]-|" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"H:|-(10)-[_widgetContainer(40)]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:|-[_widgetContainer(40)]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|-[_widgetContainer]-[figureNameLabel]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-[_widgetContainer]-|" bindings:BBindings];
 //    [self addConstraint:[NSLayoutConstraint constraintWithItem:_widgetContainer attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 }
 

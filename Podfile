@@ -7,5 +7,6 @@ target "LegacyApp" do
     pod "Facebook-iOS-SDK"
     pod "AFNetworking"
     pod "GoogleAnalytics-iOS-SDK"
+    pod "BlocksKit", '~> 2.0.0'
 end
 

@@ -81,7 +81,9 @@
     } completion:^(BOOL finished) {
         if (finished) {
             isNonUserScrolling = NO;
-            completion();
+            if (completion != NULL) {
+                completion();
+            }
         }
     }];
 }

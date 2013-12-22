@@ -63,7 +63,7 @@
 
 -(void)reset {
     if ([row isKindOfClass:figureRow.class]) {
-        [(FigureRowHorizontalScrollView *)row closeDrawer];
+        [(FigureRowHorizontalScrollView *)row closeDrawer:NULL];
     }
 }
 

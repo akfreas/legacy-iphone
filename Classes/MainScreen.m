@@ -15,6 +15,7 @@
 #import "DataSyncUtility.h"
 #import "FacebookUtils.h"
 #import <MessageUI/MessageUI.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface MainScreen ()  <MFMailComposeViewControllerDelegate>
 
@@ -28,7 +29,7 @@
     FBFriendPickerViewController *friendPicker;
     IBOutlet HorizontalContentHostingScrollView *infoScreen;
     LegacyAppConnection *connection;
-    
+    MPMoviePlayerController *splashClipPlayer;
     __unsafe_unretained DataSyncUtility *dataSync;
 }
 
@@ -53,8 +54,41 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
         dataSync = [DataSyncUtility sharedInstance];
+        [self setupSplashClip];
     }
     return self;
+}
+
+-(void)setupSplashClip {
+    
+    NSString *clipPath = [[NSBundle mainBundle] pathForResource:@"splash-animation" ofType:@"mp4"];
+    NSURL *clipURL = [NSURL fileURLWithPath:clipPath];
+    splashClipPlayer = [[MPMoviePlayerController alloc] initWithContentURL:clipURL];
+    splashClipPlayer.view.frame = self.view.bounds;
+    splashClipPlayer.view.backgroundColor = HeaderBackgroundColor;
+    splashClipPlayer.controlStyle = MPMovieControlStyleNone;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(removeSplashView)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addSplashImageView) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
+    splashClipPlayer.scalingMode = MPMovieScalingModeFill;
+    
+    UIImageView *backgroundPlaceholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"launchimage.png"]];
+    backgroundPlaceholder.backgroundColor = [UIColor redColor];
+    [splashClipPlayer.view addSubview:backgroundPlaceholder];
+    [self.view addSubview:splashClipPlayer.view];
+}
+
+-(void)addSplashImageView {
+//    [self.view addSubview:splashClipPlayer.view];
+}
+
+-(void)removeSplashView {
+    [UIView animateWithDuration:0.3 animations:^{
+        splashClipPlayer.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [splashClipPlayer.view removeFromSuperview];
+    }];
 }
 
 -(void)showShareDialog:(NSNotification *)notif {
@@ -260,10 +294,20 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:NO];
+    splashClipPlayer.view.frame = self.view.bounds;
+    [splashClipPlayer play];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+}
+
 -(void)viewDidLoad {
     [super viewDidLoad];
-    BOOL hasBeenShownSwipeMessage = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
-}
+    }
 
 
 @end

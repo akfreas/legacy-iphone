@@ -103,6 +103,8 @@
 		19C7A16918670FD600130BEF /* facebook-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C7A16718670FD600130BEF /* facebook-icon@2x.png */; };
 		19C7A16C186787B700130BEF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19C7A16B186787B700130BEF /* MediaPlayer.framework */; };
 		19C7A16D186788C300130BEF /* splash-animation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 19C7A16A1867870500130BEF /* splash-animation.mp4 */; };
+		19C7A1701867FCAC00130BEF /* no-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C7A16E1867FCAC00130BEF /* no-photo.png */; };
+		19C7A1711867FCAC00130BEF /* no-photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C7A16F1867FCAC00130BEF /* no-photo@2x.png */; };
 		19C7BD861749DD68004C8B0A /* DescriptionPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C7BD851749DD68004C8B0A /* DescriptionPage.xib */; };
 		19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */; };
 		19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F5D16A5483400D46B0A /* Social.framework */; };
@@ -265,6 +267,8 @@
 		19C7A16718670FD600130BEF /* facebook-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-icon@2x.png"; sourceTree = "<group>"; };
 		19C7A16A1867870500130BEF /* splash-animation.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "splash-animation.mp4"; sourceTree = "<group>"; };
 		19C7A16B186787B700130BEF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		19C7A16E1867FCAC00130BEF /* no-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-photo.png"; sourceTree = "<group>"; };
+		19C7A16F1867FCAC00130BEF /* no-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-photo@2x.png"; sourceTree = "<group>"; };
 		19C7BD851749DD68004C8B0A /* DescriptionPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionPage.xib; sourceTree = "<group>"; };
 		19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGRectUtils.m; sourceTree = "<group>"; };
 		19C7BD8D174BF494004C8B0A /* CGRectUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGRectUtils.h; sourceTree = "<group>"; };
@@ -441,6 +445,8 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				19C7A16E1867FCAC00130BEF /* no-photo.png */,
+				19C7A16F1867FCAC00130BEF /* no-photo@2x.png */,
 				19C7A16618670FD600130BEF /* facebook-icon.png */,
 				19C7A16718670FD600130BEF /* facebook-icon@2x.png */,
 				198263A818619D6800CA3FEE /* next-arrow-gray.png */,
@@ -707,6 +713,7 @@
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
 				196C6B2218052D8200475ACB /* PasscodeScreenViewController.xib in Resources */,
 				194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */,
+				19C7A1701867FCAC00130BEF /* no-photo.png in Resources */,
 				197308D41707B57C00FCADD3 /* question.png in Resources */,
 				19C6F811171BBA1D00DDD6D9 /* oldpaper-bg@2x.png in Resources */,
 				198263A418616DC600CA3FEE /* add-friends.png in Resources */,
@@ -715,6 +722,7 @@
 				197EA5A617F543740015DD78 /* 298-circlex@2x.png in Resources */,
 				1967B9661804A85C0092766D /* SwipeMessage_OS7.xib in Resources */,
 				192BA7DC17F9575400ECBA49 /* Images.xcassets in Resources */,
+				19C7A1711867FCAC00130BEF /* no-photo@2x.png in Resources */,
 				1909A85E1772D3B300256ED0 /* FB-f-Logo__blue_100.png in Resources */,
 				1909A8601772D44300256ED0 /* informationcircle.png in Resources */,
 				198263A518616DC600CA3FEE /* add-friends@2x.png in Resources */,

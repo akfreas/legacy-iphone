@@ -258,11 +258,7 @@ static NSString *ReuseID = @"CellReuseId";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0 && [[fetchController sections] count] > 1) {
-        return NoEventFigureRowHeight;
-    } else {
         return FigureRowCellHeight;
-    }
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

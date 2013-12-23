@@ -34,6 +34,7 @@
         self.translatesAutoresizingMaskIntoConstraints = NO;
         _angle = 130;
         _smallImageOffset = 5;
+        _smallImageRadius = PersonPhotoRadius;
     }
     
     return self;
@@ -95,6 +96,7 @@
 -(void)drawSmallImage {
     
     if (_smallImage != nil) {
+        
         CGSize smImgSize = _smallImage.size;
         CGFloat scale = MAX((_smallImageRadius * 2) / smImgSize.width, (_smallImageRadius * 2) / smImgSize.height);
         
@@ -118,6 +120,9 @@
             smallCircleImage.hidden = NO;
             smallCircleImage.image = _smallImage;
         }
+        
+        smallCircleImage.borderWidth = PersonPhotoBorderSize;
+        smallCircleImage.borderColor = PersonPhotoBorderColor;
         smallCircleImage.frame = smImgRect;
     } else {
         smallCircleImage.hidden = YES;

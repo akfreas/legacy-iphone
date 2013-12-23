@@ -41,12 +41,12 @@
 
 -(void)setConstraints {
     UIBind(eventSubtitleLabel, figureNameLabel, ageLabel, _widgetContainer);
-    [self addConstraintWithVisualFormat:@"H:|-77-[figureNameLabel]-|" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"H:|-77-[eventSubtitleLabel]-10-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|-77-[figureNameLabel(250)]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|-77-[eventSubtitleLabel(200)]" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"H:|-77-[ageLabel]-|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"V:|-(2)-[figureNameLabel]-(2)-[ageLabel]-(2)-[eventSubtitleLabel]-|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"H:|-[_widgetContainer]-[figureNameLabel]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:|-[_widgetContainer]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-(10)-[_widgetContainer]-|" bindings:BBindings];
 //    [self addConstraint:[NSLayoutConstraint constraintWithItem:_widgetContainer attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 }
 

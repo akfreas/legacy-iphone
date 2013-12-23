@@ -87,7 +87,7 @@
 #define FigureNameFont [UIFont fontWithName:FigureNameFontName size:FigureNameFontSize]
 
 #define AgeLabelFontName @"HelveticaNeue-Light"
-#define AgeLabelFontSize 14
+#define AgeLabelFontSize 12
 
 #define AgeLabelFont [UIFont fontWithName:AgeLabelFontName size:AgeLabelFontSize]
 
@@ -103,10 +103,10 @@
 
 #define HeaderFont [UIFont fontWithName:HeaderFontName size:HeaderFontSize]
 
-#define LegacyEntryHeight 150
+#define LegacyEntryHeight 170
 #define FigurePhotoRadius 25
-#define PersonPhotoRadius 25
-#define PersonPhotoBorderSize 4
+#define PersonPhotoRadius 14
+#define PersonPhotoBorderSize 2
 #define PersonPhotoOffset 10
 
 #define UIBind(...)  NSDictionary *BBindings = MXDictionaryOfVariableBindings(__VA_ARGS__)

@@ -56,16 +56,17 @@
 
 -(void)getFigureThumbnailImage {
     [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:self.event.figure completion:^(UIImage *theImage) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _widget.largeImage = theImage;
-            [self setNeedsLayout];
-        });
+        if (theImage != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _widget.largeImage = theImage;
+            });
+        }
     }];
 }
 
 -(void)setEvent:(Event *)event {
     _event = event;
-    _widget.largeImage = nil;
+    _widget.largeImage = [UIImage imageNamed:@"no-photo.png"];
     [self getFigureThumbnailImage];
     [self setNeedsLayout];
 }

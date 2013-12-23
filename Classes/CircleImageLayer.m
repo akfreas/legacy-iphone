@@ -6,6 +6,7 @@
     CGFloat _radius;
     CGFloat _borderWidth;
     CGMutablePathRef circlePath;
+    CGColorRef ourBorderColor;
 }
 
 
@@ -18,8 +19,6 @@
         _radius = theRadius;
         self.frame = CGRectMake(0, 0, theRadius * 2 + ImageLayerDefaultStrokeWidth, theRadius * 2 + ImageLayerDefaultStrokeWidth);
         self.borderWidth = ImageLayerDefaultStrokeWidth;
-//        [self drawBackgroundBorderLayer];
-//        [self drawImageHostingLayer];
     }
     return self;
 }
@@ -27,6 +26,7 @@
 -(id)init {
     if (self == [super init]) {
         self.contentsScale = [UIScreen mainScreen].scale;
+        ourBorderColor = [UIColor clearColor].CGColor;
         [self setNeedsDisplay];
     }
     return self;
@@ -91,6 +91,11 @@
     return [super needsDisplayForKey:key];
 }
 
+-(void)setBorderColor:(CGColorRef)borderColor {
+    ourBorderColor = borderColor;
+    [self setNeedsDisplay];
+}
+
 -(void)setImage:(UIImage *)image {
     _image = image;
     [self setNeedsDisplay];
@@ -137,10 +142,12 @@
         CGContextSetFillColorWithColor(ctx, [UIColor grayColor].CGColor);
         drawingMode = kCGPathFillStroke;
     }
-    CGContextAddArc(ctx, center.x, center.y, _radius - _borderWidth / 2, 0, M_PI * 2, 1);
-    CGContextSetLineWidth(ctx, _borderWidth);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0 alpha:.8].CGColor);
-    CGContextDrawPath(ctx, drawingMode);
+    if (_borderWidth > 0) {
+        CGContextAddArc(ctx, center.x, center.y, _radius - _borderWidth / 2, 0, M_PI * 2, 1);
+        CGContextSetLineWidth(ctx, _borderWidth + 0.5f);
+        CGContextSetStrokeColorWithColor(ctx, ourBorderColor);
+        CGContextDrawPath(ctx, drawingMode);
+    }
 }
 
 @end

@@ -37,6 +37,10 @@
     [(CircleImageLayer *)self.layer setBorderWidth:borderWidth];
 }
 
+-(void)setBorderColor:(UIColor *)borderColor {
+    [(CircleImageLayer *)self.layer setBorderColor:borderColor.CGColor];
+}
+
 -(void)layoutSubviews {
     self.layer.frame = self.frame;
     [super layoutSubviews];

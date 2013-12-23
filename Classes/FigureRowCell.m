@@ -44,7 +44,9 @@
 }
 
 -(void)addArrowView {
-    arrowView = [[UIView alloc] initWithFrame:CGRectZero];
+    if (arrowView == nil) {
+        arrowView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
     arrowView.backgroundColor = [UIColor whiteColor];
     
     UIImageView *arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"next-arrow-gray"]];
@@ -58,7 +60,7 @@
 
     [self.contentView addSubview:arrowView];
     [self.contentView addConstraintWithVisualFormat:@"V:|[arrowView]|" bindings:BBindings];
-    [self.contentView addConstraintWithVisualFormat:@"H:[arrowView(20)]|" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"H:[arrowView(20)]-(5)-|" bindings:BBindings];
 }
 
 -(void)reset {
@@ -95,9 +97,7 @@
     UIBind(row);
     [self.contentView addConstraintWithVisualFormat:@"H:|[row]|" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|[row]|" bindings:BBindings];
-    if (arrowView == nil) {
-        [self addArrowView];
-    }
+    [self addArrowView];
 }
 
 -(void)createImageFromView:(UIView *)view name:(NSString *)name {

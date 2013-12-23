@@ -54,7 +54,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
         dataSync = [DataSyncUtility sharedInstance];
+#if DEBUG != 1
         [self setupSplashClip];
+#endif
+        self.view.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }

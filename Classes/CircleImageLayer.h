@@ -5,6 +5,7 @@
 @property (assign) CGFloat radius;
 @property (assign) CGRect frame;
 @property (assign) CGFloat borderWidth;
+@property (assign) CGColorRef borderColor;
 
 
 -(id)initWithRadius:(CGFloat)theRadius;

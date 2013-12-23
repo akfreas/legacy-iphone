@@ -2,6 +2,7 @@
 #import "ImageWidgetContainer.h"
 #import "Person.h"
 #import "Event.h"
+#import "EventPersonRelation.h"
 #import "Figure.h"
 #import "LegacyAppConnection.h"
 #import "LegacyAppRequest.h"
@@ -14,6 +15,7 @@
     UILabel *eventSubtitleLabel;
     UILabel *figureNameLabel;
     UILabel *ageLabel;
+    UITapGestureRecognizer *tapGesture;
 }
 
 -(CGSize)intrinsicContentSize {
@@ -27,8 +29,14 @@
         self.scrollEnabled = NO;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self addUIComponents];
+        [self addTapGesture];
     }
     return self;
+}
+
+-(void)addTapGesture {
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sendTapNotification)];
+    [self addGestureRecognizer:tapGesture];
 }
 
 -(void)addUIComponents {
@@ -77,15 +85,16 @@
     [self addSubview:_widgetContainer];
 }
 
--(void)setEvent:(Event *)event {
-    _event = event;
-    figureNameLabel.text = event.figure.name;
-    self.widgetContainer.event = event;
-    eventSubtitleLabel.text = event.eventDescription;
-    ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
+-(void)sendTapNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForInfoOverlayButtonTapped object:nil userInfo:@{@"relation" : self.relation}];
 }
--(void)setPerson:(Person *)person {
-    _person = person;
-    self.widgetContainer.person = person;
+
+-(void)setRelation:(EventPersonRelation *)relation {
+    _relation = relation;
+    self.widgetContainer.relation = _relation;
+
+    figureNameLabel.text = _relation.event.figure.name;
+    eventSubtitleLabel.text = _relation.event.eventDescription;
+    ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", _relation.event.ageYears, _relation.event.ageMonths, _relation.event.ageDays];
 }
 @end

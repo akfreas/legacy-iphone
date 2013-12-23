@@ -295,6 +295,10 @@ static NSString *ReuseID = @"CellReuseId";
 
 #pragma mark UITableView Delegate Methods
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    EventPersonRelation *relation = [fetchController objectAtIndexPath:indexPath];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForInfoOverlayButtonTapped object:nil userInfo:@{@"relation": relation}];
+}
 
 #pragma mark UIScrollView Delegate Methods
 

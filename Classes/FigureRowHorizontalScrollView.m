@@ -110,17 +110,9 @@
 
 #pragma mark Accessors
 
--(void)setEvent:(Event *)event {
-    
-    _event = event;
-    if (event != nil) {
-        figureContentView.event = event;
-    }
-}
-
--(void)setPerson:(Person *)person {
-    _person = person;
-    figureContentView.person = person;
+-(void)setRelation:(EventPersonRelation *)relation {
+    _relation = relation;
+    figureContentView.relation = _relation;
 }
 
 -(CGSize)intrinsicContentSize {

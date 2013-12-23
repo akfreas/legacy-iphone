@@ -3,6 +3,7 @@
 #import "ProgressIndicator.h"
 #import "Event.h"
 #import "Figure.h"
+#import "EventPersonRelation.h"
 #import "ImageWidget.h"
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
@@ -48,14 +49,14 @@
     if ([object isKindOfClass:[Person class]]) {
         Person *thePerson = (Person *)object;
         
-        if ([thePerson.facebookId isEqualToString:_person.facebookId]) {
+        if ([thePerson.facebookId isEqualToString:_relation.person.facebookId]) {
             _widget.smallImage = [UIImage imageWithData:thePerson.thumbnail];
         }
     }
 }
 
 -(void)getFigureThumbnailImage {
-    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:self.event.figure completion:^(UIImage *theImage) {
+    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:_relation.event.figure completion:^(UIImage *theImage) {
         if (theImage != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 _widget.largeImage = theImage;
@@ -64,32 +65,26 @@
     }];
 }
 
--(void)setEvent:(Event *)event {
-    _event = event;
+-(void)setRelation:(EventPersonRelation *)relation {
+    _relation = relation;
     _widget.largeImage = [UIImage imageNamed:@"no-photo.png"];
     [self getFigureThumbnailImage];
     [self setNeedsLayout];
-}
-
-
--(void)setPerson:(Person *)person {
     
-    _person = person;
-    if (person != nil) {
-        UIImage *thumbnail = [UIImage imageWithData:person.thumbnail];
+    if (_relation.person != nil) {
+        UIImage *thumbnail = [UIImage imageWithData:_relation.person.thumbnail];
         _widget.smallImage = thumbnail;
-        [self addObserver:self forKeyPath:@"self.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
+        [self addObserver:self forKeyPath:@"self.relation.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
     } else {
         _widget.smallImage = nil;
     }
     [self setNeedsLayout];
-    
 }
 
 -(void)dealloc {
     
-    if (_person != nil) {
-        [self removeObserver:self forKeyPath:@"self.person.thumbnail"];
+    if (_relation.person != nil) {
+        [self removeObserver:self forKeyPath:@"self.relation.person.thumbnail"];
     }
 }
 

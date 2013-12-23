@@ -46,21 +46,20 @@
 -(void)addArrowView {
     if (arrowView == nil) {
         arrowView = [[UIView alloc] initWithFrame:CGRectZero];
-    }
     arrowView.backgroundColor = [UIColor whiteColor];
     
     UIImageView *arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"next-arrow-gray"]];
+        arrowImage.translatesAutoresizingMaskIntoConstraints = NO;
     [arrowView addSubview:arrowImage];
     [arrowView addConstraint:[NSLayoutConstraint constraintWithItem:arrowImage
                                                           attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:arrowView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     [arrowView addConstraint:[NSLayoutConstraint constraintWithItem:arrowImage attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:arrowView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
-    UIBind(arrowView, arrowImage);
-//    [arrowView addConstraintWithVisualFormat:@"H:|[arrowImage]|" bindings:BBindings];
-//    [arrowView addConstraintWithVisualFormat:@"V:|[arrowImage]|" bindings:BBindings];
-
+        
     [self.contentView addSubview:arrowView];
-    [self.contentView addConstraintWithVisualFormat:@"V:|[arrowView]|" bindings:BBindings];
-    [self.contentView addConstraintWithVisualFormat:@"H:[arrowView(20)]-(5)-|" bindings:BBindings];
+        UIBind(arrowView);
+        [self.contentView addConstraintWithVisualFormat:@"V:|[arrowView]|" bindings:BBindings];
+        [self.contentView addConstraintWithVisualFormat:@"H:[arrowView(25)]|" bindings:BBindings];
+    }
 }
 
 -(void)reset {
@@ -85,19 +84,18 @@
 
         }
         
-        figureRow.person = eventPersonRelation.person;
-        figureRow.event = eventPersonRelation.event;
+        figureRow.relation = eventPersonRelation;
         rowView = figureRow;
     } else {
         NSLog(@"Wat.");
     }
     [row removeFromSuperview];
+    [self addArrowView];
     row = rowView;
-    [self.contentView addSubview:row];
+    [self.contentView insertSubview:row belowSubview:arrowView];
     UIBind(row);
     [self.contentView addConstraintWithVisualFormat:@"H:|[row]|" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|[row]|" bindings:BBindings];
-    [self addArrowView];
 }
 
 -(void)createImageFromView:(UIView *)view name:(NSString *)name {

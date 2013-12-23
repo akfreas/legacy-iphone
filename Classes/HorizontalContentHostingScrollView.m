@@ -4,6 +4,7 @@
 #import "LegacyAppConnection.h"
 #import "FigureRowHorizontalScrollView.h"
 #import "Event.h"
+#import "EventPersonRelation.h"
 #import "LegacyWebView.h"
 #import "FigureRowTablePage.h"
 #import "EventInfoTableView.h"
@@ -121,10 +122,10 @@ typedef enum ScrollViewDirection {
     
     
     NSDictionary *userInfo = notif.userInfo;
-    Event *theEvent = userInfo[@"event"];
+    EventPersonRelation *relation = userInfo[@"relation"];
     
-    EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithEvent:theEvent];
-    infoPage.person = userInfo[@"person"];
+    EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithEvent:relation.event];
+    infoPage.person = relation.person;
     infoPage.frame = [self frameAtIndex:TimelinePageNumber];
     [infoPage reloadData];
     [self addPage:infoPage];

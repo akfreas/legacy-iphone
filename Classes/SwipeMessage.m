@@ -284,8 +284,7 @@ CGFloat InfoPageWidth = 280;
     
     
 //    exampleRow = [[FigureRowHorizontalScrollView alloc] initWithOrigin:CGPointMake(0, 200)];
-    exampleRow.event = rowData.event;
-    exampleRow.person = rowData.person;
+    exampleRow.relation = rowData;
     [figureRowCellPlaceholder removeFromSuperview];
     [hostingBlurView addSubview:exampleRow];
     exampleRowBackground = [[UIView alloc] initWithFrame:exampleRow.frame];

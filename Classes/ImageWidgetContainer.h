@@ -1,10 +1,8 @@
-@class Event;
-@class Person;
+@class EventPersonRelation;
 @class ImageWidget;
 @interface ImageWidgetContainer : UIView
 
-@property (nonatomic) Event *event;
-@property (nonatomic) Person *person;
+@property (strong, nonatomic) EventPersonRelation *relation;
 @property (nonatomic) ImageWidget *widget;
 
 @end

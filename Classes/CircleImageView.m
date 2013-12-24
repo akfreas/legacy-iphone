@@ -14,6 +14,7 @@
 -(id)initWithImage:(UIImage *)theImage radius:(CGFloat)theRadius {
     self = [super initWithFrame:CGRectMake(0, 0, theRadius * 2 + ImageLayerDefaultStrokeWidth, theRadius * 2 + ImageLayerDefaultStrokeWidth)];
     if (self) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         self.radius = theRadius;
         self.backgroundColor = [UIColor clearColor];
         self.contentScaleFactor = [UIScreen mainScreen].scale;
@@ -47,7 +48,7 @@
 }
 
 -(CGSize)intrinsicContentSize {
-    return CGSizeMake(self.radius, self.radius);
+    return CGSizeMake(_radius * 2, _radius * 2);
 }
 
 @end

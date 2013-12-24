@@ -299,8 +299,10 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:NO];
+#if DEBUG != 1
     splashClipPlayer.view.frame = self.view.bounds;
     [splashClipPlayer play];
+#endif
 }
 
 -(void)viewWillAppear:(BOOL)animated {

@@ -30,7 +30,7 @@
 #define FigureRowCellWidth 320
 
 
-#define SpaceBetweenFigureRowPages 1
+#define SpaceBetweenFigureRowPages 0
 
 #define FigureRowScrollViewPadding 1
 

@@ -124,8 +124,7 @@ typedef enum ScrollViewDirection {
     NSDictionary *userInfo = notif.userInfo;
     EventPersonRelation *relation = userInfo[@"relation"];
     
-    EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithEvent:relation.event];
-    infoPage.person = relation.person;
+    EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithRelation:relation];
     infoPage.frame = [self frameAtIndex:TimelinePageNumber];
     [infoPage reloadData];
     [self addPage:infoPage];
@@ -165,7 +164,7 @@ typedef enum ScrollViewDirection {
             
             LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
             webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);
-            webView.event = page.event;
+            webView.relation = page.relation;
             [self addPage:webView];
         }
         

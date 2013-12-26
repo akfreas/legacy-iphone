@@ -1,7 +1,7 @@
-@class Event;
+@class EventPersonRelation;
 @interface EventInfoHeaderCell : UITableViewCell
 
--(id)initWithEvent:(Event *)anEvent;
+-(id)initWithRelation:(EventPersonRelation *)relation;
 
 @property (readonly) CGPoint pointForLines;
 @property (nonatomic, assign) CGFloat nameLabelOriginYOffset;

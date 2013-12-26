@@ -2,6 +2,7 @@
 #import "Figure.h"
 #import "LegacyWebView.h"
 #import "WebViewControls.h"
+#import "EventPersonRelation.h"
 
 @interface LegacyWebView () <WebViewControlDelegate>
 @end
@@ -41,7 +42,7 @@
     
     if (hasRenderedInitialHtml == NO) {
         
-        NSString *nameWithUnderscores = [_event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        NSString *nameWithUnderscores = [_relation.event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
         baseUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:baseUrl];
@@ -89,8 +90,8 @@
     }
 }
 
--(void)setEvent:(Event *)event {
-    _event = event;
+-(void)setRelation:(EventPersonRelation *)relation {
+    _relation = relation;
     [self loadRequest];
 }
 

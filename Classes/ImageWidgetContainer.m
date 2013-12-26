@@ -15,6 +15,13 @@
     ObjectArchiveAccessor *accessor;
 }
 
+-(id)initWithRelation:(EventPersonRelation *)relation {
+    self = [super init];
+    if (self) {
+        self.relation = relation;
+    }
+    return self;
+}
 
 -(id)init {
     self = [super init];

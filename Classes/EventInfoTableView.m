@@ -5,6 +5,7 @@
 #import "Figure.h"
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
+#import "EventPersonRelation.h"
 
 @interface EventInfoTableView () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,10 +21,12 @@
     NSArray *arrayOfEvents;
 }
 
--(id)initWithEvent:(Event *)anEvent {
+-(id)initWithRelation:(EventPersonRelation *)aRelation {
+    
     self = [super init];
     if (self) {
-        keyEvent = anEvent;
+        self.relation = aRelation;
+        keyEvent = aRelation.event;
         accessor = [ObjectArchiveAccessor sharedInstance];
         [self fetchRelatedEvents];
         self.delegate = self;
@@ -49,20 +52,6 @@
         }
     }
 }
-#pragma mark Accessors
-
-
--(void)setPerson:(Person *)person {
-    _person = person;
-}
-
--(Event *)event {
-    return keyEvent;
-}
-
--(void)setEvent:(Event *)event {
-    keyEvent = event;
-}
 
 #pragma mark TableView Methods
 
@@ -77,7 +66,7 @@
     
     if (indexPath.row == 0) {
         if (headerCell == nil) {
-            headerCell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
+            headerCell = [[EventInfoHeaderCell alloc] initWithRelation:self.relation];
         }
         
         

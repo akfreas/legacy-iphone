@@ -1,30 +1,29 @@
 #import "EventInfoHeaderCell.h"
-#import "CircleImageView.h"
+#import "ImageWidgetContainer.h"
 #import "Event.h"
 #import "Figure.h"
 #import "ImageDownloadUtil.h"
 #import "FigureNameLabelBlurLayer.h"
+#import "EventPersonRelation.h"
 #import "HeaderCellLine.h"
 
 #import <CoreImage/CoreImage.h>
 
 @implementation EventInfoHeaderCell {
     
-    Event *event;
-//    UIView *mainImageView;
-    CircleImageView *mainImageView;
-    CircleImageView *personImageView;
+    EventPersonRelation *relation;
+    ImageWidgetContainer *imageWidget;
     HeaderCellLine *cellLine;
     UIImage *mainImage;
     UIImage *blurImage;
     UIImageView *blurImageView;
 }
 
--(id)initWithEvent:(Event *)anEvent {
+-(id)initWithRelation:(EventPersonRelation *)aRelation {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableViewCellIdentifierForHeader];
     
     if (self) {
-        event = anEvent;
+        relation = aRelation;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
 
@@ -88,7 +87,7 @@
 
 -(CGPoint)pointForLines {
     
-    CGPoint newPoint = CGPointMake(CGRectGetMaxX(mainImageView.frame), mainImageView.frame.origin.y + mainImageView.frame.size.height / 2);
+    CGPoint newPoint = CGPointMake(CGRectGetMaxX(imageWidget.frame), imageWidget.frame.origin.y + imageWidget.frame.size.height / 2);
     
     return newPoint;
 }
@@ -98,17 +97,17 @@
 
 -(void)drawMainCircleImage {
     
-    if (mainImageView == nil) {
+    if (imageWidget == nil) {
 //        mainImageView = [[UIView alloc] initWithFrame:CGRectZero];
-        mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:60.0f];
-        mainImageView.borderWidth = PersonPhotoBorderWidth;
-        mainImageView.borderColor = PersonPhotoBorderColor;
-        [self.contentView insertSubview:mainImageView aboveSubview:cellLine];
+        imageWidget = [[ImageWidgetContainer alloc] initWithRelation:relation];
+//        mainImageView.borderWidth = PersonPhotoBorderWidth;
+//        mainImageView.borderColor = PersonPhotoBorderColor;
+        [self.contentView insertSubview:imageWidget aboveSubview:cellLine];
     } else {
-        mainImageView.image = mainImage;
+//        mainImageView.image = mainImage;
     }
-    CGRect imageRect = CGRectMakeFrameForDeadCenterInRect(self.contentView.frame, mainImageView.frame.size);
-    mainImageView.frame = CGRectOffset(imageRect, -50, 0);
+    CGRect imageRect = CGRectMakeFrameForDeadCenterInRect(self.contentView.frame, imageWidget.frame.size);
+    imageWidget.frame = CGRectOffset(imageRect, -50, 0);
     //    UIBind(mainImageView);
 //    [mainImageView autoCenterInSuperview];
 //    [self.contentView addConstraintWithVisualFormat:@"H:|[mainImageView(100)]|" bindings:BBindings];
@@ -116,13 +115,13 @@
 }
 
 -(void)addLine {
-    cellLine = [[HeaderCellLine alloc] initWithFrame:self.contentView.bounds numberOfItems:[event.figure.events count]];
+    cellLine = [[HeaderCellLine alloc] initWithFrame:self.contentView.bounds numberOfItems:[relation.event.figure.events count]];
     [self.contentView addSubview:cellLine];
 }
 
 -(void)fetchFigureProfilePic {
     
-    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:event.figure completion:^(UIImage *theImage) {
+    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:relation.event.figure completion:^(UIImage *theImage) {
         mainImage = theImage;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self addLine];

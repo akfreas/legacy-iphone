@@ -2,13 +2,11 @@
 
 #include "PageProtocol.h"
 
-@class Event;
-@class Person;
+@class EventPersonRelation;
 @interface EventInfoTableView : UITableView <PageProtocol>
 
-@property (nonatomic, weak) Person *person;
-@property (nonatomic, weak) Event *event;
+@property (nonatomic, weak) EventPersonRelation *relation;
 
--(id)initWithEvent:(Event *)anEvent;
+-(id)initWithRelation:(EventPersonRelation *)anEvent;
 
 @end

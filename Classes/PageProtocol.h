@@ -1,4 +1,4 @@
-@class Event;
+@class EventPersonRelation;
 
 @protocol PageProtocol <NSObject>
 
@@ -9,6 +9,6 @@
 
 @optional
 
-@property (weak, nonatomic) Event *event;
+@property (weak, nonatomic) EventPersonRelation *relation;
 
 @end

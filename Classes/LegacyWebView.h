@@ -1,12 +1,11 @@
 #import "PageProtocol.h"
 
-@class Event;
+@class EventPersonRelation;
 
 @interface LegacyWebView : UIView <UIWebViewDelegate, UIScrollViewDelegate, PageProtocol>
 
-@property (nonatomic) Event *event;
+@property (nonatomic) EventPersonRelation *relation;
 @property (nonatomic, readonly) UIScrollView *scrollView;
-//@property (copy) void(^loadingCompleteBlock)();
 
 -(void)loadRequest;
 

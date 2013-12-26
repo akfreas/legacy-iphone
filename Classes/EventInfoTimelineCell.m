@@ -6,7 +6,7 @@
 
 @interface EventInfoTimelineCellContentView : UIView
 
-@property (assign) BOOL isKey;
+@property (nonatomic, assign) BOOL isKey;
 
 @end
 @implementation EventInfoTimelineCellContentView
@@ -17,6 +17,10 @@
     return self;
 }
 
+-(void)setIsKey:(BOOL)isKey {
+    _isKey = isKey;
+    [self setNeedsDisplay];
+}
 
 -(void)drawRect:(CGRect)rect {
     

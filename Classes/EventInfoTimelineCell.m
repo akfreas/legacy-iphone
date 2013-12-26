@@ -2,6 +2,45 @@
 #import "RelatedEventLabel.h"
 #import "Event.h"
 #import <CoreGraphics/CoreGraphics.h>
+
+
+@interface EventInfoTimelineCellContentView : UIView
+
+@property (assign) BOOL isKey;
+
+@end
+@implementation EventInfoTimelineCellContentView
+
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    self.backgroundColor = [UIColor clearColor];
+    return self;
+}
+
+
+-(void)drawRect:(CGRect)rect {
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    aPath.lineWidth = EventHeaderCellLineStrokeWidth;
+    aPath.lineCapStyle = kCGLineCapRound;
+    CGFloat startX = 20;
+    CGFloat arcRadius = 4;
+    CGFloat arcStart = self.bounds.size.height / 2 - arcRadius * 2;
+    [HeaderBackgroundColor setStroke];
+    [aPath moveToPoint:CGPointMake(startX, 0)];
+    CGPoint lastLinePoint = CGPointMake(startX, arcStart - arcRadius);
+    [aPath addLineToPoint:lastLinePoint];
+    [aPath addArcWithCenter:CGPointMake(startX, arcStart) radius:arcRadius startAngle:DEG2RAD(-90) endAngle:DEG2RAD(270) clockwise:YES];
+    [aPath moveToPoint:CGPointMake(startX, lastLinePoint.y + arcRadius * 2)];
+    [aPath addLineToPoint:CGPointMake(startX, self.frame.size.height)];
+    if (self.isKey) {
+        [HeaderBackgroundColor setFill];
+        [aPath fill];
+    }
+    [aPath stroke];
+}
+@end
+
 @interface EventInfoTimelineCell ()
 
 @property (strong, nonatomic, readwrite) NSString *reuseIdentifier;
@@ -13,20 +52,28 @@
     
     IBOutlet UITextView *textView;
     IBOutlet UILabel *ageLabel;
-    UIView *lineView;
+    NSString *reuseID;
+    EventInfoTimelineCellContentView *contentView;
 }
 
--(id)initWithEvent:(Event *)anEvent {
+-(id)initWithEvent:(Event *)anEvent reuseIdentifier:(NSString *)reuseIdentifier {
     
     NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])  owner:self options:nil];
     self = [nibArray objectAtIndex:0];
+//    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     
     if (self) {
         _event = anEvent;
-        self.reuseIdentifier = TableViewCellIdentifierForMainCell;
+        reuseID = reuseIdentifier;
+        contentView = [[EventInfoTimelineCellContentView alloc] initWithFrame:self.frame];
+        [self.contentView addSubview:contentView];
         [self drawEventLabel];
     }
     return self;
+}
+
+-(NSString *)reuseIdentifier {
+    return reuseID;
 }
 
 -(void)drawEventLabel {
@@ -40,19 +87,10 @@
     [self drawEventLabel];
 }
 
+
 -(void)setShowAsKey:(BOOL)showAsKey {
-    if (showAsKey == YES) {
-        if (lineView == nil) {
-            lineView = [[UIView alloc] initWithFrame:CGRectMake(7, ageLabel.frame.origin.y + ageLabel.frame.size.height, ageLabel.frame.size.width, 1)];
-            lineView.backgroundColor = [UIColor blackColor];
-            [self addSubview:lineView];
-        }
-        lineView.hidden = NO;
-    } else {
-        lineView.hidden = YES;
-    }
+    contentView.isKey = showAsKey;
 }
 
-
-
 @end
+

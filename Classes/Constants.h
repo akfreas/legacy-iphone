@@ -29,7 +29,7 @@
 #define NoEventFigureRowHeight 60
 #define FigureRowCellWidth 320
 
-
+#define DEG2RAD(DEG) ((DEG)*((M_PI)/(180.0)))
 #define SpaceBetweenFigureRowPages 0
 
 #define FigureRowScrollViewPadding 1
@@ -110,5 +110,7 @@
 #define PersonPhotoRadius 14
 #define PersonPhotoBorderSize 2
 #define PersonPhotoOffset 10
+
+#define EventHeaderCellLineStrokeWidth 1.0f
 
 #define UIBind(...)  NSDictionary *BBindings = MXDictionaryOfVariableBindings(__VA_ARGS__)

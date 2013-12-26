@@ -53,7 +53,7 @@
 
 
 -(void)setPerson:(Person *)person {
-    _person = person;    
+    _person = person;
 }
 
 -(Event *)event {
@@ -88,7 +88,7 @@
         static NSString *ReuseId = TableViewCellIdentifierForMainCell;
         EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)[self dequeueReusableCellWithIdentifier:ReuseId];
         if (timelineCell == nil) {
-            timelineCell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent];
+            timelineCell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent reuseIdentifier:ReuseId];
         } else {
             timelineCell.event = theEvent;
         }

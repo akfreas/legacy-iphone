@@ -16,7 +16,7 @@
 - (void)drawRect:(CGRect)rect {
     
     UIBezierPath *path = [UIBezierPath bezierPath];
-    path.lineWidth = 2.0;
+    path.lineWidth = EventHeaderCellLineStrokeWidth;
     path.lineCapStyle = kCGLineCapRound;
     
     [[UIColor whiteColor] setStroke];

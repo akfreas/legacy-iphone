@@ -16,7 +16,7 @@
 }
 
 -(id)initWithRelation:(EventPersonRelation *)relation {
-    self = [super init];
+    self = [self init];
     if (self) {
         self.relation = relation;
     }
@@ -84,6 +84,7 @@
         [self addObserver:self forKeyPath:@"self.relation.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
     } else {
         _widget.smallImage = nil;
+//        _widget.smallImage = _relation.event.figure.image;
     }
     [self setNeedsLayout];
 }

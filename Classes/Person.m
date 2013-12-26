@@ -24,4 +24,8 @@
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
+-(UIImage *)thumbnailImage {
+    return [UIImage imageWithData:self.thumbnail];
+}
+
 @end

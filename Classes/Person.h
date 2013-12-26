@@ -30,5 +30,5 @@
 - (void)removeEvents:(NSSet *)values;
 
 -(NSString *)fullName;
-
+-(UIImage *)thumbnailImage;
 @end

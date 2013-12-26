@@ -68,6 +68,25 @@
     [self setNeedsLayout];
 }
 
+-(void)setLargeImageBorderColor:(UIColor *)largeImageBorderColor {
+    _largeImageBorderColor = largeImageBorderColor;
+    largeCircleImage.borderColor = largeImageBorderColor;
+}
+
+-(void)setSmallImageBorderColor:(UIColor *)smallImageBorderColor {
+    _smallImageBorderColor = smallImageBorderColor;
+    smallCircleImage.borderColor = smallImageBorderColor;
+}
+
+-(void)setSmallImageBorderWidth:(CGFloat)smallImageBorderWidth {
+    _smallImageBorderWidth = smallImageBorderWidth;
+    smallCircleImage.borderWidth = smallImageBorderWidth;
+}
+
+-(void)setLargeImageBorderWidth:(CGFloat)largeImageBorderWidth {
+    _largeImageBorderWidth = largeImageBorderWidth;
+    largeCircleImage.borderWidth = largeImageBorderWidth;
+}
 
 -(void)setSmallImageOffset:(CGFloat)smallImageOffset {
     _smallImageOffset = smallImageOffset;
@@ -81,6 +100,8 @@
     
     if (largeCircleImage == nil) {
         largeCircleImage = [[CircleImageView alloc] initWithImage:_largeImage radius:_largeImageRadius];
+        largeCircleImage.borderColor = self.largeImageBorderColor;
+        largeCircleImage.borderWidth = self.largeImageBorderWidth;
         [self addSubview:largeCircleImage];
         UIBind(largeCircleImage);
         [self addConstraintWithVisualFormat:@"V:|[largeCircleImage]|" bindings:BBindings];
@@ -121,8 +142,8 @@
             smallCircleImage.image = _smallImage;
         }
         
-        smallCircleImage.borderWidth = PersonPhotoBorderSize;
-        smallCircleImage.borderColor = PersonPhotoBorderColor;
+        smallCircleImage.borderWidth = self.smallImageBorderWidth;
+        smallCircleImage.borderColor = self.smallImageBorderColor;
         smallCircleImage.frame = smImgRect;
     } else {
         smallCircleImage.hidden = YES;

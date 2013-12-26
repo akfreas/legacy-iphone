@@ -1,7 +1,8 @@
 #import "EventInfoHeaderCell.h"
-#import "ImageWidgetContainer.h"
+#import "ImageWidget.h"
 #import "Event.h"
 #import "Figure.h"
+#import "Person.h"
 #import "ImageDownloadUtil.h"
 #import "FigureNameLabelBlurLayer.h"
 #import "EventPersonRelation.h"
@@ -12,7 +13,7 @@
 @implementation EventInfoHeaderCell {
     
     EventPersonRelation *relation;
-    ImageWidgetContainer *imageWidget;
+    ImageWidget *imageWidget;
     HeaderCellLine *cellLine;
     UIImage *mainImage;
     UIImage *blurImage;
@@ -39,7 +40,6 @@
     blurImageView = [[UIImageView alloc] initWithImage:blurImage];
     blurImageView.alpha = 0;
     [self.contentView insertSubview:blurImageView belowSubview:cellLine];
-//    [self.contentView addSubview:blurImageView];
     UIBind(blurImageView);
     [self.contentView addConstraintWithVisualFormat:@"H:|[blurImageView]|" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|[blurImageView]|" bindings:BBindings];
@@ -57,7 +57,6 @@
         CIContext *context = [CIContext contextWithOptions:nil];
         CIImage *image = [CIImage imageWithCGImage:mainImage.CGImage];
         CGAffineTransform cgTransform = CGAffineTransformMakeScale(transform, transform);
-    //    cgTransform = CGAffineTransformTranslate(cgTransform, -1, 0);
         image = [image imageByApplyingTransform:cgTransform];
         CIFilter *gaussianFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
         [gaussianFilter setValue:image forKey:kCIInputImageKey];
@@ -98,20 +97,20 @@
 -(void)drawMainCircleImage {
     
     if (imageWidget == nil) {
-//        mainImageView = [[UIView alloc] initWithFrame:CGRectZero];
-        imageWidget = [[ImageWidgetContainer alloc] initWithRelation:relation];
-//        mainImageView.borderWidth = PersonPhotoBorderWidth;
-//        mainImageView.borderColor = PersonPhotoBorderColor;
+        imageWidget = [[ImageWidget alloc] initWithSmallImage:relation.person.thumbnailImage largeImage:mainImage];
+        imageWidget.largeImageRadius = 60;
+        imageWidget.smallImageRadius = 30;
+        imageWidget.largeImageBorderWidth = PersonPhotoBorderWidth;
+        imageWidget.largeImageBorderColor = PersonPhotoBorderColor;
+        imageWidget.smallImageBorderColor = PersonPhotoBorderColor;
+        imageWidget.smallImageBorderWidth = PersonPhotoBorderWidth;
         [self.contentView insertSubview:imageWidget aboveSubview:cellLine];
     } else {
-//        mainImageView.image = mainImage;
+        imageWidget.largeImage = mainImage;
+        imageWidget.smallImage = relation.person.thumbnailImage;
     }
-    CGRect imageRect = CGRectMakeFrameForDeadCenterInRect(self.contentView.frame, imageWidget.frame.size);
+    CGRect imageRect = CGRectMakeFrameForDeadCenterInRect(self.contentView.frame, CGSizeMake(200, 200));
     imageWidget.frame = CGRectOffset(imageRect, -50, 0);
-    //    UIBind(mainImageView);
-//    [mainImageView autoCenterInSuperview];
-//    [self.contentView addConstraintWithVisualFormat:@"H:|[mainImageView(100)]|" bindings:BBindings];
-//    [self.contentView addConstraintWithVisualFormat:@"V:|-[mainImageView(100)]-|" bindings:BBindings];
 }
 
 -(void)addLine {

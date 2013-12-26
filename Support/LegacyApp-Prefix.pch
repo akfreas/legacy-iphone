@@ -10,6 +10,7 @@
 #import "Utility_AppSettings.h"
 #import "CGRectUtils.h"
 #import "UIView+LayoutHelpers.h"
+#import <UIView+AutoLayout/UIView+AutoLayout.h>
 #import "Flurry.h"
 
 

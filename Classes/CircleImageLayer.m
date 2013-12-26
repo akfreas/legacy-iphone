@@ -92,7 +92,7 @@
 }
 
 -(void)setBorderColor:(CGColorRef)borderColor {
-    ourBorderColor = borderColor;
+    ourBorderColor = CGColorCreateCopy(borderColor);
     [self setNeedsDisplay];
 }
 

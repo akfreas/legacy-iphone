@@ -79,7 +79,9 @@
 #define AgeLabelFontColor [UIColor colorWithHexString:@"#9B9B9B"]
 #define LineSeparatorColor [UIColor colorWithHexString:@"#E1E4E6"]
 #define TitleColor [UIColor colorWithHexString:@"#000000"]
+
 #define PersonPhotoBorderColor [UIColor colorWithHexString:@"#FFFFFF"]
+#define PersonPhotoBorderWidth 2
 
 #define FigureNameFontName @"HelveticaNeue"
 #define FigureNameFontSize 22

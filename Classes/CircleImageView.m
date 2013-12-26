@@ -12,7 +12,7 @@
 }
 
 -(id)initWithImage:(UIImage *)theImage radius:(CGFloat)theRadius {
-    self = [super initWithFrame:CGRectMake(0, 0, theRadius * 2 + ImageLayerDefaultStrokeWidth, theRadius * 2 + ImageLayerDefaultStrokeWidth)];
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.radius = theRadius;
@@ -47,8 +47,14 @@
     [super layoutSubviews];
 }
 
+-(void)setFrame:(CGRect)frame {
+    self.layer.frame = frame;
+    [super setFrame:frame];
+}
+
 -(CGSize)intrinsicContentSize {
-    return CGSizeMake(_radius * 2, _radius * 2);
+    CGSize contentSize = CGSizeMake(_radius * 2, _radius * 2);
+    return contentSize;
 }
 
 @end

@@ -4,14 +4,17 @@
 #import "Figure.h"
 #import "ImageDownloadUtil.h"
 #import "FigureNameLabelBlurLayer.h"
+#import "HeaderCellLine.h"
 
 #import <CoreImage/CoreImage.h>
 
 @implementation EventInfoHeaderCell {
     
     Event *event;
+//    UIView *mainImageView;
     CircleImageView *mainImageView;
     CircleImageView *personImageView;
+    HeaderCellLine *cellLine;
     UIImage *mainImage;
     UIImage *blurImage;
     UIImageView *blurImageView;
@@ -24,6 +27,7 @@
         event = anEvent;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+
         self.contentView.clipsToBounds = YES;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.contentView.backgroundColor = [UIColor lightGrayColor];
@@ -32,11 +36,11 @@
     
     return self;
 }
-
 -(void)addImageBlurView {
     blurImageView = [[UIImageView alloc] initWithImage:blurImage];
     blurImageView.alpha = 0;
-    [self.contentView insertSubview:blurImageView belowSubview:mainImageView];
+    [self.contentView insertSubview:blurImageView belowSubview:cellLine];
+//    [self.contentView addSubview:blurImageView];
     UIBind(blurImageView);
     [self.contentView addConstraintWithVisualFormat:@"H:|[blurImageView]|" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|[blurImageView]|" bindings:BBindings];
@@ -95,16 +99,25 @@
 -(void)drawMainCircleImage {
     
     if (mainImageView == nil) {
-        mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:75.0f];
-//        mainImageView.backgroundColor = [UIColor orangeColor];
-        [self.contentView addSubview:mainImageView];
+//        mainImageView = [[UIView alloc] initWithFrame:CGRectZero];
+        mainImageView = [[CircleImageView alloc] initWithImage:mainImage radius:60.0f];
+        mainImageView.borderWidth = PersonPhotoBorderWidth;
+        mainImageView.borderColor = PersonPhotoBorderColor;
+        [self.contentView insertSubview:mainImageView aboveSubview:cellLine];
     } else {
-//        mainImageView.image = mainImage;
+        mainImageView.image = mainImage;
     }
-    mainImageView.frame = CGRectMakeFrameForDeadCenterInRect(self.contentView.frame, mainImageView.frame.size);
-//    UIBind(mainImageView);
-//    [blurImageView addConstraintWithVisualFormat:@"H:|-(>=1@250)-[mainImageView(100)]-(>=10@250)-|" bindings:BBindings];
-//    [blurImageView addConstraintWithVisualFormat:@"V:|-(>=10@250)-[mainImageView(100)]-(>=10@250)-|" bindings:BBindings];
+    CGRect imageRect = CGRectMakeFrameForDeadCenterInRect(self.contentView.frame, mainImageView.frame.size);
+    mainImageView.frame = CGRectOffset(imageRect, -50, 0);
+    //    UIBind(mainImageView);
+//    [mainImageView autoCenterInSuperview];
+//    [self.contentView addConstraintWithVisualFormat:@"H:|[mainImageView(100)]|" bindings:BBindings];
+//    [self.contentView addConstraintWithVisualFormat:@"V:|-[mainImageView(100)]-|" bindings:BBindings];
+}
+
+-(void)addLine {
+    cellLine = [[HeaderCellLine alloc] initWithFrame:self.contentView.bounds numberOfItems:[event.figure.events count]];
+    [self.contentView addSubview:cellLine];
 }
 
 -(void)fetchFigureProfilePic {
@@ -112,9 +125,9 @@
     [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:event.figure completion:^(UIImage *theImage) {
         mainImage = theImage;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self drawBackgroundBlurImage];
+            [self addLine];
             [self drawMainCircleImage];
-            [self setNeedsUpdateConstraints];
+            [self drawBackgroundBlurImage];
         });
     }];
 }

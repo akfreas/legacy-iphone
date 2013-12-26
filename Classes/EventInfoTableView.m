@@ -5,7 +5,6 @@
 #import "Figure.h"
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
-#import "RightIndicatorLines.h"
 
 @interface EventInfoTableView () <UITableViewDataSource, UITableViewDelegate>
 
@@ -15,7 +14,6 @@
     
     Event *keyEvent;
     ObjectArchiveAccessor *accessor;
-    RightIndicatorLines *indicatorLines;
     EventInfoHeaderCell *headerCell;
     
     NSInteger keyEventIndex;
@@ -33,7 +31,6 @@
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.allowsSelection = NO;
-//        self.backgroundColor = UIColor.clearColor;
     }
     return self;
 }
@@ -52,27 +49,11 @@
         }
     }
 }
-
--(void)addStickLinesForCell:(EventInfoHeaderCell *)cell {
-    
-    if (indicatorLines == nil) {
-        CGFloat indicatedCellMaxY = cell.frame.size.height + RelatedEventsLabelHeight * (keyEventIndex );
-        CGPoint translatedPoint = [self convertPoint:cell.pointForLines toView:self];
-        
-        indicatorLines  = [RightIndicatorLines new];
-        indicatorLines = [[RightIndicatorLines alloc] initWithStartPoint:translatedPoint endPoint:CGPointMake(self.bounds.size.width, indicatedCellMaxY + 20)];
-        [self addSubview:indicatorLines];
-    }
-    
-    indicatorLines.person = _person;
-}
 #pragma mark Accessors
 
 
 -(void)setPerson:(Person *)person {
-    _person = person;
-    indicatorLines.person = person;
-    
+    _person = person;    
 }
 
 -(Event *)event {
@@ -97,7 +78,6 @@
     if (indexPath.row == 0) {
         if (headerCell == nil) {
             headerCell = [[EventInfoHeaderCell alloc] initWithEvent:keyEvent];
-            [self addStickLinesForCell:headerCell];
         }
         
         

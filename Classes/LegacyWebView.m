@@ -3,21 +3,23 @@
 #import "LegacyWebView.h"
 #import "WebViewControls.h"
 #import "EventPersonRelation.h"
+#import <TFHpple.h>
 
 @interface LegacyWebView () <WebViewControlDelegate>
 @end
 
 @implementation LegacyWebView {
     
-    IBOutlet UIWebView *webView;
+    UIWebView *webView;
     BOOL hasRenderedInitialHtml;
     BOOL viewHasBecomeFullyVisible;
     NSOperationQueue *queue;
     
-    NSString *initialHtmlString;
+    NSMutableString *initialHtmlString;
     NSURL *baseUrl;
     NSURL *initialClickedLinkUrl;
     WebViewControls *controls;
+    TFHpple *hppleParser;
 }
 
 
@@ -26,16 +28,26 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [[NSBundle mainBundle] loadNibNamed:@"LegacyWebView" owner:self options:nil];
-        controls = [[WebViewControls alloc] initWithOrigin:CGPointMake(0, 0)];
-        controls.delegate = self;
         queue = [[NSOperationQueue alloc] init];
         webView.scrollView.delegate = self;
-        controls.hideBackButton = YES;
-        controls.hideForwardButton = YES;
-        [self addSubview:webView];
+        [self addWebView];
+        [self addWebViewControls];
+        [self addLayoutConstraints];
     }
     return self;
+}
+
+-(void)addWebView {
+    webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    webView.delegate = self;
+    [self addSubview:webView];
+}
+
+-(void)addLayoutConstraints {
+    UIBind(controls, webView);
+    [self addConstraintWithVisualFormat:@"H:|[controls]|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|[controls][webView]|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|[webView]|" bindings:BBindings];
 }
 
 -(void)loadRequest {
@@ -44,14 +56,15 @@
         
         NSString *nameWithUnderscores = [_relation.event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
         baseUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
-        
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:baseUrl];
         [request addValue:@"Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341" forHTTPHeaderField:@"User-Agent"];
         [controls startActivityIndicator];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *htmlData, NSError *error) {
+            initialHtmlString = [[NSMutableString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+            [initialHtmlString replaceOccurrencesOfString:@"<div class=\"header\">" withString:@"<div class=\"header\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
             
-            initialHtmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
-            
+            [initialHtmlString replaceOccurrencesOfString:@"<ul id=\"page-actions\" class=\"hlist\">" withString:@"<ul id=\"page-actions\" class=\"hlist\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
+            [initialHtmlString replaceOccurrencesOfString:@"<h1 id=\"section_0\">" withString:@"<h1 id=\"section_0\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
             if (viewHasBecomeFullyVisible == YES && hasRenderedInitialHtml == NO) {
                 [self loadInitialState];
             }
@@ -60,6 +73,8 @@
     }
 }
 
+
+
 -(UIScrollView *)scrollView {
     return webView.scrollView;
 }
@@ -67,13 +82,20 @@
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     
-    webView.frame = CGRectMakeFrameWithSizeFromFrame(frame);
+    webView.frame = CGRectOffset(CGRectMakeFrameWithSizeFromFrame(frame), 0, controls.frame.size.height);
 }
 
 -(void)addWebViewControls {
-    if (controls.superview == nil) {
+    if (controls == nil) {
+        controls = [[WebViewControls alloc] initWithFrame:CGRectZero];
+        controls.delegate = self;
+        controls.hideBackButton = YES;
+        controls.hideForwardButton = YES;
+        
         [self insertSubview:controls aboveSubview:webView];
+        
     }
+    controls.figure = _relation.event.figure;
     [UIView animateWithDuration:1 animations:^{
         controls.alpha = 1;
     }];
@@ -161,7 +183,7 @@
     }
     
     if (navigationType == UIWebViewNavigationTypeBackForward) {
-//        controls.hideForwardButton = !webView.canGoForward;
+        //        controls.hideForwardButton = !webView.canGoForward;
     }
     
     return YES;

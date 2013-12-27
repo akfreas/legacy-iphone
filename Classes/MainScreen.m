@@ -73,17 +73,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(removeSplashView)
                                                  name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addSplashImageView) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
+ 
     splashClipPlayer.scalingMode = MPMovieScalingModeFill;
     
     UIImageView *backgroundPlaceholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"launchimage.png"]];
     backgroundPlaceholder.backgroundColor = [UIColor redColor];
     [splashClipPlayer.view addSubview:backgroundPlaceholder];
     [self.view addSubview:splashClipPlayer.view];
-}
-
--(void)addSplashImageView {
-//    [self.view addSubview:splashClipPlayer.view];
 }
 
 -(void)removeSplashView {

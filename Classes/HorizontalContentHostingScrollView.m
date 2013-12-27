@@ -31,7 +31,6 @@ typedef enum ScrollViewDirection {
     CGPoint lastScrollPoint;
     BOOL paginationInProgress;
     LegacyAppConnection *connection;
-    WebViewControls *controls;
     ScrollViewDirection direction;
 }
 
@@ -57,7 +56,6 @@ typedef enum ScrollViewDirection {
         self.bounces = NO;
         departurePoint = CGPointZero;
         arrayOfFigureRows = [[NSMutableArray alloc] init];
-        controls = [[WebViewControls alloc] initWithOrigin:CGPointMake(self.contentOffset.x, 0)];
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
@@ -69,6 +67,10 @@ typedef enum ScrollViewDirection {
         [self scrollToPage:LandingPageNumber];
     }
     return self;
+}
+
+-(CGSize)intrinsicContentSize {
+    return CGSizeMake(320, 480);
 }
 
 -(void)scrollToInfoPage {

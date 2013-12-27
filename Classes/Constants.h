@@ -102,8 +102,8 @@
 
 #define HeaderFontName @"HelveticaNeue-Bold"
 #define HeaderFontSize 25
-
 #define HeaderFont [UIFont fontWithName:HeaderFontName size:HeaderFontSize]
+#define HeaderTextColor [UIColor whiteColor]
 
 #define LegacyEntryHeight 170
 #define FigurePhotoRadius 25

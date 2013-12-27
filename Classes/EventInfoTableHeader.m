@@ -1,28 +1,6 @@
 #import "EventInfoTableHeader.h"
 #import "EventPersonRelation.h"
 
-@interface HeaderContentView : UIView
-
-@end
-
-@implementation HeaderContentView
-
--(id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor redColor];
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-    }
-    return self;
-}
-
-
--(BOOL)translatesAutoresizingMaskIntoConstraints {
-    return NO;
-}
-
-@end
-
 @implementation EventInfoTableHeader {
     
     UILabel *nameLabel;
@@ -30,48 +8,58 @@
     
     UIButton *leftButton;
     UIButton *rightButton;
-    HeaderContentView *cv;
 }
 
 -(id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
+        [self.contentView addObserver:self forKeyPath:@"frame" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionPrior) context:nil];
         self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
         self.contentView.backgroundColor = HeaderBackgroundColor;
     }
     return self;
 }
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"Change: %@, obj: %@", change, object);
+}
 
 -(void)setRelation:(EventPersonRelation *)relation {
     _relation = relation;
     [self addNameLabel];
+    [self addButtons];
+    [self configureLayoutConstraints];
 }
 
--(void)layoutSubviews {
-    
-    if (leftButton == nil && rightButton == nil) {
-        [self addButtons];
-    }
+-(void)configureLayoutConstraints {
 
-    if (nameLabel != nil) {
-        if ([constraints count] > 0) {
-            [self.contentView removeConstraints:constraints];
-        }
-        UIBind(nameLabel);
-        constraints = [NSMutableArray arrayWithArray:[self.contentView addConstraintWithVisualFormat:@"H:|-70-[nameLabel]" bindings:BBindings]];
-        [constraints addObjectsFromArray:[self.contentView addConstraintWithVisualFormat:@"V:|-20-[nameLabel]-|" bindings:BBindings]];
-        [nameLabel autoCenterInSuperview];
-    }
-    [super layoutSubviews];
-
+    UIBind(leftButton, rightButton, nameLabel);
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=10@250)-[leftButton(25)]-(>=5@100)-[nameLabel(>=200@1000)]-(>=5)-[rightButton(==leftButton)]-(>=5@100)-|" options:NSLayoutFormatDirectionLeftToRight metrics:nil views:BBindings]];
+    [self.contentView addConstraintWithVisualFormat:@"V:|-24-[leftButton]" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"V:|-24-[rightButton]" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"V:|-24-[nameLabel]" bindings:BBindings];
 }
+
+
+//-(void)prepareForReuse {
+//    
+//    if (nameLabel != nil) {
+////        if ([constraints count] > 0) {
+////            [self.contentView removeConstraints:constraints];
+////        }
+//        UIBind(nameLabel);
+////        constraints = [NSMutableArray arrayWithArray:[self.contentView addConstraintWithVisualFormat:@"H:|-20-[nameLabel]|" bindings:BBindings]];
+////        [constraints addObjectsFromArray:[self.contentView addConstraintWithVisualFormat:@"V:|-20-[nameLabel]-|" bindings:BBindings]];
+//        [nameLabel autoCenterInSuperview];
+//    }
+//
+//}
 
 -(CGSize)intrinsicContentSize {
     return CGSizeMake(320, 64);
 }
 
 -(void)addNameLabel {
-    nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    nameLabel = [[UILabel alloc] initForAutoLayout];
     nameLabel.text = _relation.event.figure.name;
     nameLabel.font = HeaderFont;
     nameLabel.textColor = [UIColor whiteColor];
@@ -79,15 +67,20 @@
 }
 
 -(void)addButtons {
-    leftButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    leftButton = [[UIButton alloc] initForAutoLayout];
     [leftButton setImage:[UIImage imageNamed:@"back-arrow"] forState:UIControlStateNormal];
     [self.contentView addSubview:leftButton];
     [leftButton bk_addEventHandler:^(id sender) {
-        [AKNOTIF postNotificationName:KeyForScrollToPageNotification object:@{KeyForPageNumberInUserInfo : [NSNumber numberWithInteger:0]}];
+        [AKNOTIF postNotificationName:KeyForScrollToPageNotification object:nil userInfo:@{KeyForPageNumberInUserInfo : [NSNumber numberWithInteger:0]}];
     } forControlEvents:UIControlEventTouchUpInside];
-    UIBind(leftButton);
-    [self.contentView addConstraintWithVisualFormat:@"H:|-7-[leftButton]" bindings:BBindings];
-    [self.contentView addConstraintWithVisualFormat:@"V:|-24-[leftButton]" bindings:BBindings];
+    
+    rightButton = [[UIButton alloc] initForAutoLayout];
+    [rightButton setImage:[UIImage imageNamed:@"next-arrow"] forState:UIControlStateNormal];
+    [self.contentView addSubview:rightButton];
+    [rightButton bk_addEventHandler:^(id sender) {
+        [AKNOTIF postNotificationName:KeyForScrollToPageNotification object:nil userInfo:@{KeyForPageNumberInUserInfo: [NSNumber numberWithInteger:2]} ];
+    } forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 @end

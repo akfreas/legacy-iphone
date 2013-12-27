@@ -35,6 +35,7 @@ static NSString *HeaderID = @"EventHeader";
         [self registerClass:[EventInfoTableHeader class] forHeaderFooterViewReuseIdentifier:HeaderID];
         self.delegate = self;
         self.dataSource = self;
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.allowsSelection = NO;
@@ -68,6 +69,10 @@ static NSString *HeaderID = @"EventHeader";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 64;
+}
+
+-(CGSize)intrinsicContentSize {
+    return CGSizeMake(320, 480);
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -111,6 +116,7 @@ static NSString *HeaderID = @"EventHeader";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     EventInfoTableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
     header.relation = self.relation;
+    [header prepareForReuse];
     return header;
 }
 

@@ -59,7 +59,9 @@ static NSString *ReuseID = @"CellReuseId";
     }
     return self;
 }
-
+-(CGSize)intrinsicContentSize {
+    return CGSizeMake(320, 480);
+}
 #pragma mark TopActionView Control Methods
 
 -(void)createHeaderWrapperView {

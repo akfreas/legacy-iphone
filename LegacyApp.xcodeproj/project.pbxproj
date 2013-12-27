@@ -74,6 +74,8 @@
 		1980A89E186CD2A200ECD354 /* EventInfoTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980A89D186CD2A200ECD354 /* EventInfoTableHeader.m */; };
 		1980A8A1186CE79F00ECD354 /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1980A89F186CE79F00ECD354 /* back-arrow.png */; };
 		1980A8A2186CE79F00ECD354 /* back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1980A8A0186CE79F00ECD354 /* back-arrow@2x.png */; };
+		1980A8AB186DFE8D00ECD354 /* next-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1980A8A9186DFE8D00ECD354 /* next-arrow.png */; };
+		1980A8AC186DFE8D00ECD354 /* next-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1980A8AA186DFE8D00ECD354 /* next-arrow@2x.png */; };
 		1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */; };
 		198263A418616DC600CA3FEE /* add-friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A218616DC600CA3FEE /* add-friends.png */; };
 		198263A518616DC600CA3FEE /* add-friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A318616DC600CA3FEE /* add-friends@2x.png */; };
@@ -226,6 +228,8 @@
 		1980A89D186CD2A200ECD354 /* EventInfoTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoTableHeader.m; sourceTree = "<group>"; };
 		1980A89F186CE79F00ECD354 /* back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow.png"; sourceTree = "<group>"; };
 		1980A8A0186CE79F00ECD354 /* back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow@2x.png"; sourceTree = "<group>"; };
+		1980A8A9186DFE8D00ECD354 /* next-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-arrow.png"; sourceTree = "<group>"; };
+		1980A8AA186DFE8D00ECD354 /* next-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-arrow@2x.png"; sourceTree = "<group>"; };
 		1982639B1861639100CA3FEE /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		1982639D18616AD300CA3FEE /* UIView+LayoutHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayoutHelpers.h"; sourceTree = "<group>"; };
 		1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayoutHelpers.m"; sourceTree = "<group>"; };
@@ -472,6 +476,8 @@
 				19C7A16718670FD600130BEF /* facebook-icon@2x.png */,
 				1980A89F186CE79F00ECD354 /* back-arrow.png */,
 				1980A8A0186CE79F00ECD354 /* back-arrow@2x.png */,
+				1980A8A9186DFE8D00ECD354 /* next-arrow.png */,
+				1980A8AA186DFE8D00ECD354 /* next-arrow@2x.png */,
 				198263A818619D6800CA3FEE /* next-arrow-gray.png */,
 				198263A918619D6800CA3FEE /* next-arrow-gray@2x.png */,
 				198263A218616DC600CA3FEE /* add-friends.png */,
@@ -724,8 +730,10 @@
 				198263AA18619D6800CA3FEE /* next-arrow-gray.png in Resources */,
 				1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */,
 				19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */,
+				1980A8AB186DFE8D00ECD354 /* next-arrow.png in Resources */,
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
 				196C6B2218052D8200475ACB /* PasscodeScreenViewController.xib in Resources */,
+				1980A8AC186DFE8D00ECD354 /* next-arrow@2x.png in Resources */,
 				194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */,
 				1980A8A1186CE79F00ECD354 /* back-arrow.png in Resources */,
 				19C7A1701867FCAC00130BEF /* no-photo.png in Resources */,

@@ -6,6 +6,7 @@
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
 #import "EventPersonRelation.h"
+#import "EventInfoTableHeader.h"
 
 @interface EventInfoTableView () <UITableViewDataSource, UITableViewDelegate>
 
@@ -21,6 +22,8 @@
     NSArray *arrayOfEvents;
 }
 
+static NSString *HeaderID = @"EventHeader";
+
 -(id)initWithRelation:(EventPersonRelation *)aRelation {
     
     self = [super init];
@@ -29,6 +32,7 @@
         keyEvent = aRelation.event;
         accessor = [ObjectArchiveAccessor sharedInstance];
         [self fetchRelatedEvents];
+        [self registerClass:[EventInfoTableHeader class] forHeaderFooterViewReuseIdentifier:HeaderID];
         self.delegate = self;
         self.dataSource = self;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -62,13 +66,16 @@
     }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 64;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
         if (headerCell == nil) {
             headerCell = [[EventInfoHeaderCell alloc] initWithRelation:self.relation];
         }
-        
         
         return headerCell;
     } else {
@@ -100,6 +107,13 @@
         return RelatedEventsLabelHeight;
     }
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    EventInfoTableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
+    header.relation = self.relation;
+    return header;
+}
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [arrayOfEvents count] + 1;

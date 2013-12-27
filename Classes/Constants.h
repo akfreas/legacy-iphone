@@ -114,3 +114,4 @@
 #define EventHeaderCellLineStrokeWidth 1.0f
 
 #define UIBind(...)  NSDictionary *BBindings = MXDictionaryOfVariableBindings(__VA_ARGS__)
+#define AKNOTIF [NSNotificationCenter defaultCenter]

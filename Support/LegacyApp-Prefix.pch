@@ -6,6 +6,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <AFNetworking/AFNetworking.h>
 #import <HexColors/HexColor.h>
+#import <BlocksKit/BlocksKit.h>
 #import <BlocksKit/BlocksKit+UIKit.h>
 #import "Utility_AppSettings.h"
 #import "CGRectUtils.h"

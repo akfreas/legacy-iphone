@@ -71,6 +71,9 @@
 		1975752817D06EA800822779 /* EventInfoHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752717D06EA800822779 /* EventInfoHeaderCell.xib */; };
 		197EA5A617F543740015DD78 /* 298-circlex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197EA5A517F543740015DD78 /* 298-circlex@2x.png */; };
 		1980719017E8117B0039FC65 /* FigureRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980718F17E8117B0039FC65 /* FigureRowCell.m */; };
+		1980A89E186CD2A200ECD354 /* EventInfoTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980A89D186CD2A200ECD354 /* EventInfoTableHeader.m */; };
+		1980A8A1186CE79F00ECD354 /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1980A89F186CE79F00ECD354 /* back-arrow.png */; };
+		1980A8A2186CE79F00ECD354 /* back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1980A8A0186CE79F00ECD354 /* back-arrow@2x.png */; };
 		1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */; };
 		198263A418616DC600CA3FEE /* add-friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A218616DC600CA3FEE /* add-friends.png */; };
 		198263A518616DC600CA3FEE /* add-friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198263A318616DC600CA3FEE /* add-friends@2x.png */; };
@@ -219,6 +222,10 @@
 		197EA5A517F543740015DD78 /* 298-circlex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "298-circlex@2x.png"; path = "images/298-circlex@2x.png"; sourceTree = "<group>"; };
 		1980718E17E8117B0039FC65 /* FigureRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureRowCell.h; sourceTree = "<group>"; };
 		1980718F17E8117B0039FC65 /* FigureRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureRowCell.m; sourceTree = "<group>"; };
+		1980A89C186CD2A200ECD354 /* EventInfoTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoTableHeader.h; sourceTree = "<group>"; };
+		1980A89D186CD2A200ECD354 /* EventInfoTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoTableHeader.m; sourceTree = "<group>"; };
+		1980A89F186CE79F00ECD354 /* back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow.png"; sourceTree = "<group>"; };
+		1980A8A0186CE79F00ECD354 /* back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow@2x.png"; sourceTree = "<group>"; };
 		1982639B1861639100CA3FEE /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		1982639D18616AD300CA3FEE /* UIView+LayoutHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayoutHelpers.h"; sourceTree = "<group>"; };
 		1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayoutHelpers.m"; sourceTree = "<group>"; };
@@ -361,6 +368,8 @@
 				197305EC17C5C41500958D15 /* EventInfoTimelineCell.h */,
 				197305ED17C5C41500958D15 /* EventInfoTimelineCell.m */,
 				197305EF17C5CA6700958D15 /* EventInfoTimelineCell.xib */,
+				1980A89C186CD2A200ECD354 /* EventInfoTableHeader.h */,
+				1980A89D186CD2A200ECD354 /* EventInfoTableHeader.m */,
 			);
 			name = "Event Info Components";
 			sourceTree = "<group>";
@@ -461,6 +470,8 @@
 				19C7A16F1867FCAC00130BEF /* no-photo@2x.png */,
 				19C7A16618670FD600130BEF /* facebook-icon.png */,
 				19C7A16718670FD600130BEF /* facebook-icon@2x.png */,
+				1980A89F186CE79F00ECD354 /* back-arrow.png */,
+				1980A8A0186CE79F00ECD354 /* back-arrow@2x.png */,
 				198263A818619D6800CA3FEE /* next-arrow-gray.png */,
 				198263A918619D6800CA3FEE /* next-arrow-gray@2x.png */,
 				198263A218616DC600CA3FEE /* add-friends.png */,
@@ -716,7 +727,9 @@
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
 				196C6B2218052D8200475ACB /* PasscodeScreenViewController.xib in Resources */,
 				194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */,
+				1980A8A1186CE79F00ECD354 /* back-arrow.png in Resources */,
 				19C7A1701867FCAC00130BEF /* no-photo.png in Resources */,
+				1980A8A2186CE79F00ECD354 /* back-arrow@2x.png in Resources */,
 				197308D41707B57C00FCADD3 /* question.png in Resources */,
 				19C6F811171BBA1D00DDD6D9 /* oldpaper-bg@2x.png in Resources */,
 				198263A418616DC600CA3FEE /* add-friends.png in Resources */,
@@ -824,6 +837,7 @@
 				197305E817C5B32D00958D15 /* EventInfoHeaderCell.m in Sources */,
 				197305EB17C5B66A00958D15 /* EventInfoTableView.m in Sources */,
 				197305EE17C5C41500958D15 /* EventInfoTimelineCell.m in Sources */,
+				1980A89E186CD2A200ECD354 /* EventInfoTableHeader.m in Sources */,
 				19BDFDD217FD3A8100B415C1 /* AMBlurView.m in Sources */,
 				197305F317C5D54500958D15 /* LegacyInfoPage.m in Sources */,
 				1975751E17D04F4700822779 /* Figure.m in Sources */,

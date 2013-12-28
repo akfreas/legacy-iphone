@@ -7,7 +7,6 @@
 #import "Figure.h"
 
 @implementation EventRowCell {
-    UIView <RowProtocol> *row;
     
     NoEventPersonRow *noEventRow;
     EventRowHorizontalScrollView *eventRowScrollView;
@@ -23,6 +22,11 @@
         
         self.backgroundColor = HeaderBackgroundColor;
         self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addArrowView];
+        [self addEventRowScrollView];
+        [self addDrawerItems];
+        [self layoutIfNeeded];
+
     }
     return self;
 }
@@ -30,7 +34,7 @@
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     return [super hitTest:point withEvent:event];
 }
--(void)addActionComponents {
+-(void)addDrawerItems {
     
     facebookButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [facebookButton setImage:[UIImage imageNamed:@"facebook-icon"] forState:UIControlStateNormal];
@@ -63,39 +67,22 @@
 }
 
 -(void)reset {
-    if ([row isKindOfClass:eventRowScrollView.class]) {
-        [(EventRowHorizontalScrollView *)row closeDrawer:NULL];
+    if ([eventRowScrollView isKindOfClass:eventRowScrollView.class]) {
+        [(EventRowHorizontalScrollView *)eventRowScrollView closeDrawer:NULL];
     }
 }
 
 -(void)setEventPersonRelation:(EventPersonRelation *)eventPersonRelation {
-    
-    UIView <RowProtocol> *rowView;
-    if (eventPersonRelation.event == nil && eventPersonRelation.person != nil) {
-        if (noEventRow == nil) {
-            noEventRow = [[NoEventPersonRow alloc] init];
-        }
-        noEventRow.person = eventPersonRelation.person;
-        rowView = noEventRow;
-    } else if (eventPersonRelation.event != nil) {
-        if (eventRowScrollView == nil) {
-            eventRowScrollView = [[EventRowHorizontalScrollView alloc] initWithFrame:CGRectZero];
-            [self addActionComponents];
+    eventRowScrollView.relation = eventPersonRelation;
+}
 
-        }
-        
-        eventRowScrollView.relation = eventPersonRelation;
-        rowView = eventRowScrollView;
-    } else {
-        NSLog(@"Wat.");
-    }
-    [row removeFromSuperview];
-    [self addArrowView];
-    row = rowView;
-    [self.contentView insertSubview:row belowSubview:arrowView];
-    UIBind(row);
-    [self.contentView addConstraintWithVisualFormat:@"H:|[row]|" bindings:BBindings];
-    [self.contentView addConstraintWithVisualFormat:@"V:|[row]|" bindings:BBindings];
+-(void)addEventRowScrollView {
+    
+    eventRowScrollView = [[EventRowHorizontalScrollView alloc] initWithFrame:CGRectZero];
+    [self.contentView insertSubview:eventRowScrollView belowSubview:arrowView];
+    UIBind(eventRowScrollView);
+    [self.contentView addConstraintWithVisualFormat:@"H:|[eventRowScrollView]|" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"V:|[eventRowScrollView]|" bindings:BBindings];
 }
 
 -(void)createImageFromView:(UIView *)view name:(NSString *)name {

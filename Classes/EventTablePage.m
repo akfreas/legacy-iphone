@@ -21,16 +21,12 @@
 @implementation EventTablePage {
     CGPoint priorPoint;
     CGRect actionViewTopInitialFrame; 
-    LegacyAppConnection *connection;
     TopActionView *actionViewTop;
     NSFetchedResultsController *fetchController;
     UITableView *hostingTableView;
     UIView *headerViewWrapper;
     UIView *toolBarBackgroundView;
     UIView *lineView;
-    UIView *clearView;
-    
-    BOOL hasPostedCell;
 }
 
 static NSString *ReuseID = @"CellReuseId";
@@ -46,10 +42,10 @@ static NSString *ReuseID = @"CellReuseId";
         self.delegate = self;
         self.dataSource = self;
         self.bounces = YES;
-        hasPostedCell = NO;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         }
+        [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
         fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
         fetchController.delegate = self;
         self.contentOffset = CGPointMake(0, 0);
@@ -113,12 +109,10 @@ static NSString *ReuseID = @"CellReuseId";
     
     if (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height + toolBarBackgroundView.frame.size.height) {
         lineView.alpha = 1;
-//        toolBar.hidden = YES;
         actionViewTop.tintColor = TopActionViewDefaultTintColor;
     } else {
         actionViewTop.tintColor = [UIColor clearColor];
         lineView.alpha = 0;
-//        toolBar.hidden = NO;
     }
     
     actionViewTop.isVisible = (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height);
@@ -154,18 +148,6 @@ static NSString *ReuseID = @"CellReuseId";
 
 }
 
--(void)notifyWithFigureRowData:(EventPersonRelation *)relation point:(CGPoint)origin {
-    
-    
-    BOOL hasBeenShownSwipeMessage = NO;// [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownSwipeMessage];
-    if (hasBeenShownSwipeMessage == NO) {
-        
-
-        NSDictionary *figureRowInfo = @{@"event_person_relation": relation, @"row_origin" : [NSValue valueWithCGPoint:origin]};
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForFigureRowTransportNotification object:nil userInfo:figureRowInfo];
-    }
-}
-
 #pragma mark NSFetchedResultsController Delegate Methods
 
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -174,12 +156,7 @@ static NSString *ReuseID = @"CellReuseId";
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self endUpdates];
-    
-    
 }
-
-
-
 
 -(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
@@ -216,22 +193,7 @@ static NSString *ReuseID = @"CellReuseId";
 -(EventRowCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     EventRowCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseID];
-    
-    if (cell == nil) {
-        cell = [[EventRowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseID];
-    }
     [self configureCell:cell atIndexPath:indexPath];
-    
-    if (hasPostedCell == NO && indexPath.row == 2) {
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        EventPersonRelation *relation = [fetchController objectAtIndexPath:indexPath];
-        UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-        [cell addObserver:self forKeyPath:@"cell.frame" options:NSKeyValueObservingOptionNew context:nil];
-        [self notifyWithFigureRowData:relation point:cell.frame.origin] ;
-        hasPostedCell = YES;
-    }
-    
-
     return cell;
     
 }
@@ -262,25 +224,8 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    return headerViewWrapper;
-    if (section == 0) {
-        clearView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, headerViewWrapper.frame.size.height)];
-        clearView.backgroundColor = [UIColor clearColor];
-        clearView.tag = 7;
-        return clearView;
-    }
-    return nil;
+    return headerViewWrapper;
 }
-
-//-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-//    UIView *ourHit = [super hitTest:point withEvent:event];
-//    if (ourHit == clearView) {
-//        [actionViewTop addFriendsButtonTappedAction];
-//        return actionViewTop;
-//    } else {
-//        return ourHit;
-//    }
-//}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     

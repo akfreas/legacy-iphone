@@ -53,8 +53,8 @@
     [self addConstraintWithVisualFormat:@"H:|-77-[eventSubtitleLabel(200)]" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"H:|-77-[ageLabel]-|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"V:|-(2)-[figureNameLabel]-(2)-[ageLabel]-(2)-[eventSubtitleLabel]-|" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"H:|-[_widgetContainer]-[figureNameLabel]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:|-(10)-[_widgetContainer]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|-(>=9)-[_widgetContainer(55)]-(>=8)-[figureNameLabel]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-(10)-[_widgetContainer(55)]-|" bindings:BBindings];
 //    [self addConstraint:[NSLayoutConstraint constraintWithItem:_widgetContainer attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 }
 

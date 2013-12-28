@@ -1,7 +1,7 @@
-#import "EventInfoTableHeader.h"
+#import "FigureTimelineTableHeader.h"
 #import "EventPersonRelation.h"
 
-@implementation EventInfoTableHeader {
+@implementation FigureTimelineTableHeader {
     
     UILabel *nameLabel;
     NSMutableArray *constraints;

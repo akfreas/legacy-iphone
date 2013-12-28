@@ -3,7 +3,7 @@
 #include "PageProtocol.h"
 
 @class EventPersonRelation;
-@interface EventInfoTableView : UITableView <PageProtocol>
+@interface FigureTimelinePage : UITableView <PageProtocol>
 
 @property (nonatomic, weak) EventPersonRelation *relation;
 

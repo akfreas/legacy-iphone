@@ -1,6 +1,6 @@
-#import "HeaderCellLine.h"
+#import "FigureTimelineTopCellLine.h"
 
-@implementation HeaderCellLine {
+@implementation FigureTimelineTopCellLine {
     NSInteger itemCount;
 }
 

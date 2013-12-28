@@ -1,6 +1,6 @@
 @class EventPersonRelation;
 
-@interface EventInfoTableHeader : UITableViewHeaderFooterView
+@interface FigureTimelineTableHeader : UITableViewHeaderFooterView
 
 @property (strong, nonatomic) EventPersonRelation *relation;
 

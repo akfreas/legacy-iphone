@@ -1,4 +1,4 @@
-#import "EventInfoHeaderCell.h"
+#import "FigureTimelineTopCell.h"
 #import "ImageWidget.h"
 #import "Event.h"
 #import "Figure.h"
@@ -6,15 +6,15 @@
 #import "ImageDownloadUtil.h"
 #import "FigureNameLabelBlurLayer.h"
 #import "EventPersonRelation.h"
-#import "HeaderCellLine.h"
+#import "FigureTimelineTopCellLine.h"
 
 #import <CoreImage/CoreImage.h>
 
-@implementation EventInfoHeaderCell {
+@implementation FigureTimelineTopCell {
     
     EventPersonRelation *relation;
     ImageWidget *imageWidget;
-    HeaderCellLine *cellLine;
+    FigureTimelineTopCellLine *cellLine;
     UIImage *mainImage;
     UIImage *blurImage;
     UIImageView *blurImageView;
@@ -114,7 +114,7 @@
 }
 
 -(void)addLine {
-    cellLine = [[HeaderCellLine alloc] initWithFrame:self.contentView.bounds numberOfItems:[relation.event.figure.events count]];
+    cellLine = [[FigureTimelineTopCellLine alloc] initWithFrame:self.contentView.bounds numberOfItems:[relation.event.figure.events count]];
     [self.contentView addSubview:cellLine];
 }
 

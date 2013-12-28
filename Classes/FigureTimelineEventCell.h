@@ -1,6 +1,6 @@
 @class Event;
 
-@interface EventInfoTimelineCell : UITableViewCell
+@interface FigureTimelineEventCell : UITableViewCell
 
 -(id)initWithEvent:(Event *)event reuseIdentifier:(NSString *)reuseIdentifier;
 

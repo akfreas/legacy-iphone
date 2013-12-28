@@ -3,7 +3,7 @@
 #import "FigureRowHorizontalScrollView.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
-#import "EventInfoTableView.h"
+#import "FigureTimelinePage.h"
 #import "FigureRowTablePage.h"
 
 

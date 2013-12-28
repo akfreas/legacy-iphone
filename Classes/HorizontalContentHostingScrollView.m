@@ -7,7 +7,7 @@
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
 #import "FigureRowTablePage.h"
-#import "EventInfoTableView.h"
+#import "FigureTimelinePage.h"
 #import "LegacyInfoPage.h"
 #import "WebViewControls.h"
 
@@ -126,7 +126,7 @@ typedef enum ScrollViewDirection {
     NSDictionary *userInfo = notif.userInfo;
     EventPersonRelation *relation = userInfo[@"relation"];
     
-    EventInfoTableView *infoPage = [[EventInfoTableView alloc] initWithRelation:relation];
+    FigureTimelinePage *infoPage = [[FigureTimelinePage alloc] initWithRelation:relation];
     infoPage.frame = [self frameAtIndex:TimelinePageNumber];
     [infoPage reloadData];
     [self addPage:infoPage];
@@ -162,7 +162,7 @@ typedef enum ScrollViewDirection {
         UIView <PageProtocol> *page = [pageArray objectAtIndex:currentPage];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:KeyForHasScrolledToPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [page class]}];
-        if ([page isKindOfClass:[EventInfoTableView class]] && currentPage == [pageArray count] - 1) {
+        if ([page isKindOfClass:[FigureTimelinePage class]] && currentPage == [pageArray count] - 1) {
             
             LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
             webView.frame = CGRectSetHeightForRect(self.bounds.size.height, webView.frame);

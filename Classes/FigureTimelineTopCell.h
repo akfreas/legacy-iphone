@@ -1,5 +1,5 @@
 @class EventPersonRelation;
-@interface EventInfoHeaderCell : UITableViewCell
+@interface FigureTimelineTopCell : UITableViewCell
 
 -(id)initWithRelation:(EventPersonRelation *)relation;
 

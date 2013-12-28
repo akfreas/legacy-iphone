@@ -1,4 +1,4 @@
-#import "EventInfoTimelineCell.h"
+#import "FigureTimelineEventCell.h"
 #import "RelatedEventLabel.h"
 #import "Event.h"
 #import <CoreGraphics/CoreGraphics.h>
@@ -45,13 +45,13 @@
 }
 @end
 
-@interface EventInfoTimelineCell ()
+@interface FigureTimelineEventCell ()
 
 @property (strong, nonatomic, readwrite) NSString *reuseIdentifier;
 
 @end
 
-@implementation EventInfoTimelineCell {
+@implementation FigureTimelineEventCell {
 
     
     IBOutlet UITextView *textView;

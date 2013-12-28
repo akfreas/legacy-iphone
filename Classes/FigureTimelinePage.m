@@ -1,22 +1,22 @@
-#import "EventInfoTableView.h"
-#import "EventInfoHeaderCell.h"
-#import "EventInfoTimelineCell.h"
+#import "FigureTimelinePage.h"
+#import "FigureTimelineTopCell.h"
+#import "FigureTimelineEventCell.h"
 #import "Event.h"
 #import "Figure.h"
 #import "Person.h"
 #import "ObjectArchiveAccessor.h"
 #import "EventPersonRelation.h"
-#import "EventInfoTableHeader.h"
+#import "FigureTimelineTableHeader.h"
 
-@interface EventInfoTableView () <UITableViewDataSource, UITableViewDelegate>
+@interface FigureTimelinePage () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
-@implementation EventInfoTableView {
+@implementation FigureTimelinePage {
     
     Event *keyEvent;
     ObjectArchiveAccessor *accessor;
-    EventInfoHeaderCell *headerCell;
+    FigureTimelineTopCell *headerCell;
     
     NSInteger keyEventIndex;
     NSArray *arrayOfEvents;
@@ -32,7 +32,7 @@ static NSString *HeaderID = @"EventHeader";
         keyEvent = aRelation.event;
         accessor = [ObjectArchiveAccessor sharedInstance];
         [self fetchRelatedEvents];
-        [self registerClass:[EventInfoTableHeader class] forHeaderFooterViewReuseIdentifier:HeaderID];
+        [self registerClass:[FigureTimelineTableHeader class] forHeaderFooterViewReuseIdentifier:HeaderID];
         self.delegate = self;
         self.dataSource = self;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -74,14 +74,14 @@ static NSString *HeaderID = @"EventHeader";
     return 64;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayHeaderView:(EventInfoTableHeader *)view forSection:(NSInteger)section {
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(FigureTimelineTableHeader *)view forSection:(NSInteger)section {
 //    view.translatesAutoresizingMaskIntoConstraints = NO;
     [view prepareForReuse];
 }
 
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    EventInfoTableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
+    FigureTimelineTableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
     header.relation = self.relation;
     return header;
 }
@@ -102,7 +102,7 @@ static NSString *HeaderID = @"EventHeader";
     
     if (indexPath.row == 0) {
         if (headerCell == nil) {
-            headerCell = [[EventInfoHeaderCell alloc] initWithRelation:self.relation];
+            headerCell = [[FigureTimelineTopCell alloc] initWithRelation:self.relation];
         }
         
         return headerCell;
@@ -110,9 +110,9 @@ static NSString *HeaderID = @"EventHeader";
         NSInteger eventIndex = indexPath.row - 1;
         Event *theEvent = arrayOfEvents[eventIndex];
         static NSString *ReuseId = TableViewCellIdentifierForMainCell;
-        EventInfoTimelineCell *timelineCell = (EventInfoTimelineCell *)[self dequeueReusableCellWithIdentifier:ReuseId];
+        FigureTimelineEventCell *timelineCell = (FigureTimelineEventCell *)[self dequeueReusableCellWithIdentifier:ReuseId];
         if (timelineCell == nil) {
-            timelineCell = [[EventInfoTimelineCell alloc] initWithEvent:theEvent reuseIdentifier:ReuseId];
+            timelineCell = [[FigureTimelineEventCell alloc] initWithEvent:theEvent reuseIdentifier:ReuseId];
         } else {
             timelineCell.event = theEvent;
         }

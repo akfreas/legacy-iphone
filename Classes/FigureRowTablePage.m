@@ -26,7 +26,7 @@
     NSFetchedResultsController *fetchController;
     UITableView *hostingTableView;
     UIView *headerViewWrapper;
-    UIToolbar *toolBar;
+    UIView *toolBarBackgroundView;
     UIView *lineView;
     UIView *clearView;
     
@@ -59,9 +59,7 @@ static NSString *ReuseID = @"CellReuseId";
     }
     return self;
 }
--(CGSize)intrinsicContentSize {
-    return CGSizeMake(320, 480);
-}
+
 #pragma mark TopActionView Control Methods
 
 -(void)createHeaderWrapperView {
@@ -80,7 +78,7 @@ static NSString *ReuseID = @"CellReuseId";
 -(void)addTopActionView {
     
     
-    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    toolBarBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
     if (actionViewTop == nil) {
         
         CGRect actionViewTopFrame;
@@ -88,9 +86,9 @@ static NSString *ReuseID = @"CellReuseId";
             actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight_non_OS7, self.bounds.size.width, TopActionViewHeight_non_OS7);
             actionViewTopFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_non_OS7);
         } else {
-            [headerViewWrapper.layer insertSublayer:toolBar.layer below:actionViewTop.layer];
+            [headerViewWrapper.layer insertSublayer:toolBarBackgroundView.layer below:actionViewTop.layer];
             actionViewTopInitialFrame = CGRectMake(0, -TopActionViewHeight_OS7, self.bounds.size.width, TopActionViewHeight_OS7);
-            [toolBar setBarTintColor:[UIColor colorWithWhite:1 alpha:.85]];
+            toolBarBackgroundView.backgroundColor = HeaderBackgroundColor;
 
             actionViewTopFrame = CGRectMake(0, 0, self.bounds.size.width, TopActionViewHeight_OS7);
         }
@@ -113,7 +111,7 @@ static NSString *ReuseID = @"CellReuseId";
         actionViewTop.frame = CGRectMake(0, actionViewTop.frame.origin.y + diff, actionViewTop.frame.size.width, actionViewTop.frame.size.height);
     }
     
-    if (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height + toolBar.frame.size.height) {
+    if (actionViewTop.frame.origin.y > -actionViewTop.frame.size.height + toolBarBackgroundView.frame.size.height) {
         lineView.alpha = 1;
 //        toolBar.hidden = YES;
         actionViewTop.tintColor = TopActionViewDefaultTintColor;

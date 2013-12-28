@@ -35,7 +35,6 @@ static NSString *HeaderID = @"EventHeader";
         [self registerClass:[EventInfoTableHeader class] forHeaderFooterViewReuseIdentifier:HeaderID];
         self.delegate = self;
         self.dataSource = self;
-        self.translatesAutoresizingMaskIntoConstraints = NO;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.allowsSelection = NO;
@@ -71,10 +70,34 @@ static NSString *HeaderID = @"EventHeader";
     return 64;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
+    return 64;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(EventInfoTableHeader *)view forSection:(NSInteger)section {
+//    view.translatesAutoresizingMaskIntoConstraints = NO;
+    [view prepareForReuse];
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    EventInfoTableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
+    header.relation = self.relation;
+    return header;
+}
+
+
+
 -(CGSize)intrinsicContentSize {
     return CGSizeMake(320, 480);
 }
+-(void)layoutSublayersOfLayer:(CALayer *)layer {
+    [super layoutSublayersOfLayer:layer];
+}
 
+-(void)layoutSubviews {
+    [super layoutSubviews];
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
@@ -112,14 +135,6 @@ static NSString *HeaderID = @"EventHeader";
         return RelatedEventsLabelHeight;
     }
 }
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    EventInfoTableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
-    header.relation = self.relation;
-    [header prepareForReuse];
-    return header;
-}
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [arrayOfEvents count] + 1;

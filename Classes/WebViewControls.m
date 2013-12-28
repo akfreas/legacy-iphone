@@ -6,6 +6,7 @@
     
     UIButton *backButton;
     UIButton *forwardButton;
+    UIButton *backPageButton;
     UIActivityIndicatorView *indicatorView;
     UILabel *titleLabel;
 }
@@ -21,26 +22,39 @@
         [forwardButton setImage:[self forwardButtonImage] forState:UIControlStateNormal];
         [forwardButton setTitle:@"" forState:UIControlStateNormal];
         indicatorView.hidden = YES;
-
+        
+        [self addActivityIndicator];
+        [self addBackPageButton];
+        [self addTitleLabel];
+        [self addLayoutConstraints];
     }
     return self;
+}
+
+-(void)addBackPageButton {
+    backPageButton = [[UIButton alloc] initForAutoLayout];
+    [backPageButton setImage:BackPageButtonImage forState:UIControlStateNormal];
+    [backPageButton bk_addEventHandler:^(id sender) {
+        [AKNOTIF postNotificationName:KeyForScrollToPageNotification object:nil userInfo:@{KeyForPageNumberInUserInfo: FigureLegacyTimelineViewPageNumber}];
+    } forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:backPageButton];
+    
 }
 
 -(CGSize)intrinsicContentSize {
     return CGSizeMake(320, 64);
 }
 
+-(void)addTitleLabel {
+    
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [self addSubview:titleLabel];
+    titleLabel.font = HeaderFont;
+    titleLabel.textColor = HeaderTextColor;
+}
+
 -(void)setFigure:(Figure *)figure {
-    if (titleLabel == nil) {
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [self addSubview:titleLabel];
-        titleLabel.font = HeaderFont;
-        titleLabel.textColor = HeaderTextColor;
-    }
-    MXDictionaryOfVariableBindings(titleLabel);
     titleLabel.text = figure.name;
-    [self addActivityIndicator];
-    [self addLayoutConstraints];
 }
 
 -(void)addActivityIndicator {
@@ -53,10 +67,12 @@
 -(void)addLayoutConstraints {
     
     [titleLabel autoCenterInSuperviewAlongAxis:ALAxisVertical];
-    UIBind(titleLabel, indicatorView);
+    UIBind(titleLabel, indicatorView, backPageButton);
     [self addConstraintWithVisualFormat:@"V:[titleLabel]-10-|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"H:[titleLabel]-10-[indicatorView]" bindings:BBindings];
     [indicatorView autoAlignAxis:ALAxisHorizontal toSameAxisOfView:titleLabel];
+    [self addConstraintWithVisualFormat:@"H:|-24-[backPageButton]" bindings:BBindings];
+    [backPageButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:titleLabel];
 }
 
 - (UIImage *)forwardButtonImage

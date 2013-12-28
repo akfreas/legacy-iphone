@@ -111,6 +111,13 @@
 #define PersonPhotoBorderSize 2
 #define PersonPhotoOffset 10
 
+#define BackPageButtonImage [UIImage imageNamed:@"back-arrow.png"]
+#define ForwardPageButtonImage [UIImage imageNamed:@"next-arrow.png"]
+
+#define MainEventPageNumber [NSNumber numberWithInteger:0]
+#define FigureLegacyTimelineViewPageNumber [NSNumber numberWithInteger:1]
+#define WikipediaViewPageNumber [NSNumber numberWithInteger:2]
+
 #define EventHeaderCellLineStrokeWidth 1.0f
 
 #define UIBind(...)  NSDictionary *BBindings = MXDictionaryOfVariableBindings(__VA_ARGS__)

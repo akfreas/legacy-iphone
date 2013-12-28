@@ -61,10 +61,12 @@
         [controls startActivityIndicator];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *htmlData, NSError *error) {
             initialHtmlString = [[NSMutableString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
-            [initialHtmlString replaceOccurrencesOfString:@"<div class=\"header\">" withString:@"<div class=\"header\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
-            
-            [initialHtmlString replaceOccurrencesOfString:@"<ul id=\"page-actions\" class=\"hlist\">" withString:@"<ul id=\"page-actions\" class=\"hlist\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
-            [initialHtmlString replaceOccurrencesOfString:@"<h1 id=\"section_0\">" withString:@"<h1 id=\"section_0\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
+            if ([initialHtmlString length] > 0) {
+                [initialHtmlString replaceOccurrencesOfString:@"<div class=\"header\">" withString:@"<div class=\"header\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
+                
+                [initialHtmlString replaceOccurrencesOfString:@"<ul id=\"page-actions\" class=\"hlist\">" withString:@"<ul id=\"page-actions\" class=\"hlist\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
+                [initialHtmlString replaceOccurrencesOfString:@"<h1 id=\"section_0\">" withString:@"<h1 id=\"section_0\" style=\"display:none\">" options:0 range:NSMakeRange(0, [initialHtmlString length] - 1)];
+            }
             if (viewHasBecomeFullyVisible == YES && hasRenderedInitialHtml == NO) {
                 [self loadInitialState];
             }

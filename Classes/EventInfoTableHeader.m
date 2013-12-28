@@ -13,14 +13,9 @@
 -(id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
-        [self.contentView addObserver:self forKeyPath:@"frame" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionPrior) context:nil];
-        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
         self.contentView.backgroundColor = HeaderBackgroundColor;
     }
     return self;
-}
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"Change: %@, obj: %@", change, object);
 }
 
 -(void)setRelation:(EventPersonRelation *)relation {
@@ -33,29 +28,18 @@
 -(void)configureLayoutConstraints {
 
     UIBind(leftButton, rightButton, nameLabel);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=10@250)-[leftButton(25)]-(>=5@100)-[nameLabel(>=200@1000)]-(>=5)-[rightButton(==leftButton)]-(>=5@100)-|" options:NSLayoutFormatDirectionLeftToRight metrics:nil views:BBindings]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[leftButton]-[nameLabel]-[rightButton]-|" options:NSLayoutFormatDirectionLeftToRight metrics:nil views:BBindings]];
+    [self addConstraintWithVisualFormat:@"V:|-24-[leftButton]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-24-[rightButton]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-24-[nameLabel]" bindings:BBindings];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[leftButton]-[nameLabel]-[rightButton]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:BBindings]];
     [self.contentView addConstraintWithVisualFormat:@"V:|-24-[leftButton]" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|-24-[rightButton]" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|-24-[nameLabel]" bindings:BBindings];
 }
 
-
-//-(void)prepareForReuse {
-//    
-//    if (nameLabel != nil) {
-////        if ([constraints count] > 0) {
-////            [self.contentView removeConstraints:constraints];
-////        }
-//        UIBind(nameLabel);
-////        constraints = [NSMutableArray arrayWithArray:[self.contentView addConstraintWithVisualFormat:@"H:|-20-[nameLabel]|" bindings:BBindings]];
-////        [constraints addObjectsFromArray:[self.contentView addConstraintWithVisualFormat:@"V:|-20-[nameLabel]-|" bindings:BBindings]];
-//        [nameLabel autoCenterInSuperview];
-//    }
-//
-//}
-
--(CGSize)intrinsicContentSize {
-    return CGSizeMake(320, 64);
+-(void)prepareForReuse {
+    [self configureLayoutConstraints];
 }
 
 -(void)addNameLabel {
@@ -63,6 +47,9 @@
     nameLabel.text = _relation.event.figure.name;
     nameLabel.font = HeaderFont;
     nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.textAlignment = NSTextAlignmentCenter;
+    nameLabel.contentMode = UIViewContentModeScaleAspectFit;
+    nameLabel.adjustsFontSizeToFitWidth = YES;
     [self.contentView addSubview:nameLabel];
 }
 

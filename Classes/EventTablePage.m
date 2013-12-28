@@ -9,16 +9,16 @@
 #import "FacebookSignInButton.h"
 #import "TopActionView.h"
 #import "AppDelegate.h"
-#import "FigureRowCell.h"
+#import "EventRowCell.h"
 #import "AFAlertView.h"
 
-#import "FigureRowTablePage.h"
+#import "EventTablePage.h"
 
-@interface FigureRowTablePage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface EventTablePage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end
 
-@implementation FigureRowTablePage {
+@implementation EventTablePage {
     CGPoint priorPoint;
     CGRect actionViewTopInitialFrame; 
     LegacyAppConnection *connection;
@@ -189,7 +189,7 @@ static NSString *ReuseID = @"CellReuseId";
                 [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
             case NSFetchedResultsChangeUpdate:
-                [self configureCell:(FigureRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                [self configureCell:(EventRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             case NSFetchedResultsChangeDelete:
                 [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             default:
@@ -213,12 +213,12 @@ static NSString *ReuseID = @"CellReuseId";
 
 #pragma mark UITableView Datasource Methods
 
--(FigureRowCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(EventRowCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    FigureRowCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseID];
+    EventRowCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseID];
     
     if (cell == nil) {
-        cell = [[FigureRowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseID];
+        cell = [[EventRowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseID];
     }
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -240,7 +240,7 @@ static NSString *ReuseID = @"CellReuseId";
     
 }
 
--(void)configureCell:(FigureRowCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+-(void)configureCell:(EventRowCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
     cell.eventPersonRelation = eventRelation;

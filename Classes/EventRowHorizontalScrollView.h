@@ -3,7 +3,7 @@
 
 
 
-@interface FigureRowHorizontalScrollView : UIScrollView <RowProtocol, UIScrollViewDelegate>
+@interface EventRowHorizontalScrollView : UIScrollView <RowProtocol, UIScrollViewDelegate>
 
 
 @property (nonatomic) EventPersonRelation *relation;

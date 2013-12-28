@@ -1,4 +1,4 @@
-#import "FigureRowContentView.h"
+#import "EventRowContentView.h"
 #import "ImageWidgetContainer.h"
 #import "Person.h"
 #import "Event.h"
@@ -10,7 +10,7 @@
 #import "ImageWidget.h"
 #import "Utility_AppSettings.h"
 
-@implementation FigureRowContentView {
+@implementation EventRowContentView {
     
     UILabel *eventSubtitleLabel;
     UILabel *figureNameLabel;

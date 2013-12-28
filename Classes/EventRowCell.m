@@ -1,16 +1,16 @@
-#import "FigureRowCell.h"
-#import "FigureRowHorizontalScrollView.h"
+#import "EventRowCell.h"
+#import "EventRowHorizontalScrollView.h"
 #import "EventPersonRelation.h"
 #import "NoEventPersonRow.h"
 #import "RowProtocol.h"
 #import "Event.h"
 #import "Figure.h"
 
-@implementation FigureRowCell {
+@implementation EventRowCell {
     UIView <RowProtocol> *row;
     
     NoEventPersonRow *noEventRow;
-    FigureRowHorizontalScrollView *figureRow;
+    EventRowHorizontalScrollView *eventRowScrollView;
     UIView *arrowView;
     UIButton *facebookButton;
 }
@@ -34,11 +34,11 @@
     
     facebookButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [facebookButton setImage:[UIImage imageNamed:@"facebook-icon"] forState:UIControlStateNormal];
-    [self.contentView insertSubview:facebookButton belowSubview:figureRow];
+    [self.contentView insertSubview:facebookButton belowSubview:eventRowScrollView];
     [facebookButton bk_addEventHandler:^(id sender) {
         NSLog(@"Captured hit.");
     } forControlEvents:UIControlEventTouchUpInside];
-    UIBind(facebookButton, figureRow);
+    UIBind(facebookButton, eventRowScrollView);
     [self.contentView addConstraintWithVisualFormat:@"H:|-[facebookButton(20)]" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|-[facebookButton]-|" bindings:BBindings];
 }
@@ -63,8 +63,8 @@
 }
 
 -(void)reset {
-    if ([row isKindOfClass:figureRow.class]) {
-        [(FigureRowHorizontalScrollView *)row closeDrawer:NULL];
+    if ([row isKindOfClass:eventRowScrollView.class]) {
+        [(EventRowHorizontalScrollView *)row closeDrawer:NULL];
     }
 }
 
@@ -78,14 +78,14 @@
         noEventRow.person = eventPersonRelation.person;
         rowView = noEventRow;
     } else if (eventPersonRelation.event != nil) {
-        if (figureRow == nil) {
-            figureRow = [[FigureRowHorizontalScrollView alloc] initWithFrame:CGRectZero];
+        if (eventRowScrollView == nil) {
+            eventRowScrollView = [[EventRowHorizontalScrollView alloc] initWithFrame:CGRectZero];
             [self addActionComponents];
 
         }
         
-        figureRow.relation = eventPersonRelation;
-        rowView = figureRow;
+        eventRowScrollView.relation = eventPersonRelation;
+        rowView = eventRowScrollView;
     } else {
         NSLog(@"Wat.");
     }

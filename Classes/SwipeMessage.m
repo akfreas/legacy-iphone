@@ -1,10 +1,10 @@
 #import "SwipeMessage.h"
 #import "AMBlurView.h"
-#import "FigureRowHorizontalScrollView.h"
+#import "EventRowHorizontalScrollView.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
 #import "FigureTimelinePage.h"
-#import "FigureRowTablePage.h"
+#import "EventTablePage.h"
 
 
 @interface SwipeMessage () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
@@ -36,7 +36,7 @@
     
     NSMutableArray *selectorStack;
     
-    FigureRowHorizontalScrollView *exampleRow;
+    EventRowHorizontalScrollView *exampleRow;
     UIView *exampleRowBackground;
     CGFloat topToolbar;
 }
@@ -88,7 +88,7 @@ CGFloat InfoPageWidth = 280;
 -(void)handleScrollingFromPageNotification:(NSNotification *)notif {
     
     Class pageClass = notif.userInfo[KeyForPageTypeInUserInfo];
-    if ([FigureRowTablePage class] == pageClass) {
+    if ([EventTablePage class] == pageClass) {
         [self advanceInState];
     }
 }

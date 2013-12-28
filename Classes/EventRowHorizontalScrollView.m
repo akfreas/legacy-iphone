@@ -1,18 +1,18 @@
-#import "FigureRowHorizontalScrollView.h"
-#import "FigureRowContentView.h"
+#import "EventRowHorizontalScrollView.h"
+#import "EventRowContentView.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
 #import "Figure.h"
 #import "Event.h"
 #import "Person.h"
 
-@interface FigureRowHorizontalScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface EventRowHorizontalScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end
 
-@implementation FigureRowHorizontalScrollView {
+@implementation EventRowHorizontalScrollView {
     
-    FigureRowContentView *figureContentView;
+    EventRowContentView *figureContentView;
 
     UILabel *figureNameLabel;
     UIPageControl *pageControl;
@@ -122,7 +122,7 @@
 #pragma mark Page Management
 
 -(void)addContentView {
-    figureContentView = [[FigureRowContentView alloc] initWithFrame:CGRectZero];
+    figureContentView = [[EventRowContentView alloc] initWithFrame:CGRectZero];
     [self addSubview:figureContentView];
     UIBind(figureContentView);
     [self addConstraintWithVisualFormat:[NSString stringWithFormat:@"H:|-%d-[figureContentView]|", DrawerWidth] bindings:BBindings];

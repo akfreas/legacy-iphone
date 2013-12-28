@@ -1,5 +1,5 @@
 @class EventPersonRelation;
-@interface FigureRowCell : UITableViewCell
+@interface EventRowCell : UITableViewCell
 
 @property (weak, nonatomic) EventPersonRelation *eventPersonRelation;
 

@@ -2,11 +2,11 @@
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
-#import "FigureRowHorizontalScrollView.h"
+#import "EventRowHorizontalScrollView.h"
 #import "Event.h"
 #import "EventPersonRelation.h"
 #import "LegacyWebView.h"
-#import "FigureRowTablePage.h"
+#import "EventTablePage.h"
 #import "FigureTimelinePage.h"
 #import "LegacyInfoPage.h"
 #import "WebViewControls.h"
@@ -20,12 +20,11 @@ typedef enum ScrollViewDirection {
 } ScrollViewDirection;
 
 @implementation HorizontalContentHostingScrollView {
-    NSMutableArray *arrayOfFigureRows;
     NSFetchedResultsController *fetchedResultsController;
     
     NSInteger currentPage;
     NSMutableArray *pageArray;
-    FigureRowTablePage *figurePage;
+    EventTablePage *figurePage;
     CGPoint departurePoint;
     CGPoint destinationPoint;
     CGPoint lastScrollPoint;
@@ -55,7 +54,6 @@ typedef enum ScrollViewDirection {
         self.showsVerticalScrollIndicator = NO;
         self.bounces = NO;
         departurePoint = CGPointZero;
-        arrayOfFigureRows = [[NSMutableArray alloc] init];
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
@@ -83,7 +81,7 @@ typedef enum ScrollViewDirection {
 
 -(void)addFigurePage {
     
-    figurePage = [[FigureRowTablePage alloc] initWithFrame:[self frameAtIndex:LandingPageNumber]];
+    figurePage = [[EventTablePage alloc] initWithFrame:[self frameAtIndex:LandingPageNumber]];
     [self addPage:figurePage];
 }
 
@@ -132,8 +130,8 @@ typedef enum ScrollViewDirection {
     [self addPage:infoPage];
     [self scrollToPage:TimelinePageNumber];
     
-    if ([notif.object isKindOfClass:[FigureRowHorizontalScrollView class]]) {
-        FigureRowHorizontalScrollView *theRow = (FigureRowHorizontalScrollView *)notif.object;
+    if ([notif.object isKindOfClass:[EventRowHorizontalScrollView class]]) {
+        EventRowHorizontalScrollView *theRow = (EventRowHorizontalScrollView *)notif.object;
         [theRow delayedReset];
     }
     
@@ -145,13 +143,6 @@ typedef enum ScrollViewDirection {
     
     CGRect windowFrame = [[[[UIApplication sharedApplication] windows] lastObject] frame];
     return CGRectMake((self.bounds.size.width + SpaceBetweenFigureRowPages) * index , 0, self.bounds.size.width, windowFrame.size.height);
-}
-
--(void)removeInfoViews {
-    for (UIView *infoView in arrayOfFigureRows) {
-        [infoView removeFromSuperview];
-    }
-    [arrayOfFigureRows removeAllObjects];
 }
 
 -(void)checkIfScrollCompletedAndNotifyPage {

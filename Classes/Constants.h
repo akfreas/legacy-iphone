@@ -105,6 +105,8 @@
 #define HeaderFont [UIFont fontWithName:HeaderFontName size:HeaderFontSize]
 #define HeaderTextColor [UIColor whiteColor]
 
+#define LegacyPointSummaryFont [UIFont fontWithName:@"HelveticaNeue" size:15]
+
 #define LegacyEntryHeight 170
 #define FigurePhotoRadius 25
 #define PersonPhotoRadius 14

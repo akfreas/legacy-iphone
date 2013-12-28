@@ -4,19 +4,22 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 
-@interface EventInfoTimelineCellContentView : UIView
+@interface FigureTimelineCellLinePointView : UIView
 
 @property (nonatomic, assign) BOOL isKey;
-
+@property (nonatomic, assign) BOOL isTerminalCell;
 @end
-@implementation EventInfoTimelineCellContentView
+@implementation FigureTimelineCellLinePointView
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
     return self;
 }
-
+-(void)setIsTerminalCell:(BOOL)isTerminalCell {
+    _isTerminalCell = isTerminalCell;
+    [self setNeedsDisplay];
+}
 -(void)setIsKey:(BOOL)isKey {
     _isKey = isKey;
     [self setNeedsDisplay];
@@ -35,8 +38,10 @@
     CGPoint lastLinePoint = CGPointMake(startX, arcStart - arcRadius);
     [aPath addLineToPoint:lastLinePoint];
     [aPath addArcWithCenter:CGPointMake(startX, arcStart) radius:arcRadius startAngle:DEG2RAD(-90) endAngle:DEG2RAD(270) clockwise:YES];
-    [aPath moveToPoint:CGPointMake(startX, lastLinePoint.y + arcRadius * 2)];
-    [aPath addLineToPoint:CGPointMake(startX, self.frame.size.height)];
+    if (self.isTerminalCell == NO) {
+        [aPath moveToPoint:CGPointMake(startX, lastLinePoint.y + arcRadius * 2)];
+        [aPath addLineToPoint:CGPointMake(startX, self.frame.size.height)];
+    }
     if (self.isKey) {
         [HeaderBackgroundColor setFill];
         [aPath fill];
@@ -57,7 +62,7 @@
     IBOutlet UITextView *textView;
     IBOutlet UILabel *ageLabel;
     NSString *reuseID;
-    EventInfoTimelineCellContentView *contentView;
+    FigureTimelineCellLinePointView *contentView;
 }
 
 -(id)initWithEvent:(Event *)anEvent reuseIdentifier:(NSString *)reuseIdentifier {
@@ -69,7 +74,7 @@
     if (self) {
         _event = anEvent;
         reuseID = reuseIdentifier;
-        contentView = [[EventInfoTimelineCellContentView alloc] initWithFrame:self.frame];
+        contentView = [[FigureTimelineCellLinePointView alloc] initWithFrame:self.frame];
         [self.contentView addSubview:contentView];
         [self drawEventLabel];
     }
@@ -91,7 +96,9 @@
     [self drawEventLabel];
 }
 
-
+-(void)setIsTerminalCell:(BOOL)isTerminalCell {
+    contentView.isTerminalCell = isTerminalCell;
+}
 -(void)setShowAsKey:(BOOL)showAsKey {
     contentView.isKey = showAsKey;
 }

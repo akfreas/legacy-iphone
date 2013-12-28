@@ -32,10 +32,10 @@
     [path stroke];
     
     [[UIColor whiteColor] setFill];
-    NSDictionary *textAttrs = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    NSDictionary *textAttrs = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName : LegacyPointSummaryFont};
     NSString *plural = itemCount > 1 ? @"s" : @"";
     NSString *legacyPointString = [NSString stringWithFormat:@"%i Legacy Point%@", itemCount, plural];
-    [legacyPointString drawAtPoint:CGPointMake(originPoint.x - 100, originPoint.y - 20) withAttributes:textAttrs];
+    [legacyPointString drawAtPoint:CGPointMake(originPoint.x - 130, originPoint.y - 20) withAttributes:textAttrs];
     
 }
 

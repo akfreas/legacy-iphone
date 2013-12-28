@@ -117,13 +117,8 @@ static NSString *HeaderID = @"EventHeader";
             timelineCell.event = theEvent;
         }
         
-        if (eventIndex == keyEventIndex) {
-            timelineCell.showAsKey = YES;
-        } else {
-            timelineCell.showAsKey = NO;
-        }
-        
-        timelineCell.frame = CGRectSetHeightForRect(RelatedEventsLabelHeight, timelineCell.frame);
+        timelineCell.showAsKey = (eventIndex == keyEventIndex);
+        timelineCell.isTerminalCell = (indexPath.row == [arrayOfEvents count]);
         return timelineCell;
     }
 }

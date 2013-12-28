@@ -6,5 +6,6 @@
 
 @property (nonatomic) Event *event;
 @property (nonatomic, assign) BOOL showAsKey;
+@property (nonatomic, assign) BOOL isTerminalCell;
 
 @end

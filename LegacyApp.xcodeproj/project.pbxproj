@@ -86,6 +86,7 @@
 		1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1997B72816DEBA31009692F5 /* LegacyModel.xcdatamodeld */; };
 		199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199C0CAB16C0C0D900068E73 /* CoreData.framework */; };
 		19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
+		19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */; };
 		19BDFDB917FBA44900B415C1 /* NoEventPersonRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDB817FBA44900B415C1 /* NoEventPersonRow.m */; };
 		19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BDFDBC17FBA4ED00B415C1 /* NoEventPersonRow.xib */; };
 		19BDFDC417FBE99800B415C1 /* EventPersonRelation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */; };
@@ -244,6 +245,8 @@
 		199C0CAB16C0C0D900068E73 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPickerHandler.h; sourceTree = "<group>"; };
 		19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendPickerHandler.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		19BB09D8186F840500E7D995 /* EventRowDrawerOpenBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRowDrawerOpenBucket.h; sourceTree = "<group>"; };
+		19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRowDrawerOpenBucket.m; sourceTree = "<group>"; };
 		19BDFDB717FBA44900B415C1 /* NoEventPersonRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoEventPersonRow.h; sourceTree = "<group>"; };
 		19BDFDB817FBA44900B415C1 /* NoEventPersonRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoEventPersonRow.m; sourceTree = "<group>"; };
 		19BDFDBC17FBA4ED00B415C1 /* NoEventPersonRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoEventPersonRow.xib; path = Resources/NoEventPersonRow.xib; sourceTree = SOURCE_ROOT; };
@@ -389,6 +392,8 @@
 				1980718F17E8117B0039FC65 /* EventRowCell.m */,
 				191CF63C1749635C00086D5E /* EventRowHorizontalScrollView.h */,
 				191CF63D1749635D00086D5E /* EventRowHorizontalScrollView.m */,
+				19BB09D8186F840500E7D995 /* EventRowDrawerOpenBucket.h */,
+				19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */,
 			);
 			name = "Figure Row Page";
 			sourceTree = "<group>";
@@ -811,6 +816,7 @@
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
 				19D29F6E16A66B8100D46B0A /* FBLoginViewController.m in Sources */,
 				1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */,
+				19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */,
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
 				19BDFDB917FBA44900B415C1 /* NoEventPersonRow.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,

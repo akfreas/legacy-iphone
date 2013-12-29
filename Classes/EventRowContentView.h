@@ -2,7 +2,7 @@
 @class AgeIndicatorView;
 @class ImageWidgetContainer;
 
-@interface EventRowContentView : UIScrollView
+@interface EventRowContentView : UIView
 
 @property (nonatomic, strong) EventPersonRelation *relation;
 @property (nonatomic, readonly) ImageWidgetContainer *widgetContainer;

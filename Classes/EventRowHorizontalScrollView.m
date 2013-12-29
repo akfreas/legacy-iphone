@@ -5,6 +5,7 @@
 #import "Figure.h"
 #import "Event.h"
 #import "Person.h"
+#import "EventRowDrawerOpenBucket.h"
 
 @interface EventRowHorizontalScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -13,31 +14,24 @@
 @implementation EventRowHorizontalScrollView {
     
     EventRowContentView *figureContentView;
-
-    UILabel *figureNameLabel;
-    UIPageControl *pageControl;
-    NSMutableArray *pageArray;
     UIView *nameContainerView;
-    
-    CGPoint lastPoint;
     BOOL isNonUserScrolling;
     
     UIButton *facebookButton;
-    UISwipeGestureRecognizer *swipeGestureRecognizer;
 }
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)initForAutoLayout {
+    self = [super initForAutoLayout];
     if (self) {
-        
-        self.bounces = NO;
+        [self addContentView];
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
-        self.scrollEnabled = YES;
+        self.bounces = NO;
         self.backgroundColor = [UIColor clearColor];
+        self.contentSize = CGSizeAddWidthToSize(figureContentView.intrinsicContentSize, DrawerWidth);
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addContentView];
-        [self registerForNotifications];
+        [self addContentViewConstraints];
+        [self layoutIfNeeded];
     }
     return self;
 }
@@ -60,21 +54,7 @@
     return [figureContentView pointInside:newPoint withEvent:event];
 }
 
-
--(void)setContentSize:(CGSize)contentSize {
-    if (contentSize.width <= self.intrinsicContentSize.width) {
-        contentSize = CGSizeAddWidthToSize(contentSize, DrawerWidth);
-    }
-    self.contentOffset = CGPointMake(DrawerWidth, 0);
-    [super setContentSize:contentSize];
-}
-
--(void)delayedReset {
-    [self performSelector:@selector(resetContentOffset) withObject:self afterDelay:.2];
-}
-
 -(void)closeDrawer:(void(^)())completion {
-    
     [UIView animateWithDuration:0.2 animations:^{
         isNonUserScrolling = YES;
         self.contentOffset = CGPointMake(DrawerWidth, 0);
@@ -89,7 +69,7 @@
 }
 
 -(void)openDrawer {
-    
+    [[EventRowDrawerOpenBucket sharedInstance] addRow:self];
     [UIView animateWithDuration:0.2 animations:^{
         isNonUserScrolling = YES;
         self.contentOffset = CGPointMake(0, 0);
@@ -98,17 +78,12 @@
     }];
 }
 
--(void)registerForNotifications {
-        
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeActionOverlay:) name:KeyForOverlayViewShown object:nil];
-    
-}
-
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Accessors
+
 
 -(void)setRelation:(EventPersonRelation *)relation {
     _relation = relation;
@@ -116,17 +91,25 @@
 }
 
 -(CGSize)intrinsicContentSize {
-    return figureContentView.intrinsicContentSize;
+    CGSize contentSize = CGSizeAddWidthToSize(figureContentView.intrinsicContentSize, 0);
+    return contentSize;
 }
 
 #pragma mark Page Management
-
--(void)addContentView {
-    figureContentView = [[EventRowContentView alloc] initWithFrame:CGRectZero];
-    [self addSubview:figureContentView];
+-(void)addContentViewConstraints {
+    
     UIBind(figureContentView);
-    [self addConstraintWithVisualFormat:[NSString stringWithFormat:@"H:|-%d-[figureContentView]|", DrawerWidth] bindings:BBindings];
+    [self addConstraintWithVisualFormat:[NSString stringWithFormat:@"H:|-%f-[figureContentView(320)]|", DrawerWidth] bindings:BBindings];
+    //    [self addConstraintWithVisualFormat:@"H:|[figureContentView(>=320)]|" bindings:BBindings];
+    
     [self addConstraintWithVisualFormat:@"V:|[figureContentView]|" bindings:BBindings];
+    [self closeDrawer:NULL];
+    
+}
+-(void)addContentView {
+    figureContentView = [[EventRowContentView alloc] initForAutoLayout];
+    [self addSubview:figureContentView];
+    self.contentSize = CGSizeAddWidthToSize(figureContentView.intrinsicContentSize, DrawerWidth);
 }
 
 

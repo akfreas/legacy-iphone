@@ -69,7 +69,7 @@
 
 #define OverlayViewButtonRadius 25
 
-#define DrawerWidth 50
+#define DrawerWidth 50.0f
 
 #define TopBarButtonRadius 11
 #define TopBarLeftMargin 15

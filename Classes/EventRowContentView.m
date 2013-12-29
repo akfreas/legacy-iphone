@@ -15,24 +15,43 @@
     UILabel *eventSubtitleLabel;
     UILabel *figureNameLabel;
     UILabel *ageLabel;
+    UIView *arrowView;
+
     UITapGestureRecognizer *tapGesture;
 }
 
--(CGSize)intrinsicContentSize {
-    return CGSizeMake(FigureRowCellWidth, FigureRowCellHeight);
-}
-
--(id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+-(id)initForAutoLayout {
+    self = [super initForAutoLayout];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        self.scrollEnabled = NO;
-        self.translatesAutoresizingMaskIntoConstraints = NO;
         [self addUIComponents];
         [self addTapGesture];
     }
     return self;
 }
+
+
+-(void)addArrowView {
+    if (arrowView == nil) {
+        arrowView = [[UIView alloc] initWithFrame:CGRectZero];
+        arrowView.backgroundColor = [UIColor whiteColor];
+        
+        UIImageView *arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"next-arrow-gray"]];
+        arrowImage.translatesAutoresizingMaskIntoConstraints = NO;
+        [arrowView addSubview:arrowImage];
+        [arrowView addConstraint:[NSLayoutConstraint constraintWithItem:arrowImage
+                                                              attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:arrowView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+        [arrowView addConstraint:[NSLayoutConstraint constraintWithItem:arrowImage attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:arrowView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
+        
+        [self addSubview:arrowView];
+    }
+}
+
+
+-(CGSize)intrinsicContentSize {
+    return CGSizeMake(FigureRowCellWidth, FigureRowCellHeight);
+}
+
 
 -(void)addTapGesture {
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sendTapNotification)];
@@ -44,17 +63,22 @@
     [self addFigureNameLabel];
     [self addAgeLabel];
     [self addWidgetContainer];
+    [self addArrowView];
     [self setConstraints];
+    [self layoutIfNeeded];
 }
 
 -(void)setConstraints {
-    UIBind(eventSubtitleLabel, figureNameLabel, ageLabel, _widgetContainer);
-    [self addConstraintWithVisualFormat:@"H:|-77-[figureNameLabel(250)]-|" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"H:|-77-[eventSubtitleLabel(200)]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"H:|-77-[ageLabel]-|" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:|-(2)-[figureNameLabel]-(2)-[ageLabel]-(2)-[eventSubtitleLabel]-|" bindings:BBindings];
+    UIBind(eventSubtitleLabel, figureNameLabel, ageLabel, _widgetContainer, arrowView);
+    [self addConstraintWithVisualFormat:@"H:|-77-[figureNameLabel]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|-77-[eventSubtitleLabel(200)]-(>=8)-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|-77-[ageLabel]-(>=8)-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-(>=2)-[figureNameLabel]-(2)-[ageLabel]-(>=2)-[eventSubtitleLabel]-(>=5)-|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"H:|-(>=9)-[_widgetContainer(55)]-(>=8)-[figureNameLabel]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:|-(10)-[_widgetContainer(55)]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-(>=10)-[_widgetContainer(55)]-(>=10)-|" bindings:BBindings];
+    
+    [arrowView autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self];
+    [self addConstraintWithVisualFormat:@"H:[arrowView(25)]-|" bindings:BBindings];
 //    [self addConstraint:[NSLayoutConstraint constraintWithItem:_widgetContainer attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 }
 
@@ -86,7 +110,7 @@
 }
 
 -(void)sendTapNotification {
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForInfoOverlayButtonTapped object:nil userInfo:@{@"relation" : self.relation}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForInfoOverlayButtonTapped object:self userInfo:@{@"relation" : self.relation}];
 }
 
 -(void)setRelation:(EventPersonRelation *)relation {

@@ -10,7 +10,7 @@
 #import "TopActionView.h"
 #import "AppDelegate.h"
 #import "EventRowCell.h"
-#import "AFAlertView.h"
+#import "EventRowDrawerOpenBucket.h"
 
 #import "EventTablePage.h"
 
@@ -42,6 +42,7 @@ static NSString *ReuseID = @"CellReuseId";
         self.delegate = self;
         self.dataSource = self;
         self.bounces = YES;
+        self.rowHeight = FigureRowCellHeight;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         }
@@ -206,7 +207,7 @@ static NSString *ReuseID = @"CellReuseId";
     
     EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
     cell.eventPersonRelation = eventRelation;
-    [cell reset];
+//    [cell reset];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -219,7 +220,6 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
         return FigureRowCellHeight;
 }
 
@@ -247,12 +247,19 @@ static NSString *ReuseID = @"CellReuseId";
 
 #pragma mark UIScrollView Delegate Methods
 
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+
+    if ([EventRowDrawerOpenBucket hasOpenDrawers] == YES) {
+        self.scrollEnabled = NO;
+        [[EventRowDrawerOpenBucket sharedInstance] closeDrawers:^{
+            self.scrollEnabled = YES;
+            [self scrollViewDidScroll:scrollView];
+        }];
+    }
     if (actionViewTop != nil) {
         [self addTopActionForScrollAction:scrollView];
     }
-    
     headerViewWrapper.frame = CGRectMake(scrollView.contentOffset.x, scrollView.contentOffset.y, headerViewWrapper.frame.size.width, headerViewWrapper.frame.size.height);
 }
 

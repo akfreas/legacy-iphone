@@ -129,12 +129,6 @@ typedef enum ScrollViewDirection {
     [infoPage reloadData];
     [self addPage:infoPage];
     [self scrollToPage:TimelinePageNumber];
-    
-    if ([notif.object isKindOfClass:[EventRowHorizontalScrollView class]]) {
-        EventRowHorizontalScrollView *theRow = (EventRowHorizontalScrollView *)notif.object;
-        [theRow delayedReset];
-    }
-    
 }
 
 

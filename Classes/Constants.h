@@ -83,7 +83,7 @@
 #define FigurePhotoRadius 25
 #define PersonPhotoRadius 14
 #define PersonPhotoBorderSize 2
-#define PersonPhotoOffset 10
+#define PersonPhotoOffset -5
 #define EventHeaderCellLineStrokeWidth 1.0f
 
 #pragma mark Color Definitions
@@ -126,6 +126,7 @@
 #define TwitterButtonImage [UIImage imageNamed:@"twitter-icon.png"]
 #define AddFriendsButtonImage [UIImage imageNamed:@"add-friends.png"]
 #define CheckMarkImage [UIImage imageNamed:@"check-mark.png"]
+#define NoEventImage [UIImage imageNamed:@"no-photo-legacy.png"]
 
 #pragma mark Page Constants
 

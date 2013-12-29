@@ -51,7 +51,7 @@
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showShareDialog:) name:KeyForFacebookButtonTapped object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showConnectToFBDialog:) name:KeyForFacebookButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -96,7 +96,7 @@
     }];
 }
 
--(void)showShareDialog:(NSNotification *)notif {
+-(void)showConnectToFBDialog:(NSNotification *)notif {
     RNBlurModalView *blurView;
     ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
     blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
@@ -197,12 +197,13 @@
 -(void)showFriendPicker {
     FBSessionState state = [FBSession activeSession].state;
         if (state == FBSessionStateOpen || state == FBSessionStateCreatedTokenLoaded) {
+            DataSyncUtility *localDataSync = dataSync;
             friendPickerDelegate = [[FriendPickerHandler alloc] init];
             friendPicker = [[FBFriendPickerViewController alloc] init];
             friendPicker.allowsMultipleSelection = NO;
             friendPicker.delegate = friendPickerDelegate;
             friendPickerDelegate.friendPickerCompletionBlock = ^{
-                [dataSync sync:NULL];
+                [localDataSync sync:NULL];
             };
             friendPicker.session = [FBSession activeSession];
             Person *currentPerson = [accessor primaryPerson];

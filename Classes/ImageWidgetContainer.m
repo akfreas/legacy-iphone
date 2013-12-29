@@ -72,15 +72,23 @@
     }];
 }
 
+
 -(void)setRelation:(EventPersonRelation *)relation {
     _relation = relation;
-    _widget.largeImage = [UIImage imageNamed:@"no-photo.png"];
+    if (relation.event == nil) {
+        _widget.largeImage = NoEventImage;
+    } else {
+        _widget.largeImage = [UIImage imageNamed:@"no-photo.png"];
+    }
     [self getFigureThumbnailImage];
     [self setNeedsLayout];
     
     if (_relation.person != nil) {
         UIImage *thumbnail = [UIImage imageWithData:_relation.person.thumbnail];
         _widget.smallImage = thumbnail;
+        _widget.smallImageOffset = PersonPhotoOffset;
+        _widget.smallImageBorderColor = PersonPhotoBorderColor;
+        _widget.smallImageBorderWidth = PersonPhotoBorderWidth;
         [self addObserver:self forKeyPath:@"self.relation.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
     } else {
         _widget.smallImage = nil;

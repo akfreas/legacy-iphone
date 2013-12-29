@@ -99,9 +99,15 @@
     ageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     ageLabel.font = AgeLabelFont;
     ageLabel.textColor = AgeLabelFontColor;
-    ageLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:.6];
-    ageLabel.layer.cornerRadius = 10;
     [self addSubview:ageLabel];
+}
+
+-(void)configureViewForNilEvent {
+    arrowView.hidden = YES;
+    figureNameLabel.text = @"Another Day";
+    ageLabel.text = @"Another Time";
+    eventSubtitleLabel.text = [NSString stringWithFormat:@"%@ has no matching Legacy today.", _relation.person.firstName];
+    eventSubtitleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 -(void)addWidgetContainer {
@@ -116,9 +122,14 @@
 -(void)setRelation:(EventPersonRelation *)relation {
     _relation = relation;
     self.widgetContainer.relation = _relation;
-
-    figureNameLabel.text = _relation.event.figure.name;
-    eventSubtitleLabel.text = _relation.event.eventDescription;
-    ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", _relation.event.ageYears, _relation.event.ageMonths, _relation.event.ageDays];
+    if (_relation.event == nil) {
+        [self configureViewForNilEvent];
+    } else {
+        figureNameLabel.text = _relation.event.figure.name;
+        eventSubtitleLabel.text = _relation.event.eventDescription;
+        eventSubtitleLabel.adjustsFontSizeToFitWidth = NO;
+        ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", _relation.event.ageYears, _relation.event.ageMonths, _relation.event.ageDays];
+        arrowView.hidden = NO;
+    }
 }
 @end

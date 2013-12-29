@@ -1,0 +1,3 @@
+@interface ConnectToFacebookDialogView : UIView
+
+@end

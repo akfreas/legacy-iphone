@@ -80,3 +80,7 @@ CGRect CGRectMakeFrameForDeadCenterInRect(CGRect rect, CGSize frameSize) {
     CGRect newRect = CGRectMake(rect.size.width / 2 - frameSize.width / 2, rect.size.height / 2 - frameSize.height / 2, frameSize.width, frameSize.height);
     return newRect;
 }
+CGSize CGSizeInset(CGSize size, CGFloat dw, CGFloat dh) {
+    CGSize newSize = CGSizeMake(size.width - dw, size.height - dh);
+    return newSize;
+}

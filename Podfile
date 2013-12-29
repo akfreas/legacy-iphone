@@ -10,5 +10,6 @@ target "LegacyApp" do
     pod "BlocksKit", '~> 2.0.0'
     pod "UIView+AutoLayout"
     pod "hpple"
+    pod "RNBlurModalView"
 end
 

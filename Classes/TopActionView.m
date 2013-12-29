@@ -4,7 +4,7 @@
 #import "Person.h"
 
 @implementation TopActionView {
-    CircleImageView *addFriendsButton;
+    UIButton *addFriendsButton;
     CircleImageView *profilePicButton;
     CGFloat buttonRadii;
     CGFloat yButtonOrigin;
@@ -26,24 +26,28 @@
 }
 
 -(void)addTitle {
-    titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleLabel = [[UILabel alloc] initForAutoLayout];
     titleLabel.text = @"Legacy";
     titleLabel.font = HeaderFont;
     titleLabel.textColor = [UIColor whiteColor];
     MXDictionaryOfVariableBindings(titleLabel);
     [self addSubview:titleLabel];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:8]];
 }
 
 -(void)addAddFriendsButton {
     
-    addFriendsButton = [[CircleImageView alloc] initWithImage:[UIImage imageNamed:@"add-friends.png"] radius:buttonRadii];
-    addFriendsButton.frame = CGRectMake(self.frame.size.width - buttonRadii*2 - TopBarLeftMargin, yButtonOrigin, addFriendsButton.frame.size.height, addFriendsButton.frame.size.width);
+    addFriendsButton = [[UIButton alloc] initForAutoLayout];
+    [addFriendsButton setImage:AddFriendsButtonImage forState:UIControlStateNormal];
     addFriendsButton.tag = 8;
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addFriendsButtonTappedAction)];
-    [addFriendsButton addGestureRecognizer:gesture];
+    [addFriendsButton bk_addEventHandler:^(id sender) {
+        [AKNOTIF postNotificationName:KeyForFacebookButtonTapped object:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:addFriendsButton];
+    UIBind(addFriendsButton);
+    [self addConstraintWithVisualFormat:@"H:[addFriendsButton]-|" bindings:BBindings];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:addFriendsButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
 }
 
 -(void)addProfilePicButton {

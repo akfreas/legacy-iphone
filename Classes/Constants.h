@@ -69,13 +69,17 @@
 
 #define OverlayViewButtonRadius 25
 
-#define DrawerWidth 50.0f
+#define DrawerWidth 90.0f
 
 #define TopBarButtonRadius 11
 #define TopBarLeftMargin 15
 #define TopBarTopMargin 15
+#define DefaultFullscreenContentSize CGSizeMake(320, 480)
 
 #define HeaderBackgroundColor [UIColor colorWithHexString:@"#3E94E0"]
+#define AppLightBlueColor HeaderBackgroundColor
+#define LightButtonColor [UIColor colorWithHexString:@"#9BC9ED"]
+#define DarkButtonColor [UIColor colorWithHexString:@"#69AEE4"]
 #define AgeLabelFontColor [UIColor colorWithHexString:@"#9B9B9B"]
 #define LineSeparatorColor [UIColor colorWithHexString:@"#E1E4E6"]
 #define TitleColor [UIColor colorWithHexString:@"#000000"]
@@ -107,6 +111,9 @@
 
 #define LegacyPointSummaryFont [UIFont fontWithName:@"HelveticaNeue" size:15]
 
+#define FacebookModalDescriptionFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:15]
+#define FacebookModalDescriptionTextColor [UIColor colorWithHexString:@"#FFFFFF"]
+
 #define LegacyEntryHeight 170
 #define FigurePhotoRadius 25
 #define PersonPhotoRadius 14
@@ -115,6 +122,10 @@
 
 #define BackPageButtonImage [UIImage imageNamed:@"back-arrow.png"]
 #define ForwardPageButtonImage [UIImage imageNamed:@"next-arrow.png"]
+#define FacebookButtonImage [UIImage imageNamed:@"facebook-icon.png"]
+#define TwitterButtonImage [UIImage imageNamed:@"twitter-icon.png"]
+#define AddFriendsButtonImage [UIImage imageNamed:@"add-friends.png"]
+#define CheckMarkImage [UIImage imageNamed:@"check-mark.png"]
 
 #define MainEventPageNumber [NSNumber numberWithInteger:0]
 #define FigureLegacyTimelineViewPageNumber [NSNumber numberWithInteger:1]

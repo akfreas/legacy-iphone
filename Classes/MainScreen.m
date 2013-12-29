@@ -14,8 +14,10 @@
 #import "LegacyAppRequest.h"
 #import "DataSyncUtility.h"
 #import "FacebookUtils.h"
+#import "ConnectToFacebookDialogView.h"
 #import <MessageUI/MessageUI.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <RNBlurModalView/RNBlurModalView.h>
 
 @interface MainScreen ()  <MFMailComposeViewControllerDelegate>
 
@@ -95,7 +97,10 @@
 }
 
 -(void)showShareDialog:(NSNotification *)notif {
-    
+    ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
+    RNBlurModalView *blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
+    [blurView hideCloseButton:YES];
+    [blurView showWithDuration:0.5f delay:0 options:0 completion:NULL];
     Event *event = notif.userInfo[@"event"];
     NSString *eventAgeString = [NSString stringWithFormat:@"@%@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
     NSString *eventDescriptionString = [NSString stringWithFormat:@"%@: %@", eventAgeString, event.eventDescription];

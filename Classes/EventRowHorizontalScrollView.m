@@ -17,7 +17,6 @@
     UIView *nameContainerView;
     BOOL isNonUserScrolling;
     
-    UIButton *facebookButton;
 }
 
 - (id)initForAutoLayout {
@@ -76,10 +75,6 @@
     } completion:^(BOOL finished) {
         isNonUserScrolling = NO;
     }];
-}
-
--(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Accessors

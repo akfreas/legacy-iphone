@@ -12,6 +12,8 @@
     EventRowHorizontalScrollView *eventRowScrollView;
     UIView *arrowView;
     UIButton *facebookButton;
+    UIButton *twitterButton;
+    UIButton *arrowButton;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -29,6 +31,35 @@
 }
 
 -(void)addDrawerItems {
+    [self addFacebookButton];
+    [self addTwitterButton];
+    [self addArrowButton];
+    [self addLayoutConstraints];
+}
+
+-(void)addLayoutConstraints {
+    UIBind(facebookButton, twitterButton, eventRowScrollView);
+
+    [self.contentView addConstraintWithVisualFormat:@"H:|-(>=15)-[facebookButton(20)]-(>=20)-[twitterButton(20)]" bindings:BBindings];
+    [self.contentView addConstraintWithVisualFormat:@"V:|[facebookButton]|" bindings:BBindings];
+    [twitterButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.contentView];
+}
+
+-(void)addArrowButton {
+    
+}
+
+-(void)addTwitterButton {
+    
+    twitterButton = [[UIButton alloc] initForAutoLayout];
+    [twitterButton setImage:TwitterButtonImage forState:UIControlStateNormal];
+    [self.contentView insertSubview:twitterButton belowSubview:eventRowScrollView];
+    [twitterButton bk_addEventHandler:^(id sender) {
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)addFacebookButton {
     
     facebookButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [facebookButton setImage:[UIImage imageNamed:@"facebook-icon"] forState:UIControlStateNormal];
@@ -36,9 +67,6 @@
     [facebookButton bk_addEventHandler:^(id sender) {
         NSLog(@"Captured hit.");
     } forControlEvents:UIControlEventTouchUpInside];
-    UIBind(facebookButton, eventRowScrollView);
-    [self.contentView addConstraintWithVisualFormat:@"H:|-[facebookButton(20)]" bindings:BBindings];
-    [self.contentView addConstraintWithVisualFormat:@"V:|[facebookButton]|" bindings:BBindings];
 }
 
 

@@ -108,6 +108,17 @@
     ageLabel.text = @"Another Time";
     eventSubtitleLabel.text = [NSString stringWithFormat:@"%@ has no matching Legacy today.", _relation.person.firstName];
     eventSubtitleLabel.adjustsFontSizeToFitWidth = YES;
+    tapGesture.enabled = NO;
+}
+
+-(void)configureViewForNonNilEvent {
+    
+    tapGesture.enabled = YES;
+    figureNameLabel.text = _relation.event.figure.name;
+    eventSubtitleLabel.text = _relation.event.eventDescription;
+    eventSubtitleLabel.adjustsFontSizeToFitWidth = NO;
+    ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", _relation.event.ageYears, _relation.event.ageMonths, _relation.event.ageDays];
+    arrowView.hidden = NO;
 }
 
 -(void)addWidgetContainer {
@@ -125,11 +136,7 @@
     if (_relation.event == nil) {
         [self configureViewForNilEvent];
     } else {
-        figureNameLabel.text = _relation.event.figure.name;
-        eventSubtitleLabel.text = _relation.event.eventDescription;
-        eventSubtitleLabel.adjustsFontSizeToFitWidth = NO;
-        ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", _relation.event.ageYears, _relation.event.ageMonths, _relation.event.ageDays];
-        arrowView.hidden = NO;
+        [self configureViewForNonNilEvent];
     }
 }
 @end

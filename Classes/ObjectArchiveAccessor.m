@@ -488,16 +488,16 @@ static NSString *PersonEntityName = @"Person";
 
 -(NSArray *)eventRelationSortDescriptors {
     
-    NSSortDescriptor *nilSorter = [NSSortDescriptor sortDescriptorWithKey:@"pinsToTop" ascending:NO];
+    NSSortDescriptor *pinToTopSorter = [NSSortDescriptor sortDescriptorWithKey:@"pinsToTop" ascending:NO];
     NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
     NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
     NSSortDescriptor *bdaySorter = [NSSortDescriptor sortDescriptorWithKey:@"person.birthday" ascending:NO];
     
-    NSSortDescriptor *ageYearSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageYears" ascending:YES];
-    NSSortDescriptor *ageMonthSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageMonths" ascending:YES];
-    NSSortDescriptor *ageDaySorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageDays" ascending:YES];
+//    NSSortDescriptor *ageYearSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageYears" ascending:YES];
+//    NSSortDescriptor *ageMonthSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageMonths" ascending:YES];
+//    NSSortDescriptor *ageDaySorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageDays" ascending:YES];
     
-    return @[nilSorter, meSorter, friendSorter, bdaySorter, ageYearSorter, ageMonthSorter, ageDaySorter];
+    return @[pinToTopSorter, meSorter, friendSorter, bdaySorter,];// ageYearSorter, ageMonthSorter, ageDaySorter];
 }
 
 
@@ -574,7 +574,7 @@ static NSString *PersonEntityName = @"Person";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"EventPersonRelation"];
     fetchRequest.sortDescriptors = [self eventRelationSortDescriptors];
     
-    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"pinsToTop" cacheName:nil];
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     return resultsController;
 }
 

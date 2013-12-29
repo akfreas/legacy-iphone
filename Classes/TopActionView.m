@@ -18,8 +18,8 @@
         buttonRadii = TopBarButtonRadius;
         self.backgroundColor = HeaderBackgroundColor;
         yButtonOrigin = self.frame.size.height / 2 - TopBarButtonRadius + 5;
-        [self addProfilePicButton];
         [self addTitle];
+        [self addProfilePicButton];
         [self addAddFriendsButton];
     }
     return self;
@@ -56,9 +56,12 @@
     if (mainPerson != nil && profilePicButton == nil) {
         UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
         profilePicButton = [[CircleImageView alloc] initWithImage:thumb radius:buttonRadii];
+        profilePicButton.borderColor = PersonPhotoBorderColor;
         profilePicButton.borderWidth = 0;
-        profilePicButton.frame = CGRectMake(TopBarLeftMargin, yButtonOrigin, profilePicButton.frame.size.width, profilePicButton.frame.size.height);
         [self addSubview:profilePicButton];
+        UIBind(profilePicButton);
+        [self addConstraintWithVisualFormat:@"H:|-[profilePicButton]" bindings:BBindings];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:profilePicButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
     }
 }
 

@@ -97,10 +97,12 @@
 }
 
 -(void)showShareDialog:(NSNotification *)notif {
+    RNBlurModalView *blurView;
     ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
-    RNBlurModalView *blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
+    blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
     [blurView hideCloseButton:YES];
-    [blurView showWithDuration:0.5f delay:0 options:0 completion:NULL];
+    connectView.dismissBlock = ^{ [blurView hideWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL]; };
+    [blurView showWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
     Event *event = notif.userInfo[@"event"];
     NSString *eventAgeString = [NSString stringWithFormat:@"@%@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
     NSString *eventDescriptionString = [NSString stringWithFormat:@"%@: %@", eventAgeString, event.eventDescription];

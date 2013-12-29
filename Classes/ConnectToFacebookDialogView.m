@@ -13,8 +13,7 @@
     return CGSizeInset(DefaultFullscreenContentSize, 20, 70);
 }
 
-- (id)initForAutoLayout
-{
+- (id)initForAutoLayout {
     self = [super initForAutoLayout];
     if (self) {
         self.backgroundColor = AppLightBlueColor;
@@ -55,7 +54,11 @@
     okButton.backgroundColor = LightButtonColor;
     [okButton setTitle:@"OK" forState:UIControlStateNormal];
     [okButton bk_addEventHandler:^(id sender) {
-        [FacebookUtils loginWithFacebook:NULL];
+        [FacebookUtils loginWithFacebook:^{
+            if (self.dismissBlock != NULL) {
+                self.dismissBlock();
+            }
+        }];
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:okButton];
     
@@ -63,7 +66,9 @@
     [skipButton setTitle:@"Skip" forState:UIControlStateNormal];
     skipButton.backgroundColor = DarkButtonColor;
     [skipButton bk_addEventHandler:^(id sender) {
-        
+        if (self.dismissBlock != NULL) {
+            self.dismissBlock();
+        }
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:skipButton];
 }

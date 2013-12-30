@@ -51,7 +51,7 @@
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showConnectToFBDialog:) name:KeyForFacebookButtonTapped object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFriendButtonTapped:) name:KeyForFacebookButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -59,7 +59,6 @@
 #if DEBUG != 1
         [self setupSplashClip];
 #endif
-        self.view.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }
@@ -96,23 +95,28 @@
     }];
 }
 
--(void)showConnectToFBDialog:(NSNotification *)notif {
+-(void)addFriendButtonTapped:(NSNotification *)notif {
+    [FBSession openActiveSessionWithAllowLoginUI:NO];
+    if (FBSession.activeSession.isOpen) {
+        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser>user, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showFriendPicker];
+            });
+        }];
+    } else {
+        [self showConnectToFBDialog];
+    }
+}
+
+-(void)showConnectToFBDialog {
     RNBlurModalView *blurView;
     ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
     blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
     [blurView hideCloseButton:YES];
-    connectView.dismissBlock = ^{ [blurView hideWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL]; };
+    connectView.dismissBlock = ^{
+        [blurView hideWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
+    };
     [blurView showWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
-    Event *event = notif.userInfo[@"event"];
-    NSString *eventAgeString = [NSString stringWithFormat:@"@%@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
-    NSString *eventDescriptionString = [NSString stringWithFormat:@"%@: %@", eventAgeString, event.eventDescription];
-    NSString *nameWithUnderscores = [event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    NSURL *wikipediaUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
-    [FBDialogs presentShareDialogWithLink:wikipediaUrl name:event.figure.name caption:eventAgeString description:eventDescriptionString picture:[NSURL URLWithString:event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-        
-    }];
-    
-    
 }
 
 
@@ -183,22 +187,14 @@
     }
 }
 
-
--(void)showSettingsModalView {
-    
-    if (viewForSettings == nil) {
-        viewForSettings = [[UINavigationController alloc] initWithRootViewController:[[SettingsModalView alloc] init]];
-    }
-    [self presentViewController:viewForSettings animated:YES completion:NULL];
-
-}
-
-
 -(void)showFriendPicker {
+    
     FBSessionState state = [FBSession activeSession].state;
         if (state == FBSessionStateOpen || state == FBSessionStateCreatedTokenLoaded) {
             DataSyncUtility *localDataSync = dataSync;
-            friendPickerDelegate = [[FriendPickerHandler alloc] init];
+            if (friendPickerDelegate == nil) {
+                friendPickerDelegate = [[FriendPickerHandler alloc] init];
+            }
             friendPicker = [[FBFriendPickerViewController alloc] init];
             friendPicker.allowsMultipleSelection = NO;
             friendPicker.delegate = friendPickerDelegate;
@@ -212,14 +208,7 @@
             [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
             
         } else {
-            AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"Connect to Facebook?"];
-            alert.description = @"Connecting to Facebook allows you to discover what happened in someone else's life at your friend's exact age.";
-            alert.leftButtonActionBlock = ^(NSArray *components) {
-                [FacebookUtils loginWithFacebook:NULL];
-            };
-            alert.leftButtonTitle = @"OK";
-            alert.rightButtonTitle = @"No Thanks";
-            [alert showInView:self.view];
+            [self showConnectToFBDialog];
         }
 }
 
@@ -306,20 +295,11 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:NO];
+    [super viewDidAppear:animated];
 #if DEBUG != 1
-    splashClipPlayer.view.frame = self.view.bounds;
+    splashClipPlayer.view.frame = xxx self.view.bounds;
     [splashClipPlayer play];
 #endif
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-}
-
--(void)viewDidLoad {
-    [super viewDidLoad];
 }
 
 

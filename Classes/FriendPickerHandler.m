@@ -1,6 +1,7 @@
 #import "FriendPickerHandler.h"
 #import "ObjectArchiveAccessor.h"
 #import "DataSyncUtility.h"
+#import "Person.h"
 
 @implementation FriendPickerHandler {
     
@@ -9,11 +10,17 @@
 }
 
 @synthesize friendPickerCompletionBlock;
+-(id)init {
+    self = [super init];
+    if (self) {
+        accessor = [ObjectArchiveAccessor sharedInstance];
+    }
+    return self;
+}
 
 -(FBModalCompletionHandler)completionHandler {
     return (FBModalCompletionHandler)^(FBFriendPickerViewController *sender, BOOL donePressed){
         if (donePressed) {
-            accessor = [ObjectArchiveAccessor sharedInstance];
             [accessor addFacebookUsers:sender.selection completionBlock:^{
                 [[DataSyncUtility sharedInstance] syncFacebookFriends:^{
                     [sender dismissViewControllerAnimated:YES completion:NULL];
@@ -29,10 +36,7 @@
 
 -(void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker {
     
-    
-    FBModalCompletionHandler completion = [self completionHandler];
-    completion(friendPicker, YES);
-    [friendPicker dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 

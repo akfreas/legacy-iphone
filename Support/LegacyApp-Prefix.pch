@@ -3,7 +3,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <AFFacebook-iOS-SDK/FacebookSDK/FacebookSDK.h>
 #import <AFNetworking/AFNetworking.h>
 #import <HexColors/HexColor.h>
 #import <BlocksKit/BlocksKit.h>

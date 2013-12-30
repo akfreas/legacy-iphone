@@ -127,12 +127,6 @@
         CGFloat imageWidth = _image.size.width * scale;
         CGFloat imageHeight = _image.size.height * scale;
         CGRect imgRect;
-        
-        if (imageWidth > imageHeight) {
-            imgRect = CGRectMake(_radius - imageWidth / 2, 0, imageWidth, imageHeight);
-        } else {
-            imgRect = CGRectMake(0, _radius - imageHeight / 2, imageWidth, imageHeight);
-        }
         imgRect = CGRectMakeFrameForDeadCenterInRect(self.bounds, CGSizeMake(imageWidth, imageHeight));
         CGContextDrawImage(ctx, imgRect, _image.CGImage);
         CGContextRestoreGState(ctx);

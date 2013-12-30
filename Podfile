@@ -4,7 +4,7 @@
 target "LegacyApp" do
 
     pod "HexColors"
-    pod "Facebook-iOS-SDK"
+    pod "AFFacebook-iOS-SDK"
     pod "AFNetworking"
     pod "GoogleAnalytics-iOS-SDK"
     pod "BlocksKit", '~> 2.0.0'

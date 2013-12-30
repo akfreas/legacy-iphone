@@ -50,6 +50,8 @@
 -(id)init {
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     if (self) {
+        accessor = [ObjectArchiveAccessor sharedInstance];
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFriendButtonTapped:) name:KeyForFacebookButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
@@ -92,6 +94,7 @@
         splashClipPlayer.view.alpha = 0;
     } completion:^(BOOL finished) {
         [splashClipPlayer.view removeFromSuperview];
+        splashClipPlayer = nil;
     }];
 }
 
@@ -123,7 +126,6 @@
 
 -(void)showAlertForNoBirthday:(Person *)thePerson completion:(void(^)(Person *person))completion cancellation:(void(^)(Person *person))cancellation {
     
-    accessor = [ObjectArchiveAccessor sharedInstance];
     AFAlertView *alertView = [[AFAlertView alloc] initWithTitle:@"No Birthday Found"];
     alertView.prompt = [NSString stringWithFormat:@"%@ doesn't have their full birthday listed.  Please correct the date below.", thePerson.firstName];
     
@@ -196,7 +198,7 @@
                 friendPickerDelegate = [[FriendPickerHandler alloc] init];
             }
             friendPicker = [[FBFriendPickerViewController alloc] init];
-            friendPicker.allowsMultipleSelection = NO;
+            friendPicker.selection = [self selectedFacebookUsers];
             friendPicker.delegate = friendPickerDelegate;
             friendPickerDelegate.friendPickerCompletionBlock = ^{
                 [localDataSync sync:NULL];
@@ -212,6 +214,16 @@
         }
 }
 
+-(NSArray *)selectedFacebookUsers {
+    NSArray *fbPersons = [accessor allPersons];
+    NSMutableArray *fbUsers = [NSMutableArray array];
+    for (Person *person in fbPersons) {
+        id<FBGraphUser> fbUser = (id<FBGraphUser>)[FBGraphObject graphObject];
+        fbUser.id = person.facebookId;
+        [fbUsers addObject:fbUser];
+    }
+    return [NSArray arrayWithArray:fbUsers];
+}
 
 -(BOOL)shouldSyncNow {
     NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:KeyForLastDateSynced];
@@ -297,8 +309,10 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 #if DEBUG != 1
-    splashClipPlayer.view.frame = xxx self.view.bounds;
-    [splashClipPlayer play];
+    if (splashClipPlayer != nil) {
+        splashClipPlayer.view.frame = self.view.bounds;
+        [splashClipPlayer play];
+    }
 #endif
 }
 

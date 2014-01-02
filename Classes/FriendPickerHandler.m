@@ -65,10 +65,32 @@
                     enterBirthdayView = [[BirthdaySelectionView alloc] initForAutoLayout];
                 }
                 enterBirthdayView.facebookUser = user;
-                blurView = [[RNBlurModalView alloc] initWithParentView:friendPicker.view view:enterBirthdayView];
+                RNBlurModalView *aBlurView = [[RNBlurModalView alloc] initWithParentView:friendPicker.view view:enterBirthdayView];
 
-//                [blurView hideCloseButton:YES];
-                [blurView show];
+                [aBlurView hideCloseButton:YES];
+                [aBlurView show];
+                void(^pickedBlock)(NSDate *) = ^(NSDate *pickedDate){
+                    NSMutableArray *oldArray = [NSMutableArray arrayWithArray:friendPicker.selection];
+                    NSInteger idx = [oldArray indexOfObjectPassingTest:^BOOL(id<FBGraphUser> sortedUser, NSUInteger idx, BOOL *stop) {
+                        if (sortedUser.id == user.id) {
+                            return YES;
+                        } else {
+                            return NO;
+                        }
+                    }];
+                    if (idx != NSNotFound) {
+                        [selectedFriends removeObjectForKey:[oldArray[idx] id]];
+                        [oldArray removeObjectAtIndex:idx];
+                        [friendPicker clearSelection];
+                        friendPicker.selection = oldArray;
+                    }
+                    [aBlurView hide];
+                };
+                enterBirthdayView.cancelButtonBlock = pickedBlock;
+                enterBirthdayView.okButtonBlock = ^{
+                    [aBlurView hide];
+                };
+                blurView = aBlurView;
             }
             [selectedFriends setValue:user forKey:user.id];
             [diffDict removeObjectForKey:user.id];

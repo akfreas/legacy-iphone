@@ -9,8 +9,9 @@
     UILabel *circleSubtitle;
     UILabel *questionLabel;
     SSFlatDatePicker *birthdayPicker;
-    UIButton *saveButton;
+    UIButton *okButton;
     UIButton *cancelButton;
+    BOOL hasLoadedUIComponents;
 }
 
 -(id)init {
@@ -24,7 +25,11 @@
 
 -(void)setFacebookUser:(id<FBGraphUser>)facebookUser {
     _facebookUser = facebookUser;
-    [self addUIComponents];
+    if (hasLoadedUIComponents == NO) {
+        [self addUIComponents];
+        hasLoadedUIComponents = YES;
+    }
+    [self configureUIComponents];
 }
 
 -(void)addUIComponents {
@@ -35,12 +40,14 @@
     [self addButtons];
     [self addVerticalLayoutConstraints];
 }
+
 -(void)addVerticalLayoutConstraints {
-    UIBind(profilePhoto, circleSubtitle, questionLabel, birthdayPicker, saveButton, cancelButton);
-    [self addConstraintWithVisualFormat:@"V:|-20-[profilePhoto]-[circleSubtitle]-[questionLabel]-[birthdayPicker][saveButton]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:[saveButton(60)]|" bindings:BBindings];
+    UIBind(profilePhoto, circleSubtitle, questionLabel, birthdayPicker, okButton, cancelButton);
+    [self addConstraintWithVisualFormat:@"V:|-20-[profilePhoto]-[circleSubtitle]-[questionLabel]-[birthdayPicker]-[okButton]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:[okButton(60)]|" bindings:BBindings];
     [self addConstraintWithVisualFormat:@"V:[cancelButton(60)]|" bindings:BBindings];
 }
+
 -(void)addCircleImage {
     profilePhoto = [[CircleImageView alloc] initWithImage:NoEventImage radius:40.0f];
     profilePhoto.borderWidth = PersonPhotoBorderWidth;
@@ -48,33 +55,24 @@
     [self addSubview:profilePhoto];
     UIBind(profilePhoto);
     [self addConstraintWithVisualFormat:@"H:|-[profilePhoto]-|" bindings:BBindings];
-    NSURL *profileImageURL = [NSURL URLWithString:_facebookUser[@"picture"][@"data"][@"url"]];
-    [SDWebImageDownloader.sharedDownloader downloadImageWithURL:profileImageURL options:0 progress:^(NSUInteger receivedSize, long long expectedSize) {
-        
-    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            profilePhoto.image = image;
-        });
-    }];
     
 }
 
 -(void)addLabelBelowCircleImage {
     circleSubtitle = [[UILabel alloc] initForAutoLayout];
-    circleSubtitle.text = [NSString stringWithFormat:@"%@ doesn't have their birthday listed on Facebook.", _facebookUser.first_name];
     circleSubtitle.lineBreakMode = NSLineBreakByWordWrapping;
-    circleSubtitle.numberOfLines = 3;
+    circleSubtitle.numberOfLines = 2;
     circleSubtitle.textAlignment = NSTextAlignmentCenter;
     circleSubtitle.textColor = HeaderTextColor;
+    circleSubtitle.font = FacebookModalDescriptionFont;
     [self addSubview:circleSubtitle];
     UIBind(circleSubtitle);
-    [self addConstraintWithVisualFormat:@"H:[circleSubtitle(200)]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:[circleSubtitle(250)]" bindings:BBindings];
     [circleSubtitle autoAlignAxis:ALAxisVertical toSameAxisOfView:self];
 }
 
 -(void)addQuestionLabel {
     questionLabel = [[UILabel alloc] initForAutoLayout];
-    questionLabel.text = [NSString stringWithFormat:@"What is %@'s birthday?", _facebookUser.first_name];
     questionLabel.font = HeaderFont;
     questionLabel.textColor = HeaderTextColor;
     questionLabel.adjustsFontSizeToFitWidth = YES;
@@ -88,22 +86,59 @@
     birthdayPicker = [[SSFlatDatePicker alloc] initForAutoLayout];
     birthdayPicker.datePickerMode = SSFlatDatePickerModeDate;
     [self addSubview:birthdayPicker];
+    birthdayPicker.backgroundColor = AppLightBlueColor;
+    [[SSFlatDatePicker appearance] setGradientColor:DarkButtonColor];
     UIBind(birthdayPicker);
     [self addConstraintWithVisualFormat:@"H:|-[birthdayPicker]-|" bindings:BBindings];
 }
 
 -(void)addButtons {
-    saveButton = [[UIButton alloc] initForAutoLayout];
-    [saveButton setTitle:@"OK" forState:UIControlStateNormal];
-    [self addSubview:saveButton];
-    saveButton.backgroundColor = LightButtonColor;
-    
+    okButton = [[UIButton alloc] initForAutoLayout];
+    [okButton setTitle:@"OK" forState:UIControlStateNormal];
+    [self addSubview:okButton];
+    okButton.backgroundColor = LightButtonColor;
     cancelButton = [[UIButton alloc] initForAutoLayout];
     [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
     [self addSubview:cancelButton];
     cancelButton.backgroundColor = DarkButtonColor;
-    UIBind(cancelButton, saveButton);
-    [self addConstraintWithVisualFormat:@"H:|[cancelButton][saveButton(==cancelButton)]|" bindings:BBindings];
+    
+    UIBind(cancelButton, okButton);
+    [self addConstraintWithVisualFormat:@"H:|[cancelButton][okButton(==cancelButton)]|" bindings:BBindings];
+}
+
+-(void)setOkButtonBlock:(void (^)())okButtonBlock {
+    
+    _okButtonBlock = okButtonBlock;
+    [okButton bk_addEventHandler:^(id sender) {
+        if (self.okButtonBlock != NULL) {
+            self.okButtonBlock();
+        }
+    } forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)setCancelButtonBlock:(void (^)(NSDate *))cancelButtonBlock {
+    _cancelButtonBlock = cancelButtonBlock;
+    [cancelButton bk_addEventHandler:^(id sender) {
+        if (self.cancelButtonBlock != NULL) {
+            self.cancelButtonBlock(birthdayPicker.date);
+        }
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(void)configureUIComponents {
+    
+    NSURL *profileImageURL = [NSURL URLWithString:_facebookUser[@"picture"][@"data"][@"url"]];
+    [SDWebImageDownloader.sharedDownloader downloadImageWithURL:profileImageURL options:0 progress:^(NSUInteger receivedSize, long long expectedSize) {
+        
+    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            profilePhoto.image = image;
+        });
+    }];
+    
+    questionLabel.text = [NSString stringWithFormat:@"What is %@'s birthday?", _facebookUser.first_name];
+    circleSubtitle.text = [NSString stringWithFormat:@"%@ doesn't have their birthday listed on Facebook.", _facebookUser.first_name];
 }
 
 -(CGSize)intrinsicContentSize {

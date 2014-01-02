@@ -79,7 +79,7 @@
     questionLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:questionLabel];
     UIBind(questionLabel);
-    [self addConstraintWithVisualFormat:@"H:|-[questionLabel]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|-(>=10)-[questionLabel(<=300)]-(>=10)-|" bindings:BBindings];
 }
 
 -(void)addDatePicker {
@@ -136,9 +136,13 @@
             profilePhoto.image = image;
         });
     }];
-    
+    questionLabel.adjustsFontSizeToFitWidth = YES;
     questionLabel.text = [NSString stringWithFormat:@"What is %@'s birthday?", _facebookUser.first_name];
     circleSubtitle.text = [NSString stringWithFormat:@"%@ doesn't have their birthday listed on Facebook.", _facebookUser.first_name];
+    [questionLabel sizeToFit];
+    [circleSubtitle sizeToFit];
+    [self setNeedsUpdateConstraints];
+    [self setNeedsLayout];
 }
 
 -(CGSize)intrinsicContentSize {

@@ -106,28 +106,30 @@
     [self addConstraintWithVisualFormat:@"H:|[cancelButton][okButton(==cancelButton)]|" bindings:BBindings];
 }
 
--(void)setOkButtonBlock:(void (^)())okButtonBlock {
+-(void)setOkButtonBlock:(void (^)(id<FBGraphUser>))okButtonBlock {
     
     _okButtonBlock = okButtonBlock;
     [okButton bk_addEventHandler:^(id sender) {
         if (self.okButtonBlock != NULL) {
-            self.okButtonBlock();
+            NSString *dateString = [[Utility_AppSettings dateFormatterForDisplay] stringFromDate:birthdayPicker.date];
+            [_facebookUser setObject:dateString forKey:@"birthday"];
+            self.okButtonBlock(_facebookUser);
         }
     } forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)setCancelButtonBlock:(void (^)(NSDate *))cancelButtonBlock {
+-(void)setCancelButtonBlock:(void (^)())cancelButtonBlock {
     _cancelButtonBlock = cancelButtonBlock;
     [cancelButton bk_addEventHandler:^(id sender) {
         if (self.cancelButtonBlock != NULL) {
-            self.cancelButtonBlock(birthdayPicker.date);
+            self.cancelButtonBlock();
         }
     } forControlEvents:UIControlEventTouchUpInside];
     
 }
 
 -(void)configureUIComponents {
-    
+    profilePhoto.image = NoEventImage;
     NSURL *profileImageURL = [NSURL URLWithString:_facebookUser[@"picture"][@"data"][@"url"]];
     [SDWebImageDownloader.sharedDownloader downloadImageWithURL:profileImageURL options:0 progress:^(NSUInteger receivedSize, long long expectedSize) {
         
@@ -139,10 +141,34 @@
     questionLabel.adjustsFontSizeToFitWidth = YES;
     questionLabel.text = [NSString stringWithFormat:@"What is %@'s birthday?", _facebookUser.first_name];
     circleSubtitle.text = [NSString stringWithFormat:@"%@ doesn't have their birthday listed on Facebook.", _facebookUser.first_name];
-    [questionLabel sizeToFit];
-    [circleSubtitle sizeToFit];
+    [self configureBirthdayPickerDate];
     [self setNeedsUpdateConstraints];
     [self setNeedsLayout];
+}
+
+-(void)configureBirthdayPickerDate {
+    NSDate *newBirthday;
+    
+    if (_facebookUser.birthday != nil) {
+        NSArray *stringDateComponents = [_facebookUser.birthday componentsSeparatedByString:@"/"];
+        
+        NSDateComponents *birthdayComponents = [[NSDateComponents alloc] init];
+        NSInteger monthInt = [stringDateComponents[0] integerValue];
+        NSInteger dayInt = [stringDateComponents[1] integerValue];
+        NSInteger yearInt = 1988;
+        if ([stringDateComponents count] == 3) {
+            yearInt = [stringDateComponents[2] integerValue];
+        }
+        [birthdayComponents setMonth:monthInt];
+        [birthdayComponents setDay:dayInt];
+        [birthdayComponents setYear:yearInt];
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
+        newBirthday = [calendar dateFromComponents:birthdayComponents];
+    } else {
+        newBirthday = [NSDate date];
+    }
+    birthdayPicker.date = newBirthday;
 }
 
 -(CGSize)intrinsicContentSize {

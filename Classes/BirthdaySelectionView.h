@@ -3,6 +3,6 @@
 
 @property (strong, nonatomic) id<FBGraphUser> facebookUser;
 @property (strong, nonatomic) Person *person;
-@property (nonatomic, copy) void(^cancelButtonBlock)(NSDate *pickedDate);
-@property (nonatomic, copy) void(^okButtonBlock)();
+@property (nonatomic, copy) void(^cancelButtonBlock)();
+@property (nonatomic, copy) void(^okButtonBlock)(id<FBGraphUser> graphUser);
 @end

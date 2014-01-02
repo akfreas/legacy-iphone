@@ -11,5 +11,8 @@ target "LegacyApp" do
     pod "UIView+AutoLayout"
     pod "hpple"
     pod "RNBlurModalView"
+    pod "SDWebImage"
+    pod "SSFlatDatePicker"
 end
+
 

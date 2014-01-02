@@ -4,7 +4,6 @@
 #import "Figure.h"
 #import "Person.h"
 #import "ImageDownloadUtil.h"
-#import "FigureNameLabelBlurLayer.h"
 #import "EventPersonRelation.h"
 #import "FigureTimelineTopCellLine.h"
 

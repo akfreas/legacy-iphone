@@ -5,7 +5,6 @@
 #import "Person.h"
 #import "Figure.h"
 #import "ObjectArchiveAccessor.h"
-#import "AFAlertView.h"
 #import "Utility_AppSettings.h"
 #import "FriendPickerHandler.h"
 #import "Event.h"

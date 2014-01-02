@@ -89,19 +89,11 @@
         _widget.smallImageOffset = PersonPhotoOffset;
         _widget.smallImageBorderColor = PersonPhotoBorderColor;
         _widget.smallImageBorderWidth = PersonPhotoBorderWidth;
-        [self addObserver:self forKeyPath:@"self.relation.person.thumbnail" options:NSKeyValueObservingOptionNew context:nil];
     } else {
         _widget.smallImage = nil;
 //        _widget.smallImage = _relation.event.figure.image;
     }
     [self setNeedsLayout];
-}
-
--(void)dealloc {
-    
-    if (_relation.person != nil) {
-        [self removeObserver:self forKeyPath:@"self.relation.person.thumbnail"];
-    }
 }
 
 @end

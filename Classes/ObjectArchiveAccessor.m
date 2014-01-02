@@ -554,7 +554,6 @@ static NSString *PersonEntityName = @"Person";
 
 -(void)addFacebookUsers:(NSArray *)users completionBlock:(void(^)())completionBlock {
     
-    __block NSInteger userCount = [users count];
     for (id user in users) {
         if ([user conformsToProtocol:@protocol(FBGraphUser)]) {
             id<FBGraphUser> fbUser = user;

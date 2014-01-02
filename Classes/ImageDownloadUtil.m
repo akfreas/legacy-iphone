@@ -28,7 +28,6 @@
 }
 
 -(void)fetchAndSaveImageForFigure:(Figure *)figure completion:(void(^)(UIImage *))completion {
-    NSManagedObjectID *figureId = [figure objectID];
     __block Figure *ourFigure = figure;
     if (figure.imageData == nil) {
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:figure.imageURL]];

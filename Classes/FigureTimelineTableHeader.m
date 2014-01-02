@@ -28,10 +28,6 @@
 -(void)configureLayoutConstraints {
 
     UIBind(leftButton, rightButton, nameLabel);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[leftButton]-[nameLabel]-[rightButton]-|" options:NSLayoutFormatDirectionLeftToRight metrics:nil views:BBindings]];
-    [self addConstraintWithVisualFormat:@"V:|-24-[leftButton]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:|-24-[rightButton]" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:|-24-[nameLabel]" bindings:BBindings];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[leftButton]-[nameLabel]-[rightButton]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:BBindings]];
     [self.contentView addConstraintWithVisualFormat:@"V:|-24-[leftButton]" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|-24-[rightButton]" bindings:BBindings];

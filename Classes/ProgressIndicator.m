@@ -1,6 +1,4 @@
 #import "ProgressIndicator.h"
-#define DEG2RAD(angle) angle*M_PI/180.0
-
 
 @implementation ProgressIndicator
 

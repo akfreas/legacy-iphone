@@ -1,14 +1,11 @@
 #import "EventRowCell.h"
 #import "EventRowHorizontalScrollView.h"
 #import "EventPersonRelation.h"
-#import "NoEventPersonRow.h"
-#import "RowProtocol.h"
 #import "Event.h"
 #import "Figure.h"
 
 @implementation EventRowCell {
     
-    NoEventPersonRow *noEventRow;
     EventRowHorizontalScrollView *eventRowScrollView;
     UIView *arrowView;
     UIButton *facebookButton;

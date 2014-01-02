@@ -18,9 +18,7 @@
 
 
 -(IBAction)performLogin:(id)sender {
-    
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    
+        
     [AppDelegate openSessionWithCompletionBlock:^(FBSession *session, FBSessionState state, NSError *error) {
         switch (state) {
             case FBSessionStateOpen:

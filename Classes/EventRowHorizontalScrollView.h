@@ -1,13 +1,11 @@
-#import "RowProtocol.h"
 @class EventPersonRelation;
 
 
 
-@interface EventRowHorizontalScrollView : UIScrollView <RowProtocol, UIScrollViewDelegate>
+@interface EventRowHorizontalScrollView : UIScrollView <UIScrollViewDelegate>
 
 
 @property (nonatomic) EventPersonRelation *relation;
--(void)delayedReset;
 -(void)openDrawer;
 -(void)closeDrawer:(void(^)())completion;
 

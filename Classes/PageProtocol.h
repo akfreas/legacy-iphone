@@ -9,6 +9,6 @@
 
 @optional
 
-@property (weak, nonatomic) EventPersonRelation *relation;
+@property (strong, nonatomic) EventPersonRelation *relation;
 
 @end

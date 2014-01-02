@@ -122,59 +122,6 @@
     [blurView showWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
 }
 
-
-
--(void)showAlertForNoBirthday:(Person *)thePerson completion:(void(^)(Person *person))completion cancellation:(void(^)(Person *person))cancellation {
-    
-    AFAlertView *alertView = [[AFAlertView alloc] initWithTitle:@"No Birthday Found"];
-    alertView.prompt = [NSString stringWithFormat:@"%@ doesn't have their full birthday listed.  Please correct the date below.", thePerson.firstName];
-    
-    UITextField *textField = [[UITextField alloc] init];
-    textField.frame = CGRectMake(15, 0, 285, 44);
-    textField.backgroundColor = [UIColor grayColor];
-    textField.textAlignment = NSTextAlignmentCenter;
-    textField.font = [Utility_AppSettings applicationFontLarge];
-    textField.accessibilityLabel = @"BirthdayInput";
-    
-    NSDate *newBirthday;
-    
-    if (thePerson.birthday != nil) {
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *birthdayComponents = [calendar components:(NSMonthCalendarUnit | NSDayCalendarUnit | NSYearCalendarUnit) fromDate:thePerson.birthday];
-        newBirthday = [calendar dateFromComponents:birthdayComponents];
-    } else {
-        newBirthday = [NSDate date];
-    }
-    
-    UIDatePicker *bDayDatePicker = [[UIDatePicker alloc] init];
-    bDayDatePicker.datePickerMode = UIDatePickerModeDate;
-    bDayDatePicker.date = newBirthday;
-    bDayDatePicker.accessibilityLabel = @"BirthdayInput";
-    
-    
-    
-    [alertView insertUIComponent:bDayDatePicker atIndex:2];
-    
-    alertView.leftButtonTitle = @"Done";
-    alertView.leftButtonActionBlock = ^(NSArray *uiComponents) {
-        NSDate *birthday;
-        for (UIView *component in uiComponents) {
-            if ([component.accessibilityLabel isEqualToString:@"BirthdayInput"])  {
-                birthday = [(UIDatePicker*)component date];
-            }
-        }
-        NSLog(@"Chosen date: %@", birthday);
-        thePerson.birthday = birthday;
-        [accessor save];
-        completion(thePerson);
-    };
-    alertView.rightButtonTitle = @"Cancel";
-    alertView.rightButtonActionBlock = ^(NSArray *uiComponents){
-        cancellation(thePerson);
-    };
-    [alertView showInView:self.view];
-}
-
 -(void)getUserBirthdayAndPlaceMainScreen {
     
     [FBSession openActiveSessionWithAllowLoginUI:NO];
@@ -249,34 +196,6 @@
         }
     }
 }
-
-/*
--(void)deletePerson:(NSNotification *)notif {
-    
-    Person *personToDelete = notif.userInfo[@"person"];
-    
-    
-    AFAlertView *alert = [[AFAlertView alloc] initWithTitle:@"Confirm"];
-    alert.description = [NSString stringWithFormat:@"Are you sure you want to remove %@?", personToDelete.firstName];
-    alert.leftButtonTitle = @"YES";
-    alert.leftButtonActionBlock = ^(NSArray *components){
-        
-        LegacyAppRequest *requestToDelete = [LegacyAppRequest requestToDeletePerson:personToDelete];
-        LegacyAppConnection *delConnection = [[LegacyAppConnection alloc] initWithLegacyRequest:requestToDelete];
-        [Flurry logEvent:@"delete_person_confirmed" withParameters:@{@"person": personToDelete.facebookId}];
-        [delConnection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[ObjectArchiveAccessor sharedInstance] removePerson:personToDelete];
-            });
-        }];
-        
-    };
-    
-    alert.rightButtonTitle = @"NO";
-    
-    [alert showInView:self.view];
-}
- */
 
 - (NSString *)applicationDocumentsDirectory {
 	

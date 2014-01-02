@@ -3,5 +3,5 @@
 -(FBModalCompletionHandler)completionHandler;
 
 @property (copy) void(^friendPickerCompletionBlock)();
-
+@property (nonatomic, strong) NSArray *friendPickerControllerSelection;
 @end

@@ -41,12 +41,14 @@
     addFriendsButton = [[UIButton alloc] initForAutoLayout];
     [addFriendsButton setImage:AddFriendsButtonImage forState:UIControlStateNormal];
     addFriendsButton.tag = 8;
+    addFriendsButton.contentMode = UIViewContentModeCenter;
     [addFriendsButton bk_addEventHandler:^(id sender) {
         [AKNOTIF postNotificationName:KeyForFacebookButtonTapped object:nil];
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:addFriendsButton];
     UIBind(addFriendsButton);
-    [self addConstraintWithVisualFormat:@"H:[addFriendsButton]-|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:[addFriendsButton(40)]-|" bindings:BBindings];
+//    [self addConstraintWithVisualFormat:@"V:[addFriendsButton(40)]-|" bindings:BBindings];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:addFriendsButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
 }
 

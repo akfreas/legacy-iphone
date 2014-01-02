@@ -17,6 +17,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <RNBlurModalView/RNBlurModalView.h>
+#import <AFFacebook-iOS-SDK/FacebookSDK/Facebook.h>
 
 @interface MainScreen ()  <MFMailComposeViewControllerDelegate>
 
@@ -197,8 +198,9 @@
                 friendPickerDelegate = [[FriendPickerHandler alloc] init];
             }
             friendPicker = [[FBFriendPickerViewController alloc] init];
-            friendPicker.selection = [self selectedFacebookUsers];
+            friendPicker.selection = friendPickerDelegate.friendPickerControllerSelection = [self selectedFacebookUsers];
             friendPicker.delegate = friendPickerDelegate;
+            friendPicker.indicateUserBirthday = YES;
             friendPickerDelegate.friendPickerCompletionBlock = ^{
                 [localDataSync sync:NULL];
             };
@@ -219,6 +221,8 @@
     for (Person *person in fbPersons) {
         id<FBGraphUser> fbUser = (id<FBGraphUser>)[FBGraphObject graphObject];
         fbUser.id = person.facebookId;
+        fbUser.first_name = person.firstName;
+        fbUser.last_name = person.lastName;
         [fbUsers addObject:fbUser];
     }
     return [NSArray arrayWithArray:fbUsers];
@@ -246,6 +250,7 @@
     }
 }
 
+/*
 -(void)deletePerson:(NSNotification *)notif {
     
     Person *personToDelete = notif.userInfo[@"person"];
@@ -271,6 +276,7 @@
     
     [alert showInView:self.view];
 }
+ */
 
 - (NSString *)applicationDocumentsDirectory {
 	

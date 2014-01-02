@@ -38,7 +38,6 @@
 		194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* LegacyWebView.xib */; };
 		195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B600016DEB7D3006215E9 /* LegacyWebView.m */; };
 		19632B9616DB036900E0EA75 /* EventRowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* EventRowContentView.m */; };
-		196464A21871D64A008E1A71 /* BirthdayEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196464A11871D64A008E1A71 /* BirthdayEntryViewController.m */; };
 		1967B95A180480C50092766D /* left-right-swipe-message.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B959180480C50092766D /* left-right-swipe-message.png */; };
 		1967B95C180483D30092766D /* timeline-annotation-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B95B180483D30092766D /* timeline-annotation-image@2x.png */; };
 		1967B95E180484790092766D /* webview-annotation-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B95D180484790092766D /* webview-annotation-image@2x.png */; };
@@ -117,6 +116,7 @@
 		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19DC00B5186C8CCF007A8D66 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC00B4186C8CCF007A8D66 /* Reveal.framework */; };
 		19DC00B8186C8EA3007A8D66 /* FigureTimelineTopCellLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */; };
+		19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
 		4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
@@ -178,8 +178,6 @@
 		19632B9516DB036900E0EA75 /* EventRowContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRowContentView.m; sourceTree = "<group>"; };
 		19632BA816DC5A9100E0EA75 /* ScrollViewStickLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewStickLines.h; sourceTree = "<group>"; };
 		19632BA916DC5A9100E0EA75 /* ScrollViewStickLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewStickLines.m; sourceTree = "<group>"; };
-		196464A01871D64A008E1A71 /* BirthdayEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthdayEntryViewController.h; sourceTree = "<group>"; };
-		196464A11871D64A008E1A71 /* BirthdayEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthdayEntryViewController.m; sourceTree = "<group>"; };
 		1967B959180480C50092766D /* left-right-swipe-message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message.png"; sourceTree = "<group>"; };
 		1967B95B180483D30092766D /* timeline-annotation-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline-annotation-image@2x.png"; sourceTree = "<group>"; };
 		1967B95D180484790092766D /* webview-annotation-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "webview-annotation-image@2x.png"; sourceTree = "<group>"; };
@@ -286,6 +284,8 @@
 		19DC00B6186C8EA3007A8D66 /* FigureTimelineTopCellLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureTimelineTopCellLine.h; sourceTree = "<group>"; };
 		19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureTimelineTopCellLine.m; sourceTree = "<group>"; };
 		19FAD7831763005E006FA829 /* PageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PageProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		19FCB6F31874D30A00F9D30B /* BirthdaySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthdaySelectionView.h; sourceTree = "<group>"; };
+		19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthdaySelectionView.m; sourceTree = "<group>"; };
 		4750656191454527BBB82BAF /* libPods-LegacyApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0F3CA0154533E800369BE1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility_AppSettings.h; path = ../Utility_AppSettings.h; sourceTree = "<group>"; };
@@ -560,6 +560,8 @@
 		4EEA6D021526902D00B96EFD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				19FCB6F31874D30A00F9D30B /* BirthdaySelectionView.h */,
+				19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */,
 				19BB09DF18707BAE00E7D995 /* Sharing */,
 				19BDFDD017FD3A8100B415C1 /* AMBlurView.h */,
 				19BDFDD117FD3A8100B415C1 /* AMBlurView.m */,
@@ -592,8 +594,6 @@
 				19D29F7F16A674C200D46B0A /* MainScreen.h */,
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
 				196B77511817D52D00DF0C65 /* MainScreen.xib */,
-				196464A01871D64A008E1A71 /* BirthdayEntryViewController.h */,
-				196464A11871D64A008E1A71 /* BirthdayEntryViewController.m */,
 				196C6B1E18052D8200475ACB /* PasscodeScreenViewController.h */,
 				196C6B1F18052D8200475ACB /* PasscodeScreenViewController.m */,
 				196C6B2018052D8200475ACB /* PasscodeScreenViewController.xib */,
@@ -827,7 +827,6 @@
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
-				196464A21871D64A008E1A71 /* BirthdayEntryViewController.m in Sources */,
 				19BB09E918708DE600E7D995 /* ConnectToFacebookDialogViewController.m in Sources */,
 				199354FD16D4A29700D73389 /* HorizontalContentHostingScrollView.m in Sources */,
 				19632B9616DB036900E0EA75 /* EventRowContentView.m in Sources */,
@@ -854,6 +853,7 @@
 				197305EE17C5C41500958D15 /* FigureTimelineEventCell.m in Sources */,
 				1980A89E186CD2A200ECD354 /* FigureTimelineTableHeader.m in Sources */,
 				19BDFDD217FD3A8100B415C1 /* AMBlurView.m in Sources */,
+				19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */,
 				197305F317C5D54500958D15 /* LegacyInfoPage.m in Sources */,
 				1975751E17D04F4700822779 /* Figure.m in Sources */,
 				1975752117D053D900822779 /* ImageDownloadUtil.m in Sources */,

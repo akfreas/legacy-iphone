@@ -32,6 +32,12 @@
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19354F1C17F1BA98007569F9 /* Security.framework */; };
+		193FF16B187649D80099FEBD /* Figure+FigureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF16A187649D80099FEBD /* Figure+FigureHelper.m */; };
+		193FF16E187649F50099FEBD /* Event+EventHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF16D187649F50099FEBD /* Event+EventHelper.m */; };
+		193FF17118764A040099FEBD /* Person+PersonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17018764A040099FEBD /* Person+PersonHelper.m */; };
+		193FF17418764A270099FEBD /* EventPersonRelation+RelationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17318764A270099FEBD /* EventPersonRelation+RelationHelpers.m */; };
+		193FF17A187653270099FEBD /* NSManagedObject+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF179187653270099FEBD /* NSManagedObject+Helpers.m */; };
+		193FF180187654250099FEBD /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17F187654250099FEBD /* PersistenceManager.m */; };
 		1945775817D3EAA000C5DB62 /* button-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775617D3EAA000C5DB62 /* button-back.png */; };
 		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
@@ -169,6 +175,18 @@
 		192E6E411724B1AA008C9153 /* ImageWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWidget.h; sourceTree = "<group>"; };
 		192E6E421724B1AA008C9153 /* ImageWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidget.m; sourceTree = "<group>"; };
 		19354F1C17F1BA98007569F9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		193FF169187649D80099FEBD /* Figure+FigureHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Figure+FigureHelper.h"; sourceTree = "<group>"; };
+		193FF16A187649D80099FEBD /* Figure+FigureHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Figure+FigureHelper.m"; sourceTree = "<group>"; };
+		193FF16C187649F50099FEBD /* Event+EventHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+EventHelper.h"; sourceTree = "<group>"; };
+		193FF16D187649F50099FEBD /* Event+EventHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+EventHelper.m"; sourceTree = "<group>"; };
+		193FF16F18764A040099FEBD /* Person+PersonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Person+PersonHelper.h"; sourceTree = "<group>"; };
+		193FF17018764A040099FEBD /* Person+PersonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Person+PersonHelper.m"; sourceTree = "<group>"; };
+		193FF17218764A270099FEBD /* EventPersonRelation+RelationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventPersonRelation+RelationHelpers.h"; sourceTree = "<group>"; };
+		193FF17318764A270099FEBD /* EventPersonRelation+RelationHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventPersonRelation+RelationHelpers.m"; sourceTree = "<group>"; };
+		193FF178187653270099FEBD /* NSManagedObject+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Helpers.h"; sourceTree = "<group>"; };
+		193FF179187653270099FEBD /* NSManagedObject+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Helpers.m"; sourceTree = "<group>"; };
+		193FF17E187654250099FEBD /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceManager.h; sourceTree = "<group>"; };
+		193FF17F187654250099FEBD /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceManager.m; sourceTree = "<group>"; };
 		1945775617D3EAA000C5DB62 /* button-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-back.png"; path = "images/button-back.png"; sourceTree = "<group>"; };
 		1945775717D3EAA000C5DB62 /* button-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-forward.png"; path = "images/button-forward.png"; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* LegacyWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyWebView.xib; sourceTree = "<group>"; };
@@ -452,6 +470,8 @@
 				4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */,
 				4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */,
 				4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */,
+				193FF17E187654250099FEBD /* PersistenceManager.h */,
+				193FF17F187654250099FEBD /* PersistenceManager.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -465,8 +485,18 @@
 				1909A84C1771F4B100256ED0 /* Event.m */,
 				1909A84E1772B39400256ED0 /* Person.h */,
 				1909A84F1772B39400256ED0 /* Person.m */,
+				193FF178187653270099FEBD /* NSManagedObject+Helpers.h */,
+				193FF179187653270099FEBD /* NSManagedObject+Helpers.m */,
 				19BDFDC217FBE99800B415C1 /* EventPersonRelation.h */,
 				19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */,
+				193FF169187649D80099FEBD /* Figure+FigureHelper.h */,
+				193FF16A187649D80099FEBD /* Figure+FigureHelper.m */,
+				193FF16C187649F50099FEBD /* Event+EventHelper.h */,
+				193FF16D187649F50099FEBD /* Event+EventHelper.m */,
+				193FF16F18764A040099FEBD /* Person+PersonHelper.h */,
+				193FF17018764A040099FEBD /* Person+PersonHelper.m */,
+				193FF17218764A270099FEBD /* EventPersonRelation+RelationHelpers.h */,
+				193FF17318764A270099FEBD /* EventPersonRelation+RelationHelpers.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -826,6 +856,7 @@
 				19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */,
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
 				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
+				193FF17418764A270099FEBD /* EventPersonRelation+RelationHelpers.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
 				19BB09E918708DE600E7D995 /* ConnectToFacebookDialogViewController.m in Sources */,
 				199354FD16D4A29700D73389 /* HorizontalContentHostingScrollView.m in Sources */,
@@ -833,6 +864,7 @@
 				195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */,
 				192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */,
+				193FF180187654250099FEBD /* PersistenceManager.m in Sources */,
 				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,
 				191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */,
 				191CF63E1749635D00086D5E /* EventRowHorizontalScrollView.m in Sources */,
@@ -846,16 +878,20 @@
 				1909A8731776B45100256ED0 /* FacebookSignInButton.m in Sources */,
 				1909A87B1777471E00256ED0 /* TopActionView.m in Sources */,
 				19BDFDC417FBE99800B415C1 /* EventPersonRelation.m in Sources */,
+				193FF16B187649D80099FEBD /* Figure+FigureHelper.m in Sources */,
 				191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */,
 				19BB09E218707BD700E7D995 /* ConnectToFacebookDialogView.m in Sources */,
 				197305E817C5B32D00958D15 /* FigureTimelineTopCell.m in Sources */,
+				193FF16E187649F50099FEBD /* Event+EventHelper.m in Sources */,
 				197305EB17C5B66A00958D15 /* FigureTimelinePage.m in Sources */,
 				197305EE17C5C41500958D15 /* FigureTimelineEventCell.m in Sources */,
 				1980A89E186CD2A200ECD354 /* FigureTimelineTableHeader.m in Sources */,
+				193FF17118764A040099FEBD /* Person+PersonHelper.m in Sources */,
 				19BDFDD217FD3A8100B415C1 /* AMBlurView.m in Sources */,
 				19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */,
 				197305F317C5D54500958D15 /* LegacyInfoPage.m in Sources */,
 				1975751E17D04F4700822779 /* Figure.m in Sources */,
+				193FF17A187653270099FEBD /* NSManagedObject+Helpers.m in Sources */,
 				1975752117D053D900822779 /* ImageDownloadUtil.m in Sources */,
 				1975752417D06CA100822779 /* WebViewControls.m in Sources */,
 				1980719017E8117B0039FC65 /* EventRowCell.m in Sources */,

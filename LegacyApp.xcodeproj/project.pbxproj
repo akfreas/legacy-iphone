@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1909A84D1771F4B100256ED0 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A84C1771F4B100256ED0 /* Event.m */; };
-		1909A8501772B39400256ED0 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A84F1772B39400256ED0 /* Person.m */; };
 		1909A8531772BCCD00256ED0 /* DataSyncUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8521772BCCD00256ED0 /* DataSyncUtility.m */; };
 		1909A85E1772D3B300256ED0 /* FB-f-Logo__blue_100.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85D1772D3B300256ED0 /* FB-f-Logo__blue_100.png */; };
 		1909A8601772D44300256ED0 /* informationcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1909A85F1772D44300256ED0 /* informationcircle.png */; };
@@ -39,6 +38,8 @@
 		193FF17A187653270099FEBD /* NSManagedObject+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF179187653270099FEBD /* NSManagedObject+Helpers.m */; };
 		193FF180187654250099FEBD /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17F187654250099FEBD /* PersistenceManager.m */; };
 		193FF1851876FDB40099FEBD /* NSFetchedResultsControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF1841876FDB40099FEBD /* NSFetchedResultsControllerFactory.m */; };
+		193FF188187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF187187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m */; };
+		193FF18B187709FD0099FEBD /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF18A187709FD0099FEBD /* Person.m */; };
 		1945775817D3EAA000C5DB62 /* button-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775617D3EAA000C5DB62 /* button-back.png */; };
 		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
@@ -120,7 +121,6 @@
 		19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7916A6706A00D46B0A /* CFNetwork.framework */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
-		19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */; };
 		19DC00B5186C8CCF007A8D66 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC00B4186C8CCF007A8D66 /* Reveal.framework */; };
 		19DC00B8186C8EA3007A8D66 /* FigureTimelineTopCellLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */; };
 		19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */; };
@@ -141,8 +141,6 @@
 /* Begin PBXFileReference section */
 		1909A84B1771F4B100256ED0 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Event.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1909A84C1771F4B100256ED0 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Event.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		1909A84E1772B39400256ED0 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		1909A84F1772B39400256ED0 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		1909A8511772BCCD00256ED0 /* DataSyncUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSyncUtility.h; sourceTree = "<group>"; };
 		1909A8521772BCCD00256ED0 /* DataSyncUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DataSyncUtility.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1909A85D1772D3B300256ED0 /* FB-f-Logo__blue_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_100.png"; sourceTree = "<group>"; };
@@ -190,6 +188,10 @@
 		193FF17F187654250099FEBD /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceManager.m; sourceTree = "<group>"; };
 		193FF1831876FDB40099FEBD /* NSFetchedResultsControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFetchedResultsControllerFactory.h; sourceTree = "<group>"; };
 		193FF1841876FDB40099FEBD /* NSFetchedResultsControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFetchedResultsControllerFactory.m; sourceTree = "<group>"; };
+		193FF186187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+ManagedObjectContextHelper.h"; sourceTree = "<group>"; };
+		193FF187187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+ManagedObjectContextHelper.m"; sourceTree = "<group>"; };
+		193FF189187709FD0099FEBD /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		193FF18A187709FD0099FEBD /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		1945775617D3EAA000C5DB62 /* button-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-back.png"; path = "images/button-back.png"; sourceTree = "<group>"; };
 		1945775717D3EAA000C5DB62 /* button-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-forward.png"; path = "images/button-forward.png"; sourceTree = "<group>"; };
 		194E327316DF4150007A55D7 /* LegacyWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyWebView.xib; sourceTree = "<group>"; };
@@ -488,10 +490,12 @@
 				1975751D17D04F4700822779 /* Figure.m */,
 				1909A84B1771F4B100256ED0 /* Event.h */,
 				1909A84C1771F4B100256ED0 /* Event.m */,
-				1909A84E1772B39400256ED0 /* Person.h */,
-				1909A84F1772B39400256ED0 /* Person.m */,
 				193FF178187653270099FEBD /* NSManagedObject+Helpers.h */,
 				193FF179187653270099FEBD /* NSManagedObject+Helpers.m */,
+				193FF186187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.h */,
+				193FF187187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m */,
+				193FF189187709FD0099FEBD /* Person.h */,
+				193FF18A187709FD0099FEBD /* Person.m */,
 				19BDFDC217FBE99800B415C1 /* EventPersonRelation.h */,
 				19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */,
 				193FF169187649D80099FEBD /* Figure+FigureHelper.h */,
@@ -848,6 +852,7 @@
 			files = (
 				194E327216DEBCE4007A55D7 /* Constants.h in Sources */,
 				19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */,
+				193FF18B187709FD0099FEBD /* Person.m in Sources */,
 				19DC00B8186C8EA3007A8D66 /* FigureTimelineTopCellLine.m in Sources */,
 				4EEA6D0C1526902D00B96EFD /* AppDelegate.m in Sources */,
 				4EEA6D0E1526902D00B96EFD /* main.m in Sources */,
@@ -858,9 +863,9 @@
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
 				19D29F6E16A66B8100D46B0A /* FBLoginViewController.m in Sources */,
 				1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */,
+				193FF188187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */,
 				19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */,
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
-				19D61CB116B05D4F00C81E60 /* ObjectArchiveAccessor.m in Sources */,
 				193FF17418764A270099FEBD /* EventPersonRelation+RelationHelpers.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
 				19BB09E918708DE600E7D995 /* ConnectToFacebookDialogViewController.m in Sources */,
@@ -876,7 +881,6 @@
 				192BA7E717F9D76600ECBA49 /* FacebookUtils.m in Sources */,
 				19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */,
 				1909A84D1771F4B100256ED0 /* Event.m in Sources */,
-				1909A8501772B39400256ED0 /* Person.m in Sources */,
 				1909A8531772BCCD00256ED0 /* DataSyncUtility.m in Sources */,
 				1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */,
 				1909A8691776192100256ED0 /* EventTablePage.m in Sources */,

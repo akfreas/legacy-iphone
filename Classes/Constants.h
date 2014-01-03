@@ -137,7 +137,7 @@
 
 #pragma mark Animation Durations
 
-#define FacebookModalPresentationDuration 0.5f
+#define FacebookModalPresentationDuration 0.2f
 
 #pragma mark Helpers
 

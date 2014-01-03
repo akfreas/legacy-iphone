@@ -4,6 +4,11 @@
 
 +(NSArray *)allPersonsInContext:(NSManagedObjectContext *)context includePrimary:(BOOL)includePrimary;
 +(Person *)personWithFacebookID:(NSString *)facebookID context:(NSManagedObjectContext *)context;
++(Person *)primaryPersonInContext:(NSManagedObjectContext *)context;
 +(Person *)personWithJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context;
 +(Person *)personWithFacebookGraphUser:(id<FBGraphUser>)graphUser inContext:(NSManagedObjectContext *)context;
+
+
+-(NSString *)fullName;
+-(UIImage *)thumbnailImage;
 @end

@@ -91,19 +91,19 @@
     return [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(self.class)];
 }
 
--(NSString *)description {
-    NSMutableString *descriptionString = [NSMutableString new];
-    if (self.managedObjectContext != nil) {
-        NSEntityDescription *entityDescription = [self.class entityDescriptionInContext:self.managedObjectContext];
-        NSArray *instanceProperties = entityDescription.properties;
-        for (NSPropertyDescription *propertyDesc in instanceProperties) {
-            [descriptionString appendFormat:@"%@ = %@, ", propertyDesc.name, [self valueForKey:propertyDesc.name]];
-        }
-    } else {
-        [descriptionString appendString:NSStringFromClass(self.class)];
-    }
-    return descriptionString;
-}
+//-(NSString *)description {
+//    NSMutableString *descriptionString = [NSMutableString new];
+//    if (self.managedObjectContext != nil) {
+//        NSEntityDescription *entityDescription = [self.class entityDescriptionInContext:self.managedObjectContext];
+//        NSArray *instanceProperties = entityDescription.properties;
+//        for (NSPropertyDescription *propertyDesc in instanceProperties) {
+//            [descriptionString appendFormat:@"%@ = %@, ", propertyDesc.name, [self valueForKey:propertyDesc.name]];
+//        }
+//    } else {
+//        [descriptionString appendString:NSStringFromClass(self.class)];
+//    }
+//    return descriptionString;
+//}
 
 
 @end

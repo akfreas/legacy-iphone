@@ -1,17 +1,18 @@
 #import "FacebookUtils.h"
-#import "ObjectArchiveAccessor.h"
 #import "DataSyncUtility.h"
+#import "PersistenceManager.h"
 
 @implementation FacebookUtils
 
 +(void)getAndSavePrimaryUser:(void(^)())completion {
-    [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
-        [[ObjectArchiveAccessor sharedInstance] createAndSetPrimaryUser:result completionBlock:^(Person *thePerson) {
-            if (completion != NULL) {
-                completion();
-            }
-            [[DataSyncUtility sharedInstance] sync:^{
-            }];
+    FBRequest *request = [FBRequest requestForMe];
+    [request.parameters setObject:@"first_name,last_name,birthday,picture" forKey:@"fields"];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
+        PersistenceManager *ourManager = [PersistenceManager new];
+        Person *primaryPerson = [Person personWithFacebookGraphUser:result inContext:ourManager.managedObjectContext];
+        primaryPerson.isPrimary = [NSNumber numberWithBool:YES];
+        [primaryPerson save];
+        [[DataSyncUtility sharedInstance] sync:^{
         }];
     }];
 }

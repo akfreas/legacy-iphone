@@ -1,5 +1,4 @@
 #import "HorizontalContentHostingScrollView.h"
-#import "ObjectArchiveAccessor.h"
 #import "Person.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
@@ -11,6 +10,7 @@
 #import "AppDelegate.h"
 #import "EventRowCell.h"
 #import "EventRowDrawerOpenBucket.h"
+#import "NSFetchedResultsControllerFactory.h"
 
 #import "EventTablePage.h"
 
@@ -47,7 +47,7 @@ static NSString *ReuseID = @"CellReuseId";
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         }
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
-        fetchController = [[ObjectArchiveAccessor sharedInstance] fetchedResultsControllerForRelations];
+        fetchController = [NSFetchedResultsControllerFactory fetchControllerForEventTableInContext:nil];
         fetchController.delegate = self;
         self.contentOffset = CGPointMake(0, 0);
         [fetchController performFetch:NULL];

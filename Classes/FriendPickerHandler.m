@@ -1,14 +1,13 @@
 #import "FriendPickerHandler.h"
-#import "ObjectArchiveAccessor.h"
 #import "DataSyncUtility.h"
 #import "Person.h"
 #import "BirthdaySelectionView.h"
+#import "PersistenceManager.h"
 #import <RNBlurModalView/RNBlurModalView.h>
 
 @implementation FriendPickerHandler {
     
     NSMutableDictionary *selectedFriends;
-    ObjectArchiveAccessor *accessor;
     RNBlurModalView *blurView;
     BirthdaySelectionView *enterBirthdayView;
 }
@@ -18,7 +17,6 @@
     self = [super init];
     if (self) {
         selectedFriends = [NSMutableDictionary dictionary];
-        accessor = [ObjectArchiveAccessor sharedInstance];
     }
     return self;
 }
@@ -26,13 +24,10 @@
 -(FBModalCompletionHandler)completionHandler {
     return (FBModalCompletionHandler)^(FBFriendPickerViewController *sender, BOOL donePressed){
         if (donePressed) {
-            [accessor addFacebookUsers:sender.selection completionBlock:^{
                 [[DataSyncUtility sharedInstance] syncFacebookFriends:^{
                     [sender dismissViewControllerAnimated:YES completion:NULL];
                     [[DataSyncUtility sharedInstance] sync:NULL];
                 }];
-                
-            }];
         } else {
             [sender dismissViewControllerAnimated:YES completion:NULL];
         }
@@ -69,7 +64,7 @@
 
                 [aBlurView hideCloseButton:YES];
                 [aBlurView show];
-                void(^pickedBlock)(NSDate *) = ^(NSDate *pickedDate){
+                void(^cancelledBlock)() = ^(){
                     NSMutableArray *oldArray = [NSMutableArray arrayWithArray:friendPicker.selection];
                     NSInteger idx = [oldArray indexOfObjectPassingTest:^BOOL(id<FBGraphUser> sortedUser, NSUInteger idx, BOOL *stop) {
                         if (sortedUser.id == user.id) {
@@ -86,19 +81,28 @@
                     }
                     [aBlurView hide];
                 };
-                enterBirthdayView.cancelButtonBlock = pickedBlock;
-                enterBirthdayView.okButtonBlock = ^{
+                enterBirthdayView.cancelButtonBlock = cancelledBlock;
+                enterBirthdayView.okButtonBlock = ^(id<FBGraphUser> graphUser){
+                    [Person personWithFacebookGraphUser:graphUser inContext:nil];
+                    [friendPicker.tableView reloadData];
                     [aBlurView hide];
                 };
                 blurView = aBlurView;
+            } else {
+                [Person personWithFacebookGraphUser:user inContext:nil];
             }
             [selectedFriends setValue:user forKey:user.id];
-            [diffDict removeObjectForKey:user.id];
         }
+        [diffDict removeObjectForKey:user.id];
     }
     if ([diffDict count] > 0) {
         for (NSString *fbUserID in diffDict.allKeys) {
             [selectedFriends removeObjectForKey:fbUserID];
+            Person *person = [Person personWithFacebookID:fbUserID context:nil];
+            if (person != nil) {
+                [person delete];
+            }
+            [PersistenceManager save];
         }
     }
     

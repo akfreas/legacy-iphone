@@ -4,7 +4,7 @@
 #import "SettingsModalView.h"
 #import "Person.h"
 #import "Figure.h"
-#import "ObjectArchiveAccessor.h"
+
 #import "Utility_AppSettings.h"
 #import "FriendPickerHandler.h"
 #import "Event.h"
@@ -25,8 +25,7 @@
 
 @implementation MainScreen {
     UINavigationController *viewForSettings;
-    
-    ObjectArchiveAccessor *accessor;
+    RNBlurModalView *blurView;
     FriendPickerHandler *friendPickerDelegate;
     FBFriendPickerViewController *friendPicker;
     IBOutlet HorizontalContentHostingScrollView *infoScreen;
@@ -50,8 +49,6 @@
 -(id)init {
     self = [super initWithNibName:@"MainScreen" bundle:[NSBundle mainBundle]];
     if (self) {
-        accessor = [ObjectArchiveAccessor sharedInstance];
-
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFriendPicker) name:KeyForAddFriendButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFriendButtonTapped:) name:KeyForFacebookButtonTapped object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
@@ -112,28 +109,14 @@
 }
 
 -(void)showConnectToFBDialog {
-    RNBlurModalView *blurView;
     ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
     blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
+    [AKNOTIF addObserver:self selector:@selector(startDataSync) name:KeyForLoggedIntoFacebookNotification object:nil];
     [blurView hideCloseButton:YES];
     connectView.dismissBlock = ^{
         [blurView hideWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
     };
     [blurView showWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
-}
-
--(void)getUserBirthdayAndPlaceMainScreen {
-    
-    [FBSession openActiveSessionWithAllowLoginUI:NO];
-    if (FBSession.activeSession.isOpen) {
-        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser>user, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                accessor = [ObjectArchiveAccessor sharedInstance];
-                [accessor createAndSetPrimaryUser:user completionBlock:^(Person *thePerson) {
-                }];
-            });
-        }];
-    }
 }
 
 -(void)showFriendPicker {
@@ -152,7 +135,7 @@
                 [localDataSync sync:NULL];
             };
             friendPicker.session = [FBSession activeSession];
-            Person *currentPerson = [accessor primaryPerson];
+            Person *currentPerson = [Person primaryPersonInContext:nil];
             friendPicker.userID = currentPerson.facebookId;
             [friendPicker loadData];
             [friendPicker presentModallyFromViewController:self animated:YES handler:friendPickerDelegate.completionHandler];
@@ -163,7 +146,7 @@
 }
 
 -(NSArray *)selectedFacebookUsers {
-    NSArray *fbPersons = [accessor allPersons];
+    NSArray *fbPersons = [Person allPersonsInContext:nil includePrimary:NO];
     NSMutableArray *fbUsers = [NSMutableArray array];
     for (Person *person in fbPersons) {
         id<FBGraphUser> fbUser = (id<FBGraphUser>)[FBGraphObject graphObject];
@@ -224,7 +207,10 @@
 
 
 -(void)startDataSync {
-    
+    if (blurView != nil) {
+        [blurView hide];
+        blurView = nil;
+    }
     if ([self shouldSyncNow]) {
         [dataSync sync:NULL];
     }

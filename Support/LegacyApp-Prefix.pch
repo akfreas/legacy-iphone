@@ -15,6 +15,16 @@
 #import "Flurry.h"
 
 
+#pragma mark Core Data Helpers
+
+#import "Event+EventHelper.h"
+#import "Person+PersonHelper.h"
+#import "Figure+FigureHelper.h"
+#import "NSManagedObject+Helpers.h"
+#import "NSManagedObjectContext+ManagedObjectContextHelper.h"
+#import "EventPersonRelation+RelationHelpers.h"
+
+
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)

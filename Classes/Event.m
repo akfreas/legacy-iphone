@@ -41,10 +41,10 @@ static NSString *KeyForEventId = @"event_id";
     return self;
 }
 
--(NSString *)description {
-    
-    return [NSString stringWithFormat:@"%@ %@ (%@d %@m %@y) %@", self.eventId, self.eventDescription, self.ageDays, self.ageMonths, self.ageYears, self.eventDescription];
-}
+//-(NSString *)description {
+//    
+//    return [NSString stringWithFormat:@"%@ %@ (%@d %@m %@y) %@", self.eventId, self.eventDescription, self.ageDays, self.ageMonths, self.ageYears, self.eventDescription];
+//}
 
 
 @end

@@ -10,7 +10,7 @@
     </entity>
     <entity name="EventPersonRelation" representedClassName="EventPersonRelation" syncable="YES">
         <attribute name="pinsToTop" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="event" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Event" syncable="YES"/>
+        <relationship name="event" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Event" syncable="YES"/>
         <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="eventRelation" inverseEntity="Person" syncable="YES"/>
     </entity>
     <entity name="Figure" representedClassName="Figure" syncable="YES">
@@ -27,6 +27,7 @@
         <attribute name="isFacebookUser" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isPrimary" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profilePicURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <relationship name="eventRelation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="EventPersonRelation" inverseName="person" inverseEntity="EventPersonRelation" syncable="YES"/>
     </entity>

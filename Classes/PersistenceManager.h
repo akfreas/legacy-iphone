@@ -14,9 +14,10 @@
 +(void)saveContext:(NSManagedObjectContext *)context;
 +(void)deleteObject:(NSManagedObject *)object;
 +(void)deleteAllObjects;
-+(void)deleteObjectsOfType:(Class)class context:(NSManagedObjectContext *)context;
 
 -(void)resetManagedObjectContext;
+
+-(void)deleteObjectsOfType:(__unsafe_unretained Class)class context:(NSManagedObjectContext *)context;
 -(void)deleteObject:(NSManagedObject *)object;
 -(void)deleteAllObjectsAndSave;
 -(void)save;

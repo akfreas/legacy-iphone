@@ -60,9 +60,9 @@
     [[self sharedInstance] deleteAllObjectsAndSave];
 }
 
-+(void)deleteObjectsOfType:(__unsafe_unretained Class)class context:(NSManagedObjectContext *)context {
+-(void)deleteObjectsOfType:(__unsafe_unretained Class)class context:(NSManagedObjectContext *)context {
     if (context == nil) {
-        context = [[self sharedInstance] managedObjectContext];
+        context = [self managedObjectContext];
     }
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(class)];
     NSError *err = nil;
@@ -71,7 +71,7 @@
         NSLog(@"Error deleting all objects of type %@. Error: %@", class, err);
     }
     for (NSManagedObject *obj in allObjectsOfType) {
-        [context deleteObject:obj];
+        [obj.managedObjectContext deleteObject:obj];
     }
 }
 

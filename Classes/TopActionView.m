@@ -1,6 +1,6 @@
 #import "CircleImageView.h"
 #import "TopActionView.h"
-#import "ObjectArchiveAccessor.h"
+
 #import "Person.h"
 
 @implementation TopActionView {
@@ -53,8 +53,8 @@
 }
 
 -(void)addProfilePicButton {
-    ObjectArchiveAccessor *accessor = [ObjectArchiveAccessor sharedInstance];
-    Person *mainPerson = [accessor primaryPerson];
+    
+    Person *mainPerson = [Person primaryPersonInContext:nil];
     if (mainPerson != nil && profilePicButton == nil) {
         UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
         profilePicButton = [[CircleImageView alloc] initWithImage:thumb radius:buttonRadii];
@@ -69,8 +69,7 @@
 
 -(void)configureProfilePicButton {
     
-    ObjectArchiveAccessor *accessor = [ObjectArchiveAccessor sharedInstance];
-    Person *mainPerson = [accessor primaryPerson];
+    Person *mainPerson = [Person primaryPersonInContext:nil];
     
     UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
 

@@ -6,13 +6,12 @@
 #import "EventPersonRelation.h"
 #import "ImageWidget.h"
 #import "Person.h"
-#import "ObjectArchiveAccessor.h"
+
 #import "ImageDownloadUtil.h"
 
 @implementation ImageWidgetContainer {
     
     NSOperationQueue *operationQueue;
-    ObjectArchiveAccessor *accessor;
 }
 
 -(id)initWithRelation:(EventPersonRelation *)relation {
@@ -27,7 +26,6 @@
     self = [super init];
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
-        accessor = [ObjectArchiveAccessor sharedInstance];
         [self addImageWidget];
     }
     return self;
@@ -72,6 +70,14 @@
     }];
 }
 
+-(void)getPersonThumbnailImage {
+    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForPerson:_relation.person completion:^(UIImage *thumbnail) {
+        _widget.smallImage = thumbnail;
+        _widget.smallImageOffset = PersonPhotoOffset;
+        _widget.smallImageBorderColor = PersonPhotoBorderColor;
+        _widget.smallImageBorderWidth = PersonPhotoBorderWidth;
+    }];
+}
 
 -(void)setRelation:(EventPersonRelation *)relation {
     _relation = relation;
@@ -84,14 +90,9 @@
     [self setNeedsLayout];
     
     if (_relation.person != nil) {
-        UIImage *thumbnail = [UIImage imageWithData:_relation.person.thumbnail];
-        _widget.smallImage = thumbnail;
-        _widget.smallImageOffset = PersonPhotoOffset;
-        _widget.smallImageBorderColor = PersonPhotoBorderColor;
-        _widget.smallImageBorderWidth = PersonPhotoBorderWidth;
+        [self getPersonThumbnailImage];
     } else {
         _widget.smallImage = nil;
-//        _widget.smallImage = _relation.event.figure.image;
     }
     [self setNeedsLayout];
 }

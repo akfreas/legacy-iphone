@@ -1,7 +1,7 @@
 #import "DataSyncUtility.h"
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
-#import "ObjectArchiveAccessor.h"
+#import "PersistenceManager.h"
 #import "Figure.h"
 #import "Event.h"
 #import "Person.h"
@@ -9,7 +9,6 @@
 @implementation DataSyncUtility {
     
     NSOperationQueue *queue;
-    ObjectArchiveAccessor *accessor;
     LegacyAppConnection *connection;
     void (^completion)();
 }
@@ -29,7 +28,6 @@
     self = [super init];
     
     if (self) {
-        accessor = [ObjectArchiveAccessor sharedInstance];
         queue = [[NSOperationQueue alloc] init];
     }
     return self;
@@ -40,27 +38,22 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     LegacyAppRequest *request;
     completion = completionBlock;
-    Person *primaryPerson = [accessor primaryPerson];
+    Person *primaryPerson = [Person primaryPersonInContext:nil];
 
     request = [LegacyAppRequest requestToGetStoriesForPerson:primaryPerson];
     
     connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ObjectArchiveAccessor *ourAccessor = [ObjectArchiveAccessor sharedInstance];
-            [ourAccessor clearEventsAndFiguresAndSave];
-            [self parseArrayOfEventsForTable:result];
-        });
+        [self parseArrayOfEventsForTable:result];
     }];
     
 }
 
 -(void)syncFacebookFriends:(void(^)())completionBlock {
     
-    NSArray *persons = [accessor addedPeople];
-    Person *primaryPerson = [accessor primaryPerson];
+    NSArray *persons = [Person allPersonsInContext:[[PersistenceManager sharedInstance] managedObjectContext] includePrimary:NO];
+    Person *primaryPerson = [Person primaryPersonInContext:nil];
     LegacyAppRequest *request = [LegacyAppRequest requestToSaveFacebookUsers:persons forPerson:primaryPerson];
     
     connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
@@ -76,9 +69,12 @@
 
 -(void)parseArrayOfEventsForTable:(NSArray *)events {
     
+    PersistenceManager *ourManager = [PersistenceManager new];
+    [ourManager deleteObjectsOfType:[EventPersonRelation class] context:nil];
     for (NSDictionary *eventDict in events) {
-        [accessor addEventAndFigureRelationWithJson:eventDict];
+        [EventPersonRelation relationFromJSON:eventDict context:ourManager.managedObjectContext];
     }
+    [ourManager save];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if (completion != NULL) {
@@ -90,7 +86,7 @@
 
 -(void)syncRelatedEvents {
     
-    NSArray *figures = [accessor allFigures];
+    NSArray *figures = [Figure allObjects];
     
     if ([figures count] > 0) {
         
@@ -100,13 +96,12 @@
             connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
             
             [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-                ObjectArchiveAccessor *ourAccessor = [ObjectArchiveAccessor sharedInstance];
+                PersistenceManager *ourManager = [PersistenceManager new];
                 NSArray *resultArray = (NSArray *)result;
                 for (NSDictionary *relatedEvent in resultArray) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [ourAccessor addEventAndFigureWithJson:relatedEvent];
-                    });
+                    [Event eventFromJSON:relatedEvent context:ourManager.managedObjectContext];
                 }
+                [ourManager save];
             }];
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

@@ -2,7 +2,7 @@
 #import "Event.h"
 #import "EventPersonRelation.h"
 #import "Figure.h"
-#import "ObjectArchiveAccessor.h"
+
 #import "Utility_AppSettings.h"
 #import "MainScreen.h"
 
@@ -42,7 +42,7 @@ static NSString *PersonEntityName = @"Person";
     
     if (self) {
         operationQueue = [[NSOperationQueue alloc] init];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
+        //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
     }
     return self;
 }
@@ -102,7 +102,7 @@ static NSString *PersonEntityName = @"Person";
 -(void)save {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-
+        
         NSError *error;
         if([self.managedObjectContext hasChanges]) {
             [self.managedObjectContext save:&error];
@@ -113,7 +113,7 @@ static NSString *PersonEntityName = @"Person";
 #pragma mark Getter Methods
 
 -(Person *)primaryPerson {
-
+    
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"isPrimary == YES"];
     NSError *error;
@@ -147,7 +147,7 @@ static NSString *PersonEntityName = @"Person";
 
 -(NSArray *)addedPeople {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:PersonEntityName];
-    NSPredicate *fbUsersPred = [NSPredicate predicateWithFormat:@"(isFacebookUser == %@) AND (isPrimary <> YES)", [NSNumber numberWithBool:YES]];
+    NSPredicate *fbUsersPred = [NSPredicate predicateWithFormat:@"isFacebookUser == %@ && isPrimary != %@", [NSNumber numberWithBool:YES], [NSNumber numberWithBool:YES]];
     //    NSPredicate *fbUsersPred = [NSPredicate predicateWithFormat:@"isFacebookUser == %@", [NSNumber numberWithBool:YES]];
     
     request.predicate = fbUsersPred;
@@ -287,21 +287,21 @@ static NSString *PersonEntityName = @"Person";
 
 -(void)clearEventsAndFiguresAndSave {
     
-//    NSFetchRequest *eventDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+    //    NSFetchRequest *eventDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
     NSError *error;
-//    NSArray *arrayOfEvents = [self.managedObjectContext executeFetchRequest:eventDeleteFetchRequest error:&error];
-//    
-//    for (Event *event in arrayOfEvents) {
-//        [self.managedObjectContext deleteObject:event];
-//    }
-//    
-//    NSFetchRequest *figureDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
-//    
-//    NSArray *arrayOfFigures = [self.managedObjectContext executeFetchRequest:figureDeleteFetchRequest error:&error];
-//    
-//    for (Figure *figure in arrayOfFigures) {
-//        [self.managedObjectContext deleteObject:figure];
-//    }
+    //    NSArray *arrayOfEvents = [self.managedObjectContext executeFetchRequest:eventDeleteFetchRequest error:&error];
+    //
+    //    for (Event *event in arrayOfEvents) {
+    //        [self.managedObjectContext deleteObject:event];
+    //    }
+    //
+    //    NSFetchRequest *figureDeleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Figure"];
+    //
+    //    NSArray *arrayOfFigures = [self.managedObjectContext executeFetchRequest:figureDeleteFetchRequest error:&error];
+    //
+    //    for (Figure *figure in arrayOfFigures) {
+    //        [self.managedObjectContext deleteObject:figure];
+    //    }
     
     NSFetchRequest *relationDeleteFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"EventPersonRelation"];
     
@@ -387,6 +387,7 @@ static NSString *PersonEntityName = @"Person";
         person.firstName = json[@"first_name"];
         person.lastName = json[@"last_name"];
         person.birthday = [[Utility_AppSettings dateFormatterForRequest] dateFromString:json[@"birthday"]];
+        person.isPrimary = [NSNumber numberWithBool:NO];
         person.isFacebookUser = [NSNumber numberWithBool:YES];
     }
     id profilePicURL = json[@"profile_pic"];
@@ -415,7 +416,7 @@ static NSString *PersonEntityName = @"Person";
     EventPersonRelation *relation = [[EventPersonRelation alloc] initWithEntity:relationEntityDesc insertIntoManagedObjectContext:self.managedObjectContext];
     
     Event *newEvent;
-
+    
     if (jsonError == nil) {
         NSString *eventId = json[@"event_id"];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
@@ -492,12 +493,7 @@ static NSString *PersonEntityName = @"Person";
     NSSortDescriptor *meSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isPrimary" ascending:NO];
     NSSortDescriptor *friendSorter = [NSSortDescriptor sortDescriptorWithKey:@"person.isFacebookUser" ascending:NO];
     NSSortDescriptor *bdaySorter = [NSSortDescriptor sortDescriptorWithKey:@"person.birthday" ascending:NO];
-    
-//    NSSortDescriptor *ageYearSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageYears" ascending:YES];
-//    NSSortDescriptor *ageMonthSorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageMonths" ascending:YES];
-//    NSSortDescriptor *ageDaySorter = [NSSortDescriptor sortDescriptorWithKey:@"event.ageDays" ascending:YES];
-    
-    return @[pinToTopSorter, meSorter, friendSorter, bdaySorter,];// ageYearSorter, ageMonthSorter, ageDaySorter];
+    return @[pinToTopSorter, meSorter, friendSorter, bdaySorter];// ageYearSorter, ageMonthSorter, ageDaySorter];
 }
 
 
@@ -512,43 +508,31 @@ static NSString *PersonEntityName = @"Person";
     newPerson.firstName = fbUser.first_name;
     newPerson.lastName = fbUser.last_name;
     
-    FBRequest *request = [FBRequest requestForGraphPath:[NSString stringWithFormat:@"me/friends/%@?fields=birthday,picture", fbUser.id]];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
-        NSLog(@"Result: %@ error: %@", result[@"data"] , error);
-        NSArray *resultArray = result[@"data"];
-        if ([resultArray count] == 1) {
-            NSString *birthdayString = resultArray[0][@"birthday"];
-            
-            
-            NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
-            
-            if (theBirthday == nil) {
-                theBirthday = [[Utility_AppSettings dateFormatterForPartialBirthday] dateFromString:birthdayString];
-                newPerson.birthday = theBirthday;
-                [[MainScreen sharedInstance] showAlertForNoBirthday:newPerson completion:^(Person *person) {
-                    [self save];
-                    completionBlock(newPerson);
-                } cancellation:^(Person *person) {
-                    [self removePerson:person];
-                    [self save];
-                    completionBlock(nil);
-                }];
-            } else {
-                newPerson.birthday = theBirthday;
-                completionBlock(newPerson);
-            }
-            
-            NSString *urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=140", fbUser.id];
-            
-            NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
-            [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    newPerson.thumbnail = data;
-                    [self save];
-                });
-            }];
+    NSString *birthdayString = fbUser.birthday;
+    
+    
+    NSDate *theBirthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:birthdayString];
+    
+    if (theBirthday == nil) {
+        theBirthday = [[Utility_AppSettings dateFormatterForPartialBirthday] dateFromString:birthdayString];
+        newPerson.birthday = theBirthday;
+        
+    } else {
+        newPerson.birthday = theBirthday;
+        if (completionBlock != NULL) {
+            completionBlock(newPerson);
         }
-    }];
+    }
+    
+//    NSString *urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=140", fbUser.id];
+//    
+//    NSMutableURLRequest *profilePicRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+//    [NSURLConnection sendAsynchronousRequest:profilePicRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            newPerson.thumbnail = data;
+//            [self save];
+//        });
+//    }];
     return newPerson;
 }
 

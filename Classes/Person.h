@@ -1,15 +1,15 @@
 //
 //  Person.h
-//  Legacy
+//  LegacyApp
 //
-//  Created by Alexander Freas on 6/19/13.
+//  Created by Alexander Freas on 1/3/14.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Event;
+@class EventPersonRelation;
 
 @interface Person : NSManagedObject
 
@@ -20,15 +20,7 @@
 @property (nonatomic, retain) NSNumber * isPrimary;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSData * thumbnail;
-@end
+@property (nonatomic, retain) NSString * profilePicURL;
+@property (nonatomic, retain) EventPersonRelation *eventRelation;
 
-@interface Person (CoreDataGeneratedAccessors)
-
-- (void)addEventsObject:(Event *)value;
-- (void)removeEventsObject:(Event *)value;
-- (void)addEvents:(NSSet *)values;
-- (void)removeEvents:(NSSet *)values;
-
--(NSString *)fullName;
--(UIImage *)thumbnailImage;
 @end

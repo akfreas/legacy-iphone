@@ -1,5 +1,6 @@
 #import "Event+EventHelper.h"
 #import "Figure.h"
+#import "PersistenceManager.h"
 @implementation Event (EventHelper)
 
 #define kAgeDays @"age_days"
@@ -20,6 +21,16 @@
     Figure *figure = [Figure figureFromJSON:JSONDict[kFigure] inContext:context];
     newEvent.figure = figure;
     return newEvent;
+}
+
++(NSArray *)eventsForFigure:(Figure *)figure inContext:(NSManagedObjectContext *)context {
+    if (context == nil) {
+        context = [[PersistenceManager sharedInstance] managedObjectContext];
+    }
+    NSFetchRequest *request = [self baseFetchRequest];
+    request.predicate = [NSPredicate predicateWithFormat:@"figure == %@", figure];
+    NSArray *returnArr = [context executeFetchRequest:request];
+    return returnArr;
 }
 
 @end

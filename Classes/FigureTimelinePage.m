@@ -4,7 +4,7 @@
 #import "Event.h"
 #import "Figure.h"
 #import "Person.h"
-#import "ObjectArchiveAccessor.h"
+
 #import "EventPersonRelation.h"
 #import "FigureTimelineTableHeader.h"
 
@@ -15,7 +15,6 @@
 @implementation FigureTimelinePage {
     
     Event *keyEvent;
-    ObjectArchiveAccessor *accessor;
     FigureTimelineTopCell *headerCell;
     
     NSInteger keyEventIndex;
@@ -30,7 +29,6 @@ static NSString *HeaderID = @"EventHeader";
     if (self) {
         self.relation = aRelation;
         keyEvent = aRelation.event;
-        accessor = [ObjectArchiveAccessor sharedInstance];
         [self fetchRelatedEvents];
         [self registerClass:[FigureTimelineTableHeader class] forHeaderFooterViewReuseIdentifier:HeaderID];
         self.delegate = self;
@@ -45,7 +43,7 @@ static NSString *HeaderID = @"EventHeader";
 
 -(void)fetchRelatedEvents {
     
-    arrayOfEvents = [accessor eventsForFigure:keyEvent.figure];
+    arrayOfEvents = [Event eventsForFigure:keyEvent.figure inContext:nil];
     
     for (int i=0; i < [arrayOfEvents count]; i++) {
         

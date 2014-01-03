@@ -1,13 +1,13 @@
 //
 //  Person.m
-//  Legacy
+//  LegacyApp
 //
-//  Created by Alexander Freas on 6/19/13.
+//  Created by Alexander Freas on 1/3/14.
 //
 //
 
 #import "Person.h"
-#import "Event.h"
+#import "EventPersonRelation.h"
 
 
 @implementation Person
@@ -19,13 +19,7 @@
 @dynamic isPrimary;
 @dynamic lastName;
 @dynamic thumbnail;
-
--(NSString *)fullName {
-    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
-}
-
--(UIImage *)thumbnailImage {
-    return [UIImage imageWithData:self.thumbnail];
-}
+@dynamic profilePicURL;
+@dynamic eventRelation;
 
 @end

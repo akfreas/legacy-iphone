@@ -2,7 +2,7 @@
 #import "Event.h"
 #import "Person.h"
 #import "Figure.h"
-#import "ObjectArchiveAccessor.h"
+
 #import "Utility_AppSettings.h"
 #import <TargetConditionals.h>
 @implementation LegacyAppRequest {
@@ -183,11 +183,9 @@
 
     LegacyAppRequest *request = [LegacyAppRequest baseRequest];
     NSMutableURLRequest *urlRequest = request.urlRequest;
-    
-    Person *primaryPerson = [[ObjectArchiveAccessor sharedInstance] primaryPerson];
-    
+
     NSString *token = FBSession.activeSession.accessTokenData.accessToken;
-    NSString *activeFbUserId = primaryPerson.facebookId;
+    NSString *activeFbUserId = person.facebookId;
     
     NSDictionary *cookieDict = [NSDictionary dictionaryWithObjectsAndKeys:token, @"token", activeFbUserId, @"activeUserId", nil];
     NSData *cookieInfo = [NSJSONSerialization dataWithJSONObject:cookieDict options:0 error:NULL];

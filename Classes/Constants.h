@@ -25,6 +25,7 @@
 #define KeyForHasScrolledToPageNotification @"HasScrolledToPage"
 #define KeyForScrollingFromPageNotification @"ScrollingFromPage"
 
+#define LegacyCoreDataException @"LegacyCoreDataException"
 
 #pragma mark Size/Spacing Definitions
 

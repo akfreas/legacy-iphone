@@ -180,7 +180,10 @@
 }
 
 +(LegacyAppRequest *)baseRequestForPerson:(Person *)person {
-
+    
+    if (person == nil) {
+        person = [Person primaryPersonInContext:nil];
+    }
     LegacyAppRequest *request = [LegacyAppRequest baseRequest];
     NSMutableURLRequest *urlRequest = request.urlRequest;
 

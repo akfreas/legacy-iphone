@@ -6,6 +6,7 @@
     LegacyAppRequest *request;
     NSMutableData *resultData;
     id result;
+    dispatch_queue_t ourQueue;
 }
 
 @synthesize AYAConnectionCallback = _AYAConnectionCallback;
@@ -15,6 +16,9 @@
     
     if (self) {
         request = theRequest;
+        
+        ourQueue = dispatch_queue_create("com.legacyapp.networkqueue", DISPATCH_QUEUE_SERIAL);
+        
     }
     return self;
 }
@@ -28,7 +32,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"URL: %@ Error: %@", operation.request.URL, error);
     }];
-    
+    operation.completionQueue = ourQueue;
     [operation start];
 }
 

@@ -7,7 +7,7 @@
 +(void)setupPersistence;
 
 +(NSManagedObjectContext *)managedObjectContext;
-
++(NSManagedObjectContext *)managedObjectContextForUI;
 +(void)deletePersistentStore;
 +(void)resetManagedObjectContext;
 +(void)save;

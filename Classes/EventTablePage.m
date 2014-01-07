@@ -11,7 +11,7 @@
 #import "EventRowCell.h"
 #import "EventRowDrawerOpenBucket.h"
 #import "NSFetchedResultsControllerFactory.h"
-
+#import "PersistenceManager.h"
 #import "EventTablePage.h"
 
 @interface EventTablePage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
@@ -27,6 +27,7 @@
     UIView *headerViewWrapper;
     UIView *toolBarBackgroundView;
     UIView *lineView;
+    PersistenceManager *manager;
 }
 
 static NSString *ReuseID = @"CellReuseId";
@@ -47,9 +48,10 @@ static NSString *ReuseID = @"CellReuseId";
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         }
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
-        fetchController = [NSFetchedResultsControllerFactory fetchControllerForEventTableInContext:nil];
+        manager = [PersistenceManager sharedInstance];
+        fetchController = [NSFetchedResultsControllerFactory fetchControllerForEventTableInContext:manager.managedObjectContext];
         fetchController.delegate = self;
-        self.contentOffset = CGPointMake(0, 0);
+//        self.contentOffset = CGPointMake(0, 0);
         [fetchController performFetch:NULL];
         
         [self addTopActionView];

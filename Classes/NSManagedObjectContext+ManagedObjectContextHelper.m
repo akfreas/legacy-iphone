@@ -8,6 +8,9 @@
     if (err != nil) {
         NSLog(@"Error saving context %@. Error: %@", self, [err description]);
     }
+    if (self.parentContext != nil) {
+        [self.parentContext save:&err];
+    }
 }
 
 -(NSArray *)executeFetchRequest:(NSFetchRequest *)request {

@@ -6,12 +6,19 @@
 #import "Event.h"
 #import "Person.h"
 
+@interface DataSyncUtility ()
+
+@property (copy) void(^completion)();
+
+@end
+
 @implementation DataSyncUtility {
     
     NSOperationQueue *queue;
     LegacyAppConnection *connection;
-    void (^completion)();
 }
+
+@synthesize completion;
 
 +(DataSyncUtility *)sharedInstance {
     static dispatch_once_t onceToken;
@@ -37,7 +44,7 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     LegacyAppRequest *request;
-    completion = completionBlock;
+    self.completion = completionBlock;
     Person *primaryPerson = [Person primaryPersonInContext:nil];
 
     request = [LegacyAppRequest requestToGetStoriesForPerson:primaryPerson];
@@ -62,7 +69,9 @@
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
         
         if (completionBlock != NULL) {
-            completionBlock();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -70,23 +79,24 @@
 -(void)parseArrayOfEventsForTable:(NSArray *)events {
     
     PersistenceManager *ourManager = [PersistenceManager new];
-    [ourManager deleteObjectsOfType:[EventPersonRelation class] context:nil];
-    for (NSDictionary *eventDict in events) {
-        [EventPersonRelation relationFromJSON:eventDict context:ourManager.managedObjectContext];
-    }
-    [ourManager save];
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (completion != NULL) {
-            completion();
+    [ourManager.managedObjectContext performBlock:^{
+        [ourManager deleteObjectsOfType:[EventPersonRelation class] context:nil];
+        for (NSDictionary *eventDict in events) {
+            [EventPersonRelation relationFromJSON:eventDict context:ourManager.managedObjectContext];
         }
-    });
-    [self syncRelatedEvents];
+        [ourManager save];
+        [self syncRelatedEvents:ourManager.managedObjectContext];
+    }];
+    if (self.completion != NULL) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.completion();
+        });
+    }
 }
 
--(void)syncRelatedEvents {
+-(void)syncRelatedEvents:(NSManagedObjectContext *)context {
     
-    NSArray *figures = [Figure allObjects];
+    NSArray *figures = [Figure allObjectsInContext:context];
     
     if ([figures count] > 0) {
         
@@ -96,12 +106,14 @@
             connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
             
             [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-                PersistenceManager *ourManager = [PersistenceManager new];
                 NSArray *resultArray = (NSArray *)result;
-                for (NSDictionary *relatedEvent in resultArray) {
-                    [Event eventFromJSON:relatedEvent context:ourManager.managedObjectContext];
-                }
-                [ourManager save];
+                [context performBlock:^{
+                    for (NSDictionary *relatedEvent in resultArray) {
+                        Event *e = [Event eventFromJSON:relatedEvent context:context];
+                        
+                    }
+                    [context save];
+                }];
             }];
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

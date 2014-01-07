@@ -56,15 +56,21 @@
     NSManagedObjectID *figureID = figure.objectID;
     if (figure.imageData == nil) {
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:figure.imageURL]];
-        [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                PersistenceManager *ourManager = [PersistenceManager new];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        operation.responseSerializer = [AFImageResponseSerializer serializer];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, UIImage *image) {
+            PersistenceManager *ourManager = [PersistenceManager new];
+            [ourManager.managedObjectContext performBlock:^{
                 Figure *ourFigure = [Figure objectWithObjectID:figureID inContext:ourManager.managedObjectContext];
-                ourFigure.imageData = data;
+                ourFigure.imageData = UIImageJPEGRepresentation(image, 1.0f);
                 [ourManager save];
-            });
-            UIImage *theImage = [UIImage imageWithData:data];
+            }];
+            
+            UIImage *theImage = image;
             completion(theImage);
+
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
         }];
     } else {
         completion(figure.image);

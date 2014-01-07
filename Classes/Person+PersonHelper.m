@@ -63,6 +63,9 @@
 }
 
 +(Person *)personWithFacebookID:(NSString *)facebookID context:(NSManagedObjectContext *)context {
+    if (context == nil) {
+        context = [[PersistenceManager sharedInstance] managedObjectContext];
+    }
     NSFetchRequest *request = [self baseFetchRequest];
     request.predicate = [NSPredicate predicateWithFormat:@"facebookId == %@", facebookID];
     NSArray *result = [context executeFetchRequest:request error:NULL];

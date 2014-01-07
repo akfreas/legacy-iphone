@@ -1,28 +1,38 @@
 #import "PersistenceManager.h"
 
 @implementation PersistenceManager {
-    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
 }
 
--(id)init {
+static NSManagedObjectContext *parentContext;
+
+
+-(id)initShared {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:nil];
+        [PersistenceManager setupParentContext];
     }
     return self;
 }
 
 -(void)mergeChanges:(NSNotification *)notif {
-    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notif];
+    
+    if ([NSThread isMainThread] == NO) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self mergeChanges:notif];
+        });
+        return;
+    }
+    [[PersistenceManager managedObjectContext] mergeChangesFromContextDidSaveNotification:notif];
 }
 
 +(instancetype)sharedInstance {
-    static id sharedInstance;
+    static PersistenceManager *sharedInstance;
     if (sharedInstance == nil) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            sharedInstance = [[self alloc] init];
+            sharedInstance = [[self alloc] initShared];
+            [[NSNotificationCenter defaultCenter] addObserver:sharedInstance selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:nil];
         });
     }
     return sharedInstance;
@@ -33,7 +43,28 @@
 }
 
 +(NSManagedObjectContext *)managedObjectContext {
-    return [[self sharedInstance] managedObjectContext];
+    NSManagedObjectContext *ctx = [[self sharedInstance] managedObjectContext];
+    NSLog(@"Context: %@", ctx);
+    return ctx;
+}
+
++(NSManagedObjectContext *)parentContext {
+    @synchronized (self) {
+        NSAssert(parentContext != nil, @"Parent context is nil!");
+        NSLog(@"Parent context: %@", parentContext);
+        return parentContext;
+    }
+}
+
++(void)setupParentContext {
+    if (parentContext == nil) {
+        parentContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        parentContext.persistentStoreCoordinator = [self persistentStoreCoordinator];
+    }
+}
+
++(NSManagedObjectContext *)managedObjectContextForUI {
+    return [[self sharedInstance] managedObjectContextForUI];
 }
 
 +(void)deletePersistentStore {
@@ -114,8 +145,21 @@
 }
 
 -(NSManagedObjectContext *)managedObjectContext {
+    NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
+    NSManagedObjectContext *threadMOC = [threadDict objectForKey:@"ThreadMOC"];
+    if (threadMOC == nil) {
+        threadMOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        threadMOC.parentContext = [PersistenceManager parentContext];
+        [threadDict setObject:threadMOC forKey:@"ThreadMOC"];
+    } else {
+        NSLog(@"Got thread context. Thread: %@", [NSThread currentThread]);
+    }
+    return threadMOC;
+}
+
+-(NSManagedObjectContext *)managedObjectContextForUI {
     if (_managedObjectContext == nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         _managedObjectContext.persistentStoreCoordinator = [PersistenceManager persistentStoreCoordinator];
     }
     return _managedObjectContext;
@@ -125,6 +169,9 @@
     NSError *error;
     if (context.hasChanges == YES) {
         [context save:&error];
+        if (context.parentContext != nil) {
+            [context.parentContext save:&error];
+        }
     }
     
     if (error != nil) {
@@ -134,11 +181,19 @@
 
 -(void)save {
     NSError *saveError = nil;
-    if ([_managedObjectContext hasChanges]) {
-        [_managedObjectContext save:&saveError];
+    BOOL saved = NO;
+    NSManagedObjectContext *moc = [PersistenceManager managedObjectContext];
+    if ([moc hasChanges]) {
+        saved = [moc save:&saveError];
+        if (moc.parentContext != nil) {
+            [moc.parentContext save:&saveError];
+        }
+    }
+    if (saved == NO) {
+        NSLog(@"Context %@ was not saved.", [PersistenceManager managedObjectContext]);
     }
     if (saveError != nil) {
-        [NSException raise:LegacyCoreDataException format:@"Error saving context %@. Error: %@", _managedObjectContext, saveError];
+        [NSException raise:LegacyCoreDataException format:@"Error saving context %@. Error: %@", [PersistenceManager managedObjectContext], saveError];
     }
 }
 

@@ -61,13 +61,15 @@
 }
 
 -(void)getFigureThumbnailImage {
-    [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:_relation.event.figure completion:^(UIImage *theImage) {
-        if (theImage != nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                _widget.largeImage = theImage;
-            });
-        }
-    }];
+    if (_relation.event.figure != nil) {
+        [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:_relation.event.figure completion:^(UIImage *theImage) {
+            if (theImage != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _widget.largeImage = theImage;
+                });
+            }
+        }];
+    }
 }
 
 -(void)getPersonThumbnailImage {

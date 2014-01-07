@@ -6,7 +6,7 @@
 
 +(void)getAndSavePrimaryUser:(void(^)())completion {
     FBRequest *request = [FBRequest requestForMe];
-    [request.parameters setObject:@"first_name,last_name,birthday,picture" forKey:@"fields"];
+    [request.parameters setObject:@"first_name,last_name,birthday,picture.width(200).height(200)" forKey:@"fields"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
         PersistenceManager *ourManager = [PersistenceManager new];
         Person *primaryPerson = [Person personWithFacebookGraphUser:result inContext:ourManager.managedObjectContext];

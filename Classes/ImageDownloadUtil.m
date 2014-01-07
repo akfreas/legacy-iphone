@@ -33,11 +33,13 @@
     if (person.thumbnail == nil) {
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:person.profilePicURL]];
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        operation.responseSerializer = [AFImageResponseSerializer serializer];
+        AFImageResponseSerializer *serializer = [AFImageResponseSerializer serializer];
+        serializer.imageScale = 1.0f;
+        operation.responseSerializer = serializer;
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, UIImage *image) {
             PersistenceManager *ourManager = [PersistenceManager new];
             Person *ourPerson = [Person objectWithObjectID:personID inContext:ourManager.managedObjectContext];
-            ourPerson.thumbnail = UIImagePNGRepresentation(image);
+            ourPerson.thumbnail = UIImageJPEGRepresentation(image, 1.0f);
             [ourPerson save];
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(image);

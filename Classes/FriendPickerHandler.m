@@ -3,6 +3,8 @@
 #import "Person.h"
 #import "BirthdaySelectionView.h"
 #import "PersistenceManager.h"
+#import "LegacyAppConnection.h"
+#import "LegacyAppRequest.h"
 #import <RNBlurModalView/RNBlurModalView.h>
 
 @implementation FriendPickerHandler {
@@ -100,12 +102,25 @@
             [selectedFriends removeObjectForKey:fbUserID];
             Person *person = [Person personWithFacebookID:fbUserID context:nil];
             if (person != nil) {
-                [person delete];
+                [self removePerson:person];
             }
-            [PersistenceManager save];
         }
     }
     
+}
+
+-(void)removePerson:(Person *)person {
+    LegacyAppRequest *request = [LegacyAppRequest requestToDeletePerson:person];
+    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
+    NSManagedObjectID *personID = person.objectID;
+    [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+        if (error == nil) {
+            PersistenceManager *ourManager = [PersistenceManager new];
+            Person *ourPerson = [Person objectWithObjectID:personID inContext:ourManager.managedObjectContext];
+            [ourPerson delete];
+            [ourManager save];
+        }
+    }];
 }
 
 @end

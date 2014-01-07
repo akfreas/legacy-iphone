@@ -13,8 +13,6 @@
 @end
 
 @implementation DataSyncUtility {
-    
-    NSOperationQueue *queue;
     LegacyAppConnection *connection;
 }
 
@@ -35,7 +33,7 @@
     self = [super init];
     
     if (self) {
-        queue = [[NSOperationQueue alloc] init];
+        connection = [[LegacyAppConnection alloc] initWithLegacyRequest:nil];
     }
     return self;
 }
@@ -103,16 +101,15 @@
         for (Figure *theFigure in figures) {
             LegacyAppRequest *request = [LegacyAppRequest requestToGetAllEventsForFigure:theFigure];
             
-            connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
             
-            [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-                NSArray *resultArray = (NSArray *)result;
-                [context performBlock:^{
+            [connection get:request withCompletionBlock:^(LegacyAppRequest *request, NSArray *resultArray, NSError *error) {
+                NSManagedObjectContext *ctx = [PersistenceManager managedObjectContext];
+                [ctx performBlockAndWait:^{
                     for (NSDictionary *relatedEvent in resultArray) {
-                        Event *e = [Event eventFromJSON:relatedEvent context:context];
+                        Event *e = [Event eventFromJSON:relatedEvent context:ctx];
                         
                     }
-                    [context save];
+                    [ctx save];
                 }];
             }];
         }

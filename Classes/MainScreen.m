@@ -159,6 +159,7 @@
 }
 
 -(BOOL)shouldSyncNow {
+    return YES;
     NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:KeyForLastDateSynced];
     if (lastDate == nil) {
         return YES;

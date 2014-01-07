@@ -185,9 +185,6 @@ static NSManagedObjectContext *parentContext;
     NSManagedObjectContext *moc = [PersistenceManager managedObjectContext];
     if ([moc hasChanges]) {
         saved = [moc save:&saveError];
-        if (moc.parentContext != nil) {
-            [moc.parentContext save:&saveError];
-        }
     }
     if (saved == NO) {
         NSLog(@"Context %@ was not saved.", [PersistenceManager managedObjectContext]);

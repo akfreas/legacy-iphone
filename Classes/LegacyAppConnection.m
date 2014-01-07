@@ -36,6 +36,19 @@
     [operation start];
 }
 
+-(void)get:(LegacyAppRequest *)aRequest withCompletionBlock:(void (^)(LegacyAppRequest *, id, NSError *))_block {
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:aRequest.urlRequest];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
+        _block(aRequest, JSON, NULL);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"URL: %@ Error: %@", operation.request.URL, error);
+    }];
+    operation.completionQueue = ourQueue;
+    [operation start];
+}
+
 -(void)postWithCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block {
     
 //    AFHTTPRequestOperation *operation = [AFHTTPRequestOperation set]

@@ -1,5 +1,5 @@
 #import "Person+PersonHelper.h"
-#import "PersistenceManager.h"
+
 
 @implementation Person (PersonHelper)
 
@@ -11,7 +11,7 @@
 
 +(Person *)primaryPersonInContext:(NSManagedObjectContext *)context {
     if (context == nil) {
-        context = [[PersistenceManager sharedInstance] managedObjectContext];
+        context = [NSManagedObjectContext MR_contextForCurrentThread];
     }
     NSFetchRequest *request = [self baseFetchRequest];
     request.predicate = [NSPredicate predicateWithFormat:@"isPrimary == %@", [NSNumber numberWithBool:YES]];
@@ -25,7 +25,7 @@
 
 +(Person *)personWithFacebookGraphUser:(id<FBGraphUser>)graphUser inContext:(NSManagedObjectContext *)context {
     if (context == nil) {
-        context = [[PersistenceManager sharedInstance] managedObjectContext];
+        context = [NSManagedObjectContext MR_contextForCurrentThread];
     }
     
     Person *existingPerson = [self personWithFacebookID:graphUser.id context:context];
@@ -47,7 +47,7 @@
 +(NSArray *)allPersonsInContext:(NSManagedObjectContext *)context includePrimary:(BOOL)includePrimary {
     
     if (context == nil) {
-        context = [[PersistenceManager sharedInstance] managedObjectContext];
+        context = [NSManagedObjectContext MR_contextForCurrentThread];
     }
     
     NSFetchRequest *fetch = [self baseFetchRequest];
@@ -63,9 +63,7 @@
 }
 
 +(Person *)personWithFacebookID:(NSString *)facebookID context:(NSManagedObjectContext *)context {
-    NSFetchRequest *request = [self baseFetchRequest];
-    request.predicate = [NSPredicate predicateWithFormat:@"facebookId == %@", facebookID];
-    NSArray *result = [context executeFetchRequest:request error:NULL];
+    NSArray *result = [Person MR_findByAttribute:@"facebookId" withValue:facebookID inContext:context];
     if ([result count] > 1) {
         [NSException raise:LegacyCoreDataException format:@"More than one Facebook user exists with ID %@, which should not be the case.  Users: %@", facebookID, result];
     }
@@ -74,7 +72,7 @@
 
 +(Person *)personWithJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context {
     if (context == nil) {
-        context = [[PersistenceManager sharedInstance] managedObjectContext];
+        context = [NSManagedObjectContext MR_contextForCurrentThread];
     }
     Person *existingPerson = [self personWithFacebookID:JSONDict[kFacebookID] context:context];
     if (existingPerson != nil) {

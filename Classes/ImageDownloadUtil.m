@@ -1,5 +1,4 @@
 #import "ImageDownloadUtil.h"
-#import "PersistenceManager.h"
 #import "Figure.h"
 
 @implementation ImageDownloadUtil {
@@ -35,8 +34,7 @@
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         operation.responseSerializer = [AFImageResponseSerializer serializer];
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, UIImage *image) {
-            PersistenceManager *ourManager = [PersistenceManager new];
-            Person *ourPerson = [Person objectWithObjectID:personID inContext:ourManager.managedObjectContext];
+            Person *ourPerson = [Person objectWithObjectID:personID inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
             ourPerson.thumbnail = UIImagePNGRepresentation(image);
             [ourPerson save];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -50,19 +48,21 @@
         UIImage *image = [UIImage imageWithData:person.thumbnail];
         completion(image);
     }
-
+    
 }
 -(void)fetchAndSaveImageForFigure:(Figure *)figure completion:(void(^)(UIImage *))completion {
     NSManagedObjectID *figureID = figure.objectID;
     if (figure.imageData == nil) {
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:figure.imageURL]];
         [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                PersistenceManager *ourManager = [PersistenceManager new];
-                Figure *ourFigure = [Figure objectWithObjectID:figureID inContext:ourManager.managedObjectContext];
-                ourFigure.imageData = data;
-                [ourManager save];
-            });
+            if (data != nil) {
+                NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
+                Figure *ourFigure = [Figure objectWithObjectID:figureID inContext:ctx];
+                [ctx performBlockAndWait:^{
+                    ourFigure.imageData = data;
+                    [ctx MR_saveOnlySelfAndWait];
+                }];
+            }
             UIImage *theImage = [UIImage imageWithData:data];
             completion(theImage);
         }];

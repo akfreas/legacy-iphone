@@ -1,6 +1,6 @@
 #import "Event+EventHelper.h"
 #import "Figure.h"
-#import "PersistenceManager.h"
+
 @implementation Event (EventHelper)
 
 #define kAgeDays @"age_days"
@@ -11,7 +11,7 @@
 #define kFigure @"figure"
 
 +(Event *)eventFromJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context {
-    Event *newEvent = [Event newInContext:context];
+    Event *newEvent = [Event MR_createInContext:context];
     newEvent.ageDays = JSONDict[kAgeDays];
     newEvent.ageMonths = JSONDict[kAgeMonths];
     newEvent.ageYears = JSONDict[kAgeYears];
@@ -24,9 +24,7 @@
 }
 
 +(NSArray *)eventsForFigure:(Figure *)figure inContext:(NSManagedObjectContext *)context {
-    if (context == nil) {
-        context = [[PersistenceManager sharedInstance] managedObjectContext];
-    }
+    
     NSFetchRequest *request = [self baseFetchRequest];
     request.predicate = [NSPredicate predicateWithFormat:@"figure == %@", figure];
     NSArray *returnArr = [context executeFetchRequest:request];

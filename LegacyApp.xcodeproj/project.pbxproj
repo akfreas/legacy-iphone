@@ -36,7 +36,6 @@
 		193FF17118764A040099FEBD /* Person+PersonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17018764A040099FEBD /* Person+PersonHelper.m */; };
 		193FF17418764A270099FEBD /* EventPersonRelation+RelationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17318764A270099FEBD /* EventPersonRelation+RelationHelpers.m */; };
 		193FF17A187653270099FEBD /* NSManagedObject+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF179187653270099FEBD /* NSManagedObject+Helpers.m */; };
-		193FF180187654250099FEBD /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17F187654250099FEBD /* PersistenceManager.m */; };
 		193FF1851876FDB40099FEBD /* NSFetchedResultsControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF1841876FDB40099FEBD /* NSFetchedResultsControllerFactory.m */; };
 		193FF188187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF187187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m */; };
 		193FF18B187709FD0099FEBD /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF18A187709FD0099FEBD /* Person.m */; };
@@ -115,7 +114,6 @@
 		19C7BD861749DD68004C8B0A /* DescriptionPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C7BD851749DD68004C8B0A /* DescriptionPage.xib */; };
 		19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */; };
 		19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F5D16A5483400D46B0A /* Social.framework */; };
-		19D29F6E16A66B8100D46B0A /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */; };
 		19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7516A6705600D46B0A /* AdSupport.framework */; };
 		19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7716A6706200D46B0A /* SystemConfiguration.framework */; };
 		19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7916A6706A00D46B0A /* CFNetwork.framework */; };
@@ -184,8 +182,6 @@
 		193FF17318764A270099FEBD /* EventPersonRelation+RelationHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventPersonRelation+RelationHelpers.m"; sourceTree = "<group>"; };
 		193FF178187653270099FEBD /* NSManagedObject+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Helpers.h"; sourceTree = "<group>"; };
 		193FF179187653270099FEBD /* NSManagedObject+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Helpers.m"; sourceTree = "<group>"; };
-		193FF17E187654250099FEBD /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceManager.h; sourceTree = "<group>"; };
-		193FF17F187654250099FEBD /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceManager.m; sourceTree = "<group>"; };
 		193FF1831876FDB40099FEBD /* NSFetchedResultsControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFetchedResultsControllerFactory.h; sourceTree = "<group>"; };
 		193FF1841876FDB40099FEBD /* NSFetchedResultsControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFetchedResultsControllerFactory.m; sourceTree = "<group>"; };
 		193FF186187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+ManagedObjectContextHelper.h"; sourceTree = "<group>"; };
@@ -293,8 +289,6 @@
 		19C7BD8B174BF3F9004C8B0A /* CGRectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGRectUtils.m; sourceTree = "<group>"; };
 		19C7BD8D174BF494004C8B0A /* CGRectUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGRectUtils.h; sourceTree = "<group>"; };
 		19D29F5D16A5483400D46B0A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
-		19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
 		19D29F7516A6705600D46B0A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		19D29F7716A6706200D46B0A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		19D29F7916A6706A00D46B0A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -475,8 +469,6 @@
 				4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */,
 				4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */,
 				4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */,
-				193FF17E187654250099FEBD /* PersistenceManager.h */,
-				193FF17F187654250099FEBD /* PersistenceManager.m */,
 				193FF1831876FDB40099FEBD /* NSFetchedResultsControllerFactory.h */,
 				193FF1841876FDB40099FEBD /* NSFetchedResultsControllerFactory.m */,
 			);
@@ -620,8 +612,6 @@
 				19C7BD8A174BC7AA004C8B0A /* Pages */,
 				199354FB16D4A29700D73389 /* HorizontalContentHostingScrollView.h */,
 				199354FC16D4A29700D73389 /* HorizontalContentHostingScrollView.m */,
-				19D29F6C16A66B8100D46B0A /* FBLoginViewController.h */,
-				19D29F6D16A66B8100D46B0A /* FBLoginViewController.m */,
 				19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */,
 				19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */,
 				4EEA6D3B1526A7CD00B96EFD /* FirstTimeLoadScreen.h */,
@@ -861,7 +851,6 @@
 				4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */,
 				4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */,
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
-				19D29F6E16A66B8100D46B0A /* FBLoginViewController.m in Sources */,
 				1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */,
 				193FF188187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */,
 				19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */,
@@ -874,7 +863,6 @@
 				195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */,
 				1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */,
 				192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */,
-				193FF180187654250099FEBD /* PersistenceManager.m in Sources */,
 				192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */,
 				191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */,
 				191CF63E1749635D00086D5E /* EventRowHorizontalScrollView.m in Sources */,

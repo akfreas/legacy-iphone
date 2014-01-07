@@ -5,6 +5,7 @@
     
     LegacyAppRequest *request;
     NSMutableData *resultData;
+    dispatch_queue_t queue;
     id result;
 }
 
@@ -15,6 +16,7 @@
     
     if (self) {
         request = theRequest;
+        queue = dispatch_queue_create("com.legacyapp.networkqueue", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -25,6 +27,21 @@
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
         _block(request, JSON, NULL);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"URL: %@ Error: %@", operation.request.URL, error);
+    }];
+    
+    [operation start];
+}
+
+
+-(void)get:(LegacyAppRequest *)aRequest withCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block {
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:aRequest.urlRequest];
+    operation.completionQueue = queue;
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
+        _block(aRequest, JSON, NULL);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"URL: %@ Error: %@", operation.request.URL, error);
     }];

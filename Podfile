@@ -13,6 +13,7 @@ target "LegacyApp" do
     pod "RNBlurModalView"
     pod "SDWebImage"
     pod "SSFlatDatePicker"
+    pod "MagicalRecord"
 end
 
 

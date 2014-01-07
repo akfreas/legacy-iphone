@@ -1,6 +1,6 @@
 #import "NSFetchedResultsControllerFactory.h"
 #import "EventPersonRelation.h"
-#import "PersistenceManager.h"
+
 
 @implementation NSFetchedResultsControllerFactory
 
@@ -18,9 +18,7 @@
 
 
 +(NSFetchedResultsController *)fetchControllerForEventTableInContext:(NSManagedObjectContext *)context {
-    if (context == nil) {
-        context = [PersistenceManager managedObjectContext];
-    }
+    
     NSFetchRequest *relationFetchRequest = [EventPersonRelation baseFetchRequest];
     relationFetchRequest.sortDescriptors = [self eventRelationSortDescriptors];
     NSFetchedResultsController *fetchController = [[NSFetchedResultsController alloc] initWithFetchRequest:relationFetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];

@@ -7,19 +7,23 @@
 
 #define kPerson @"person"
 
-+(EventPersonRelation *)relationFromJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context {
-    Event *event = [Event eventFromJSON:JSONDict context:context];
-    NSDictionary *personJSONDict = JSONDict[kPerson];
-    Person *person;
-    if (personJSONDict != nil) {
-        person = [Person personWithJSON:personJSONDict context:context];
-    }
++(void)relationFromJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context {
     
-    EventPersonRelation *relation = [EventPersonRelation newInContext:context];
-    relation.event = event;
-    relation.person = person;
+    [context performBlock:^{
+        
+        Event *event = [Event eventFromJSON:JSONDict context:context];
+        NSDictionary *personJSONDict = JSONDict[kPerson];
+        Person *person;
+        if (personJSONDict != nil) {
+            person = [Person personWithJSON:personJSONDict context:context];
+        }
+        
+        EventPersonRelation *relation = [EventPersonRelation MR_createInContext:context];
+        relation.event = event;
+        relation.person = person;
+    }];
     
-    return relation;
+//    return relation;
 }
 
 @end

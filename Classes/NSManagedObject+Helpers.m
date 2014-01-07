@@ -1,5 +1,5 @@
 #import "NSManagedObject+Helpers.h"
-#import "PersistenceManager.h"
+
 
 @implementation NSManagedObject (Helpers)
 
@@ -7,7 +7,7 @@
 
 
 +(instancetype)new {
-    id instance = [self newInContext:[PersistenceManager managedObjectContext]];
+    id instance = [self newInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     return instance;
 }
 
@@ -18,7 +18,7 @@
 }
 
 +(instancetype)objectWithObjectID:(NSManagedObjectID *)objectId {
-    return [self objectWithObjectID:objectId inContext:[[PersistenceManager sharedInstance] managedObjectContext]];
+    return [self objectWithObjectID:objectId inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
 +(instancetype)objectWithObjectID:(NSManagedObjectID *)objectId inContext:(NSManagedObjectContext *)context {
@@ -37,7 +37,7 @@
 }
 
 -(void)delete {
-    [PersistenceManager deleteObject:self];
+    [self.managedObjectContext deleteObject:self];
 }
 
 -(void)saveInContext:(NSManagedObjectContext *)context {
@@ -70,9 +70,6 @@
         return entityDescription;
 }
 
-+(NSArray *)allObjects {
-    return [self allObjectsInContext:[PersistenceManager managedObjectContext]];
-}
 
 +(NSArray *)allObjectsInContext:(NSManagedObjectContext *)context {
     

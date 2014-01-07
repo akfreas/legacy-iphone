@@ -23,6 +23,7 @@
 #import "NSManagedObject+Helpers.h"
 #import "NSManagedObjectContext+ManagedObjectContextHelper.h"
 #import "EventPersonRelation+RelationHelpers.h"
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)

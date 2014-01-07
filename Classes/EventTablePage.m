@@ -46,9 +46,10 @@ static NSString *ReuseID = @"CellReuseId";
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         }
+        [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"Legacy.sqlite"];
+
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
-        fetchController = [NSFetchedResultsControllerFactory fetchControllerForEventTableInContext:nil];
-        fetchController.delegate = self;
+        fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary" ascending:NO withPredicate:nil groupBy:nil delegate:self];
         self.contentOffset = CGPointMake(0, 0);
         [fetchController performFetch:NULL];
         

@@ -2,6 +2,6 @@
 
 @interface EventPersonRelation (RelationHelpers)
 
-+(EventPersonRelation *)relationFromJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context;
++(void)relationFromJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context;
 
 @end

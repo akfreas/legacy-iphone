@@ -1,6 +1,5 @@
 #import "MainScreen.h"
 #import "HorizontalContentHostingScrollView.h"
-#import "FBLoginViewController.h"
 #import "SettingsModalView.h"
 #import "Person.h"
 #import "Figure.h"
@@ -159,6 +158,7 @@
 }
 
 -(BOOL)shouldSyncNow {
+    return YES;
     NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:KeyForLastDateSynced];
     if (lastDate == nil) {
         return YES;

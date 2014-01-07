@@ -8,13 +8,13 @@
 
 +(Figure *)figureFromJSON:(NSDictionary *)JSONDict inContext:(NSManagedObjectContext *)context {
     NSString *figureID = JSONDict[kID];
-    NSArray *existingFigure = [Figure objectsWithValue:figureID forKey:@"id" inContext:context];
+    NSArray *existingFigure = [Figure MR_findByAttribute:@"id" withValue:figureID inContext:context];
     Figure *figure = nil;
     
     if ([existingFigure count] > 0) {
         figure = [existingFigure firstObject];
     } else {
-        figure = [Figure newInContext:context];
+        figure = [Figure MR_createInContext:context];
         figure.id = JSONDict[kID];
         figure.imageURL = JSONDict[KImageURL];
         figure.name = JSONDict[kName];

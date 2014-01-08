@@ -3,7 +3,7 @@
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
 #import "GAI.h"
-
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 @implementation AppDelegate 
 
 @synthesize window = _window;
@@ -15,6 +15,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 #if DEBUG==0
     [Flurry setCrashReportingEnabled:YES];

@@ -5,6 +5,7 @@
 #define kID @"id"
 #define KImageURL @"image_url"
 #define kName @"name"
+#define kNumberAssociatedEvents @"events_count"
 
 +(Figure *)figureFromJSON:(NSDictionary *)JSONDict inContext:(NSManagedObjectContext *)context {
     NSString *figureID = JSONDict[kID];
@@ -15,6 +16,8 @@
         figure = [existingFigure firstObject];
     } else {
         figure = [Figure MR_createInContext:context];
+        figure.associatedEvents = [NSNumber numberWithInteger:[JSONDict[kNumberAssociatedEvents] integerValue]];
+        figure.eventsSynced = [NSNumber numberWithBool:NO];
         figure.id = JSONDict[kID];
         figure.imageURL = JSONDict[KImageURL];
         figure.name = JSONDict[kName];

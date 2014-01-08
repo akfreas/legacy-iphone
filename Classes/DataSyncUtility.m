@@ -33,17 +33,13 @@
 }
 
 -(void)sync:(void (^)())completionBlock {
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     LegacyAppRequest *request;
     completion = completionBlock;
     Person *primaryPerson = [Person primaryPersonInContext:nil];
-
+    
     request = [LegacyAppRequest requestToGetStoriesForPerson:primaryPerson];
     
-    connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
-    
-    [connection getWithCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
+    [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
         [self parseArrayOfEventsForTable:result];
     }];
     
@@ -51,14 +47,11 @@
 
 -(void)syncFacebookFriends:(void(^)())completionBlock {
     
-    NSArray *persons = [Person MR_findAll];
+    NSArray *persons = [Person MR_findAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     Person *primaryPerson = [Person MR_findFirstByAttribute:@"isPrimary" withValue:[NSNumber numberWithBool:YES]];
     LegacyAppRequest *request = [LegacyAppRequest requestToSaveFacebookUsers:persons forPerson:primaryPerson];
     
-    connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
-    
-    
-    [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+    [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
         
         if (completionBlock != NULL) {
             completionBlock();
@@ -68,7 +61,7 @@
 
 -(void)parseArrayOfEventsForTable:(NSArray *)events {
     
-    NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
     [ctx performBlock:^{
         [EventPersonRelation MR_deleteAllMatchingPredicate:nil inContext:ctx];
         for (NSDictionary *eventDict in events) {
@@ -76,41 +69,51 @@
         }
         [ctx MR_saveOnlySelfAndWait];
     }];
-
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         if (completion != NULL) {
             completion();
         }
     });
-    [self syncRelatedEvents];
 }
 
--(void)syncRelatedEvents {
+-(void)syncRelatedEventsInContext:(NSManagedObjectContext *)ctx {
     
-    NSArray *figures = [Figure MR_findAll];
-    
+    NSArray *figures = [Figure MR_findAllInContext:ctx];
     if ([figures count] > 0) {
         
         for (Figure *theFigure in figures) {
-            LegacyAppRequest *request = [LegacyAppRequest requestToGetAllEventsForFigure:theFigure];
-            
-            
-            [connection get:request withCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-                NSArray *resultArray = (NSArray *)result;
-                NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
-                [ctx performBlock:^{
-                    
-                    for (NSDictionary *relatedEvent in resultArray) {
-                        [Event eventFromJSON:relatedEvent context:ctx];
-                    }
-                    [ctx MR_saveOnlySelfAndWait];
-                }];
-            }];
+            [DataSyncUtility syncRelatedEventForFigure:theFigure];
         }
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:KeyForLastDateSynced];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+
++(void)syncRelatedEventForFigure:(Figure *)figure {
+    LegacyAppRequest *request = [LegacyAppRequest requestToGetAllEventsForFigure:figure];
+    NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
+    NSManagedObjectID *figureID = figure.objectID;
+    [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+        NSArray *resultArray = (NSArray *)result;
+        [ctx performBlock:^{
+            
+            for (NSDictionary *relatedEvent in resultArray) {
+                [Event eventFromJSON:relatedEvent context:ctx];
+            }
+            [ctx save];
+            Figure *ourFigure = [Figure objectWithObjectID:figureID inContext:ctx];
+            if ([ourFigure.events count] == [ourFigure.associatedEvents integerValue]) {
+                ourFigure.eventsSynced = [NSNumber numberWithBool:YES];
+            } else {
+                ourFigure.eventsSynced = [NSNumber numberWithBool:NO];
+            }
+            [ctx MR_saveWithOptions:MRSaveParentContexts completion:^(BOOL success, NSError *error) {
+                NSAssert(success == YES || error == nil, @"Saving parent contexts failed.");
+                
+            }];
+        }];
+    }];
 }
 
 @end

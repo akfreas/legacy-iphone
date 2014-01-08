@@ -66,7 +66,6 @@
 		197305F017C5CA6700958D15 /* FigureTimelineEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 197305EF17C5CA6700958D15 /* FigureTimelineEventCell.xib */; };
 		197305F317C5D54500958D15 /* LegacyInfoPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305F217C5D54500958D15 /* LegacyInfoPage.m */; };
 		197308D41707B57C00FCADD3 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = 197308D31707B57C00FCADD3 /* question.png */; };
-		1975751E17D04F4700822779 /* Figure.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975751D17D04F4700822779 /* Figure.m */; };
 		1975752117D053D900822779 /* ImageDownloadUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975752017D053D900822779 /* ImageDownloadUtil.m */; };
 		1975752417D06CA100822779 /* WebViewControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975752317D06CA100822779 /* WebViewControls.m */; };
 		1975752617D06CBD00822779 /* WebViewControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1975752517D06CBD00822779 /* WebViewControls.xib */; };
@@ -86,6 +85,7 @@
 		199354FD16D4A29700D73389 /* HorizontalContentHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* HorizontalContentHostingScrollView.m */; };
 		1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1993550816D4E89900D73389 /* ImageWidgetContainer.xib */; };
 		1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
+		1995FFAE187E042C00EE1AB7 /* Figure.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995FFAD187E042C00EE1AB7 /* Figure.m */; };
 		1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1997B72816DEBA31009692F5 /* LegacyModel.xcdatamodeld */; };
 		199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199C0CAB16C0C0D900068E73 /* CoreData.framework */; };
 		19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
@@ -224,8 +224,6 @@
 		197305F117C5D54500958D15 /* LegacyInfoPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LegacyInfoPage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		197305F217C5D54500958D15 /* LegacyInfoPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LegacyInfoPage.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		197308D31707B57C00FCADD3 /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = question.png; path = images/question.png; sourceTree = "<group>"; };
-		1975751C17D04F4700822779 /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Figure.h; sourceTree = "<group>"; };
-		1975751D17D04F4700822779 /* Figure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Figure.m; sourceTree = "<group>"; };
 		1975751F17D053D900822779 /* ImageDownloadUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloadUtil.h; sourceTree = "<group>"; };
 		1975752017D053D900822779 /* ImageDownloadUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloadUtil.m; sourceTree = "<group>"; };
 		1975752217D06CA000822779 /* WebViewControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewControls.h; sourceTree = "<group>"; };
@@ -253,6 +251,8 @@
 		1993550816D4E89900D73389 /* ImageWidgetContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageWidgetContainer.xib; sourceTree = "<group>"; };
 		1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWidgetContainer.m; sourceTree = "<group>"; };
 		1993550C16D4E8F600D73389 /* ImageWidgetContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageWidgetContainer.h; sourceTree = "<group>"; };
+		1995FFAC187E042C00EE1AB7 /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Figure.h; sourceTree = "<group>"; };
+		1995FFAD187E042C00EE1AB7 /* Figure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Figure.m; sourceTree = "<group>"; };
 		1997B72916DEBA31009692F5 /* LegacyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LegacyModel.xcdatamodel; sourceTree = "<group>"; };
 		199C0CAB16C0C0D900068E73 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPickerHandler.h; sourceTree = "<group>"; };
@@ -478,8 +478,6 @@
 		19D61CBA16B06D3500C81E60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1975751C17D04F4700822779 /* Figure.h */,
-				1975751D17D04F4700822779 /* Figure.m */,
 				1909A84B1771F4B100256ED0 /* Event.h */,
 				1909A84C1771F4B100256ED0 /* Event.m */,
 				193FF178187653270099FEBD /* NSManagedObject+Helpers.h */,
@@ -493,6 +491,8 @@
 				193FF169187649D80099FEBD /* Figure+FigureHelper.h */,
 				193FF16A187649D80099FEBD /* Figure+FigureHelper.m */,
 				193FF16C187649F50099FEBD /* Event+EventHelper.h */,
+				1995FFAC187E042C00EE1AB7 /* Figure.h */,
+				1995FFAD187E042C00EE1AB7 /* Figure.m */,
 				193FF16D187649F50099FEBD /* Event+EventHelper.m */,
 				193FF16F18764A040099FEBD /* Person+PersonHelper.h */,
 				193FF17018764A040099FEBD /* Person+PersonHelper.m */,
@@ -867,6 +867,7 @@
 				191CF63B17488CE700086D5E /* CircleImageLayer.m in Sources */,
 				191CF63E1749635D00086D5E /* EventRowHorizontalScrollView.m in Sources */,
 				192BA7E717F9D76600ECBA49 /* FacebookUtils.m in Sources */,
+				1995FFAE187E042C00EE1AB7 /* Figure.m in Sources */,
 				19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */,
 				1909A84D1771F4B100256ED0 /* Event.m in Sources */,
 				1909A8531772BCCD00256ED0 /* DataSyncUtility.m in Sources */,
@@ -888,7 +889,6 @@
 				19BDFDD217FD3A8100B415C1 /* AMBlurView.m in Sources */,
 				19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */,
 				197305F317C5D54500958D15 /* LegacyInfoPage.m in Sources */,
-				1975751E17D04F4700822779 /* Figure.m in Sources */,
 				193FF17A187653270099FEBD /* NSManagedObject+Helpers.m in Sources */,
 				1975752117D053D900822779 /* ImageDownloadUtil.m in Sources */,
 				1975752417D06CA100822779 /* WebViewControls.m in Sources */,

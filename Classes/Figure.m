@@ -2,7 +2,7 @@
 //  Figure.m
 //  LegacyApp
 //
-//  Created by Alexander Freas on 8/29/13.
+//  Created by Alexander Freas on 1/8/14.
 //
 //
 
@@ -13,14 +13,11 @@
 @implementation Figure
 
 @dynamic id;
+@dynamic imageData;
 @dynamic imageURL;
 @dynamic name;
-@dynamic imageData;
+@dynamic eventsSynced;
+@dynamic associatedEvents;
 @dynamic events;
-
-
--(UIImage *)image {
-    return [UIImage imageWithData:self.imageData];
-}
 
 @end

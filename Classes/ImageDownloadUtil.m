@@ -67,7 +67,8 @@
             completion(theImage);
         }];
     } else {
-        completion(figure.image);
+        UIImage *image = [UIImage imageWithData:figure.imageData];
+        completion(image);
     }
 }
 

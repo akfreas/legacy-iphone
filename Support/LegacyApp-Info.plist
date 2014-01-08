@@ -52,7 +52,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0.1</string>
 	<key>DebugResourceUrl</key>
-	<string>http://api.legacyapp.net</string>
+	<string>http://localhost:8000</string>
 	<key>FacebookAppID</key>
 	<string>562062263833279</string>
 	<key>LSApplicationCategoryType</key>

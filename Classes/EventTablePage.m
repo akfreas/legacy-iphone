@@ -11,6 +11,7 @@
 #import "EventRowCell.h"
 #import "EventRowDrawerOpenBucket.h"
 #import "NSFetchedResultsControllerFactory.h"
+#import "DataSyncUtility.h"
 
 #import "EventTablePage.h"
 
@@ -47,11 +48,14 @@ static NSString *ReuseID = @"CellReuseId";
             self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         }
         [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"Legacy.sqlite"];
-
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
-        fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary" ascending:NO withPredicate:nil groupBy:nil delegate:self];
+        fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary" ascending:NO withPredicate:nil groupBy:nil delegate:self inContext:[NSManagedObjectContext MR_defaultContext]];
         self.contentOffset = CGPointMake(0, 0);
-        [fetchController performFetch:NULL];
+        NSError *err = nil;
+        [fetchController performFetch:&err];
+        if (err != nil) {
+            NSLog(@"Error performing fetch: %@", err);  
+        }
         
         [self addTopActionView];
     }
@@ -165,12 +169,14 @@ static NSString *ReuseID = @"CellReuseId";
     if (anObject != nil) {
         switch (type) {
             case NSFetchedResultsChangeInsert:
-                [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
                 break;
             case NSFetchedResultsChangeUpdate:
                 [self configureCell:(EventRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                break;
             case NSFetchedResultsChangeDelete:
                 [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+                break;
             default:
                 break;
         }
@@ -196,6 +202,7 @@ static NSString *ReuseID = @"CellReuseId";
     
     EventRowCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseID];
     [self configureCell:cell atIndexPath:indexPath];
+
     return cell;
     
 }
@@ -208,7 +215,9 @@ static NSString *ReuseID = @"CellReuseId";
     
     EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
     cell.eventPersonRelation = eventRelation;
-//    [cell reset];
+    if ([eventRelation.event.figure.eventsSynced isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+        [DataSyncUtility syncRelatedEventForFigure:eventRelation.event.figure];
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -5,5 +5,6 @@
 
 -(void)sync:(void(^)())completion;
 -(void)syncFacebookFriends:(void(^)())completion;
++(void)syncRelatedEventForFigure:(Figure *)figure;
 
 @end

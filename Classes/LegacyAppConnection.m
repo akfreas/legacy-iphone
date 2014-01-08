@@ -8,7 +8,7 @@
     dispatch_queue_t queue;
     id result;
 }
-
+static dispatch_queue_t queue;
 @synthesize AYAConnectionCallback = _AYAConnectionCallback;
 
 -(id)initWithLegacyRequest:(LegacyAppRequest *)theRequest  {
@@ -16,7 +16,6 @@
     
     if (self) {
         request = theRequest;
-        queue = dispatch_queue_create("com.legacyapp.networkqueue", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -35,8 +34,10 @@
 }
 
 
--(void)get:(LegacyAppRequest *)aRequest withCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block {
-    
++(void)get:(LegacyAppRequest *)aRequest withCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block {
+    if (queue == nil) {
+        queue = dispatch_queue_create("com.legacyapp.networkqueue", DISPATCH_QUEUE_SERIAL);
+    }
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:aRequest.urlRequest];
     operation.completionQueue = queue;
     operation.responseSerializer = [AFJSONResponseSerializer serializer];

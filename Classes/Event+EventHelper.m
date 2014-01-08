@@ -11,7 +11,14 @@
 #define kFigure @"figure"
 
 +(Event *)eventFromJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context {
-    Event *newEvent = [Event MR_createInContext:context];
+    NSArray *existingEvents = [Event MR_findByAttribute:@"eventId" withValue:JSONDict[kEventID] inContext:context];
+    Event *newEvent;
+    if ([existingEvents count] > 0) {
+        newEvent = [existingEvents firstObject];
+        return newEvent;
+    } else {
+        newEvent = [Event MR_createInContext:context];
+    }
     newEvent.ageDays = JSONDict[kAgeDays];
     newEvent.ageMonths = JSONDict[kAgeMonths];
     newEvent.ageYears = JSONDict[kAgeYears];

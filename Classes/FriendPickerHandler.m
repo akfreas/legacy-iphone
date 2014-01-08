@@ -100,7 +100,8 @@
     if ([diffDict count] > 0) {
         for (NSString *fbUserID in diffDict.allKeys) {
             [selectedFriends removeObjectForKey:fbUserID];
-            Person *person = [Person personWithFacebookID:fbUserID context:nil];
+            NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
+            Person *person = [Person personWithFacebookID:fbUserID context:ctx];
             if (person != nil) {
                 [self removePerson:person];
             }
@@ -116,9 +117,11 @@
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
         if (error == nil) {
             NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
-            Person *ourPerson = [Person objectWithObjectID:personID inContext:ctx];
-            [ourPerson MR_deleteInContext:ctx];
-            [ctx MR_saveOnlySelfAndWait];
+            [ctx performBlockAndWait:^{
+                Person *ourPerson = [Person objectWithObjectID:personID inContext:ctx];
+                [ourPerson MR_deleteInContext:ctx];
+                [ctx MR_saveOnlySelfAndWait];
+            }];
         }
     }];
 }

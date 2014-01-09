@@ -41,6 +41,8 @@
     
     [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
         [self parseArrayOfEventsForTable:result];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:KeyForLastDateSynced];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }];
     
 }
@@ -85,8 +87,6 @@
         for (Figure *theFigure in figures) {
             [DataSyncUtility syncRelatedEventForFigure:theFigure];
         }
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:KeyForLastDateSynced];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

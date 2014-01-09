@@ -37,7 +37,7 @@
     completion = completionBlock;
     Person *primaryPerson = [Person primaryPersonInContext:nil];
     
-    request = [LegacyAppRequest requestToGetStoriesForPerson:primaryPerson];
+    request = [LegacyAppRequest requestToGetAllStoriesForPrimaryPerson:primaryPerson];
     
     [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, NSArray *result, NSError *error) {
         [self parseArrayOfEventsForTable:result];
@@ -63,7 +63,7 @@
 
 -(void)parseArrayOfEventsForTable:(NSArray *)events {
     
-    NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
+    NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
     [ctx performBlock:^{
         [EventPersonRelation MR_deleteAllMatchingPredicate:nil inContext:ctx];
         for (NSDictionary *eventDict in events) {

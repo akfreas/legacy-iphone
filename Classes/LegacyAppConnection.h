@@ -8,5 +8,4 @@
 
 -(void)getWithCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block;
 +(void)get:(LegacyAppRequest *)aRequest withCompletionBlock:(void(^)(LegacyAppRequest *request, id result, NSError *error))_block;
-
 @end

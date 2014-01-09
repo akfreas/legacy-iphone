@@ -1,5 +1,7 @@
 #import "FacebookUtils.h"
 #import "DataSyncUtility.h"
+#import "LegacyAppConnection.h"
+#import "LegacyAppRequest.h"
 
 
 @implementation FacebookUtils
@@ -8,10 +10,19 @@
     FBRequest *request = [FBRequest requestForMe];
     [request.parameters setObject:@"first_name,last_name,birthday,picture" forKey:@"fields"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
-        Person *primaryPerson = [Person personWithFacebookGraphUser:result inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-        primaryPerson.isPrimary = [NSNumber numberWithBool:YES];
-        [primaryPerson save];
-        [[DataSyncUtility sharedInstance] sync:^{
+        NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
+        [ctx performBlock:^{
+            
+            Person *primaryPerson = [Person personWithFacebookGraphUser:result inContext:ctx];
+            primaryPerson.isPrimary = [NSNumber numberWithBool:YES];
+            [ctx save];
+            LegacyAppRequest *request = [LegacyAppRequest requestToGetEventForPerson:primaryPerson];
+            [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, NSDictionary *relation, NSError *error) {
+                [ctx performBlock:^{
+                    [EventPersonRelation relationFromJSON:relation context:ctx];
+                    [ctx MR_saveOnlySelfAndWait];
+                }];
+            }];
         }];
     }];
 }

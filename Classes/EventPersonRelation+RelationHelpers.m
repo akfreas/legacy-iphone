@@ -6,20 +6,25 @@
 @implementation EventPersonRelation (RelationHelpers)
 
 #define kPerson @"person"
+#define kErrorKey @"error"
 
 +(void)relationFromJSON:(NSDictionary *)JSONDict context:(NSManagedObjectContext *)context {
-    Event *event = [Event eventFromJSON:JSONDict context:context];
-    NSDictionary *personJSONDict = JSONDict[kPerson];
-    Person *person;
-    if (personJSONDict != nil) {
-        person = [Person personWithJSON:personJSONDict context:context];
+    
+    Event *event;
+    
+    if (JSONDict[kErrorKey] == nil) {
+        event = [Event eventFromJSON:JSONDict context:context];
     }
     
+    NSDictionary *personJSONDict = JSONDict[kPerson];
+    Person *person;
     EventPersonRelation *relation = [EventPersonRelation MR_createInContext:context];
-    relation.event = event;
-    relation.person = person;
+    if (personJSONDict != nil) {
+        person = [Person personWithJSON:personJSONDict context:context];
+        relation.person = person;
+    }
     
-    //    return relation;
+    relation.event = event;
 }
 
 @end

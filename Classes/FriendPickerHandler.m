@@ -25,14 +25,7 @@
 
 -(FBModalCompletionHandler)completionHandler {
     return (FBModalCompletionHandler)^(FBFriendPickerViewController *sender, BOOL donePressed){
-        if (donePressed) {
-                [[DataSyncUtility sharedInstance] syncFacebookFriends:^{
-                    [sender dismissViewControllerAnimated:YES completion:NULL];
-                    [[DataSyncUtility sharedInstance] sync:NULL];
-                }];
-        } else {
             [sender dismissViewControllerAnimated:YES completion:NULL];
-        }
     };
 }
 
@@ -53,7 +46,7 @@
 
 -(void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker {
     NSMutableDictionary *diffDict = [NSMutableDictionary dictionaryWithDictionary:selectedFriends];
-    
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
     
     for (id<FBGraphUser> user in friendPicker.selection) {
         if ([selectedFriends objectForKey:user.id] == nil) {
@@ -85,13 +78,13 @@
                 };
                 enterBirthdayView.cancelButtonBlock = cancelledBlock;
                 enterBirthdayView.okButtonBlock = ^(id<FBGraphUser> graphUser){
-                    [Person personWithFacebookGraphUser:graphUser inContext:nil];
+                    [Person personWithFacebookGraphUser:graphUser inContext:context];
                     [friendPicker.tableView reloadData];
                     [aBlurView hide];
                 };
                 blurView = aBlurView;
             } else {
-                [Person personWithFacebookGraphUser:user inContext:nil];
+                [self addPersonWithGraphUser:user];
             }
             [selectedFriends setValue:user forKey:user.id];
         }
@@ -100,23 +93,44 @@
     if ([diffDict count] > 0) {
         for (NSString *fbUserID in diffDict.allKeys) {
             [selectedFriends removeObjectForKey:fbUserID];
-            NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
-            Person *person = [Person personWithFacebookID:fbUserID context:ctx];
+            Person *person = [Person personWithFacebookID:fbUserID context:context];
             if (person != nil) {
                 [self removePerson:person];
             }
         }
     }
-    
+}
+
+-(void)addPersonWithGraphUser:(id<FBGraphUser>)user {
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+    [context performBlockAndWait:^{
+        __block Person *newPerson = [Person personWithFacebookGraphUser:user inContext:context];
+        [context MR_saveOnlySelfAndWait];
+        LegacyAppRequest *request = [LegacyAppRequest requestToAddPerson:newPerson];
+        
+        [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+            LegacyAppRequest *relationRequest = [LegacyAppRequest requestToGetEventForPerson:newPerson];
+            [LegacyAppConnection get:relationRequest withCompletionBlock:^(LegacyAppRequest *request, NSDictionary *relation, NSError *error) {
+                NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
+                [ctx performBlock:^{
+                    [EventPersonRelation relationFromJSON:relation context:ctx];
+                    [ctx save];
+                }];
+            }];
+        }];
+    }];
 }
 
 -(void)removePerson:(Person *)person {
+    
+    [EventPersonRelation MR_deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"person == %@", person]];
+    
     LegacyAppRequest *request = [LegacyAppRequest requestToDeletePerson:person];
     LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     NSManagedObjectID *personID = person.objectID;
     [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
         if (error == nil) {
-            NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
+            NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
             [ctx performBlockAndWait:^{
                 Person *ourPerson = [Person objectWithObjectID:personID inContext:ctx];
                 [ourPerson MR_deleteInContext:ctx];

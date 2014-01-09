@@ -77,6 +77,20 @@
     return url;
 }
 
++(NSURL *)urlToGetEventForPerson:(Person *)person {
+    NSURL *url = [self baseUrl];
+    url = [url URLByAppendingPathComponent:[NSString stringWithFormat:@"user/%@/event", person.facebookId]];
+    return url;
+}
+
++(NSURL *)urlToAddPerson:(Person *)person {
+    NSURL *url = [LegacyAppRequest baseUrl];
+    
+    NSString *pathString = [NSString stringWithFormat:@"user/%@/add", person.facebookId];
+    
+    url = [url URLByAppendingPathComponent:pathString];
+    return url;
+}
 
 +(NSURL *)urlToGetRandomEvents {
     NSURL *url = [LegacyAppRequest baseUrl];
@@ -115,7 +129,7 @@
     return request;
 }
 
-+(LegacyAppRequest *)requestToGetStoriesForPerson:(Person *)person {
++(LegacyAppRequest *)requestToGetAllStoriesForPrimaryPerson:(Person *)person {
     
     LegacyAppRequest *request = [LegacyAppRequest baseRequestForPerson:person];
     NSURL *url = [LegacyAppRequest urlToGetEvents];
@@ -124,16 +138,21 @@
     return request;
 }
 
+
++(LegacyAppRequest *)requestToGetEventForPerson:(Person *)person {
+    LegacyAppRequest *request = [LegacyAppRequest baseRequestForPerson:nil];
+    NSURL *url = [LegacyAppRequest urlToGetEventForPerson:person];
+    request.urlRequest.URL = url;
+    return request;
+}
+
 +(LegacyAppRequest *)requestToSaveFacebookUsers:(NSArray *)users forPerson:(Person *)person {
     
     
     NSMutableArray *arrayOfUserInfo = [NSMutableArray array];
     
-    for (Person *person in users) {
-        
-        
-        NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
-        [arrayOfUserInfo addObject:@{@"facebook_id" : person.facebookId, @"birthday" : [formatter stringFromDate:person.birthday]}];
+    for (Person *ourPerson in users) {
+        [arrayOfUserInfo addObject:[self dictionaryForPerson:ourPerson]];
     }
     
     LegacyAppRequest *request = [self baseRequestForPerson:person];
@@ -142,6 +161,11 @@
     request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:arrayOfUserInfo options:NSJSONWritingPrettyPrinted error:NULL];
     
     return request;
+}
+
++(NSDictionary *)dictionaryForPerson:(Person *)ourPerson {
+    NSDateFormatter *formatter = [Utility_AppSettings dateFormatterForRequest];
+    return @{@"facebook_id" : ourPerson.facebookId, @"birthday" : [formatter stringFromDate:ourPerson.birthday]};
 }
 
 +(LegacyAppRequest *)requestToUpdateBirthday:(NSDate *)birthday forPerson:(Person *)person {
@@ -181,6 +205,9 @@
 
 +(LegacyAppRequest *)baseRequestForPerson:(Person *)person {
 
+    if (person == nil) {
+        person = [Person primaryPersonInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    }
     LegacyAppRequest *request = [LegacyAppRequest baseRequest];
     NSMutableURLRequest *urlRequest = request.urlRequest;
 
@@ -208,9 +235,23 @@
     LegacyAppRequest *request = [LegacyAppRequest baseRequestForPerson:nil];
     
     NSURL *urlToDelete = [LegacyAppRequest urlToDeletePerson:person];
-    
     request.urlRequest.URL = urlToDelete;
     
+    return request;
+}
+
++(LegacyAppRequest *)requestToAddPerson:(Person *)person {
+    LegacyAppRequest *request = [LegacyAppRequest baseRequestForPerson:nil];
+    NSURL *urlToDelete = [self urlToAddPerson:person];
+    request.urlRequest.URL = urlToDelete;
+    
+    NSError *err = nil;
+    NSDictionary *dict = [self dictionaryForPerson:person];
+    request.urlRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
+    request.urlRequest.HTTPMethod = @"POST";
+    if (err != nil) {
+        NSLog(@"Error serializing person to delete: %@ %@", person, err);
+    }
     return request;
 }
 

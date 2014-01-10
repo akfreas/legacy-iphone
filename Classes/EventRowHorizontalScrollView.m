@@ -23,14 +23,14 @@
     self = [super initForAutoLayout];
     if (self) {
         figureContentView = [[EventRowContentView alloc] initForAutoLayout];
-
+    
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
         self.bounces = NO;
         self.backgroundColor = [UIColor clearColor];
+        
         self.contentSize = CGSizeAddWidthToSize(figureContentView.intrinsicContentSize, DrawerWidth);
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        [self layoutIfNeeded];
     }
     return self;
 }
@@ -77,7 +77,12 @@
     }];
 }
 -(void)layoutSubviews {
-    [self addContentView];
+    if (figureContentView.superview == nil) {
+        self.contentSize = CGSizeAddWidthToSize(figureContentView.intrinsicContentSize, DrawerWidth);
+        self.contentOffset = CGPointMake(DrawerWidth, 0);
+        [self addContentView];
+        [self addContentViewConstraints];
+    }
     [super layoutSubviews];
 }
 #pragma mark Accessors
@@ -101,14 +106,11 @@
     //    [self addConstraintWithVisualFormat:@"H:|[figureContentView(>=320)]|" bindings:BBindings];
     
     [self addConstraintWithVisualFormat:@"V:|[figureContentView]|" bindings:BBindings];
-    [self closeDrawer:NULL];
+
     
 }
 -(void)addContentView {
-        [figureContentView layoutIfNeeded];
-        [self addSubview:figureContentView];
-        [self addContentViewConstraints];
-        self.contentSize = CGSizeAddWidthToSize(figureContentView.intrinsicContentSize, DrawerWidth);
+    [self addSubview:figureContentView];
 }
 
 

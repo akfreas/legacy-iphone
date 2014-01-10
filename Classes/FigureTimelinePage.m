@@ -23,13 +23,10 @@
 
 static NSString *HeaderID = @"EventHeader";
 
--(id)initWithRelation:(EventPersonRelation *)aRelation {
+-(id)init {
     
     self = [super init];
     if (self) {
-        self.relation = aRelation;
-        keyEvent = aRelation.event;
-        [self fetchRelatedEvents];
         [self registerClass:[FigureTimelineTableHeader class] forHeaderFooterViewReuseIdentifier:HeaderID];
         self.delegate = self;
         self.dataSource = self;
@@ -43,7 +40,7 @@ static NSString *HeaderID = @"EventHeader";
 
 -(void)fetchRelatedEvents {
     
-    arrayOfEvents = [Event eventsForFigure:self.relation.event.figure inContext:[NSManagedObjectContext MR_defaultContext]];
+    arrayOfEvents = [Event eventsForFigure:_relation.event.figure inContext:[NSManagedObjectContext MR_defaultContext]];
     
     for (int i=0; i < [arrayOfEvents count]; i++) {
         
@@ -54,7 +51,12 @@ static NSString *HeaderID = @"EventHeader";
         }
     }
 }
-
+#pragma mark Accessors
+-(void)setRelation:(EventPersonRelation *)relation {
+    _relation = relation;
+    keyEvent = relation.event;
+    [self fetchRelatedEvents];
+}
 #pragma mark TableView Methods
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -80,7 +82,7 @@ static NSString *HeaderID = @"EventHeader";
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     FigureTimelineTableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderID];
-    header.relation = self.relation;
+    header.relation = _relation;
     return header;
 }
 
@@ -100,9 +102,9 @@ static NSString *HeaderID = @"EventHeader";
     
     if (indexPath.row == 0) {
         if (headerCell == nil) {
-            headerCell = [[FigureTimelineTopCell alloc] initWithRelation:self.relation];
+            headerCell = [[FigureTimelineTopCell alloc] init];
         }
-        
+        headerCell.relation = _relation;
         return headerCell;
     } else {
         NSInteger eventIndex = indexPath.row - 1;

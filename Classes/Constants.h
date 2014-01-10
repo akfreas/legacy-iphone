@@ -131,7 +131,7 @@
 #define AddFriendsButtonImage [UIImage imageNamed:@"add-friends.png"]
 #define CheckMarkImage [UIImage imageNamed:@"check-mark.png"]
 #define NoEventImage [UIImage imageNamed:@"no-photo-legacy.png"]
-
+#define NoProfilePhotoImage [UIImage imageNamed:@"no-photo.png"]
 #pragma mark Page Constants
 
 #define MainEventPageNumber [NSNumber numberWithInteger:0]

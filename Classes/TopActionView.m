@@ -3,8 +3,22 @@
 
 #import "Person.h"
 
+
+@interface ButtonWithImageView : UIButton
+
+@end
+
+@implementation ButtonWithImageView
+
+-(UIView *)viewForBaselineLayout {
+    return self.imageView;
+}
+
+@end
+
+
 @implementation TopActionView {
-    UIButton *addFriendsButton;
+    ButtonWithImageView *addFriendsButton;
     CircleImageView *profilePicButton;
     CGFloat buttonRadii;
     CGFloat yButtonOrigin;
@@ -38,7 +52,7 @@
 
 -(void)addAddFriendsButton {
     
-    addFriendsButton = [[UIButton alloc] initForAutoLayout];
+    addFriendsButton = [[ButtonWithImageView alloc] initForAutoLayout];
     [addFriendsButton setImage:AddFriendsButtonImage forState:UIControlStateNormal];
     addFriendsButton.tag = 8;
     addFriendsButton.contentMode = UIViewContentModeCenter;
@@ -48,8 +62,8 @@
     [self addSubview:addFriendsButton];
     UIBind(addFriendsButton);
     [self addConstraintWithVisualFormat:@"H:[addFriendsButton(40)]-|" bindings:BBindings];
-//    [self addConstraintWithVisualFormat:@"V:[addFriendsButton(40)]-|" bindings:BBindings];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:addFriendsButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
+    [self addConstraintWithVisualFormat:@"V:[addFriendsButton(40)]" bindings:BBindings];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:addFriendsButton attribute:NSLayoutAttributeBaseline multiplier:1.0f constant:0]];
 }
 
 -(void)addProfilePicButton {

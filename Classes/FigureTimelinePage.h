@@ -7,6 +7,4 @@
 
 @property (nonatomic, strong) EventPersonRelation *relation;
 
--(id)initWithRelation:(EventPersonRelation *)anEvent;
-
 @end

@@ -31,6 +31,7 @@ typedef enum ScrollViewDirection {
     BOOL paginationInProgress;
     LegacyAppConnection *connection;
     ScrollViewDirection direction;
+    FigureTimelinePage *timelinePage;
 }
 
 #define InfoPageNumber 999
@@ -61,6 +62,7 @@ typedef enum ScrollViewDirection {
         }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPageWithNotif:) name:KeyForScrollToPageNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToLandingPage) name:KeyForLoggedIntoFacebookNotification object:nil];
+        timelinePage = [[FigureTimelinePage alloc] init];
         [self addFigurePage];
         [self scrollToPage:LandingPageNumber];
     }
@@ -123,11 +125,10 @@ typedef enum ScrollViewDirection {
     
     NSDictionary *userInfo = notif.userInfo;
     EventPersonRelation *relation = userInfo[@"relation"];
-    
-    FigureTimelinePage *infoPage = [[FigureTimelinePage alloc] initWithRelation:relation];
-    infoPage.frame = [self frameAtIndex:TimelinePageNumber];
-    [infoPage reloadData];
-    [self addPage:infoPage];
+    timelinePage.relation = relation;
+    timelinePage.frame = [self frameAtIndex:TimelinePageNumber];
+    [timelinePage reloadData];
+    [self addPage:timelinePage];
     [self scrollToPage:TimelinePageNumber];
 }
 

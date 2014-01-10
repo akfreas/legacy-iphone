@@ -13,6 +13,11 @@
     return self;
 }
 
+-(void)setNumberOfItems:(NSInteger)numberOfItems {
+    _numberOfItems = numberOfItems;
+    [self setNeedsDisplay];
+}
+
 - (void)drawRect:(CGRect)rect {
     
     UIBezierPath *path = [UIBezierPath bezierPath];

@@ -148,8 +148,6 @@
     } else {
         smallCircleImage.hidden = YES;
     }
-
-    
 }
 
 @end

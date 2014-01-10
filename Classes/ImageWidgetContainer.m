@@ -84,7 +84,7 @@
     if (relation.event == nil) {
         _widget.largeImage = NoEventImage;
     } else {
-        _widget.largeImage = [UIImage imageNamed:@"no-photo.png"];
+        _widget.largeImage = NoProfilePhotoImage;
     }
     [self getFigureThumbnailImage];
     [self setNeedsLayout];

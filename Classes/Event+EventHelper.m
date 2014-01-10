@@ -30,10 +30,18 @@
     return newEvent;
 }
 
++(NSArray *)sortDescriptors {
+    NSArray *arr = @[[NSSortDescriptor sortDescriptorWithKey:@"ageYears" ascending:YES],
+                     [NSSortDescriptor sortDescriptorWithKey:@"ageMonths" ascending:YES],
+                     [NSSortDescriptor sortDescriptorWithKey:@"ageDays" ascending:YES]];
+    return arr;
+}
+
 +(NSArray *)eventsForFigure:(Figure *)figure inContext:(NSManagedObjectContext *)context {
     
     NSFetchRequest *request = [self baseFetchRequest];
     request.predicate = [NSPredicate predicateWithFormat:@"figure == %@", figure];
+    request.sortDescriptors = [self sortDescriptors];
     NSArray *returnArr = [context executeFetchRequest:request];
     return returnArr;
 }

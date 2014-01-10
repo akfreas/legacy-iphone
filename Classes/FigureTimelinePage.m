@@ -43,7 +43,7 @@ static NSString *HeaderID = @"EventHeader";
 
 -(void)fetchRelatedEvents {
     
-    arrayOfEvents = [Event MR_findByAttribute:@"figure" withValue:_relation.event.figure];
+    arrayOfEvents = [Event eventsForFigure:self.relation.event.figure inContext:[NSManagedObjectContext MR_defaultContext]];
     
     for (int i=0; i < [arrayOfEvents count]; i++) {
         

@@ -26,4 +26,8 @@
     return figure;
 }
 
+-(UIImage *)thumbnailImage {
+    return [UIImage imageWithData:self.imageData];
+}
+
 @end

@@ -28,7 +28,7 @@ static UIImage *DefaultBlurImage;
     
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        self.contentView.translatesAutoresizingMaskIntoCons traints = NO;
+        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
         
         queue = [[NSOperationQueue alloc] init];
         self.contentView.clipsToBounds = YES;

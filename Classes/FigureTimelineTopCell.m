@@ -8,7 +8,7 @@
 #import "FigureTimelineTopCellLine.h"
 
 #import <CoreImage/CoreImage.h>
-
+#define BackgroundFadeInAnimationDuration 0.5f
 @implementation FigureTimelineTopCell {
     
     ImageWidget *imageWidget;
@@ -16,7 +16,8 @@
     UIImage *figureProfileImage;
     UIImageView *blurBackgroundImageView;
     UILabel *personNameLabel;
-    dispatch_queue_t queue;
+    NSMutableArray *layoutConstraintsForBackgroundImageView;
+    NSOperationQueue *queue;
 }
 
 static UIImage *DefaultBlurImage;
@@ -27,9 +28,9 @@ static UIImage *DefaultBlurImage;
     
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.contentView.translatesAutoresizingMaskIntoCons traints = NO;
         
-        queue = dispatch_queue_create("com.legacyapp.imagequeue", DISPATCH_QUEUE_SERIAL);
+        queue = [[NSOperationQueue alloc] init];
         self.contentView.clipsToBounds = YES;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.contentView.backgroundColor = [UIColor lightGrayColor];
@@ -38,24 +39,48 @@ static UIImage *DefaultBlurImage;
     return self;
 }
 -(void)addBackgroundViewForImage:(UIImage *)backgroundImage {
-    if (blurBackgroundImageView.superview == nil || blurBackgroundImageView == nil) {
-        blurBackgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        [self.contentView insertSubview:blurBackgroundImageView belowSubview:cellLine];
-        UIBind(blurBackgroundImageView);
-        [self.contentView addConstraintWithVisualFormat:@"H:|[blurBackgroundImageView]|" bindings:BBindings];
-        [self.contentView addConstraintWithVisualFormat:@"V:|[blurBackgroundImageView]|" bindings:BBindings];
-        blurBackgroundImageView.alpha = 0;
-        [UIView animateWithDuration:0.5f animations:^{
-            blurBackgroundImageView.alpha = 1;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
+    imageView.alpha = 0;
+    __weak FigureTimelineTopCell *instance = self;
+
+    if (blurBackgroundImageView != nil && [backgroundImage isEqual:blurBackgroundImageView.image] == NO) {
+        [UIView animateWithDuration:BackgroundFadeInAnimationDuration animations:^{
+            blurBackgroundImageView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [blurBackgroundImageView removeFromSuperview];
+            [instance addBackgroundImageView:imageView completion:^{
+                blurBackgroundImageView = imageView;
+            }];
         }];
     } else {
-        blurBackgroundImageView.image = backgroundImage;
+        [instance addBackgroundImageView:imageView completion:^{
+            blurBackgroundImageView = imageView;
+        }];
     }
+}
+
+-(void)addBackgroundImageView:(UIImageView *)imageView completion:(void(^)())completion {
+    [self.contentView insertSubview:imageView belowSubview:cellLine];
+    if (layoutConstraintsForBackgroundImageView == nil) {
+        layoutConstraintsForBackgroundImageView = [NSMutableArray array];
+        UIBind(imageView);
+        [layoutConstraintsForBackgroundImageView addObjectsFromArray:[self.contentView addConstraintWithVisualFormat:@"H:|[imageView]|" bindings:BBindings]];
+        [layoutConstraintsForBackgroundImageView addObjectsFromArray:[self.contentView addConstraintWithVisualFormat:@"V:|[imageView]|" bindings:BBindings]];
+    }
+    imageView.alpha = 0;
+    [UIView animateWithDuration:BackgroundFadeInAnimationDuration animations:^{
+        imageView.alpha = 1;
+    }completion:^(BOOL finished) {
+        if (completion != NULL) {
+            completion();
+        }
+    }];
 }
 
 -(void)drawBackgroundBlurImageWithImage:(UIImage *)ourImage completion:(void(^)(UIImage *blurImage))completion {
     
-    dispatch_async(queue, ^{
+    [queue addOperationWithBlock:^{
         CGFloat transform = self.contentView.frame.size.width / ourImage.size.width;
         
         CIContext *context = [CIContext contextWithOptions:nil];
@@ -78,20 +103,23 @@ static UIImage *DefaultBlurImage;
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(blurImage);
         });
-    });
+    }];
 
 }
 
 #pragma mark Accessors
 
 -(void)setRelation:(EventPersonRelation *)relation {
-    _relation = relation;
-    imageWidget.largeImage = NoProfilePhotoImage;
-    imageWidget.smallImage = nil;
-    personNameLabel.text = @"";
-//    [self addLine]
-
-//    [self fetchFigureProfilePic];
+    if (relation != _relation) {
+        _relation = relation;
+        imageWidget.largeImage = NoProfilePhotoImage;
+        imageWidget.smallImage = nil;
+        personNameLabel.text = @"";
+        [blurBackgroundImageView removeFromSuperview];
+        blurBackgroundImageView = nil;
+        figureProfileImage = nil;
+        [self fetchFigureProfilePic];
+    }
 }
 
 -(void)layoutSubviews {
@@ -99,12 +127,12 @@ static UIImage *DefaultBlurImage;
     [self addAndConfigureLine];
     [self drawMainCircleImage];
     if (figureProfileImage == nil) {
-        if (DefaultBlurImage == nil) {
+        if (DefaultBlurImage == nil && [queue operationCount] == 0) {
             [self drawBackgroundBlurImageWithImage:NoProfilePhotoImage completion:^(UIImage *blurImage) {
                 DefaultBlurImage = blurImage;
                 [self addBackgroundViewForImage:DefaultBlurImage];
             }];
-        } else if (blurBackgroundImageView == nil) {
+        } else if (blurBackgroundImageView == nil && [queue operationCount] == 0) {
             [self addBackgroundViewForImage:DefaultBlurImage];
         }
     }
@@ -181,6 +209,7 @@ static UIImage *DefaultBlurImage;
             [self drawBackgroundBlurImageWithImage:figureProfileImage completion:^(UIImage *blurImage) {
                 [self addBackgroundViewForImage:blurImage];
             }];
+            
             if (_relation.person != nil) {
                 [self addPersonNameLabel];
             }

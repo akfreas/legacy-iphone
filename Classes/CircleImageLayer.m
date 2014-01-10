@@ -113,7 +113,7 @@
     CGContextBeginPath(ctx);
     CGContextMoveToPoint(ctx, center.x, center.y);
     
-    CGContextAddArc(ctx, center.x, center.y, _radius, 0, M_PI * 2, 1);
+    CGContextAddArc(ctx, center.x, center.y, _radius - 2, 0, M_PI * 2, 1);
     CGContextClosePath(ctx);
     
     CGContextSaveGState(ctx);
@@ -137,7 +137,7 @@
         drawingMode = kCGPathFillStroke;
     }
     if (_borderWidth > 0) {
-        CGContextAddArc(ctx, center.x, center.y, _radius - _borderWidth / 2, 0, M_PI * 2, 1);
+        CGContextAddArc(ctx, center.x, center.y, _radius - _borderWidth / 2 - 2, 0, M_PI * 2, 1);
         CGContextSetLineWidth(ctx, _borderWidth + 0.5f);
         CGContextSetStrokeColorWithColor(ctx, ourBorderColor);
         CGContextDrawPath(ctx, drawingMode);

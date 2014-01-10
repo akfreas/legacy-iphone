@@ -103,12 +103,9 @@
     
     UIBind(figureContentView);
     [self addConstraintWithVisualFormat:[NSString stringWithFormat:@"H:|-%f-[figureContentView(320)]|", DrawerWidth] bindings:BBindings];
-    //    [self addConstraintWithVisualFormat:@"H:|[figureContentView(>=320)]|" bindings:BBindings];
-    
     [self addConstraintWithVisualFormat:@"V:|[figureContentView]|" bindings:BBindings];
-
-    
 }
+
 -(void)addContentView {
     [self addSubview:figureContentView];
 }

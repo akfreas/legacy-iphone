@@ -60,7 +60,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ResourceUrl</key>
-	<string>http://api.legacyapp.net</string>
+	<string>http://apiv2.legacyapp.net</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Cinzel-Regular.ttf</string>

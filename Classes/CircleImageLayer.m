@@ -14,8 +14,8 @@
 
 
 -(id)initWithRadius:(CGFloat)theRadius {
-    
-    if (self == [self init]) {
+    self = [self init];
+    if (self) {
         _radius = theRadius;
         self.frame = CGRectMake(0, 0, theRadius * 2 + ImageLayerDefaultStrokeWidth, theRadius * 2 + ImageLayerDefaultStrokeWidth);
         self.borderWidth = ImageLayerDefaultStrokeWidth;
@@ -24,7 +24,8 @@
 }
 
 -(id)init {
-    if (self == [super init]) {
+    self = [super init];
+    if (self) {
         self.contentsScale = [UIScreen mainScreen].scale;
         ourBorderColor = [UIColor clearColor].CGColor;
         [self setNeedsDisplay];

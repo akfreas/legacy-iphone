@@ -100,7 +100,7 @@
 #define FacebookModalDescriptionTextColor [UIColor colorWithHexString:@"#FFFFFF"]
 #define PersonPhotoBorderColor [UIColor colorWithHexString:@"#FFFFFF"]
 #define HeaderTextColor [UIColor whiteColor]
-
+#define PersonNameTopCellColor [UIColor whiteColor]
 #pragma mark Font Definitions
 
 #define FigureNameFontName @"HelveticaNeue"
@@ -118,6 +118,9 @@
 #define HeaderFont [UIFont fontWithName:HeaderFontName size:HeaderFontSize]
 #define LegacyPointSummaryFont [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define FacebookModalDescriptionFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:15]
+#define PersonNameTopCellFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:17]
+
+
 
 #pragma mark Image Definitions
 

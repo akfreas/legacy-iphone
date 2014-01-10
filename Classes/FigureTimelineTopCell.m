@@ -17,6 +17,7 @@
     UIImage *mainImage;
     UIImage *blurImage;
     UIImageView *blurImageView;
+    UILabel *personNameLabel;
 }
 
 -(id)initWithRelation:(EventPersonRelation *)aRelation {
@@ -109,12 +110,25 @@
         imageWidget.smallImage = relation.person.thumbnailImage;
     }
     CGRect imageRect = CGRectMakeFrameForDeadCenterInRect(self.contentView.frame, CGSizeMake(200, 200));
-    imageWidget.frame = CGRectOffset(imageRect, -50, 0);
+    imageWidget.frame = CGRectOffset(imageRect, -65, 0);
 }
 
 -(void)addLine {
     cellLine = [[FigureTimelineTopCellLine alloc] initWithFrame:self.contentView.bounds numberOfItems:[relation.event.figure.events count]];
     [self.contentView addSubview:cellLine];
+}
+
+-(void)addPersonNameLabel {
+    if (personNameLabel == nil) {
+        personNameLabel = [[UILabel alloc] initForAutoLayout];
+        [self.contentView addSubview:personNameLabel];
+        CGRect rect = CGRectMakeFrameWithOriginInBottomOfFrame(imageWidget.frame, self.frame.size.width - CGRectGetMaxX(imageWidget.frame), 35);
+        personNameLabel.frame = CGRectOffset(rect, 130, -40);
+        personNameLabel.font = PersonNameTopCellFont;
+        personNameLabel.textColor = PersonNameTopCellColor;
+        personNameLabel.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    personNameLabel.text = relation.person.fullName;
 }
 
 -(void)fetchFigureProfilePic {
@@ -125,6 +139,9 @@
             [self addLine];
             [self drawMainCircleImage];
             [self drawBackgroundBlurImage];
+            if (relation.person != nil) {
+                [self addPersonNameLabel];
+            }
         });
     }];
 }

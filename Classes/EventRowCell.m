@@ -84,8 +84,6 @@
     UIBind(eventRowScrollView);
     [self.contentView addConstraintWithVisualFormat:@"H:|[eventRowScrollView]|" bindings:BBindings];
     [self.contentView addConstraintWithVisualFormat:@"V:|[eventRowScrollView]|" bindings:BBindings];
-    [eventRowScrollView layoutIfNeeded];
-    [self layoutIfNeeded];
 }
 
 -(void)createImageFromView:(UIView *)view name:(NSString *)name {

@@ -169,13 +169,13 @@ static NSString *ReuseID = @"CellReuseId";
     if (anObject != nil) {
         switch (type) {
             case NSFetchedResultsChangeInsert:
-                [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                [self insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
             case NSFetchedResultsChangeUpdate:
                 [self configureCell:(EventRowCell *)[self cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
                 break;
             case NSFetchedResultsChangeDelete:
-                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
             default:
                 break;

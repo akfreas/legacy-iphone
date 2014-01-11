@@ -136,7 +136,13 @@ static UIImage *DefaultBlurImage;
             [self addBackgroundViewForImage:DefaultBlurImage];
         }
     }
-    
+    if (personNameLabel != nil) {
+        CGFloat labelWidth = 120;
+        CGFloat labelHeight = 30;
+        CGFloat rightMargin = 20;
+        CGRect rect = CGRectMake(CGRectGetMaxX(self.contentView.frame) - labelWidth - rightMargin, CGRectGetMaxY(self.contentView.frame) - 70, labelWidth, labelHeight);
+        personNameLabel.frame = rect;
+    }
 }
 
 -(CGSize)intrinsicContentSize {
@@ -191,11 +197,10 @@ static UIImage *DefaultBlurImage;
     if (personNameLabel == nil) {
         personNameLabel = [[UILabel alloc] initForAutoLayout];
         [self.contentView addSubview:personNameLabel];
-        CGRect rect = CGRectMakeFrameWithOriginInBottomOfFrame(imageWidget.frame, self.frame.size.width - CGRectGetMaxX(imageWidget.frame), 35);
-        personNameLabel.frame = CGRectOffset(rect, 130, -40);
         personNameLabel.font = PersonNameTopCellFont;
         personNameLabel.textColor = PersonNameTopCellColor;
         personNameLabel.contentMode = UIViewContentModeScaleAspectFit;
+        [self setNeedsLayout];
     }
     personNameLabel.text = _relation.person.fullName;
 }

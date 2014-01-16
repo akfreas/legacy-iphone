@@ -127,7 +127,7 @@
 }
 
 -(void)sendTapNotification {
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForInfoOverlayButtonTapped object:self userInfo:@{@"relation" : self.relation}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EventRowTappedNotificationKey object:self userInfo:@{@"relation" : self.relation}];
 }
 
 -(void)setRelation:(EventPersonRelation *)relation {

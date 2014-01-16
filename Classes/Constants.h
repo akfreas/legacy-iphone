@@ -1,29 +1,20 @@
 #pragma mark NSNotification Keys
 
 #define KeyForNoBirthdayNotification @"NoBirthdayForPerson"
-#define KeyForPersonInBirthdayNotFoundNotification @"thePerson"
-#define KeyForWikipediaButtonTappedNotification @"WikipediaButtonTapped"
 #define KeyForRemovePersonButtonTappedNotification @"RemoveFriendButton"
-#define KeyForOverlayViewShown @"OverlayViewShown"
 
-#define KeyForFigureRowContentChanged @"FigureRowContentChanged"
-#define KeyForFacebookButtonTapped @"FacebookButtonTapped"
-#define KeyForInfoOverlayButtonTapped @"OverlayInfoButtonTapped"
-#define KeyForAddFriendButtonTapped @"AddFriendButtonTapped"
-#define KeyForPersonThumbnailUpdated @"PersonThumbnailUpdated"
+#define KeyForShareWithFacebook @"ShareWithFacebook"
+#define KeyForShareWithTwitter @"ShareWithTwitter"
+#define EventRowTappedNotificationKey @"OverlayInfoButtonTapped"
+#define FacebookActionButtonTappedNotificationKey @"AddFriendButtonTapped"
 #define KeyForUserHasAuthenticatedWithFacebook @"HasAuthenticatedWithFacebook"
-#define KeyForHasBeenShownSwipeMessage @"HasShownSwipeMessage"
 #define KeyForLastDateSynced @"LastDaySynced"
 #define TableViewCellIdentifierForHeader @"HeaderCellIdentifier"
 #define TableViewCellIdentifierForMainCell @"MainTableViewCell"
-#define NoEventErrorKey @"NoEventError"
 #define KeyForLoggedIntoFacebookNotification @"LoggedIntoFacebookNotification"
-#define KeyForFigureRowTransportNotification @"FigureRowIncoming"
 #define KeyForScrollToPageNotification @"ScrollToPageNotification"
 #define KeyForPageNumberInUserInfo @"PageNumber"
 #define KeyForPageTypeInUserInfo @"PageType"
-#define KeyForHasScrolledToPageNotification @"HasScrolledToPage"
-#define KeyForScrollingFromPageNotification @"ScrollingFromPage"
 
 #define LegacyCoreDataException @"LegacyCoreDataException"
 

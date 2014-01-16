@@ -253,7 +253,7 @@ static NSString *ReuseID = @"CellReuseId";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     EventPersonRelation *relation = [fetchController objectAtIndexPath:indexPath];
     if (relation.event != nil) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForInfoOverlayButtonTapped object:nil userInfo:@{@"relation": relation}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:EventRowTappedNotificationKey object:nil userInfo:@{@"relation": relation}];
     }
 }
 

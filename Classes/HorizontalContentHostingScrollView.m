@@ -56,7 +56,7 @@ typedef enum ScrollViewDirection {
         self.bounces = NO;
         departurePoint = CGPointZero;
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:KeyForInfoOverlayButtonTapped object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:EventRowTappedNotificationKey object:nil];
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToInfoPage) name:@"ScrollToInfo" object:nil];
         }
@@ -147,7 +147,6 @@ typedef enum ScrollViewDirection {
         self.scrollEnabled = YES;
         UIView <PageProtocol> *page = [pageArray objectAtIndex:currentPage];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForHasScrolledToPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [page class]}];
         if ([page isKindOfClass:[FigureTimelinePage class]] && currentPage == [pageArray count] - 1) {
             
             LegacyWebView *webView = [[LegacyWebView alloc] initWithFrame:[self frameAtIndex:WebViewPageNumber]];
@@ -260,7 +259,6 @@ typedef enum ScrollViewDirection {
         
         NSDictionary *params = @{@"from_page": [NSNumber numberWithInteger:currentPage], @"to_page" : [NSNumber numberWithInteger:page]};
         [Flurry logEvent:@"page_movement" withParameters:params];
-        [[NSNotificationCenter defaultCenter] postNotificationName:KeyForScrollingFromPageNotification object:nil userInfo:@{KeyForPageTypeInUserInfo: [[pageArray objectAtIndex:currentPage] class]}];
         CGPoint pagePoint = [self frameAtIndex:page].origin;
         departurePoint = [self frameAtIndex:currentPage].origin;
         destinationPoint = pagePoint;

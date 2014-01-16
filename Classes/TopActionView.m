@@ -57,7 +57,7 @@
     addFriendsButton.tag = 8;
     addFriendsButton.contentMode = UIViewContentModeCenter;
     [addFriendsButton bk_addEventHandler:^(id sender) {
-        [AKNOTIF postNotificationName:KeyForFacebookButtonTapped object:nil];
+        [AKNOTIF postNotificationName:FacebookActionButtonTappedNotificationKey object:nil];
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:addFriendsButton];
     UIBind(addFriendsButton);
@@ -100,7 +100,7 @@
 -(void)addFriendsButtonTappedAction {
     
     [Flurry logEvent:@"top_action_bar_tapped"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:KeyForAddFriendButtonTapped object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FacebookActionButtonTappedNotificationKey object:self];
 }
 
 @end

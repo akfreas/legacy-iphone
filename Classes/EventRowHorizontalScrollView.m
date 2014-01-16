@@ -40,10 +40,12 @@
     if (isNonUserScrolling == YES) {
         return;
     }
-    if (scrollView.contentOffset.x > DrawerWidth / 2) {
-        [self closeDrawer:NULL];
-    } else {
-        [self openDrawer];
+    if (decelerate == NO) {
+        if (scrollView.contentOffset.x > DrawerWidth / 2) {
+            [self closeDrawer:NULL];
+        } else {
+            [self openDrawer];
+        }
     }
 }
 

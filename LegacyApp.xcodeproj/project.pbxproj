@@ -295,8 +295,6 @@
 		19D29F7D16A671C800D46B0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		19D29F7F16A674C200D46B0A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreen.h; sourceTree = "<group>"; };
 		19D29F8016A674C200D46B0A /* MainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ObjectArchiveAccessor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ObjectArchiveAccessor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		19DC00B4186C8CCF007A8D66 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		19DC00B6186C8EA3007A8D66 /* FigureTimelineTopCellLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureTimelineTopCellLine.h; sourceTree = "<group>"; };
 		19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureTimelineTopCellLine.m; sourceTree = "<group>"; };
@@ -335,6 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */,
 				196B64751868E18800A75C63 /* Reveal.framework in Frameworks */,
 				19C7A16C186787B700130BEF /* MediaPlayer.framework in Frameworks */,
 				19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */,
@@ -346,7 +345,6 @@
 				19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
 				19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */,
-				19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */,
 				4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */,
 				199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */,
 				4EEA6CE315268ED300B96EFD /* UIKit.framework in Frameworks */,
@@ -463,8 +461,6 @@
 				1909A8521772BCCD00256ED0 /* DataSyncUtility.m */,
 				1975751F17D053D900822779 /* ImageDownloadUtil.h */,
 				1975752017D053D900822779 /* ImageDownloadUtil.m */,
-				19D61CAF16B05D4E00C81E60 /* ObjectArchiveAccessor.h */,
-				19D61CB016B05D4E00C81E60 /* ObjectArchiveAccessor.m */,
 				4E640C1B15460C5A009D8DC6 /* Utility_Notifications.h */,
 				4E640C1C15460C5A009D8DC6 /* Utility_Notifications.m */,
 				4E0F3CA515453CB200369BE1 /* Utility_AppSettings.h */,

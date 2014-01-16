@@ -8,12 +8,16 @@
 
 @property (nonatomic, assign) BOOL isKey;
 @property (nonatomic, assign) BOOL isTerminalCell;
+@property (nonatomic, assign) CGPoint pointOrigin;
 @end
 @implementation FigureTimelineCellLinePointView
 
--(id)initWithFrame:(CGRect)frame {
+-(id)initWithFrame:(CGRect)frame pointOrigin:(CGPoint)pointOrigin {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor clearColor];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        self.pointOrigin = pointOrigin;
+    }
     return self;
 }
 -(void)setIsTerminalCell:(BOOL)isTerminalCell {
@@ -32,12 +36,12 @@
     aPath.lineCapStyle = kCGLineCapRound;
     CGFloat startX = 20;
     CGFloat arcRadius = 4;
-    CGFloat arcStart = self.bounds.size.height / 2 - arcRadius * 2;
+    CGFloat arcOrigin = self.pointOrigin.y;
     [HeaderBackgroundColor setStroke];
     [aPath moveToPoint:CGPointMake(startX, 0)];
-    CGPoint lastLinePoint = CGPointMake(startX, arcStart - arcRadius);
+    CGPoint lastLinePoint = CGPointMake(startX, arcOrigin - arcRadius);
     [aPath addLineToPoint:lastLinePoint];
-    [aPath addArcWithCenter:CGPointMake(startX, arcStart) radius:arcRadius startAngle:DEG2RAD(-90) endAngle:DEG2RAD(270) clockwise:YES];
+    [aPath addArcWithCenter:CGPointMake(startX, arcOrigin) radius:arcRadius startAngle:DEG2RAD(-90) endAngle:DEG2RAD(270) clockwise:YES];
     if (self.isTerminalCell == NO) {
         [aPath moveToPoint:CGPointMake(startX, lastLinePoint.y + arcRadius * 2)];
         [aPath addLineToPoint:CGPointMake(startX, self.frame.size.height)];
@@ -74,7 +78,8 @@
     if (self) {
         _event = anEvent;
         reuseID = reuseIdentifier;
-        contentView = [[FigureTimelineCellLinePointView alloc] initWithFrame:self.frame];
+        
+        contentView = [[FigureTimelineCellLinePointView alloc] initWithFrame:self.frame pointOrigin:CGPointMake(0, CGRectGetMidY(ageLabel.frame))];
         [self.contentView addSubview:contentView];
         [self drawEventLabel];
     }
@@ -86,7 +91,6 @@
 }
 
 -(void)drawEventLabel {
-    
     ageLabel.text = [NSString stringWithFormat:@"@ %@ years, %@ months, %@ days old ", _event.ageYears, _event.ageMonths, _event.ageDays];
     textView.text = _event.eventDescription;
 }

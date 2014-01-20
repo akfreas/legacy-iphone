@@ -30,11 +30,17 @@
         
         queue = [[NSOperationQueue alloc] init];
         webView.scrollView.delegate = self;
+    }
+    return self;
+}
+
+-(void)layoutSubviews {
+    if (webView == nil) {
         [self addWebView];
         [self addWebViewControls];
         [self addLayoutConstraints];
     }
-    return self;
+    [super layoutSubviews];
 }
 
 -(void)addWebView {

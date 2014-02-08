@@ -45,7 +45,7 @@ static NSString *ReuseID = @"CellReuseId";
         self.bounces = YES;
         self.rowHeight = FigureRowCellHeight;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-            self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+            self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         }
         [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"Legacy.sqlite"];
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];

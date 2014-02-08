@@ -9,7 +9,6 @@
 #import "EventTablePage.h"
 #import "FigureTimelinePage.h"
 #import "LegacyInfoPage.h"
-#import "WebViewControls.h"
 
 @interface HorizontalContentHostingScrollView () <UIScrollViewDelegate>
 @end

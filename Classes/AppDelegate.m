@@ -54,10 +54,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     NSDictionary *deviceDict = @{@"device_token": hexToken};
     Person *mainPerson = [Person primaryPersonInContext:nil];
     LegacyAppRequest *request = [LegacyAppRequest requestToPostDeviceInformation:deviceDict person:mainPerson];
-    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
-    
-    [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-        NSLog(@"APNS result: %@", result);
+    [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+        NSLog(@"APNS Result: %@", result);
     }];
 }
 

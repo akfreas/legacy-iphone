@@ -49,6 +49,16 @@
     }
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [[EventRowDrawerOpenBucket sharedInstance] closeDrawers:NULL];
+    if (scrollView.contentOffset.x == 0) {
+        [[EventRowDrawerOpenBucket sharedInstance] addRow:self];
+    }
+    if (scrollView.contentOffset.x == DrawerWidth) {
+        [[EventRowDrawerOpenBucket sharedInstance] removeRow:self];
+    }
+}
+
 #pragma mark Gesture Recognizer Methods
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     CGPoint newPoint = [figureContentView convertPoint:point fromView:self];
@@ -92,6 +102,11 @@
 
 -(void)setRelation:(EventPersonRelation *)relation {
     _relation = relation;
+    if (_relation.event == nil) {
+        self.scrollEnabled = NO;
+    } else {
+        self.scrollEnabled = YES;
+    }
     figureContentView.relation = _relation;
 }
 

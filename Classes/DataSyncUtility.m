@@ -23,14 +23,6 @@
     return instance;
 }
 
--(id)init {
-    self = [super init];
-    
-    if (self) {
-        connection = [[LegacyAppConnection alloc] initWithLegacyRequest:nil];
-    }
-    return self;
-}
 
 -(void)sync:(void (^)())completionBlock {
     LegacyAppRequest *request;

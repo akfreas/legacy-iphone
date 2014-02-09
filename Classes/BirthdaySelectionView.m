@@ -87,7 +87,7 @@
     birthdayPicker.datePickerMode = SSFlatDatePickerModeDate;
     [self addSubview:birthdayPicker];
     birthdayPicker.backgroundColor = AppLightBlueColor;
-    [[SSFlatDatePicker appearance] setGradientColor:DarkButtonColor];
+    [[SSFlatDatePicker appearance] setGradientColor:AppLightBlueColor];
     UIBind(birthdayPicker);
     [self addConstraintWithVisualFormat:@"H:|-[birthdayPicker]-|" bindings:BBindings];
 }

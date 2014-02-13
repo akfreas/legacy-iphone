@@ -9,6 +9,7 @@
 #import "EventTablePage.h"
 #import "FigureTimelinePage.h"
 #import "LegacyInfoPage.h"
+#import "EventRowDrawerOpenBucket.h"
 
 @interface HorizontalContentHostingScrollView () <UIScrollViewDelegate>
 @end
@@ -56,9 +57,6 @@ typedef enum ScrollViewDirection {
         departurePoint = CGPointZero;
         self.contentSize = CGSizeMake(0, self.bounds.size.height);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEventInfoPageAndScroll:) name:EventRowTappedNotificationKey object:nil];
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToInfoPage) name:@"ScrollToInfo" object:nil];
-        }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPageWithNotif:) name:KeyForScrollToPageNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToLandingPage) name:KeyForLoggedIntoFacebookNotification object:nil];
         timelinePage = [[FigureTimelinePage alloc] init];
@@ -121,7 +119,7 @@ typedef enum ScrollViewDirection {
 
 -(void)addEventInfoPageAndScroll:(NSNotification *)notif {
     
-    
+    [[EventRowDrawerOpenBucket sharedInstance] closeDrawers:NULL];
     NSDictionary *userInfo = notif.userInfo;
     EventPersonRelation *relation = userInfo[@"relation"];
     timelinePage.relation = relation;

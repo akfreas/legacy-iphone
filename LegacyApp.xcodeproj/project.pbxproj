@@ -120,6 +120,11 @@
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
 		19DC00B5186C8CCF007A8D66 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC00B4186C8CCF007A8D66 /* Reveal.framework */; };
 		19DC00B8186C8EA3007A8D66 /* FigureTimelineTopCellLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */; };
+		19F1190B18AD238800951ACD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F1190A18AD238800951ACD /* XCTest.framework */; };
+		19F1190C18AD238800951ACD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE415268ED300B96EFD /* Foundation.framework */; };
+		19F1190D18AD238800951ACD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE215268ED300B96EFD /* UIKit.framework */; };
+		19F1191318AD238800951ACD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19F1191118AD238800951ACD /* InfoPlist.strings */; };
+		19F1191518AD238800951ACD /* LegacyAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191418AD238800951ACD /* LegacyAppTests.m */; };
 		19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
@@ -134,6 +139,16 @@
 		4EEA6D5D1526CAEF00B96EFD /* LegacyAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */; };
 		C12EEAC0084E419EA9E773D9 /* libPods-LegacyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4750656191454527BBB82BAF /* libPods-LegacyApp.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		19F1191718AD238800951ACD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EEA6CD515268ED200B96EFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EEA6CDD15268ED200B96EFD;
+			remoteInfo = LegacyApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1909A84B1771F4B100256ED0 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Event.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -296,6 +311,12 @@
 		19DC00B4186C8CCF007A8D66 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		19DC00B6186C8EA3007A8D66 /* FigureTimelineTopCellLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureTimelineTopCellLine.h; sourceTree = "<group>"; };
 		19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureTimelineTopCellLine.m; sourceTree = "<group>"; };
+		19F1190918AD238800951ACD /* LegacyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegacyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		19F1190A18AD238800951ACD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		19F1191018AD238800951ACD /* LegacyAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LegacyAppTests-Info.plist"; sourceTree = "<group>"; };
+		19F1191218AD238800951ACD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		19F1191418AD238800951ACD /* LegacyAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LegacyAppTests.m; sourceTree = "<group>"; };
+		19F1191618AD238800951ACD /* LegacyAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LegacyAppTests-Prefix.pch"; sourceTree = "<group>"; };
 		19FAD7831763005E006FA829 /* PageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PageProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19FCB6F31874D30A00F9D30B /* BirthdaySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthdaySelectionView.h; sourceTree = "<group>"; };
 		19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthdaySelectionView.m; sourceTree = "<group>"; };
@@ -327,6 +348,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		19F1190618AD238800951ACD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19F1190B18AD238800951ACD /* XCTest.framework in Frameworks */,
+				19F1190D18AD238800951ACD /* UIKit.framework in Frameworks */,
+				19F1190C18AD238800951ACD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4EEA6CDB15268ED200B96EFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -540,6 +571,25 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		19F1190E18AD238800951ACD /* LegacyAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				19F1191418AD238800951ACD /* LegacyAppTests.m */,
+				19F1190F18AD238800951ACD /* Supporting Files */,
+			);
+			path = LegacyAppTests;
+			sourceTree = "<group>";
+		};
+		19F1190F18AD238800951ACD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				19F1191018AD238800951ACD /* LegacyAppTests-Info.plist */,
+				19F1191118AD238800951ACD /* InfoPlist.strings */,
+				19F1191618AD238800951ACD /* LegacyAppTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		4EEA6CD315268ED200B96EFD = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +597,7 @@
 				4EEA6D081526902D00B96EFD /* Resources */,
 				4EEA6D091526902D00B96EFD /* Support */,
 				4EEA6D101526906000B96EFD /* Dependencies */,
+				19F1190E18AD238800951ACD /* LegacyAppTests */,
 				4EEA6CE115268ED300B96EFD /* Frameworks */,
 				4EEA6CDF15268ED200B96EFD /* Products */,
 				F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */,
@@ -557,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				4EEA6CDE15268ED200B96EFD /* LegacyApp.app */,
+				19F1190918AD238800951ACD /* LegacyAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -577,6 +629,7 @@
 				4EEA6CE415268ED300B96EFD /* Foundation.framework */,
 				4EEA6CE615268ED300B96EFD /* CoreGraphics.framework */,
 				4750656191454527BBB82BAF /* libPods-LegacyApp.a */,
+				19F1190A18AD238800951ACD /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -680,6 +733,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		19F1190818AD238800951ACD /* LegacyAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19F1191918AD238800951ACD /* Build configuration list for PBXNativeTarget "LegacyAppTests" */;
+			buildPhases = (
+				19F1190518AD238800951ACD /* Sources */,
+				19F1190618AD238800951ACD /* Frameworks */,
+				19F1190718AD238800951ACD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				19F1191818AD238800951ACD /* PBXTargetDependency */,
+			);
+			name = LegacyAppTests;
+			productName = LegacyAppTests;
+			productReference = 19F1190918AD238800951ACD /* LegacyAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4EEA6CDD15268ED200B96EFD /* LegacyApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EEA6CF615268ED300B96EFD /* Build configuration list for PBXNativeTarget "LegacyApp" */;
@@ -707,6 +778,9 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
+					19F1190818AD238800951ACD = {
+						TestTargetID = 4EEA6CDD15268ED200B96EFD;
+					};
 					4EEA6CDD15268ED200B96EFD = {
 						DevelopmentTeam = KGJCC745S9;
 					};
@@ -725,11 +799,20 @@
 			projectRoot = "";
 			targets = (
 				4EEA6CDD15268ED200B96EFD /* LegacyApp */,
+				19F1190818AD238800951ACD /* LegacyAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		19F1190718AD238800951ACD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19F1191318AD238800951ACD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4EEA6CDC15268ED200B96EFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -828,6 +911,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		19F1190518AD238800951ACD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19F1191518AD238800951ACD /* LegacyAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4EEA6CDA15268ED200B96EFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -890,7 +981,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		19F1191818AD238800951ACD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4EEA6CDD15268ED200B96EFD /* LegacyApp */;
+			targetProxy = 19F1191718AD238800951ACD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		19F1191118AD238800951ACD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19F1191218AD238800951ACD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		4EEA6D051526902D00B96EFD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -903,6 +1010,63 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		19F1191A18AD238800951ACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LegacyApp.app/LegacyApp";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LegacyAppTests/LegacyAppTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = "LegacyAppTests/LegacyAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		19F1191B18AD238800951ACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LegacyApp.app/LegacyApp";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LegacyAppTests/LegacyAppTests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = "LegacyAppTests/LegacyAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		4EEA6CF415268ED300B96EFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1046,6 +1210,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		19F1191918AD238800951ACD /* Build configuration list for PBXNativeTarget "LegacyAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19F1191A18AD238800951ACD /* Debug */,
+				19F1191B18AD238800951ACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "LegacyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -23,7 +23,6 @@
     CGPoint priorPoint;
     CGRect actionViewTopInitialFrame; 
     TopActionView *actionViewTop;
-    NSFetchedResultsController *fetchController;
     UITableView *hostingTableView;
     UIView *headerViewWrapper;
     UIView *toolBarBackgroundView;
@@ -49,10 +48,10 @@ static NSString *ReuseID = @"CellReuseId";
         }
         [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"Legacy.sqlite"];
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
-        fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary" ascending:NO withPredicate:nil groupBy:nil delegate:self inContext:[NSManagedObjectContext MR_defaultContext]];
+        self.fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary" ascending:NO withPredicate:nil groupBy:nil delegate:self inContext:[NSManagedObjectContext MR_defaultContext]];
         self.contentOffset = CGPointMake(0, 0);
         NSError *err = nil;
-        [fetchController performFetch:&err];
+        [self.fetchController performFetch:&err];
         if (err != nil) {
             NSLog(@"Error performing fetch: %@", err);  
         }
@@ -213,7 +212,7 @@ static NSString *ReuseID = @"CellReuseId";
 
 -(void)configureCell:(EventRowCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
+    EventPersonRelation *eventRelation = [self.fetchController objectAtIndexPath:indexPath];
     cell.relation = eventRelation;
     if ([eventRelation.event.figure.eventsSynced isEqualToNumber:[NSNumber numberWithBool:NO]]) {
         [DataSyncUtility syncRelatedEventForFigure:eventRelation.event.figure];
@@ -221,11 +220,11 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        return [[[fetchController sections] objectAtIndex:section] numberOfObjects];
+        return [[[self.fetchController sections] objectAtIndex:section] numberOfObjects];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger numberOfSections = [[fetchController sections] count];
+    NSInteger numberOfSections = [[self.fetchController sections] count];
     return numberOfSections;
 }
 
@@ -251,7 +250,7 @@ static NSString *ReuseID = @"CellReuseId";
 #pragma mark UITableView Delegate Methods
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    EventPersonRelation *relation = [fetchController objectAtIndexPath:indexPath];
+    EventPersonRelation *relation = [self.fetchController objectAtIndexPath:indexPath];
     if (relation.event != nil) {
         [[NSNotificationCenter defaultCenter] postNotificationName:EventRowTappedNotificationKey object:nil userInfo:@{@"relation": relation}];
     }
@@ -286,7 +285,7 @@ static NSString *ReuseID = @"CellReuseId";
 }
 
 -(void)dealloc {
-    fetchController = nil;
+    self.fetchController = nil;
 }
 
 #pragma mark PageProtocol Delegate Methods

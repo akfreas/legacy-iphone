@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSNumber * eventsSynced;
 @property (nonatomic, retain) NSNumber * associatedEvents;
 @property (nonatomic, retain) NSSet *events;
+@property (nonatomic, readonly) UIImage *image;
 @end
 
 @interface Figure (CoreDataGeneratedAccessors)

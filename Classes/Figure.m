@@ -20,4 +20,8 @@
 @dynamic associatedEvents;
 @dynamic events;
 
+-(UIImage *)image {
+    return [UIImage imageWithData:self.imageData];
+}
+
 @end

@@ -77,8 +77,9 @@
                     [aBlurView hide];
                 };
                 enterBirthdayView.cancelButtonBlock = cancelledBlock;
+                __weak FriendPickerHandler *instance = self;
                 enterBirthdayView.okButtonBlock = ^(id<FBGraphUser> graphUser){
-                    [Person personWithFacebookGraphUser:graphUser inContext:context];
+                    [instance addPersonWithGraphUser:graphUser];
                     [friendPicker.tableView reloadData];
                     [aBlurView hide];
                 };
@@ -126,9 +127,8 @@
     [EventPersonRelation MR_deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"person == %@", person]];
     
     LegacyAppRequest *request = [LegacyAppRequest requestToDeletePerson:person];
-    LegacyAppConnection *connection = [[LegacyAppConnection alloc] initWithLegacyRequest:request];
     NSManagedObjectID *personID = person.objectID;
-    [connection getWithCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
+    [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
         if (error == nil) {
             NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
             [ctx performBlockAndWait:^{

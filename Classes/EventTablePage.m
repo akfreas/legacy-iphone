@@ -214,7 +214,7 @@ static NSString *ReuseID = @"CellReuseId";
 -(void)configureCell:(EventRowCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     EventPersonRelation *eventRelation = [fetchController objectAtIndexPath:indexPath];
-    cell.eventPersonRelation = eventRelation;
+    cell.relation = eventRelation;
     if ([eventRelation.event.figure.eventsSynced isEqualToNumber:[NSNumber numberWithBool:NO]]) {
         [DataSyncUtility syncRelatedEventForFigure:eventRelation.event.figure];
     }
@@ -255,6 +255,7 @@ static NSString *ReuseID = @"CellReuseId";
     if (relation.event != nil) {
         [[NSNotificationCenter defaultCenter] postNotificationName:EventRowTappedNotificationKey object:nil userInfo:@{@"relation": relation}];
     }
+    [[EventRowDrawerOpenBucket sharedInstance] closeDrawers:NULL];
 }
 
 #pragma mark UIScrollView Delegate Methods

@@ -9,15 +9,19 @@
 
 #import <CoreImage/CoreImage.h>
 #define BackgroundFadeInAnimationDuration 0.5f
+
+@interface FigureTimelineTopCell ()
+
+@property (nonatomic, retain) dispatch_queue_t imageProcessingQueue;
+@property (nonatomic, retain)  NSMutableArray *layoutConstraintsForBackgroundImageView;
+@property (nonatomic, retain) UIImageView *currentBackground;
+@end
+
 @implementation FigureTimelineTopCell {
     
     ImageWidget *imageWidget;
     FigureTimelineTopCellLine *cellLine;
-    UIImage *figureProfileImage;
-    UIImageView *blurBackgroundImageView;
     UILabel *personNameLabel;
-    NSMutableArray *layoutConstraintsForBackgroundImageView;
-    NSOperationQueue *queue;
 }
 
 static UIImage *DefaultBlurImage;
@@ -30,7 +34,7 @@ static UIImage *DefaultBlurImage;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        queue = [[NSOperationQueue alloc] init];
+        self.imageProcessingQueue = dispatch_queue_create("com.sashimiblade.legacyapp.imageprocessing", DISPATCH_QUEUE_SERIAL);
         self.contentView.clipsToBounds = YES;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.contentView.backgroundColor = [UIColor lightGrayColor];
@@ -40,47 +44,26 @@ static UIImage *DefaultBlurImage;
 }
 -(void)addBackgroundViewForImage:(UIImage *)backgroundImage {
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
-    imageView.alpha = 0;
-    __weak FigureTimelineTopCell *instance = self;
-
-    if (blurBackgroundImageView != nil && [backgroundImage isEqual:blurBackgroundImageView.image] == NO) {
-        [UIView animateWithDuration:BackgroundFadeInAnimationDuration animations:^{
-            blurBackgroundImageView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [blurBackgroundImageView removeFromSuperview];
-            [instance addBackgroundImageView:imageView completion:^{
-                blurBackgroundImageView = imageView;
-            }];
-        }];
+    if (self.currentBackground == nil) {
+        self.currentBackground = [[UIImageView alloc] initWithImage:backgroundImage];
+        [self.contentView insertSubview:self.currentBackground belowSubview:cellLine];
+        NSDictionary *BBindings = @{@"imageView": self.currentBackground};
+        [self.contentView addConstraintWithVisualFormat:@"H:|[imageView]|" bindings:BBindings];
+        [self.contentView addConstraintWithVisualFormat:@"V:|[imageView]|" bindings:BBindings];
     } else {
-        [instance addBackgroundImageView:imageView completion:^{
-            blurBackgroundImageView = imageView;
+        self.currentBackground.image = backgroundImage;
+    }
+    if (backgroundImage != nil) {
+        [UIView animateWithDuration:BackgroundFadeInAnimationDuration animations:^{
+            self.currentBackground.alpha = 1;
         }];
     }
-}
-
--(void)addBackgroundImageView:(UIImageView *)imageView completion:(void(^)())completion {
-    [self.contentView insertSubview:imageView belowSubview:cellLine];
-    if (layoutConstraintsForBackgroundImageView == nil) {
-        layoutConstraintsForBackgroundImageView = [NSMutableArray array];
-        UIBind(imageView);
-        [layoutConstraintsForBackgroundImageView addObjectsFromArray:[self.contentView addConstraintWithVisualFormat:@"H:|[imageView]|" bindings:BBindings]];
-        [layoutConstraintsForBackgroundImageView addObjectsFromArray:[self.contentView addConstraintWithVisualFormat:@"V:|[imageView]|" bindings:BBindings]];
-    }
-    imageView.alpha = 0;
-    [UIView animateWithDuration:BackgroundFadeInAnimationDuration animations:^{
-        imageView.alpha = 1;
-    }completion:^(BOOL finished) {
-        if (completion != NULL) {
-            completion();
-        }
-    }];
 }
 
 -(void)drawBackgroundBlurImageWithImage:(UIImage *)ourImage completion:(void(^)(UIImage *blurImage))completion {
     
-    [queue addOperationWithBlock:^{
+    dispatch_async(self.imageProcessingQueue, ^{
+        
         CGFloat transform = self.contentView.frame.size.width / ourImage.size.width;
         
         CIContext *context = [CIContext contextWithOptions:nil];
@@ -103,7 +86,7 @@ static UIImage *DefaultBlurImage;
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(blurImage);
         });
-    }];
+    });
 
 }
 
@@ -112,12 +95,10 @@ static UIImage *DefaultBlurImage;
 -(void)setRelation:(EventPersonRelation *)relation {
     if (relation != _relation) {
         _relation = relation;
-        imageWidget.largeImage = NoProfilePhotoImage;
-        imageWidget.smallImage = nil;
+        imageWidget.largeImage = _relation.event.figure.imageData != nil ? _relation.event.figure.image :NoProfilePhotoImage;
+        imageWidget.smallImage = _relation.person.thumbnailImage;
+        self.currentBackground.alpha = 0;
         personNameLabel.text = @"";
-        [blurBackgroundImageView removeFromSuperview];
-        blurBackgroundImageView = nil;
-        figureProfileImage = nil;
         [self fetchFigureProfilePic];
     }
 }
@@ -126,13 +107,13 @@ static UIImage *DefaultBlurImage;
     [super layoutSubviews];
     [self addAndConfigureLine];
     [self drawMainCircleImage];
-    if (figureProfileImage == nil) {
-        if (DefaultBlurImage == nil && [queue operationCount] == 0) {
+    if (self.relation.event.figure.imageData == nil) {
+        if (DefaultBlurImage == nil) {
             [self drawBackgroundBlurImageWithImage:NoProfilePhotoImage completion:^(UIImage *blurImage) {
                 DefaultBlurImage = blurImage;
                 [self addBackgroundViewForImage:DefaultBlurImage];
             }];
-        } else if (blurBackgroundImageView == nil && [queue operationCount] == 0) {
+        } else {
             [self addBackgroundViewForImage:DefaultBlurImage];
         }
     }
@@ -176,8 +157,8 @@ static UIImage *DefaultBlurImage;
     }
 }
 -(void)fillCircleImages {
-    if (figureProfileImage != nil) {
-        imageWidget.largeImage = figureProfileImage;
+    if (_relation.event.figure.image != nil) {
+        imageWidget.largeImage = _relation.event.figure.image;
     }
     if (_relation.person.thumbnailImage != nil) {
         imageWidget.smallImage = _relation.person.thumbnailImage;
@@ -209,12 +190,12 @@ static UIImage *DefaultBlurImage;
     
     [[ImageDownloadUtil sharedInstance] fetchAndSaveImageForFigure:_relation.event.figure completion:^(UIImage *theImage) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            figureProfileImage = theImage;
             [self fillCircleImages];
-            [self drawBackgroundBlurImageWithImage:figureProfileImage completion:^(UIImage *blurImage) {
-                [self addBackgroundViewForImage:blurImage];
-            }];
-            
+            if (_relation.event.figure.image != nil) {
+                [self drawBackgroundBlurImageWithImage:_relation.event.figure.image completion:^(UIImage *blurImage) {
+                    [self addBackgroundViewForImage:blurImage];
+                }];
+            }
             if (_relation.person != nil) {
                 [self addPersonNameLabel];
             }

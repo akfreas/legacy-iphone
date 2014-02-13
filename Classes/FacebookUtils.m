@@ -16,6 +16,9 @@
             Person *primaryPerson = [Person personWithFacebookGraphUser:result inContext:ctx];
             primaryPerson.isPrimary = [NSNumber numberWithBool:YES];
             [ctx save];
+            if (completion != NULL) {
+                completion();
+            }
             LegacyAppRequest *request = [LegacyAppRequest requestToGetEventForPerson:primaryPerson];
             [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, NSDictionary *relation, NSError *error) {
                 [ctx performBlock:^{

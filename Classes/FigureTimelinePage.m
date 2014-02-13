@@ -31,7 +31,6 @@ static NSString *HeaderID = @"EventHeader";
         self.delegate = self;
         self.dataSource = self;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.allowsSelection = NO;
     }
     return self;
@@ -142,7 +141,7 @@ static NSString *HeaderID = @"EventHeader";
 #pragma mark PageProtocol Delegate Methods
 
 -(void)becameVisible {
-    
+    [self setContentOffset:CGPointZero];
 }
 
 -(void)scrollCompleted {

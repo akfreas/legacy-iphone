@@ -25,7 +25,6 @@
 		192784AA1827C37E00DAA196 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 192784A91827C37E00DAA196 /* libz.dylib */; };
 		192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */; };
 		192BA7DC17F9575400ECBA49 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7DB17F9575400ECBA49 /* Images.xcassets */; };
-		192BA7DE17F9595F00ECBA49 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7DD17F9595F00ECBA49 /* Default.png */; };
 		192BA7E717F9D76600ECBA49 /* FacebookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 192BA7E617F9D76600ECBA49 /* FacebookUtils.m */; };
 		192E42B3174668E900192BD5 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
 		192E6E431724B1AA008C9153 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
@@ -164,7 +163,6 @@
 		192784A91827C37E00DAA196 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-header-text@2x.png"; sourceTree = "<group>"; };
 		192BA7DB17F9575400ECBA49 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LegacyApp/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		192BA7DD17F9595F00ECBA49 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
 		192BA7E517F9D76500ECBA49 /* FacebookUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookUtils.h; sourceTree = "<group>"; };
 		192BA7E617F9D76600ECBA49 /* FacebookUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookUtils.m; sourceTree = "<group>"; };
 		192E42B1174668E900192BD5 /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
@@ -545,7 +543,6 @@
 		4EEA6CD315268ED200B96EFD = {
 			isa = PBXGroup;
 			children = (
-				192BA7DD17F9595F00ECBA49 /* Default.png */,
 				4EEA6D021526902D00B96EFD /* Classes */,
 				4EEA6D081526902D00B96EFD /* Resources */,
 				4EEA6D091526902D00B96EFD /* Support */,
@@ -739,7 +736,6 @@
 			files = (
 				19BDFDC817FD157A00B415C1 /* legacy-fb-button.png in Resources */,
 				19C7A16918670FD600130BEF /* facebook-icon@2x.png in Resources */,
-				192BA7DE17F9595F00ECBA49 /* Default.png in Resources */,
 				1967B95E180484790092766D /* webview-annotation-image@2x.png in Resources */,
 				19BB09DD186FFB4F00E7D995 /* twitter-icon.png in Resources */,
 				1967B9691804AB170092766D /* chevron-left.png in Resources */,

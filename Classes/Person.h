@@ -22,5 +22,6 @@
 @property (nonatomic, retain) NSData * thumbnail;
 @property (nonatomic, retain) NSString * profilePicURL;
 @property (nonatomic, retain) EventPersonRelation *eventRelation;
+@property (nonatomic, readonly) UIImage *thumbnailImage;
 
 @end

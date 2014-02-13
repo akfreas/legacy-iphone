@@ -22,4 +22,8 @@
 @dynamic profilePicURL;
 @dynamic eventRelation;
 
+-(UIImage *)thumbnailImage {
+    return [UIImage imageWithData:self.thumbnail];
+}
+
 @end

@@ -16,4 +16,8 @@ target "LegacyApp" do
     pod "MagicalRecord"
 end
 
+target "LegacyApp Tests" do 
+    pod "MagicalRecord"
+    pod "AFNetworking"
+end
 

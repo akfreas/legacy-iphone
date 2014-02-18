@@ -4,6 +4,7 @@
 #import "LegacyAppConnection.h"
 #import "GAI.h"
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <BugSense-iOS/BugSenseController.h>
 @implementation AppDelegate 
 
 @synthesize window = _window;
@@ -16,6 +17,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [BugSenseController sharedControllerWithBugSenseAPIKey:@"6e2eee3d"];
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 #if DEBUG==0
     [Flurry setCrashReportingEnabled:YES];

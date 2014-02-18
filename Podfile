@@ -14,9 +14,10 @@ target "LegacyApp" do
     pod "SDWebImage"
     pod "SSFlatDatePicker"
     pod "MagicalRecord"
+    pod "BugSense"
 end
 
-target "LegacyApp Tests" do 
+target "LegacyAppTests" do 
     pod "MagicalRecord"
     pod "AFNetworking"
 end

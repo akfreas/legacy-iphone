@@ -125,6 +125,9 @@
 		19F1190D18AD238800951ACD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE215268ED300B96EFD /* UIKit.framework */; };
 		19F1191318AD238800951ACD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19F1191118AD238800951ACD /* InfoPlist.strings */; };
 		19F1191518AD238800951ACD /* LegacyAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191418AD238800951ACD /* LegacyAppTests.m */; };
+		19F1191F18AD274D00951ACD /* EventTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191C18AD274D00951ACD /* EventTableTests.m */; };
+		19F1192018AD274D00951ACD /* FixtureFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191E18AD274D00951ACD /* FixtureFactory.m */; };
+		19F1192318AD284C00951ACD /* EventsFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = 19F1192218AD284C00951ACD /* EventsFixture.json */; };
 		19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
@@ -137,6 +140,7 @@
 		4EEA6D0E1526902D00B96EFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D071526902D00B96EFD /* main.m */; };
 		4EEA6D451526A90200B96EFD /* LegacyAppConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */; };
 		4EEA6D5D1526CAEF00B96EFD /* LegacyAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */; };
+		6677FD66B5CE45B88CB2EADA /* libPods-LegacyAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EFCEF74ABF3473F8E2F0E97 /* libPods-LegacyAppTests.a */; };
 		C12EEAC0084E419EA9E773D9 /* libPods-LegacyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4750656191454527BBB82BAF /* libPods-LegacyApp.a */; };
 /* End PBXBuildFile section */
 
@@ -317,6 +321,10 @@
 		19F1191218AD238800951ACD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		19F1191418AD238800951ACD /* LegacyAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LegacyAppTests.m; sourceTree = "<group>"; };
 		19F1191618AD238800951ACD /* LegacyAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LegacyAppTests-Prefix.pch"; sourceTree = "<group>"; };
+		19F1191C18AD274D00951ACD /* EventTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableTests.m; sourceTree = "<group>"; };
+		19F1191D18AD274D00951ACD /* FixtureFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixtureFactory.h; sourceTree = "<group>"; };
+		19F1191E18AD274D00951ACD /* FixtureFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixtureFactory.m; sourceTree = "<group>"; };
+		19F1192218AD284C00951ACD /* EventsFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EventsFixture.json; sourceTree = "<group>"; };
 		19FAD7831763005E006FA829 /* PageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PageProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19FCB6F31874D30A00F9D30B /* BirthdaySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthdaySelectionView.h; sourceTree = "<group>"; };
 		19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthdaySelectionView.m; sourceTree = "<group>"; };
@@ -344,6 +352,8 @@
 		4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegacyAppConnection.m; sourceTree = "<group>"; };
 		4EEA6D5B1526CAEF00B96EFD /* LegacyAppRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LegacyAppRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LegacyAppRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		595AAB8D2D184AC6A9909131 /* Pods-LegacyAppTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyAppTests.xcconfig"; path = "Pods/Pods-LegacyAppTests.xcconfig"; sourceTree = "<group>"; };
+		8EFCEF74ABF3473F8E2F0E97 /* libPods-LegacyAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyApp.xcconfig"; path = "Pods/Pods-LegacyApp.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -355,6 +365,7 @@
 				19F1190B18AD238800951ACD /* XCTest.framework in Frameworks */,
 				19F1190D18AD238800951ACD /* UIKit.framework in Frameworks */,
 				19F1190C18AD238800951ACD /* Foundation.framework in Frameworks */,
+				6677FD66B5CE45B88CB2EADA /* libPods-LegacyAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +585,10 @@
 		19F1190E18AD238800951ACD /* LegacyAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				19F1192118AD283800951ACD /* Fixtures */,
+				19F1191C18AD274D00951ACD /* EventTableTests.m */,
+				19F1191D18AD274D00951ACD /* FixtureFactory.h */,
+				19F1191E18AD274D00951ACD /* FixtureFactory.m */,
 				19F1191418AD238800951ACD /* LegacyAppTests.m */,
 				19F1190F18AD238800951ACD /* Supporting Files */,
 			);
@@ -590,6 +605,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		19F1192118AD283800951ACD /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				19F1192218AD284C00951ACD /* EventsFixture.json */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
 		4EEA6CD315268ED200B96EFD = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +624,7 @@
 				4EEA6CE115268ED300B96EFD /* Frameworks */,
 				4EEA6CDF15268ED200B96EFD /* Products */,
 				F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */,
+				595AAB8D2D184AC6A9909131 /* Pods-LegacyAppTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -630,6 +654,7 @@
 				4EEA6CE615268ED300B96EFD /* CoreGraphics.framework */,
 				4750656191454527BBB82BAF /* libPods-LegacyApp.a */,
 				19F1190A18AD238800951ACD /* XCTest.framework */,
+				8EFCEF74ABF3473F8E2F0E97 /* libPods-LegacyAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -737,9 +762,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19F1191918AD238800951ACD /* Build configuration list for PBXNativeTarget "LegacyAppTests" */;
 			buildPhases = (
+				EA4EFD09F7D540829C9ECED8 /* Check Pods Manifest.lock */,
 				19F1190518AD238800951ACD /* Sources */,
 				19F1190618AD238800951ACD /* Frameworks */,
 				19F1190718AD238800951ACD /* Resources */,
+				8103A824A81F495C9C3D3F55 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -809,6 +836,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F1192318AD284C00951ACD /* EventsFixture.json in Resources */,
 				19F1191318AD238800951ACD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,6 +936,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		8103A824A81F495C9C3D3F55 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-LegacyAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA4EFD09F7D540829C9ECED8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -915,7 +973,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F1192018AD274D00951ACD /* FixtureFactory.m in Sources */,
 				19F1191518AD238800951ACD /* LegacyAppTests.m in Sources */,
+				19F1191F18AD274D00951ACD /* EventTableTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,6 +1072,7 @@
 /* Begin XCBuildConfiguration section */
 		19F1191A18AD238800951ACD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 595AAB8D2D184AC6A9909131 /* Pods-LegacyAppTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
@@ -1042,6 +1103,7 @@
 		};
 		19F1191B18AD238800951ACD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 595AAB8D2D184AC6A9909131 /* Pods-LegacyAppTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
@@ -1217,6 +1279,7 @@
 				19F1191B18AD238800951ACD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4EEA6CD815268ED200B96EFD /* Build configuration list for PBXProject "LegacyApp" */ = {
 			isa = XCConfigurationList;

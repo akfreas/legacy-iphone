@@ -110,7 +110,7 @@
 #define LegacyPointSummaryFont [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define FacebookModalDescriptionFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:15]
 #define PersonNameTopCellFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:17]
-
+#define InfoPageFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:15]
 
 
 #pragma mark Image Definitions
@@ -120,9 +120,12 @@
 #define FacebookButtonImage [UIImage imageNamed:@"facebook-icon.png"]
 #define TwitterButtonImage [UIImage imageNamed:@"twitter-icon.png"]
 #define AddFriendsButtonImage [UIImage imageNamed:@"add-friends.png"]
+#define FacebookInfoPageButton [UIImage imageNamed:@"facebook_button.png"]
 #define CheckMarkImage [UIImage imageNamed:@"check-mark.png"]
 #define NoEventImage [UIImage imageNamed:@"no-photo-legacy.png"]
 #define NoProfilePhotoImage [UIImage imageNamed:@"no-photo.png"]
+#define CloseButtonImage [UIImage imageNamed:@"close.png"]
+#define LogoImage [UIImage imageNamed:@"legacy-about-logo.png"]
 #pragma mark Page Constants
 
 #define MainEventPageNumber [NSNumber numberWithInteger:0]
@@ -132,6 +135,18 @@
 #pragma mark Animation Durations
 
 #define FacebookModalPresentationDuration 0.2f
+
+
+#pragma mark Enums
+
+typedef enum PageNumber {
+    InfoPageNumber,
+    LandingPageNumber,
+    TimelinePageNumber,
+    WebViewPageNumber,
+    LastPageNumber
+} PageNumber;
+
 
 #pragma mark Helpers
 

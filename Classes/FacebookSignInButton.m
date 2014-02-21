@@ -8,34 +8,30 @@
     IBOutlet UILabel *facebookConnectText;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
         [self addSubview:view];
         [self addTapGesture];
         self.frame = CGRectSetSizeOnFrame(self.frame, view.frame.size);
-        [self configureFacbookConnectText];
+        [self configureFacebookConnectText];
         
     }
     return self;
 }
 
--(void)configureFacbookConnectText {
-    facebookConnectText.font = [UIFont fontWithName:@"Cinzel-Regular" size:16.0];
+-(void)configureFacebookConnectText {
+    [self setImage:FacebookInfoPageButton forState:UIControlStateNormal];
 }
 
 -(void)addTapGesture {
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginWithFacebook)];
-    
-    [view addGestureRecognizer:tapGesture];
+    [self bk_addEventHandler:^(id sender) {
+        
+        [FacebookUtils loginWithFacebook:^{
+            [self hide];
+        }];
+    } forControlEvents:UIControlEventTouchUpInside];
 }
-
--(void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    view.frame = CGRectMakeFrameWithSizeFromFrame(frame);
-    }
 
 -(void)hide {
     [UIView animateWithDuration:.25 animations:^{
@@ -45,14 +41,4 @@
     }];
 }
 
--(void)setAlpha:(CGFloat)alpha {
-    [super setAlpha:alpha];
-    view.alpha = alpha;
-}
-
--(void)loginWithFacebook {
-    [FacebookUtils loginWithFacebook:^{
-        [self hide];
-    }];
-}
 @end

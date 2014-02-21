@@ -1,3 +1,3 @@
-@interface FacebookSignInButton : UIButton
+    @interface FacebookSignInButton : UIButton
 
 @end

@@ -3,6 +3,7 @@
 #import "SettingsModalView.h"
 #import "Person.h"
 #import "Figure.h"
+#import "FixtureFactory.h"
 
 #import "Utility_AppSettings.h"
 #import "FriendPickerHandler.h"
@@ -30,7 +31,6 @@
     IBOutlet HorizontalContentHostingScrollView *infoScreen;
     LegacyAppConnection *connection;
     MPMoviePlayerController *splashClipPlayer;
-    __unsafe_unretained DataSyncUtility *dataSync;
 }
 
 
@@ -53,7 +53,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
-        dataSync = [DataSyncUtility sharedInstance];
 #if DEBUG != 1
         [self setupSplashClip];
 #endif
@@ -136,7 +135,6 @@
     
     FBSessionState state = [FBSession activeSession].state;
         if (state == FBSessionStateOpen || state == FBSessionStateCreatedTokenLoaded) {
-            DataSyncUtility *localDataSync = dataSync;
             if (friendPickerDelegate == nil) {
                 friendPickerDelegate = [[FriendPickerHandler alloc] init];
             }
@@ -145,7 +143,7 @@
             friendPicker.delegate = friendPickerDelegate;
             friendPicker.indicateUserBirthday = YES;
             friendPickerDelegate.friendPickerCompletionBlock = ^{
-                [localDataSync sync:NULL];
+                [[DataSyncUtility sharedInstance] sync:NULL];
             };
             friendPicker.session = [FBSession activeSession];
             Person *currentPerson = [Person primaryPersonInContext:nil];
@@ -226,7 +224,7 @@
         blurView = nil;
     }
     if ([self shouldSyncNow]) {
-        [dataSync sync:NULL];
+        [[DataSyncUtility sharedInstance] sync:NULL];
     }
 }
 

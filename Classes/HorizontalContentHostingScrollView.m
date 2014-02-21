@@ -12,6 +12,9 @@
 #import "EventRowDrawerOpenBucket.h"
 
 @interface HorizontalContentHostingScrollView () <UIScrollViewDelegate>
+
+@property (nonatomic, assign) BOOL scrollingFromTouch;
+
 @end
 
 typedef enum ScrollViewDirection {
@@ -34,12 +37,6 @@ typedef enum ScrollViewDirection {
     FigureTimelinePage *timelinePage;
 }
 
-#define InfoPageNumber 999
-#define LandingPageNumber 0
-#define TimelinePageNumber LandingPageNumber + 1
-#define WebViewPageNumber TimelinePageNumber + 1
-#define LastPageNumber WebViewPageNumber + 1
-
 +(BOOL)requiresConstraintBasedLayout {
     return YES;
 }
@@ -60,6 +57,7 @@ typedef enum ScrollViewDirection {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPageWithNotif:) name:KeyForScrollToPageNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToLandingPage) name:KeyForLoggedIntoFacebookNotification object:nil];
         timelinePage = [[FigureTimelinePage alloc] init];
+        [self addLegacyInfoPage];
         [self addFigurePage];
         [self scrollToPage:LandingPageNumber];
     }
@@ -129,8 +127,6 @@ typedef enum ScrollViewDirection {
     [self scrollToPage:TimelinePageNumber];
 }
 
-
-
 -(CGRect)frameAtIndex:(NSInteger)index {
     
     CGRect windowFrame = [[[[UIApplication sharedApplication] windows] lastObject] frame];
@@ -199,6 +195,10 @@ typedef enum ScrollViewDirection {
     
     [self checkIfScrollCompletedAndNotifyPage];
     [self setScrollViewDirection];
+    if (scrollView.contentOffset.x < [self frameAtIndex:LandingPageNumber].origin.x && self.scrollingFromTouch == YES) {
+        scrollView.contentOffset = [self frameAtIndex:currentPage].origin;
+        return;
+    }
     [self notifyVisiblePage];
     if (scrollView.contentOffset.x == [self frameAtIndex:LandingPageNumber].origin.x && [pageArray count] > 0) {
         NSMutableArray *newArray = [NSMutableArray arrayWithArray:pageArray];
@@ -226,7 +226,7 @@ typedef enum ScrollViewDirection {
     
     if (self.contentOffset.x != departurePoint.x && paginationInProgress == NO) {
         
-        if (self.contentOffset.x > departurePoint.x) {
+        if (self.contentOffset.x> departurePoint.x) {
             nextPage++;
         } else {
             nextPage--;
@@ -241,18 +241,19 @@ typedef enum ScrollViewDirection {
     
 }
 
-
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    self.scrollingFromTouch = YES;
+    return  [super hitTest:point withEvent:event];
+}
 -(void)scrollToPageWithNotif:(NSNotification *)notif {
-    
+    self.scrollingFromTouch = NO;
     NSNumber *page = notif.userInfo[KeyForPageNumberInUserInfo];
-    
     [self scrollToPage:[page integerValue]];
 }
 
 -(void)scrollToPage:(NSInteger)page {
     
     if (currentPage != page) {
-        
         
         NSDictionary *params = @{@"from_page": [NSNumber numberWithInteger:currentPage], @"to_page" : [NSNumber numberWithInteger:page]};
         [Flurry logEvent:@"page_movement" withParameters:params];

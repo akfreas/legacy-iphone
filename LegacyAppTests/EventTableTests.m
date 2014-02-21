@@ -24,23 +24,21 @@
 
 - (void)setUp
 {
+    BOOL isAscending = NO;
     [super setUp];
-    self.events = [[FixtureFactory eventsFromFixture] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO]]];
+    self.events = [[FixtureFactory eventsFromFixture] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"event_id" ascending:isAscending]]];
     self.tablePage = [[EventTablePage alloc] initWithFrame:CGRectZero];
     NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
     self.dataSync = [[DataSyncUtility alloc] init];
-//    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
     __block BOOL finished = NO;
     [self.dataSync parseArrayOfEventsForTable:self.events completion:^{
         finished = YES;
-        self.tablePage.fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary,event.eventId" ascending:NO withPredicate:nil groupBy:nil delegate:self.tablePage inContext:ctx];
+        self.tablePage.fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"event.eventId" ascending:isAscending withPredicate:nil groupBy:nil delegate:self.tablePage inContext:ctx];
         NSError *err = nil;
         [self.tablePage.fetchController performFetch:&err];
         if (err) {
             XCTAssert(err, @"Error encountered performing fetch on controller.");
         }
-        NSArray *arr = [EventPersonRelation MR_findAllSortedBy:@"pinsToTop" ascending:YES];
-        [self.tablePage reloadData];
     }];
     
     while(finished == NO) {

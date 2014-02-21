@@ -7,7 +7,6 @@
 
 @implementation DataSyncUtility {
     
-    NSOperationQueue *queue;
     LegacyAppConnection *connection;
     void (^completion)();
 }
@@ -53,22 +52,28 @@
     }];
 }
 
+-(void)parseArrayOfEventsForTable:(NSArray *)events completion:(void (^)())completionBlock {
+    completion = completionBlock;
+    [self parseArrayOfEventsForTable:events];
+}
+
 -(void)parseArrayOfEventsForTable:(NSArray *)events {
     
-    NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
     [ctx performBlock:^{
         [EventPersonRelation MR_deleteAllMatchingPredicate:nil inContext:ctx];
         for (NSDictionary *eventDict in events) {
             [EventPersonRelation relationFromJSON:eventDict context:ctx];
         }
         [ctx MR_saveOnlySelfAndWait];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion != NULL) {
+                completion();
+            }
+        });
     }];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (completion != NULL) {
-            completion();
-        }
-    });
 }
 
 -(void)syncRelatedEventsInContext:(NSManagedObjectContext *)ctx {

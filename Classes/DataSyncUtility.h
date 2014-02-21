@@ -8,5 +8,6 @@
 -(void)syncFacebookFriends:(void(^)())completion;
 +(void)syncRelatedEventForFigure:(Figure *)figure;
 -(void)parseArrayOfEventsForTable:(NSArray *)events;
+-(void)parseArrayOfEventsForTable:(NSArray *)events completion:(void (^)())completionBlock;
 
 @end

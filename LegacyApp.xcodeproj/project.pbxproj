@@ -20,7 +20,6 @@
 		191CF63E1749635D00086D5E /* EventRowHorizontalScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63D1749635D00086D5E /* EventRowHorizontalScrollView.m */; };
 		191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 191E849C17F92655003A37AC /* Cinzel-Regular.ttf */; };
 		191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78FF1783990B00729F2A /* RelatedEventLabel.m */; };
-		1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */; };
 		19277237173B560D00A9F51D /* RelatedEventLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19277236173B560D00A9F51D /* RelatedEventLabel.xib */; };
 		192784AA1827C37E00DAA196 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 192784A91827C37E00DAA196 /* libz.dylib */; };
 		192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */; };
@@ -126,6 +125,13 @@
 		19A729DF18B6F159003EDF48 /* FixtureFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191E18AD274D00951ACD /* FixtureFactory.m */; };
 		19A729E018B6F168003EDF48 /* EventsFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = 19F1192218AD284C00951ACD /* EventsFixture.json */; };
 		19A729E118B6F351003EDF48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D071526902D00B96EFD /* main.m */; };
+		19A729E418B6F8E9003EDF48 /* NotificationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A729E318B6F8E9003EDF48 /* NotificationUtils.m */; };
+		19A729E718B6FCD5003EDF48 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729E518B6FCD5003EDF48 /* close.png */; };
+		19A729E818B6FCD5003EDF48 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729E618B6FCD5003EDF48 /* close@2x.png */; };
+		19A729EB18B6FCE6003EDF48 /* facebook_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729E918B6FCE6003EDF48 /* facebook_button.png */; };
+		19A729EC18B6FCE6003EDF48 /* facebook_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729EA18B6FCE6003EDF48 /* facebook_button@2x.png */; };
+		19A729EF18B6FD14003EDF48 /* legacy-about-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */; };
+		19A729F018B6FD14003EDF48 /* legacy-about-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */; };
 		19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */; };
 		19BB09DD186FFB4F00E7D995 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DB186FFB4F00E7D995 /* twitter-icon.png */; };
 		19BB09DE186FFB4F00E7D995 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DC186FFB4F00E7D995 /* twitter-icon@2x.png */; };
@@ -215,7 +221,6 @@
 		191E849C17F92655003A37AC /* Cinzel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cinzel-Regular.ttf"; sourceTree = "<group>"; };
 		191F78FE1783990B00729F2A /* RelatedEventLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedEventLabel.h; sourceTree = "<group>"; };
 		191F78FF1783990B00729F2A /* RelatedEventLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedEventLabel.m; sourceTree = "<group>"; };
-		1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LegacyInfoPage.xib; path = Resources/LegacyInfoPage.xib; sourceTree = SOURCE_ROOT; };
 		19277236173B560D00A9F51D /* RelatedEventLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedEventLabel.xib; sourceTree = "<group>"; };
 		192784A91827C37E00DAA196 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		192BA7D717F9280D00ECBA49 /* legacy-header-text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-header-text@2x.png"; sourceTree = "<group>"; };
@@ -309,6 +314,14 @@
 		199C0CAB16C0C0D900068E73 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		19A524AD16B7CBAF00195D9D /* FriendPickerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPickerHandler.h; sourceTree = "<group>"; };
 		19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendPickerHandler.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		19A729E218B6F8E9003EDF48 /* NotificationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationUtils.h; sourceTree = "<group>"; };
+		19A729E318B6F8E9003EDF48 /* NotificationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationUtils.m; sourceTree = "<group>"; };
+		19A729E518B6FCD5003EDF48 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		19A729E618B6FCD5003EDF48 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		19A729E918B6FCE6003EDF48 /* facebook_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_button.png; sourceTree = "<group>"; };
+		19A729EA18B6FCE6003EDF48 /* facebook_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_button@2x.png"; sourceTree = "<group>"; };
+		19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-about-logo.png"; sourceTree = "<group>"; };
+		19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-about-logo@2x.png"; sourceTree = "<group>"; };
 		19BB09D8186F840500E7D995 /* EventRowDrawerOpenBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRowDrawerOpenBucket.h; sourceTree = "<group>"; };
 		19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRowDrawerOpenBucket.m; sourceTree = "<group>"; };
 		19BB09DB186FFB4F00E7D995 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
@@ -497,7 +510,6 @@
 			children = (
 				197305F117C5D54500958D15 /* LegacyInfoPage.h */,
 				197305F217C5D54500958D15 /* LegacyInfoPage.m */,
-				1926F0C217CF82CB00406AB4 /* LegacyInfoPage.xib */,
 			);
 			name = "Info Page";
 			sourceTree = "<group>";
@@ -542,6 +554,8 @@
 				4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */,
 				193FF1831876FDB40099FEBD /* NSFetchedResultsControllerFactory.h */,
 				193FF1841876FDB40099FEBD /* NSFetchedResultsControllerFactory.m */,
+				19A729E218B6F8E9003EDF48 /* NotificationUtils.h */,
+				19A729E318B6F8E9003EDF48 /* NotificationUtils.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -576,6 +590,12 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */,
+				19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */,
+				19A729E918B6FCE6003EDF48 /* facebook_button.png */,
+				19A729EA18B6FCE6003EDF48 /* facebook_button@2x.png */,
+				19A729E518B6FCD5003EDF48 /* close.png */,
+				19A729E618B6FCD5003EDF48 /* close@2x.png */,
 				19BB09EA1870A95F00E7D995 /* no-photo-legacy.png */,
 				19BB09EB1870A95F00E7D995 /* no-photo-legacy@2x.png */,
 				19BB09E31870855900E7D995 /* check-mark.png */,
@@ -877,6 +897,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19A729EC18B6FCE6003EDF48 /* facebook_button@2x.png in Resources */,
 				19BDFDC817FD157A00B415C1 /* legacy-fb-button.png in Resources */,
 				19C7A16918670FD600130BEF /* facebook-icon@2x.png in Resources */,
 				1967B95E180484790092766D /* webview-annotation-image@2x.png in Resources */,
@@ -886,16 +907,20 @@
 				19C7A16818670FD600130BEF /* facebook-icon.png in Resources */,
 				1967B95C180483D30092766D /* timeline-annotation-image@2x.png in Resources */,
 				1967B95A180480C50092766D /* left-right-swipe-message.png in Resources */,
+				19A729E818B6FCD5003EDF48 /* close@2x.png in Resources */,
 				1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */,
 				196B77521817D52E00DF0C65 /* MainScreen.xib in Resources */,
 				1967B963180491B60092766D /* chevron-arrow@2x.png in Resources */,
 				1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */,
 				19C49EAE16CA3ABC00304AD6 /* button-pressed.png in Resources */,
 				19C49EAF16CA3ABC00304AD6 /* button.png in Resources */,
+				19A729EF18B6FD14003EDF48 /* legacy-about-logo.png in Resources */,
 				1993550916D4E89900D73389 /* ImageWidgetContainer.xib in Resources */,
 				198263AB18619D6800CA3FEE /* next-arrow-gray@2x.png in Resources */,
 				198263AA18619D6800CA3FEE /* next-arrow-gray.png in Resources */,
+				19A729E718B6FCD5003EDF48 /* close.png in Resources */,
 				1993550B16D4E8CB00D73389 /* ImageWidgetContainer.m in Resources */,
+				19A729F018B6FD14003EDF48 /* legacy-about-logo@2x.png in Resources */,
 				19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */,
 				1980A8AB186DFE8D00ECD354 /* next-arrow.png in Resources */,
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
@@ -922,11 +947,11 @@
 				1967B96E1804B8440092766D /* chevron-left@2x.png in Resources */,
 				19BB09ED1870A95F00E7D995 /* no-photo-legacy@2x.png in Resources */,
 				197305F017C5CA6700958D15 /* FigureTimelineEventCell.xib in Resources */,
-				1926F0C317CF82CB00406AB4 /* LegacyInfoPage.xib in Resources */,
 				1975752617D06CBD00822779 /* WebViewControls.xib in Resources */,
 				1975752817D06EA800822779 /* FigureTimelineTopCell.xib in Resources */,
 				196C6B2418052DEC00475ACB /* legacyapp-headertext_03@2x.png in Resources */,
 				1967B96A1804AB170092766D /* chevron-right.png in Resources */,
+				19A729EB18B6FCE6003EDF48 /* facebook_button.png in Resources */,
 				1945775817D3EAA000C5DB62 /* button-back.png in Resources */,
 				1945775917D3EAA000C5DB62 /* button-forward.png in Resources */,
 				19C7A16D186788C300130BEF /* splash-animation.mp4 in Resources */,
@@ -1102,6 +1127,7 @@
 				19BDFDD217FD3A8100B415C1 /* AMBlurView.m in Sources */,
 				19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */,
 				197305F317C5D54500958D15 /* LegacyInfoPage.m in Sources */,
+				19A729E418B6F8E9003EDF48 /* NotificationUtils.m in Sources */,
 				193FF17A187653270099FEBD /* NSManagedObject+Helpers.m in Sources */,
 				1975752117D053D900822779 /* ImageDownloadUtil.m in Sources */,
 				1975752417D06CA100822779 /* WebViewControls.m in Sources */,

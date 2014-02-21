@@ -35,7 +35,7 @@
     backPageButton = [[UIButton alloc] initForAutoLayout];
     [backPageButton setImage:BackPageButtonImage forState:UIControlStateNormal];
     [backPageButton bk_addEventHandler:^(id sender) {
-        [AKNOTIF postNotificationName:KeyForScrollToPageNotification object:nil userInfo:@{KeyForPageNumberInUserInfo: FigureLegacyTimelineViewPageNumber}];
+        [NotificationUtils scrollToPage:TimelinePageNumber];
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:backPageButton];
     

@@ -17,9 +17,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-    [BugSenseController sharedControllerWithBugSenseAPIKey:@"6e2eee3d"];
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 #if DEBUG==0
+    [BugSenseController sharedControllerWithBugSenseAPIKey:@"6e2eee3d"];
     [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:@"BM6HRVCKMTZK83B29BTH"];
     

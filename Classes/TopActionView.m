@@ -19,7 +19,7 @@
 
 @implementation TopActionView {
     ButtonWithImageView *addFriendsButton;
-    CircleImageView *profilePicButton;
+    UIButton *backArrowButton;
     CGFloat buttonRadii;
     CGFloat yButtonOrigin;
     UILabel *titleLabel;
@@ -33,7 +33,7 @@
         self.backgroundColor = HeaderBackgroundColor;
         yButtonOrigin = self.frame.size.height / 2 - TopBarButtonRadius + 5;
         [self addTitle];
-        [self addProfilePicButton];
+        [self addInfoBackButton];
         [self addAddFriendsButton];
     }
     return self;
@@ -66,35 +66,17 @@
     [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:addFriendsButton attribute:NSLayoutAttributeBaseline multiplier:1.0f constant:0]];
 }
 
--(void)addProfilePicButton {
+-(void)addInfoBackButton {
     
-    Person *mainPerson = [Person primaryPersonInContext:nil];
-    if (mainPerson != nil && profilePicButton == nil) {
-        UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
-        profilePicButton = [[CircleImageView alloc] initWithImage:thumb radius:buttonRadii];
-        profilePicButton.borderColor = PersonPhotoBorderColor;
-        profilePicButton.borderWidth = 0;
-        [self addSubview:profilePicButton];
-        UIBind(profilePicButton);
-        [self addConstraintWithVisualFormat:@"H:|-[profilePicButton]" bindings:BBindings];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:profilePicButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
-    }
-}
-
--(void)configureProfilePicButton {
-    
-    Person *mainPerson = [Person primaryPersonInContext:nil];
-    
-    UIImage *thumb = [UIImage imageWithData:mainPerson.thumbnail];
-
-    profilePicButton.image = thumb;
-    
-}
-
--(void)setIsVisible:(BOOL)isVisible {
-    if (isVisible && profilePicButton.image == nil) {
-        [self configureProfilePicButton];
-    }
+    backArrowButton = [[UIButton alloc] initForAutoLayout];
+    [backArrowButton setImage:BackPageButtonImage forState:UIControlStateNormal];
+    [backArrowButton bk_addEventHandler:^(id sender) {
+        [NotificationUtils scrollToPage:InfoPageNumber];
+    } forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:backArrowButton];
+    UIBind(backArrowButton);
+    [self addConstraintWithVisualFormat:@"H:|-[backArrowButton]" bindings:BBindings];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:backArrowButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
 }
 
 -(void)addFriendsButtonTappedAction {

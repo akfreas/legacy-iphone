@@ -4,6 +4,4 @@
 
 @property (nonatomic, assign) BOOL isVisible;
 
--(void)addFriendsButtonTappedAction;
-
 @end

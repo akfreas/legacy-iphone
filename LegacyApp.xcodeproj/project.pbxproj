@@ -42,6 +42,43 @@
 		1945775917D3EAA000C5DB62 /* button-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 1945775717D3EAA000C5DB62 /* button-forward.png */; };
 		194E327216DEBCE4007A55D7 /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = 19C49EAB16CA345800304AD6 /* Constants.h */; };
 		194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194E327316DF4150007A55D7 /* LegacyWebView.xib */; };
+		1951217E18B5D113006B5FB3 /* EventPersonRelation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDC317FBE99800B415C1 /* EventPersonRelation.m */; };
+		1951217F18B5D140006B5FB3 /* EventTablePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8681776192100256ED0 /* EventTablePage.m */; };
+		1951218018B5D26A006B5FB3 /* BirthdaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */; };
+		1951218118B5D26A006B5FB3 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BDFDD117FD3A8100B415C1 /* AMBlurView.m */; };
+		1951218218B5D26A006B5FB3 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A84C1771F4B100256ED0 /* Event.m */; };
+		1951218318B5D26A006B5FB3 /* NSManagedObject+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF179187653270099FEBD /* NSManagedObject+Helpers.m */; };
+		1951218418B5D26A006B5FB3 /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF187187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m */; };
+		1951218518B5D26A006B5FB3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF18A187709FD0099FEBD /* Person.m */; };
+		1951218618B5D26A006B5FB3 /* Figure+FigureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF16A187649D80099FEBD /* Figure+FigureHelper.m */; };
+		1951218718B5D26A006B5FB3 /* Figure.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995FFAD187E042C00EE1AB7 /* Figure.m */; };
+		1951218818B5D26A006B5FB3 /* Event+EventHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF16D187649F50099FEBD /* Event+EventHelper.m */; };
+		1951218918B5D26A006B5FB3 /* Person+PersonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17018764A040099FEBD /* Person+PersonHelper.m */; };
+		1951218A18B5D26A006B5FB3 /* EventPersonRelation+RelationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17318764A270099FEBD /* EventPersonRelation+RelationHelpers.m */; };
+		1951218B18B5D26A006B5FB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D041526902D00B96EFD /* AppDelegate.m */; };
+		1951218C18B5D26A006B5FB3 /* CircleImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191CF63A17488CE700086D5E /* CircleImageLayer.m */; };
+		1951218D18B5D26A006B5FB3 /* CircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8621772E6B000256ED0 /* CircleImageView.m */; };
+		1951218E18B5D26A006B5FB3 /* WebViewControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975752317D06CA100822779 /* WebViewControls.m */; };
+		1951218F18B5D26A006B5FB3 /* LegacyInfoPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305F217C5D54500958D15 /* LegacyInfoPage.m */; };
+		1951219018B5D26A006B5FB3 /* FigureTimelineTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305E717C5B32D00958D15 /* FigureTimelineTopCell.m */; };
+		1951219118B5D26A006B5FB3 /* FigureTimelineTopCellLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */; };
+		1951219218B5D26A006B5FB3 /* FigureTimelinePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305EA17C5B66A00958D15 /* FigureTimelinePage.m */; };
+		1951219318B5D26A006B5FB3 /* FigureTimelineEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305ED17C5C41500958D15 /* FigureTimelineEventCell.m */; };
+		1951219418B5D26A006B5FB3 /* FigureTimelineTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1980A89D186CD2A200ECD354 /* FigureTimelineTableHeader.m */; };
+		1951219518B5D26A006B5FB3 /* HorizontalContentHostingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199354FC16D4A29700D73389 /* HorizontalContentHostingScrollView.m */; };
+		1951219618B5D26A006B5FB3 /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
+		1951219818B5D26A006B5FB3 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
+		1951219918B5D26A006B5FB3 /* ImageWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E6E421724B1AA008C9153 /* ImageWidget.m */; };
+		1951219A18B5D26A006B5FB3 /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
+		1951219C18B5D26A006B5FB3 /* FacebookSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A8711776B45100256ED0 /* FacebookSignInButton.m */; };
+		1951219D18B5D26A006B5FB3 /* TopActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1909A87A1777471E00256ED0 /* TopActionView.m */; };
+		1951219E18B5D26A006B5FB3 /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E42B2174668E900192BD5 /* ProgressIndicator.m */; };
+		1951219F18B5D26A006B5FB3 /* RelatedEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 191F78FF1783990B00729F2A /* RelatedEventLabel.m */; };
+		195121A018B5D26A006B5FB3 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
+		195121A218B5D26A006B5FB3 /* LegacyAppConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */; };
+		195121A318B5D26A006B5FB3 /* LegacyAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */; };
+		195121A418B5D26A006B5FB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D071526902D00B96EFD /* main.m */; };
+		195121A518B5D26A006B5FB3 /* splash-animation.mp4 in Sources */ = {isa = PBXBuildFile; fileRef = 19C7A16A1867870500130BEF /* splash-animation.mp4 */; };
 		195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B600016DEB7D3006215E9 /* LegacyWebView.m */; };
 		19632B9616DB036900E0EA75 /* EventRowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* EventRowContentView.m */; };
 		1967B95A180480C50092766D /* left-right-swipe-message.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B959180480C50092766D /* left-right-swipe-message.png */; };
@@ -125,9 +162,9 @@
 		19F1190D18AD238800951ACD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE215268ED300B96EFD /* UIKit.framework */; };
 		19F1191318AD238800951ACD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19F1191118AD238800951ACD /* InfoPlist.strings */; };
 		19F1191518AD238800951ACD /* LegacyAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191418AD238800951ACD /* LegacyAppTests.m */; };
-		19F1191F18AD274D00951ACD /* EventTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191C18AD274D00951ACD /* EventTableTests.m */; };
 		19F1192018AD274D00951ACD /* FixtureFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191E18AD274D00951ACD /* FixtureFactory.m */; };
 		19F1192318AD284C00951ACD /* EventsFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = 19F1192218AD284C00951ACD /* EventsFixture.json */; };
+		19F1192518B5CD7E00951ACD /* EventTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1192418B5CD7E00951ACD /* EventTableTests.m */; };
 		19FCB6F51874D30A00F9D30B /* BirthdaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */; };
 		4E0F3CA1154533E800369BE1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0F3CA0154533E800369BE1 /* QuartzCore.framework */; };
 		4E0F3CA715453CB200369BE1 /* Utility_AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F3CA615453CB200369BE1 /* Utility_AppSettings.m */; };
@@ -321,10 +358,10 @@
 		19F1191218AD238800951ACD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		19F1191418AD238800951ACD /* LegacyAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LegacyAppTests.m; sourceTree = "<group>"; };
 		19F1191618AD238800951ACD /* LegacyAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LegacyAppTests-Prefix.pch"; sourceTree = "<group>"; };
-		19F1191C18AD274D00951ACD /* EventTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableTests.m; sourceTree = "<group>"; };
 		19F1191D18AD274D00951ACD /* FixtureFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixtureFactory.h; sourceTree = "<group>"; };
 		19F1191E18AD274D00951ACD /* FixtureFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixtureFactory.m; sourceTree = "<group>"; };
 		19F1192218AD284C00951ACD /* EventsFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EventsFixture.json; sourceTree = "<group>"; };
+		19F1192418B5CD7E00951ACD /* EventTableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableTests.m; sourceTree = "<group>"; };
 		19FAD7831763005E006FA829 /* PageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PageProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		19FCB6F31874D30A00F9D30B /* BirthdaySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirthdaySelectionView.h; sourceTree = "<group>"; };
 		19FCB6F41874D30A00F9D30B /* BirthdaySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirthdaySelectionView.m; sourceTree = "<group>"; };
@@ -585,8 +622,8 @@
 		19F1190E18AD238800951ACD /* LegacyAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				19F1192418B5CD7E00951ACD /* EventTableTests.m */,
 				19F1192118AD283800951ACD /* Fixtures */,
-				19F1191C18AD274D00951ACD /* EventTableTests.m */,
 				19F1191D18AD274D00951ACD /* FixtureFactory.h */,
 				19F1191E18AD274D00951ACD /* FixtureFactory.m */,
 				19F1191418AD238800951ACD /* LegacyAppTests.m */,
@@ -973,9 +1010,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1951218018B5D26A006B5FB3 /* BirthdaySelectionView.m in Sources */,
+				1951218118B5D26A006B5FB3 /* AMBlurView.m in Sources */,
+				1951218218B5D26A006B5FB3 /* Event.m in Sources */,
+				1951218318B5D26A006B5FB3 /* NSManagedObject+Helpers.m in Sources */,
+				1951218418B5D26A006B5FB3 /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */,
+				1951218518B5D26A006B5FB3 /* Person.m in Sources */,
+				1951218618B5D26A006B5FB3 /* Figure+FigureHelper.m in Sources */,
+				1951218718B5D26A006B5FB3 /* Figure.m in Sources */,
+				1951218818B5D26A006B5FB3 /* Event+EventHelper.m in Sources */,
+				1951218918B5D26A006B5FB3 /* Person+PersonHelper.m in Sources */,
+				1951218A18B5D26A006B5FB3 /* EventPersonRelation+RelationHelpers.m in Sources */,
+				1951218B18B5D26A006B5FB3 /* AppDelegate.m in Sources */,
+				1951218C18B5D26A006B5FB3 /* CircleImageLayer.m in Sources */,
+				1951218D18B5D26A006B5FB3 /* CircleImageView.m in Sources */,
+				1951218E18B5D26A006B5FB3 /* WebViewControls.m in Sources */,
+				1951218F18B5D26A006B5FB3 /* LegacyInfoPage.m in Sources */,
+				1951219018B5D26A006B5FB3 /* FigureTimelineTopCell.m in Sources */,
+				1951219118B5D26A006B5FB3 /* FigureTimelineTopCellLine.m in Sources */,
+				1951219218B5D26A006B5FB3 /* FigureTimelinePage.m in Sources */,
+				1951219318B5D26A006B5FB3 /* FigureTimelineEventCell.m in Sources */,
+				1951219418B5D26A006B5FB3 /* FigureTimelineTableHeader.m in Sources */,
+				1951219518B5D26A006B5FB3 /* HorizontalContentHostingScrollView.m in Sources */,
+				1951219618B5D26A006B5FB3 /* FriendPickerHandler.m in Sources */,
+				1951219818B5D26A006B5FB3 /* ImageWidgetContainer.m in Sources */,
+				1951219918B5D26A006B5FB3 /* ImageWidget.m in Sources */,
+				1951219A18B5D26A006B5FB3 /* MainScreen.m in Sources */,
+				1951219C18B5D26A006B5FB3 /* FacebookSignInButton.m in Sources */,
+				1951219D18B5D26A006B5FB3 /* TopActionView.m in Sources */,
+				1951219E18B5D26A006B5FB3 /* ProgressIndicator.m in Sources */,
+				1951219F18B5D26A006B5FB3 /* RelatedEventLabel.m in Sources */,
+				195121A018B5D26A006B5FB3 /* SettingsModalView.m in Sources */,
+				195121A218B5D26A006B5FB3 /* LegacyAppConnection.m in Sources */,
+				195121A318B5D26A006B5FB3 /* LegacyAppRequest.m in Sources */,
+				195121A418B5D26A006B5FB3 /* main.m in Sources */,
+				195121A518B5D26A006B5FB3 /* splash-animation.mp4 in Sources */,
+				1951217F18B5D140006B5FB3 /* EventTablePage.m in Sources */,
+				1951217E18B5D113006B5FB3 /* EventPersonRelation.m in Sources */,
+				19F1192518B5CD7E00951ACD /* EventTableTests.m in Sources */,
 				19F1192018AD274D00951ACD /* FixtureFactory.m in Sources */,
 				19F1191518AD238800951ACD /* LegacyAppTests.m in Sources */,
-				19F1191F18AD274D00951ACD /* EventTableTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1075,7 +1149,7 @@
 			baseConfigurationReference = 595AAB8D2D184AC6A9909131 /* Pods-LegacyAppTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LegacyApp.app/LegacyApp";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1088,7 +1162,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LegacyAppTests/LegacyAppTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/LegacyApp-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1106,7 +1180,7 @@
 			baseConfigurationReference = 595AAB8D2D184AC6A9909131 /* Pods-LegacyAppTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LegacyApp.app/LegacyApp";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1120,7 +1194,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LegacyAppTests/LegacyAppTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/LegacyApp-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				INFOPLIST_FILE = "LegacyAppTests/LegacyAppTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";

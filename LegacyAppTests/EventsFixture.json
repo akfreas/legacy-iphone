@@ -1,0 +1,327 @@
+ [
+  {
+  "event_description": "Borrows $10,000 to create a fashion collection.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/b858174920f0a51055a809c872de31bf",
+  "id": 6054,
+  "name": "Calvin Klein"
+  },
+  "age_years": 20,
+  "event_id": 773,
+  "age_days": 28,
+  "age_months": 8
+  },
+  {
+  "event_description": "Paints renowned THE ANNUNCIATION.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/9fb455d0c52cb0488127bb07091398c8",
+  "id": 4149,
+  "name": "Orazio Gentileschi"
+  },
+  "age_years": 61,
+  "event_id": 16148,
+  "age_days": 25,
+  "age_months": 6
+  },
+  {
+  "event_description": "Becomes First Lady upon inauguration of husband George.",
+  "figure": {
+  "events_count": 1,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/6aa09882b26e121d1b37fc1559b32d69",
+  "id": 3386,
+  "name": "Barbara Bush"
+  },
+  "age_years": 63,
+  "event_id": 16917,
+  "age_days": 12,
+  "age_months": 7
+  },
+  {
+  "event_description": "Is appointed Commanding General of European War.",
+  "figure": {
+  "events_count": 31,
+  "image_url": "not_found_0",
+  "id": 6059,
+  "name": "Ike Eisenhower"
+  },
+  "age_years": 52,
+  "event_id": 12588,
+  "age_days": 25,
+  "age_months": 0
+  },
+  {
+  "event_description": "Publishes THE MEANING OF GOD IN HUMAN EXPERIENCE.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/90b06201705a2fc36bfa28608b2e9e76",
+  "id": 6972,
+  "name": "William Hocking"
+  },
+  "age_years": 39,
+  "event_id": 7697,
+  "age_days": 5,
+  "age_months": 1
+  },
+  {
+  "event_description": "Enters Caracus as liberator of Venezuela.",
+  "figure": {
+  "events_count": 12,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/6855aad7b3d5d279970aa49d5bf127b4",
+  "id": 9440,
+  "name": "Simon Bolivar"
+  },
+  "age_years": 30,
+  "event_id": 4274,
+  "age_days": 14,
+  "age_months": 0
+  },
+  {
+  "event_description": "Sells 10 millionth copy of his book THE EXORCIST.",
+  "figure": {
+  "events_count": 1,
+  "image_url": "not_found_0",
+  "id": 3419,
+  "name": "William P. Blatty"
+  },
+  "age_years": 43,
+  "event_id": 9538,
+  "age_days": 25,
+  "age_months": 11
+  },
+  {
+  "event_description": "Is shot while on a civil rights march.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/534e55525dd8aaa678f006be03143082",
+  "id": 8493,
+  "name": "James Meredith"
+  },
+  "age_years": 32,
+  "event_id": 5376,
+  "age_days": 11,
+  "age_months": 11
+  },
+  {
+  "event_description": "Discovers existence of ancient Minoan culture on Crete.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/aac4b73d009c7b5b49d035409671ddf4",
+  "id": 6914,
+  "name": "Arthur Evans"
+  },
+  "age_years": 47,
+  "event_id": 10707,
+  "age_days": 30,
+  "age_months": 0
+  },
+  {
+  "event_description": "Continues the saga in RAMBO: FIRST BLOOD PART II.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/10eb691a4f28ebadb50affd8f2895d86",
+  "id": 1366,
+  "name": "Sylvester Stallone"
+  },
+  "age_years": 38,
+  "event_id": 7612,
+  "age_days": 13,
+  "age_months": 10
+  },
+  {
+  "event_description": "Marries Livinia Warren/combined height is 77 inches.",
+  "figure": {
+  "events_count": 3,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/e374ae68ada4a9888a63340810ed6388",
+  "id": 1904,
+  "name": "General Tom Thumb"
+  },
+  "age_years": 25,
+  "event_id": 2439,
+  "age_days": 3,
+  "age_months": 2
+  },
+  {
+  "event_description": "Champions a method of natural childbirth.",
+  "figure": {
+  "events_count": 1,
+  "image_url": "not_found_2",
+  "id": 645,
+  "name": "Ferhand Lamaze"
+  },
+  "age_years": 54,
+  "event_id": 13610,
+  "age_days": 18,
+  "age_months": 9
+  },
+  {
+  "event_description": "Reconciles Heraclitanism philosophy with Eleaticism.  449 BC  ->57/3",
+  "figure": {
+  "events_count": 2,
+  "image_url": "not_found_0",
+  "id": 5448,
+  "name": "Empedocles"
+  },
+  "age_years": 44,
+  "event_id": 9900,
+  "age_days": 7,
+  "age_months": 11
+  },
+  {
+  "event_description": "Contributes to ethnological with study of Indian tribes.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/2ae37da22ef84a20fcd4f8485c864e52",
+  "id": 8508,
+  "name": "Henry Schoolcraft"
+  },
+  "age_years": 64,
+  "event_id": 17200,
+  "age_days": 17,
+  "age_months": 4
+  },
+  {
+  "event_description": "Wins an Olympic gold medal in distance run at Antwerp.",
+  "figure": {
+  "events_count": 1,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/805ef2ff17045bd140d1cfd590ec82c2",
+  "id": 333,
+  "name": "Paavo Nurmi"
+  },
+  "age_years": 23,
+  "event_id": 1729,
+  "age_days": 11,
+  "age_months": 3
+  },
+  {
+  "event_description": "Replaces Gladstone as Prime Minister of Great Britain.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/0fb7122fd57d73fa0ebecedc6268cc85",
+  "id": 5005,
+  "name": "Robert Salisbury"
+  },
+  "age_years": 55,
+  "event_id": 13866,
+  "age_days": 23,
+  "age_months": 5
+  },
+  {
+  "event_description": "Completes work on the UNIVAC computer.",
+  "figure": {
+  "events_count": 3,
+  "image_url": "not_found_2",
+  "id": 8843,
+  "name": "John P. Eckert Jr"
+  },
+  "age_years": 32,
+  "event_id": 5068,
+  "age_days": 16,
+  "age_months": 1
+  },
+  {
+  "event_description": "Founds in Chicago the Congress of Racial Equality.",
+  "figure": {
+  "events_count": 1,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/5d045ae3e990e7c1aec4b3911e7e3f18",
+  "id": 3007,
+  "name": "James Farmer"
+  },
+  "age_years": 22,
+  "event_id": 1604,
+  "age_days": 11,
+  "age_months": 11
+  },
+  {
+  "event_description": "Retires to president emeritus of Vasser College.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/1cd64e34e3735ae60bda61f92a02aafa",
+  "id": 2346,
+  "name": "Sarah Blanding"
+  },
+  "age_years": 65,
+  "event_id": 17687,
+  "age_days": 7,
+  "age_months": 8
+  },
+  {
+  "event_description": "Completes construction of the Golden Gate Bridge.",
+  "figure": {
+  "events_count": 4,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/977cdebba574cf97d8771f96f7702f9e",
+  "id": 1549,
+  "name": "Othmar Ammann"
+  },
+  "age_years": 61,
+  "event_id": 16016,
+  "age_days": 17,
+  "age_months": 2
+  },
+  {
+  "event_description": "Founds Knott's Berry Farm Amusement Park in California.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/cf53aea28ccc89c840e0f06909214347",
+  "id": 10636,
+  "name": "Walter Knott"
+  },
+  "age_years": 50,
+  "event_id": 12102,
+  "age_days": 13,
+  "age_months": 9
+  },
+  {
+  "event_description": "Becomes first practicing woman physician in America.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/90b06201705a2fc36bfa28608b2e9e76",
+  "id": 4757,
+  "name": "Mary Walker"
+  },
+  "age_years": 22,
+  "event_id": 1513,
+  "age_days": 16,
+  "age_months": 8
+  },
+  {
+  "event_description": "Prosecutes Marie Antoinette before revolutionary tribunal.",
+  "figure": {
+  "events_count": 1,
+  "image_url": "not_found_2",
+  "id": 8425,
+  "name": "A. Fouquier-Tinville"
+  },
+  "age_years": 47,
+  "event_id": 10770,
+  "age_days": 0,
+  "age_months": 3
+  },
+  {
+  "event_description": "Dies at Versailles in gross immorality and despised by people.",
+  "figure": {
+  "events_count": 2,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/2e4368eaa56d9446888bd7e30f5d1640",
+  "id": 2491,
+  "name": "King Louis Xv"
+  },
+  "age_years": 64,
+  "event_id": 17114,
+  "age_days": 24,
+  "age_months": 1
+  },
+  {
+  "event_description": "Performs in Rome as greatest comic actor of antiquity.  67 BC",
+  "figure": {
+  "events_count": 1,
+  "image_url": "http://legacyapp-images.s3.amazonaws.com/90b06201705a2fc36bfa28608b2e9e76",
+  "id": 8618,
+  "name": "Quintus Roscius"
+  },
+  "age_years": 66,
+  "event_id": 18056,
+  "age_days": 28,
+  "age_months": 7
+  }
+  ]

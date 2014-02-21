@@ -15,7 +15,7 @@
 
 #import "EventTablePage.h"
 
-@interface EventTablePage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface EventTablePage () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -48,7 +48,7 @@ static NSString *ReuseID = @"CellReuseId";
         }
         [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"Legacy.sqlite"];
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
-        self.fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary" ascending:NO withPredicate:nil groupBy:nil delegate:self inContext:[NSManagedObjectContext MR_defaultContext]];
+        self.fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary,event.figure.id" ascending:NO withPredicate:nil groupBy:nil delegate:self inContext:[NSManagedObjectContext MR_defaultContext]];
         self.contentOffset = CGPointMake(0, 0);
         NSError *err = nil;
         [self.fetchController performFetch:&err];

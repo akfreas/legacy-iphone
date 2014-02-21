@@ -1,13 +1,11 @@
 #import "FigureTimelineTopCellLine.h"
 
-@implementation FigureTimelineTopCellLine {
-    NSInteger itemCount;
-}
+@implementation FigureTimelineTopCellLine
 
 - (id)initWithFrame:(CGRect)frame numberOfItems:(NSInteger)itemC {
     self = [super initWithFrame:frame];
     if (self) {
-        itemCount = itemC;
+        _numberOfItems = itemC;
         self.backgroundColor = [UIColor clearColor];
     }
     return self;
@@ -38,8 +36,8 @@
     
     [[UIColor whiteColor] setFill];
     NSDictionary *textAttrs = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName : LegacyPointSummaryFont};
-    NSString *plural = itemCount > 1 ? @"s" : @"";
-    NSString *legacyPointString = [NSString stringWithFormat:@"%i Legacy Point%@", itemCount, plural];
+    NSString *plural = self.numberOfItems > 1 ? @"s" : @"";
+    NSString *legacyPointString = [NSString stringWithFormat:@"%i Legacy Point%@", self.numberOfItems, plural];
     [legacyPointString drawAtPoint:CGPointMake(originPoint.x - 130, originPoint.y - 20) withAttributes:textAttrs];
     
 }

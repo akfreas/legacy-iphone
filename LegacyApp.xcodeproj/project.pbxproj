@@ -77,7 +77,6 @@
 		195121A018B5D26A006B5FB3 /* SettingsModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E640C1615460474009D8DC6 /* SettingsModalView.m */; };
 		195121A218B5D26A006B5FB3 /* LegacyAppConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D441526A90200B96EFD /* LegacyAppConnection.m */; };
 		195121A318B5D26A006B5FB3 /* LegacyAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D5C1526CAEF00B96EFD /* LegacyAppRequest.m */; };
-		195121A418B5D26A006B5FB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D071526902D00B96EFD /* main.m */; };
 		195121A518B5D26A006B5FB3 /* splash-animation.mp4 in Sources */ = {isa = PBXBuildFile; fileRef = 19C7A16A1867870500130BEF /* splash-animation.mp4 */; };
 		195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B600016DEB7D3006215E9 /* LegacyWebView.m */; };
 		19632B9616DB036900E0EA75 /* EventRowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19632B9516DB036900E0EA75 /* EventRowContentView.m */; };
@@ -94,7 +93,6 @@
 		196B64EC1868E1C100A75C63 /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B64EB1868E1C100A75C63 /* libFlurry_4.2.3.a */; };
 		196B77521817D52E00DF0C65 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B77511817D52D00DF0C65 /* MainScreen.xib */; };
 		196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196C6B1C18051FCD00475ACB /* MessageUI.framework */; };
-		196C6B2218052D8200475ACB /* PasscodeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196C6B2018052D8200475ACB /* PasscodeScreenViewController.xib */; };
 		196C6B2418052DEC00475ACB /* legacyapp-headertext_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196C6B2318052DEC00475ACB /* legacyapp-headertext_03@2x.png */; };
 		197305E817C5B32D00958D15 /* FigureTimelineTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305E717C5B32D00958D15 /* FigureTimelineTopCell.m */; };
 		197305EB17C5B66A00958D15 /* FigureTimelinePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 197305EA17C5B66A00958D15 /* FigureTimelinePage.m */; };
@@ -125,6 +123,9 @@
 		1997B72A16DEBA31009692F5 /* LegacyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1997B72816DEBA31009692F5 /* LegacyModel.xcdatamodeld */; };
 		199C0CAD16C0C0F300068E73 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199C0CAB16C0C0D900068E73 /* CoreData.framework */; };
 		19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A524AE16B7CBAF00195D9D /* FriendPickerHandler.m */; };
+		19A729DF18B6F159003EDF48 /* FixtureFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F1191E18AD274D00951ACD /* FixtureFactory.m */; };
+		19A729E018B6F168003EDF48 /* EventsFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = 19F1192218AD284C00951ACD /* EventsFixture.json */; };
+		19A729E118B6F351003EDF48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA6D071526902D00B96EFD /* main.m */; };
 		19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */; };
 		19BB09DD186FFB4F00E7D995 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DB186FFB4F00E7D995 /* twitter-icon.png */; };
 		19BB09DE186FFB4F00E7D995 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DC186FFB4F00E7D995 /* twitter-icon@2x.png */; };
@@ -264,9 +265,6 @@
 		196B64EB1868E1C100A75C63 /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		196B77511817D52D00DF0C65 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		196C6B1C18051FCD00475ACB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		196C6B1E18052D8200475ACB /* PasscodeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasscodeScreenViewController.h; sourceTree = "<group>"; };
-		196C6B1F18052D8200475ACB /* PasscodeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasscodeScreenViewController.m; sourceTree = "<group>"; };
-		196C6B2018052D8200475ACB /* PasscodeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeScreenViewController.xib; sourceTree = "<group>"; };
 		196C6B2318052DEC00475ACB /* legacyapp-headertext_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacyapp-headertext_03@2x.png"; sourceTree = "<group>"; };
 		197305E617C5B32D00958D15 /* FigureTimelineTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureTimelineTopCell.h; sourceTree = "<group>"; };
 		197305E717C5B32D00958D15 /* FigureTimelineTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureTimelineTopCell.m; sourceTree = "<group>"; };
@@ -731,9 +729,6 @@
 				19D29F7F16A674C200D46B0A /* MainScreen.h */,
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
 				196B77511817D52D00DF0C65 /* MainScreen.xib */,
-				196C6B1E18052D8200475ACB /* PasscodeScreenViewController.h */,
-				196C6B1F18052D8200475ACB /* PasscodeScreenViewController.m */,
-				196C6B2018052D8200475ACB /* PasscodeScreenViewController.xib */,
 				1909A86F1776B41700256ED0 /* Row Components */,
 				192E42B1174668E900192BD5 /* ProgressIndicator.h */,
 				192E42B2174668E900192BD5 /* ProgressIndicator.m */,
@@ -904,7 +899,6 @@
 				19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */,
 				1980A8AB186DFE8D00ECD354 /* next-arrow.png in Resources */,
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
-				196C6B2218052D8200475ACB /* PasscodeScreenViewController.xib in Resources */,
 				1980A8AC186DFE8D00ECD354 /* next-arrow@2x.png in Resources */,
 				194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */,
 				1980A8A1186CE79F00ECD354 /* back-arrow.png in Resources */,
@@ -936,6 +930,7 @@
 				1945775817D3EAA000C5DB62 /* button-back.png in Resources */,
 				1945775917D3EAA000C5DB62 /* button-forward.png in Resources */,
 				19C7A16D186788C300130BEF /* splash-animation.mp4 in Resources */,
+				19A729E018B6F168003EDF48 /* EventsFixture.json in Resources */,
 				19BB09E51870855900E7D995 /* check-mark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1040,10 +1035,10 @@
 				1951219D18B5D26A006B5FB3 /* TopActionView.m in Sources */,
 				1951219E18B5D26A006B5FB3 /* ProgressIndicator.m in Sources */,
 				1951219F18B5D26A006B5FB3 /* RelatedEventLabel.m in Sources */,
+				19A729E118B6F351003EDF48 /* main.m in Sources */,
 				195121A018B5D26A006B5FB3 /* SettingsModalView.m in Sources */,
 				195121A218B5D26A006B5FB3 /* LegacyAppConnection.m in Sources */,
 				195121A318B5D26A006B5FB3 /* LegacyAppRequest.m in Sources */,
-				195121A418B5D26A006B5FB3 /* main.m in Sources */,
 				195121A518B5D26A006B5FB3 /* splash-animation.mp4 in Sources */,
 				1951217F18B5D140006B5FB3 /* EventTablePage.m in Sources */,
 				1951217E18B5D113006B5FB3 /* EventPersonRelation.m in Sources */,
@@ -1069,6 +1064,7 @@
 				4E640C1715460474009D8DC6 /* SettingsModalView.m in Sources */,
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
 				1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */,
+				19A729DF18B6F159003EDF48 /* FixtureFactory.m in Sources */,
 				193FF188187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */,
 				19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */,
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,

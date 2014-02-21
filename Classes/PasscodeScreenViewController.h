@@ -1,3 +1,0 @@
-@interface PasscodeScreenViewController : UIViewController
-
-@end

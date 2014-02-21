@@ -8,12 +8,15 @@
 #import <HexColors/HexColor.h>
 #import <BlocksKit/BlocksKit.h>
 #import <BlocksKit/BlocksKit+UIKit.h>
-#import "Utility_AppSettings.h"
-#import "CGRectUtils.h"
-#import "UIView+LayoutHelpers.h"
+
 #import <UIView+AutoLayout/UIView+AutoLayout.h>
 #import "Flurry.h"
 
+#pragma mark Utilities
+#import "Utility_AppSettings.h"
+#import "CGRectUtils.h"
+#import "UIView+LayoutHelpers.h"
+#import "NotificationUtils.h"
 
 #pragma mark Core Data Helpers
 

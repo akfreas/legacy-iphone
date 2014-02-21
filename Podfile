@@ -18,7 +18,19 @@ target "LegacyApp" do
 end
 
 target "LegacyAppTests" do 
-    pod "MagicalRecord"
+    pod "HexColors"
+    pod "AFFacebook-iOS-SDK"
     pod "AFNetworking"
+    pod "GoogleAnalytics-iOS-SDK"
+    pod "BlocksKit", '~> 2.0.0'
+    pod "UIView+AutoLayout"
+    pod "hpple"
+    pod "RNBlurModalView"
+    pod "SDWebImage"
+    pod "SSFlatDatePicker"
+    pod "MagicalRecord"
+    pod "BugSense"
 end
+
+
 

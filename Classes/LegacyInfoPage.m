@@ -16,7 +16,7 @@
 @end
 
 @implementation LegacyInfoPage {
-    }
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -107,25 +107,25 @@
 -(void)addLayoutConstraints {
     
     NSDictionary *bindingDict = @{@"facebookText" : self.facebookText,
-                           @"backButton" : self.backButton,
-                           @"logoImage" : self.logoImage,
-                           @"appDescriptionLabel" : self.appDescriptionLabel,
-                           @"feedbackButton" : self.feedbackButton,
-                           @"facebookButton" : self.facebookButton};
+                                  @"backButton" : self.backButton,
+                                  @"logoImage" : self.logoImage,
+                                  @"appDescriptionLabel" : self.appDescriptionLabel,
+                                  @"feedbackButton" : self.feedbackButton,
+                                  @"facebookButton" : self.facebookButton};
     for (UIView *v in [bindingDict allValues]) {
         v.translatesAutoresizingMaskIntoConstraints = NO;
     }
-    [self addConstraintWithVisualFormat:@"V:|-(25)-[backButton]-(<=30)-[logoImage]-(<=45)-[appDescriptionLabel]-(15)-[feedbackButton(25)]" bindings:bindingDict];
-    [self addConstraintWithVisualFormat:@"H:|-[backButton]" bindings:bindingDict];
+    [self addConstraintWithVisualFormat:@"V:|-[backButton(>=70)]-(<=30)-[logoImage]-(<=45)-[appDescriptionLabel]-(15)-[feedbackButton(25)]" bindings:bindingDict];
+    [self addConstraintWithVisualFormat:@"H:|[backButton(>=70)]" bindings:bindingDict];
     [self.logoImage autoAlignAxisToSuperviewAxis:ALAxisVertical];
     [self.appDescriptionLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
     [self addConstraintWithVisualFormat:@"H:|-[appDescriptionLabel]-|" bindings:bindingDict];
     [self addConstraintWithVisualFormat:@"H:|-[feedbackButton(100)]" bindings:bindingDict];
     
-    
-    [self addConstraintWithVisualFormat:@"V:[feedbackButton]-(15)-[facebookText]-(>=10)-[facebookButton]-|" bindings:bindingDict];
-    [self addConstraintWithVisualFormat:@"H:|-[facebookText]-|" bindings:bindingDict];
-    [self addConstraintWithVisualFormat:@"H:|-[facebookButton]-|" bindings:bindingDict];
+        [self addConstraintWithVisualFormat:@"V:[feedbackButton]-(15)-[facebookText]-(>=10)-[facebookButton]-|" bindings:bindingDict];
+        [self addConstraintWithVisualFormat:@"H:|-[facebookText]-|" bindings:bindingDict];
+        [self addConstraintWithVisualFormat:@"H:|-[facebookButton]-|" bindings:bindingDict];
+
 }
 
 
@@ -137,12 +137,19 @@ NSDictionary * _AKDictionaryOfVariableBindings(NSString *commaSeparatedKeysStrin
     for (int i=0; i<[keys count]; i++) {
         
     }
+    return dict;
 }
 
 #pragma mark PageProtocol Delegate Methods
 
 -(void)becameVisible {
-    
+    if ([[FBSession activeSession] isOpen] == NO) {
+        self.facebookText.hidden = NO;
+        self.facebookButton.hidden = NO;
+    } else {
+        self.facebookText.hidden = YES;
+        self.facebookButton.hidden = YES;
+    }
 }
 
 -(void)scrollCompleted {

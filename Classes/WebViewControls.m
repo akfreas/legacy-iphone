@@ -68,10 +68,12 @@
     
     [titleLabel autoCenterInSuperviewAlongAxis:ALAxisVertical];
     UIBind(titleLabel, indicatorView, backPageButton);
-    [self addConstraintWithVisualFormat:@"V:[titleLabel]-10-|" bindings:BBindings];
+    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:8]];
     [self addConstraintWithVisualFormat:@"H:[titleLabel]-10-[indicatorView]" bindings:BBindings];
     [indicatorView autoAlignAxis:ALAxisHorizontal toSameAxisOfView:titleLabel];
-    [self addConstraintWithVisualFormat:@"H:|-24-[backPageButton]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|[backPageButton(>=70)]" bindings:BBindings];
     [backPageButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:titleLabel];
 }
 

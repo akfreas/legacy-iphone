@@ -61,21 +61,23 @@
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:addFriendsButton];
     UIBind(addFriendsButton);
-    [self addConstraintWithVisualFormat:@"H:[addFriendsButton(40)]-|" bindings:BBindings];
-    [self addConstraintWithVisualFormat:@"V:[addFriendsButton(40)]" bindings:BBindings];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:addFriendsButton attribute:NSLayoutAttributeBaseline multiplier:1.0f constant:0]];
+    [self addConstraintWithVisualFormat:@"H:[addFriendsButton(>=70)]|" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-(<=20)-[addFriendsButton(>=40)]|" bindings:BBindings];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:addFriendsButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
+    
 }
 
 -(void)addInfoBackButton {
     
-    backArrowButton = [[UIButton alloc] initForAutoLayout];
+    backArrowButton = [[ButtonWithImageView alloc] initForAutoLayout];
     [backArrowButton setImage:BackPageButtonImage forState:UIControlStateNormal];
     [backArrowButton bk_addEventHandler:^(id sender) {
         [NotificationUtils scrollToPage:InfoPageNumber];
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:backArrowButton];
     UIBind(backArrowButton);
-    [self addConstraintWithVisualFormat:@"H:|-[backArrowButton]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"H:|[backArrowButton(>=70)]" bindings:BBindings];
+    [self addConstraintWithVisualFormat:@"V:|-(<=20)-[backArrowButton(>=40)]|" bindings:BBindings];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:backArrowButton attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0]];
 }
 

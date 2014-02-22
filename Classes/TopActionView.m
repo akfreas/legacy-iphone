@@ -1,20 +1,9 @@
 #import "CircleImageView.h"
 #import "TopActionView.h"
-
+#import "ButtonWithImageView.h"
 #import "Person.h"
 
 
-@interface ButtonWithImageView : UIButton
-
-@end
-
-@implementation ButtonWithImageView
-
--(UIView *)viewForBaselineLayout {
-    return self.imageView;
-}
-
-@end
 
 
 @implementation TopActionView {

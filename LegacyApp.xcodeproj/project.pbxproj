@@ -132,6 +132,7 @@
 		19A729EC18B6FCE6003EDF48 /* facebook_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729EA18B6FCE6003EDF48 /* facebook_button@2x.png */; };
 		19A729EF18B6FD14003EDF48 /* legacy-about-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */; };
 		19A729F018B6FD14003EDF48 /* legacy-about-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */; };
+		19A729F318B874BE003EDF48 /* ButtonWithImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A729F218B874BE003EDF48 /* ButtonWithImageView.m */; };
 		19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */; };
 		19BB09DD186FFB4F00E7D995 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DB186FFB4F00E7D995 /* twitter-icon.png */; };
 		19BB09DE186FFB4F00E7D995 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DC186FFB4F00E7D995 /* twitter-icon@2x.png */; };
@@ -322,6 +323,8 @@
 		19A729EA18B6FCE6003EDF48 /* facebook_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_button@2x.png"; sourceTree = "<group>"; };
 		19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-about-logo.png"; sourceTree = "<group>"; };
 		19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-about-logo@2x.png"; sourceTree = "<group>"; };
+		19A729F118B874BE003EDF48 /* ButtonWithImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonWithImageView.h; path = Classes/ButtonWithImageView.h; sourceTree = SOURCE_ROOT; };
+		19A729F218B874BE003EDF48 /* ButtonWithImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonWithImageView.m; path = Classes/ButtonWithImageView.m; sourceTree = SOURCE_ROOT; };
 		19BB09D8186F840500E7D995 /* EventRowDrawerOpenBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRowDrawerOpenBucket.h; sourceTree = "<group>"; };
 		19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRowDrawerOpenBucket.m; sourceTree = "<group>"; };
 		19BB09DB186FFB4F00E7D995 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 			isa = PBXGroup;
 			children = (
 				19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */,
+				19A729F118B874BE003EDF48 /* ButtonWithImageView.h */,
+				19A729F218B874BE003EDF48 /* ButtonWithImageView.m */,
 				19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */,
 				19A729E918B6FCE6003EDF48 /* facebook_button.png */,
 				19A729EA18B6FCE6003EDF48 /* facebook_button@2x.png */,
@@ -1107,6 +1112,7 @@
 				192BA7E717F9D76600ECBA49 /* FacebookUtils.m in Sources */,
 				1995FFAE187E042C00EE1AB7 /* Figure.m in Sources */,
 				19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */,
+				19A729F318B874BE003EDF48 /* ButtonWithImageView.m in Sources */,
 				1909A84D1771F4B100256ED0 /* Event.m in Sources */,
 				1909A8531772BCCD00256ED0 /* DataSyncUtility.m in Sources */,
 				1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */,

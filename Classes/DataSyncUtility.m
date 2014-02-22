@@ -98,7 +98,6 @@
             for (NSDictionary *relatedEvent in resultArray) {
                 [Event eventFromJSON:relatedEvent context:ctx];
             }
-            [ctx save];
             Figure *ourFigure = [Figure objectWithObjectID:figureID inContext:ctx];
             if ([ourFigure.events count] == [ourFigure.associatedEvents integerValue]) {
                 ourFigure.eventsSynced = [NSNumber numberWithBool:YES];

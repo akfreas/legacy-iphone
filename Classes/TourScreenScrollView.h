@@ -1,0 +1,3 @@
+@interface TourScreenScrollView : UIScrollView
+
+@end

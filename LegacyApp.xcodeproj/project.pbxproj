@@ -133,6 +133,13 @@
 		19A729EF18B6FD14003EDF48 /* legacy-about-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */; };
 		19A729F018B6FD14003EDF48 /* legacy-about-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */; };
 		19A729F318B874BE003EDF48 /* ButtonWithImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A729F218B874BE003EDF48 /* ButtonWithImageView.m */; };
+		19A729F618B885D7003EDF48 /* TourScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A729F518B885D7003EDF48 /* TourScreenViewController.m */; };
+		19A729FA18B88685003EDF48 /* TourScreenScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A729F918B88685003EDF48 /* TourScreenScrollView.m */; };
+		19A729FD18B924BC003EDF48 /* AnalyticsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A729FC18B924BC003EDF48 /* AnalyticsUtil.m */; };
+		19A72A0218BB0BF0003EDF48 /* 01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729FE18BB0BF0003EDF48 /* 01@2x.png */; };
+		19A72A0318BB0BF0003EDF48 /* 02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729FF18BB0BF0003EDF48 /* 02@2x.png */; };
+		19A72A0418BB0BF0003EDF48 /* 03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A72A0018BB0BF0003EDF48 /* 03@2x.png */; };
+		19A72A0518BB0BF0003EDF48 /* 04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A72A0118BB0BF0003EDF48 /* 04@2x.png */; };
 		19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */; };
 		19BB09DD186FFB4F00E7D995 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DB186FFB4F00E7D995 /* twitter-icon.png */; };
 		19BB09DE186FFB4F00E7D995 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DC186FFB4F00E7D995 /* twitter-icon@2x.png */; };
@@ -325,6 +332,16 @@
 		19A729EE18B6FD14003EDF48 /* legacy-about-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacy-about-logo@2x.png"; sourceTree = "<group>"; };
 		19A729F118B874BE003EDF48 /* ButtonWithImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonWithImageView.h; path = Classes/ButtonWithImageView.h; sourceTree = SOURCE_ROOT; };
 		19A729F218B874BE003EDF48 /* ButtonWithImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonWithImageView.m; path = Classes/ButtonWithImageView.m; sourceTree = SOURCE_ROOT; };
+		19A729F418B885D7003EDF48 /* TourScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourScreenViewController.h; sourceTree = "<group>"; };
+		19A729F518B885D7003EDF48 /* TourScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourScreenViewController.m; sourceTree = "<group>"; };
+		19A729F818B88685003EDF48 /* TourScreenScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourScreenScrollView.h; sourceTree = "<group>"; };
+		19A729F918B88685003EDF48 /* TourScreenScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourScreenScrollView.m; sourceTree = "<group>"; };
+		19A729FB18B924BC003EDF48 /* AnalyticsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsUtil.h; sourceTree = "<group>"; };
+		19A729FC18B924BC003EDF48 /* AnalyticsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsUtil.m; sourceTree = "<group>"; };
+		19A729FE18BB0BF0003EDF48 /* 01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01@2x.png"; sourceTree = "<group>"; };
+		19A729FF18BB0BF0003EDF48 /* 02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02@2x.png"; sourceTree = "<group>"; };
+		19A72A0018BB0BF0003EDF48 /* 03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03@2x.png"; sourceTree = "<group>"; };
+		19A72A0118BB0BF0003EDF48 /* 04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04@2x.png"; sourceTree = "<group>"; };
 		19BB09D8186F840500E7D995 /* EventRowDrawerOpenBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRowDrawerOpenBucket.h; sourceTree = "<group>"; };
 		19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRowDrawerOpenBucket.m; sourceTree = "<group>"; };
 		19BB09DB186FFB4F00E7D995 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
@@ -497,6 +514,28 @@
 			name = "Figure Row Page";
 			sourceTree = "<group>";
 		};
+		19A729F718B885EC003EDF48 /* Tour */ = {
+			isa = PBXGroup;
+			children = (
+				19A729F418B885D7003EDF48 /* TourScreenViewController.h */,
+				19A729F518B885D7003EDF48 /* TourScreenViewController.m */,
+				19A729F818B88685003EDF48 /* TourScreenScrollView.h */,
+				19A729F918B88685003EDF48 /* TourScreenScrollView.m */,
+			);
+			name = Tour;
+			sourceTree = "<group>";
+		};
+		19A72A0618BB0BF7003EDF48 /* Tour */ = {
+			isa = PBXGroup;
+			children = (
+				19A729FE18BB0BF0003EDF48 /* 01@2x.png */,
+				19A729FF18BB0BF0003EDF48 /* 02@2x.png */,
+				19A72A0018BB0BF0003EDF48 /* 03@2x.png */,
+				19A72A0118BB0BF0003EDF48 /* 04@2x.png */,
+			);
+			name = Tour;
+			sourceTree = "<group>";
+		};
 		19BB09DF18707BAE00E7D995 /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +598,8 @@
 				193FF1841876FDB40099FEBD /* NSFetchedResultsControllerFactory.m */,
 				19A729E218B6F8E9003EDF48 /* NotificationUtils.h */,
 				19A729E318B6F8E9003EDF48 /* NotificationUtils.m */,
+				19A729FB18B924BC003EDF48 /* AnalyticsUtil.h */,
+				19A729FC18B924BC003EDF48 /* AnalyticsUtil.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -593,6 +634,7 @@
 		19D61CCF16B23B6400C81E60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				19A72A0618BB0BF7003EDF48 /* Tour */,
 				19A729ED18B6FD14003EDF48 /* legacy-about-logo.png */,
 				19A729F118B874BE003EDF48 /* ButtonWithImageView.h */,
 				19A729F218B874BE003EDF48 /* ButtonWithImageView.m */,
@@ -754,6 +796,7 @@
 				19D29F7F16A674C200D46B0A /* MainScreen.h */,
 				19D29F8016A674C200D46B0A /* MainScreen.m */,
 				196B77511817D52D00DF0C65 /* MainScreen.xib */,
+				19A729F718B885EC003EDF48 /* Tour */,
 				1909A86F1776B41700256ED0 /* Row Components */,
 				192E42B1174668E900192BD5 /* ProgressIndicator.h */,
 				192E42B2174668E900192BD5 /* ProgressIndicator.m */,
@@ -909,10 +952,12 @@
 				19BB09DD186FFB4F00E7D995 /* twitter-icon.png in Resources */,
 				1967B9691804AB170092766D /* chevron-left.png in Resources */,
 				191E849F17F9265D003A37AC /* Cinzel-Regular.ttf in Resources */,
+				19A72A0418BB0BF0003EDF48 /* 03@2x.png in Resources */,
 				19C7A16818670FD600130BEF /* facebook-icon.png in Resources */,
 				1967B95C180483D30092766D /* timeline-annotation-image@2x.png in Resources */,
 				1967B95A180480C50092766D /* left-right-swipe-message.png in Resources */,
 				19A729E818B6FCD5003EDF48 /* close@2x.png in Resources */,
+				19A72A0318BB0BF0003EDF48 /* 02@2x.png in Resources */,
 				1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */,
 				196B77521817D52E00DF0C65 /* MainScreen.xib in Resources */,
 				1967B963180491B60092766D /* chevron-arrow@2x.png in Resources */,
@@ -929,6 +974,7 @@
 				19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */,
 				1980A8AB186DFE8D00ECD354 /* next-arrow.png in Resources */,
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
+				19A72A0518BB0BF0003EDF48 /* 04@2x.png in Resources */,
 				1980A8AC186DFE8D00ECD354 /* next-arrow@2x.png in Resources */,
 				194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */,
 				1980A8A1186CE79F00ECD354 /* back-arrow.png in Resources */,
@@ -950,6 +996,7 @@
 				1909A8741776B45100256ED0 /* FacebookSignInButton.xib in Resources */,
 				19BB09EC1870A95F00E7D995 /* no-photo-legacy.png in Resources */,
 				1967B96E1804B8440092766D /* chevron-left@2x.png in Resources */,
+				19A72A0218BB0BF0003EDF48 /* 01@2x.png in Resources */,
 				19BB09ED1870A95F00E7D995 /* no-photo-legacy@2x.png in Resources */,
 				197305F017C5CA6700958D15 /* FigureTimelineEventCell.xib in Resources */,
 				1975752617D06CBD00822779 /* WebViewControls.xib in Resources */,
@@ -1095,6 +1142,7 @@
 				4E640C1D15460C5A009D8DC6 /* Utility_Notifications.m in Sources */,
 				1982639F18616AD300CA3FEE /* UIView+LayoutHelpers.m in Sources */,
 				19A729DF18B6F159003EDF48 /* FixtureFactory.m in Sources */,
+				19A729FA18B88685003EDF48 /* TourScreenScrollView.m in Sources */,
 				193FF188187703110099FEBD /* NSManagedObjectContext+ManagedObjectContextHelper.m in Sources */,
 				19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */,
 				19D29F8116A674C200D46B0A /* MainScreen.m in Sources */,
@@ -1123,6 +1171,7 @@
 				19BDFDC417FBE99800B415C1 /* EventPersonRelation.m in Sources */,
 				193FF16B187649D80099FEBD /* Figure+FigureHelper.m in Sources */,
 				191F79001783990B00729F2A /* RelatedEventLabel.m in Sources */,
+				19A729FD18B924BC003EDF48 /* AnalyticsUtil.m in Sources */,
 				19BB09E218707BD700E7D995 /* ConnectToFacebookDialogView.m in Sources */,
 				197305E817C5B32D00958D15 /* FigureTimelineTopCell.m in Sources */,
 				193FF16E187649F50099FEBD /* Event+EventHelper.m in Sources */,
@@ -1137,6 +1186,7 @@
 				193FF17A187653270099FEBD /* NSManagedObject+Helpers.m in Sources */,
 				1975752117D053D900822779 /* ImageDownloadUtil.m in Sources */,
 				1975752417D06CA100822779 /* WebViewControls.m in Sources */,
+				19A729F618B885D7003EDF48 /* TourScreenViewController.m in Sources */,
 				1980719017E8117B0039FC65 /* EventRowCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

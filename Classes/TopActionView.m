@@ -71,8 +71,6 @@
 }
 
 -(void)addFriendsButtonTappedAction {
-    
-    [Flurry logEvent:@"top_action_bar_tapped"];
     [[NSNotificationCenter defaultCenter] postNotificationName:FacebookActionButtonTappedNotificationKey object:self];
 }
 

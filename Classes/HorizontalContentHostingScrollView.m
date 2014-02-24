@@ -120,6 +120,7 @@ typedef enum ScrollViewDirection {
     [[EventRowDrawerOpenBucket sharedInstance] closeDrawers:NULL];
     NSDictionary *userInfo = notif.userInfo;
     EventPersonRelation *relation = userInfo[@"relation"];
+    [AnalyticsUtil logRelationTapped:relation];
     timelinePage.relation = relation;
     timelinePage.frame = [self frameAtIndex:TimelinePageNumber];
     [timelinePage reloadData];
@@ -243,8 +244,9 @@ typedef enum ScrollViewDirection {
 
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     self.scrollingFromTouch = YES;
-    return  [super hitTest:point withEvent:event];
+    return [super hitTest:point withEvent:event];
 }
+
 -(void)scrollToPageWithNotif:(NSNotification *)notif {
     self.scrollingFromTouch = NO;
     NSNumber *page = notif.userInfo[KeyForPageNumberInUserInfo];
@@ -254,9 +256,7 @@ typedef enum ScrollViewDirection {
 -(void)scrollToPage:(NSInteger)page {
     
     if (currentPage != page) {
-        
-        NSDictionary *params = @{@"from_page": [NSNumber numberWithInteger:currentPage], @"to_page" : [NSNumber numberWithInteger:page]};
-        [Flurry logEvent:@"page_movement" withParameters:params];
+        [AnalyticsUtil logPageTransitionTo:page];
         CGPoint pagePoint = [self frameAtIndex:page].origin;
         departurePoint = [self frameAtIndex:currentPage].origin;
         destinationPoint = pagePoint;

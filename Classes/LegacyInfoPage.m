@@ -83,7 +83,7 @@
     self.feedbackButton.titleLabel.font = InfoPageFont;
     [self.feedbackButton setTitle:@"Feedback" forState:UIControlStateNormal];
     [self.feedbackButton bk_addEventHandler:^(id sender) {
-        [Flurry logEvent:@"send_message_button_tapped"];
+        [AnalyticsUtil logPressFromButton:self.feedbackButton];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMail" object:nil];
     } forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.feedbackButton];

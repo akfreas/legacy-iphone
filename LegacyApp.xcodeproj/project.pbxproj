@@ -89,7 +89,6 @@
 		1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96C1804B8440092766D /* chevron-right@2x.png */; };
 		1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */; };
 		196B64751868E18800A75C63 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B64741868E18800A75C63 /* Reveal.framework */; };
-		196B64EC1868E1C100A75C63 /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B64EB1868E1C100A75C63 /* libFlurry_4.2.3.a */; };
 		196B77521817D52E00DF0C65 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B77511817D52D00DF0C65 /* MainScreen.xib */; };
 		196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196C6B1C18051FCD00475ACB /* MessageUI.framework */; };
 		196C6B2418052DEC00475ACB /* legacyapp-headertext_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196C6B2318052DEC00475ACB /* legacyapp-headertext_03@2x.png */; };
@@ -275,7 +274,6 @@
 		1967B96C1804B8440092766D /* chevron-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-right@2x.png"; sourceTree = "<group>"; };
 		1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message@2x.png"; sourceTree = "<group>"; };
 		196B64741868E18800A75C63 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
-		196B64EB1868E1C100A75C63 /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		196B77511817D52D00DF0C65 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		196C6B1C18051FCD00475ACB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		196C6B2318052DEC00475ACB /* legacyapp-headertext_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacyapp-headertext_03@2x.png"; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 		1980A8A0186CE79F00ECD354 /* back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow@2x.png"; sourceTree = "<group>"; };
 		1980A8A9186DFE8D00ECD354 /* next-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-arrow.png"; sourceTree = "<group>"; };
 		1980A8AA186DFE8D00ECD354 /* next-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-arrow@2x.png"; sourceTree = "<group>"; };
-		1982639B1861639100CA3FEE /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		1982639D18616AD300CA3FEE /* UIView+LayoutHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayoutHelpers.h"; sourceTree = "<group>"; };
 		1982639E18616AD300CA3FEE /* UIView+LayoutHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayoutHelpers.m"; sourceTree = "<group>"; };
 		198263A218616DC600CA3FEE /* add-friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friends.png"; sourceTree = "<group>"; };
@@ -448,7 +445,6 @@
 				19DC00B5186C8CCF007A8D66 /* Reveal.framework in Frameworks */,
 				192784AA1827C37E00DAA196 /* libz.dylib in Frameworks */,
 				196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */,
-				196B64EC1868E1C100A75C63 /* libFlurry_4.2.3.a in Frameworks */,
 				19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */,
 				19D29F7616A6705600D46B0A /* AdSupport.framework in Frameworks */,
 				19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */,
@@ -743,10 +739,8 @@
 			isa = PBXGroup;
 			children = (
 				19DC00B4186C8CCF007A8D66 /* Reveal.framework */,
-				196B64EB1868E1C100A75C63 /* libFlurry_4.2.3.a */,
 				196B64741868E18800A75C63 /* Reveal.framework */,
 				19C7A16B186787B700130BEF /* MediaPlayer.framework */,
-				1982639B1861639100CA3FEE /* Flurry.h */,
 				192784A91827C37E00DAA196 /* libz.dylib */,
 				196C6B1C18051FCD00475ACB /* MessageUI.framework */,
 				19354F1C17F1BA98007569F9 /* Security.framework */,

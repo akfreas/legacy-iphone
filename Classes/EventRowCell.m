@@ -59,6 +59,7 @@
         [compose addURL:[self wikipediaURL]];
         [compose addImage:self.relation.event.figure.image];
         [compose setInitialText:[self shortDescriptionString]];
+        [AnalyticsUtil logRelationShared:self.relation network:@"twitter"];
         [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:compose animated:YES completion:NULL];
     } forControlEvents:UIControlEventTouchUpInside];
 }
@@ -72,7 +73,7 @@
     [facebookButton bk_addEventHandler:^(id sender) {
         NSLog(@"Captured hit.");
         [FBDialogs presentShareDialogWithLink:[self wikipediaURL] name:self.relation.event.figure.name caption:[self eventDescriptionString] description:[self eventDescriptionString] picture:[NSURL URLWithString:self.relation.event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-            
+            [AnalyticsUtil logRelationShared:self.relation network:@"fb"];
         }];
     } forControlEvents:UIControlEventTouchUpInside];
 }

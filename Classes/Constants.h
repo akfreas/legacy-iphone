@@ -2,13 +2,14 @@
 
 #define KeyForNoBirthdayNotification @"NoBirthdayForPerson"
 #define KeyForRemovePersonButtonTappedNotification @"RemoveFriendButton"
-
+#define KeyForTourCompletedNotification @"NotifyTourCompleted"
 #define KeyForShareWithFacebook @"ShareWithFacebook"
 #define KeyForShareWithTwitter @"ShareWithTwitter"
 #define EventRowTappedNotificationKey @"OverlayInfoButtonTapped"
 #define FacebookActionButtonTappedNotificationKey @"AddFriendButtonTapped"
 #define KeyForUserHasAuthenticatedWithFacebook @"HasAuthenticatedWithFacebook"
 #define KeyForLastDateSynced @"LastDaySynced"
+#define KeyForHasBeenShownTour @"TourShown"
 #define TableViewCellIdentifierForHeader @"HeaderCellIdentifier"
 #define TableViewCellIdentifierForMainCell @"MainTableViewCell"
 #define KeyForLoggedIntoFacebookNotification @"LoggedIntoFacebookNotification"
@@ -107,6 +108,7 @@
 #define HeaderFontName @"HelveticaNeue-Bold"
 #define HeaderFontSize 25
 #define HeaderFont [UIFont fontWithName:HeaderFontName size:HeaderFontSize]
+#define StartNowButtonFont [UIFont fontWithName:@"HelveticaNeue" size:25]
 #define LegacyPointSummaryFont [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define FacebookModalDescriptionFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:15]
 #define PersonNameTopCellFont [UIFont fontWithName:@"HelveticaNeue-Bold" size:17]

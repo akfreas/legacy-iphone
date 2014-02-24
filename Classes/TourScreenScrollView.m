@@ -37,15 +37,6 @@
     [self addSubview:self.lockedForegroundView];
 }
 
-//-(void)layoutSubviews {
-//    CGSize contentSize = CGSizeMake(0, [[[UIApplication sharedApplication] keyWindow] frame].size.height);
-//    for (UIView *page in self.paginatedViews) {
-//        contentSize = CGSizeAddWidthToSize(contentSize, page.frame.size.width);
-//    }
-//    self.contentSize = contentSize;
-//    [super layoutSubviews];
-//}
-
 -(void)addPaginatedViews {
     NSArray *imageFileNames = @[@"01.png", @"02.png", @"03.png", @"04.png"];
     NSMutableDictionary *bindingDict = [NSMutableDictionary dictionary];
@@ -76,7 +67,7 @@
         } else {
             horizFormat = [NSString stringWithFormat:@"H:|[%@]", bindingNameForIndex(i)];
         }
-        vertFormat = [NSString stringWithFormat:@"V:|[%@]|", bindingNameForIndex(i)];
+        vertFormat = [NSString stringWithFormat:@"V:|[%@]", bindingNameForIndex(i)];
         [bindingDict addEntriesFromDictionary:bindingDictForImageWithIndex(i)];
         [self addConstraintWithVisualFormat:horizFormat bindings:bindingDict];
         [self addConstraintWithVisualFormat:vertFormat bindings:bindingDict];

@@ -15,7 +15,6 @@
 #import "FacebookUtils.h"
 #import "ConnectToFacebookDialogView.h"
 #import <MessageUI/MessageUI.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import <RNBlurModalView/RNBlurModalView.h>
 #import <AFFacebook-iOS-SDK/FacebookSDK/Facebook.h>
 
@@ -30,7 +29,6 @@
     FBFriendPickerViewController *friendPicker;
     IBOutlet HorizontalContentHostingScrollView *infoScreen;
     LegacyAppConnection *connection;
-    MPMoviePlayerController *splashClipPlayer;
 }
 
 
@@ -55,7 +53,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tourCompleted) name:KeyForTourCompletedNotification object:nil];
 #if DEBUG != 1
-        [self setupSplashClip];
+//        [self setupSplashClip];
 #endif
     }
     return self;
@@ -80,34 +78,6 @@
     
 }
 
--(void)setupSplashClip {
-    
-    NSString *clipPath = [[NSBundle mainBundle] pathForResource:@"splash-animation" ofType:@"mp4"];
-    NSURL *clipURL = [NSURL fileURLWithPath:clipPath];
-    splashClipPlayer = [[MPMoviePlayerController alloc] initWithContentURL:clipURL];
-    splashClipPlayer.view.frame = self.view.bounds;
-    splashClipPlayer.view.backgroundColor = HeaderBackgroundColor;
-    splashClipPlayer.controlStyle = MPMovieControlStyleNone;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(removeSplashView)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
- 
-    splashClipPlayer.scalingMode = MPMovieScalingModeFill;
-    
-    UIImageView *backgroundPlaceholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"launchimage.png"]];
-    backgroundPlaceholder.backgroundColor = [UIColor redColor];
-    [splashClipPlayer.view addSubview:backgroundPlaceholder];
-    [self.view addSubview:splashClipPlayer.view];
-}
-
--(void)removeSplashView {
-    [UIView animateWithDuration:0.3 animations:^{
-        splashClipPlayer.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        [splashClipPlayer.view removeFromSuperview];
-        splashClipPlayer = nil;
-    }];
-}
 
 -(void)addFriendButtonTapped:(NSNotification *)notif {
     [FBSession openActiveSessionWithAllowLoginUI:NO];
@@ -238,7 +208,6 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
     BOOL tourShown = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownTour];
     if (tourShown == NO) {
         self.view.alpha = 0;
@@ -256,12 +225,6 @@
     if (tourShown != YES) {
         [self presentViewController:[TourScreenViewController new] animated:YES completion:NULL];
     }
-#if DEBUG != 1
-    if (splashClipPlayer != nil) {
-        splashClipPlayer.view.frame = self.view.bounds;
-        [splashClipPlayer play];
-    }
-#endif
 }
 
 

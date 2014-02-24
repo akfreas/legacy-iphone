@@ -5,6 +5,13 @@
 #import "GAI.h"
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <BugSense-iOS/BugSenseController.h>
+#import <MediaPlayer/MediaPlayer.h>
+
+@interface AppDelegate ()
+@property MPMoviePlayerController *splashClipPlayer;
+
+@end
+
 @implementation AppDelegate 
 
 @synthesize window = _window;
@@ -31,8 +38,46 @@
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     [self.window makeKeyAndVisible];
+    [self setupSplashClip];
+    if (self.splashClipPlayer != nil) {
+        self.splashClipPlayer.view.frame = CGRectMakeFrameForDeadCenterInRect(self.window.frame, CGSizeMake(320, 568));
+        [self.splashClipPlayer play];
+    }
     return YES;
 }
+
+
+-(void)setupSplashClip {
+    
+    NSString *clipPath = [[NSBundle mainBundle] pathForResource:@"splash-animation" ofType:@"mp4"];
+    NSURL *clipURL = [NSURL fileURLWithPath:clipPath];
+    self.splashClipPlayer = [[MPMoviePlayerController alloc] initWithContentURL:clipURL];
+    self.splashClipPlayer.view.frame = self.window.bounds;
+    self.splashClipPlayer.view.backgroundColor = HeaderBackgroundColor;
+    self.splashClipPlayer.controlStyle = MPMovieControlStyleNone;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(removeSplashView)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    
+    self.splashClipPlayer.scalingMode = MPMovieScalingModeFill;
+    
+    UIImageView *backgroundPlaceholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"launchimage.png"]];
+    backgroundPlaceholder.backgroundColor = [UIColor redColor];
+    [self.splashClipPlayer.view addSubview:backgroundPlaceholder];
+    [self.window addSubview:self.splashClipPlayer.view];
+    
+}
+
+
+-(void)removeSplashView {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.splashClipPlayer.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.splashClipPlayer.view removeFromSuperview];
+        self.splashClipPlayer = nil;
+    }];
+}
+
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     

@@ -9,20 +9,12 @@
 
 @synthesize window = _window;
 
-void uncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-    // Internal error reporting
-}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 #if DEBUG==0
     [BugSenseController sharedControllerWithBugSenseAPIKey:@"6e2eee3d"];
-    [Flurry setCrashReportingEnabled:YES];
-    [Flurry startSession:@"BM6HRVCKMTZK83B29BTH"];
-    
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     
     // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
@@ -30,9 +22,6 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     // Optional: set Logger to VERBOSE for debug information.
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    
-    // Initialize tracker.
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45417322-1"];
 #endif
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

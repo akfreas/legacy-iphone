@@ -4,7 +4,7 @@
 #import "Person.h"
 #import "Figure.h"
 #import "FixtureFactory.h"
-
+#import "TourScreenViewController.h"
 #import "Utility_AppSettings.h"
 #import "FriendPickerHandler.h"
 #import "Event.h"
@@ -53,12 +53,14 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletePerson:) name:KeyForRemovePersonButtonTappedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentMailMessage) name:@"sendMail" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDataSync) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tourCompleted) name:KeyForTourCompletedNotification object:nil];
 #if DEBUG != 1
         [self setupSplashClip];
 #endif
     }
     return self;
 }
+
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
@@ -228,8 +230,32 @@
     }
 }
 
+-(void)tourCompleted {
+    [UIView animateWithDuration:1.0f animations:^{
+        self.view.alpha = 1;
+    }];
+}
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    
+    BOOL tourShown = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownTour];
+    if (tourShown == NO) {
+        self.view.alpha = 0;
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    BOOL tourShown = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownTour];
+    if (tourShown != YES) {
+        [self presentViewController:[TourScreenViewController new] animated:YES completion:NULL];
+    }
 #if DEBUG != 1
     if (splashClipPlayer != nil) {
         splashClipPlayer.view.frame = self.view.bounds;

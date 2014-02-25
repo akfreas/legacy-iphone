@@ -138,7 +138,8 @@
 		19A72A0218BB0BF0003EDF48 /* 01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729FE18BB0BF0003EDF48 /* 01@2x.png */; };
 		19A72A0318BB0BF0003EDF48 /* 02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A729FF18BB0BF0003EDF48 /* 02@2x.png */; };
 		19A72A0418BB0BF0003EDF48 /* 03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A72A0018BB0BF0003EDF48 /* 03@2x.png */; };
-		19A72A0518BB0BF0003EDF48 /* 04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A72A0118BB0BF0003EDF48 /* 04@2x.png */; };
+		19A72A0818BCB029003EDF48 /* 04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A72A0718BCB029003EDF48 /* 04@2x.png */; };
+		19A72A0B18BCC5AF003EDF48 /* ConfigurationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A72A0A18BCC5AF003EDF48 /* ConfigurationUtil.m */; };
 		19BB09DA186F840500E7D995 /* EventRowDrawerOpenBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */; };
 		19BB09DD186FFB4F00E7D995 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DB186FFB4F00E7D995 /* twitter-icon.png */; };
 		19BB09DE186FFB4F00E7D995 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BB09DC186FFB4F00E7D995 /* twitter-icon@2x.png */; };
@@ -338,7 +339,9 @@
 		19A729FE18BB0BF0003EDF48 /* 01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01@2x.png"; sourceTree = "<group>"; };
 		19A729FF18BB0BF0003EDF48 /* 02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02@2x.png"; sourceTree = "<group>"; };
 		19A72A0018BB0BF0003EDF48 /* 03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03@2x.png"; sourceTree = "<group>"; };
-		19A72A0118BB0BF0003EDF48 /* 04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04@2x.png"; sourceTree = "<group>"; };
+		19A72A0718BCB029003EDF48 /* 04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04@2x.png"; sourceTree = "<group>"; };
+		19A72A0918BCC5AF003EDF48 /* ConfigurationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationUtil.h; sourceTree = "<group>"; };
+		19A72A0A18BCC5AF003EDF48 /* ConfigurationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationUtil.m; sourceTree = "<group>"; };
 		19BB09D8186F840500E7D995 /* EventRowDrawerOpenBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRowDrawerOpenBucket.h; sourceTree = "<group>"; };
 		19BB09D9186F840500E7D995 /* EventRowDrawerOpenBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRowDrawerOpenBucket.m; sourceTree = "<group>"; };
 		19BB09DB186FFB4F00E7D995 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
@@ -527,7 +530,7 @@
 				19A729FE18BB0BF0003EDF48 /* 01@2x.png */,
 				19A729FF18BB0BF0003EDF48 /* 02@2x.png */,
 				19A72A0018BB0BF0003EDF48 /* 03@2x.png */,
-				19A72A0118BB0BF0003EDF48 /* 04@2x.png */,
+				19A72A0718BCB029003EDF48 /* 04@2x.png */,
 			);
 			name = Tour;
 			sourceTree = "<group>";
@@ -596,6 +599,8 @@
 				19A729E318B6F8E9003EDF48 /* NotificationUtils.m */,
 				19A729FB18B924BC003EDF48 /* AnalyticsUtil.h */,
 				19A729FC18B924BC003EDF48 /* AnalyticsUtil.m */,
+				19A72A0918BCC5AF003EDF48 /* ConfigurationUtil.h */,
+				19A72A0A18BCC5AF003EDF48 /* ConfigurationUtil.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -939,6 +944,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19A72A0818BCB029003EDF48 /* 04@2x.png in Resources */,
 				19A729EC18B6FCE6003EDF48 /* facebook_button@2x.png in Resources */,
 				19BDFDC817FD157A00B415C1 /* legacy-fb-button.png in Resources */,
 				19C7A16918670FD600130BEF /* facebook-icon@2x.png in Resources */,
@@ -968,7 +974,6 @@
 				19BDFDBD17FBA4ED00B415C1 /* NoEventPersonRow.xib in Resources */,
 				1980A8AB186DFE8D00ECD354 /* next-arrow.png in Resources */,
 				192BA7D817F9280D00ECBA49 /* legacy-header-text@2x.png in Resources */,
-				19A72A0518BB0BF0003EDF48 /* 04@2x.png in Resources */,
 				1980A8AC186DFE8D00ECD354 /* next-arrow@2x.png in Resources */,
 				194E327416DF4150007A55D7 /* LegacyWebView.xib in Resources */,
 				1980A8A1186CE79F00ECD354 /* back-arrow.png in Resources */,
@@ -1143,6 +1148,7 @@
 				193FF17418764A270099FEBD /* EventPersonRelation+RelationHelpers.m in Sources */,
 				19A524AF16B7CBAF00195D9D /* FriendPickerHandler.m in Sources */,
 				19BB09E918708DE600E7D995 /* ConnectToFacebookDialogViewController.m in Sources */,
+				19A72A0B18BCC5AF003EDF48 /* ConfigurationUtil.m in Sources */,
 				199354FD16D4A29700D73389 /* HorizontalContentHostingScrollView.m in Sources */,
 				19632B9616DB036900E0EA75 /* EventRowContentView.m in Sources */,
 				195B600216DEB7D3006215E9 /* LegacyWebView.m in Sources */,

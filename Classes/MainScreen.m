@@ -17,6 +17,7 @@
 #import <MessageUI/MessageUI.h>
 #import <RNBlurModalView/RNBlurModalView.h>
 #import <AFFacebook-iOS-SDK/FacebookSDK/Facebook.h>
+#import "ConfigurationUtil.h"
 
 @interface MainScreen ()  <MFMailComposeViewControllerDelegate>
 
@@ -93,14 +94,18 @@
 }
 
 -(void)showConnectToFBDialog {
-    ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
-    blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
-    [AKNOTIF addObserver:self selector:@selector(startDataSync) name:KeyForLoggedIntoFacebookNotification object:nil];
-    [blurView hideCloseButton:YES];
-    connectView.dismissBlock = ^{
-        [blurView hideWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
-    };
-    [blurView showWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
+    if (blurView == nil) {
+        ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
+        blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
+        [AKNOTIF addObserver:self selector:@selector(startDataSync) name:KeyForLoggedIntoFacebookNotification object:nil];
+        [blurView hideCloseButton:YES];
+        connectView.dismissBlock = ^{
+            [blurView hideWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:^{
+                blurView = nil;
+            }];
+        };
+        [blurView showWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:NULL];
+    }
 }
 
 -(void)showFriendPicker {
@@ -142,7 +147,6 @@
 }
 
 -(BOOL)shouldSyncNow {
-    
     NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:KeyForLastDateSynced];
     if (lastDate == nil) {
         return YES;
@@ -195,6 +199,9 @@
         [blurView hide];
         blurView = nil;
     }
+    [LegacyAppConnection get:[LegacyAppRequest requestToGetConfiguration] withCompletionBlock:^(LegacyAppRequest *request, NSDictionary *configJSON, NSError *error) {
+        [ConfigurationUtil saveConfigFromJSON:configJSON];
+    }];
     if ([self shouldSyncNow]) {
         [[DataSyncUtility sharedInstance] sync:NULL];
     }
@@ -211,7 +218,7 @@
     BOOL tourShown = [[NSUserDefaults standardUserDefaults] boolForKey:KeyForHasBeenShownTour];
     if (tourShown == NO) {
         self.view.alpha = 0;
-    }
+    } 
 }
 
 -(void)viewWillAppear:(BOOL)animated {

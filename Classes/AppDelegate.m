@@ -32,23 +32,19 @@
 #endif
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
     MainScreen *mainScreen = [MainScreen sharedInstance];
     self.window.rootViewController = mainScreen;
-    
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     [self.window makeKeyAndVisible];
-    [self setupSplashClip];
-    if (self.splashClipPlayer != nil) {
-        self.splashClipPlayer.view.frame = CGRectMakeFrameForDeadCenterInRect(self.window.frame, CGSizeMake(320, 568));
-        [self.splashClipPlayer play];
-    }
+#if DEBUG==0
+    [self setupSplashClipAndPlay];
+#endif
     return YES;
 }
 
 
--(void)setupSplashClip {
-    
+-(void)setupSplashClipAndPlay {
+    self.window.backgroundColor = AppLightBlueColor;
     NSString *clipPath = [[NSBundle mainBundle] pathForResource:@"splash-animation" ofType:@"mp4"];
     NSURL *clipURL = [NSURL fileURLWithPath:clipPath];
     self.splashClipPlayer = [[MPMoviePlayerController alloc] initWithContentURL:clipURL];
@@ -62,10 +58,15 @@
     self.splashClipPlayer.scalingMode = MPMovieScalingModeFill;
     
     UIImageView *backgroundPlaceholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"launchimage.png"]];
-    backgroundPlaceholder.backgroundColor = [UIColor redColor];
+    backgroundPlaceholder.backgroundColor = AppLightBlueColor;
     [self.splashClipPlayer.view addSubview:backgroundPlaceholder];
+    
+    self.splashClipPlayer.view.frame = CGRectMakeFrameForDeadCenterInRect(self.window.frame, CGSizeMake(320, 568));
     [self.window addSubview:self.splashClipPlayer.view];
     
+    if (self.splashClipPlayer != nil) {
+        [self.splashClipPlayer play];
+    }
 }
 
 
@@ -75,6 +76,7 @@
     } completion:^(BOOL finished) {
         [self.splashClipPlayer.view removeFromSuperview];
         self.splashClipPlayer = nil;
+        self.window.backgroundColor = [UIColor clearColor];
     }];
 }
 

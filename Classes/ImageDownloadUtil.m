@@ -34,12 +34,14 @@
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         operation.responseSerializer = [AFImageResponseSerializer serializer];
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, UIImage *image) {
-            Person *ourPerson = [Person objectWithObjectID:personID inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+            NSManagedObjectContext *ctx = [NSManagedObjectContext MR_contextForCurrentThread];
+            Person *ourPerson = [Person objectWithObjectID:personID inContext:ctx];
             ourPerson.thumbnail = UIImagePNGRepresentation(image);
-            [ourPerson save];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(image);
-            });
+            [ctx MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(image);
+                });
+            }];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Image download failed for %@. Error: %@", person, error);
         }];

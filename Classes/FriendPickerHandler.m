@@ -115,7 +115,7 @@
                 NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
                 [ctx performBlock:^{
                     [EventPersonRelation relationFromJSON:relation context:ctx];
-                    [ctx save];
+                    [ctx MR_saveOnlySelfAndWait];
                 }];
             }];
         }];

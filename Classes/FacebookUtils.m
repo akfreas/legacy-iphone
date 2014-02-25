@@ -15,7 +15,7 @@
             
             Person *primaryPerson = [Person personWithFacebookGraphUser:result inContext:ctx];
             primaryPerson.isPrimary = [NSNumber numberWithBool:YES];
-            [ctx save];
+            [ctx MR_saveOnlySelfAndWait];
             if (completion != NULL) {
                 completion();
             }

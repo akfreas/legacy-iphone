@@ -147,6 +147,11 @@
 }
 
 -(BOOL)shouldSyncNow {
+    
+    if ([ConfigurationUtil appHasBeenUpgraded] == YES) {
+        return YES;
+    }
+    
     NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:KeyForLastDateSynced];
     if (lastDate == nil) {
         return YES;

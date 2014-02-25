@@ -1,10 +1,26 @@
 #import "ConfigurationUtil.h"
 #define ConfigShouldUseWikipediaKey @"use_direct_wikipedia_link"
 #define ConfigShareURLRoot @"root_share_url"
+#define ConfigCurrentVersionNumber @"current_app_version"
 @implementation ConfigurationUtil
 
 +(BOOL)shouldUseWikipediaForSharing {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:ConfigShouldUseWikipediaKey] boolValue];
+}
+
++(BOOL)appHasBeenUpgraded {
+    NSNumber *currentVersionNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSNumber *previousVersionNumber = [[NSUserDefaults standardUserDefaults] objectForKey:ConfigCurrentVersionNumber];
+    
+    if (previousVersionNumber == nil) {
+        return YES;
+    }
+    
+    if ([currentVersionNumber floatValue] > [previousVersionNumber floatValue]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 +(NSURL *)shareURL {

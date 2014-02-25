@@ -3,6 +3,7 @@
 #import "EventPersonRelation.h"
 #import "Event.h"
 #import "Figure.h"
+#import "ConfigurationUtil.h"
 #import <Social/Social.h>
 
 @implementation EventRowCell {
@@ -56,7 +57,7 @@
     [self.contentView insertSubview:twitterButton belowSubview:eventRowScrollView];
     [twitterButton bk_addEventHandler:^(id sender) {
         SLComposeViewController *compose = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [compose addURL:[self wikipediaURL]];
+        [compose addURL:[self shareURL]];
         [compose addImage:self.relation.event.figure.image];
         [compose setInitialText:[self shortDescriptionString]];
         [AnalyticsUtil logRelationShared:self.relation network:@"twitter"];
@@ -70,12 +71,7 @@
     facebookButton.imageView.contentMode = UIViewContentModeCenter;
     [facebookButton setImage:FacebookButtonImage forState:UIControlStateNormal];
     [self.contentView insertSubview:facebookButton belowSubview:eventRowScrollView];
-    [facebookButton bk_addEventHandler:^(id sender) {
-        NSLog(@"Captured hit.");
-        [FBDialogs presentShareDialogWithLink:[self wikipediaURL] name:self.relation.event.figure.name caption:[self eventDescriptionString] description:[self eventDescriptionString] picture:[NSURL URLWithString:self.relation.event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-            [AnalyticsUtil logRelationShared:self.relation network:@"fb"];
-        }];
-    } forControlEvents:UIControlEventTouchUpInside];
+    [facebookButton bk_addEventHandler:[self handlerForFacebookButton] forControlEvents:UIControlEventTouchUpInside];
 }
 -(NSString *)shortDescriptionString {
     
@@ -89,11 +85,16 @@
     return [NSString stringWithFormat:@"%@: %@", eventAgeString, self.relation.event.eventDescription];
 }
 
--(NSURL *)wikipediaURL {
+-(NSURL *)shareURL {
     
-    NSString *nameWithUnderscores = [self.relation.event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    NSURL *wikipediaURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
-    return wikipediaURL;
+    if ([ConfigurationUtil shouldUseWikipediaForSharing] == YES) {
+        NSString *nameWithUnderscores = [self.relation.event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        NSURL *wikipediaURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
+        return wikipediaURL;
+    } else {
+        NSURL *shareURL = [[ConfigurationUtil shareURL] URLByAppendingPathComponent:[self.relation.event.eventId stringValue]];
+        return shareURL;
+    }
 }
 
 -(void)reset {
@@ -142,6 +143,25 @@
     
 }
 
+-(void(^)(id))handlerForFacebookButton {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
+        return ^(id sender) {
+            NSLog(@"Captured hit.");
+            [FBDialogs presentShareDialogWithLink:[self shareURL] name:self.relation.event.figure.name caption:[self eventDescriptionString] description:[self eventDescriptionString] picture:[NSURL URLWithString:self.relation.event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                [AnalyticsUtil logRelationShared:self.relation network:@"fb"];
+            }];
+        };
+    } else {
+        return ^(id sender) {
+            SLComposeViewController *compose = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            [compose addURL:[self shareURL]];
+            [compose addImage:self.relation.event.figure.image];
+            [compose setInitialText:[self shortDescriptionString]];
+            [AnalyticsUtil logRelationShared:self.relation network:@"fb"];
+            [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:compose animated:YES completion:NULL];
+        };
+    }
+}
 
 
 -(Person *)person {

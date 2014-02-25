@@ -37,8 +37,13 @@
     newPerson.facebookId = graphUser.id;
     newPerson.firstName = graphUser.first_name;
     newPerson.lastName = graphUser.last_name;
-    newPerson.birthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:graphUser.birthday];
-    newPerson.profilePicURL = graphUser[@"picture"][@"data"][@"url"];
+    if ([graphUser.birthday isKindOfClass:[NSNull class]] == NO) {
+        newPerson.birthday = [[Utility_AppSettings dateFormatterForDisplay] dateFromString:graphUser.birthday];
+    }
+    id profilePicUrl = graphUser[@"picture"][@"data"][@"url"];
+    if ([profilePicUrl isKindOfClass:[NSNull class]] == NO) {
+        newPerson.profilePicURL = graphUser[@"picture"][@"data"][@"url"];
+    }
     newPerson.isPrimary = [NSNumber numberWithBool:NO];
     newPerson.isFacebookUser = [NSNumber numberWithBool:YES];
     return newPerson;

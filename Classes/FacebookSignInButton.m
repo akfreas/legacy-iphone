@@ -29,6 +29,7 @@
         
         [FacebookUtils loginWithFacebook:^{
             [self hide];
+            [NotificationUtils scrollToPage:LandingPageNumber];
         }];
     } forControlEvents:UIControlEventTouchUpInside];
 }

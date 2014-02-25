@@ -261,6 +261,12 @@
     return request;
 }
 
++(LegacyAppRequest *)requestToGetConfiguration {
+    LegacyAppRequest *request = [LegacyAppRequest baseRequest];
+    request.urlRequest.URL = [[LegacyAppRequest baseUrl] URLByAppendingPathComponent:@"configuration"];
+    return request;
+}
+
 -(id)initWithRequest:(NSMutableURLRequest *)theRequest {
     self = [super init];
     

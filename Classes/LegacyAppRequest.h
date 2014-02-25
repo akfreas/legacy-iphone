@@ -10,6 +10,7 @@
 +(LegacyAppRequest *)requestToDeletePerson:(Person *)person;
 +(LegacyAppRequest *)requestToAddPerson:(Person *)person;
 +(LegacyAppRequest *)requestToVerifyPasscode:(NSString *)passcode;
++(LegacyAppRequest *)requestToGetConfiguration;
 @property (strong, nonatomic) NSMutableURLRequest *urlRequest;
 @property (strong, nonatomic) Class classToParse;
 

@@ -69,10 +69,10 @@
 
 -(void)addAppDescriptionLabel {
     self.appDescriptionLabel = [[UILabel alloc] initForAutoLayout];
-    self.appDescriptionLabel.text = @"Discover the past milestones of prominent people.";
+    self.appDescriptionLabel.text = @"Discover the past milestones of prominent people in history, entertainment, science, and more.";
     self.appDescriptionLabel.textColor = [UIColor whiteColor];
     self.appDescriptionLabel.font = InfoPageFont;
-    self.appDescriptionLabel.numberOfLines = 2;
+    self.appDescriptionLabel.numberOfLines = 3;
     [self addSubview:self.appDescriptionLabel];
 }
 

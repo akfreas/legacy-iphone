@@ -55,7 +55,11 @@
     
     for (int i=0; i<[imageFileNames count]; i++) {
         NSString *image = imageFileNames[i];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:image]];
+        UIImage *imageFromFile = [UIImage imageNamed:image];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:imageFromFile];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
+//        imageView.layer.masksToBounds = YES;
         imageView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.paginatedViews addObject:imageView];
         [self addSubview:imageView];
@@ -88,7 +92,7 @@
     [self addSubview:btn];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:lastFrame attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.0f]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:lastFrame attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.0f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:lastFrame attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-57.0f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:lastFrame attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-100.0f]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0f constant:71.0f]];
     [self layoutIfNeeded];
 }

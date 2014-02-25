@@ -13,15 +13,17 @@ static id<GAITracker> ourTracker;
 
 +(void)logPageTransitionTo:(NSInteger)to {
     
-    [ourTracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action" action:@"page_transition" label:nil value:[NSNumber numberWithInteger:to]] build]];
+    NSString *label = [NSString stringWithFormat:@"transition_to_page_%@", [NSNumber numberWithInteger:to]];
+    [ourTracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action" action:@"page_transition" label:label value:[NSNumber numberWithInteger:1]] build]];
 }
 
 +(void)logPressFromButton:(UIButton *)button {
-    [ourTracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action" action:@"button_tapped" label:button.titleLabel.text value:nil] build ]];
+    [ourTracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action" action:@"button_tapped" label:button.titleLabel.text value:[NSNumber numberWithInteger:1]] build ]];
 }
 
 +(void)logRelationTapped:(EventPersonRelation *)relation {
-    [ourTracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action" action:@"relation_tapped" label:nil value:relation.event.eventId] build]];
+    NSString *label = [NSString stringWithFormat:@"event_id_%@", relation.event.eventId];
+    [ourTracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action" action:@"relation_tapped" label:label value:[NSNumber numberWithInteger:1]] build]];
 }
 
 +(void)logConnectedToFacebook {

@@ -9,9 +9,9 @@
 }
 
 +(BOOL)appHasBeenUpgraded {
-    NSNumber *currentVersionNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSNumber *currentVersionNumber = @([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue]);
     NSNumber *previousVersionNumber = [[NSUserDefaults standardUserDefaults] objectForKey:ConfigCurrentVersionNumber];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:currentVersionNumber forKey:ConfigCurrentVersionNumber];
     if (previousVersionNumber == nil) {
         return YES;
     }

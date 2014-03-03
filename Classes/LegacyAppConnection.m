@@ -42,11 +42,19 @@ static dispatch_queue_t queue;
     operation.completionQueue = queue;
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
+#if DEBUG==1
+        NSLog(@"Making request:\n \
+              URL: %@\n\
+              Headers: %@\n\
+              Response JSON: %@\n\
+//              ", aRequest.urlRequest.URL, [aRequest.urlRequest allHTTPHeaderFields], JSON);
+#endif
         _block(aRequest, JSON, NULL);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"URL: %@ Error: %@", operation.request.URL, error);
     }];
     
+
     [operation start];
 }
 

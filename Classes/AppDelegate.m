@@ -63,7 +63,7 @@
     
     self.splashClipPlayer.view.frame = CGRectMakeFrameForDeadCenterInRect(self.window.frame, CGSizeMake(320, 568));
     [self.window addSubview:self.splashClipPlayer.view];
-    
+    [self.splashClipPlayer prepareToPlay];
     if (self.splashClipPlayer != nil) {
         [self.splashClipPlayer play];
     }
@@ -71,6 +71,9 @@
 
 
 -(void)removeSplashView {
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [UIView animateWithDuration:0.3 animations:^{
         self.splashClipPlayer.view.alpha = 0;
     } completion:^(BOOL finished) {

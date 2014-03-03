@@ -51,7 +51,7 @@ static dispatch_queue_t queue;
 #endif
         _block(aRequest, JSON, NULL);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"URL: %@ Error: %@", operation.request.URL, error);
+        _block(aRequest, nil, error);
     }];
     
 

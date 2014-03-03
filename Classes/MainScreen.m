@@ -65,21 +65,6 @@
     return UIStatusBarStyleLightContent;
 }
 
--(void)showShareDialog:(NSNotification *)notif {
-    
-    Event *event = notif.userInfo[@"event"];
-    NSString *eventAgeString = [NSString stringWithFormat:@"@%@ years, %@ months, %@ days old ", event.ageYears, event.ageMonths, event.ageDays];
-    NSString *eventDescriptionString = [NSString stringWithFormat:@"%@: %@", eventAgeString, event.eventDescription];
-    NSString *nameWithUnderscores = [event.figure.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    NSURL *wikipediaUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", nameWithUnderscores]];
-    [FBDialogs presentShareDialogWithLink:wikipediaUrl name:event.figure.name caption:eventAgeString description:eventDescriptionString picture:[NSURL URLWithString:event.figure.imageURL] clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-        
-    }];
-    
-    
-}
-
-
 -(void)addFriendButtonTapped:(NSNotification *)notif {
     [FBSession openActiveSessionWithAllowLoginUI:NO];
     if (FBSession.activeSession.isOpen) {
@@ -97,7 +82,7 @@
     if (blurView == nil) {
         ConnectToFacebookDialogView *connectView = [[ConnectToFacebookDialogView alloc] initForAutoLayout];
         blurView = [[RNBlurModalView alloc] initWithParentView:self.view view:connectView];
-        [AKNOTIF addObserver:self selector:@selector(startDataSync) name:KeyForLoggedIntoFacebookNotification object:nil];
+//        [AKNOTIF addObserver:self selector:@selector(forceDataSync) name:KeyForLoggedIntoFacebookNotification object:nil];
         [blurView hideCloseButton:YES];
         connectView.dismissBlock = ^{
             [blurView hideWithDuration:FacebookModalPresentationDuration delay:0 options:0 completion:^{
@@ -147,7 +132,7 @@
 }
 
 -(BOOL)shouldSyncNow {
-    
+
     if ([ConfigurationUtil appHasBeenUpgraded] == YES) {
         return YES;
     }
@@ -198,6 +183,9 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+-(void)forceDataSync {
+    [[DataSyncUtility sharedInstance] sync:NULL];
+}
 
 -(void)startDataSync {
     if (blurView != nil) {
@@ -208,7 +196,9 @@
         [ConfigurationUtil saveConfigFromJSON:configJSON];
     }];
     if ([self shouldSyncNow]) {
-        [[DataSyncUtility sharedInstance] sync:NULL];
+        [[DataSyncUtility sharedInstance] sync:^{
+            [ConfigurationUtil saveCurrentAppVersion];
+        }];
     }
 }
 
@@ -224,10 +214,6 @@
     if (tourShown == NO) {
         self.view.alpha = 0;
     } 
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

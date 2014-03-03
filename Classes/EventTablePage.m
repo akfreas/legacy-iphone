@@ -46,7 +46,6 @@ static NSString *ReuseID = @"CellReuseId";
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
             self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         }
-        [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"Legacy.sqlite"];
         [self registerClass:[EventRowCell class] forCellReuseIdentifier:ReuseID];
         self.fetchController = [EventPersonRelation MR_fetchAllSortedBy:@"person.isPrimary,person.facebookId,event.figure.id" ascending:NO withPredicate:nil groupBy:nil delegate:self inContext:[NSManagedObjectContext MR_defaultContext]];
         self.contentOffset = CGPointMake(0, 0);

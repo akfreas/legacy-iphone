@@ -23,6 +23,7 @@
             [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, NSDictionary *relation, NSError *error) {
                 [ctx performBlock:^{
                     [EventPersonRelation relationFromJSON:relation context:ctx];
+                    [[DataSyncUtility sharedInstance] sync:NULL];
                     [ctx MR_saveOnlySelfAndWait];
                 }];
             }];

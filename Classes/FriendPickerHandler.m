@@ -129,14 +129,12 @@
     LegacyAppRequest *request = [LegacyAppRequest requestToDeletePerson:person];
     NSManagedObjectID *personID = person.objectID;
     [LegacyAppConnection get:request withCompletionBlock:^(LegacyAppRequest *request, id result, NSError *error) {
-        if (error == nil) {
-            NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
-            [ctx performBlockAndWait:^{
-                Person *ourPerson = [Person objectWithObjectID:personID inContext:ctx];
-                [ourPerson MR_deleteInContext:ctx];
-                [ctx MR_saveOnlySelfAndWait];
-            }];
-        }
+        NSManagedObjectContext *ctx = [NSManagedObjectContext MR_context];
+        [ctx performBlockAndWait:^{
+            Person *ourPerson = [Person objectWithObjectID:personID inContext:ctx];
+            [ourPerson MR_deleteInContext:ctx];
+            [ctx MR_saveOnlySelfAndWait];
+        }];
     }];
 }
 

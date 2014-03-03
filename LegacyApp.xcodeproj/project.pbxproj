@@ -30,6 +30,7 @@
 		19348DCA16D4EAD200126BC7 /* ImageWidgetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1993550A16D4E8CB00D73389 /* ImageWidgetContainer.m */; };
 		19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19354F1C17F1BA98007569F9 /* Security.framework */; };
 		193A519218C4259E0084FDAB /* LegacyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 193A519018C4259E0084FDAB /* LegacyModel.xcdatamodeld */; };
+		193C7BFF18C513D0008807A9 /* MigrationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 193C7BFE18C513D0008807A9 /* MigrationUtil.m */; };
 		193FF16B187649D80099FEBD /* Figure+FigureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF16A187649D80099FEBD /* Figure+FigureHelper.m */; };
 		193FF16E187649F50099FEBD /* Event+EventHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF16D187649F50099FEBD /* Event+EventHelper.m */; };
 		193FF17118764A040099FEBD /* Person+PersonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 193FF17018764A040099FEBD /* Person+PersonHelper.m */; };
@@ -89,7 +90,6 @@
 		1967B96E1804B8440092766D /* chevron-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96B1804B8440092766D /* chevron-left@2x.png */; };
 		1967B96F1804B8440092766D /* chevron-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96C1804B8440092766D /* chevron-right@2x.png */; };
 		1967B9701804B8440092766D /* left-right-swipe-message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */; };
-		196B64751868E18800A75C63 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196B64741868E18800A75C63 /* Reveal.framework */; };
 		196B77521817D52E00DF0C65 /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 196B77511817D52D00DF0C65 /* MainScreen.xib */; };
 		196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 196C6B1C18051FCD00475ACB /* MessageUI.framework */; };
 		196C6B2418052DEC00475ACB /* legacyapp-headertext_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196C6B2318052DEC00475ACB /* legacyapp-headertext_03@2x.png */; };
@@ -170,7 +170,6 @@
 		19D29F7A16A6706A00D46B0A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7916A6706A00D46B0A /* CFNetwork.framework */; };
 		19D29F7E16A671C800D46B0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D29F7D16A671C800D46B0A /* Accounts.framework */; };
 		19D29F8116A674C200D46B0A /* MainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D29F8016A674C200D46B0A /* MainScreen.m */; };
-		19DC00B5186C8CCF007A8D66 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DC00B4186C8CCF007A8D66 /* Reveal.framework */; };
 		19DC00B8186C8EA3007A8D66 /* FigureTimelineTopCellLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */; };
 		19F1190B18AD238800951ACD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F1190A18AD238800951ACD /* XCTest.framework */; };
 		19F1190C18AD238800951ACD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA6CE415268ED300B96EFD /* Foundation.framework */; };
@@ -242,6 +241,8 @@
 		19354F1C17F1BA98007569F9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		193A519118C4259E0084FDAB /* LegacyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LegacyModel.xcdatamodel; sourceTree = "<group>"; };
 		193A519318C425F60084FDAB /* LegacyModel2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LegacyModel2.xcdatamodel; sourceTree = "<group>"; };
+		193C7BFD18C513D0008807A9 /* MigrationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationUtil.h; sourceTree = "<group>"; };
+		193C7BFE18C513D0008807A9 /* MigrationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrationUtil.m; sourceTree = "<group>"; };
 		193FF169187649D80099FEBD /* Figure+FigureHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Figure+FigureHelper.h"; sourceTree = "<group>"; };
 		193FF16A187649D80099FEBD /* Figure+FigureHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Figure+FigureHelper.m"; sourceTree = "<group>"; };
 		193FF16C187649F50099FEBD /* Event+EventHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+EventHelper.h"; sourceTree = "<group>"; };
@@ -276,7 +277,6 @@
 		1967B96B1804B8440092766D /* chevron-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-left@2x.png"; sourceTree = "<group>"; };
 		1967B96C1804B8440092766D /* chevron-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-right@2x.png"; sourceTree = "<group>"; };
 		1967B96D1804B8440092766D /* left-right-swipe-message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-right-swipe-message@2x.png"; sourceTree = "<group>"; };
-		196B64741868E18800A75C63 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		196B77511817D52D00DF0C65 /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainScreen.xib; path = Resources/MainScreen.xib; sourceTree = SOURCE_ROOT; };
 		196C6B1C18051FCD00475ACB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		196C6B2318052DEC00475ACB /* legacyapp-headertext_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "legacyapp-headertext_03@2x.png"; sourceTree = "<group>"; };
@@ -381,7 +381,6 @@
 		19D29F7D16A671C800D46B0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		19D29F7F16A674C200D46B0A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreen.h; sourceTree = "<group>"; };
 		19D29F8016A674C200D46B0A /* MainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		19DC00B4186C8CCF007A8D66 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		19DC00B6186C8EA3007A8D66 /* FigureTimelineTopCellLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureTimelineTopCellLine.h; sourceTree = "<group>"; };
 		19DC00B7186C8EA3007A8D66 /* FigureTimelineTopCellLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FigureTimelineTopCellLine.m; sourceTree = "<group>"; };
 		19F1190918AD238800951ACD /* LegacyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegacyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,10 +442,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				19D29F5E16A5483400D46B0A /* Social.framework in Frameworks */,
-				196B64751868E18800A75C63 /* Reveal.framework in Frameworks */,
 				19C7A16C186787B700130BEF /* MediaPlayer.framework in Frameworks */,
 				19D29F7816A6706200D46B0A /* SystemConfiguration.framework in Frameworks */,
-				19DC00B5186C8CCF007A8D66 /* Reveal.framework in Frameworks */,
 				192784AA1827C37E00DAA196 /* libz.dylib in Frameworks */,
 				196C6B1D18051FCD00475ACB /* MessageUI.framework in Frameworks */,
 				19354F1D17F1BA98007569F9 /* Security.framework in Frameworks */,
@@ -602,6 +599,8 @@
 				19A729FC18B924BC003EDF48 /* AnalyticsUtil.m */,
 				19A72A0918BCC5AF003EDF48 /* ConfigurationUtil.h */,
 				19A72A0A18BCC5AF003EDF48 /* ConfigurationUtil.m */,
+				193C7BFD18C513D0008807A9 /* MigrationUtil.h */,
+				193C7BFE18C513D0008807A9 /* MigrationUtil.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -744,8 +743,6 @@
 		4EEA6CE115268ED300B96EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				19DC00B4186C8CCF007A8D66 /* Reveal.framework */,
-				196B64741868E18800A75C63 /* Reveal.framework */,
 				19C7A16B186787B700130BEF /* MediaPlayer.framework */,
 				192784A91827C37E00DAA196 /* libz.dylib */,
 				196C6B1C18051FCD00475ACB /* MessageUI.framework */,
@@ -1162,6 +1159,7 @@
 				193A519218C4259E0084FDAB /* LegacyModel.xcdatamodeld in Sources */,
 				19C7BD8C174BF3F9004C8B0A /* CGRectUtils.m in Sources */,
 				19A729F318B874BE003EDF48 /* ButtonWithImageView.m in Sources */,
+				193C7BFF18C513D0008807A9 /* MigrationUtil.m in Sources */,
 				1909A84D1771F4B100256ED0 /* Event.m in Sources */,
 				1909A8531772BCCD00256ED0 /* DataSyncUtility.m in Sources */,
 				1909A8631772E6B200256ED0 /* CircleImageView.m in Sources */,
@@ -1352,6 +1350,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1372,6 +1371,7 @@
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp,
 					"/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/legacy-iphone",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1380,7 +1380,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "620D3A3C-B61A-43AA-85A4-6B96EEAE4E23";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1389,10 +1389,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F04133A44D8343DCAF034DB6 /* Pods-LegacyApp.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
@@ -1410,6 +1411,7 @@
 					/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/LegacyApp,
 					"/Volumes/SSD_SUPPORT/Dropbox/sashimiblade/AtYourAge/iosapp/legacy-iphone",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
@@ -1417,7 +1419,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "60E8447C-78F3-4B5C-A399-5BA7FD88997A";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

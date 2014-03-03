@@ -3,6 +3,8 @@
 #import "LegacyAppRequest.h"
 #import "LegacyAppConnection.h"
 #import "GAI.h"
+#import "MigrationUtil.h"
+#import "ConfigurationUtil.h"
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <BugSense-iOS/BugSenseController.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -34,6 +36,10 @@
     // Override point for customization after application launch.
     MainScreen *mainScreen = [MainScreen sharedInstance];
     self.window.rootViewController = mainScreen;
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"Legacy.sqlite"];
+    if ([ConfigurationUtil appHasBeenUpgraded]) {
+        [MigrationUtil performDataMigrationsForCurrentVersion];
+    }
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     [self.window makeKeyAndVisible];
 #if DEBUG==0

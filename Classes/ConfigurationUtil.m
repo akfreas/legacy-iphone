@@ -11,7 +11,6 @@
 +(BOOL)appHasBeenUpgraded {
     NSNumber *currentVersionNumber = @([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue]);
     NSNumber *previousVersionNumber = [[NSUserDefaults standardUserDefaults] objectForKey:ConfigCurrentVersionNumber];
-    [[NSUserDefaults standardUserDefaults] setObject:currentVersionNumber forKey:ConfigCurrentVersionNumber];
     if (previousVersionNumber == nil) {
         return YES;
     }
@@ -21,6 +20,13 @@
     } else {
         return NO;
     }
+}
+
++(void)saveCurrentAppVersion {
+    
+    NSNumber *currentVersionNumber = @([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue]);
+    [[NSUserDefaults standardUserDefaults] setObject:currentVersionNumber forKey:ConfigCurrentVersionNumber];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 +(NSURL *)shareURL {
